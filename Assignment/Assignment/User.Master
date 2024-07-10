@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.Master.cs" Inherits="Assignment.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link href="CSS/Master.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="header">
+            <h1>🤌BAIT2113🤌</h1>
+            <ul id="selection">
+                <li><a href="Home.aspx">Home</a></li>
+                <li><a href="About.aspx">About</a></li>
+                <li><a href="Contact.aspx">Contact</a></li>
+            </ul>
+
+            <ul id="userLogin">
+                <li><a href="Home.aspx">Signup</a></li>
+                <li><a href="About.aspx">Login</a></li>
+            </ul>
+
+            
+        </div>
+        
+        <div id="content">
+            <asp:ContentPlaceHolder ID="main" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+
+        <div id="footer">
+            Developd by [aaaa] &copy; All right reserved. <%:@DateTime.Now.Year%>
+        </div>
+    </form>
+</body>
+</html>
