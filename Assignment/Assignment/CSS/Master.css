@@ -9,6 +9,11 @@ body {
 h1, h2 {
     margin: 0px 0px 10px 0px;
 }
+#logo{
+    width: 100px;
+    padding-top:15px;
+    float: left;
+}
 
 #header {
     position: fixed;
@@ -50,7 +55,7 @@ h1, h2 {
 }
 
     #header ul li a:hover {
-        color: red;
+        color: #3490dc;
     }
 
     #header ul li a {
