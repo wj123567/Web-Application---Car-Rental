@@ -12,14 +12,25 @@
         <div id="header">
             <h1>🤌BAIT2113🤌</h1>
             <ul id="selection">
+                <asp:PlaceHolder ID="general" runat="server">
                 <li><a href="Home.aspx">Home</a></li>
                 <li><a href="About.aspx">About</a></li>
                 <li><a href="Contact.aspx">Contact</a></li>
+                </asp:PlaceHolder>
+                <asp:PlaceHolder ID="admin" runat="server" Visible="False">
+                <li><a href="admin.aspx">Admin</a></li>
+                </asp:PlaceHolder>
             </ul>
 
-            <ul id="userLogin">
+            <ul id="userControl">
+                <asp:PlaceHolder ID="Guest" runat="server">
                 <li><a href="Home.aspx">Signup</a></li>
                 <li><a href="About.aspx">Login</a></li>
+                </asp:PlaceHolder>
+                <asp:PlaceHolder ID="loginUser" runat="server" Visible="False">
+                <asp:Literal ID="userName" runat="server"></asp:Literal>
+                </asp:PlaceHolder>
+
             </ul>
 
             
