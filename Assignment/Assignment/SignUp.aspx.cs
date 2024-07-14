@@ -44,11 +44,9 @@ namespace Assignment
 
                         con.Close();
 
-                        txtVerifyEmail.Text = txtRegEmail.Text;
-
-                        string script = "verify();";
-                        ClientScript.RegisterStartupScript(this.GetType(), "VerifyScript", script, true);
-                    }
+                        Session["Email"] = txtRegEmail.Text;
+                        ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='validateEmail.aspx';", true);
+                }
                     catch (Exception ex)
                     {
                         Response.Write("Error: " + ex.ToString());
@@ -59,11 +57,11 @@ namespace Assignment
 
         protected void btnForget_Click(object sender, EventArgs e)
         {
-
-            txtForgetEmail.Text = txtEmail.Text;
-
-            string script = "forgetPass();";
-            ClientScript.RegisterStartupScript(this.GetType(), "VerifyScript", script, true);
+            if (Page.IsValid)
+            {
+                Session["Email"] = txtEmail.Text;
+                Response.Redirect("forgetPassword.aspx");
+            }
         }
 
         protected void btnLogIn_Click(object sender, EventArgs e)
@@ -111,14 +109,10 @@ namespace Assignment
                 }
                 else
                 {
-                    labelValidUser.Text = "Email or Password is incorrect";
+                    labelValidUser.Text = "Password is incorrect";
                     labelValidUser.Visible = true;
+                    updateLogin.Update();
                 }
-            }
-            else
-            {
-                labelValidUser.Text = "Email is incorrect";
-                labelValidUser.Visible = true;
             }
 
             con.Close();
@@ -135,6 +129,7 @@ namespace Assignment
             if (temp != 0)
             {
                 args.IsValid = false;
+                updateRegEmail.Update();
             }
             else
             {
@@ -142,6 +137,26 @@ namespace Assignment
             }
             con.Close();
 
+        }
+
+        protected void emailNotExist_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["UserRegistrationConnectionString"].ConnectionString);
+            con.Open();
+            string checkUser = "select count(*) from UserRegistration where Email = @email";
+            SqlCommand comCheck = new SqlCommand(checkUser, con);
+            comCheck.Parameters.AddWithValue("email", txtEmail.Text);
+            int temp = Convert.ToInt32(comCheck.ExecuteScalar().ToString());
+            if (temp == 1)
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
+                updateLogin.Update();
+            }
+            con.Close();
         }
     }
 }

@@ -24,6 +24,15 @@ namespace Assignment
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// updateLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateLogin;
+
+        /// <summary>
         /// txtEmail control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator regLogEmail;
+
+        /// <summary>
+        /// emailNotExist control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator emailNotExist;
 
         /// <summary>
         /// txtPassword control.
@@ -87,13 +105,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button btnForget;
 
         /// <summary>
-        /// UpdatePanel1 control.
+        /// updateRegEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel updateRegEmail;
 
         /// <summary>
         /// txtUname control.
@@ -204,13 +222,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqRegPass;
 
         /// <summary>
-        /// RegularExpressionValidator1 control.
+        /// regRegPass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regRegPass;
 
         /// <summary>
         /// txtConfirmPass control.
@@ -267,13 +285,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.CheckBox cbTAC;
 
         /// <summary>
-        /// CustomValidator control.
+        /// validTac control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator;
+        protected global::System.Web.UI.WebControls.CustomValidator validTac;
 
         /// <summary>
         /// btnSignup control.
@@ -283,95 +301,5 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSignup;
-
-        /// <summary>
-        /// txtForgetEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtForgetEmail;
-
-        /// <summary>
-        /// txtforgetVerify control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtforgetVerify;
-
-        /// <summary>
-        /// labelForgetSend control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelForgetSend;
-
-        /// <summary>
-        /// sendForgetCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button sendForgetCode;
-
-        /// <summary>
-        /// btnForgetVerify control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnForgetVerify;
-
-        /// <summary>
-        /// txtVerifyEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtVerifyEmail;
-
-        /// <summary>
-        /// txtNewVerify control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNewVerify;
-
-        /// <summary>
-        /// labelNewSend control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label labelNewSend;
-
-        /// <summary>
-        /// sendNewCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button sendNewCode;
-
-        /// <summary>
-        /// btnNewVerify control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewVerify;
     }
 }

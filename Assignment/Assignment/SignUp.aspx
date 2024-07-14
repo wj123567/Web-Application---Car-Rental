@@ -8,11 +8,16 @@
             <input id="switchLogin" class="switchBtn" type="button" value="Login" onclick="logIn()"/>
             <input id="switchSignup" class="switchBtn" type="button" value="Sign Up" onclick="signUp()"/>
         </div>
+
         <div id="loginInputGroup" class="inputGroup">
+            <asp:UpdatePanel ID="updateLogin" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+                <ContentTemplate>
             <asp:TextBox ID="txtEmail" runat="server" CssClass="inputField" placeholder="Email" ValidationGroup="LoginGroup"></asp:TextBox>
             <asp:RequiredFieldValidator ID="reqLogEmail" runat="server" ErrorMessage="Email is required" ControlToValidate="txtEmail" CssClass="validate" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
             <br />
             <asp:RegularExpressionValidator ID="regLogEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Please Enter a valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validate" ValidationGroup="LoginGroup"></asp:RegularExpressionValidator>
+            <br />
+             <asp:CustomValidator ID="emailNotExist" runat="server" ErrorMessage="Email Not Exist" CssClass="validate" OnServerValidate="emailNotExist_ServerValidate" Display="Dynamic" ValidationGroup="LoginGroup" ControlToValidate="txtEmail"></asp:CustomValidator>
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="inputField" placeholder="Password" ValidationGroup="LoginGroup"></asp:TextBox>
             <asp:Label ID="labelValidUser" runat="server" Text="Label" Visible="False" CssClass="validate"></asp:Label>
             <br />
@@ -24,9 +29,11 @@
             <asp:Button ID="btnLogIn" runat="server" Text="Log In" CssClass="btnUser" ValidationGroup="LoginGroup" OnClick="btnLogIn_Click" />
             <asp:Button ID="btnForget" runat="server" Text="Forget Password?" CssClass="forgetPass" OnClick="btnForget_Click" ValidationGroup="LoginGroup" />
         </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
 
         <div id="signupInputGroup" class="inputGroup">
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <asp:UpdatePanel ID="updateRegEmail" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
                 <ContentTemplate>
              <asp:TextBox ID="txtUname" runat="server" CssClass="inputField" placeholder="Username" ValidationGroup="SignUpGroup"></asp:TextBox>
              <asp:RequiredFieldValidator ID="validUname" runat="server" ErrorMessage="Username cannot be empty" ControlToValidate="txtUname" CssClass="validate" ValidationGroup="SignUpGroup"></asp:RequiredFieldValidator>
@@ -45,7 +52,7 @@
             <br />
                          <asp:CheckBox ID="cbSpecial" runat="server" Text="must contain one special characters" Enabled="True" CssClass="passCheckBox" ValidationGroup="SignUpGroup" />
             <asp:RequiredFieldValidator ID="reqRegPass" runat="server" ErrorMessage="RequiredFieldValidator" ValidationGroup="SignUpGroup" ControlToValidate="txtRegPassword" hidden="true"></asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="txtRegPassword" ValidationGroup="SignUpGroup" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+\-=\[\]{};':&quot;\\|,.&lt;&gt;\/?]).{8,}$" hidden="true"></asp:RegularExpressionValidator>
+            <asp:RegularExpressionValidator ID="regRegPass" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="txtRegPassword" ValidationGroup="SignUpGroup" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+\-=\[\]{};':&quot;\\|,.&lt;&gt;\/?]).{8,}$" hidden="true"></asp:RegularExpressionValidator>
 
             <asp:TextBox ID="txtConfirmPass" runat="server" TextMode="Password" CssClass="inputField" placeholder="Confirm Password" ValidationGroup="SignUpGroup"></asp:TextBox>
             <asp:RequiredFieldValidator ID="reqConfirmPass" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtConfirmPass" ValidationGroup="SignUpGroup" hidden="true"></asp:RequiredFieldValidator>
@@ -59,32 +66,12 @@
             <asp:CheckBox ID="cbTAC" runat="server" Text="" ValidationGroup="SignUpGroup" />
             <span>I agree to the terms & condition</span>
             <br />
-            <asp:CustomValidator ID="CustomValidator" runat="server" ErrorMessage="Please Accept Terms & Condition" ClientValidationFunction = "ValidateCheckBox" CssClass="validate" ValidationGroup="SignUpGroup" ControlToValidate="txtRegEmail"></asp:CustomValidator>
+            <asp:CustomValidator ID="validTac" runat="server" ErrorMessage="Please Accept Terms & Condition" ClientValidationFunction = "ValidateCheckBox" CssClass="validate" ValidationGroup="SignUpGroup" ControlToValidate="txtRegEmail"></asp:CustomValidator>
             <br />
             <asp:Button ID="btnSignup" runat="server" Text="Sign Up" CssClass="btnUser" ValidationGroup="SignUpGroup" OnClick="btnSignup_Click" />
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
-
-        <div id="forgetInputGroup" class="inputGroup">
-            <h1 class="verifyHead">Forget Password</h1>
-            <asp:TextBox ID="txtForgetEmail" runat="server" CssClass="inputField" placeholder="Email" ReadOnly="True"></asp:TextBox>
-             <asp:TextBox ID="txtforgetVerify" runat="server" CssClass="inputField" placeholder="Verification Code"></asp:TextBox>
-            <asp:Label ID="labelForgetSend" runat="server" Text="Verification Code Has Been Sent" Visible="False"></asp:Label>
-            <asp:Button ID="sendForgetCode" runat="server" CssClass="btnUser"  Text="Send" />
-
-            <asp:Button ID="btnForgetVerify" runat="server" Text="Verify" CssClass="btnUser"/>
-        </div>
-
-        <div id="verifyInputGroup" class="inputGroup">
-            <h1 class="verifyHead">Verify Email</h1>
-            <asp:TextBox ID="txtVerifyEmail" runat="server" CssClass="inputField" placeholder="Email" ReadOnly="True"></asp:TextBox>
-             <asp:TextBox ID="txtNewVerify" runat="server" CssClass="inputField" placeholder="Verification Code"></asp:TextBox>
-            <asp:Label ID="labelNewSend" runat="server" Text="Verification Code Has Been Sent" Visible="False"></asp:Label>
-            <asp:Button ID="sendNewCode" runat="server" CssClass="btnUser"  Text="Send" />
-            <asp:Button ID="btnNewVerify" runat="server" Text="Verify" CssClass="btnUser"/>
-        </div>
-
 
 
     </div>
@@ -94,15 +81,11 @@
         var signup = document.getElementById("signupInputGroup")
         var switches = document.getElementById("switchIndicator")
         var loginform = document.getElementById("loginForm")
-        var forget = document.getElementById("forgetInputGroup")
-        var validate = document.getElementById("verifyInputGroup")
         var switchForm = document.getElementById("switchForm")
-        var verification = document.getElementById("verifyInputGroup")
 
         function signUp() {
             signup.style.left = "70px";
             login.style.left = "-500px";
-            forget.style.left = "-500px";
             switches.style.left = "110px";
             loginform.style.height = "700px";
         }
@@ -110,23 +93,7 @@
         function logIn() {
             signup.style.left = "500px";
             login.style.left = "70px";
-            forget.style.left = "-500px";
             switches.style.left = "0";
-            loginform.style.height = "480px";
-        }
-
-        function forgetPass() {
-            login.style.left = "500px";
-            forget.style.left = "70px";
-            switchForm.style.visibility = "hidden";
-            loginform.style.height = "480px";
-        }
-
-        function verify() {
-            login.style.left = "500px";
-            signup.style.left = "500px";
-            verification.style.left = "70px";
-            switchForm.style.visibility = "hidden";
             loginform.style.height = "480px";
         }
 
