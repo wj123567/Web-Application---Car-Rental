@@ -5,6 +5,7 @@
 <html>
 <head runat="server">
     <link href="CSS/Master.css" rel="stylesheet" />
+    <link href="CSS/SignUp.css" rel="stylesheet" />
     <title></title>
 </head>
 <body>

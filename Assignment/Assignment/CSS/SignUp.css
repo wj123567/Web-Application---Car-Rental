@@ -1,1 +1,125 @@
-﻿
+﻿#loginForm{
+    background-color: #f9f9f9;
+    width: 380px;
+    height: 480px;
+    position: relative;
+    margin: 6px auto;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    overflow:hidden;
+    border-radius: 30px;
+}
+
+#switchForm{
+    width:220px;
+    margin: auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px #dccdcd;
+    border-radius: 30px;
+    visibility:visible;
+}
+
+.switchBtn{
+    padding: 10px 30px;
+    cursor:pointer;
+    background:transparent;
+    border:0;
+    outline:none;
+    position: relative;
+}
+
+#switchIndicator {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: #3490dc;
+    border-radius: 30px;
+    transition: left .5s;
+}
+
+.inputGroup{
+    top:100px;
+    position: absolute;
+    width:280px;
+    transition:.5s;
+}
+
+.inputField{
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid #3490dc;
+    outline: none;
+    background: transparent;
+}
+
+.label{
+    display: inline;
+    font-size: 0.9em;
+    margin-right: 10px;
+}
+#loginForm span{
+    font-size: 0.9em;
+}
+
+.btnUser{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    background: #3490dc;
+    color: #fff;
+    border: 0;
+    border-radius: 30px;
+    outline: none;
+    margin: 20px auto;
+}
+
+.forgetPass {
+    cursor: pointer;
+    background: transparent;
+    color: black;
+    border: 0;
+    outline: none;
+}
+
+.verifyHead{
+    font-size: 1.2em;
+}
+
+#loginInputGroup {
+    left: 70px;
+}
+
+#signupInputGroup {
+    left: 500px;
+}
+
+#forgetInputGroup {
+    left: -500px;
+}
+
+#verifyInputGroup {
+    left: 500px;
+}
+
+.validate{
+    font-size: 0.8em;
+    color: red;
+}
+
+.passCheckBox{
+    pointer-events: none;
+    accent-color: #3490dc;
+}
+
+
+
+
+

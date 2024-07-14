@@ -67,10 +67,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\UserDetail.mdf" />
+    <Content Include="App_Data\UserDetail_log.ldf">
+      <DependentUpon>UserDetail.mdf</DependentUpon>
+    </Content>
     <Content Include="CSS\Master.css" />
     <Content Include="CSS\SignUp.css" />
     <Content Include="Image\logo.png" />
     <Content Include="SignUp.aspx" />
+    <Content Include="UserManagement.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
   </ItemGroup>
@@ -96,6 +101,13 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserManagement.aspx.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserManagement.aspx.designer.cs">
+      <DependentUpon>UserManagement.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
