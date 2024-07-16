@@ -75,6 +75,7 @@
 
 
     </div>
+        </div>
 
     <script>
         var login = document.getElementById("loginInputGroup")

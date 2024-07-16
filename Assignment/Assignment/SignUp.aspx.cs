@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace Assignment
 {
@@ -25,21 +27,40 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
+                byte[] key = new byte[16];
+                byte[] iv = new byte[16];
+
+                RandomNumberGenerator rng = RandomNumberGenerator.Create();
+
+                rng.GetBytes(key);
+                rng.GetBytes(iv);
+
+                string simplePassword = txtRegPassword.Text;
+                byte[] cipherPassword = Encrypt(simplePassword,key,iv);
+                String cipherPasswordString = Convert.ToBase64String(cipherPassword);
+                String keyString = Convert.ToBase64String(key);
+                String ivString = Convert.ToBase64String(iv);
+
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["UserRegistrationConnectionString"].ConnectionString);
                 con.Open();
                     try
                     {
                         Guid newGUID = Guid.NewGuid();
 
-                        string insertUser = "insert into UserRegistration (Id, Username, Email, Password, DOB) values (@id,@username,@email,@password,@dob)";
+                        string insertUser = "insert into UserRegistration (Id, Username, Email, Password, DOB, registrationDate, EncryptionKey, IVkey) values (@id,@username,@email,@password,@dob,@registrationDate,@encryptKey,@IVkey)";
                         SqlCommand comInsert = new SqlCommand(insertUser, con);
                         comInsert.Parameters.AddWithValue("id", newGUID.ToString());
                         comInsert.Parameters.AddWithValue("username", txtUname.Text);
                         comInsert.Parameters.AddWithValue("email", txtRegEmail.Text);
-                        comInsert.Parameters.AddWithValue("password", txtRegPassword.Text);
+                        comInsert.Parameters.AddWithValue("password", cipherPasswordString);
                         comInsert.Parameters.AddWithValue("dob", txtRegDOB.Text);
+                        comInsert.Parameters.AddWithValue("registrationDate", DateTime.Now);
+                        comInsert.Parameters.AddWithValue("encryptKey", keyString);
+                        comInsert.Parameters.AddWithValue("IVkey", ivString);
 
-                        comInsert.ExecuteNonQuery();
+
+
+                    comInsert.ExecuteNonQuery();
 
 
                         con.Close();
@@ -66,46 +87,51 @@ namespace Assignment
 
         protected void btnLogIn_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["UserRegistrationConnectionString"].ConnectionString);
-
-            con.Open();
-            String checkmail = "select count(*) from UserRegistration where Email = @email";
-
-            SqlCommand comCheck = new SqlCommand(checkmail, con);
-
-            comCheck.Parameters.AddWithValue("email", txtEmail.Text);
-
-            int email = Convert.ToInt32(comCheck.ExecuteScalar().ToString());
-
-            if(email == 1)
+            if (Page.IsValid)
             {
-                String checkinfo = "Select count(*) from UserRegistration where Email = @email and Password = @password";
+                byte[] key = new byte[16];
+                byte[] iv = new byte[16];
+                String simplePassword = txtPassword.Text;
 
-                SqlCommand comInfo = new SqlCommand(checkinfo, con);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["UserRegistrationConnectionString"].ConnectionString);
 
-                comInfo.Parameters.AddWithValue("email", txtEmail.Text);
-                comInfo.Parameters.AddWithValue("password", txtPassword.Text);
+                con.Open();
 
-                int info = Convert.ToInt32(comInfo.ExecuteScalar().ToString());
+                Byte[] encryptPassword = new Byte[16];
 
-                if (info == 1)
+                string getUserKey = "Select EncryptionKey, IVkey, Password from UserRegistration where email = @email";
+
+                SqlCommand comKey = new SqlCommand(getUserKey, con);
+
+                comKey.Parameters.AddWithValue("@Email", txtEmail.Text);
+
+                SqlDataReader reader = comKey.ExecuteReader();
+
+                if (reader.Read())
                 {
+                    encryptPassword = Convert.FromBase64String(reader["Password"].ToString());
+                    key = Convert.FromBase64String(reader["EncryptionKey"].ToString());
+                    iv = Convert.FromBase64String(reader["IVkey"].ToString());
+                }
+
+                reader.Close();
+
+                if (simplePassword == Decrypt(encryptPassword, key, iv)){
                     string getUserData = "Select Id from UserRegistration where email = @email";
 
                     SqlCommand com = new SqlCommand(getUserData, con);
 
                     com.Parameters.AddWithValue("@Email", txtEmail.Text);
 
-                    SqlDataReader reader = com.ExecuteReader();
+                    reader = com.ExecuteReader();
 
-                    if(reader.Read())
+                    if (reader.Read())
                     {
                         String Id = reader["Id"].ToString();
                         Session["Id"] = Id;
                     }
 
                     Response.Redirect("Home.aspx");
-
                 }
                 else
                 {
@@ -113,9 +139,9 @@ namespace Assignment
                     labelValidUser.Visible = true;
                     updateLogin.Update();
                 }
-            }
 
-            con.Close();
+                con.Close();
+            }
         }
 
         protected void emailExist_ServerValidate(object source, ServerValidateEventArgs args)
@@ -157,6 +183,50 @@ namespace Assignment
                 updateLogin.Update();
             }
             con.Close();
+        }
+
+        protected string Decrypt(byte[] cipheredText, byte[] key, byte[] iv)
+        {
+            string simpleText = " ";
+            Aes aes = Aes.Create();
+
+            ICryptoTransform decryptor = aes.CreateDecryptor(key, iv);
+
+            using (MemoryStream ms = new MemoryStream(cipheredText))
+            {
+                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                {
+
+                    StreamReader reader = new StreamReader(cs);
+
+                    simpleText = reader.ReadToEnd();
+                }
+            }
+
+            return simpleText;
+        }
+
+        protected byte[] Encrypt(string simpleText, byte[] key, byte[] iv)
+        {
+            byte[] cipheredText;
+
+            Aes aes = Aes.Create();
+
+            ICryptoTransform encryptor = aes.CreateEncryptor(key, iv);
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                {
+                    using (StreamWriter writer = new StreamWriter(cs))
+                    {
+                        writer.Write(simpleText);
+                    }
+                    cipheredText = ms.ToArray();
+                }
+            }
+
+            return cipheredText;
         }
     }
 }
