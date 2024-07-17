@@ -73,6 +73,7 @@
     </Content>
     <Content Include="CSS\Master.css" />
     <Content Include="CSS\SignUp.css" />
+    <Content Include="CSS\Order.css" />
     <Content Include="forgetPassword.aspx" />
     <Content Include="Image\logo.png" />
     <Content Include="SignUp.aspx" />
@@ -80,6 +81,7 @@
     <Content Include="validateEmail.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
+    <Content Include="Order.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="forgetPassword.aspx.cs">
@@ -124,6 +126,13 @@
     </Compile>
     <Compile Include="validateEmail.aspx.designer.cs">
       <DependentUpon>validateEmail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Order.aspx.cs">
+      <DependentUpon>Order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Order.aspx.designer.cs">
+      <DependentUpon>Order.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
