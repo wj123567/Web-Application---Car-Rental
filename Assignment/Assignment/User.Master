@@ -81,11 +81,11 @@
 <div class="container-footer">
   <footer class="py-1 my-1" style="background-color:#effaf6;">
     <ul class="nav justify-content-center border-bottom pb-1 mb-2">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Car</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Contact</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+      <li class="nav-item"><a href="#" class="custom-nav-link nav-link px-2">Home</a></li>
+      <li class="nav-item"><a href="#" class="custom-nav-link nav-link px-2">Car</a></li>
+      <li class="nav-item"><a href="#" class="custom-nav-link nav-link px-2">Contact</a></li>
+      <li class="nav-item"><a href="#" class="custom-nav-link nav-link px-2">FAQs</a></li>
+      <li class="nav-item" ><a href="#" class="custom-nav-link nav-link px-2">About</a></li>
     </ul>
     <p class="text-center text-body-secondary">&copy; <%:@DateTime.Now.Year%> Company, Inc</p>
   </footer>
