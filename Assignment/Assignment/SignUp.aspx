@@ -3,10 +3,10 @@
 <asp:Content ID="userReg" ContentPlaceHolderID="main" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div id="loginForm">
-        <div id="switchForm">
+        <div id="switchForm" class="btn-group d-flex justify-content-center">
             <div id="switchIndicator"> </div>
-            <input id="switchLogin" class="switchBtn" type="button" value="Login" onclick="logIn()"/>
-            <input id="switchSignup" class="switchBtn" type="button" value="Sign Up" onclick="signUp()"/>
+            <input id="switchLogin" class="switchBtn btn" type="button" value="Login" onclick="logIn()"/>
+            <input id="switchSignup" class="switchBtn btn" type="button" value="Sign Up" onclick="signUp()"/>
         </div>
 
         <div id="loginInputGroup" class="inputGroup">
@@ -25,8 +25,7 @@
             <span>Show Password</span>
             <br />
 
-            
-            <asp:Button ID="btnLogIn" runat="server" Text="Log In" CssClass="btnUser" ValidationGroup="LoginGroup" OnClick="btnLogIn_Click" />
+            <asp:Button ID="btnLogIn" runat="server" Text="Log In" CssClass="btnUser mx-auto" ValidationGroup="LoginGroup" OnClick="btnLogIn_Click" />
             <asp:Button ID="btnForget" runat="server" Text="Forget Password?" CssClass="forgetPass" OnClick="btnForget_Click" ValidationGroup="LoginGroup" />
         </div>
                 </ContentTemplate>
@@ -68,7 +67,7 @@
             <br />
             <asp:CustomValidator ID="validTac" runat="server" ErrorMessage="Please Accept Terms & Condition" ClientValidationFunction = "ValidateCheckBox" CssClass="validate" ValidationGroup="SignUpGroup" ControlToValidate="txtRegEmail"></asp:CustomValidator>
             <br />
-            <asp:Button ID="btnSignup" runat="server" Text="Sign Up" CssClass="btnUser" ValidationGroup="SignUpGroup" OnClick="btnSignup_Click" />
+            <asp:Button ID="btnSignup" runat="server" Text="Sign Up" CssClass="btnUser mx-auto" ValidationGroup="SignUpGroup" OnClick="btnSignup_Click" />
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
@@ -85,7 +84,7 @@
         var switchForm = document.getElementById("switchForm")
 
         function signUp() {
-            signup.style.left = "70px";
+            signup.style.left = "55px";
             login.style.left = "-500px";
             switches.style.left = "110px";
             loginform.style.height = "700px";
@@ -93,7 +92,7 @@
 
         function logIn() {
             signup.style.left = "500px";
-            login.style.left = "70px";
+            login.style.left = "55px";
             switches.style.left = "0";
             loginform.style.height = "480px";
         }

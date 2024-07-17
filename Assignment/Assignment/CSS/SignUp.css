@@ -78,7 +78,7 @@
     border: 0;
     border-radius: 30px;
     outline: none;
-    margin: 20px auto;
+    margin: 20px 0;
 }
 
 .forgetPass {
@@ -94,7 +94,7 @@
 }
 
 #loginInputGroup {
-    left: 70px;
+    left: 55px;
 }
 
 #signupInputGroup {
@@ -102,11 +102,11 @@
 }
 
 #forgetInputGroup {
-    left: 70px;
+    left: 55px;
 }
 
 #verifyInputGroup {
-    left: 70px;
+    left: 55px;
 }
 
 .validate{

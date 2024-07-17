@@ -52,5 +52,11 @@ namespace Assignment
             loginUser.Visible = true;
 
         }
+
+        protected void logoutBtn_Click(object sender, EventArgs e)
+        {
+            Session["Id"] = null;
+            Server.Transfer("Home.aspx");
+        }
     }
 }

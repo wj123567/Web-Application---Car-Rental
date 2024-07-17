@@ -184,7 +184,7 @@ namespace Assignment
             }
             con.Close();
         }
-
+    
         protected string Decrypt(byte[] cipheredText, byte[] key, byte[] iv)
         {
             string simpleText = " ";

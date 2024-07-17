@@ -6,8 +6,8 @@
             <asp:TextBox ID="txtVerifyEmail" runat="server" CssClass="inputField" placeholder="Email" ReadOnly="True"></asp:TextBox>
              <asp:TextBox ID="txtNewVerify" runat="server" CssClass="inputField" placeholder="Verification Code"></asp:TextBox>
             <asp:Label ID="labelNewSend" runat="server" Text="Verification Code Has Been Sent" Visible="False"></asp:Label>
-            <asp:Button ID="sendNewCode" runat="server" CssClass="btnUser"  Text="Send" />
-            <asp:Button ID="btnNewVerify" runat="server" Text="Verify" CssClass="btnUser"/>
+            <asp:Button ID="sendNewCode" runat="server" CssClass="btnUser mx-auto"  Text="Send" />
+            <asp:Button ID="btnNewVerify" runat="server" Text="Verify" CssClass="btnUser mx-auto"/>
             </div>
         </div>
 </asp:Content>

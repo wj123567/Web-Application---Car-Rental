@@ -1,75 +1,42 @@
-﻿body {
-    font: 12pt Calibri;
+﻿html{
+    height:100%;
+    box-sizing:border-box;
 }
-
 body {
-    margin: 0px;
+    font: 12pt Calibri;
+    position:relative;
+    margin:0;
+    min-height:100%;
+    padding-bottom: 6.74em;
+    box-sizing:inherit;
 }
 
-h1, h2 {
-    margin: 0px 0px 10px 0px;
-}
 #logo{
     width: 100px;
-    padding-top:15px;
-    float: left;
 }
 
-#header {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    padding: 10px;
-    background-color: #eee;
-    border-bottom: 1px solid #ccc;
+#content{
+    padding-top:60px;
 }
 
-#content {
-    padding-top: 80px;
+.container-footer{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
 }
 
-#header h1 {
-    display: inline;
-    float: left;
+.form-white.input-group > .form-control:focus {
+    border-color: #fff;
+    box-shadow: inset 0 0 0 1px #fff;
 }
 
-#header ul#selection {
-    float: left;
-    padding-left: 20px;
-    list-style-type: none;
-    margin-left: 5px;
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
 }
 
-#header ul#userControl {
-    float: right;
-    margin-right: 10px;
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {
+        color: pink;
 }
 
-#header ul li {
-    text-decoration: none;
-    font-size: 1.2em;
-    display: block;
-    float: left;
-    margin-right: 10px;
-}
-
-    #header ul li a:hover {
-        color: #3490dc;
-    }
-
-    #header ul li a {
-        text-decoration: none;
-        color: #000;
-    }
-
-#footer {
-    position: fixed;
-    left: 0px;
-    bottom: 0px;
-    width: 100%;
-    padding: 10px;
-    background-color: #eee;
-    border-top: 1px solid #ccc;
-    text-align: center;
-}
