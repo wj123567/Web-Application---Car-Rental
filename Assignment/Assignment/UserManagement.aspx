@@ -23,7 +23,7 @@
                      <SortedDescendingCellStyle BackColor="#FCF6C0" />
                      <SortedDescendingHeaderStyle BackColor="#820000" />
                  </asp:GridView>
-                 <asp:SqlDataSource ID="UserRegistrationData" runat="server" ConnectionString="<%$ ConnectionStrings:UserRegistrationConnectionString %>" ProviderName="<%$ ConnectionStrings:UserRegistrationConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [UserRegistration]"></asp:SqlDataSource>
+                 <asp:SqlDataSource ID="UserRegistrationData" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" ProviderName="<%$ ConnectionStrings:DatabaseConnectionString.ProviderName %>" SelectCommand="SELECT * FROM [UserRegistration]"></asp:SqlDataSource>
             </tr>
         </table>
 

@@ -3,32 +3,12 @@
   "WorkspaceRootPath": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\css\\master.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\master.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\css\\order.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\order.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\order.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\order.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\assignment\\home.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\home.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\home.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\assignment\\user.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\user.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\assignment\\signup.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\signup.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\forgetpassword.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\forgetpassword.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -47,92 +27,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Master.css",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\Master.css",
-              "RelativeDocumentMoniker": "Assignment\\CSS\\Master.css",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\Master.css",
-              "RelativeToolTip": "Assignment\\CSS\\Master.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-07-18T07:12:45.347Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Order.css",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\Order.css",
-              "RelativeDocumentMoniker": "Assignment\\CSS\\Order.css",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\Order.css",
-              "RelativeToolTip": "Assignment\\CSS\\Order.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-07-18T07:12:20.406Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Home.aspx.cs",
               "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx.cs",
               "RelativeDocumentMoniker": "Assignment\\Home.aspx.cs",
               "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx.cs",
               "RelativeToolTip": "Assignment\\Home.aspx.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAewAkAAAAVAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-17T16:43:09.846Z",
+              "WhenOpened": "2024-07-19T15:04:27.688Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Order.aspx",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Order.aspx",
-              "RelativeDocumentMoniker": "Assignment\\Order.aspx",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Order.aspx",
-              "RelativeToolTip": "Assignment\\Order.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-07-17T16:32:37.706Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Home.aspx",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx",
-              "RelativeDocumentMoniker": "Assignment\\Home.aspx",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx",
-              "RelativeToolTip": "Assignment\\Home.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-07-17T16:23:22.91Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "User.Master",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\User.Master",
-              "RelativeDocumentMoniker": "Assignment\\User.Master",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\User.Master",
-              "RelativeToolTip": "Assignment\\User.Master",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-07-17T09:49:52.474Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SignUp.aspx",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\SignUp.aspx",
-              "RelativeDocumentMoniker": "Assignment\\SignUp.aspx",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\SignUp.aspx",
-              "RelativeToolTip": "Assignment\\SignUp.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-07-17T14:16:09.2Z",
+              "DocumentIndex": 1,
+              "Title": "forgetPassword.aspx.cs",
+              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\forgetPassword.aspx.cs",
+              "RelativeDocumentMoniker": "Assignment\\forgetPassword.aspx.cs",
+              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\forgetPassword.aspx.cs",
+              "RelativeToolTip": "Assignment\\forgetPassword.aspx.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T15:04:22.476Z",
               "EditorCaption": ""
             }
           ]

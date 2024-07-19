@@ -25,7 +25,7 @@ namespace Assignment
             String Username = " ";
             String Roles = " ";
 
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserRegistrationConnectionString"].ConnectionString);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
             conn.Open();
 
