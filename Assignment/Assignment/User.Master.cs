@@ -18,6 +18,7 @@ namespace Assignment
             {
                 LoadUserData(Session["Id"].ToString());
             }
+            
         }
 
         protected void LoadUserData(String id)
@@ -57,6 +58,13 @@ namespace Assignment
         {
             Session["Id"] = null;
             Server.Transfer("Home.aspx");
+        }
+
+
+        protected void hiddenBtn_Click(object sender, EventArgs e)
+        {
+            Session["Search"] = searchBar.Text;
+            Server.Transfer("productListing.aspx");
         }
     }
 }
