@@ -13,7 +13,7 @@
     <title>OnlyCar</title>
 </head>
 <body>
-    <form id="form1" runat="server" defaultbutton="hiddenBtn">
+    <form id="form1" runat="server">
 <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color:#effaf6">
   <div class="container-fluid">
     <a class="navbar-brand" href="Home.aspx">

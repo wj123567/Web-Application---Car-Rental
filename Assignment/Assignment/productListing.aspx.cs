@@ -55,12 +55,12 @@ namespace Assignment
 
             string findCar = "SELECT * FROM Car WHERE CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString";
 
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
-            {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+           
                 con.Open();
 
-                using (SqlCommand com = new SqlCommand(findCar, con))
-                {
+            SqlCommand com = new SqlCommand(findCar, con);
+               
                     com.Parameters.AddWithValue("@searchString", "%" + searchString + "%");
 
                     SqlDataAdapter da = new SqlDataAdapter(com);
@@ -76,11 +76,10 @@ namespace Assignment
                         productRepeater.DataSource = ds.Tables["CarData"];
                         productRepeater.DataBind();
                     }
-                }
 
-                con.Close();
-            }
+            con.Close();
         }
 
-    }
-}
+                
+            }
+        }
