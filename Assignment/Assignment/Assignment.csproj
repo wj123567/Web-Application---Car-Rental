@@ -67,10 +67,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CarManagement.aspx" />
+    <Content Include="CSS\admin.css" />
     <Content Include="App_Data\SystemDatabase.mdf" />
     <Content Include="App_Data\SystemDatabase_log.ldf">
       <DependentUpon>SystemDatabase.mdf</DependentUpon>
     </Content>
+    <Content Include="CSS\carManagement.css" />
     <Content Include="CSS\Master.css" />
     <Content Include="CSS\SignUp.css" />
     <Content Include="CSS\Order.css" />
@@ -79,6 +82,7 @@
     <Content Include="Image\CarImage\vios.png" />
     <Content Include="Image\logo.png" />
     <Content Include="productListing.aspx" />
+    <Content Include="resetPassword.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="UserManagement.aspx" />
     <Content Include="validateEmail.aspx" />
@@ -87,6 +91,20 @@
     <Content Include="Order.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CarManagement.aspx.cs">
+      <DependentUpon>CarManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CarManagement.aspx.designer.cs">
+      <DependentUpon>CarManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="forgetPassword.aspx.cs">
       <DependentUpon>forgetPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -102,6 +120,13 @@
       <DependentUpon>productListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="resetPassword.aspx.cs">
+      <DependentUpon>resetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="resetPassword.aspx.designer.cs">
+      <DependentUpon>resetPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SignUp.aspx.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -146,6 +171,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Admin.Master" />
     <None Include="packages.config" />
     <Content Include="User.Master" />
     <Content Include="Web.sitemap" />
