@@ -51,13 +51,31 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.CheckBoxList cblCarType;
 
         /// <summary>
-        /// rblPriceHL control.
+        /// txtMinPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblPriceHL;
+        protected global::System.Web.UI.WebControls.TextBox txtMinPrice;
+
+        /// <summary>
+        /// txtMaxPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMaxPrice;
+
+        /// <summary>
+        /// cprMaxMinPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cprMaxMinPrice;
 
         /// <summary>
         /// rblAlphaOrder control.

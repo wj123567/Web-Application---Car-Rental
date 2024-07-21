@@ -14,6 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:SiteMapDataSource ID="UserSiteMap" runat="server" />
 <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color:#effaf6">
   <div class="container-fluid">
     <a class="navbar-brand" href="Home.aspx">
@@ -34,10 +35,7 @@
       </div>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <asp:placeholder id="general" runat="server">
-                <li class="nav-item"><a class= "nav-link" href="home.aspx">Home</a></li>
-                <li class="nav-item"><a class= "nav-link" href="productListing.aspx">Car</a></li>
-                <li class="nav-item"><a class= "nav-link" href="contact.aspx">Help</a></li>
-                <li class="nav-item"><a class= "nav-link" href="order.aspx">Order</a></li>
+                <asp:Menu ID="Menu1" runat="server" DataSourceID="UserSiteMap" Orientation="Horizontal" StaticDisplayLevels="2" StaticMenuItemStyle-CssClass="nav-link mx-2" CssClass="nav-item"></asp:Menu>
                 </asp:placeholder>
                 <asp:PlaceHolder ID="admin" runat="server" Visible="False">
                 <li class="nav-item"><a class= "nav-link" href="admin.aspx">Admin</a></li>

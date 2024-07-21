@@ -3,7 +3,7 @@
     <asp:SqlDataSource ID="dsCarDetail" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" SelectCommand="SELECT * FROM [Car]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="dsCarType" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [CarType]"></asp:SqlDataSource>
 
-<div class="btn float-end" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+<div class="btn float-end mt-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
     <span>Filter</span>
     <i class="fa-solid fa-filter" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
 </div>
@@ -16,32 +16,34 @@
     <div class="offcanvas-body px-0">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <span class="ms-1">Car Brand:</span>
-                    <asp:CheckBoxList ID="cblCarBrand" runat="server" DataSourceID="dsCarDetail" DataTextField="CarBrand" DataValueField="CarBrand"></asp:CheckBoxList>
-
+                <a href="#" class="nav-link text-black">
+                    <span class="text-muted">Car Brand:</span>
+                    <asp:CheckBoxList ID="cblCarBrand" runat="server"></asp:CheckBoxList>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <span class="ms-1">Car Brand:</span>
-                    <asp:CheckBoxList ID="cblCarType" runat="server" DataSourceID="dsCarType" DataTextField="CType" DataValueField="CType"></asp:CheckBoxList>
+                <a href="#" class="nav-link text-black">
+                    <span class="text-muted">Car Type:</span>
+                    <asp:CheckBoxList ID="cblCarType" runat="server" DataSourceID="dsCarType" DataTextField="CType" DataValueField="CType" ValidationGroup="filter"></asp:CheckBoxList>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <span class="ms-1">Price:</span>
-                    <asp:RadioButtonList ID="rblPriceHL" runat="server">
-                        <asp:ListItem Value="asc">Low - High</asp:ListItem>
-                        <asp:ListItem Value="desc">High - Low</asp:ListItem>
-                    </asp:RadioButtonList>
+                <a href="#" class="nav-link text-black">
+                    <span class="text-muted d-block">Price Range:</span>
+                    <div class="justify-content-between">
+                    <asp:TextBox ID="txtMinPrice" runat="server" TextMode="Number" placeholder="Min" Width="100px" min="1" ValidationGroup="filter"></asp:TextBox>
+                    <span>-</span>
+                    <asp:TextBox ID="txtMaxPrice" runat="server" TextMode="Number" placeholder="Max" Width="100px" min="1" ValidationGroup="filter"></asp:TextBox>
+                    </div>
+                    <asp:CompareValidator ID="cprMaxMinPrice" runat="server" ErrorMessage="Max Price Must Greater than Min Price" ControlToCompare="txtMinPrice" ControlToValidate="txtMaxPrice" CssClass="validate" Operator="GreaterThan" ValidationGroup="filter"></asp:CompareValidator>
+                    <br />
                 </a>
                 
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                   <span class="ms-1">Alphabetical Order:</span>
+                <a href="#" class="nav-link text-black">
+                   <span class="text-muted">Alphabetical Order:</span>
                     <asp:RadioButtonList ID="rblAlphaOrder" runat="server">
                         <asp:ListItem Value="asc">A - Z</asp:ListItem>
                         <asp:ListItem Value="desc">Z - A</asp:ListItem>
@@ -50,7 +52,7 @@
                 </a>
             </li>
         </ul>
-        <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="btn btn-block float-end mx-3" style="background-color:#3490dc;"/>
+        <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="btn btn-block float-end mx-3 text-white" style="background-color:#3490dc;" OnClick="btnFilter_Click" ValidationGroup="filter"/>
     </div>
 </div>
   
@@ -99,12 +101,13 @@
                             </div>
                         </div>
                         <div class="mx-3 mb-3">
-                            <asp:Button ID="btnProductRent" runat="server" Text="Rent" CssClass="btn btn-block" style="background-color:#3490dc;"/>
+                            <asp:Button ID="btnProductRent" runat="server" Text="Rent" CssClass="btn btn-block text-white" style="background-color:#3490dc;" CommandArgument='<%# Eval("CarID") %>' OnClick="btnProductRent_Click" />
                         </div>
                     </div>
                 </div>
             </ItemTemplate>
         </asp:Repeater>
     </div>
+                                
 </div>
 </asp:Content>
