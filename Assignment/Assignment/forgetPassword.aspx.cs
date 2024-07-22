@@ -79,7 +79,7 @@ namespace Assignment
             smtpClient.EnableSsl = true;
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Host = "smtp.gmail.com";
-            smtpClient.Credentials = new System.Net.NetworkCredential("chongwj-pm23@student.tarc.edu.my", "WeiJia_081104");
+            smtpClient.Credentials = new System.Net.NetworkCredential("chongwj-pm23@student.tarc.edu.my", "####");
             smtpClient.Send(mail);
 
             labelForgetSend.Visible = true;
