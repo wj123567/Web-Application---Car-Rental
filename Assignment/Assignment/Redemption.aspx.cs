@@ -11,7 +11,12 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                String clientID = Label1.ClientID;
+                Label1.Attributes.Add("onmouseover", $"showText('{clientID}')");
+            }
         }
+
     }
 }
