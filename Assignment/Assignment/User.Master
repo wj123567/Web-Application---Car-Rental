@@ -10,7 +10,10 @@
     <link href="CSS/SignUp.css" rel="stylesheet" />
     <link href="CSS/Order.css" rel="stylesheet" />
     <link href="CSS/Master.css" rel="stylesheet" />
+    <link href="CSS/Redemption.css" rel="stylesheet" />
     <title>OnlyCar</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
