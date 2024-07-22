@@ -16,13 +16,16 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Email"] != null)
+            if (!Page.IsPostBack)
             {
-                txtForgetEmail.Text = Session["Email"].ToString();
-            }
-            else
-            {
-                Response.Redirect("SignUp.aspx");
+                if (Session["forgetEmail"] != null)
+                {
+                    txtForgetEmail.Text = Session["forgetEmail"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("SignUp.aspx");
+                }
             }
         }
 
@@ -33,7 +36,7 @@ namespace Assignment
 
             con.Open();
             SqlCommand findCom = new SqlCommand(findUserID, con);
-            findCom.Parameters.AddWithValue("@email", Session["Email"].ToString());
+            findCom.Parameters.AddWithValue("@email", Session["forgetEmail"].ToString());
 
             SqlDataReader reader = findCom.ExecuteReader();
             
@@ -62,7 +65,7 @@ namespace Assignment
             con.Close();
 
             MailMessage mail = new MailMessage();
-            mail.To.Add(Session["Email"].ToString());
+            mail.To.Add(Session["forgetEmail"].ToString());
             mail.From = new MailAddress("chongwj-pm23@student.tarc.edu.my");
             mail.Subject = "Forget Password Verification Code";
 
@@ -79,7 +82,7 @@ namespace Assignment
             smtpClient.EnableSsl = true;
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Host = "smtp.gmail.com";
-            smtpClient.Credentials = new System.Net.NetworkCredential("chongwj-pm23@student.tarc.edu.my", "####");
+            smtpClient.Credentials = new System.Net.NetworkCredential("chongwj-pm23@student.tarc.edu.my", "WeiJia_081104");
             smtpClient.Send(mail);
 
             labelForgetSend.Visible = true;

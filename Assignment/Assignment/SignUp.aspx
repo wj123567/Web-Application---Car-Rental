@@ -26,7 +26,7 @@
             <br />
 
             <asp:Button ID="btnLogIn" runat="server" Text="Log In" CssClass="btnUser mx-auto" ValidationGroup="LoginGroup" OnClick="btnLogIn_Click" />
-            <asp:Button ID="btnForget" runat="server" Text="Forget Password?" CssClass="forgetPass" OnClick="btnForget_Click" ValidationGroup="LoginGroup" />
+            <asp:Button ID="btnForget" runat="server" Text="Forget Password?" CssClass="forgetPass" OnClick="btnForget_Click" ValidationGroup="LoginGroup"/>
         </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -62,11 +62,8 @@
             <br />
             <asp:RequiredFieldValidator runat="server" ErrorMessage="Date of Birth cannot be empty" ID="validDOB" ControlToValidate="txtRegDOB" CssClass="validate" ValidationGroup="SignUpGroup"></asp:RequiredFieldValidator>
             <br />
-            <asp:CheckBox ID="cbTAC" runat="server" Text="" ValidationGroup="SignUpGroup" />
-            <span>I agree to the terms & condition</span>
-            <br />
-            <asp:CustomValidator ID="validTac" runat="server" ErrorMessage="Please Accept Terms & Condition" ClientValidationFunction = "ValidateCheckBox" CssClass="validate" ValidationGroup="SignUpGroup" ControlToValidate="txtRegEmail"></asp:CustomValidator>
-            <br />
+            <input id="cbShowRegPass" type="checkbox" onClick="showRegPass()"/>
+            <span>Show Password</span>
             <asp:Button ID="btnSignup" runat="server" Text="Sign Up" CssClass="btnUser mx-auto" ValidationGroup="SignUpGroup" OnClick="btnSignup_Click" />
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -108,6 +105,20 @@
             }
         }
 
+        function showRegPass() {
+            var password1 = document.getElementById('<%= txtRegPassword.ClientID %>');
+            var password2 = document.getElementById('<%= txtConfirmPass.ClientID %>');
+            var checkBox = document.getElementById('cbShowRegPass');
+
+                    if (checkBox.checked) {
+                        password1.type = 'text';
+                        password2.type = 'text';
+                    } else {
+                        password1.type = 'password';
+                        password2.type = 'password';
+                    }
+                }
+
         function validatePassword() {
             var password = document.getElementById('<%= txtRegPassword.ClientID %>').value;
             var hasEightChars = password.length >= 8;
@@ -131,13 +142,6 @@
             }
         }
 
-        function ValidateCheckBox(sender, args) {
-            if (document.getElementById("<%=cbTAC.ClientID %>").checked == true) {
-                        args.IsValid = true;
-                    } else {
-                        args.IsValid = false;
-                    }
-                }
 
     </script>
 

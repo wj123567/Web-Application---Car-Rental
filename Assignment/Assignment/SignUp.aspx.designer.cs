@@ -276,24 +276,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator validDOB;
 
         /// <summary>
-        /// cbTAC control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cbTAC;
-
-        /// <summary>
-        /// validTac control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator validTac;
-
-        /// <summary>
         /// btnSignup control.
         /// </summary>
         /// <remarks>

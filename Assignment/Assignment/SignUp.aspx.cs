@@ -15,11 +15,17 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
-
             if (!IsPostBack)
             {
+                if (Session["Id"] == null)
+                {
                 txtRegDOB.Attributes["max"] = DateTime.Now.AddYears(-18).ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    Server.Transfer("Home.aspx");
+                }
+
             }
         }
 
@@ -65,8 +71,9 @@ namespace Assignment
 
                         con.Close();
 
-                        Session["Email"] = txtRegEmail.Text;
-                        ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='validateEmail.aspx';", true);
+                        Session["validateEmail"] = txtRegEmail.Text;
+                        Session["validateId"] = newGUID.ToString();
+                    ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='validateEmail.aspx';", true);
                 }
                     catch (Exception ex)
                     {
@@ -80,7 +87,7 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
-                Session["Email"] = txtEmail.Text;
+                Session["forgetEmail"] = txtEmail.Text;
                 Response.Redirect("forgetPassword.aspx");
             }
         }
@@ -117,21 +124,35 @@ namespace Assignment
                 reader.Close();
 
                 if (simplePassword == Decrypt(encryptPassword, key, iv)){
-                    string getUserData = "Select Id from UserRegistration where email = @email";
+                    string getUserData = "Select Id, EmailVerification  from UserRegistration where email = @email";
 
                     SqlCommand com = new SqlCommand(getUserData, con);
 
                     com.Parameters.AddWithValue("@Email", txtEmail.Text);
 
                     reader = com.ExecuteReader();
+                    string emailValidation = " ";
+                    String Id = " ";
 
                     if (reader.Read())
                     {
-                        String Id = reader["Id"].ToString();
-                        Session["Id"] = Id;
+                        Id = reader["Id"].ToString();
+                        emailValidation = reader["EmailVerification"].ToString();
+                        
                     }
 
-                    Response.Redirect("Home.aspx");
+                    if(emailValidation == "1")
+                    {
+                        Session["Id"] = Id;
+                        Response.Redirect("Home.aspx");
+                    }
+                    else
+                    {
+                        Session["validateId"] = Id;
+                        Session["validateEmail"] = txtEmail.Text;
+                        Response.Redirect("validateEmail.aspx");
+                    }
+                    
                 }
                 else
                 {

@@ -93,20 +93,15 @@
     font-size: 1.2em;
 }
 
-#loginInputGroup {
+#loginInputGroup,
+#forgetInputGroup,
+#verifyInputGroup,
+#resetInputGroup {
     left: 55px;
 }
 
 #signupInputGroup {
     left: 500px;
-}
-
-#forgetInputGroup {
-    left: 55px;
-}
-
-#verifyInputGroup {
-    left: 55px;
 }
 
 .validate{
