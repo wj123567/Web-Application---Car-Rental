@@ -69,11 +69,12 @@
                                 <div>
                                     <asp:Label ID="lblCarBrand" runat="server" Text='<%# Eval("CarBrand") %>'/>
                                     <asp:Label ID="lblCarName" runat="server" Text='<%# Eval("CarName") %>'/>
+                                    <asp:Label ID="lblCarPlate" runat="server" Text='<%# Eval("CarPlate") %>' CssClass="text-muted d-block" Font-Size="0.9em" />
                                 </div>
-                                <div class="d-flex flex-row align-items-start text-center">
+                                <div>
                                     <span>Rm&nbsp;</span>
                                     <asp:Label ID="lblCarHourPrice" runat="server" Text='<%# Eval("CarHourPrice") %>'/>
-                                    <span>&nbsp;/ hour</span>
+                                    <span class="text-muted d-block" style="font-size:0.9em">per hour</span>
                                 </div>
                             </div>
                             <hr class="mt-2">
