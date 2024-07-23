@@ -1,0 +1,315 @@
+﻿
+/*for payment css*/
+.payment_section {
+    padding-top: 150px;
+    padding-bottom: 150px;
+    box-sizing: border-box;
+    border: 1px solid red;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+.payment_container, .driver_container {
+    display: flex;
+    border: 1px solid blue;
+    padding: 25px;
+    width: 100%;
+}
+
+    /*    .payment_container {
+        padding: 20px;
+        width:90%;
+    }*/
+
+    .payment_container .row, .driver_container .row {
+        border: 5px solid yellow;
+        width: 70%;
+        left: 5%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+        .payment_container .row .col, .driver_container .row .col {
+            border: 1px solid blue;
+            flex: 1 1 150px;
+            height: auto;
+        }
+
+            .payment_container .row .col .title， .driver_container .row .col .title {
+                font-size: 20px;
+                font-weight: 1000;
+                color: #333;
+                padding-bottom: 5px;
+                text-transform: uppercase;
+            }
+
+            .payment_container .row .col .inputbox_left, .driver_container .row .col .inputbox_left {
+                margin: 25px 0;
+            }
+
+/*    .payment_container .row .col .inputbox_left span, .driver_container .row .col .inputbox_left span {  label for input
+        font-weight: 500;
+        margin-bottom: 17px;
+        display: block;
+    }*/
+
+
+.label_left {
+    font-weight: 500;
+    margin-bottom: 17px;
+    display: block;
+}
+
+/*.payment_container .row .col .inputbox_left input, .driver_container .row .col .inputbox_left input {*/ /*LHS of form*/
+/*width: 100%;
+        color: white;
+        padding: 10px 15px;
+        font-size: 15px;
+        text-transform: none;
+    }*/
+.input_left {
+    width: 90%;
+    padding: 10px 15px;
+    font-size: 15px;
+    text-transform: none;
+}
+
+/*                       .payment_container .row .col .inputbox_left input::placeholder {
+                            color: rgba(255, 255, 255,0.7);
+                            font-style: italic;
+                        }
+
+                        .payment_container  .row .col .inputbox_left input:focus {
+                            border: 2px solid #000;
+                        }
+*/
+
+/*.payment_container .row .col .inputbox span, .driver_container .row .col .inputbox span {*/ /* label for input*/
+/*font-weight: 500;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+
+    .payment_container .row .col .inputbox input, .driver_container .row .col .inputbox input {*/ /*RHS of */
+/*width: 100%;
+        color: white;
+        padding: 10px 15px;
+        font-size: 15px;
+        text-transform: none;
+    }*/
+
+/*.payment_container .row .col .inputbox_right {
+    margin: 30px 0;
+}*/
+
+.label_right {
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.input_right {
+    width: 90%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    text-transform: none;
+}
+
+.input_full {
+    width: 90%;
+    padding: 10px 15px;
+    font-size: 15px;
+    text-transform: none;
+    resize: none;
+    height: 100px;
+}
+/*            .payment_container  .row .col .inputbox input::placeholder {
+                            color: rgba(255, 255, 255,0.7);
+                            font-style: italic;
+                        }
+
+
+                        .payment_container  .row .col .inputbox input:focus {
+                            border: 1px solid #000;
+                        }*/
+
+/*.payment_container .row .col .inputbox_select, .driver_container .row .col .inputbox_select {*/ /*payment method*/
+/*margin: 15px 0px;
+}
+
+    .payment_container .row .col .inputbox_select span, driver_container .row .col .inputbox_select span {
+        margin-top: 20px;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .payment_container .row .col .inputbox_select input, .driver_container .row .col .inputbox_select input {
+        margin-right: 40px;
+        text-transform: none;
+    }
+
+    .payment_container .row .col .inputbox_select label, .driver_container .row .col .inputbox_select label {
+        padding: 0;
+        margin: 0;
+    }*/
+
+
+/*.payment_container .row .col .flex, .driver_container .row .col .flex{
+    display: flex;
+    gap: 15px;
+}
+
+.payment_container .row .col .flex .inputbox, .driver_container .row .col .flex .inputbox {
+        margin-top: 5px;
+        width: 50%;
+    }*/
+
+
+/*.payment_container  .formprocess {
+            width: 100%;
+        }*/
+
+
+.checkout_btn {
+    width: 70px;
+    height: 50px;
+    font-size: 25px;
+    color: forestgreen;
+    font-weight: 800;
+    background-color: lightcyan;
+    cursor: pointer;
+    position: absolute;
+    right: 100px;
+}
+
+    .checkout_btn:hover {
+        background-color: lavenderblush;
+    }
+
+
+.check_driver {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.driver_check_label::first-letter {
+    text-transform: capitalize;
+}
+
+.driver_check_label {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    padding-left: 10px;
+}
+
+/*input#input_verify:focus:valid {
+    background: rgba(62, 0, 69, 0.9) url(wz_image/tick.png) right/contain no-repeat;
+}
+
+input#diamondInput:focus, input#paymentInput:focus {
+    background: rgba(62, 0, 69, 0.9) url(wz_image/tick.png) right/contain no-repeat;
+}
+
+input#paynum:focus:valid, input#expirydate:focus:valid, input#diamond:focus:valid {
+    background: rgba(62, 0, 69, 0.9) url(wz_image/tick.png) 370px/contain no-repeat;
+}
+
+input#input_verify:focus:invalid {
+    background: rgba(62, 0, 69, 0.7) url(wz_image/warning.png) right/contain no-repeat;
+}
+
+input#paynum:focus:invalid, input#expirydate:focus:invalid, input#diamond:focus:invalid {
+    background: rgba(62, 0, 69, 0.7) url(wz_image/warning.png) 370px/contain no-repeat;
+}
+
+input#submit:focus {
+    background-image: none;
+    background: #8fb1e9;
+}
+*/
+/*@media only screen and (max-width:1000px) {
+    .payment_container  .checkout_btn {
+        padding: 10px;
+        font-size: 20px;
+        margin: 10px 20px;
+    }
+
+    .payment_container  .reset_btn {
+        padding: 10px;
+        margin: 10px 20px;
+    }
+
+    .payment_container img {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:705px) {
+    .payment_container  .checkout_btn {
+        width: 40%;
+        margin: 10px 20px;
+    }
+
+    .payment_container  .reset_btn {
+        width: 40%;
+        margin: 10px 20px;
+    }
+
+    .payment_container  .row .col .inputbox_select input {
+        margin-right: 10px;
+    }
+}
+
+@media only screen and (max-width:580px) {
+    .payment_container  .checkout_btn {
+        width: 70%;
+        margin: 10px 50px;
+    }
+
+    .payment_container  .reset_btn {
+        width: 70%;
+        margin: 10px 50px;
+    }
+
+    .payment_section {
+        margin: 0;
+        padding-top: 200px;
+        padding-bottom: 200px;
+    }
+
+    .payment_container img {
+        width: 390px;
+        justify-content: center;
+    }
+
+    .payment_container  .row .col .inputbox_select input {
+        margin-right: 80px;
+    }
+}
+
+@media only screen and (max-width:450px) {
+
+    .payment_container img {
+        width: 310px;
+        justify-content: center;
+    }
+
+    .payment_container  .row .col .inputbox_select input {
+        margin-right: 40px;
+    }
+}
+
+@media only screen and (max-width:350px) {
+    .payment_container img {
+        width: 260px;
+        justify-content: center;
+    }
+
+    .payment_container  .row .col .inputbox_select input {
+        margin-right: 20px;
+    }
+}*/
