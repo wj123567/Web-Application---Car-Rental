@@ -25,12 +25,13 @@ namespace Assignment
         {
             String Username = " ";
             String Roles = " ";
+            String profilePicture = " ";
 
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
             conn.Open();
 
-            string getUserData = "Select Username, Roles from UserRegistration where Id = @id";
+            string getUserData = "Select Username, Roles, ProfilePicture from UserRegistration where Id = @id";
 
             SqlCommand com = new SqlCommand(getUserData, conn);
 
@@ -42,6 +43,7 @@ namespace Assignment
             {
                 Username = reader["Username"].ToString();
                 Roles = reader["Roles"].ToString().Trim(' ');
+                profilePicture = reader["ProfilePicture"].ToString();
             }
 
             conn.Close();
@@ -49,7 +51,8 @@ namespace Assignment
             admin.Visible = Roles.Equals("Admin", StringComparison.OrdinalIgnoreCase);
 
             Guest.Visible = false;
-            userName.Text = Username;
+            userName.Text = Username.ToString();
+            userProfilePicture.ImageUrl = profilePicture;
             loginUser.Visible = true;
 
         }

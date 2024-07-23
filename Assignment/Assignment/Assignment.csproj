@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CarManagement.aspx" />
+    <Content Include="CSS\profile.css" />
     <Content Include="CSS\admin.css" />
     <Content Include="App_Data\SystemDatabase.mdf" />
     <Content Include="App_Data\SystemDatabase_log.ldf">
@@ -82,7 +83,10 @@
     <Content Include="Image\CarImage\city.png" />
     <Content Include="Image\CarImage\vios.png" />
     <Content Include="Image\logo.png" />
+    <Content Include="Image\UserProfile\admin.jpg" />
+    <Content Include="Image\UserProfile\noImg.svg" />
     <Content Include="productListing.aspx" />
+    <Content Include="profile.aspx" />
     <Content Include="Redemption.aspx" />
     <Content Include="resetPassword.aspx" />
     <Content Include="SignUp.aspx" />
@@ -120,6 +124,20 @@
     </Compile>
     <Compile Include="productListing.aspx.designer.cs">
       <DependentUpon>productListing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profile.aspx.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profile.aspx.designer.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="profile.Master.cs">
+      <DependentUpon>profile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profile.Master.designer.cs">
+      <DependentUpon>profile.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redemption.aspx.cs">
@@ -184,6 +202,7 @@
     <None Include="packages.config" />
     <Content Include="User.Master" />
     <Content Include="Web.sitemap" />
+    <Content Include="profile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

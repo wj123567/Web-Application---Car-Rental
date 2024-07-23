@@ -1,11 +1,34 @@
-﻿.wrapper {
+﻿﻿::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.wrapper {
     display: flex;
 }
 
 .main {
     min-height: 100vh;
-    width: calc(100% - 70px); /* Adjust width to consider the collapsed sidebar */
-    margin-left: 70px; /* Offset main content to make room for sidebar */
+    width: 100%;
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     background-color: #fff;
@@ -19,26 +42,12 @@
     background-color: #effaf6;
     display: flex;
     flex-direction: column;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
 }
 
     #sidebar.expand {
         width: 260px;
         min-width: 260px;
     }
-
-#navbarSupportedContent {
-    z-index: 1001; /* Ensure navbar is above the sidebar */
-}
-
-/* Adjust main content width when sidebar is expanded */
-#sidebar.expand ~ .main {
-    width: calc(100% - 260px);
-    margin-left: 260px;
-}
 
 .toggle-btn {
     background-color: transparent;

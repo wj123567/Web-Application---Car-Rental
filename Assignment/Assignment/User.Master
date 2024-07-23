@@ -40,7 +40,7 @@
       </div>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <asp:placeholder id="general" runat="server">
-                <asp:Menu ID="Menu1" runat="server" DataSourceID="UserSiteMap" Orientation="Horizontal" StaticDisplayLevels="2" StaticMenuItemStyle-CssClass="nav-link mx-2" CssClass="nav-item"></asp:Menu>
+                <asp:Menu ID="Menu1" runat="server" DataSourceID="UserSiteMap" Orientation="Horizontal" StaticDisplayLevels="2" StaticMenuItemStyle-CssClass="nav-link mx-2" CssClass="nav-item" StaticSelectedStyle-ForeColor="#3490DC"></asp:Menu>
                 </asp:placeholder>
                 <asp:PlaceHolder ID="admin" runat="server" Visible="False">
                 <li class="nav-item"><a class= "nav-link" href="admin.aspx">Admin</a></li>
@@ -60,9 +60,8 @@
         <li class="nav-item me-3 me-lg-0 dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-                <asp:Literal ID="userName" runat="server"></asp:Literal>
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="40"
-              alt="" loading="lazy" />
+              <asp:Label ID="userName" runat="server" Text="Label"></asp:Label>
+              <asp:Image ID="userProfilePicture" runat="server" CssClass="rounded-circle d-inline mx-2" Width="30px" />
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
             <li><a class="dropdown-item" href="profile.aspx">Profile</a></li>
