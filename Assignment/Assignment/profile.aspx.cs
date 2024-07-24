@@ -5,7 +5,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.IO;
 using System.Web.UI.WebControls;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Assignment
 {
@@ -34,11 +37,11 @@ namespace Assignment
             DateTime registrationDate = DateTime.Now;
             String profilePicture = " ";
 
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-
-            conn.Open();
+            SqlConnection conn = new SqlConnection(Global.CS);
 
             string getUserData = "Select Username, Email, DOB, RegistrationDate, ProfilePicture from UserRegistration where Id = @id";
+
+            conn.Open();
 
             SqlCommand com = new SqlCommand(getUserData, conn);
 
@@ -56,6 +59,7 @@ namespace Assignment
             }
 
             conn.Close();
+            reader.Close();
 
             txtUsername.Text = username;
             txtEmailAddress.Text = email;
@@ -68,12 +72,65 @@ namespace Assignment
         protected void btnEditUserProfile_Click(object sender, EventArgs e)
         {
             if (btnEditUserProfile.Text == "Save Changes") {
+                SqlConnection con = new SqlConnection(Global.CS);
+                String updateUser = "UPDATE UserRegistration SET Username = @username WHERE Id = @id";
+
+                con.Open();
+
+                SqlCommand com = new SqlCommand(updateUser, con);
+                com.Parameters.AddWithValue("@username", txtUsername.Text);
+                com.Parameters.AddWithValue("@id", Session["Id"].ToString());
+
+                com.ExecuteNonQuery();
+
+                con.Close();
+
                 txtUsername.Enabled = false;
                 btnEditUserProfile.Text = "Edit";
             }else if(btnEditUserProfile.Text == "Edit")
             {
                 txtUsername.Enabled = true;
                 btnEditUserProfile.Text = "Save Changes";
+            }
+        }
+
+        protected void userUploadProfile_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                lblProfilePic.Text = "";
+                string id = Session["Id"].ToString();
+                string folderLocation = Server.MapPath("~/Image/UserProfile");
+                string relfolderLocation = "~/Image/UserProfile";
+                string uploadFile = "UPDATE UserRegistration SET ProfilePicture = @ProfilePicture WHERE Id = @id";
+                SqlConnection con = new SqlConnection(Global.CS);
+
+                if (fuProfile.HasFile)
+                {
+                    int fileSize = fuProfile.PostedFile.ContentLength;
+                    string ext = Path.GetExtension(fuProfile.FileName);
+                    if ((ext == ".jpg" || ext == ".png") && fileSize < 2100000)
+                    {
+                        string fileName = id + ext;
+                        string savePath = Path.Combine(folderLocation, fileName);
+                        string relPath = Path.Combine(relfolderLocation, fileName);
+                        fuProfile.SaveAs(savePath);
+
+                        con.Open();
+                        SqlCommand com = new SqlCommand(uploadFile, con);
+                        com.Parameters.AddWithValue("@ProfilePicture", relPath);
+                        com.Parameters.AddWithValue("@id", id);
+                        com.ExecuteNonQuery();
+                        con.Close();
+                        Server.Transfer("profile.aspx");
+                        lblProfilePic.Text = "Image Uploaded";
+
+                    }
+                    else
+                    {
+                        lblProfilePic.Text = "Invalid file type or file is too large";
+                    }
+                }
             }
         }
     }

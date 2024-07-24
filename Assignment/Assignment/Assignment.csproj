@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CarManagement.aspx" />
+    <Content Include="security.aspx" />
     <Content Include="CSS\profile.css" />
     <Content Include="CSS\admin.css" />
     <Content Include="App_Data\SystemDatabase.mdf" />
@@ -80,6 +81,7 @@
     <Content Include="CSS\SignUp.css" />
     <Content Include="CSS\Order.css" />
     <Content Include="forgetPassword.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Image\CarImage\city.png" />
     <Content Include="Image\CarImage\vios.png" />
     <Content Include="Image\logo.png" />
@@ -111,12 +113,22 @@
     <Compile Include="CarManagement.aspx.designer.cs">
       <DependentUpon>CarManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="security.aspx.cs">
+      <DependentUpon>security.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="security.aspx.designer.cs">
+      <DependentUpon>security.aspx</DependentUpon>
+    </Compile>
     <Compile Include="forgetPassword.aspx.cs">
       <DependentUpon>forgetPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="forgetPassword.aspx.designer.cs">
       <DependentUpon>forgetPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="productListing.aspx.cs">
       <DependentUpon>productListing.aspx</DependentUpon>

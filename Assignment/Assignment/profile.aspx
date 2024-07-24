@@ -11,11 +11,18 @@
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
+                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="profile-pic-wrapper" OnClientClick="return fileUpload()">
+                     <span class="upload-text">Upload</span>
                     <asp:Image ID="userProfilePic" runat="server" CssClass="img-account-profile rounded-circle mb-2" Width="100px" BorderColor="Black" BorderStyle="Solid" />
+                    </asp:LinkButton>
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
-                    <asp:Button ID="userUploadProfile" runat="server" Text="Upload new image" CssClass="btn btn-primary" />
+                    <asp:Button ID="userUploadProfile" runat="server" Text="Upload new image" CssClass="btn btn-primary" OnClick="userUploadProfile_Click" ValidationGroup="uploadProfilePic"/>
+                    <asp:FileUpload ID="fuProfile" runat="server" CssClass="uploadPicture" onchange="ShowPreview(event)"/>
+                    <br />
+                    <asp:RequiredFieldValidator ID="reqProfilePic" runat="server" ErrorMessage="Please Select a image" ControlToValidate="fuProfile" CssClass="validate" ValidationGroup="uploadProfilePic"></asp:RequiredFieldValidator>
+                    <asp:Label ID="lblProfilePic" runat="server" Text="" CssClass="d-block mt-2 validate"></asp:Label>
                 </div>
             </div>
         </div>
@@ -28,8 +35,8 @@
                         <!-- Form Group (username)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="inputUsername">Username</label>
-                            <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" Enabled="False"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="reqTxtUsername" runat="server" ErrorMessage="Username is required" CssClass="validate" ControlToValidate="txtUsername"></asp:RequiredFieldValidator>
+                            <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" Enabled="False" ValidationGroup="changUname"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="reqTxtUsername" runat="server" ErrorMessage="Username is required" CssClass="validate" ControlToValidate="txtUsername" ValidationGroup="changUname"></asp:RequiredFieldValidator>
                         </div>
                         <!-- Form Row        -->
                         <div class="row gx-3 mb-3">
@@ -51,7 +58,7 @@
                             </div>
                         </div>
                         <!-- Save changes button-->
-                            <asp:Button ID="btnEditUserProfile" runat="server" Text="Edit" CssClass="btn btn-primary" OnClick="btnEditUserProfile_Click" />
+                            <asp:Button ID="btnEditUserProfile" runat="server" Text="Edit" CssClass="btn btn-primary" OnClick="btnEditUserProfile_Click" ValidationGroup="changUname" />
                     </div>
                 </div>
             </div>
@@ -60,7 +67,27 @@
 </div>
 </div>
 
+<script>
 
+    function fileUpload() {
+        document.getElementById('<%= fuProfile.ClientID %>').click();
+
+        return false;
+    }
+
+    function ShowPreview(event) {
+            //read content of the file
+        var ImageDir = new FileReader();
+        //when file read update the image element
+        ImageDir.onload = function () {
+            var image = document.getElementById('<%= userProfilePic.ClientID %>');
+            image.src = ImageDir.result;
+        };
+        //get file and convert to data url to use in img src = ""
+        ImageDir.readAsDataURL(event.target.files[0]);
+    } 
+
+</script>
 
 
 

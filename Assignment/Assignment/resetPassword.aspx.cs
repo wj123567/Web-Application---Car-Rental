@@ -48,6 +48,72 @@ namespace Assignment
             return cipheredText;
         }
 
+        protected string Decrypt(byte[] cipheredText, byte[] key, byte[] iv)
+        {
+            string simpleText = " ";
+            Aes aes = Aes.Create();
+
+            ICryptoTransform decryptor = aes.CreateDecryptor(key, iv);
+
+            using (MemoryStream ms = new MemoryStream(cipheredText))
+            {
+                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                {
+
+                    StreamReader reader = new StreamReader(cs);
+
+                    simpleText = reader.ReadToEnd();
+                }
+            }
+
+            return simpleText;
+        }
+
+        protected Boolean PasswordCheck(String simplePassword)
+        {
+            byte[] key = new byte[16];
+            byte[] iv = new byte[16];
+
+            SqlConnection con = new SqlConnection(Global.CS);
+
+            con.Open();
+
+            Byte[] encryptPassword = new Byte[16];
+
+            string getUserKey = "Select EncryptionKey, IVkey, Password from UserRegistration where id = @id";
+
+            SqlCommand comKey = new SqlCommand(getUserKey, con);
+
+            comKey.Parameters.AddWithValue("@id", Session["forgetId"].ToString());
+
+            SqlDataReader reader = comKey.ExecuteReader();
+
+            if (reader.Read())
+            {
+                encryptPassword = Convert.FromBase64String(reader["Password"].ToString());
+                key = Convert.FromBase64String(reader["EncryptionKey"].ToString());
+                iv = Convert.FromBase64String(reader["IVkey"].ToString());
+            }
+
+            reader.Close();
+
+            if (simplePassword == Decrypt(encryptPassword, key, iv))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        protected void validNewPassword_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            String simplePassword = txtRegPassword.Text;
+
+            args.IsValid = !PasswordCheck(simplePassword);
+        }
+
         protected void btnSignup_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -68,7 +134,7 @@ namespace Assignment
                 String keyString = Convert.ToBase64String(key);
                 String ivString = Convert.ToBase64String(iv);
 
-                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+                SqlConnection con = new SqlConnection(Global.CS);
 
                 string updateUser = "UPDATE UserRegistration SET Password = @Password, EncryptionKey= @encryptKey, IVkey = @IVkey WHERE Id = @id";
 

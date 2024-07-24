@@ -34,7 +34,7 @@ namespace Assignment
         protected void retrievedAllData() {
             string findCar = "SELECT * FROM Car";
 
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlConnection con = new SqlConnection(Global.CS);
             
                 con.Open();
 
@@ -59,7 +59,7 @@ namespace Assignment
 
             string findCar = "SELECT * FROM Car WHERE CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString";
 
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlConnection con = new SqlConnection(Global.CS);
            
                 con.Open();
 
@@ -156,7 +156,7 @@ namespace Assignment
                 carInfo += "ORDER BY CarBrand, CarName " + rblAlphaOrder.SelectedValue.ToString();
             }
 
-             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+             SqlConnection con = new SqlConnection(Global.CS);
             con.Open();
             SqlCommand com = new SqlCommand(carInfo, con);
             SqlDataAdapter da = new SqlDataAdapter(com);
@@ -180,7 +180,7 @@ namespace Assignment
 
         public void BindBrandCbl()
         {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlConnection con = new SqlConnection(Global.CS);
             con.Open();
             string query = "SELECT DISTINCT CarBrand FROM Car Order By CarBrand";
             SqlCommand com = new SqlCommand(query, con);

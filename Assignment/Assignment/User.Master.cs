@@ -27,7 +27,7 @@ namespace Assignment
             String Roles = " ";
             String profilePicture = " ";
 
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlConnection conn = new SqlConnection(Global.CS);
 
             conn.Open();
 

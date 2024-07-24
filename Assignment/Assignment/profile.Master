@@ -11,7 +11,7 @@
     <link href="CSS/profile.css" rel="stylesheet" />
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" enctype="multipart/form-data">
  <div class="header wrapper">
         <aside id="sidebar">
             <div class="d-flex">
@@ -28,19 +28,19 @@
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
                     <a href="profile.aspx" class="sidebar-link">
-                        <i class="lni lni-user"></i>
+                        <i class="fa-solid fa-user"></i>
                         <span>Profile</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="userPaymentManagement.aspx" class="sidebar-link">
-                        <i class="lni lni-car-alt"></i>
+                        <i class="fa-solid fa-credit-card"></i>
                         <span>Payment</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="userChangePassword" class="sidebar-link">
-                        <i class="lni lni-popup"></i>
+                    <a href="security.aspx" class="sidebar-link">
+                        <i class="fa-solid fa-lock"></i>
                         <span>Change Password</span>
                     </a>
                 </li>
