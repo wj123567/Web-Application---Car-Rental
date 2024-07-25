@@ -1,5 +1,39 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/profile.Master" AutoEventWireup="true" CodeBehind="security.aspx.cs" Inherits="Assignment.ChangePassword" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+
+<div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+    <asp:UpdatePanel ID="updateDeleteAcc" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Confirmation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <span>Password</span>
+          <asp:TextBox ID="txtDeletePassword" runat="server" CssClass="form-control" placeholder="Password" ValidationGroup="deleteGroup" TextMode="Password"></asp:TextBox>
+          <asp:CustomValidator ID="cvDeleteAccount" runat="server" ErrorMessage="Incorrect Password" CssClass="validate" ControlToValidate="txtDeletePassword" ValidationGroup="deleteGroup" OnServerValidate="validDeletePassword_ServerValidate"></asp:CustomValidator>
+          <br />
+          <asp:RequiredFieldValidator ID="reqDeletePassword" runat="server" ErrorMessage="Password is required" ValidationGroup="deleteGroup" ControlToValidate="txtDeletePassword" CssClass="validate"></asp:RequiredFieldValidator>
+          <br />
+            <input id="cbDeletePass" type="checkbox" onClick="showDeletePass()"/>
+            <span>Show Password</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <asp:Button ID="btnConfirmDelete" runat="server" Text="Confirm Delete" CssClass="btn btn-primary" OnClick="btnConfirmDelete_Click" ValidationGroup="deleteGroup" />
+      </div>
+      </ContentTemplate>
+      </asp:UpdatePanel>
+    </div>
+  </div>   
+</div>
+
+
+
     <div class="container-xl px-4 mt-4">
         <h1>Security</h1>
         <hr class="mt-0 mb-4">
@@ -51,9 +85,9 @@
                     <div class="card-header">Two-Factor Authentication</div>
                     <div class="card-body">
                         <p>Add another level of security to your account by enabling two-factor authentication. We will send you a OTP to verify your login attempts.</p>
-                                <asp:RadioButtonList ID="rblOtpSwitch" runat="server">
-                                    <asp:ListItem>On</asp:ListItem>
-                                    <asp:ListItem>Off</asp:ListItem>
+                        <asp:RadioButtonList ID="rblOtpSwitch" runat="server" OnSelectedIndexChanged="rblOtpSwitch_SelectedIndexChanged" AutoPostBack="True">
+                                    <asp:ListItem Value="1">On</asp:ListItem>
+                                    <asp:ListItem Value="0">Off</asp:ListItem>
                                 </asp:RadioButtonList>
                             <div class="mt-3">
                                 <label class="small mb-1" for="twoFactorSMS">Email:</label>
@@ -66,12 +100,13 @@
                     <div class="card-header">Delete Account</div>
                     <div class="card-body">
                         <p>Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, select the button below.</p>
-                        <asp:Button ID="btnDeleteAcc" runat="server" Text="I UNDERSTAND, DELETE MY ACCOUNT" CssClass="btn btn-danger-soft text-danger" />
+                        <button type="button" class="btn btn-danger-soft text-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete">I UNDERSTAND, DELETE MY ACCOUNT</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <script>
         function showPass() {
@@ -90,6 +125,17 @@
                 password3.type = 'password';
             }
         }
+
+        function showDeletePass() {
+            var password1 = document.getElementById('<%= txtDeletePassword.ClientID %>');
+            var checkBox = document.getElementById('cbDeletePass');
+
+                    if (checkBox.checked) {
+                        password1.type = 'text';
+                    } else {
+                        password1.type = 'password';
+                    }
+                }
 
         function validatePassword() {
             var password = document.getElementById('<%= txtNewPassword.ClientID %>').value;

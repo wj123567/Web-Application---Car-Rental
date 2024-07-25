@@ -68,6 +68,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CarManagement.aspx" />
+    <Content Include="driver.aspx" />
+    <Content Include="Image\no-img.jpg" />
     <Content Include="security.aspx" />
     <Content Include="CSS\profile.css" />
     <Content Include="CSS\admin.css" />
@@ -112,6 +114,13 @@
     </Compile>
     <Compile Include="CarManagement.aspx.designer.cs">
       <DependentUpon>CarManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="driver.aspx.cs">
+      <DependentUpon>driver.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="driver.aspx.designer.cs">
+      <DependentUpon>driver.aspx</DependentUpon>
     </Compile>
     <Compile Include="security.aspx.cs">
       <DependentUpon>security.aspx</DependentUpon>
@@ -222,7 +231,12 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Image\DriverId\" />
+    <Folder Include="Image\DriverLB\" />
+    <Folder Include="Image\DriverLF\" />
+    <Folder Include="Image\DriverSelfie\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

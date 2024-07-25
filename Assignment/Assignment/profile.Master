@@ -33,15 +33,21 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a href="security.aspx" class="sidebar-link">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Security</span>
+                    </a>
+                </li>          
+                <li class="sidebar-item">
                     <a href="userPaymentManagement.aspx" class="sidebar-link">
                         <i class="fa-solid fa-credit-card"></i>
                         <span>Payment</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="security.aspx" class="sidebar-link">
-                        <i class="fa-solid fa-lock"></i>
-                        <span>Change Password</span>
+                    <a href="driver.aspx" class="sidebar-link">
+                        <i class="fa-solid fa-id-card"></i>
+                        <span>Driver</span>
                     </a>
                 </li>
             </ul>

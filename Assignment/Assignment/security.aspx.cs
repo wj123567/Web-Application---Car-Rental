@@ -29,10 +29,11 @@ namespace Assignment
         protected void LoadUserData(String id)
         {
             String email = " ";
+            String twoStepVerification = "";
 
             SqlConnection conn = new SqlConnection(Global.CS);
 
-            string getUserData = "Select Email from UserRegistration where Id = @id";
+            string getUserData = "Select Email, TwoStepVerification from UserRegistration where Id = @id";
 
             conn.Open();
 
@@ -45,12 +46,23 @@ namespace Assignment
             if (reader.Read())
             {
                 email = reader["Email"].ToString();
+                twoStepVerification = reader["TwoStepVerification"].ToString();
             }
 
             conn.Close();
             reader.Close();
 
             txtTwoFactorEmail.Text = email;
+
+            if(twoStepVerification == "1")
+            {
+                rblOtpSwitch.SelectedIndex = 0;
+            }
+            else
+            {
+                rblOtpSwitch.SelectedIndex = 1;
+            
+            }
 
         }
 
@@ -195,6 +207,60 @@ namespace Assignment
             return cipheredText;
         }
 
+        protected void rblOtpSwitch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int option = int.Parse(rblOtpSwitch.SelectedValue);
+            String id = Session["Id"].ToString();
 
+            SqlConnection con = new SqlConnection(Global.CS);
+
+            String upadateCom = "UPDATE UserRegistration set TwoStepVerification = @tsv WHERE Id = @id";
+
+            con.Open();
+            SqlCommand com = new SqlCommand(upadateCom, con);
+            com.Parameters.AddWithValue("@tsv", option);
+            com.Parameters.AddWithValue("@id", id);
+            com.ExecuteNonQuery();
+            con.Close();
+        }
+
+        protected void validDeletePassword_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            String simplePassword = txtDeletePassword.Text;
+
+            if (!validPassword(simplePassword))
+            {
+                args.IsValid = false;
+                updateDeleteAcc.Update();
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+        protected void btnConfirmDelete_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                String id = Session["Id"].ToString();
+
+                SqlConnection con = new SqlConnection(Global.CS);
+
+                String deleteCom = "DELETE FROM UserRegistration WHERE Id = @id";
+                String updateCom = "UPDATE UserOtp SET UserID = NULL WHERE UserId = @id";
+
+                con.Open();
+                SqlCommand comUpdate = new SqlCommand(updateCom, con);
+                SqlCommand comDelete = new SqlCommand(deleteCom, con);
+                comUpdate.Parameters.AddWithValue("@id", id);
+                comDelete.Parameters.AddWithValue("@id", id);
+                comUpdate.ExecuteNonQuery();
+                comDelete.ExecuteNonQuery();
+                con.Close();
+
+                Session["Id"] = null;
+                ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='home.aspx';", true);
+            }
+        }
     }
 }
