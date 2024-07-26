@@ -81,6 +81,8 @@
                                 <asp:Image ID="imgID" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
                              </div>
                     <asp:RequiredFieldValidator ID="reqIdPic" runat="server" ErrorMessage="Driver ID/Passport Picture is required" ControlToValidate="fuID" CssClass="validate mx-auto" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                                <br />
+                                <asp:Label ID="lblIdPic" runat="server" CssClass="validate mx-auto"></asp:Label>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuID" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewID(event)"/>
                                 <asp:Button ID="btnIdPic" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto"  OnClientClick="return fileUploadID()" ValidationGroup="uploadPic"/>
@@ -93,6 +95,8 @@
                                 <asp:Image ID="imgSelfie" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
                              </div>
                     <asp:RequiredFieldValidator ID="reqSelfie" runat="server" ErrorMessage="Driver Selfie is required" ControlToValidate="fuSelfie" CssClass="validate mx-auto" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                                <br />
+                                <asp:Label ID="lblSelfiePic" runat="server" CssClass="validate mx-auto"></asp:Label>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuSelfie" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewSelfie(event)"/>
                                 <asp:Button ID="btnSelfiePic" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadSelfie()" ValidationGroup="uploadPic"/>
@@ -106,7 +110,9 @@
                             <div class="image-frame mx-auto">
                                 <asp:Image ID="imgLicenseF" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
                              </div>
-                    <asp:RequiredFieldValidator ID="reqLicenseF" runat="server" ErrorMessage="Front Driver License Picture is required" ControlToValidate="fuSelfie" CssClass="validate mx-auto" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="reqLicenseF" runat="server" ErrorMessage="Front Driver License Picture is required" ControlToValidate="fuLicenseF" CssClass="validate mx-auto" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                                <br />
+                                <asp:Label ID="lblLicenseFpic" runat="server" CssClass="validate mx-auto"></asp:Label>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuLicenseF" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewLicenseF(event)"/>
                                 <asp:Button ID="btnLicenseFpic" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadLicenseF()" ValidationGroup="uploadPic"/>
@@ -118,14 +124,16 @@
                             <div class="image-frame mx-auto">
                                 <asp:Image ID="imgLicenseB" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
                              </div>
-                    <asp:RequiredFieldValidator ID="reqLicenseB" runat="server" ErrorMessage="Back Driver Selfie Picture is required" ControlToValidate="fuSelfie" CssClass="validate mx-auto" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="reqLicenseB" runat="server" ErrorMessage="Back Driver Selfie Picture is required" ControlToValidate="fuLicenseB" CssClass="validate mx-auto" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                                <br />
+                                <asp:Label ID="lblLicenseBpic" runat="server" CssClass="validate mx-auto"></asp:Label>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuLicenseB" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewLicenseB(event)"/>
                                 <asp:Button ID="btnLicenseBpic" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadLicenseB()" ValidationGroup="uploadPic"/>
                             </div>
                             </div>
                         </div>
-                    <asp:Button ID="btnUploadDoc" runat="server" Text="Upload" CssClass='btn btn-primary' ValidationGroup="uploadDoc" />
+                    <asp:Button ID="btnUploadDoc" runat="server" Text="Upload" CssClass='btn btn-primary' ValidationGroup="uploadDoc" OnClick="btnUploadDoc_Click" />
 
                 </div>
             </div>
@@ -204,6 +212,10 @@
         };
         //get file and convert to data url to use in img src = ""
         ImageDir.readAsDataURL(event.target.files[0]);
+        }
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
         }
 
     </script>

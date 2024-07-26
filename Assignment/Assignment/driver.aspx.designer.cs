@@ -159,6 +159,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqIdPic;
 
         /// <summary>
+        /// lblIdPic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblIdPic;
+
+        /// <summary>
         /// fuID control.
         /// </summary>
         /// <remarks>
@@ -193,6 +202,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqSelfie;
+
+        /// <summary>
+        /// lblSelfiePic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSelfiePic;
 
         /// <summary>
         /// fuSelfie control.
@@ -231,6 +249,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqLicenseF;
 
         /// <summary>
+        /// lblLicenseFpic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLicenseFpic;
+
+        /// <summary>
         /// fuLicenseF control.
         /// </summary>
         /// <remarks>
@@ -265,6 +292,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqLicenseB;
+
+        /// <summary>
+        /// lblLicenseBpic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLicenseBpic;
 
         /// <summary>
         /// fuLicenseB control.
