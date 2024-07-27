@@ -23,7 +23,7 @@
     <h1>Available Driver</h1>
     <hr class="mt-0 mb-4">
     <div class="card-container mb-3">
-        <asp:Label ID="lblDriverText" runat="server" Text=""></asp:Label>
+        <asp:Label ID="lblDriverText" runat="server"></asp:Label>
         <asp:Repeater ID="DriverReapeter" runat="server" OnItemDataBound="DriverReapeter_ItemDataBound">
             <ItemTemplate>
                 <div class="card-body rounded border border-dark px-0 py-2 mb-3" Style="background-color:#effaf6">
@@ -83,18 +83,6 @@
                         </div>
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
-                                <label class="small mb-1">Driver Phone number</label>
-                                <asp:TextBox ID="txtPhoneNum" runat="server" CssClass="form-control" placeholder="Enter driver phone number" TextMode="Phone"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqPhone" runat="server" ErrorMessage="Driver Phone number is required" ControlToValidate="txtPhoneNum" CssClass="validate" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputBirthday">Driver Birthdate</label>
-                                <asp:TextBox ID="txtBirthdate" runat="server" CssClass="form-control" TextMode="Date" ValidationGroup="uploadDoc"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqBirthDate" runat="server" ErrorMessage="Driver Birthdate is required" ControlToValidate="txtName" CssClass="validate" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="row gx-3 mb-3">
-                            <div class="col-md-6">
                                 <label class="small mb-1">Driver Gender</label>
                                 <asp:DropDownList ID="ddlGender" runat="server" CssClass="form-select" ValidationGroup="uploadDoc">
                                     <asp:ListItem Value="0">Select Gender</asp:ListItem>
@@ -103,6 +91,20 @@
                                 </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="reqGender" runat="server" ErrorMessage="Gender is required" ControlToValidate="ddlGender" CssClass="validate" ValidationGroup="uploadDoc" InitialValue="0"></asp:RequiredFieldValidator>
                              </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputBirthday">Driver Birthdate</label>
+                                <asp:TextBox ID="txtBirthdate" runat="server" CssClass="form-control" TextMode="Date" ValidationGroup="uploadDoc"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqBirthDate" runat="server" ErrorMessage="Driver Birthdate is required" ControlToValidate="txtBirthdate" CssClass="validate" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1 d-block">Driver Phone number</label>
+                                <asp:TextBox ID="txtPhoneNum" runat="server" CssClass="form-control d-block" TextMode="Phone" ></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="reqPhone" runat="server" ErrorMessage="Driver Phone number is required" ControlToValidate="txtPhoneNum" CssClass="validate" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                       <br />
+                        <asp:CustomValidator ID="validPhoneNum" runat="server" ErrorMessage="Invalid Phone Number" ClientValidationFunction="validatePhone" ControlToValidate="txtPhoneNum" ValidationGroup="uploadDoc" CssClass="validate"></asp:CustomValidator>
+                            </div>
                         </div>
                         <h5>Driver Document</h5>
                         <hr class="mt-0 mb-4">
@@ -175,8 +177,24 @@
         </div>
     </div>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/intlTelInput.min.js"></script>
     <script>
+        const input = document.querySelector("#<%= txtPhoneNum.ClientID %>");
+        const iti = window.intlTelInput(input, {
+            initialCountry: "auto",
+            geoIpLookup: callback => {
+                fetch("https://ipapi.co/json")
+                    .then(res => res.json())
+                    .then(data => callback(data.country_code))
+                    .catch(() => callback("us"));
+            },
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/utils.js",
+        });
+
+        function validatePhone(sender, args) {
+            args.IsValid = iti.isValidNumber();
+        }
+
         function fileUploadID() {
         document.getElementById('<%= fuID.ClientID %>').click();
 

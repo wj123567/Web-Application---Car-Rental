@@ -70,6 +70,7 @@
     <Content Include="CarManagement.aspx" />
     <Content Include="driver.aspx" />
     <Content Include="Image\no-img.jpg" />
+    <Content Include="payment.aspx" />
     <Content Include="security.aspx" />
     <Content Include="CSS\profile.css" />
     <Content Include="CSS\admin.css" />
@@ -121,6 +122,13 @@
     </Compile>
     <Compile Include="driver.aspx.designer.cs">
       <DependentUpon>driver.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="payment.aspx.cs">
+      <DependentUpon>payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="payment.aspx.designer.cs">
+      <DependentUpon>payment.aspx</DependentUpon>
     </Compile>
     <Compile Include="security.aspx.cs">
       <DependentUpon>security.aspx</DependentUpon>

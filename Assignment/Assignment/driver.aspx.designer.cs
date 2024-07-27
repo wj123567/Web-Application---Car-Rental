@@ -114,22 +114,22 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqDriverLicense;
 
         /// <summary>
-        /// txtPhoneNum control.
+        /// ddlGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhoneNum;
+        protected global::System.Web.UI.WebControls.DropDownList ddlGender;
 
         /// <summary>
-        /// reqPhone control.
+        /// reqGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqPhone;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqGender;
 
         /// <summary>
         /// txtBirthdate control.
@@ -150,22 +150,31 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqBirthDate;
 
         /// <summary>
-        /// ddlGender control.
+        /// txtPhoneNum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlGender;
+        protected global::System.Web.UI.WebControls.TextBox txtPhoneNum;
 
         /// <summary>
-        /// reqGender control.
+        /// reqPhone control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqGender;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqPhone;
+
+        /// <summary>
+        /// validPhoneNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator validPhoneNum;
 
         /// <summary>
         /// imgID control.

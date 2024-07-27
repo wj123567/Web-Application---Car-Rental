@@ -26,7 +26,7 @@ namespace Assignment
                 }
                 else
                 {
-
+                    Server.Transfer("Home.aspx");
                 }
             }
         }
