@@ -1,33 +1,66 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/profile.Master" AutoEventWireup="true" CodeBehind="driver.aspx.cs" Inherits="Assignment.driver" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [Driver]"></asp:SqlDataSource>
+
+    <div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Delete Confirmation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <h5>Are you sure you want to delete?</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <asp:Button ID="btnConfirmDelete" runat="server" Text="Confirm Delete" CssClass="btn btn-danger" ValidationGroup="deleteGroup" OnClick="btnConfirmDelete_Click" />
+      </div>
+    </div>
+  </div>   
+</div>
+
     <div class="container-xl px-4 mt-4">
     <h1>Available Driver</h1>
     <hr class="mt-0 mb-4">
     <div class="card-container mb-3">
-        <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
+        <asp:Label ID="lblDriverText" runat="server" Text=""></asp:Label>
+        <asp:Repeater ID="DriverReapeter" runat="server" OnItemDataBound="DriverReapeter_ItemDataBound">
             <ItemTemplate>
                 <div class="card-body rounded border border-dark px-0 py-2 mb-3" Style="background-color:#effaf6">
+                    
                     <div class="d-flex align-items-center justify-content-between px-4">
                         <div class="d-flex align-items-center">
                              <i class="fa-regular fa-id-card" style="font-size:1.5em;"></i>
                             <div class="mx-4">
                                     <asp:Label ID="lblDriverName" runat="server" Text='<%# Eval("DriverName") %>' CssClass="small d-block" />
                                     <asp:Label ID="lblDriverBdate" runat="server" Text='<%# Eval("DriverID") %>' CssClass="text-xs text-muted d-inline" />
+                                <br />
+                                    <asp:Label ID="lblReject" runat="server" CssClass="text-danger small"></asp:Label>
                             </div>
                         </div>
-                        <div class="ms-4 small">
-                            <asp:Label ID="Label1" runat="server" Text="Pending" CssClass="badge bg-light text-dark me-3"></asp:Label>
-                            <a href="#!">Edit</a>
+                        <div class="d-flex align-items-center ms-4 small">
+                            <asp:Label ID="lblApproval" runat="server"></asp:Label>
+                        <div>
+                            <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-muted" CommandArgument='<%# Eval("Id") %>' OnClick="btnView_Click" />
+                            <asp:Button ID="btnEdit" runat="server" Text="Edit " cssClass="btn btn-sm text-muted" CommandArgument='<%# Eval("Id") %>' OnClick="btnEdit_Click" />
+                        </div>
                         </div>
                     </div>
                 </div>
             </ItemTemplate>
         </asp:Repeater>
+        <asp:LinkButton ID="btnAddNew" runat="server" OnClick="btnAddNew_Click">
+               <div class="card-body rounded border border-dark px-0 py-2 mb-3" Style="background-color:#effaf6">
+                   <div class="d-flex align-items-center px-4">
+                   <h5 class="mx-auto my-auto text-muted">Add New Driver</h5>
+                   </div>
+               </div>
+        </asp:LinkButton>
     </div>
-    <h1>New Driver</h1>
+    <h1>Add/Edit Driver Info</h1>
     <hr class="mt-0 mb-4">
         <div class="col-xl-8 mb-5 mx-auto">
+            <asp:Panel ID="Panel1" runat="server">
             <div class="card mb-4">
                 <div class="card-header">Driver Details</div>
                 <div class="card-body">
@@ -51,7 +84,7 @@
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
                                 <label class="small mb-1">Driver Phone number</label>
-                                <asp:TextBox ID="txtPhoneNum" runat="server" CssClass="form-control" placeholder="Enter driver phone number"></asp:TextBox>
+                                <asp:TextBox ID="txtPhoneNum" runat="server" CssClass="form-control" placeholder="Enter driver phone number" TextMode="Phone"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="reqPhone" runat="server" ErrorMessage="Driver Phone number is required" ControlToValidate="txtPhoneNum" CssClass="validate" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-md-6">
@@ -64,11 +97,11 @@
                             <div class="col-md-6">
                                 <label class="small mb-1">Driver Gender</label>
                                 <asp:DropDownList ID="ddlGender" runat="server" CssClass="form-select" ValidationGroup="uploadDoc">
-                                    <asp:ListItem>Select Gender</asp:ListItem>
+                                    <asp:ListItem Value="0">Select Gender</asp:ListItem>
                                     <asp:ListItem Value="M">Male</asp:ListItem>
                                     <asp:ListItem Value="F">Female</asp:ListItem>
                                 </asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="reqGender" runat="server" ErrorMessage="Name is required" ControlToValidate="ddlGender" CssClass="validate" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="reqGender" runat="server" ErrorMessage="Gender is required" ControlToValidate="ddlGender" CssClass="validate" ValidationGroup="uploadDoc" InitialValue="0"></asp:RequiredFieldValidator>
                              </div>
                         </div>
                         <h5>Driver Document</h5>
@@ -133,15 +166,17 @@
                             </div>
                             </div>
                         </div>
-                    <asp:Button ID="btnUploadDoc" runat="server" Text="Upload" CssClass='btn btn-primary' ValidationGroup="uploadDoc" OnClick="btnUploadDoc_Click" />
-
+                    <asp:Button ID="btnUploadDoc" runat="server" Text="Add New Driver" CssClass='btn btn-primary' ValidationGroup="uploadDoc" OnClick="btnUploadDoc_Click" />
+                    <asp:Button ID="btnUpdateDoc" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadDoc" OnClick="btnUpdateDoc_Click" Visible="False"/>
+                    <asp:Button ID="btnDelete" runat="server" Text="Delete " cssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False"/>
                 </div>
             </div>
+            </asp:Panel>
         </div>
     </div>
 
-    <script>
 
+    <script>
         function fileUploadID() {
         document.getElementById('<%= fuID.ClientID %>').click();
 
