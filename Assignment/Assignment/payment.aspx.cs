@@ -212,7 +212,7 @@ namespace Assignment
         protected void btnConfirmDelete_Click(object sender, EventArgs e)
         {
             
-            string deleteString = "DELETE FROM PaymentCard WHERE Id = @Id";
+            string deleteString = "UPDATE PaymentCard SET CardNumber = NULL, CVV = NULL, UserId = NULL WHERE Id = @Id";
             SqlConnection con = new SqlConnection(Global.CS);
             con.Open();
             SqlCommand com = new SqlCommand(deleteString,con);

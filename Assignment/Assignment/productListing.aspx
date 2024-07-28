@@ -1,17 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="productListing.aspx.cs" Inherits="Assignment.productListing" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <asp:SqlDataSource ID="dsCarType" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [CarType]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="CarLocation" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [Id], [LocationName] FROM [Location]"></asp:SqlDataSource>
 
 <div>
-<div class="btn float-start mt-3 mx-2">
-    <asp:LinkButton ID="btnA2Z" runat="server" CssClass="text-dark mx-2">
+    <div class="float-start mx-2 mt-3">
+    <asp:LinkButton ID="btnA2Z" runat="server" CssClass="text-dark mx-2" OnClick="btnA2Z_Click">
         <i class="fa-solid fa-arrow-up-a-z fa-xl"></i>
     </asp:LinkButton>    
 
-    <asp:LinkButton ID="btnZ2A" runat="server" CssClass="text-dark mx-2">
+    <asp:LinkButton ID="btnZ2A" runat="server" CssClass="text-dark mx-2" OnClick="btnZ2A_Click" Visible="False">
         <i class="fa-solid fa-arrow-down-z-a fa-xl"></i>
     </asp:LinkButton>
-</div>
+    </div>
+
 <div class="btn float-end mt-3 mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
     <span class="text-lg">Filter</span>
     <i class="fa-solid fa-filter fa-xl" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
@@ -25,6 +27,25 @@
     </div>
     <div class="offcanvas-body px-0">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
+          <li class="nav-item">
+                <a href="#" class="nav-link text-black">
+                    <span class="text-muted">Location:</span>
+                    <asp:DropDownList ID="ddlLocation" runat="server" CssClass="form-select" DataSourceID="CarLocation" DataTextField="LocationName" DataValueField="Id" Width="225px" ValidationGroup="filter" OnDataBound="ddlLocation_DataBound"></asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Location is Required" ControlToValidate="ddlLocation" CssClass="validate" InitialValue="0" ValidationGroup="filter"></asp:RequiredFieldValidator>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-black">
+                    <span class="text-muted d-block">Date Time:</span>
+                    <span>Start :&nbsp;</span>
+                    <asp:TextBox ID="txtStartTime" runat="server" TextMode="Date" CssClass="form-control d-inline" Width="180px"></asp:TextBox>
+                    <br />
+                    <span class="mt-2">End &nbsp; :&nbsp;</span>
+                    <asp:TextBox ID="txtEndTime" runat="server" TextMode="Date" CssClass="form-control d-inline mt-2" Width="180px"></asp:TextBox>
+                    <br />
+                    <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtEndTime" ControlToValidate="txtStartTime" CssClass="validate" Operator="LessThan" ValidationGroup="filter"></asp:CompareValidator>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted">Car Brand:</span>
@@ -42,24 +63,14 @@
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted d-block">Price Range:</span>
                     <div class="justify-content-between">
-                    <asp:TextBox ID="txtMinPrice" runat="server" TextMode="Number" placeholder="Min" Width="100px" min="1" ValidationGroup="filter"></asp:TextBox>
+                    <asp:TextBox ID="txtMinPrice" runat="server" TextMode="Number" placeholder="Min" Width="100px" min="1" ValidationGroup="filter" CssClass="form-control d-inline"></asp:TextBox>
                     <span>-</span>
-                    <asp:TextBox ID="txtMaxPrice" runat="server" TextMode="Number" placeholder="Max" Width="100px" min="1" ValidationGroup="filter"></asp:TextBox>
+                    <asp:TextBox ID="txtMaxPrice" runat="server" TextMode="Number" placeholder="Max" Width="100px" min="1" ValidationGroup="filter" CssClass="form-control d-inline"></asp:TextBox>
                     </div>
                     <asp:CompareValidator ID="cprMaxMinPrice" runat="server" ErrorMessage="Max Price Must Greater than Min Price" ControlToCompare="txtMinPrice" ControlToValidate="txtMaxPrice" CssClass="validate" Operator="GreaterThan" ValidationGroup="filter"></asp:CompareValidator>
                     <br />
                 </a>
                 
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link text-black">
-                   <span class="text-muted">Alphabetical Order:</span>
-                    <asp:RadioButtonList ID="rblAlphaOrder" runat="server">
-                        <asp:ListItem Value="asc">A - Z</asp:ListItem>
-                        <asp:ListItem Value="desc">Z - A</asp:ListItem>
-                    </asp:RadioButtonList>
-
-                </a>
             </li>
         </ul>
         <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="btn btn-block float-end mx-3 text-white" style="background-color:#3490dc;" OnClick="btnFilter_Click" ValidationGroup="filter"/>
@@ -82,9 +93,9 @@
                                     <asp:Label ID="lblCarPlate" runat="server" Text='<%# Eval("CarPlate") %>' CssClass="text-muted d-block" Font-Size="0.9em" />
                                 </div>
                                 <div>
-                                    <span>Rm&nbsp;</span>
-                                    <asp:Label ID="lblCarHourPrice" runat="server" Text='<%# Eval("CarHourPrice") %>'/>
-                                    <span class="text-muted d-block" style="font-size:0.9em">per hour</span>
+                                    <span>Rm </span>
+                                    <asp:Label ID="lblCarDayPrice" runat="server" Text='<%# Eval("CarDayPrice") %>'/>
+                                    <span class="text-muted d-block" style="font-size:0.9em">per day</span>
                                 </div>
                             </div>
                             <hr class="mt-2">
@@ -121,4 +132,10 @@
     </div>
                                 
 </div>
+
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
 </asp:Content>

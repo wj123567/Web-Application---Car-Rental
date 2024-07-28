@@ -19,6 +19,10 @@ namespace Assignment
             if (!Page.IsPostBack)
             {
                 BindBrandCbl();
+                txtStartTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
+                txtStartTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-dd");                
+                txtEndTime.Attributes["min"] = DateTime.Now.AddDays(2).ToString("yyyy-MM-dd");
+                txtEndTime.Attributes["max"] = DateTime.Now.AddMonths(4).ToString("yyyy-MM-dd");
 
                 if (Session["Search"] != null)
                 {
@@ -44,6 +48,7 @@ namespace Assignment
                     DataSet ds = new DataSet();
                     da.Fill(ds, "CarData");
 
+                    ViewState["CarData"] = ds.Tables["CarData"];    
                     productRepeater.DataSource = ds.Tables["CarData"];
                     productRepeater.DataBind();
                 
@@ -77,7 +82,8 @@ namespace Assignment
                     }
                     else
                     {
-                        productRepeater.DataSource = ds.Tables["CarData"];
+                        ViewState["CarData"] = ds.Tables["CarData"];
+                productRepeater.DataSource = ds.Tables["CarData"];
                         productRepeater.DataBind();
                     }
 
@@ -105,7 +111,12 @@ namespace Assignment
                 }
             }
 
-            string carInfo = "SELECT * FROM Car WHERE 1=1 ";
+            string carInfo = "SELECT C.* FROM Car C WHERE 1=1 ";
+
+            carInfo += " AND LocationId = '" + ddlLocation.SelectedValue +"'";
+
+            carInfo += " AND C.CarId NOT IN(SELECT B.CarId FROM Booking B WHERE (B.StartDate >= '" + txtStartTime.Text + "' AND B.StartDate <= '" + txtEndTime.Text + "') OR (B.EndDate >= '"+ txtStartTime.Text+"' AND b.EndDate <= '" + txtEndTime.Text +"')) ";
+
             if (brandSelected.Count()>0)
             {
                 for (int i = 0; i < brandSelected.Count(); i++) {
@@ -151,11 +162,6 @@ namespace Assignment
                 }
             }
 
-            if(rblAlphaOrder != null)
-            {
-                carInfo += "ORDER BY CarBrand, CarName " + rblAlphaOrder.SelectedValue.ToString();
-            }
-
              SqlConnection con = new SqlConnection(Global.CS);
             con.Open();
             SqlCommand com = new SqlCommand(carInfo, con);
@@ -172,6 +178,7 @@ namespace Assignment
             else
             {
                 lblSearchFail.Text = " ";
+                ViewState["CarData"] = ds.Tables["CarData"];
                 productRepeater.DataSource = ds;
                 productRepeater.DataBind();
             }
@@ -201,5 +208,45 @@ namespace Assignment
             Session["CarID"] = carID;
         }
 
+        protected void btnA2Z_Click(object sender, EventArgs e)
+        {
+            DataTable carData = ViewState["CarData"] as DataTable;
+            btnA2Z.Visible = false;
+            btnZ2A.Visible = true;
+
+            if(carData != null)
+            {
+                DataView dataView = carData.DefaultView;
+                dataView.Sort = "CarName ASC";
+                DataTable sortedData = dataView.ToTable();
+
+                ViewState["CarData"] = sortedData;
+                productRepeater.DataSource = sortedData;
+                productRepeater.DataBind();
+            }
+        }
+
+        protected void btnZ2A_Click(object sender, EventArgs e)
+        {
+            DataTable carData = ViewState["CarData"] as DataTable;
+            btnA2Z.Visible = true;
+            btnZ2A.Visible = false;
+
+            if (carData != null)
+            {
+                DataView dataView = carData.DefaultView;
+                dataView.Sort = "CarName DESC";
+                DataTable sortedData = dataView.ToTable();
+
+                ViewState["CarData"] = sortedData;
+                productRepeater.DataSource = sortedData;
+                productRepeater.DataBind();
+            }
+        }
+
+        protected void ddlLocation_DataBound(object sender, EventArgs e)
+        {
+            ddlLocation.Items.Insert(0, new ListItem("Select Location", "0"));
+        }
     }
         }
