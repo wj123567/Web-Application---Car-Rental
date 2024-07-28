@@ -246,15 +246,12 @@ namespace Assignment
 
                 SqlConnection con = new SqlConnection(Global.CS);
 
-                String deleteCom = "DELETE FROM UserRegistration WHERE Id = @id";
-                String updateCom = "UPDATE UserOtp SET UserID = NULL WHERE UserId = @id";
+                String deleteCom = "UPDATE UserRegistration SET Email = NULL, Password = NULL WHERE Id = @id";
 
                 con.Open();
-                SqlCommand comUpdate = new SqlCommand(updateCom, con);
                 SqlCommand comDelete = new SqlCommand(deleteCom, con);
-                comUpdate.Parameters.AddWithValue("@id", id);
+
                 comDelete.Parameters.AddWithValue("@id", id);
-                comUpdate.ExecuteNonQuery();
                 comDelete.ExecuteNonQuery();
                 con.Close();
 

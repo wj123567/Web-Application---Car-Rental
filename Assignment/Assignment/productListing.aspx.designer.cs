@@ -15,15 +15,6 @@ namespace Assignment
     {
 
         /// <summary>
-        /// dsCarDetail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource dsCarDetail;
-
-        /// <summary>
         /// dsCarType control.
         /// </summary>
         /// <remarks>
@@ -31,6 +22,24 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource dsCarType;
+
+        /// <summary>
+        /// btnA2Z control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnA2Z;
+
+        /// <summary>
+        /// btnZ2A control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnZ2A;
 
         /// <summary>
         /// cblCarBrand control.

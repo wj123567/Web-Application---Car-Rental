@@ -1,11 +1,21 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="productListing.aspx.cs" Inherits="Assignment.productListing" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-    <asp:SqlDataSource ID="dsCarDetail" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" SelectCommand="SELECT * FROM [Car]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="dsCarType" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [CarType]"></asp:SqlDataSource>
 
-<div class="btn float-end mt-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
-    <span>Filter</span>
-    <i class="fa-solid fa-filter" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
+<div>
+<div class="btn float-start mt-3 mx-2">
+    <asp:LinkButton ID="btnA2Z" runat="server" CssClass="text-dark mx-2">
+        <i class="fa-solid fa-arrow-up-a-z fa-xl"></i>
+    </asp:LinkButton>    
+
+    <asp:LinkButton ID="btnZ2A" runat="server" CssClass="text-dark mx-2">
+        <i class="fa-solid fa-arrow-down-z-a fa-xl"></i>
+    </asp:LinkButton>
+</div>
+<div class="btn float-end mt-3 mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+    <span class="text-lg">Filter</span>
+    <i class="fa-solid fa-filter fa-xl" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
+</div>
 </div>
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">

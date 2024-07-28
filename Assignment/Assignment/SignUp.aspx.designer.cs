@@ -42,24 +42,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
-        /// reqLogEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqLogEmail;
-
-        /// <summary>
-        /// regLogEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator regLogEmail;
-
-        /// <summary>
         /// emailNotExist control.
         /// </summary>
         /// <remarks>
@@ -213,22 +195,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.CheckBox cbSpecial;
 
         /// <summary>
-        /// reqRegPass control.
+        /// validatePassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqRegPass;
-
-        /// <summary>
-        /// regRegPass control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator regRegPass;
+        protected global::System.Web.UI.WebControls.CustomValidator validatePassword;
 
         /// <summary>
         /// txtConfirmPass control.

@@ -13,11 +13,7 @@
             <asp:UpdatePanel ID="updateLogin" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                 <ContentTemplate>
             <asp:TextBox ID="txtEmail" runat="server" CssClass="inputField" placeholder="Email" ValidationGroup="LoginGroup"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="reqLogEmail" runat="server" ErrorMessage="Email is required" ControlToValidate="txtEmail" CssClass="validate" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
-            <br />
-            <asp:RegularExpressionValidator ID="regLogEmail" runat="server" ControlToValidate="txtEmail" ErrorMessage="Please Enter a valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validate" ValidationGroup="LoginGroup"></asp:RegularExpressionValidator>
-            <br />
-             <asp:CustomValidator ID="emailNotExist" runat="server" ErrorMessage="Email Not Exist" CssClass="validate" OnServerValidate="emailNotExist_ServerValidate" Display="Dynamic" ValidationGroup="LoginGroup" ControlToValidate="txtEmail"></asp:CustomValidator>
+             <asp:CustomValidator ID="emailNotExist" runat="server" ErrorMessage="Incorrect Email" CssClass="validate" OnServerValidate="emailNotExist_ServerValidate" Display="Dynamic" ValidationGroup="LoginGroup" ControlToValidate="txtEmail" ValidateEmptyText="True"></asp:CustomValidator>
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="inputField" placeholder="Password" ValidationGroup="LoginGroup"></asp:TextBox>
             <asp:Label ID="labelValidUser" runat="server" Text="Label" Visible="False" CssClass="validate"></asp:Label>
             <br />
@@ -50,8 +46,7 @@
                         <asp:CheckBox ID="cbUpLow" runat="server" Text="both lower and uppercase letters" Enabled="True" CssClass="passCheckBox" />
             <br />
                          <asp:CheckBox ID="cbSpecial" runat="server" Text="must contain one special characters" Enabled="True" CssClass="passCheckBox" ValidationGroup="SignUpGroup" />
-            <asp:RequiredFieldValidator ID="reqRegPass" runat="server" ErrorMessage="RequiredFieldValidator" ValidationGroup="SignUpGroup" ControlToValidate="txtRegPassword" hidden="true"></asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator ID="regRegPass" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="txtRegPassword" ValidationGroup="SignUpGroup" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+\-=\[\]{};':&quot;\\|,.&lt;&gt;\/?]).{8,}$" hidden="true"></asp:RegularExpressionValidator>
+           <asp:CustomValidator ID="validatePassword" runat="server" ControlToValidate="txtRegPassword" ErrorMessage="Invalid Password" ValidationGroup="SignUpGroup" CssClass="validate" ClientValidationFunction="validatePassword" ValidateEmptyText="True" Visible="False"></asp:CustomValidator>
 
             <asp:TextBox ID="txtConfirmPass" runat="server" TextMode="Password" CssClass="inputField" placeholder="Confirm Password" ValidationGroup="SignUpGroup"></asp:TextBox>
             <asp:RequiredFieldValidator ID="reqConfirmPass" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtConfirmPass" ValidationGroup="SignUpGroup" hidden="true"></asp:RequiredFieldValidator>
@@ -119,26 +114,22 @@
                     }
                 }
 
-        function validatePassword() {
+        function validatePassword(sender, args) {
             var password = document.getElementById('<%= txtRegPassword.ClientID %>').value;
             var hasEightChars = password.length >= 8;
             var hasNum = /\d/.test(password);
             var hasUpLow = /[a-z]/.test(password) && /[A-Z]/.test(password);
             var hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
 
-            if (password.length > 0) {
-                console.log("Password: " + password);
-            } else {
-                console.log("Password: ");
-            }
-
             document.getElementById('<%= cbEight.ClientID %>').checked = hasEightChars;
             document.getElementById('<%= cbNum.ClientID %>').checked = hasNum;
             document.getElementById('<%= cbUpLow.ClientID %>').checked = hasUpLow;
             document.getElementById('<%= cbSpecial.ClientID %>').checked = hasSpecial;
 
-            if (!hasEightChars && !hasNum && !hasUpLow && !hasSpecial) {
-                document.getElementById('<%= btnSignup.ClientID %>').enabled = false;
+            if (hasEightChars && hasNum && hasUpLow && hasSpecial) {
+                args.IsValid = true;
+            } else {
+                args.IsValid = false;
             }
         }
 

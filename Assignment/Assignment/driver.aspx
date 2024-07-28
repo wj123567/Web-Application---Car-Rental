@@ -101,9 +101,7 @@
                             <div class="col-md-6">
                                 <label class="small mb-1 d-block">Driver Phone number</label>
                                 <asp:TextBox ID="txtPhoneNum" runat="server" CssClass="form-control d-block" TextMode="Phone" ></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqPhone" runat="server" ErrorMessage="Driver Phone number is required" ControlToValidate="txtPhoneNum" CssClass="validate" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
-                       <br />
-                        <asp:CustomValidator ID="validPhoneNum" runat="server" ErrorMessage="Invalid Phone Number" ClientValidationFunction="validatePhone" ControlToValidate="txtPhoneNum" ValidationGroup="uploadDoc" CssClass="validate"></asp:CustomValidator>
+                        <asp:CustomValidator ID="validPhoneNum" runat="server" ErrorMessage="Invalid Phone Number" ClientValidationFunction="validatePhone" ControlToValidate="txtPhoneNum" ValidationGroup="uploadDoc" CssClass="validate" ValidateEmptyText="True"></asp:CustomValidator>
                             </div>
                         </div>
                         <h5>Driver Document</h5>

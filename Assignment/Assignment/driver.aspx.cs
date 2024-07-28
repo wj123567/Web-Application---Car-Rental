@@ -230,7 +230,7 @@ namespace Assignment
         }        
 
         protected void btnEdit_Click(object sender, EventArgs e)
-        {
+        {           
             Button btnEdit = (Button)sender;
             String id = btnEdit.CommandArgument;
             LoadAvailableDriver(id);
@@ -279,7 +279,7 @@ namespace Assignment
                 txtDriverID.Text = reader["DriverId"].ToString();
                 txtDriverLicense.Text = reader["DriverLicense"].ToString();
                 txtPhoneNum.Text = reader["DriverPno"].ToString();
-                DateTime driverBdate = reader.GetDateTime(reader.GetOrdinal("DriverBdate")); ;
+                DateTime driverBdate = reader.GetDateTime(reader.GetOrdinal("DriverBdate"));
                 txtBirthdate.Text = driverBdate.ToString("yyyy-MM-dd");
                 ddlGender.SelectedValue = reader["driverGender"].ToString();
                 imgID.ImageUrl = reader["IDpic"].ToString();;
@@ -287,9 +287,8 @@ namespace Assignment
                 imgLicenseF.ImageUrl = reader["LicenseFpic"].ToString();
                 imgLicenseB.ImageUrl = reader["LicenseBpic"].ToString();
             }
-
-
-
+            con.Close();
+            reader.Close();
         }
 
         protected void HideControls(Control container)

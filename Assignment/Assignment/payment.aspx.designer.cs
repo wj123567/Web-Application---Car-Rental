@@ -15,6 +15,15 @@ namespace Assignment
     {
 
         /// <summary>
+        /// hdnCardType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCardType;
+
+        /// <summary>
         /// btnConfirmDelete control.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnConfirmDelete;
+
+        /// <summary>
+        /// btnAddNewCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddNewCard;
 
         /// <summary>
         /// lblPaymentText control.
@@ -69,6 +87,33 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCHName;
 
         /// <summary>
+        /// lblVisaCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblVisaCard;
+
+        /// <summary>
+        /// lblMasterCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMasterCard;
+
+        /// <summary>
+        /// lblAmexCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAmexCard;
+
+        /// <summary>
         /// txtCardNum control.
         /// </summary>
         /// <remarks>
@@ -78,13 +123,22 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtCardNum;
 
         /// <summary>
-        /// reqCardNum control.
+        /// validateCard control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCardNum;
+        protected global::System.Web.UI.WebControls.CustomValidator validateCard;
+
+        /// <summary>
+        /// validateCardExist control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator validateCardExist;
 
         /// <summary>
         /// txtExpDate control.
@@ -123,22 +177,22 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCvv;
 
         /// <summary>
-        /// btnUploadDoc control.
+        /// btnUploadCard control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUploadDoc;
+        protected global::System.Web.UI.WebControls.Button btnUploadCard;
 
         /// <summary>
-        /// btnUpdateDoc control.
+        /// btnUpdateCard control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUpdateDoc;
+        protected global::System.Web.UI.WebControls.Button btnUpdateCard;
 
         /// <summary>
         /// btnDelete control.
