@@ -39,7 +39,7 @@ namespace Assignment
 
             SqlConnection conn = new SqlConnection(Global.CS);
 
-            string getUserData = "Select Username, Email, DOB, RegistrationDate, ProfilePicture from UserRegistration where Id = @id";
+            string getUserData = "Select Username, Email, DOB, RegistrationDate, ProfilePicture from ApplicationUser where Id = @id";
 
             conn.Open();
 
@@ -73,7 +73,7 @@ namespace Assignment
         {
             if (btnEditUserProfile.Text == "Save Changes") {
                 SqlConnection con = new SqlConnection(Global.CS);
-                String updateUser = "UPDATE UserRegistration SET Username = @username WHERE Id = @id";
+                String updateUser = "UPDATE ApplicationUser SET Username = @username WHERE Id = @id";
 
                 con.Open();
 
@@ -102,7 +102,7 @@ namespace Assignment
                 string id = Session["Id"].ToString();
                 string folderLocation = Server.MapPath("~/Image/UserProfile");
                 string relfolderLocation = "~/Image/UserProfile";
-                string uploadFile = "UPDATE UserRegistration SET ProfilePicture = @ProfilePicture WHERE Id = @id";
+                string uploadFile = "UPDATE ApplicationUser SET ProfilePicture = @ProfilePicture WHERE Id = @id";
                 SqlConnection con = new SqlConnection(Global.CS);
 
                 if (fuProfile.HasFile)

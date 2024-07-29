@@ -32,7 +32,7 @@ namespace Assignment
         protected void sendForgetCode_Click(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection(Global.CS);
-            String findUserID = "Select Id from UserRegistration WHERE Email = @email";
+            String findUserID = "Select Id from ApplicationUser WHERE Email = @email";
 
             con.Open();
             SqlCommand findCom = new SqlCommand(findUserID, con);

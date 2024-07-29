@@ -31,7 +31,7 @@ namespace Assignment
 
             conn.Open();
 
-            string getUserData = "Select Username, Roles, ProfilePicture from UserRegistration where Id = @id";
+            string getUserData = "Select Username, Roles, ProfilePicture from ApplicationUser where Id = @id";
 
             SqlCommand com = new SqlCommand(getUserData, conn);
 

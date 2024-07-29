@@ -74,7 +74,7 @@ namespace Assignment
         protected void sendNewCode_Click(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection(Global.CS);
-            String findUserID = "Select Id from UserRegistration WHERE Email = @email";
+            String findUserID = "Select Id from ApplicationUser WHERE Email = @email";
 
             con.Open();
             SqlCommand findCom = new SqlCommand(findUserID, con);
@@ -136,7 +136,7 @@ namespace Assignment
             if (Page.IsValid)
             {
                 SqlConnection con = new SqlConnection(Global.CS);
-                String updateUserValid = "UPDATE UserRegistration SET EmailVerification = @ev WHERE Id = @id";
+                String updateUserValid = "UPDATE ApplicationUser SET EmailVerification = @ev WHERE Id = @id";
 
                 try
                 {

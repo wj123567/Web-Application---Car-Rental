@@ -33,7 +33,7 @@ namespace Assignment
 
             SqlConnection conn = new SqlConnection(Global.CS);
 
-            string getUserData = "Select Email, TwoStepVerification from UserRegistration where Id = @id";
+            string getUserData = "Select Email, TwoStepVerification from ApplicationUser where Id = @id";
 
             conn.Open();
 
@@ -77,7 +77,7 @@ namespace Assignment
 
             Byte[] encryptPassword = new Byte[16];
 
-            string getUserKey = "Select EncryptionKey, IVkey, Password from UserRegistration where id = @id";
+            string getUserKey = "Select EncryptionKey, IVkey, Password from ApplicationUser where id = @id";
 
             SqlCommand comKey = new SqlCommand(getUserKey, con);
 
@@ -139,7 +139,7 @@ namespace Assignment
 
                 SqlConnection con = new SqlConnection(Global.CS);
 
-                string updateUser = "UPDATE UserRegistration SET Password = @Password, EncryptionKey= @encryptKey, IVkey = @IVkey WHERE Id = @id";
+                string updateUser = "UPDATE ApplicationUser SET Password = @Password, EncryptionKey= @encryptKey, IVkey = @IVkey WHERE Id = @id";
 
                 try
                 {
@@ -214,7 +214,7 @@ namespace Assignment
 
             SqlConnection con = new SqlConnection(Global.CS);
 
-            String upadateCom = "UPDATE UserRegistration set TwoStepVerification = @tsv WHERE Id = @id";
+            String upadateCom = "UPDATE ApplicationUser set TwoStepVerification = @tsv WHERE Id = @id";
 
             con.Open();
             SqlCommand com = new SqlCommand(upadateCom, con);
@@ -246,7 +246,7 @@ namespace Assignment
 
                 SqlConnection con = new SqlConnection(Global.CS);
 
-                String deleteCom = "UPDATE UserRegistration SET Email = NULL, Password = NULL WHERE Id = @id";
+                String deleteCom = "UPDATE ApplicationUser SET Email = NULL, Password = NULL WHERE Id = @id";
 
                 con.Open();
                 SqlCommand comDelete = new SqlCommand(deleteCom, con);

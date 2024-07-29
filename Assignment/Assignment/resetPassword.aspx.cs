@@ -80,7 +80,7 @@ namespace Assignment
 
             Byte[] encryptPassword = new Byte[16];
 
-            string getUserKey = "Select EncryptionKey, IVkey, Password from UserRegistration where id = @id";
+            string getUserKey = "Select EncryptionKey, IVkey, Password from ApplicationUser where id = @id";
 
             SqlCommand comKey = new SqlCommand(getUserKey, con);
 
@@ -136,7 +136,7 @@ namespace Assignment
 
                 SqlConnection con = new SqlConnection(Global.CS);
 
-                string updateUser = "UPDATE UserRegistration SET Password = @Password, EncryptionKey= @encryptKey, IVkey = @IVkey WHERE Id = @id";
+                string updateUser = "UPDATE ApplicationUser SET Password = @Password, EncryptionKey= @encryptKey, IVkey = @IVkey WHERE Id = @id";
 
                 try
                 {

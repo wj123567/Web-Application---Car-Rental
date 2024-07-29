@@ -53,7 +53,7 @@ namespace Assignment
                     {
                         Guid newGUID = Guid.NewGuid();
 
-                        string insertUser = "insert into UserRegistration (Id, Username, Email, Password, DOB, registrationDate, EncryptionKey, IVkey) values (@id,@username,@email,@password,@dob,@registrationDate,@encryptKey,@IVkey)";
+                        string insertUser = "insert into ApplicationUser (Id, Username, Email, Password, DOB, registrationDate, EncryptionKey, IVkey) values (@id,@username,@email,@password,@dob,@registrationDate,@encryptKey,@IVkey)";
                         SqlCommand comInsert = new SqlCommand(insertUser, con);
                         comInsert.Parameters.AddWithValue("id", newGUID.ToString());
                         comInsert.Parameters.AddWithValue("username", txtUname.Text);
@@ -106,7 +106,7 @@ namespace Assignment
 
                 Byte[] encryptPassword = new Byte[16];
 
-                string getUserKey = "Select EncryptionKey, IVkey, Password from UserRegistration where email = @email";
+                string getUserKey = "Select EncryptionKey, IVkey, Password from ApplicationUser where email = @email";
 
                 SqlCommand comKey = new SqlCommand(getUserKey, con);
 
@@ -124,7 +124,7 @@ namespace Assignment
                 reader.Close();
 
                 if (simplePassword == Decrypt(encryptPassword, key, iv)){
-                    string getUserData = "Select Id, EmailVerification  from UserRegistration where email = @email";
+                    string getUserData = "Select Id, EmailVerification  from ApplicationUser where email = @email";
 
                     SqlCommand com = new SqlCommand(getUserData, con);
 
@@ -169,7 +169,7 @@ namespace Assignment
         {
             SqlConnection con = new SqlConnection(Global.CS);
             con.Open();
-            string checkUser = "select count(*) from UserRegistration where Email = @email";
+            string checkUser = "select count(*) from ApplicationUser where Email = @email";
             SqlCommand comCheck = new SqlCommand(checkUser, con);
             comCheck.Parameters.AddWithValue("email", txtRegEmail.Text);
             int temp = Convert.ToInt32(comCheck.ExecuteScalar().ToString());
@@ -190,7 +190,7 @@ namespace Assignment
         {
             SqlConnection con = new SqlConnection(Global.CS);
             con.Open();
-            string checkUser = "select count(*) from UserRegistration where Email = @email";
+            string checkUser = "select count(*) from ApplicationUser where Email = @email";
             SqlCommand comCheck = new SqlCommand(checkUser, con);
             comCheck.Parameters.AddWithValue("email", txtEmail.Text);
             int temp = Convert.ToInt32(comCheck.ExecuteScalar().ToString());
