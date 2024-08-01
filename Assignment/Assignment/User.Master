@@ -26,7 +26,7 @@
 <body>
     <form id="form1" runat="server">
         <asp:SiteMapDataSource ID="UserSiteMap" runat="server" />
-<nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color:#effaf6">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light shadow-sm" style="background-color:#effaf6">
   <div class="container-fluid">
     <a class="navbar-brand" href="Home.aspx">
      <asp:Image ID="logo" runat="server" ImageUrl="~/Image/logo.png" ImageAlign="Middle" CssClass="d-inline align-top" />

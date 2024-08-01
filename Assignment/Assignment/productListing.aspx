@@ -4,7 +4,7 @@
     <asp:SqlDataSource ID="CarLocation" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [Id], [LocationName] FROM [Location]"></asp:SqlDataSource>
 
 <div>
-    <div class="float-start mx-2 mt-3">
+    <div class="float-start mx-2 mt-4">
     <asp:LinkButton ID="btnA2Z" runat="server" CssClass="text-dark mx-2" OnClick="btnA2Z_Click">
         <i class="fa-solid fa-arrow-up-a-z fa-xl"></i>
     </asp:LinkButton>    
@@ -82,8 +82,8 @@
         <asp:Label ID="lblSearchFail" runat="server"></asp:Label>  
         <asp:Repeater ID="productRepeater" runat="server">
             <ItemTemplate>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                    <div class="card h-100">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 shadow-sm" style="background-color:#effaf6;">
+                    <div class="card h-100" style="background-color:#f0f9f5;">
                         <asp:Image ID="CarImage" runat="server" ImageUrl='<%# Eval("CarImage") %>' CssClass="img-fluid card-img-top" />
                         <div class="card-body pt-0 px-3">
                             <div class="d-flex flex-row justify-content-between mb-0">
