@@ -1,52 +1,82 @@
 ﻿
 /*for payment css*/
 .payment_section {
-    padding-top: 150px;
-    padding-bottom: 150px;
+    width: 100%;
+    position: relative;
+    padding-top: 50px;
     box-sizing: border-box;
     border: 1px solid red;
     text-transform: capitalize;
     transition: all .2s linear;
 }
 
-.payment_container, .driver_container {
+.payment_container {
+    position: relative;
     display: flex;
     border: 1px solid blue;
     padding: 25px;
-    width: 100%;
+    width: 65%;
 }
 
-    /*    .payment_container {
-        padding: 20px;
-        width:90%;
-    }*/
 
-    .payment_container .row, .driver_container .row {
-        border: 5px solid yellow;
-        width: 70%;
-        left: 5%;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
+.driver_container {
+    position: relative;
+    display: flex;
+    padding: 25px;
+    width: 65%;
+}
+
+.payment_container .row {
+    width: 100%;
+    margin-left: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+.driver_container .row {
+    border: 5px solid yellow;
+    width: 100%;
+    margin-left: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+.box_top {
+    margin-top: 200px;
+    vertical-align: central;
+}
+
+.box, .box_top {
+    min-height: 200px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.payment_container .row .col, .driver_container .row .col {
+    border: 1px solid blue;
+    flex: 1 1 150px;
+    height: auto;
+}
+
+    .payment_container .row .col .title， .driver_container .row .col .title {
+        font-size: 20px;
+        font-weight: 1000;
+        color: #333;
+        padding-bottom: 5px;
+        text-transform: uppercase;
     }
 
-        .payment_container .row .col, .driver_container .row .col {
-            border: 1px solid blue;
-            flex: 1 1 150px;
-            height: auto;
-        }
-
-            .payment_container .row .col .title， .driver_container .row .col .title {
-                font-size: 20px;
-                font-weight: 1000;
-                color: #333;
-                padding-bottom: 5px;
-                text-transform: uppercase;
-            }
-
-            .payment_container .row .col .inputbox_left, .driver_container .row .col .inputbox_left {
-                margin: 25px 0;
-            }
+    .payment_container .row .col .inputbox_left, .driver_container .row .col .inputbox_left {
+        margin: 25px 0;
+    }
 
 /*    .payment_container .row .col .inputbox_left span, .driver_container .row .col .inputbox_left span {  label for input
         font-weight: 500;
@@ -173,22 +203,6 @@
         }*/
 
 
-.checkout_btn {
-    width: 70px;
-    height: 50px;
-    font-size: 25px;
-    color: forestgreen;
-    font-weight: 800;
-    background-color: lightcyan;
-    cursor: pointer;
-    position: absolute;
-    right: 100px;
-}
-
-    .checkout_btn:hover {
-        background-color: lavenderblush;
-    }
-
 
 .check_driver {
     margin-top: 20px;
@@ -313,3 +327,60 @@ input#submit:focus {
         margin-right: 20px;
     }
 }*/
+
+.charges_summary {
+    margin-top: 30px;
+}
+
+.charge_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.summary_title {
+    margin: 0;
+    font-weight: bold;
+}
+
+.summary_amt {
+    margin: 0;
+    text-align: right;
+}
+
+.summary_total {
+    background-color: antiquewhite;
+}
+
+    .summary_total .summary_amt {
+        color: green;
+    }
+
+/* format the right side*/
+.book_right-side {
+    width: 35%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 20px;
+    box-sizing: border-box;
+    padding-left: 100px;
+}
+
+.right_stickybox {
+    position: sticky;
+    top: 80px;
+}
+
+.book_box_right {
+    width: 90%; /* Ensure it uses full width of .right-side */
+    min-height: 200px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

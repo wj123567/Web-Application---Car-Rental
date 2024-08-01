@@ -67,10 +67,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bookinfo.aspx" />
+    <Content Include="bookingrecord.aspx" />
+    <Content Include="bookingrecorddetail.aspx" />
     <Content Include="CarManagement.aspx" />
+    <Content Include="CSS\bookinfo.css" />
+    <Content Include="CSS\bookingrecord.css" />
+    <Content Include="CSS\bookingrecorddetail.css" />
+    <Content Include="CSS\home.css" />
+    <Content Include="CSS\payment_pg.css" />
+    <Content Include="CSS\tracking.css" />
     <Content Include="driver.aspx" />
     <Content Include="Image\no-img.jpg" />
+    <Content Include="Image\WZ\44mbziylcv6c1.jpeg" />
+    <Content Include="Image\WZ\homeimg1.jpg" />
+    <Content Include="Image\WZ\homeimg2.jpg" />
+    <Content Include="Image\WZ\homeimg3.jpg" />
+    <Content Include="Image\WZ\homesub1.jpg" />
+    <Content Include="Image\WZ\homesub2.jpg" />
+    <Content Include="Image\WZ\koenigsegg-gemera.jpg" />
+    <Content Include="Image\WZ\pexels-mikebirdy-170811.jpg" />
+    <Content Include="Image\WZ\pexels-peng-liu-45946-169677.jpg" />
+    <Content Include="Image\WZ\road1.jpg" />
+    <Content Include="infopage.aspx" />
+    <Content Include="JS\home.js" />
+    <Content Include="JS\infopage.js" />
     <Content Include="payment.aspx" />
+    <Content Include="payment_pg.aspx" />
     <Content Include="security.aspx" />
     <Content Include="CSS\profile.css" />
     <Content Include="CSS\admin.css" />
@@ -82,7 +105,7 @@
     <Content Include="CSS\Master.css" />
     <Content Include="CSS\Redemption.css" />
     <Content Include="CSS\SignUp.css" />
-    <Content Include="CSS\Order.css" />
+    <Content Include="CSS\infopg.css" />
     <Content Include="forgetPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Image\CarImage\city.png" />
@@ -99,7 +122,6 @@
     <Content Include="validateEmail.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
-    <Content Include="Order.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin.Master.cs">
@@ -108,6 +130,27 @@
     </Compile>
     <Compile Include="Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="bookinfo.aspx.cs">
+      <DependentUpon>bookinfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bookinfo.aspx.designer.cs">
+      <DependentUpon>bookinfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bookingrecord.aspx.cs">
+      <DependentUpon>bookingrecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bookingrecord.aspx.designer.cs">
+      <DependentUpon>bookingrecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bookingrecorddetail.aspx.cs">
+      <DependentUpon>bookingrecorddetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bookingrecorddetail.aspx.designer.cs">
+      <DependentUpon>bookingrecorddetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="CarManagement.aspx.cs">
       <DependentUpon>CarManagement.aspx</DependentUpon>
@@ -123,12 +166,26 @@
     <Compile Include="driver.aspx.designer.cs">
       <DependentUpon>driver.aspx</DependentUpon>
     </Compile>
+    <Compile Include="infopage.aspx.cs">
+      <DependentUpon>infopage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="infopage.aspx.designer.cs">
+      <DependentUpon>infopage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="payment.aspx.cs">
       <DependentUpon>payment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="payment.aspx.designer.cs">
       <DependentUpon>payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="payment_pg.aspx.cs">
+      <DependentUpon>payment_pg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="payment_pg.aspx.designer.cs">
+      <DependentUpon>payment_pg.aspx</DependentUpon>
     </Compile>
     <Compile Include="security.aspx.cs">
       <DependentUpon>security.aspx</DependentUpon>
@@ -217,13 +274,6 @@
     </Compile>
     <Compile Include="validateEmail.aspx.designer.cs">
       <DependentUpon>validateEmail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Order.aspx.cs">
-      <DependentUpon>Order.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Order.aspx.designer.cs">
-      <DependentUpon>Order.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

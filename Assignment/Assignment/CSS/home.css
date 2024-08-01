@@ -1,4 +1,17 @@
-﻿
+﻿.selectable {
+    padding-left: 100px;
+}
+
+.non-selectable {
+    color: gray;
+    pointer-events: none;
+    font-size: 18px;
+    font-weight: 800;
+    font-style: italic;
+    text-align: center;
+    text-decoration: underline;
+}
+
 :root {
     --primary-color: #3d5cb8;
     --primary-color-dark: #334c99;
@@ -6,38 +19,44 @@
     --text-light: #64748b;
     --extra-light: #f1f5f9;
     --white: #ffffff;
-    --max-width: 1200px;
+    --max-width: 1000px;
 }
+
 
 .section_container {
     max-width: var(--max-width);
     margin: auto;
-    padding: 5rem 1rem;
+    margin-bottom: 20px;
+    height: auto;
+    padding-top: 30px;
+}
+
+.bg_cover {
+    background-image: url('../Image/WZ/road1.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 100% 100%;
+    padding-bottom: 200px;
+    margin-bottom: 50px;
 }
 
 
-.section_header {
-    font-size: 2.5rem;
-    font-weight: 600;
-    line-height: 3rem;
-    color: var(--text-dark);
-}
-
-img {
-    width: 100%;
-    display: flex;
-}
 
 .header_container .section_header {
     text-align: center;
     font-size: 3rem;
     line-height: 4rem;
+    font-weight: 600;
+    color: var(--white);
 }
 
 .booking_container {
-    border-radius: 2rem;
-    border: 1px solid var(--extra-light);
+    border-radius: 20px;
+    border: 3px solid var(--extra-light);
     box-shadow: 5px 5px 30px rgba(0,0,0,0.1);
+    margin-top: 65px;
+    position: relative;
 }
 
 .booking_nav {
@@ -65,10 +84,10 @@ img {
         }
 
 .booking_container .form_container {
-    margin-top: 4rem;
+    margin-top: 50px;
     display: grid;
-    grid-template-columns: repeat(4,1fr) auto;
-    gap: 1rem;
+    grid-template-columns: repeat(3,1fr) auto;
+    gap: 1px;
 }
 
 .booking_container .input_content {
@@ -78,7 +97,7 @@ img {
 .booking_container .form_group {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 10px;
 }
 
     .booking_container .form_group span {
@@ -90,55 +109,92 @@ img {
     }
 
 .booking_container .input_group {
-    width: 100%;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
     position: relative;
+    height: auto;
+    top: 0px;
+    left: 0px;
+}
+/*display:flex;*/
+
+/*.booking_container .left_input{
+    width:70%;
+    box-sizing:border-box;
 }
 
-.booking_container label {
-    position: absolute;
-    top: 50%;
-    left: 0%;
-    transform: translateY(-50%);
-    font-size: 1.2rem;
-    font-weight: 500;
+.booking_container .right_input{
+    width:30%;
+    box-sizing:border-box;
+}*/
+/*.booking_container label{
+    position:absolute;
+    top:50%;
+    left:0%;
+    transform:translateY(-50%);
+    font-size:1.2rem;
+    font-weight:500;
     color: var(--text-dark);
-    pointer-events: none;
-    transition: 0.3s;
-}
-
-
+    pointer-events:none;
+    transition:0.3s;
+}*/
 .booking_container .form_group p {
-    margin-top: .5rem;
-    font-size: 0.8rem;
-    color: var(--text-light);
+    margin-top: .5px;
+    font-size: 12px;
+    color: var(--white);
 }
 
 .control_style {
-    width: 100%;
+    /*    flex:1;*/
+    width: 95%;
     padding: 10px 0;
-    font-size: 1rem;
+    margin-top: 10px;
+    font-size: 16px;
     outline: none;
     border: none;
     border-bottom: 1px solid var(--primary-color);
     color: var(--text-dark);
 }
-    /* for asp.net control styling*/
-    /*move upper and text smaller*/
-    .control_style:focus ~ label {
-        font-size: 0.8rem;
-        top: 0;
+
+    .control_style:focus {
+        border: 3px solid var(--primary-color);
+        box-shadow: 10px 0px 8px var(--primary-color-dark);
     }
 
+    .control_style option[value=""] {
+        color: #999; /* Change color to distinguish placeholder */
+    }
+
+/* for asp.net control styling*/
+/*move upper and text smaller*/
+/*.control_style:focus ~ label{
+    font-size:0.8rem;
+    top:10px;              
+}
+*/
+.home_label_style {
+    padding: 5px !important;
+    font-size: 18px !important;
+    color: var(--text-dark) !important;
+    background-color: var(--extra-light) !important;
+    border-radius: 10px !important;
+    text-align: center;
+    width: 40%;
+}
+
 .search_btn_style {
-    padding: 1rem;
-    font-size: 1.5rem;
-    outline: none;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 20px;
     border: none;
     color: var(--white);
     background-color: var(--primary-color);
-    border-radius: 2rem;
+    border-radius: 50px;
     cursor: pointer;
     transition: 0.3s;
+    position: absolute;
+    right: 20px;
 }
 
     .search_btn_style:hover {
@@ -146,31 +202,38 @@ img {
     }
 
 /* info section*/
-.plan_container .subheader {
-    margin-bottom: 1rem;
-    text-align: center;
-    font-weight: 600;
-    color: var(--text-dark);
-    letter-spacing: 5px;
+.plan_container {
+    margin-bottom: 100px;
 }
 
-.plan_container .section_header {
-    text-align: center;
-    font-size: 3rem;
-    line-height: 4rem;
-    margin-bottom: 1rem;
-}
+    .plan_container .subheader {
+        margin-bottom: 1rem;
+        text-align: center;
+        font-weight: 600;
+        color: var(--text-dark);
+        letter-spacing: 5px;
+    }
 
-.plan_container .description {
-    text-align: center;
-    color: var(--text-light);
-}
+    .plan_container .section_header {
+        text-align: center;
+        font-size: 3rem;
+        line-height: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    .plan_container .description {
+        text-align: center;
+        color: var(--text-light);
+    }
 
 .plan_grid {
-    margin-top: 4rem;
+    width: 1200px;
+    margin-top: 100px;
     display: grid;
+    margin-left: auto;
+    margin-right: auto;
     grid-template-columns: repeat(2,1fr);
-    gap: 2rem;
+    gap: 100px;
 }
 
 .plan_content .number {
@@ -217,17 +280,17 @@ img {
 
         .plan_image img:nth-child(1) {
             max-width: 250px;
-            transform: translate(calc(-50% - 9rem), calc(-50% + 5rem));
+            transform: translate(calc(-50% - 3rem), calc(-50% + 5rem));
             z-index: 3;
         }
 
         .plan_image img:nth-child(2) {
-            max-width: 260px;
-            transform: translate(-50%, calc(-50% - 5rem));
+            max-width: 300px;
+            transform: translate(-10%, calc(-50% - 6rem));
             z-index: 2;
         }
 
         .plan_image img:nth-child(3) {
             max-width: 230px;
-            transform: translate(calc(-50% + 9rem), calc(-50% + 5rem));
+            transform: translate(calc(-50% + 18rem), calc(-50% + 5rem));
         }

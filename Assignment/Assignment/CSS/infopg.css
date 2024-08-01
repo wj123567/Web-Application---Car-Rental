@@ -1,0 +1,494 @@
+﻿:root {
+    --primary-blue: #33479b;
+    --primary-shade: #F9FaFb;
+}
+
+.info_head_container {
+    padding: 20px;
+}
+
+.header {
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+}
+
+.infopg_pickup, .infopg_dropoff {
+    margin-right: 20px;
+}
+
+    .infopg_pickup h3, .infopg_dropoff h3 {
+        margin: 0;
+        font-size: 1.1em;
+    }
+
+    .infopg_pickup p, .infopg_dropoff p {
+        margin: 0;
+        font-size: 0.9em;
+        color: #777;
+    }
+
+.arrow {
+    font-size: 1.5em;
+    margin-right: 20px;
+}
+
+.info {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: #007bff;
+}
+
+.info-icon {
+    margin-right: 5px;
+}
+
+.edit {
+    margin-left: 20px;
+}
+
+.edit-button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    .edit-button:hover {
+        background-color: #218838;
+    }
+
+/*banner part*/
+.info_banner {
+    margin-bottom: 50px;
+    width: 100%;
+    height: 50vh;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.col_left {
+    width: 50%;
+    border: 1px solid green;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #33479b;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+    .col_left img {
+        width: 60%;
+        height: auto;
+        display: block;
+        position: absolute;
+        right: 5%;
+    }
+
+.col_right {
+    width: 50%;
+    border: 1px solid pink;
+    box-sizing: border-box;
+    background-color: #F9FaFb;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.spec_container {
+    width: 70%;
+    margin-left: 5%;
+}
+
+    .spec_container .car_model th {
+        border: 1px solid red;
+        font-size: 30px;
+        line-height: 3;
+    }
+
+    .spec_container .spec_title td {
+        border: 1px solid blue;
+        font-size: 15px;
+        line-height: 2;
+        font-weight: 600;
+    }
+
+    .spec_container .spec_icon i {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        display: block;
+        margin: auto;
+    }
+
+    .spec_container .spec_detail td {
+        line-height: 2;
+        text-align: center;
+        font-size: 13px;
+        color: #2E236C;
+    }
+
+.review_container {
+    margin-top: 20px;
+    width: 100%;
+    border: 1px solid #29bb29;
+}
+/*body part*/
+.info_body_container {
+    font-family: Arial, sans-serif;
+    margin-bottom: 5%;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+}
+
+.left-side {
+    width: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.right-side {
+    width: 40%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.box_left {
+    width: 85%;
+    min-height: 200px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* add on */
+.addon_container {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.addon_header span {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.addon_title {
+    border-bottom: 1px solid grey;
+}
+
+    .addon_title th {
+        padding: 8px;
+    }
+
+.addon_list img {
+    display: block;
+    margin: auto;
+}
+
+.addon_list i {
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin: auto;
+}
+
+.addon_list td.text_center {
+    padding-left: 10px;
+    text-align: center;
+}
+
+.addon_list .addon_list_title {
+    text-align: left;
+    line-height: 3;
+}
+
+.addon_list .addon_subinfo {
+    color: #708090;
+    font-size: 12px;
+}
+
+.separator {
+    margin: 5px 0px;
+    border-bottom: 1px solid gray;
+}
+
+.quantity_style {
+    width: 80%;
+    box-sizing: border-box;
+    height: 40px;
+    border-radius: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.box_right {
+    width: 60%;
+    min-height: 200px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-left: 0;
+    margin-right: auto;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.end_text {
+    text-align: right;
+    padding-top: 20px;
+    font-weight: 600;
+}
+
+/*pickup and dropoff*/
+.pickup_container h6 {
+    margin-right: 10px;
+}
+
+h6.charge_title {
+    color: #33479b;
+    font-weight: 700;
+}
+
+
+.icon {
+    margin-right: 10px;
+}
+
+
+h6.charii_t.charge_title {
+    color: #33479b;
+    font-weight: 700;
+}
+
+.charges_summary {
+    margin-top: 30px;
+}
+
+.charge_item {
+    display: flex;
+    padding: 8px;
+}
+
+.pickup_table td {
+    padding: 8px;
+}
+/*charge summary*/
+.info {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+h6.charge_title {
+    color: #33479b;
+    font-weight: 700;
+}
+
+.charge_item {
+    display: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+h6.charge_title {
+    color: #33479b;
+    font-weight: 700;
+}
+
+.charges_summary {
+    margin-top: 30px;
+}
+
+.charge_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.summary_title {
+    margin: 0;
+    font-weight: bold;
+}
+
+.summary_amt {
+    margin: 0;
+    text-align: right;
+}
+
+.summary_total {
+    background-color: antiquewhite;
+}
+
+    .summary_total .summary_amt {
+        color: green;
+    }
+
+/*sticky bar*/
+.sticky_bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it stays above other elements */
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+
+.bar_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.selected_car {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex: 1;
+}
+
+    .selected_car img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .selected_car div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .selected_car span {
+        margin-left: 20px;
+        margin-top: 10px;
+        padding-left: 10px;
+        width: 90px;
+        font-size: 14px;
+        font-weight: 600;
+        background-color: #F5E8DD;
+        border-radius: 20px;
+        color: #33479b;
+    }
+
+    .selected_car h4 {
+        margin-left: 20px;
+        margin-top: 5px;
+        font-size: 18px;
+        font-weight: 800;
+    }
+
+.price_details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 50px;
+}
+
+    .price_details p {
+        color: #888;
+        margin: 0;
+    }
+
+    .price_details div {
+        display: flex;
+        justify-content: space-between;
+        width: auto;
+    }
+
+.next_button {
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+}
+
+.previous_button {
+    margin-right: 50px;
+}
+
+.next_btn_style, .previous_btn_style {
+    background-color: #33479b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+    .next_btn_style:hover, .previous_btn_style:hover {
+        background-color: #33479b;
+        opacity: 0.9;
+    }
+
+/*validation css*/
+.error_message {
+    color: red;
+    font-size: 10px;
+    width: 10px;
+    height: 10px;
+}
+
+/*.left-side .box:nth-child(1) {
+    height: 150px;
+}
+
+.left-side .box:nth-child(2) {
+    height: 200px;
+}
+
+.left-side .box:nth-child(3) {
+    height: 100px;
+}
+
+.right-side .box:nth-child(1) {
+    height: 120px;
+}
+
+.right-side .box:nth-child(2) {
+    height: 180px;
+}
+
+.right-side .box:nth-child(3) {
+    height: 140px;
+}*/

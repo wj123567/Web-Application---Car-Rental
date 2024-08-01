@@ -1,0 +1,102 @@
+﻿:root {
+    --primary-blue: #33479b;
+    --primary-shade: #F9FaFb;
+}
+
+/*The background card*/
+.card {
+    z-index: 0;
+    border: none;
+    position: relative;
+}
+
+
+
+.purple-text {
+    color: #673AB7;
+    font-weight: normal;
+}
+
+
+
+/*Icon progressbar*/
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey;
+}
+
+    #progressbar .active {
+        color: #673AB7;
+    }
+
+    #progressbar li {
+        list-style-type: none;
+        font-size: 15px;
+        width: 25%;
+        float: left;
+        position: relative;
+        font-weight: 400;
+    }
+
+    /*Icons in the ProgressBar*/
+    #progressbar #bar_vehicle:before {
+        font-family: Remixicon;
+        content: "\EB39";
+    }
+
+    #progressbar #bar_addon:before {
+        font-family: Remixicon;
+        content: "\EF3A";
+    }
+
+    #progressbar #bar_driver_info:before {
+        font-family: Remixicon;
+        content: "\F264";
+    }
+
+    #progressbar #bar_payment:before {
+        font-family: Remixicon;
+        content: "\EA92";
+    }
+
+    /*Icon ProgressBar before any progress*/
+    #progressbar li:before {
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        display: block;
+        font-size: 20px;
+        color: #ffffff;
+        background: lightgray;
+        border-radius: 50%;
+        margin: 0 auto 10px auto;
+        padding: 2px;
+    }
+
+    /*ProgressBar connectors*/
+    #progressbar li:after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: lightgray;
+        position: absolute;
+        left: 0;
+        top: 25px;
+        z-index: -1;
+    }
+
+
+    /*Color number of the step and the connector before it*/
+    #progressbar li.active:before, #progressbar li.active:after {
+        background: var(--primary-blue);
+    }
+
+/*Animated Progress Bar*/
+.progress {
+    height: 20px;
+}
+
+.progress-bar {
+    background-color: #673AB7;
+}

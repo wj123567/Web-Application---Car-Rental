@@ -1,0 +1,64 @@
+﻿.paymentpg_body {
+    width: 100%;
+}
+
+.paymentpg_container {
+    width: 90%;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+    .paymentpg_container .row {
+    }
+
+.payment_left_side {
+    width: 50%;
+    padding: 20px;
+    margin-left: 200px;
+    box-sizing: border-box;
+}
+
+.payment_right_side {
+    width: 30%;
+    padding: 20px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+
+small {
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.label_style,
+h6 {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #5f5b5b;
+}
+
+
+.paymentpg_backbtn,
+.paymentpg_paybtn,
+.form-control {
+    height: 48px;
+    border-radius: 2px;
+}
+
+.paymentpg_backbtn {
+    background: none;
+}
+
+    .paymentpg_backbtn:hover {
+        background: #c7c7c7;
+    }
+
+.paymentpg_paybtn {
+    background: #4364c7;
+    color: white;
+}
+
+    .paymentpg_paybtn:hover {
+        background: #33479b;
+    }

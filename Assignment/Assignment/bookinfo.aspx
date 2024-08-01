@@ -1,7 +1,26 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookinfo.aspx.cs" Inherits="Assignment.bookinfo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
 
-        <div class="payment_section">
+             <div class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                        <li id="bar_vehicle" class="active">Vehicle</li>
+                        <li id="bar_addon" class="active">Add-ons</li>
+                        <li id="bar_driver_info">Driver Info</li>
+                        <li id="bar_payment">Payment</li>
+                    </ul>
+                    <br/>
+
+            </div>
+        </div>
+	</div>
+</div>
+
+    <div class="payment_section">
             <div class="payment_container">
                 
                 <div class="row">
@@ -11,7 +30,7 @@
     
                         <div class="inputbox_left">
                             <asp:Label ID="lblFirstName" runat="server" Text="First Name :" CssClass="label_left"></asp:Label>
-                            <asp:TextBox ID="txtFirstName" runat="server" CssClass="input_left"></asp:TextBox>
+                            <asp:TextBox ID="txtFirstName" runat="server" CssClass="input_left" ></asp:TextBox>
                         </div>
     
                         <div class="inputbox_left">
@@ -31,11 +50,6 @@
                             <asp:Label ID="lblAddress" runat="server" Text="Residential Address :" CssClass="label_left"></asp:Label>
                             <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" CssClass="input_full"></asp:TextBox>
                         </div>
-
-                        <div class="inputbox_left">
-                        <asp:Label ID="Label1" runat="server" Text="Residential Address :" CssClass="label_left"></asp:Label>
-                        <asp:TextBox ID="TextBox1" runat="server" TextMode="Date" CssClass="input_full"></asp:TextBox>
-                        </div>
                     </div>
     
                     <div class="col">
@@ -43,7 +57,7 @@
                         <div class="inputbox_right" style="padding-top:60px;">
                             <asp:Label ID="lblCountryOrigin" runat="server" Text="Country of Origin : " CssClass="label_right"></asp:Label>
                             <asp:DropDownList ID="ddlCountry" runat="server" CssClass="input_right">
-                                <asp:ListItem Value="default" Selected="True" >Please Select a Country</asp:ListItem>
+                                <asp:ListItem Value="default" Selected="True" disabled="True">Please Select a Country</asp:ListItem>
 
                                 <asp:ListItem Value="AF">Afghanistan</asp:ListItem>
 
@@ -531,7 +545,7 @@
                         <div class="inputbox_right">
                             <asp:Label ID="lblDestination" runat="server" Text="Destination in Malaysia: " CssClass="label_right"></asp:Label>
                             <asp:DropDownList ID="ddlDestination" runat="server" CssClass="input_right">
-                                <asp:ListItem Value="default" Selected="True" >Select your Destination</asp:ListItem>
+                                <asp:ListItem Value="default" Selected="True" disabled="True">Select your Destination</asp:ListItem>
                                 <asp:ListItem Value="PNG">Penang</asp:ListItem>
                                 <asp:ListItem Value="KDH">Kedah</asp:ListItem>
                                 <asp:ListItem Value="TRG">Terengganu</asp:ListItem>
@@ -547,9 +561,7 @@
                                 <asp:ListItem Value="SGR">Selangor</asp:ListItem>
                             </asp:DropDownList> 
                         </div>
-    
-                        
-    
+
                       </div>
 
                     <div class="inputbox_full">
@@ -558,9 +570,91 @@
                         <asp:TextBox ID="TxtNote" runat="server" TextMode="MultiLine" CSSClass="input_full"></asp:TextBox>
                     </div>
                         
-                    
+                   
+
                     </div> <!--row end-->
+
                 </div>
+
+                <div class="book_right-side">
+                    <div class="right_stickybox">
+                    <div class="book_box_right ">
+                <div class="pickup_container">
+                    <h6 class="pickup_title">Pickup & Return</h6>
+                </div>
+
+                <table class="pickup_table">
+                    <tr >
+                        <td></td>
+                        <td class="timeline">Tue, Jul 23 · 10:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td><i class="ri-circle-line" style="color:green"> </i></td>
+                        <td style="padding-top:20px;">Sungai Nibong Express Bus Terminal</td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td style="padding-bottom:20px;">(Pickup point)</td>
+                    </tr>
+   
+
+                    <tr>
+                        <td></td>
+                        <td class="timeline">Wed, Jul 23 · 10:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
+                        <td style="padding-top:20px;">Sungai Nibong Express Bus Terminal</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="padding-bottom:20px;">(Drop off point)</td>
+                    </tr>
+   
+                    <tr>
+                        <td><i class="ri-time-line" style="color:blue"></i></td>
+                        <td> 1 day 0 hour 0 minute</td>
+                    </tr>
+                </table>
+                    
+                    </div>
+
+
+                <div class="book_box_right ">
+                    <h6 class="charge_title">Summary of Charges</h6>
+                    <div class="charges_summary">
+                        <div class="charge_item">
+                        <p class="summary_title">Rental</p>
+                        <p class ="summary_amt rental_amt">0.00</p>
+                        </div>
+                        <hr />
+                        <div class="charge_item">
+                        <p class="summary_title">Rental</p>
+                        <p class ="summary_amt summary_add_on">0.00</p>
+                        </div>
+                        <hr />
+                        <div class="charge_item">
+                        <p class="summary_title">Rental</p>
+                        <p class ="summary_amt">0.00</p>
+                        </div>
+                        <hr />
+                        <div class="charge_item">
+                        <p class="summary_title">Rental</p>
+                        <p class ="summary_amt">0.00</p>
+                        </div>
+                        <hr />
+                        <div class="charge_item summary_total">
+                        <p class="summary_title">Total Price(MYR):</p>
+                        <p class="summary_amt grand_total"><span><sub>approx</sub></span>0.00</p>
+                        </div>
+                    </div>
+                
+                </div>
+                    </div>
+                </div>
+
+
             
             <div class="driver_section">
                 <div class="driver_container">
@@ -630,16 +724,42 @@
                                         <asp:ListItem Value="Business" >Business</asp:ListItem>
                                     </asp:DropDownList> 
                             </div>
-                         
-                        <asp:Button ID="btnNext" runat="server" Text="Next" CSSClass="checkout_btn"/>
-                        
+      
                      </div>
                     
                 </div> <!-- row end-->
+                    
                 </div>
             </div>
         
-    
-   
+  </div>  
+
+         <div class="sticky_bar">
+
+         <div class="bar_content">
+              <div class="previous_button">
+    <asp:Button ID="previous_btn" runat="server" Text="Previous" cssclass="previous_btn_style prev_btn" OnClick="previous_btn_Click"/>
 </div>
+        <div class="selected_car">
+            <img src="photo/pexels-peng-liu-45946-169677.jpg" alt="Selected Car">
+            <div>
+                <span>Selected Car</span>
+                <h4 class="sticky_bar_car_model"></h4>
+            </div>
+        </div>
+        <div class="price_details">
+            <div>
+                <p>Grand Total</p>
+                
+            </div>
+            <div>
+                <span class="sticky_bar_price"></span>
+            </div>
+        </div>
+        <div class="next_button">
+            <asp:Button ID="btnNext2" runat="server" Text="Next" cssclass="next_btn_style next_btn" OnClick="btnNext_Click"/>
+        </div>
+    </div>
+</div>
+    
 </asp:Content>

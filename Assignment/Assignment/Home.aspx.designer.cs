@@ -15,31 +15,49 @@ namespace Assignment
     {
 
         /// <summary>
-        /// txtLocation control.
+        /// lblLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLocation;
+        protected global::System.Web.UI.WebControls.Label lblLocation;
 
         /// <summary>
-        /// txtTraveller control.
+        /// ddlLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTraveller;
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
 
         /// <summary>
-        /// txtDeparture control.
+        /// lblDeparture control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDeparture;
+        protected global::System.Web.UI.WebControls.Label lblDeparture;
+
+        /// <summary>
+        /// txtDepartureDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDepartureDate;
+
+        /// <summary>
+        /// ddlDepartureTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlDepartureTime;
 
         /// <summary>
         /// lblReturn control.
@@ -51,13 +69,22 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblReturn;
 
         /// <summary>
-        /// txtReturn control.
+        /// txtReturnDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReturn;
+        protected global::System.Web.UI.WebControls.TextBox txtReturnDate;
+
+        /// <summary>
+        /// ddlReturnTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlReturnTime;
 
         /// <summary>
         /// btnSearch control.
