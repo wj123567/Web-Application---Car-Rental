@@ -38,10 +38,10 @@
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted d-block">Date Time:</span>
                     <span>Start :&nbsp;</span>
-                    <asp:TextBox ID="txtStartTime" runat="server" TextMode="Date" CssClass="form-control d-inline" Width="180px"></asp:TextBox>
+                    <asp:TextBox ID="txtStartTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline" Width="180px"></asp:TextBox>
                     <br />
                     <span class="mt-2">End &nbsp; :&nbsp;</span>
-                    <asp:TextBox ID="txtEndTime" runat="server" TextMode="Date" CssClass="form-control d-inline mt-2" Width="180px"></asp:TextBox>
+                    <asp:TextBox ID="txtEndTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline mt-2" Width="180px"></asp:TextBox>
                     <br />
                     <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtEndTime" ControlToValidate="txtStartTime" CssClass="validate" Operator="LessThan" ValidationGroup="filter"></asp:CompareValidator>
                 </a>

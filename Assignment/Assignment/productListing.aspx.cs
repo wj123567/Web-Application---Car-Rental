@@ -19,10 +19,10 @@ namespace Assignment
             if (!Page.IsPostBack)
             {
                 BindBrandCbl();
-                txtStartTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
-                txtStartTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-dd");                
-                txtEndTime.Attributes["min"] = DateTime.Now.AddDays(2).ToString("yyyy-MM-dd");
-                txtEndTime.Attributes["max"] = DateTime.Now.AddMonths(4).ToString("yyyy-MM-dd");
+                txtStartTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
+                txtStartTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-ddTHH:mm");                
+                txtEndTime.Attributes["min"] = DateTime.Now.AddDays(2).ToString("yyyy-MM-ddTHH:mm");
+                txtEndTime.Attributes["max"] = DateTime.Now.AddMonths(4).ToString("yyyy-MM-ddTHH:mm");
 
                 if (Session["Search"] != null)
                 {
@@ -115,7 +115,7 @@ namespace Assignment
 
             carInfo += " AND LocationId = '" + ddlLocation.SelectedValue +"'";
 
-            carInfo += " AND C.CarId NOT IN(SELECT B.CarId FROM Booking B WHERE (B.StartDate >= '" + txtStartTime.Text + "' AND B.StartDate <= '" + txtEndTime.Text + "') OR (B.EndDate >= '"+ txtStartTime.Text+"' AND b.EndDate <= '" + txtEndTime.Text +"')) ";
+            carInfo += " AND C.CarId NOT IN(SELECT B.CarId FROM Booking B WHERE (B.StartDate >= @startDate AND B.StartDate <= @endDate) OR (B.EndDate >= @startDate AND b.EndDate <= @endDate)) ";
 
             if (brandSelected.Count()>0)
             {
@@ -162,9 +162,14 @@ namespace Assignment
                 }
             }
 
+            DateTime startDate = DateTime.Parse(txtStartTime.Text);
+            DateTime endDate = DateTime.Parse(txtEndTime.Text);
+
              SqlConnection con = new SqlConnection(Global.CS);
             con.Open();
             SqlCommand com = new SqlCommand(carInfo, con);
+            com.Parameters.AddWithValue("@startDate", startDate);
+            com.Parameters.AddWithValue("@endDate", endDate);
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds,"CarData");
