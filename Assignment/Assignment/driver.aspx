@@ -113,7 +113,7 @@
                             <div class="image-frame mx-auto">
                                 <asp:Image ID="imgID" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
                              </div>
-                    <asp:RequiredFieldValidator ID="reqIdPic" runat="server" ErrorMessage="Driver ID/Passport Picture is required" ControlToValidate="fuID" CssClass="validate mx-auto" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                   <asp:CustomValidator ID="validateIDpic" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuID" ValidateEmptyText="True" ValidationGroup="uploadDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <br />
                                 <asp:Label ID="lblIdPic" runat="server" CssClass="validate mx-auto"></asp:Label>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
@@ -127,7 +127,7 @@
                             <div class="image-frame mx-auto">
                                 <asp:Image ID="imgSelfie" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
                              </div>
-                    <asp:RequiredFieldValidator ID="reqSelfie" runat="server" ErrorMessage="Driver Selfie is required" ControlToValidate="fuSelfie" CssClass="validate mx-auto" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                   <asp:CustomValidator ID="validateSelfiePic" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuSelfie" ValidateEmptyText="True" ValidationGroup="uploadDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <br />
                                 <asp:Label ID="lblSelfiePic" runat="server" CssClass="validate mx-auto"></asp:Label>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
@@ -143,7 +143,7 @@
                             <div class="image-frame mx-auto">
                                 <asp:Image ID="imgLicenseF" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
                              </div>
-                    <asp:RequiredFieldValidator ID="reqLicenseF" runat="server" ErrorMessage="Front Driver License Picture is required" ControlToValidate="fuLicenseF" CssClass="validate mx-auto" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                                <asp:CustomValidator ID="validateLicenseF" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuLicenseF" ValidateEmptyText="True" ValidationGroup="uploadDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <br />
                                 <asp:Label ID="lblLicenseFpic" runat="server" CssClass="validate mx-auto"></asp:Label>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
@@ -157,7 +157,7 @@
                             <div class="image-frame mx-auto">
                                 <asp:Image ID="imgLicenseB" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
                              </div>
-                    <asp:RequiredFieldValidator ID="reqLicenseB" runat="server" ErrorMessage="Back Driver Selfie Picture is required" ControlToValidate="fuLicenseB" CssClass="validate mx-auto" ValidationGroup="uploadDoc"></asp:RequiredFieldValidator>
+                    <asp:CustomValidator ID="validateLicenseB" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuLicenseB" ValidateEmptyText="True" ValidationGroup="uploadDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <br />
                                 <asp:Label ID="lblLicenseBpic" runat="server" CssClass="validate mx-auto"></asp:Label>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
@@ -260,10 +260,29 @@
         ImageDir.onload = function () {
             var image = document.getElementById('<%= imgLicenseB.ClientID %>');
             image.src = ImageDir.result;
-        };
+        } 
         //get file and convert to data url to use in img src = ""
         ImageDir.readAsDataURL(event.target.files[0]);
         }
+
+        function validateFile(sender, args) {
+            var fileUpload = document.getElementById(sender.controltovalidate);
+                var fileName = fileUpload.value;
+                var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+                var maxSize = 2097152;
+
+                if (!allowedExtensions.test(fileName)) {
+                    args.IsValid = false;
+                    return;
+                }
+
+                if (fileUpload.files[0].size > maxSize) {
+                    args.IsValid = false;
+                    return;
+                }
+
+                args.IsValid = true;
+            }
 
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);

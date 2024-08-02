@@ -177,13 +177,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Image imgID;
 
         /// <summary>
-        /// reqIdPic control.
+        /// validateIDpic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqIdPic;
+        protected global::System.Web.UI.WebControls.CustomValidator validateIDpic;
 
         /// <summary>
         /// lblIdPic control.
@@ -222,13 +222,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Image imgSelfie;
 
         /// <summary>
-        /// reqSelfie control.
+        /// validateSelfiePic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqSelfie;
+        protected global::System.Web.UI.WebControls.CustomValidator validateSelfiePic;
 
         /// <summary>
         /// lblSelfiePic control.
@@ -267,13 +267,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Image imgLicenseF;
 
         /// <summary>
-        /// reqLicenseF control.
+        /// validateLicenseF control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqLicenseF;
+        protected global::System.Web.UI.WebControls.CustomValidator validateLicenseF;
 
         /// <summary>
         /// lblLicenseFpic control.
@@ -312,13 +312,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Image imgLicenseB;
 
         /// <summary>
-        /// reqLicenseB control.
+        /// validateLicenseB control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqLicenseB;
+        protected global::System.Web.UI.WebControls.CustomValidator validateLicenseB;
 
         /// <summary>
         /// lblLicenseBpic control.

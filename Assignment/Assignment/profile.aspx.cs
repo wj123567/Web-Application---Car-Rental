@@ -98,7 +98,6 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
-                lblProfilePic.Text = "";
                 string id = Session["Id"].ToString();
                 string folderLocation = Server.MapPath("~/Image/UserProfile");
                 string relfolderLocation = "~/Image/UserProfile";
@@ -109,8 +108,6 @@ namespace Assignment
                 {
                     int fileSize = fuProfile.PostedFile.ContentLength;
                     string ext = Path.GetExtension(fuProfile.FileName);
-                    if ((ext == ".jpg" || ext == ".png") && fileSize < 2100000)
-                    {
                         string fileName = id + ext;
                         string savePath = Path.Combine(folderLocation, fileName);
                         string relPath = Path.Combine(relfolderLocation, fileName);
@@ -124,12 +121,6 @@ namespace Assignment
                         con.Close();
                         Server.Transfer("profile.aspx");
                         lblProfilePic.Text = "Image Uploaded";
-
-                    }
-                    else
-                    {
-                        lblProfilePic.Text = "Invalid file type or file is too large";
-                    }
                 }
             }
         }

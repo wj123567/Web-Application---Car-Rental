@@ -21,7 +21,7 @@
                     <asp:Button ID="userUploadProfile" runat="server" Text="Upload new image" CssClass="btn btn-primary" OnClick="userUploadProfile_Click" ValidationGroup="uploadProfilePic"/>
                     <asp:FileUpload ID="fuProfile" runat="server" CssClass="uploadPicture" onchange="ShowPreview(event)"/>
                     <br />
-                    <asp:RequiredFieldValidator ID="reqProfilePic" runat="server" ErrorMessage="Please Select a image" ControlToValidate="fuProfile" CssClass="validate" ValidationGroup="uploadProfilePic"></asp:RequiredFieldValidator>
+                    <asp:CustomValidator ID="validateProfilePic" runat="server" ControlToValidate="fuProfile" CssClass="validate" ValidationGroup="uploadProfilePic" ValidateEmptyText="True" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile"></asp:CustomValidator>
                     <asp:Label ID="lblProfilePic" runat="server" Text="" CssClass="d-block mt-2 validate"></asp:Label>
                 </div>
             </div>
@@ -86,6 +86,25 @@
         //get file and convert to data url to use in img src = ""
         ImageDir.readAsDataURL(event.target.files[0]);
     } 
+
+    function validateFile(sender, args) {
+        var fileUpload = document.getElementById('<%= fuProfile.ClientID %>');
+        var fileName = fileUpload.value;
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+        var maxSize = 2097152; 
+
+        if (!allowedExtensions.test(fileName)) {
+            args.IsValid = false;
+            return;
+        }
+
+        if (fileUpload.files[0].size > maxSize) {
+            args.IsValid = false;
+            return;
+        }
+
+        args.IsValid = true;
+    }
 
 </script>
 

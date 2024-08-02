@@ -77,7 +77,7 @@
                                 <asp:TextBox ID="txtCardNum" runat="server" CssClass="form-control" placeholder="0000 0000 0000 0000" ValidationGroup="uploadCard" MaxLength="19" OnKeyUp="formatCardNumber(this)"></asp:TextBox>
                     <asp:CustomValidator ID="validateCard" runat="server" ErrorMessage="Card is Invalid" CssClass="validate" ValidationGroup="uploadCard" ClientValidationFunction="validateCard" ControlToValidate="txtCardNum" ValidateEmptyText="True"></asp:CustomValidator>
                  <br />
-                    <asp:CustomValidator ID="validateCardExist" runat="server" ErrorMessage="Card is Exist" CssClass="validate" ValidationGroup="uploadCard" ClientValidationFunction="validateCard" ControlToValidate="txtCardNum" OnServerValidate="validateCard_ServerValidate"></asp:CustomValidator>
+                    <asp:CustomValidator ID="validateCardExist" runat="server" ErrorMessage="Card is Exist" CssClass="validate" ValidationGroup="uploadCard" ControlToValidate="txtCardNum" OnServerValidate="validateCard_ServerValidate"></asp:CustomValidator>
                             </div>
                         </div>
                         <div class="row gx-3 mb-3">

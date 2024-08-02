@@ -58,16 +58,22 @@ namespace Assignment
 
         protected void btnUpdateDoc_Click(object sender, EventArgs e)
         {
-            string updateString = "UPDATE Driver SET DriverName = @DriverName, DriverId = @DriverId, DriverLicense = @DriverLicense, DriverPno = @DriverPno, DriverBdate = @DriverBdate, DriverGender = @DriverGender, IDpic = @IDpic, SelfiePic = @SelfiePic, LicenseFpic = @LicenseFpic, LicenseBpic = @LicenseBpic, Approval = @Approval, UserId = @UserId WHERE Id = @Id";
+            if (Page.IsValid)
+            {
+                string updateString = "UPDATE Driver SET DriverName = @DriverName, DriverId = @DriverId, DriverLicense = @DriverLicense, DriverPno = @DriverPno, DriverBdate = @DriverBdate, DriverGender = @DriverGender, IDpic = @IDpic, SelfiePic = @SelfiePic, LicenseFpic = @LicenseFpic, LicenseBpic = @LicenseBpic, Approval = @Approval, UserId = @UserId WHERE Id = @Id";
 
-            SaveDriverInfo(updateString, Session["DriverID"].ToString(), "P");
+                SaveDriverInfo(updateString, Session["DriverID"].ToString(), "P");
+            }
         }
 
         protected void btnUploadDoc_Click(object sender, EventArgs e)
         {
-            string insertString = "INSERT into Driver (Id, DriverName, DriverId, DriverLicense, DriverPno, DriverBdate, DriverGender, IDpic, SelfiePic, LicenseFpic, LicenseBpic,Approval ,UserId ) values (@Id, @DriverName, @DriverId, @DriverLicense, @DriverPno, @DriverBdate, @DriverGender, @IDpic, @SelfiePic, @LicenseFpic, @LicenseBpic, @Approval, @UserId)";
-            Guid newGUID = Guid.NewGuid();
-            SaveDriverInfo(insertString, newGUID.ToString(), "P");
+            if (Page.IsValid)
+            {
+                string insertString = "INSERT into Driver (Id, DriverName, DriverId, DriverLicense, DriverPno, DriverBdate, DriverGender, IDpic, SelfiePic, LicenseFpic, LicenseBpic,Approval ,UserId ) values (@Id, @DriverName, @DriverId, @DriverLicense, @DriverPno, @DriverBdate, @DriverGender, @IDpic, @SelfiePic, @LicenseFpic, @LicenseBpic, @Approval, @UserId)";
+                Guid newGUID = Guid.NewGuid();
+                SaveDriverInfo(insertString, newGUID.ToString(), "P");
+            }
         }
         protected void SaveDriverInfo(string uploadString, string Guid, string approval)
         {

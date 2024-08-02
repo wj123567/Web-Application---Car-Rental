@@ -60,13 +60,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.FileUpload fuProfile;
 
         /// <summary>
-        /// reqProfilePic control.
+        /// validateProfilePic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqProfilePic;
+        protected global::System.Web.UI.WebControls.CustomValidator validateProfilePic;
 
         /// <summary>
         /// lblProfilePic control.
