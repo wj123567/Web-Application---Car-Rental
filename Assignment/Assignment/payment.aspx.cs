@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Xml.Linq;
 using System.Drawing;
+using System.Configuration;
 
 namespace Assignment
 {
@@ -34,7 +35,7 @@ namespace Assignment
         protected void LoadUserData(string id)
         {
             string loadUser = "SELECT * FROM PaymentCard WHERE UserId = @UserId ORDER BY IsDefault DESC";
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
 
             SqlCommand com = new SqlCommand(loadUser, con);
@@ -120,7 +121,7 @@ namespace Assignment
                 DateTime expDate = DateTime.Parse(txtExpDate.Text);
                 String cardNumber = txtCardNum.Text.Replace(" ","");
 
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
                 con.Open();
                 SqlCommand com = new SqlCommand(uploadString, con);
                 com.Parameters.AddWithValue("@CardNumber", cardNumber);
@@ -141,7 +142,7 @@ namespace Assignment
         {
             string selectCard = "Select count(*) from PaymentCard WHERE CardNumber = @CardNumber AND UserId = @Id";
             String cardNumber = txtCardNum.Text.Replace(" ", "");
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectCard, con);
             com.Parameters.AddWithValue("@CardNumber",cardNumber);
@@ -168,7 +169,7 @@ namespace Assignment
             String selectDriver = "SELECT * FROM PaymentCard WHERE Id = @id";
             Button btnEdit = (Button)sender;
             String id = btnEdit.CommandArgument;
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
             com.Parameters.AddWithValue("@Id", id);
@@ -192,7 +193,7 @@ namespace Assignment
             String cardId = btnDelete.CommandArgument;
             String updateString = "UPDATE PaymentCard SET IsDefault = 0 WHERE UserID = @UserID";
             String defaultString = "UPDATE PaymentCard SET IsDefault = 1 WHERE Id = @id";
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(updateString,con);
             com.Parameters.AddWithValue("@UserID", Session["Id"].ToString());
@@ -213,7 +214,7 @@ namespace Assignment
         {
             
             string deleteString = "UPDATE PaymentCard SET CardNumber = NULL, CVV = NULL, UserId = NULL WHERE Id = @Id";
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(deleteString,con);
             com.Parameters.AddWithValue("@Id", Session["CardID"].ToString());
@@ -227,7 +228,7 @@ namespace Assignment
         {
             string checkString = "SELECT COUNT(*) FROM PaymentCard WHERE UserId = @UserId AND IsDefault = 1";
             string addDefault = "UPDATE PaymentCard SET IsDefault = 1 WHERE UserId = @UserId AND Id = (SELECT MAX(Id) From PaymentCard WHERE UserId = @UserId)";
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(checkString, con);
             com.Parameters.AddWithValue("@UserId", Session["Id"].ToString());

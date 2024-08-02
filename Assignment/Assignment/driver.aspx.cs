@@ -9,6 +9,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 namespace Assignment
 {
@@ -35,7 +36,7 @@ namespace Assignment
         protected void loadUserInfo(String id)
         {
             String selectDriver = "SELECT Id, DriverName, DriverId, Approval, RejectReason FROM Driver WHERE UserId = @id";
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
             com.Parameters.AddWithValue("@id", id);
@@ -80,7 +81,7 @@ namespace Assignment
                 string relPathLicenseF = " ";                 
                 string savePathLicenseB = " "; 
                 string relPathLicenseB = " "; 
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
                 if (fuID.HasFile)
                 {
@@ -243,7 +244,7 @@ namespace Assignment
         {
             string deleteDriver = "UPDATE Driver SET UserId = NULL WHERE Id = @id";
 
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
             con.Open();
 
@@ -265,7 +266,7 @@ namespace Assignment
         protected void LoadAvailableDriver(String id)
         {
             String selectDriver = "SELECT * FROM Driver WHERE Id = @id";
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
             com.Parameters.AddWithValue("@Id",id);

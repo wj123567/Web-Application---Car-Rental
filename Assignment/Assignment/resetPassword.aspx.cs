@@ -74,7 +74,7 @@ namespace Assignment
             byte[] key = new byte[16];
             byte[] iv = new byte[16];
 
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
             con.Open();
 
@@ -134,7 +134,7 @@ namespace Assignment
                 String keyString = Convert.ToBase64String(key);
                 String ivString = Convert.ToBase64String(iv);
 
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
                 string updateUser = "UPDATE ApplicationUser SET Password = @Password, EncryptionKey= @encryptKey, IVkey = @IVkey WHERE Id = @id";
 

@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 namespace Assignment
 {
@@ -31,7 +32,7 @@ namespace Assignment
             String email = " ";
             String twoStepVerification = "";
 
-            SqlConnection conn = new SqlConnection(Global.CS);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
             string getUserData = "Select Email, TwoStepVerification from ApplicationUser where Id = @id";
 
@@ -71,7 +72,7 @@ namespace Assignment
             byte[] key = new byte[16];
             byte[] iv = new byte[16];
 
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
             con.Open();
 
@@ -137,7 +138,7 @@ namespace Assignment
                 String keyString = Convert.ToBase64String(key);
                 String ivString = Convert.ToBase64String(iv);
 
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
                 string updateUser = "UPDATE ApplicationUser SET Password = @Password, EncryptionKey= @encryptKey, IVkey = @IVkey WHERE Id = @id";
 
@@ -212,7 +213,7 @@ namespace Assignment
             int option = int.Parse(rblOtpSwitch.SelectedValue);
             String id = Session["Id"].ToString();
 
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
             String upadateCom = "UPDATE ApplicationUser set TwoStepVerification = @tsv WHERE Id = @id";
 
@@ -244,7 +245,7 @@ namespace Assignment
             {
                 String id = Session["Id"].ToString();
 
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
                 String deleteCom = "UPDATE ApplicationUser SET Email = NULL, Password = NULL WHERE Id = @id";
 

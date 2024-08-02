@@ -47,7 +47,7 @@ namespace Assignment
                 String keyString = Convert.ToBase64String(key);
                 String ivString = Convert.ToBase64String(iv);
 
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
                 con.Open();
                     try
                     {
@@ -100,7 +100,7 @@ namespace Assignment
                 byte[] iv = new byte[16];
                 String simplePassword = txtPassword.Text;
 
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
                 con.Open();
 
@@ -167,7 +167,7 @@ namespace Assignment
 
         protected void emailExist_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             string checkUser = "select count(*) from ApplicationUser where Email = @email";
             SqlCommand comCheck = new SqlCommand(checkUser, con);
@@ -188,7 +188,7 @@ namespace Assignment
 
         protected void emailNotExist_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             string checkUser = "select count(*) from ApplicationUser where Email = @email";
             SqlCommand comCheck = new SqlCommand(checkUser, con);

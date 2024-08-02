@@ -33,7 +33,7 @@ namespace Assignment
         {
             if (Session["validateId"] != null)
             {
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
                 String findUserOtp = "SELECT TOP 1 OtpKey, DateCreated FROM UserOtp WHERE UserID = @UserID ORDER BY DateCreated DESC";
 
                 con.Open();
@@ -73,7 +73,7 @@ namespace Assignment
 
         protected void sendNewCode_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             String findUserID = "Select Id from ApplicationUser WHERE Email = @email";
 
             con.Open();
@@ -135,7 +135,7 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
                 String updateUserValid = "UPDATE ApplicationUser SET EmailVerification = @ev WHERE Id = @id";
 
                 try

@@ -37,7 +37,7 @@ namespace Assignment
             DateTime registrationDate = DateTime.Now;
             String profilePicture = " ";
 
-            SqlConnection conn = new SqlConnection(Global.CS);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
             string getUserData = "Select Username, Email, DOB, RegistrationDate, ProfilePicture from ApplicationUser where Id = @id";
 
@@ -72,7 +72,7 @@ namespace Assignment
         protected void btnEditUserProfile_Click(object sender, EventArgs e)
         {
             if (btnEditUserProfile.Text == "Save Changes") {
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
                 String updateUser = "UPDATE ApplicationUser SET Username = @username WHERE Id = @id";
 
                 con.Open();
@@ -103,7 +103,7 @@ namespace Assignment
                 string folderLocation = Server.MapPath("~/Image/UserProfile");
                 string relfolderLocation = "~/Image/UserProfile";
                 string uploadFile = "UPDATE ApplicationUser SET ProfilePicture = @ProfilePicture WHERE Id = @id";
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
                 if (fuProfile.HasFile)
                 {

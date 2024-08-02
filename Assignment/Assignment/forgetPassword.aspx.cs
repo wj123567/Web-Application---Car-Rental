@@ -31,7 +31,7 @@ namespace Assignment
 
         protected void sendForgetCode_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(Global.CS);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             String findUserID = "Select Id from ApplicationUser WHERE Email = @email";
 
             con.Open();
@@ -93,7 +93,7 @@ namespace Assignment
         {
             if (Session["forgetId"] != null)
             {
-                SqlConnection con = new SqlConnection(Global.CS);
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
                 String findUserOtp = "SELECT TOP 1 OtpKey, DateCreated FROM UserOtp WHERE UserID = @UserID ORDER BY DateCreated DESC";
 
                 con.Open();
