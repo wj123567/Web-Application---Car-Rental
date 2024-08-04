@@ -73,6 +73,7 @@
     <Content Include="bookingrecorddetail.aspx" />
     <Content Include="CarManagement.aspx" />
     <Content Include="CSS\bookinfo.css" />
+    <Content Include="CSS\bookingprocess.css" />
     <Content Include="CSS\bookingrecord.css" />
     <Content Include="CSS\bookingrecorddetail.css" />
     <Content Include="CSS\home.css" />

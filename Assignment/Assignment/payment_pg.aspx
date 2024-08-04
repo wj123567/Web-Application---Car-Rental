@@ -80,7 +80,7 @@
                   </div>
                 </div>
     
-           
+                <asp:GridView ID="GridView1" runat="server" Width="643px"></asp:GridView>
     
     
             </div>

@@ -731,8 +731,8 @@
                     
                 </div>
             </div>
-        
-  </div>  
+
+  </div>  <!-- p section-->
 
          <div class="sticky_bar">
 
