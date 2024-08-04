@@ -1,38 +1,135 @@
-﻿
-/* Card */
-.card {
-    margin-bottom: 30px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+﻿:root {
+    scroll-behavior: smooth;
 }
 
-.card-header,
-.card-footer {
-    border-color: #ebeef4;
-    background-color: #fff;
-    color: #798eb3;
-    padding: 15px;
+body {
+    font-family: "Open Sans", sans-serif;
+    background: #f6f9ff;
+    color: #444444;
 }
 
-.card-title {
-    padding: 20px 0 15px 0;
-    font-size: 18px;
-    font-weight: 500;
-    color: #012970;
-    font-family: "Poppins", sans-serif;
+a {
+    color: #4154f1;
+    text-decoration: none;
 }
 
-    .card-title span {
-        color: #899bbd;
-        font-size: 14px;
-        font-weight: 400;
+    a:hover {
+        color: #717ff5;
+        text-decoration: none;
     }
 
-.card-body {
-    padding: 0 20px 20px 20px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Nunito", sans-serif;
 }
 
-.card-img-overlay {
-    background-color: rgba(255, 255, 255, 0.6);
+/*--------------------------------------------------------------
+# Main
+--------------------------------------------------------------*/
+#main {
+    margin-top: 60px;
+    margin-right: 100px;
+    padding: 20px 30px;
+    transition: all 0.3s;
+}
+
+@media (max-width: 1199px) {
+    #main {
+        padding: 20px;
+    }
+}
+
+
+@media (min-width: 1200px) {
+
+    #main,
+    #footer {
+        margin-left: 300px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .toggle-sidebar .sidebar {
+        left: 0;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    .toggle-sidebar #main,
+    .toggle-sidebar #footer {
+        margin-left: 0;
+    }
+
+    .toggle-sidebar .sidebar {
+        left: -300px;
+    }
+}
+
+
+/* Recent Sales */
+
+.table thead {
+    background: #f6f6fe;
+}
+
+    .table thead th {
+        border: 0;
+    }
+
+.dataTable-top {
+    padding: 0 0 10px 0;
+}
+
+.dataTable-bottom {
+    padding: 10px 0 0 0;
+}
+
+
+@keyframes animate-loading {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+table tbody td {
+    text-align: center;
+}
+
+.cust_name {
+}
+
+.cust_pnum {
+}
+
+.custAddress {
+}
+
+.driver_name {
+}
+
+.driver_pnum {
+}
+
+.admin_pickup_date {
+}
+
+.admin_pickup_loc {
+}
+
+.admin_drop_date {
+}
+
+.admin_drop_time {
+}
+
+.admin_price {
 }
