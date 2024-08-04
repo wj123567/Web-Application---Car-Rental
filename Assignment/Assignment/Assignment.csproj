@@ -78,6 +78,7 @@
     <Content Include="CSS\payment_pg.css" />
     <Content Include="CSS\tracking.css" />
     <Content Include="driver.aspx" />
+    <Content Include="Image\no-img -long.png" />
     <Content Include="Image\no-img.jpg" />
     <Content Include="Image\WZ\44mbziylcv6c1.jpeg" />
     <Content Include="Image\WZ\homeimg1.jpg" />

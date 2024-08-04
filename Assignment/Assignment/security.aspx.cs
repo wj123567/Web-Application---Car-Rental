@@ -247,7 +247,7 @@ namespace Assignment
 
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
-                String deleteCom = "UPDATE ApplicationUser SET Email = NULL, Password = NULL WHERE Id = @id";
+                String deleteCom = "DELETE FROM ApplicationUser WHERE Id = @id";
 
                 con.Open();
                 SqlCommand comDelete = new SqlCommand(deleteCom, con);

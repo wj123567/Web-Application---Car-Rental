@@ -217,7 +217,7 @@ namespace Assignment
 
         protected void btnConfirmDelete_Click(object sender, EventArgs e)
         {
-            string deleteDriver = "UPDATE Driver SET UserId = NULL WHERE Id = @id";
+            string deleteDriver = "DELETE FROM Driver WHERE Id = @id";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 

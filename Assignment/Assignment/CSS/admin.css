@@ -1,4 +1,4 @@
-﻿﻿::after,
+﻿::after,
 ::before {
     box-sizing: border-box;
     margin: 0;
@@ -133,3 +133,9 @@ a.sidebar-link:hover {
     transform: rotate(45deg);
     transition: all .2s ease-out;
 }
+
+.validate {
+    font-size: 0.8em;
+    color: red;
+}
+

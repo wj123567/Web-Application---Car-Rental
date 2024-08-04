@@ -123,7 +123,7 @@
                             </div>
                         </div>
                         <div class="mx-3 mb-3">
-                            <asp:Button ID="btnProductRent" runat="server" Text="Rent" CssClass="btn btn-block text-white" style="background-color:#3490dc;" CommandArgument='<%# Eval("CarID") %>' OnClick="btnProductRent_Click" />
+                            <asp:Button ID="btnProductRent" runat="server" Text="Rent" CssClass="btn btn-block text-white" style="background-color:#3490dc;" CommandArgument='<%# Eval("CarPlate") %>' OnClick="btnProductRent_Click" />
                         </div>
                     </div>
                 </div>
