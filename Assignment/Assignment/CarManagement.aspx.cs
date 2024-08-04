@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -37,8 +39,8 @@ namespace Assignment
         protected void btnUploadCar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
-            {
-
+            {               
+                string price = txtCarPrice.Text.Replace("MYR ", "");
             }
         }
 
@@ -47,6 +49,93 @@ namespace Assignment
             if (Page.IsValid)
             {
 
+            }
+        }
+
+        protected void btnEditCar_Click(object sender, EventArgs e)
+        {
+            ShowControls(carPanel);
+            validateCarPic.Enabled = false;
+            btnUploadCar.Visible = false;
+            btnUpdateCar.Visible = true;
+            btnDelete.Visible = true;
+            validateCarPic.Enabled = false;
+            Button btnEdit = (Button)sender;
+            String carPlate = btnEdit.CommandArgument;
+            loadCarData(carPlate);
+        }
+
+        protected void btnViewCar_Click(object sender, EventArgs e)
+        {
+            HideControls(carPanel);
+            Button btnView = (Button)sender;
+            String carPlate = btnView.CommandArgument;
+            loadCarData(carPlate);
+        }
+
+        protected void loadCarData(String carPlate)
+        {
+            String selectCar = "SELECT * FROM Car WHERE CarPlate = @CarPlate";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectCar, con);
+            com.Parameters.AddWithValue("@CarPlate", carPlate);
+
+            SqlDataReader reader = com.ExecuteReader();
+
+            if (reader.Read())
+            {
+                Session["carPlate"] = reader["CarPlate"].ToString();
+                txtCarPlate.Text = reader["CarPlate"].ToString();
+                ddlCarBrand.SelectedValue = reader["CarBrand"].ToString();
+                txtCarName.Text = reader["CarName"].ToString();
+                ddlCarType.SelectedValue = reader["CType"].ToString();
+                txtCarDesc.Text = reader["CarDesc"].ToString();
+                txtCarPrice.Text = reader["CarDayPrice"].ToString();
+                txtCarSeat.Text = reader["CarSeat"].ToString();
+                ddlCarTransmission.SelectedValue = reader["CarTransmission"].ToString();
+                ddlCarEnergy.SelectedValue = reader["CarEnergy"].ToString();
+                ddlCarLocation.SelectedValue = reader["LocationId"].ToString();
+                imgCarPic.ImageUrl = reader["CarImage"].ToString();
+            }
+            con.Close();
+            reader.Close();
+        }
+        protected void HideControls(Control container)
+        {
+            foreach (Control c in container.Controls)
+            {
+                if (c is Button)
+                {
+                    c.Visible = false;
+                }
+                else if (c is TextBox)
+                {
+                    ((TextBox)c).ReadOnly = true;
+                }
+                else if (c is DropDownList)
+                {
+                    ((DropDownList)c).Enabled = false;
+                }
+            }
+        }
+
+        protected void ShowControls(Control container)
+        {
+            foreach (Control c in container.Controls)
+            {
+                if (c is Button)
+                {
+                    c.Visible = true;
+                }
+                else if (c is TextBox)
+                {
+                    ((TextBox)c).ReadOnly = false;
+                }
+                else if (c is DropDownList)
+                {
+                    ((DropDownList)c).Enabled = true;
+                }
             }
         }
     }

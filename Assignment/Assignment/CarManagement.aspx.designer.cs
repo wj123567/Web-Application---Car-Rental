@@ -51,6 +51,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button btnConfirmDelete;
 
         /// <summary>
+        /// carPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel carPanel;
+
+        /// <summary>
         /// LinkButton1 control.
         /// </summary>
         /// <remarks>
@@ -69,24 +78,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Image imgCarPic;
 
         /// <summary>
-        /// btnUploadCarPic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUploadCarPic;
-
-        /// <summary>
-        /// fuCarPic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuCarPic;
-
-        /// <summary>
         /// validateCarPic control.
         /// </summary>
         /// <remarks>
@@ -96,13 +87,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.CustomValidator validateCarPic;
 
         /// <summary>
-        /// Panel1 control.
+        /// fuCarPic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.FileUpload fuCarPic;
 
         /// <summary>
         /// txtCarPlate control.
@@ -204,13 +195,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtCarPrice;
 
         /// <summary>
-        /// reqCarPrice control.
+        /// validatePrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCarPrice;
+        protected global::System.Web.UI.WebControls.CustomValidator validatePrice;
 
         /// <summary>
         /// txtCarSeat control.

@@ -25,6 +25,7 @@
     <div class="container-xl px-4 mt-4">
     <h1 class="text-dark">Car Management</h1>
     <hr class="mt-0 mb-4">
+<asp:Panel ID="carPanel" runat="server">
     <div class="row">
      <div class="col-xl-4">
             <div class="card mb-0 mb-xl-0">
@@ -34,16 +35,14 @@
                      <span class="upload-text">Upload</span>
                     <asp:Image ID="imgCarPic" runat="server" CssClass="img-car-pic mb-2" Width="300px" ImageUrl="~/Image/no-img -long.png" />
                     </asp:LinkButton>
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 2 MB</div>
-                    <asp:Button ID="btnUploadCarPic" runat="server" Text="Upload new image" CssClass="btn btn-primary" ValidationGroup="uploadCarPic" Enabled="False"/>
+                    <div class="small font-italic text-muted">JPG or PNG no larger than 2 MB</div>
+                    <asp:CustomValidator ID="validateCarPic" runat="server" ControlToValidate="fuCarPic" CssClass="validate" ValidationGroup="uploadCar" ValidateEmptyText="True" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile"></asp:CustomValidator>
                     <asp:FileUpload ID="fuCarPic" runat="server" CssClass="uploadPicture" onchange="ShowPreview(event)"/>
                     <br />
-                    <asp:CustomValidator ID="validateCarPic" runat="server" ControlToValidate="fuCarPic" CssClass="validate" ValidationGroup="uploadCarPic" ValidateEmptyText="True" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile"></asp:CustomValidator>
                 </div>
             </div>
         </div>
         <div class="col-xl-8 mb-5">
-            <asp:Panel ID="Panel1" runat="server">
             <div class="card mb-4">
                 <div class="card-header">Add/Edit Car</div>
                 <div class="card-body">
@@ -81,7 +80,7 @@
                             <div class="col-md-6">
                                 <label class="small mb-1">Car Day Price</label>
                                 <asp:TextBox ID="txtCarPrice" runat="server" CssClass="form-control" ValidationGroup="uploadCar" placeholder="MYR 0.00"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqCarPrice" runat="server" ErrorMessage="Car Price is required" ControlToValidate="txtCarPrice" CssClass="validate" ValidationGroup="uploadCar"></asp:RequiredFieldValidator>
+                                <asp:CustomValidator ID="validatePrice" runat="server" ErrorMessage="CustomValidator" ClientValidationFunction="checkPrice" ControlToValidate="txtCarPrice" Text="Invalid Price" ValidationGroup="uploadCar" CssClass="validate" ValidateEmptyText="True"></asp:CustomValidator>
                        <br />
                             </div>
                         </div>
@@ -123,10 +122,10 @@
                     <asp:Button ID="btnUpdateCar" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadCar" Visible="False"/>
                     <asp:Button ID="btnDelete" runat="server" Text="Delete " cssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False"/>
                 </div>
-            </div>
-            </asp:Panel>
+            </div>            
         </div> 
-    </div>        
+    </div>       
+</asp:Panel>        
 
     <h1 class="text-dark">Car Detail</h1>
     <hr class="mt-0 mb-4">
@@ -158,8 +157,8 @@
                     <td scope="col"><%# Eval("CarEnergy") %></td>
                     <td scope="col"><%# Eval("LocationId") %></td>
                     <td scope="col">
-                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" />
-                    <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" />
+                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEditCar_Click" CommandArgument='<%# Eval("CarPlate") %>' />
+                    <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnViewCar_Click" CommandArgument='<%# Eval("CarPlate") %>' />
                     </td>
                 </tr>
                 </ItemTemplate>
@@ -176,13 +175,13 @@
     <script>
 
         function fileUpload() {
+            document.getElementById('<%= validateCarPic.ClientID %>').enabled = true;
             document.getElementById('<%= fuCarPic.ClientID %>').click();
 
             return false;
         }
 
         function ShowPreview(event) {           
-            document.getElementById('<%= btnUploadCarPic.ClientID %>').disabled = false;
             //read content of the file
             var ImageDir = new FileReader();
             //when file read update the image element
@@ -247,6 +246,18 @@
             e.target.value = (value || value === 0)
                 ? localStringToNumber(value).toLocaleString(undefined, options)
                 : ''
+        }
+
+        function checkPrice(sender, args) {
+            var priceInput = document.getElementById(sender.controltovalidate).value;
+            priceInput = priceInput.replace("MYR ", "");
+            var price = parseFloat(priceInput);
+
+            if (price > 0 && price <= 1000) {
+                args.IsValid = true;
+            } else {
+                args.IsValid = false;
+            }
         }
     </script>
 

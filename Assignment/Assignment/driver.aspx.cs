@@ -206,7 +206,8 @@ namespace Assignment
         }        
 
         protected void btnEdit_Click(object sender, EventArgs e)
-        {           
+        {
+            ShowControls(Panel1);
             Button btnEdit = (Button)sender;
             String id = btnEdit.CommandArgument;
             LoadAvailableDriver(id);
@@ -279,6 +280,25 @@ namespace Assignment
                 }else if(c is DropDownList)
                 {
                     ((DropDownList)c).Enabled = false;
+                }
+            }
+        }
+
+        protected void ShowControls(Control container)
+        {
+            foreach (Control c in container.Controls)
+            {
+                if (c is Button)
+                {
+                    c.Visible = true;
+                }
+                else if (c is TextBox)
+                {
+                    ((TextBox)c).ReadOnly = false;
+                }
+                else if (c is DropDownList)
+                {
+                    ((DropDownList)c).Enabled = true;
                 }
             }
         }
