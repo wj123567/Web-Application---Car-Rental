@@ -38,7 +38,7 @@
                 <div class="row">
                   <div class="col-sm-3 col-xs-6 mt-4">
                     <asp:Label ID="lblExpiry" runat="server" Text="Card Expiry (mm/yy)" CssClass="label_style"></asp:Label>
-                    <asp:TextBox ID="txtExpiry" runat="server" CssClass="form-control my-1"></asp:TextBox>
+                    <asp:TextBox ID="txtExpiry" runat="server" TextMode="Date" CssClass="form-control my-1"></asp:TextBox>
                   </div>
                   <div class="col-sm-3 col-xs-6 mt-4">      
                     <asp:Label ID="lblCvv" runat="server" Text="CVV" CssClass="label_style"></asp:Label>
@@ -165,6 +165,7 @@
 
         </div>
       </div>
+
     </div>
 
 

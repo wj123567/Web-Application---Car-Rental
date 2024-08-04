@@ -139,12 +139,20 @@
                     <!-- text -->
                     <h4 class="mb-3">Booking Status</h4> 
                      <p>
-   Done
- </p>
+                        Done
+                     </p>
                   </div>
+                    <div class="mt-4 text_center invoice_container">
+                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-info invoice_style">
+                        <i class="ri-file-download-line"> Download Invoice</i>
+                    </asp:LinkButton>
+                    </div>
                 </div>
               </div>
             </div>
+
+              
+
           </div>
         </div>
       </section>
