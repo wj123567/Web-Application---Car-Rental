@@ -98,3 +98,15 @@
 .booking_summary_container {
     margin-top: 20px;
 }
+
+.invoice_container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Ensure container height if necessary */
+}
+.invoice_style{
+    font-size:20px;
+    width:80%;
+    
+}

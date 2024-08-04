@@ -68,10 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bookinfo.aspx" />
+    <Content Include="bookingprocess.aspx" />
     <Content Include="bookingrecord.aspx" />
     <Content Include="bookingrecorddetail.aspx" />
     <Content Include="CarManagement.aspx" />
     <Content Include="CSS\bookinfo.css" />
+    <Content Include="CSS\bookingprocess.css" />
     <Content Include="CSS\bookingrecord.css" />
     <Content Include="CSS\bookingrecorddetail.css" />
     <Content Include="CSS\home.css" />
@@ -138,6 +140,13 @@
     </Compile>
     <Compile Include="bookinfo.aspx.designer.cs">
       <DependentUpon>bookinfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="bookingprocess.aspx.cs">
+      <DependentUpon>bookingprocess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bookingprocess.aspx.designer.cs">
+      <DependentUpon>bookingprocess.aspx</DependentUpon>
     </Compile>
     <Compile Include="bookingrecord.aspx.cs">
       <DependentUpon>bookingrecord.aspx</DependentUpon>
