@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/profile.Master" AutoEventWireup="true" CodeBehind="driver.aspx.cs" Inherits="Assignment.driver" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-
+    <asp:HiddenField ID="hdnCountryCode" runat="server" />
     <div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
@@ -166,7 +166,7 @@
                             </div>
                             </div>
                         </div>
-                    <asp:Button ID="btnUploadDoc" runat="server" Text="Add New Driver" CssClass='btn btn-primary' ValidationGroup="uploadDoc" OnClick="btnUploadDoc_Click" />
+                    <asp:Button ID="btnUploadDoc" runat="server" Text="Add New Driver" CssClass='btn btn-primary' ValidationGroup="uploadDoc" OnClientClick="getCountryCode()" OnClick="btnUploadDoc_Click" />
                     <asp:Button ID="btnUpdateDoc" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadDoc" OnClick="btnUpdateDoc_Click" Visible="False"/>
                     <asp:Button ID="btnDelete" runat="server" Text="Delete " cssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False"/>
                 </div>
@@ -189,9 +189,15 @@
             utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/utils.js",
         });
 
-        function validatePhone(sender, args) {
+        function validatePhone(sender, args) {          
             args.IsValid = iti.isValidNumber();
         }
+
+        function getCountryCode() {
+            document.getElementById('<%= hdnCountryCode.ClientID %>').value = iti.getSelectedCountryData().dialCode;
+        }
+
+
 
         function fileUploadID() {
         document.getElementById('<%= fuID.ClientID %>').click();

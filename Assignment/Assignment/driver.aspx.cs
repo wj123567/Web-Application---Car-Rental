@@ -87,6 +87,7 @@ namespace Assignment
                 string relPathLicenseF = " ";                 
                 string savePathLicenseB = " "; 
                 string relPathLicenseB = " "; 
+                string countryCode = "+" + hdnCountryCode.Value;
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
                 if (fuID.HasFile)
@@ -95,17 +96,9 @@ namespace Assignment
                     string ext = Path.GetExtension(fuID.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverId");
                     string relfolderLocation = "~/Image/DriverId";
-                    if ((ext == ".jpg" || ext == ".png") && fileSize < 2100000)
-                    {
                         string fileName = Guid + ext;
                         savePathId = Path.Combine(folderLocation, fileName);
                         relPathId = Path.Combine(relfolderLocation, fileName);
-                    }
-                    else
-                    {
-                        lblIdPic.Text = "Invalid file type or file is too large";
-                        return;
-                    }
                 }                
                 
                 if (fuSelfie.HasFile)
@@ -114,17 +107,9 @@ namespace Assignment
                     string ext = Path.GetExtension(fuSelfie.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverSelfie");
                     string relfolderLocation = "~/Image/DriverSelfie";
-                    if ((ext == ".jpg" || ext == ".png") && fileSize < 2100000)
-                    {
                         string fileName = Guid + ext;
                         savePathSelfie = Path.Combine(folderLocation, fileName);
                         relPathSelfie = Path.Combine(relfolderLocation, fileName);
-                    }
-                    else
-                    {
-                        lblSelfiePic.Text = "Invalid file type or file is too large";
-                        return;
-                    }
                 }                
                 
                 if (fuLicenseF.HasFile)
@@ -133,17 +118,9 @@ namespace Assignment
                     string ext = Path.GetExtension(fuLicenseF.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverLF");
                     string relfolderLocation = "~/Image/DriverLF";
-                    if ((ext == ".jpg" || ext == ".png") && fileSize < 2100000)
-                    {
                         string fileName = Guid + ext;
                         savePathLicenseF = Path.Combine(folderLocation, fileName);
                         relPathLicenseF = Path.Combine(relfolderLocation, fileName);
-                    }
-                    else
-                    {
-                        lblLicenseFpic.Text = "Invalid file type or file is too large";
-                        return;
-                    }
                 }
                 
                 if (fuLicenseB.HasFile)
@@ -152,17 +129,9 @@ namespace Assignment
                     string ext = Path.GetExtension(fuLicenseB.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverLB");
                     string relfolderLocation = "~/Image/DriverLB";
-                    if ((ext == ".jpg" || ext == ".png") && fileSize < 2100000)
-                    {
                         string fileName = Guid + ext;
                         savePathLicenseB = Path.Combine(folderLocation, fileName);
                         relPathLicenseB = Path.Combine(relfolderLocation, fileName);
-                    }
-                    else
-                    {
-                        lblLicenseBpic.Text = "Invalid file type or file is too large";
-                        return;
-                    }
                 }
 
                 con.Open();
@@ -171,7 +140,7 @@ namespace Assignment
                 com.Parameters.AddWithValue("@DriverName", txtName.Text);
                 com.Parameters.AddWithValue("@DriverId", txtDriverID.Text);
                 com.Parameters.AddWithValue("@DriverLicense", txtDriverLicense.Text);
-                com.Parameters.AddWithValue("@DriverPno", txtPhoneNum.Text);
+                com.Parameters.AddWithValue("@DriverPno", countryCode +" "+txtPhoneNum.Text);
                 com.Parameters.AddWithValue("@DriverBdate", txtBirthdate.Text);
                 com.Parameters.AddWithValue("@DriverGender", ddlGender.SelectedValue);
                 com.Parameters.AddWithValue("@IDpic", relPathId);
