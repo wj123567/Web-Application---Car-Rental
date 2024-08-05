@@ -25,8 +25,7 @@
     <div class="container-xl px-4 mt-4">
     <h1 class="text-dark">Car Management</h1>
     <hr class="mt-0 mb-4">
-<asp:UpdatePanel ID="updateCarForm" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-    <ContentTemplate>
+
 <asp:Panel ID="carPanel" runat="server">
     <div class="row">
      <div class="col-xl-4">
@@ -47,8 +46,6 @@
         <div class="col-xl-8 mb-5">
             <div class="card mb-4">
                 <div class="card-header">Add/Edit Car</div>
-                <asp:UpdatePanel ID="Updateform" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-                    <ContentTemplate>
                 <div class="card-body">
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
@@ -126,20 +123,16 @@
                     <asp:Button ID="btnUpdateCar" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadCar" Visible="False" OnClick="btnUpdateCar_Click"/>
                     <asp:Button ID="btnDelete" runat="server" Text="Delete " cssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False"/>
                 </div>
-                     </ContentTemplate>
-                </asp:UpdatePanel>
             </div>            
         </div> 
-    </div>       
-</asp:Panel>  
-    </ContentTemplate>
-</asp:UpdatePanel>        
+    </div>        
+</asp:Panel>      
 
     <h1 class="text-dark">Car Detail</h1>
     <hr class="mt-0 mb-4">
         <div>
-           <asp:UpdatePanel ID="updateCarTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-              <ContentTemplate>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+                <ContentTemplate>
             <table id="carTable" class="table table-striped table-bordered table-hover table-responsive">
             <thead>
                 <tr class="table-primary" style="text-align: center;">
@@ -151,7 +144,7 @@
                     <th scope="col">                        
                         <asp:LinkButton ID="btnSortCarName" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarName" CssClass="text-dark">Car Name</asp:LinkButton></th>
                     <th scope="col">                        
-                        <asp:LinkButton ID="btnSortCarType" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarType" CssClass="text-dark">Car Type</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortCarType" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CType" CssClass="text-dark">Car Type</asp:LinkButton></th>
                     <th scope="col">                        
                         <asp:LinkButton ID="btnSortCarDayPrice" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarDayPrice" CssClass="text-dark">Car Day Price</asp:LinkButton></th>
                     <th scope="col">                        
@@ -184,8 +177,9 @@
                 </asp:Repeater>
             </tbody>
         </table>
-         </ContentTemplate>
-</asp:UpdatePanel>
+                </ContentTemplate>
+                </asp:UpdatePanel>
+
         <div>
             <button type="button" class="btn btn-primary" id="btnPrev" runat="server">Previous</button>
             <button type="button" class="btn btn-primary" id="btnNext" runat="server">Next</button>

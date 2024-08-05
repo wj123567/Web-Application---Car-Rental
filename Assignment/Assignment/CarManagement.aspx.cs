@@ -132,12 +132,13 @@ namespace Assignment
             btnUploadCar.Visible = false;
             btnUpdateCar.Visible = true;
             btnDelete.Visible = true;
+            txtCarPlate.ReadOnly = true;
+            validateCarPlate.Enabled = false;
             validateCarPic.Enabled = false;
             Button btnEdit = (Button)sender;
             String carPlate = btnEdit.CommandArgument;
             Session["carPlate"] = carPlate;
             loadCarData(carPlate);
-            updateCarForm.Update();
         }
 
         protected void btnViewCar_Click(object sender, EventArgs e)
@@ -147,7 +148,6 @@ namespace Assignment
             String carPlate = btnView.CommandArgument;
             loadCarData(carPlate);
             Session["carPlate"] = carPlate;
-            updateCarForm.Update();
         }
 
         protected void loadCarData(String carPlate)
@@ -236,7 +236,7 @@ namespace Assignment
             ViewState["CarTable"] = sortedData;
             repeaterCarTable.DataSource = sortedData;
             repeaterCarTable.DataBind();
-            updateCarTable.Update();
+            UpdatePanel1.Update();
         }
 
         protected void validateCarPlate_ServerValidate(object source, ServerValidateEventArgs args)
@@ -254,7 +254,6 @@ namespace Assignment
             else 
             { 
                 args.IsValid = false;
-                Updateform.Update();
             }
         }
     }
