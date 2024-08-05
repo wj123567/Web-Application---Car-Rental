@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="CarManagement.aspx.cs" Inherits="Assignment.CarManagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-    <asp:SqlDataSource ID="car" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [Car]"></asp:SqlDataSource>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:SqlDataSource ID="carType" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [CType] FROM [CarType]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="carLocation" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [Id], [LocationName] FROM [Location]"></asp:SqlDataSource>
 
@@ -25,6 +25,8 @@
     <div class="container-xl px-4 mt-4">
     <h1 class="text-dark">Car Management</h1>
     <hr class="mt-0 mb-4">
+<asp:UpdatePanel ID="updateCarForm" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+    <ContentTemplate>
 <asp:Panel ID="carPanel" runat="server">
     <div class="row">
      <div class="col-xl-4">
@@ -45,12 +47,14 @@
         <div class="col-xl-8 mb-5">
             <div class="card mb-4">
                 <div class="card-header">Add/Edit Car</div>
+                <asp:UpdatePanel ID="Updateform" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+                    <ContentTemplate>
                 <div class="card-body">
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
                                 <label class="small mb-1">Car Plate</label>
                                 <asp:TextBox ID="txtCarPlate" runat="server" CssClass="form-control" placeholder="Car Plate" ValidationGroup="uploadCar"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="reqCarPlate" runat="server" ErrorMessage="Car Plate is required" ControlToValidate="txtCarPlate" CssClass="validate" ValidationGroup="uploadCar"></asp:RequiredFieldValidator>
+                                <asp:CustomValidator ID="validateCarPlate" runat="server" ErrorMessage="Car Plate is invalid" ControlToValidate="txtCarPlate" CssClass="validate" ValidationGroup="uploadCar" OnServerValidate="validateCarPlate_ServerValidate" ValidateEmptyText="True"></asp:CustomValidator>
                             </div>
                             <div class="col-md-6">
                                 <label class="small mb-1">Car Brand</label>
@@ -119,33 +123,48 @@
                             </div>
                         </div>
                     <asp:Button ID="btnUploadCar" runat="server" Text="Add Car" CssClass='btn btn-primary' ValidationGroup="uploadCar" OnClick="btnUploadCar_Click"/>
-                    <asp:Button ID="btnUpdateCar" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadCar" Visible="False"/>
+                    <asp:Button ID="btnUpdateCar" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadCar" Visible="False" OnClick="btnUpdateCar_Click"/>
                     <asp:Button ID="btnDelete" runat="server" Text="Delete " cssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False"/>
                 </div>
+                     </ContentTemplate>
+                </asp:UpdatePanel>
             </div>            
         </div> 
     </div>       
-</asp:Panel>        
+</asp:Panel>  
+    </ContentTemplate>
+</asp:UpdatePanel>        
 
     <h1 class="text-dark">Car Detail</h1>
     <hr class="mt-0 mb-4">
         <div>
+           <asp:UpdatePanel ID="updateCarTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+              <ContentTemplate>
             <table id="carTable" class="table table-striped table-bordered table-hover table-responsive">
             <thead>
                 <tr class="table-primary" style="text-align: center;">
-                    <th scope="col">Car Plate</th>
-                    <th scope="col">Car Brand</th>
-                    <th scope="col">Car Name</th>
-                    <th scope="col">Car Type</th>
-                    <th scope="col">Car Day Price</th>
-                    <th scope="col">Car Transmission</th>
-                    <th scope="col">Car Energy</th>
-                    <th scope="col">Location Id</th>
+                    <th scope="col">
+                        <asp:LinkButton ID="btnSortCarPlate" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark">Car Plate</asp:LinkButton>
+                     </th>
+                    <th scope="col">                        
+                        <asp:LinkButton ID="btnSortCarBrand" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarBrand" CssClass="text-dark">Car Brand</asp:LinkButton></th>
+                    <th scope="col">                        
+                        <asp:LinkButton ID="btnSortCarName" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarName" CssClass="text-dark">Car Name</asp:LinkButton></th>
+                    <th scope="col">                        
+                        <asp:LinkButton ID="btnSortCarType" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarType" CssClass="text-dark">Car Type</asp:LinkButton></th>
+                    <th scope="col">                        
+                        <asp:LinkButton ID="btnSortCarDayPrice" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarDayPrice" CssClass="text-dark">Car Day Price</asp:LinkButton></th>
+                    <th scope="col">                        
+                        <asp:LinkButton ID="btnSortCarTransmission" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarTransmission" CssClass="text-dark">Car Transmission</asp:LinkButton></th>
+                    <th scope="col">                        
+                        <asp:LinkButton ID="btnSortCarEnergy" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarEnergy" CssClass="text-dark">Car Energy</asp:LinkButton></th>
+                    <th scope="col">                        
+                        <asp:LinkButton ID="btnSortCarLocation" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="LocationName" CssClass="text-dark">Location Name</asp:LinkButton></th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <asp:Repeater ID="Repeater1" runat="server" DataSourceID="car">
+                <asp:Repeater ID="repeaterCarTable" runat="server">
                 <ItemTemplate>
                 <tr style="text-align: center;">
                     <td scope="col"><%# Eval("CarPlate") %></td>
@@ -155,16 +174,18 @@
                     <td scope="col"><%# Eval("CarDayPrice") %></td>
                     <td scope="col"><%# Eval("CarTransmission") %></td>
                     <td scope="col"><%# Eval("CarEnergy") %></td>
-                    <td scope="col"><%# Eval("LocationId") %></td>
+                    <td scope="col"><%# Eval("LocationName") %></td>
                     <td scope="col">
-                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEditCar_Click" CommandArgument='<%# Eval("CarPlate") %>' />
-                    <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnViewCar_Click" CommandArgument='<%# Eval("CarPlate") %>' />
+                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEditCar_Click" CommandArgument='<%# Eval("CarPlate") %>' OnClientClick="Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);" />
+                    <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnViewCar_Click" CommandArgument='<%# Eval("CarPlate") %>' OnClientClick="Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);" />
                     </td>
                 </tr>
                 </ItemTemplate>
                 </asp:Repeater>
             </tbody>
         </table>
+         </ContentTemplate>
+</asp:UpdatePanel>
         <div>
             <button type="button" class="btn btn-primary" id="btnPrev" runat="server">Previous</button>
             <button type="button" class="btn btn-primary" id="btnNext" runat="server">Next</button>
@@ -173,6 +194,9 @@
 
     </div>
     <script>
+        function EndRequestHandler(sender, args) {
+            scrollTo(0, 0);
+        }
 
         function fileUpload() {
             document.getElementById('<%= validateCarPic.ClientID %>').enabled = true;
@@ -258,6 +282,10 @@
             } else {
                 args.IsValid = false;
             }
+        }
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
         }
     </script>
 

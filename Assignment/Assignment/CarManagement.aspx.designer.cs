@@ -15,13 +15,13 @@ namespace Assignment
     {
 
         /// <summary>
-        /// car control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource car;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
         /// carType control.
@@ -49,6 +49,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnConfirmDelete;
+
+        /// <summary>
+        /// updateCarForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateCarForm;
 
         /// <summary>
         /// carPanel control.
@@ -96,6 +105,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.FileUpload fuCarPic;
 
         /// <summary>
+        /// Updateform control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel Updateform;
+
+        /// <summary>
         /// txtCarPlate control.
         /// </summary>
         /// <remarks>
@@ -105,13 +123,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtCarPlate;
 
         /// <summary>
-        /// reqCarPlate control.
+        /// validateCarPlate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqCarPlate;
+        protected global::System.Web.UI.WebControls.CustomValidator validateCarPlate;
 
         /// <summary>
         /// ddlCarBrand control.
@@ -303,13 +321,94 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button btnDelete;
 
         /// <summary>
-        /// Repeater1 control.
+        /// updateCarTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        protected global::System.Web.UI.UpdatePanel updateCarTable;
+
+        /// <summary>
+        /// btnSortCarPlate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortCarPlate;
+
+        /// <summary>
+        /// btnSortCarBrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortCarBrand;
+
+        /// <summary>
+        /// btnSortCarName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortCarName;
+
+        /// <summary>
+        /// btnSortCarType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortCarType;
+
+        /// <summary>
+        /// btnSortCarDayPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortCarDayPrice;
+
+        /// <summary>
+        /// btnSortCarTransmission control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortCarTransmission;
+
+        /// <summary>
+        /// btnSortCarEnergy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortCarEnergy;
+
+        /// <summary>
+        /// btnSortCarLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortCarLocation;
+
+        /// <summary>
+        /// repeaterCarTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repeaterCarTable;
 
         /// <summary>
         /// btnPrev control.
