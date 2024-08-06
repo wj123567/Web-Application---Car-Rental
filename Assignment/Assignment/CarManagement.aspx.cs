@@ -256,5 +256,17 @@ namespace Assignment
                 args.IsValid = false;
             }
         }
+
+        protected void repeaterCarTable_ItemCreated(object sender, RepeaterItemEventArgs e)
+        {
+            Button btnView = (Button)e.Item.FindControl("btnView");
+            Button btnEdit = (Button)e.Item.FindControl("btnEdit");
+            if (btnView != null && btnEdit != null)
+            {
+                ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
+                scriptManager.RegisterPostBackControl(btnView);
+                scriptManager.RegisterPostBackControl(btnEdit);
+            }
+        }
     }
 }

@@ -115,7 +115,7 @@ namespace Assignment
 
             carInfo += " AND LocationId = '" + ddlLocation.SelectedValue +"'";
 
-            carInfo += " AND C.CarId NOT IN(SELECT B.CarId FROM Booking B WHERE (B.StartDate >= @startDate AND B.StartDate <= @endDate) OR (B.EndDate >= @startDate AND b.EndDate <= @endDate)) ";
+            carInfo += " AND C.CarPlate NOT IN(SELECT B.CarPlate FROM Booking B WHERE (B.StartDate >= @startDate AND B.StartDate <= @endDate) OR (B.EndDate >= @startDate AND b.EndDate <= @endDate)) ";
 
             if (brandSelected.Count()>0)
             {
@@ -208,9 +208,9 @@ namespace Assignment
         protected void btnProductRent_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
-            String carID = button.CommandArgument.ToString();
+            String carPlate = button.CommandArgument.ToString();
 
-            Session["CarID"] = carID;
+            Session["CarPlate"] = carPlate;
         }
 
         protected void btnA2Z_Click(object sender, EventArgs e)

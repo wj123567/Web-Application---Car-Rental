@@ -157,7 +157,7 @@
                 </tr>
             </thead>
             <tbody>
-                <asp:Repeater ID="repeaterCarTable" runat="server">
+                <asp:Repeater ID="repeaterCarTable" runat="server" OnItemCreated="repeaterCarTable_ItemCreated">
                 <ItemTemplate>
                 <tr style="text-align: center;">
                     <td scope="col"><%# Eval("CarPlate") %></td>
@@ -169,8 +169,8 @@
                     <td scope="col"><%# Eval("CarEnergy") %></td>
                     <td scope="col"><%# Eval("LocationName") %></td>
                     <td scope="col">
-                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEditCar_Click" CommandArgument='<%# Eval("CarPlate") %>' OnClientClick="Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);" />
-                    <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnViewCar_Click" CommandArgument='<%# Eval("CarPlate") %>' OnClientClick="Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequestHandler);" />
+                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEditCar_Click" CommandArgument='<%# Eval("CarPlate") %>' OnClientClick="activateDummy(this)"/>
+                    <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnViewCar_Click" CommandArgument='<%# Eval("CarPlate") %>' OnClientClick="activateDummy(this)"/>
                     </td>
                 </tr>
                 </ItemTemplate>
@@ -179,7 +179,6 @@
         </table>
                 </ContentTemplate>
                 </asp:UpdatePanel>
-
         <div>
             <button type="button" class="btn btn-primary" id="btnPrev" runat="server">Previous</button>
             <button type="button" class="btn btn-primary" id="btnNext" runat="server">Next</button>
@@ -188,10 +187,6 @@
 
     </div>
     <script>
-        function EndRequestHandler(sender, args) {
-            scrollTo(0, 0);
-        }
-
         function fileUpload() {
             document.getElementById('<%= validateCarPic.ClientID %>').enabled = true;
             document.getElementById('<%= fuCarPic.ClientID %>').click();
