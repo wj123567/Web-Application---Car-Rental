@@ -64,7 +64,7 @@ namespace Assignment
             {
                 string savePath = " ";
                 string relPath = " ";
-                string insertString = "INSERT into Car (CarPlate, CarBrand, CarName, CType, CarDesc, CarDayPrice, CarSeat, CarTransmission, CarEnergy, LocationId, CarImage) VALUES (@CarPlate, @CarBrand, @CarName, @CType, @CarDesc, @CarDayPrice, @CarSeat, @CarTransmission, @CarEnergy, @LocationId, @CarImage)";
+                string insertString = "INSERT into Car (CarPlate, CarBrand, CarName, CType, CarDesc, CarDayPrice, CarSeat, CarTransmission, CarEnergy, LocationId, IsDelisted,CarImage) VALUES (@CarPlate, @CarBrand, @CarName, @CType, @CarDesc, @CarDayPrice, @CarSeat, @CarTransmission, @CarEnergy, @LocationId, @IsDelisted ,@CarImage)";
                 if (fuCarPic.HasFile)
                 {
                     savePath = " ";
@@ -78,6 +78,7 @@ namespace Assignment
                     fuCarPic.SaveAs(savePath);
                 }
                 uploadCar(insertString,relPath);
+                Server.Transfer("CarManagement.aspx");
             }
         }
 
@@ -87,7 +88,7 @@ namespace Assignment
             {
                 string savePath = " ";
                 string relPath = imgCarPic.ImageUrl;
-                string updateString = "UPDATE Car SET CarPlate=@CarPlate, CarBrand=@CarBrand, CarName=@CarName, CType=@CType, CarDesc=@CarDesc, CarDayPrice=@CarDayPrice, CarSeat=@CarSeat, CarTransmission=@CarTransmission, CarEnergy=@CarEnergy, LocationId=@LocationId, CarImage=@CarImage WHERE CarPlate = @CarPlate";
+                string updateString = "UPDATE Car SET CarPlate=@CarPlate, CarBrand=@CarBrand, CarName=@CarName, CType=@CType, CarDesc=@CarDesc, CarDayPrice=@CarDayPrice, CarSeat=@CarSeat, CarTransmission=@CarTransmission, CarEnergy=@CarEnergy, LocationId=@LocationId, IsDelisted=@IsDelisted ,CarImage=@CarImage WHERE CarPlate = @CarPlate";
                 if (fuCarPic.HasFile)
                 {
                     savePath = " ";
@@ -101,6 +102,7 @@ namespace Assignment
                     fuCarPic.SaveAs(savePath);
                 }
                 uploadCar(updateString,relPath);
+                Server.Transfer("CarManagement.aspx");
             }
         }
 
@@ -120,6 +122,7 @@ namespace Assignment
             com.Parameters.AddWithValue("@CarTransmission", ddlCarTransmission.SelectedValue);
             com.Parameters.AddWithValue("@CarEnergy", ddlCarEnergy.SelectedValue);
             com.Parameters.AddWithValue("@LocationId", ddlCarLocation.SelectedValue);
+            com.Parameters.AddWithValue("@IsDelisted", int.Parse(ddlCarState.SelectedValue));
             com.Parameters.AddWithValue("@CarImage", imgPath);
             com.ExecuteNonQuery();
             con.Close();
@@ -137,7 +140,6 @@ namespace Assignment
             validateCarPic.Enabled = false;
             Button btnEdit = (Button)sender;
             String carPlate = btnEdit.CommandArgument;
-            Session["carPlate"] = carPlate;
             loadCarData(carPlate);
         }
 
@@ -147,7 +149,6 @@ namespace Assignment
             Button btnView = (Button)sender;
             String carPlate = btnView.CommandArgument;
             loadCarData(carPlate);
-            Session["carPlate"] = carPlate;
         }
 
         protected void loadCarData(String carPlate)
@@ -173,6 +174,7 @@ namespace Assignment
                 ddlCarTransmission.SelectedValue = reader["CarTransmission"].ToString();
                 ddlCarEnergy.SelectedValue = reader["CarEnergy"].ToString();
                 ddlCarLocation.SelectedValue = reader["LocationId"].ToString();
+                ddlCarState.SelectedValue = reader["IsDelisted"].ToString();
                 imgCarPic.ImageUrl = reader["CarImage"].ToString();
             }
             con.Close();
@@ -267,6 +269,33 @@ namespace Assignment
                 scriptManager.RegisterPostBackControl(btnView);
                 scriptManager.RegisterPostBackControl(btnEdit);
             }
+        }
+
+        protected void repeaterCarTable_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Label lblCarState = (Label)e.Item.FindControl("lblCarState");
+            string isDelisted = DataBinder.Eval(e.Item.DataItem, "IsDelisted").ToString();
+
+            if(isDelisted == "1")
+            {
+                lblCarState.Text = "Delisted";
+            }
+            else
+            {
+               lblCarState.Text = "Listed";
+            }
+        }
+
+        protected void btnConfirmDelete_Click(object sender, EventArgs e)
+        {
+            string deleteString = "DELETE FROM Car WHERE CarPlate = @CarPlate";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(deleteString, con);
+            com.Parameters.AddWithValue("@CarPlate", txtCarPlate.Text);
+            com.ExecuteNonQuery();
+            con.Close();
+            Server.Transfer("CarManagement.aspx");
         }
     }
 }

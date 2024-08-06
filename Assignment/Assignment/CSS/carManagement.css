@@ -64,3 +64,9 @@ th, td {
     height: 100%;
     object-fit: cover;
 }
+
+.rblist input[type="radio"] {
+    margin-left: 10px;
+    margin-right: 1px;
+    vertical-align:text-top;
+}

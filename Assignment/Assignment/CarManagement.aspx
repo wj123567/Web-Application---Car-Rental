@@ -8,15 +8,15 @@
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Card Detail</h1>
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">Car Detail</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          <h5>Are you sure you want to delete?</h5>
+          <h5 class="text-dark">Are you sure you want to delete?</h5>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <asp:Button ID="btnConfirmDelete" runat="server" Text="Confirm Delete" CssClass="btn btn-danger" ValidationGroup="deleteGroup"/>
+        <asp:Button ID="btnConfirmDelete" runat="server" Text="Confirm Delete" CssClass="btn btn-danger" ValidationGroup="deleteGroup" OnClick="btnConfirmDelete_Click"/>
       </div>
     </div>
   </div>   
@@ -118,6 +118,15 @@
                                 <asp:RequiredFieldValidator ID="reqCarLocation" runat="server" ErrorMessage="Car Location is required" ControlToValidate="ddlCarLocation" CssClass="validate" ValidationGroup="uploadCar" InitialValue="0"></asp:RequiredFieldValidator>
                        <br />
                             </div>
+                        </div>                    
+                    <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1">Car State</label>
+                                <asp:DropDownList ID="ddlCarState" runat="server" CssClass="form-select" ValidationGroup="uploadCar">
+                                    <asp:ListItem Value="1">Delisted</asp:ListItem>
+                                    <asp:ListItem Value="0" Selected="True">Listed</asp:ListItem>
+                                </asp:DropDownList>
+                  </div>
                         </div>
                     <asp:Button ID="btnUploadCar" runat="server" Text="Add Car" CssClass='btn btn-primary' ValidationGroup="uploadCar" OnClick="btnUploadCar_Click"/>
                     <asp:Button ID="btnUpdateCar" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadCar" Visible="False" OnClick="btnUpdateCar_Click"/>
@@ -153,11 +162,13 @@
                         <asp:LinkButton ID="btnSortCarEnergy" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarEnergy" CssClass="text-dark">Car Energy</asp:LinkButton></th>
                     <th scope="col">                        
                         <asp:LinkButton ID="btnSortCarLocation" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="LocationName" CssClass="text-dark">Location Name</asp:LinkButton></th>
+                     <th scope="col">
+                        <asp:LinkButton ID="btnSortCarState" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="IsDelisted" CssClass="text-dark">Car Stated</asp:LinkButton></th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <asp:Repeater ID="repeaterCarTable" runat="server" OnItemCreated="repeaterCarTable_ItemCreated">
+                <asp:Repeater ID="repeaterCarTable" runat="server" OnItemCreated="repeaterCarTable_ItemCreated" OnItemDataBound="repeaterCarTable_ItemDataBound">
                 <ItemTemplate>
                 <tr style="text-align: center;">
                     <td scope="col"><%# Eval("CarPlate") %></td>
@@ -169,8 +180,10 @@
                     <td scope="col"><%# Eval("CarEnergy") %></td>
                     <td scope="col"><%# Eval("LocationName") %></td>
                     <td scope="col">
-                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEditCar_Click" CommandArgument='<%# Eval("CarPlate") %>' OnClientClick="activateDummy(this)"/>
-                    <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnViewCar_Click" CommandArgument='<%# Eval("CarPlate") %>' OnClientClick="activateDummy(this)"/>
+                        <asp:Label ID="lblCarState" runat="server"></asp:Label></td>
+                    <td scope="col">
+                    <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEditCar_Click" CommandArgument='<%# Eval("CarPlate") %>'/>
+                    <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnViewCar_Click" CommandArgument='<%# Eval("CarPlate") %>'/>
                     </td>
                 </tr>
                 </ItemTemplate>
@@ -180,8 +193,6 @@
                 </ContentTemplate>
                 </asp:UpdatePanel>
         <div>
-            <button type="button" class="btn btn-primary" id="btnPrev" runat="server">Previous</button>
-            <button type="button" class="btn btn-primary" id="btnNext" runat="server">Next</button>
         </div>
     </div>
 

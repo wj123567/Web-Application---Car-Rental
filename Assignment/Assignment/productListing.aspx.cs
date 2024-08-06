@@ -36,7 +36,7 @@ namespace Assignment
         }
 
         protected void retrievedAllData() {
-            string findCar = "SELECT * FROM Car";
+            string findCar = "SELECT * FROM Car WHERE IsDelisted = 0";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             
@@ -62,7 +62,7 @@ namespace Assignment
             string searchString = Session["Search"].ToString();
             Session["Search"] = null;
 
-            string findCar = "SELECT * FROM Car WHERE CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString";
+            string findCar = "SELECT * FROM Car WHERE CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString AND IsDelisted = 0";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
            
@@ -111,7 +111,7 @@ namespace Assignment
                 }
             }
 
-            string carInfo = "SELECT C.* FROM Car C WHERE 1=1 ";
+            string carInfo = "SELECT C.* FROM Car C WHERE IsDelisted = 0 ";
 
             carInfo += " AND LocationId = '" + ddlLocation.SelectedValue +"'";
 
