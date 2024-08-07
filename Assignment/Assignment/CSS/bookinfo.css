@@ -36,7 +36,6 @@
 }
 
 .driver_container .row {
-    border: 5px solid yellow;
     width: 100%;
     margin-left: 100px;
     display: flex;
@@ -61,7 +60,7 @@
 }
 
 .payment_container .row .col, .driver_container .row .col {
-    border: 1px solid blue;
+
     flex: 1 1 150px;
     height: auto;
 }
@@ -74,7 +73,10 @@
         text-transform: uppercase;
     }
 
-    .payment_container .row .col .inputbox_left, .driver_container .row .col .inputbox_left {
+    .payment_container .row .col .inputbox_left,
+    .payment_container .row .col .inputbox_right,
+    .driver_container .row .col .inputbox_left,
+    .driver_container .row .col .inputbox_right {
         margin: 25px 0;
     }
 
@@ -90,6 +92,14 @@
     margin-bottom: 17px;
     display: block;
 }
+
+.radio_btn_style {
+    border:1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+
+
 
 /*.payment_container .row .col .inputbox_left input, .driver_container .row .col .inputbox_left input {*/ /*LHS of form*/
 /*width: 100%;
@@ -143,7 +153,6 @@
 .input_right {
     width: 90%;
     padding: 10px 15px;
-    margin-bottom: 20px;
     font-size: 15px;
     text-transform: none;
 }
@@ -203,6 +212,10 @@
         }*/
 
 
+#main_chkDriver{
+    width:20px;
+    height:20px;
+}
 
 .check_driver {
     margin-top: 20px;
@@ -214,10 +227,11 @@
 }
 
 .driver_check_label {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     text-transform: none;
     padding-left: 10px;
+    vertical-align:top;
 }
 
 /*input#input_verify:focus:valid {
