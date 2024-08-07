@@ -17,8 +17,7 @@ namespace Assignment
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
             
             if (!Page.IsPostBack)
-            {
-                BindBrandCbl();
+            {               
                 txtStartTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
                 txtStartTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-ddTHH:mm");                
                 txtEndTime.Attributes["min"] = DateTime.Now.AddDays(2).ToString("yyyy-MM-ddTHH:mm");
@@ -189,22 +188,6 @@ namespace Assignment
             }
  
         }
-
-        public void BindBrandCbl()
-        {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            con.Open();
-            string query = "SELECT DISTINCT CarBrand FROM Car Order By CarBrand";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataAdapter da = new SqlDataAdapter(com);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "CarData");
-            cblCarBrand.DataValueField = "CarBrand";
-            cblCarBrand.DataTextField = "CarBrand";
-            cblCarBrand.DataSource = ds.Tables["CarData"];
-            cblCarBrand.DataBind();
-        }
-
         protected void btnProductRent_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;

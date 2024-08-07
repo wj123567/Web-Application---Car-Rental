@@ -18,7 +18,6 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
-                loadCarBrand();
                 loadCarData();
             }
 
@@ -39,23 +38,14 @@ namespace Assignment
             repeaterCarTable.DataSource = ds.Tables["CarTable"];
             repeaterCarTable.DataBind();
         }
-        protected void loadCarBrand()
+
+        protected void ddlCarBrand_DataBound(object sender, EventArgs e)
         {
             ddlCarBrand.Items.Insert(0, new ListItem("Select Brand", "0"));
-            string[] carBrand = { "Select Brand", "Abarth", "Alfa Romeo", "Aston Martin", "Audi", "Bentley", "BMW", "Bugatti", "Cadillac", "Chevrolet", "Chrysler", "Citroën", "Dacia", "Daewoo", "Daihatsu", "Dodge", "Donkervoort", "DS", "Ferrari", "Fiat", "Fisker", "Ford", "Honda", "Hummer", "Hyundai", "Infiniti", "Iveco", "Jaguar", "Jeep", "Kia", "KTM", "Lada", "Lamborghini", "Lancia", "Land Rover", "Landwind", "Lexus", "Lotus", "Maserati", "Maybach", "Mazda", "McLaren", "Mercedes-Benz", "MG", "Mini", "Mitsubishi", "Morgan", "Nissan", "Opel", "Peugeot", "Porsche", "Renault", "Rolls Royce", "Rover", "Saab", "Seat", "Skoda", "Smart", "SsangYong", "Subaru", "Suzuki", "Tesla", "Toyota", "Volkswagen", "Volvo" };
-            for (int i = 1; i < carBrand.Length; i++)
-            {
-                ddlCarBrand.Items.Insert(i, new ListItem(carBrand[i], carBrand[i]));
-            }
         }
         protected void ddlCarLocation_DataBound(object sender, EventArgs e)
         {
             ddlCarLocation.Items.Insert(0, new ListItem("Select Location", "0"));
-        }
-
-        protected void ddlCarType_DataBound(object sender, EventArgs e)
-        {
-            ddlCarType.Items.Insert(0, new ListItem("Select Car Type", "0"));
         }
 
         protected void btnUploadCar_Click(object sender, EventArgs e)
@@ -165,7 +155,14 @@ namespace Assignment
             {
                 Session["carPlate"] = reader["CarPlate"].ToString();
                 txtCarPlate.Text = reader["CarPlate"].ToString();
-                ddlCarBrand.SelectedValue = reader["CarBrand"].ToString();
+                if(reader["CarBrand"] != DBNull.Value)
+                {
+                    ddlCarBrand.SelectedValue = reader["CarBrand"].ToString();
+                }
+                else
+                {
+                    ddlCarBrand.SelectedValue = "0";
+                }
                 txtCarName.Text = reader["CarName"].ToString();
                 ddlCarType.SelectedValue = reader["CType"].ToString();
                 txtCarDesc.Text = reader["CarDesc"].ToString();
@@ -173,7 +170,14 @@ namespace Assignment
                 txtCarSeat.Text = reader["CarSeat"].ToString();
                 ddlCarTransmission.SelectedValue = reader["CarTransmission"].ToString();
                 ddlCarEnergy.SelectedValue = reader["CarEnergy"].ToString();
-                ddlCarLocation.SelectedValue = reader["LocationId"].ToString();
+                if(reader["LocationId"] != DBNull.Value)
+                {
+                    ddlCarLocation.SelectedValue = reader["LocationId"].ToString();
+                }
+                else
+                {
+                    ddlCarLocation.SelectedValue = "0";
+                }
                 ddlCarState.SelectedValue = reader["IsDelisted"].ToString();
                 imgCarPic.ImageUrl = reader["CarImage"].ToString();
             }
@@ -390,6 +394,111 @@ namespace Assignment
             con.Close();
 
             Server.Transfer("CarManagement.aspx");
+        }
+
+        protected void ddlCarNewCarbrand_DataBound(object sender, EventArgs e)
+        {
+            ddlCarNewCarbrand.Items.Insert(0, new ListItem("New Brand", "0"));
+        }
+
+        protected void ddlCarNewCarbrand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            String selectBrand = "SELECT * FROM CarBrand WHERE BrandName = @bn";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(selectBrand, con);
+
+            if (ddlCarNewCarbrand.SelectedIndex == 0)
+            {
+                btnUploadBrand.Visible = true;
+                btnUpdateBrand.Visible = false;
+                btnDeleteBrand.Visible = false;
+                txtBrand.Text = " ";
+            }
+            else
+            {
+                btnUpdateBrand.Visible = true;
+                btnUploadBrand.Visible = false;
+                btnDeleteBrand.Visible = true;
+                com.Parameters.AddWithValue("@bn", ddlCarNewCarbrand.SelectedValue);
+                con.Open();
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.Read())
+                {
+                    txtBrand.Text = reader["BrandName"].ToString();
+                }
+                con.Close();
+                reader.Close();
+            }
+
+            updateAddBrand.Update();
+        }
+
+        protected void btnDeleteBrand_Click(object sender, EventArgs e)
+        {
+            string deleteString = "DELETE FROM CarBrand WHERE BrandName = @bn";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(deleteString, con);
+            con.Open();
+            com.Parameters.AddWithValue("@bn", ddlCarNewCarbrand.SelectedValue);
+            com.ExecuteNonQuery();
+            con.Close();
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='CarManagement.aspx';", true);
+        }
+
+        protected void btnUploadBrand_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                string insertString = "INSERT INTO CarBrand (BrandName) VALUES (@bn)";
+                uploadBrand(insertString, "NULL");
+                ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='CarManagement.aspx';", true);
+            }
+        }
+
+        protected void btnUpdateBrand_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                string updateString = "UPDATE CarBrand SET BrandName = @bn WHERE BrandName = @ibn";
+                string ibn = ddlCarNewCarbrand.SelectedValue;
+                uploadBrand(updateString, ibn);
+                ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='CarManagement.aspx';", true);
+            }
+        }
+
+        protected void uploadBrand(string sql, string ibn)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(sql, con);
+            con.Open();
+            com.Parameters.AddWithValue("@bn", txtBrand.Text);
+            if(ibn != "NULL")
+            {
+                com.Parameters.AddWithValue("@ibn", ibn);
+            }
+            com.ExecuteNonQuery();
+            con.Close();
+        }
+
+        protected void cvBrand_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            string sql = "SELECT COUNT(*) FROM CarBrand WHERE BrandName = @bn";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(sql, con);
+            com.Parameters.AddWithValue("@bn",args.Value);
+            int temp = (int)com.ExecuteScalar();
+            con.Close();
+
+            if(temp == 0)
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
         }
     }
 }

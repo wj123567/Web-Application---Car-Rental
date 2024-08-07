@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="productListing.aspx.cs" Inherits="Assignment.productListing" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-    <asp:SqlDataSource ID="dsCarType" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [CarType]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="CarBrand" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [CarBrand] ORDER BY [BrandName]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="CarLocation" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [Id], [LocationName] FROM [Location]"></asp:SqlDataSource>
 
 <div>
@@ -53,13 +53,18 @@
             <li class="nav-item">
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted">Car Brand:</span>
-                    <asp:CheckBoxList ID="cblCarBrand" runat="server" CssClass="checkboxlist"></asp:CheckBoxList>
+                    <asp:CheckBoxList ID="cblCarBrand" runat="server" CssClass="checkboxlist" DataSourceID="CarBrand" DataTextField="BrandName" DataValueField="BrandName"></asp:CheckBoxList>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted">Car Type:</span>
-                    <asp:CheckBoxList ID="cblCarType" runat="server" DataSourceID="dsCarType" DataTextField="CType" DataValueField="CType" ValidationGroup="filter" CssClass="checkboxlist"></asp:CheckBoxList>
+                    <asp:CheckBoxList ID="cblCarType" runat="server" ValidationGroup="filter" CssClass="checkboxlist">
+                        <asp:ListItem>Hatchback</asp:ListItem>
+                        <asp:ListItem>MPV</asp:ListItem>
+                        <asp:ListItem>Sedan</asp:ListItem>
+                        <asp:ListItem>SUV</asp:ListItem>
+                    </asp:CheckBoxList>
                 </a>
             </li>
 
