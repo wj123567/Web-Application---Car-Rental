@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="CarManagement.aspx.cs" Inherits="Assignment.CarManagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <asp:SqlDataSource ID="carType" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [CType] FROM [CarType]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="carBrand" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [BrandName] FROM [CarBrand] ORDER BY [BrandName]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="carLocation" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [Id], [LocationName] FROM [Location]"></asp:SqlDataSource>
 
     <div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
@@ -28,18 +28,21 @@
     <asp:UpdatePanel ID="updateAddBrand" runat="server" UpdateMode="Conditional">
     <ContentTemplate>
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel2">Add Location</h1>
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel2">Add/Remove Brand</h1>
+          <asp:DropDownList ID="ddlCarNewCarbrand" runat="server" CssClass="form-select form-select-sm mx-2 w-auto" DataSourceID="carBrand" DataTextField="BrandName" DataValueField="BrandName" AutoPostBack="True" OnDataBound="ddlCarNewCarbrand_DataBound" OnSelectedIndexChanged="ddlCarNewCarbrand_SelectedIndexChanged"></asp:DropDownList>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          <span>Location:</span>
-          <asp:TextBox ID="txtBrand" runat="server" CssClass="form-control" placeholder="Password" ValidationGroup="addBrand" TextMode="Password"></asp:TextBox>
-          <asp:CustomValidator ID="cvBrand" runat="server" ErrorMessage="Incorrect Password" CssClass="validate" ControlToValidate="txtBrand" ValidationGroup="addBrand" Display="Dynamic"></asp:CustomValidator>
-          <asp:RequiredFieldValidator ID="reqBrand" runat="server" ErrorMessage="Password is required" ValidationGroup="addBrand" ControlToValidate="txtBrand" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+          <span>Car Brand:</span>
+          <asp:TextBox ID="txtBrand" runat="server" CssClass="form-control" placeholder="Car Brand" ValidationGroup="addBrand" MaxLength="15"></asp:TextBox>
+          <asp:CustomValidator ID="cvBrand" runat="server" ErrorMessage="Car Brand Exist" CssClass="validate" ControlToValidate="txtBrand" ValidationGroup="addBrand" Display="Dynamic" OnServerValidate="cvBrand_ServerValidate"></asp:CustomValidator>
+          <asp:RequiredFieldValidator ID="reqBrand" runat="server" ErrorMessage="Car Brand is required" ValidationGroup="addBrand" ControlToValidate="txtBrand" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <asp:Button ID="btnUploadBrand" runat="server" Text="Add Location" CssClass="btn btn-primary" ValidationGroup="addBrand" />
+        <asp:Button ID="btnDeleteBrand" runat="server" Text="Delete" CssClass="btn btn-danger" ValidationGroup="delBrand" OnClick="btnDeleteBrand_Click" Visible="False" />
+        <asp:Button ID="btnUploadBrand" runat="server" Text="Add Brand" CssClass="btn btn-primary" ValidationGroup="addBrand" OnClick="btnUploadBrand_Click" />
+        <asp:Button ID="btnUpdateBrand" runat="server" Text="Update Brand" CssClass="btn btn-primary" ValidationGroup="addBrand" OnClick="btnUpdateBrand_Click" Visible="False" />
+        
       </div>
       </ContentTemplate>
       </asp:UpdatePanel>
@@ -53,7 +56,7 @@
     <asp:UpdatePanel ID="updateAddLocation" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
     <ContentTemplate>
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel3">Add/Remove Location</h1>
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel3">Add/Remove Location</h1>
           <asp:DropDownList ID="ddlChooseLocation" runat="server" CssClass="form-select form-select-sm mx-2 w-auto" OnSelectedIndexChanged="ddlChooseLocation_SelectedIndexChanged" DataSourceID="carLocation" DataTextField="LocationName" DataValueField="Id" OnDataBound="ddlChooseLocation_DataBound" AutoPostBack="True"></asp:DropDownList>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -150,7 +153,10 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="small mb-1">Car Brand</label>
-                                <asp:DropDownList ID="ddlCarBrand" runat="server" ValidationGroup="uploadCar" CssClass="form-select"></asp:DropDownList>
+                            <div class="d-flex justify-content-between align-items-center">             <asp:DropDownList ID="ddlCarBrand" runat="server" ValidationGroup="uploadCar" CssClass="form-select" DataSourceID="carBrand" DataTextField="BrandName" DataValueField="BrandName" OnDataBound="ddlCarBrand_DataBound"></asp:DropDownList>                               
+                                <asp:LinkButton ID="LinkButton2" runat="server" CssClass="border border-gray mx-1 px-3 py-2 rounded" data-bs-toggle="modal" data-bs-target="#addBrand" OnClientClick="return false"><i class="fa-solid fa-plus-minus fa-lg" style="color: #000000;"></i></asp:LinkButton> 
+                            </div> 
+
                     <asp:RequiredFieldValidator ID="reqCarBrand" runat="server" ErrorMessage="Car Brand is required" ControlToValidate="ddlCarBrand" CssClass="validate" ValidationGroup="uploadCar" InitialValue="0"></asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -162,7 +168,13 @@
                   </div>
                             <div class="col-md-6">
                                 <label class="small mb-1">Car Type</label>
-                                <asp:DropDownList ID="ddlCarType" runat="server" CssClass="form-select" ValidationGroup="uploadCar" DataSourceID="carType" DataTextField="CType" DataValueField="CType" OnDataBound="ddlCarType_DataBound"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlCarType" runat="server" CssClass="form-select" ValidationGroup="uploadCar">
+                                    <asp:ListItem Value="0" Selected="False">Select Car Type</asp:ListItem>
+                                    <asp:ListItem>Hatchback</asp:ListItem>
+                                    <asp:ListItem>MPV</asp:ListItem>
+                                    <asp:ListItem>Sedan</asp:ListItem>
+                                    <asp:ListItem>SUV</asp:ListItem>
+                                </asp:DropDownList>
                     <asp:RequiredFieldValidator ID="reqCarType" runat="server" ErrorMessage="Car Type is required" ControlToValidate="ddlCarType" CssClass="validate" ValidationGroup="uploadCar" InitialValue="0"></asp:RequiredFieldValidator>
                        <br />
                             </div>

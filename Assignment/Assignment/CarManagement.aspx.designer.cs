@@ -24,13 +24,13 @@ namespace Assignment
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// carType control.
+        /// carBrand control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource carType;
+        protected global::System.Web.UI.WebControls.SqlDataSource carBrand;
 
         /// <summary>
         /// carLocation control.
@@ -60,6 +60,15 @@ namespace Assignment
         protected global::System.Web.UI.UpdatePanel updateAddBrand;
 
         /// <summary>
+        /// ddlCarNewCarbrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlCarNewCarbrand;
+
+        /// <summary>
         /// txtBrand control.
         /// </summary>
         /// <remarks>
@@ -87,6 +96,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqBrand;
 
         /// <summary>
+        /// btnDeleteBrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDeleteBrand;
+
+        /// <summary>
         /// btnUploadBrand control.
         /// </summary>
         /// <remarks>
@@ -94,6 +112,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUploadBrand;
+
+        /// <summary>
+        /// btnUpdateBrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateBrand;
 
         /// <summary>
         /// updateAddLocation control.
@@ -310,6 +337,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCarBrand;
+
+        /// <summary>
+        /// LinkButton2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
 
         /// <summary>
         /// reqCarBrand control.
