@@ -297,5 +297,99 @@ namespace Assignment
             con.Close();
             Server.Transfer("CarManagement.aspx");
         }
+
+        protected void ddlChooseLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            String selectCar = "SELECT * FROM Location WHERE Id = @LocationId";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(selectCar, con);         
+
+            if (ddlChooseLocation.SelectedIndex == 0)
+            {
+                btnUploadLocation.Visible = true;
+                btnUpdateLocation.Visible = false;
+                btnDeleteLocation.Visible = false;
+                txtLocation.Text = " ";
+                ddlState.SelectedValue = "0";
+                txtPostcode.Text = " ";
+                txtAddress.Text = " ";
+            }
+            else
+            {
+                btnUpdateLocation.Visible = true;
+                btnUploadLocation.Visible = false;
+                btnDeleteLocation.Visible = true;
+                com.Parameters.AddWithValue("@LocationId", ddlChooseLocation.SelectedValue);
+                con.Open();
+                SqlDataReader reader = com.ExecuteReader();
+                if (reader.Read())
+                {
+                    txtLocation.Text = reader["LocationName"].ToString();
+                    ddlState.SelectedValue = reader["LocationState"].ToString();
+                    txtPostcode.Text = reader["LocationPostcode"].ToString();
+                    txtAddress.Text = reader["LocationAddress"].ToString();
+                }
+                con.Close();
+                reader.Close();
+            }
+
+            updateAddLocation.Update();
+        }
+
+        protected void ddlChooseLocation_DataBound(object sender, EventArgs e)
+        {
+            ddlChooseLocation.Items.Insert(0, new ListItem("New Location", "0"));
+        }
+
+        protected void uploadLocation(string sql, string id)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(sql, con);
+            con.Open();
+            com.Parameters.AddWithValue("@LocationName", txtLocation.Text);
+            com.Parameters.AddWithValue("@LocationState", ddlState.SelectedValue);
+            com.Parameters.AddWithValue("@LocationPostcode", txtPostcode.Text);
+            com.Parameters.AddWithValue("@LocationAddress", txtAddress.Text);
+            com.Parameters.AddWithValue("@LocationId", id);
+            com.ExecuteNonQuery();
+            con.Close();
+        }
+
+        protected void btnUpdateLocation_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+            string updateString = "UPDATE Location SET LocationName=@LocationName, LocationState=@LocationState, LocationPostcode=@LocationPostcode, LocationAddress=@LocationAddress WHERE Id = @LocationId";
+            string id = ddlChooseLocation.SelectedValue;
+            uploadLocation(updateString, id);
+            Server.Transfer("CarManagement.aspx");
+            }
+
+        }
+
+        protected void btnUploadLocation_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+            string insertString = "INSERT INTO Location (LocationName, LocationState, LocationPostcode, LocationAddress) VALUES (@LocationName, @LocationState, @LocationPostcode, @LocationAddress)";
+            string id = "NULL";
+            uploadLocation(insertString, id);
+            Server.Transfer("CarManagement.aspx");
+            }
+
+        }
+
+        protected void btnDeleteLocation_Click(object sender, EventArgs e)
+        {
+            string deleteString = "DELETE FROM Location WHERE Id = @LocationId";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(deleteString, con);
+            con.Open();
+            com.Parameters.AddWithValue("@LocationId", ddlChooseLocation.SelectedValue);
+            com.ExecuteNonQuery();
+            con.Close();
+
+            Server.Transfer("CarManagement.aspx");
+        }
     }
 }

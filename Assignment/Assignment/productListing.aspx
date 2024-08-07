@@ -31,19 +31,23 @@
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted">Location:</span>
                     <asp:DropDownList ID="ddlLocation" runat="server" CssClass="form-select" DataSourceID="CarLocation" DataTextField="LocationName" DataValueField="Id" Width="225px" ValidationGroup="filter" OnDataBound="ddlLocation_DataBound"></asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Location is Required" ControlToValidate="ddlLocation" CssClass="validate" InitialValue="0" ValidationGroup="filter"></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID="requireLocation" runat="server" ErrorMessage="Location is Required" ControlToValidate="ddlLocation" CssClass="validate" InitialValue="0" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted d-block">Date Time:</span>
                     <span>Start :&nbsp;</span>
-                    <asp:TextBox ID="txtStartTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline" Width="180px"></asp:TextBox>
+                    <asp:TextBox ID="txtStartTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline" Width="180px" ValidationGroup="filter"></asp:TextBox>
                     <br />
                     <span class="mt-2">End &nbsp; :&nbsp;</span>
-                    <asp:TextBox ID="txtEndTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline mt-2" Width="180px"></asp:TextBox>
+                    <asp:TextBox ID="txtEndTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline mt-2" Width="180px" ValidationGroup="filter"></asp:TextBox>
                     <br />
-                    <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtEndTime" ControlToValidate="txtStartTime" CssClass="validate" Operator="LessThan" ValidationGroup="filter"></asp:CompareValidator>
+                    <asp:RequiredFieldValidator ID="requireStart" runat="server" ErrorMessage="Start Date is Required" ControlToValidate="txtStartTime" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
+                    <br />
+                    <asp:RequiredFieldValidator ID="requireEnd" runat="server" ErrorMessage="End Date is Required" ControlToValidate="txtEndTime" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
+                    <br />
+                    <asp:CompareValidator ID="compareStartEnd" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtEndTime" ControlToValidate="txtStartTime" CssClass="validate" Operator="LessThan" ValidationGroup="filter" Display="Dynamic"></asp:CompareValidator>
                 </a>
             </li>
             <li class="nav-item">
@@ -84,8 +88,8 @@
             <ItemTemplate>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 shadow-sm" style="background-color:#effaf6;">
                     <div class="card h-100" style="background-color:#f0f9f5;">
-                        <div class="mx-auto image-frame">
-                        <asp:Image ID="CarImage" runat="server" ImageUrl='<%# Eval("CarImage") %>' CssClass="img-fluid card-img-top img-size" />
+                        <div class="mx-auto img-size">
+                        <asp:Image ID="CarImage" runat="server" ImageUrl='<%# Eval("CarImage") %>' CssClass="img-fluid card-img-top" />
                        </div>
                         <div class="card-body pt-0 px-3">
                             <div class="d-flex flex-row justify-content-between mb-0">

@@ -75,9 +75,8 @@
                     <asp:Label ID="lblMasterCard" runat="server" Text="" CssClass="fab fa-cc-mastercard fa-lg"></asp:Label>
                     <asp:Label ID="lblAmexCard" runat="server" Text="" CssClass="fab fa-cc-amex fa-lg"></asp:Label>
                                 <asp:TextBox ID="txtCardNum" runat="server" CssClass="form-control" placeholder="0000 0000 0000 0000" ValidationGroup="uploadCard" MaxLength="19" OnKeyUp="formatCardNumber(this)"></asp:TextBox>
-                    <asp:CustomValidator ID="validateCard" runat="server" ErrorMessage="Card is Invalid" CssClass="validate" ValidationGroup="uploadCard" ClientValidationFunction="validateCard" ControlToValidate="txtCardNum" ValidateEmptyText="True"></asp:CustomValidator>
-                 <br />
-                    <asp:CustomValidator ID="validateCardExist" runat="server" ErrorMessage="Card is Exist" CssClass="validate" ValidationGroup="uploadCard" ControlToValidate="txtCardNum" OnServerValidate="validateCard_ServerValidate"></asp:CustomValidator>
+                    <asp:CustomValidator ID="validateCard" runat="server" ErrorMessage="Card is Invalid" CssClass="validate" ValidationGroup="uploadCard" ClientValidationFunction="validateCard" ControlToValidate="txtCardNum" ValidateEmptyText="True" Display="Dynamic"></asp:CustomValidator>
+                    <asp:CustomValidator ID="validateCardExist" runat="server" ErrorMessage="Card is Exist" CssClass="validate" ValidationGroup="uploadCard" ControlToValidate="txtCardNum" OnServerValidate="validateCard_ServerValidate" Display="Dynamic"></asp:CustomValidator>
                             </div>
                         </div>
                         <div class="row gx-3 mb-3">

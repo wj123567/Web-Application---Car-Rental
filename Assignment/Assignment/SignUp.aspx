@@ -13,8 +13,11 @@
             <asp:UpdatePanel ID="updateLogin" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                 <ContentTemplate>
             <asp:TextBox ID="txtEmail" runat="server" CssClass="inputField" placeholder="Email" ValidationGroup="LoginGroup"></asp:TextBox>
-             <asp:CustomValidator ID="emailNotExist" runat="server" ErrorMessage="Incorrect Email" CssClass="validate" OnServerValidate="emailNotExist_ServerValidate" Display="Dynamic" ValidationGroup="LoginGroup" ControlToValidate="txtEmail" ValidateEmptyText="True"></asp:CustomValidator>
+             <asp:RequiredFieldValidator ID="requireEmail" runat="server" ErrorMessage="Email is Required" Display="Dynamic" CssClass="validate" ControlToValidate="txtEmail" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
+             <asp:RegularExpressionValidator ID="regexEmail" runat="server" ErrorMessage="Invalid Email" CssClass="validate" ValidationGroup="LoginGroup" ControlToValidate="txtEmail" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+             <asp:CustomValidator ID="emailNotExist" runat="server" ErrorMessage="Email Not Exist" CssClass="validate" OnServerValidate="emailNotExist_ServerValidate" Display="Dynamic" ValidationGroup="LoginGroup" ControlToValidate="txtEmail" ValidateEmptyText="False"></asp:CustomValidator>
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="inputField" placeholder="Password" ValidationGroup="LoginGroup"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="requirePassword" runat="server" ErrorMessage="Password is Required" Display="Dynamic" CssClass="validate" ControlToValidate="txtPassword" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
             <asp:Label ID="labelValidUser" runat="server" Text="Label" Visible="False" CssClass="validate"></asp:Label>
             <br />
             <input id="cbShowPass" type="checkbox" onClick="showPass()"/>
@@ -33,10 +36,8 @@
              <asp:TextBox ID="txtUname" runat="server" CssClass="inputField" placeholder="Username" ValidationGroup="SignUpGroup"></asp:TextBox>
              <asp:RequiredFieldValidator ID="validUname" runat="server" ErrorMessage="Username cannot be empty" ControlToValidate="txtUname" CssClass="validate" ValidationGroup="SignUpGroup"></asp:RequiredFieldValidator>
             <asp:TextBox ID="txtRegEmail" runat="server" CssClass="inputField" placeholder="Email" ValidationGroup="SignUpGroup"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="reqRegEmail" runat="server" ErrorMessage="Email is required" ControlToValidate="txtRegEmail" CssClass="validate" ValidationGroup="SignUpGroup"></asp:RequiredFieldValidator>
-            <br />
-            <asp:RegularExpressionValidator ID="regRegEmail" runat="server" ControlToValidate="txtRegEmail" ErrorMessage="Please Enter a valid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validate" ValidationGroup="SignUpGroup"></asp:RegularExpressionValidator>
-            <br />
+            <asp:RequiredFieldValidator ID="reqRegEmail" runat="server" ErrorMessage="Email is required" ControlToValidate="txtRegEmail" CssClass="validate" ValidationGroup="SignUpGroup" Display="Dynamic"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="regRegEmail" runat="server" ControlToValidate="txtRegEmail" ErrorMessage="Invalid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validate" ValidationGroup="SignUpGroup" Display="Dynamic"></asp:RegularExpressionValidator>
             <asp:CustomValidator ID="emailExist" runat="server" ErrorMessage="Email Already Exist" ControlToValidate="txtRegEmail" CssClass="validate" OnServerValidate="emailExist_ServerValidate" Display="Dynamic" ValidationGroup="SignUpGroup"></asp:CustomValidator>
             <asp:TextBox ID="txtRegPassword" runat="server" TextMode="Password" CssClass="inputField" placeholder="Password" onkeyup="validatePassword()" ValidationGroup="SignUpGroup"></asp:TextBox>
                         <asp:CheckBox ID="cbEight" runat="server" Text="must contain at least eight characters" Enabled="True" Checked="False" CssClass="passCheckBox" ValidationGroup="SignUpGroup" />
@@ -49,8 +50,8 @@
            <asp:CustomValidator ID="validatePassword" runat="server" ControlToValidate="txtRegPassword" ErrorMessage="Invalid Password" ValidationGroup="SignUpGroup" CssClass="validate" ClientValidationFunction="validatePassword" ValidateEmptyText="True" Visible="False"></asp:CustomValidator>
 
             <asp:TextBox ID="txtConfirmPass" runat="server" TextMode="Password" CssClass="inputField" placeholder="Confirm Password" ValidationGroup="SignUpGroup"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="reqConfirmPass" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="txtConfirmPass" ValidationGroup="SignUpGroup" hidden="true"></asp:RequiredFieldValidator>
-            <asp:CompareValidator ID="validPassword" runat="server" ErrorMessage="Both Password Must be Same" ControlToCompare="txtRegPassword" ControlToValidate="txtConfirmPass" CssClass="validate" ValidationGroup="SignUpGroup"></asp:CompareValidator>
+            <asp:RequiredFieldValidator ID="reqConfirmPass" runat="server" ErrorMessage="Confirm Password is Required" ControlToValidate="txtConfirmPass" ValidationGroup="SignUpGroup" Display="Dynamic" CssClass="validate"></asp:RequiredFieldValidator>
+            <asp:CompareValidator ID="validPassword" runat="server" ErrorMessage="Both Password Must be Same" ControlToCompare="txtRegPassword" ControlToValidate="txtConfirmPass" CssClass="validate" ValidationGroup="SignUpGroup" Display="Dynamic"></asp:CompareValidator>
             <br />
             <p class="label">Date of Birth:</p>
             <asp:TextBox ID="txtRegDOB" runat="server" TextMode="Date" ValidationGroup="SignUpGroup"></asp:TextBox>

@@ -22,6 +22,99 @@
   </div>   
 </div>
 
+    <div class="modal fade" id="addBrand" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addLocation" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+    <asp:UpdatePanel ID="updateAddBrand" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel2">Add Location</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <span>Location:</span>
+          <asp:TextBox ID="txtBrand" runat="server" CssClass="form-control" placeholder="Password" ValidationGroup="addBrand" TextMode="Password"></asp:TextBox>
+          <asp:CustomValidator ID="cvBrand" runat="server" ErrorMessage="Incorrect Password" CssClass="validate" ControlToValidate="txtBrand" ValidationGroup="addBrand" Display="Dynamic"></asp:CustomValidator>
+          <asp:RequiredFieldValidator ID="reqBrand" runat="server" ErrorMessage="Password is required" ValidationGroup="addBrand" ControlToValidate="txtBrand" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <asp:Button ID="btnUploadBrand" runat="server" Text="Add Location" CssClass="btn btn-primary" ValidationGroup="addBrand" />
+      </div>
+      </ContentTemplate>
+      </asp:UpdatePanel>
+    </div>
+  </div>   
+</div>
+    
+    <div class="modal modal-lg fade" id="addLocation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addLocation" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+    <asp:UpdatePanel ID="updateAddLocation" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
+    <ContentTemplate>
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel3">Add/Remove Location</h1>
+          <asp:DropDownList ID="ddlChooseLocation" runat="server" CssClass="form-select form-select-sm mx-2 w-auto" OnSelectedIndexChanged="ddlChooseLocation_SelectedIndexChanged" DataSourceID="carLocation" DataTextField="LocationName" DataValueField="Id" OnDataBound="ddlChooseLocation_DataBound" AutoPostBack="True"></asp:DropDownList>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                              <span>Location Name:</span>
+                              <asp:TextBox ID="txtLocation" runat="server" CssClass="form-control" placeholder="Location Name" ValidationGroup="deleteGroup" TextMode="SingleLine"></asp:TextBox>
+                              <asp:RequiredFieldValidator ID="reqLocation" runat="server" ErrorMessage="Password is required" ValidationGroup="addLocation" ControlToValidate="txtLocation" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-md-6">
+                              <span>Location State:</span>
+                                <asp:DropDownList ID="ddlState" runat="server" ValidationGroup="addLocation" CssClass="form-select">
+                                    <asp:ListItem Value="0">Select State</asp:ListItem>
+                                    <asp:ListItem>Johor</asp:ListItem>
+                                    <asp:ListItem>Kedah</asp:ListItem>
+                                    <asp:ListItem>Kelantan</asp:ListItem>
+                                    <asp:ListItem>Malacca</asp:ListItem>
+                                    <asp:ListItem>Negeri Sembilan</asp:ListItem>
+                                    <asp:ListItem>Pahang</asp:ListItem>
+                                    <asp:ListItem>Penang</asp:ListItem>
+                                    <asp:ListItem>Perak</asp:ListItem>
+                                    <asp:ListItem>Perlis</asp:ListItem>
+                                    <asp:ListItem>Sabah</asp:ListItem>
+                                    <asp:ListItem>Sarawak</asp:ListItem>
+                                    <asp:ListItem>Selangor</asp:ListItem>
+                                    <asp:ListItem>Terengganu</asp:ListItem>
+                                </asp:DropDownList>                    
+                              <asp:RequiredFieldValidator ID="requireState" runat="server" ErrorMessage="State is required" ValidationGroup="addLocation" ControlToValidate="ddlState" CssClass="validate" Display="Dynamic" InitialValue="0"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                              <span>Location Postcode:</span>
+                              <asp:TextBox ID="txtPostcode" runat="server" CssClass="form-control" placeholder="Postcode" ValidationGroup="deleteGroup" TextMode="SingleLine"></asp:TextBox>
+                              <asp:RequiredFieldValidator ID="requirePostcode" runat="server" ErrorMessage="Postcode is required" ValidationGroup="addLocation" ControlToValidate="txtPostcode" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="regexPostcode" runat="server" ErrorMessage="Invalid Postcode" ControlToValidate="txtPostcode" CssClass="validate" Display="Dynamic" ValidationExpression="^(0[1-9]|[1-9][0-9])\d{3}$"></asp:RegularExpressionValidator>
+                            </div>
+                            <div class="col-md-6">
+                              <span>Location Address:</span>
+                              <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control" placeholder="Address" ValidationGroup="addLocation" TextMode="MultiLine" Rows="3" Columns="20" style="resize:none;"></asp:TextBox>
+                              <asp:RequiredFieldValidator ID="requireAddress" runat="server" ErrorMessage="Address is required" ValidationGroup="addLocation" ControlToValidate="txtAddress" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+      </div>
+      <div class="modal-footer">
+        <asp:Button ID="btnDeleteLocation" runat="server" Text="Delete" CssClass="btn btn-danger" validationGroup="delLocation" OnClick="btnDeleteLocation_Click" Visible="False" />
+        <asp:Button ID="btnUploadLocation" runat="server" Text="Add Location" CssClass="btn btn-primary" validationGroup="addLocation" OnClick="btnUploadLocation_Click" />
+        <asp:Button ID="btnUpdateLocation" runat="server" Text="Update Location" CssClass="btn btn-primary" ValidationGroup="addLocation" OnClick="btnUpdateLocation_Click" Visible="False" />
+      </div>
+      </ContentTemplate>
+        <Triggers>
+           <asp:PostBackTrigger ControlID="btnUploadLocation" />
+           <asp:PostBackTrigger ControlID="btnUpdateLocation" />
+            <asp:PostBackTrigger ControlID="btnDeleteLocation" />
+        </Triggers>
+      </asp:UpdatePanel>
+    </div>
+  </div>   
+</div>
+
     <div class="container-xl px-4 mt-4">
     <h1 class="text-dark">Car Management</h1>
     <hr class="mt-0 mb-4">
@@ -51,7 +144,9 @@
                             <div class="col-md-6">
                                 <label class="small mb-1">Car Plate</label>
                                 <asp:TextBox ID="txtCarPlate" runat="server" CssClass="form-control" placeholder="Car Plate" ValidationGroup="uploadCar"></asp:TextBox>
-                                <asp:CustomValidator ID="validateCarPlate" runat="server" ErrorMessage="Car Plate is invalid" ControlToValidate="txtCarPlate" CssClass="validate" ValidationGroup="uploadCar" OnServerValidate="validateCarPlate_ServerValidate" ValidateEmptyText="True"></asp:CustomValidator>
+                                <asp:RequiredFieldValidator ID="requireCarPlate" runat="server" ErrorMessage="Car Plate is required" ControlToValidate="txtCarPlate" CssClass="validate" ValidationGroup="uploadCar" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="regexCarPlate" runat="server" ErrorMessage="Invalid Car Plate" Display="Dynamic" CssClass="validate" ValidationGroup="uploadCar" ControlToValidate="txtCarPlate" ValidationExpression="[A-Z]{3}\d{1,4}"></asp:RegularExpressionValidator>
+                                <asp:CustomValidator ID="validateCarPlate" runat="server" ErrorMessage="Car Plate is Exist" ControlToValidate="txtCarPlate" CssClass="validate" ValidationGroup="uploadCar" OnServerValidate="validateCarPlate_ServerValidate" ValidateEmptyText="False" Display="Dynamic"></asp:CustomValidator>
                             </div>
                             <div class="col-md-6">
                                 <label class="small mb-1">Car Brand</label>
@@ -114,7 +209,11 @@
                   </div>
                             <div class="col-md-6">
                                 <label class="small mb-1">Car Location</label>
-                                <asp:DropDownList ID="ddlCarLocation" runat="server" CssClass="form-select" ValidationGroup="uploadCar" DataSourceID="carLocation" DataTextField="LocationName" DataValueField="Id" OnDataBound="ddlCarLocation_DataBound"></asp:DropDownList>
+                            <div class="d-flex justify-content-between align-items-center">                                
+                                <asp:DropDownList ID="ddlCarLocation" runat="server" CssClass="form-select d-inline" ValidationGroup="uploadCar" DataSourceID="carLocation" DataTextField="LocationName" DataValueField="Id" OnDataBound="ddlCarLocation_DataBound"></asp:DropDownList>
+                                <asp:LinkButton ID="btnAddLocation" runat="server" CssClass="border border-gray mx-1 px-3 py-2 rounded" data-bs-toggle="modal" data-bs-target="#addLocation" OnClientClick="return false"><i class="fa-solid fa-plus-minus fa-lg" style="color: #000000;"></i></asp:LinkButton> 
+                            </div>    
+
                                 <asp:RequiredFieldValidator ID="reqCarLocation" runat="server" ErrorMessage="Car Location is required" ControlToValidate="ddlCarLocation" CssClass="validate" ValidationGroup="uploadCar" InitialValue="0"></asp:RequiredFieldValidator>
                        <br />
                             </div>
@@ -130,7 +229,7 @@
                         </div>
                     <asp:Button ID="btnUploadCar" runat="server" Text="Add Car" CssClass='btn btn-primary' ValidationGroup="uploadCar" OnClick="btnUploadCar_Click"/>
                     <asp:Button ID="btnUpdateCar" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadCar" Visible="False" OnClick="btnUpdateCar_Click"/>
-                    <asp:Button ID="btnDelete" runat="server" Text="Delete " cssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False"/>
+                    <asp:Button ID="btnDelete" runat="server" Text="Delete " cssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False"/>                                      
                 </div>
             </div>            
         </div> 

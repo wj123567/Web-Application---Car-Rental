@@ -78,6 +78,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtCurrentPass;
 
         /// <summary>
+        /// requireCurrentPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireCurrentPassword;
+
+        /// <summary>
         /// validCurrentPassword control.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewPassword;
+
+        /// <summary>
+        /// requireNewPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireNewPassword;
 
         /// <summary>
         /// validNewPassword control.
@@ -141,15 +159,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.CheckBox cbSpecial;
 
         /// <summary>
-        /// reqPass control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqPass;
-
-        /// <summary>
         /// regPass control.
         /// </summary>
         /// <remarks>
@@ -166,6 +175,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
+
+        /// <summary>
+        /// requireConfirmPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireConfirmPassword;
 
         /// <summary>
         /// cprConfirmPass control.

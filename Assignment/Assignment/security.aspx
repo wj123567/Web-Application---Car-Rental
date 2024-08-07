@@ -15,9 +15,8 @@
       <div class="modal-body">
           <span>Password</span>
           <asp:TextBox ID="txtDeletePassword" runat="server" CssClass="form-control" placeholder="Password" ValidationGroup="deleteGroup" TextMode="Password"></asp:TextBox>
-          <asp:CustomValidator ID="cvDeleteAccount" runat="server" ErrorMessage="Incorrect Password" CssClass="validate" ControlToValidate="txtDeletePassword" ValidationGroup="deleteGroup" OnServerValidate="validDeletePassword_ServerValidate"></asp:CustomValidator>
-          <br />
-          <asp:RequiredFieldValidator ID="reqDeletePassword" runat="server" ErrorMessage="Password is required" ValidationGroup="deleteGroup" ControlToValidate="txtDeletePassword" CssClass="validate"></asp:RequiredFieldValidator>
+          <asp:CustomValidator ID="cvDeleteAccount" runat="server" ErrorMessage="Incorrect Password" CssClass="validate" ControlToValidate="txtDeletePassword" ValidationGroup="deleteGroup" OnServerValidate="validDeletePassword_ServerValidate" Display="Dynamic"></asp:CustomValidator>
+          <asp:RequiredFieldValidator ID="reqDeletePassword" runat="server" ErrorMessage="Password is required" ValidationGroup="deleteGroup" ControlToValidate="txtDeletePassword" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
           <br />
             <input id="cbDeletePass" type="checkbox" onClick="showDeletePass()"/>
             <span>Show Password</span>
@@ -47,14 +46,15 @@
                             <div class="mb-3">
                                 <label class="small mb-1" for="currentPassword">Current Password</label>
                                 <asp:TextBox ID="txtCurrentPass" runat="server" CssClass="form-control" placeholder="Enter current password" TextMode="Password" ValidationGroup="passwordGroup"></asp:TextBox>
-                                <asp:CustomValidator ID="validCurrentPassword" runat="server" ErrorMessage="Incorrect Password" CssClass="validate" ControlToValidate="txtCurrentPass" ValidationGroup="passwordGroup" OnServerValidate="validCurrentPassword_ServerValidate"></asp:CustomValidator>
+                                <asp:RequiredFieldValidator ID="requireCurrentPassword" runat="server" ErrorMessage="Current Password is Required" Display="Dynamic" CssClass="validate" ControlToValidate="txtCurrentPass" ValidationGroup="passwordGroup"></asp:RequiredFieldValidator>
+                                <asp:CustomValidator ID="validCurrentPassword" runat="server" ErrorMessage="Incorrect Password" CssClass="validate" ControlToValidate="txtCurrentPass" ValidationGroup="passwordGroup" OnServerValidate="validCurrentPassword_ServerValidate" Display="Dynamic"></asp:CustomValidator>
                             </div>
                             <!-- Form Group (new password)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="newPassword">New Password</label>
                      <asp:TextBox ID="txtNewPassword" runat="server" CssClass="form-control" placeholder="Enter new password" TextMode="Password" onkeyup="validatePassword()" ValidationGroup="passwordGroup"></asp:TextBox>
-
-                     <asp:CustomValidator ID="validNewPassword" runat="server" ErrorMessage="New Password Cannot be same as Old Password" CssClass="validate" ControlToValidate="txtNewPassword" ValidationGroup="passwordGroup" OnServerValidate="validNewPassword_ServerValidate"></asp:CustomValidator>
+                     <asp:RequiredFieldValidator ID="requireNewPassword" runat="server" ErrorMessage="New Password is Required" Display="Dynamic" CssClass="validate" ControlToValidate="txtNewPassword" ValidationGroup="passwordGroup"></asp:RequiredFieldValidator>
+                     <asp:CustomValidator ID="validNewPassword" runat="server" ErrorMessage="New Password Cannot be same as Old Password" CssClass="validate" ControlToValidate="txtNewPassword" ValidationGroup="passwordGroup" OnServerValidate="validNewPassword_ServerValidate" Display="Dynamic"></asp:CustomValidator>
                     <br />
                         <asp:CheckBox ID="cbEight" runat="server" Text="must contain at least eight characters" Enabled="True" Checked="False" CssClass="passCheckBox" ValidationGroup="passwordGroup" />
             <br />
@@ -63,15 +63,14 @@
                         <asp:CheckBox ID="cbUpLow" runat="server" Text="both lower and uppercase letters" Enabled="True" CssClass="passCheckBox" ValidationGroup="passwordGroup" />
             <br />
                          <asp:CheckBox ID="cbSpecial" runat="server" Text="must contain one special characters" Enabled="True" CssClass="passCheckBox" ValidationGroup="passwordGroup" />
-
-            <asp:RequiredFieldValidator ID="reqPass" runat="server" ErrorMessage="RequiredFieldValidator" ValidationGroup="passwordGroup" ControlToValidate="txtNewPassword" hidden="true"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ID="regPass" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="txtNewPassword" ValidationGroup="passwordGroup" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+\-=\[\]{};':&quot;\\|,.&lt;&gt;\/?]).{8,}$" hidden="true"></asp:RegularExpressionValidator>
                             </div>
                             <!-- Form Group (confirm password)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="confirmPassword">Confirm Password</label>
                                 <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control" placeholder="Confirm new password" TextMode="Password" ValidationGroup="passwordGroup"></asp:TextBox>
-                                <asp:CompareValidator ID="cprConfirmPass" runat="server" ErrorMessage="Both Password need to be same" ControlToCompare="txtNewPassword" ControlToValidate="txtConfirmPassword" CssClass="validate" ValidationGroup="passwordGroup"></asp:CompareValidator>
+                                <asp:RequiredFieldValidator ID="requireConfirmPassword" runat="server" ErrorMessage="Confirm Password is Required" Display="Dynamic" CssClass="validate" ControlToValidate="txtConfirmPassword" ValidationGroup="passwordGroup"></asp:RequiredFieldValidator>
+                                <asp:CompareValidator ID="cprConfirmPass" runat="server" ErrorMessage="Both Password need to be same" ControlToCompare="txtNewPassword" ControlToValidate="txtConfirmPassword" CssClass="validate" ValidationGroup="passwordGroup" Display="Dynamic"></asp:CompareValidator>
                             </div>
             <input id="cbShowPass" type="checkbox" onClick="showPass()"/>
             <span>Show Password</span>

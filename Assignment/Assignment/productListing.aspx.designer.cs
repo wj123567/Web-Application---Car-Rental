@@ -60,13 +60,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
 
         /// <summary>
-        /// RequiredFieldValidator1 control.
+        /// requireLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireLocation;
 
         /// <summary>
         /// txtStartTime control.
@@ -87,13 +87,31 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtEndTime;
 
         /// <summary>
-        /// CompareValidator1 control.
+        /// requireStart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireStart;
+
+        /// <summary>
+        /// requireEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireEnd;
+
+        /// <summary>
+        /// compareStartEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator compareStartEnd;
 
         /// <summary>
         /// cblCarBrand control.
