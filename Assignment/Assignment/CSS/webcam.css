@@ -1,0 +1,80 @@
+﻿
+.webcamSection {
+    border: 1px solid red;
+    position: relative;
+    width: 100%;
+    height: 1000px;
+}
+
+.webcamContainer {
+    width: auto;
+    padding-top: 50px;
+    padding-right: 50px;
+    position: relative;
+    left: 25%;
+    top: 20%;
+    position: fixed;
+}
+
+.webcamClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+table.webcamTable {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+    table.webcamTable th {
+        background-color: #F7F7F7;
+        color: #333;
+        font-weight: bold;
+    }
+
+table.webcamTable th {
+    padding: 5px;
+    width: 400px;
+    height: 50px;
+    border: 1px solid #ccc;
+}
+
+    table.webcamTable td {
+        padding: 5px;
+        width: 400px;
+        text-align: center;
+        border: 1px solid #ccc;
+    }
+
+.webcamTitle {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.webcamOutput {
+    padding: 50px;
+}
+
+.webcamExecute {
+    padding: 15px;
+}
+
+.btnCapture {
+    width: 50%;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: darkorange;
+}
+
+.btnUpload {
+    width: 50%;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: darkblue;
+}

@@ -79,6 +79,7 @@
     <Content Include="CSS\home.css" />
     <Content Include="CSS\payment_pg.css" />
     <Content Include="CSS\tracking.css" />
+    <Content Include="CSS\webcam.css" />
     <Content Include="driver.aspx" />
     <Content Include="Image\no-img -long.png" />
     <Content Include="Image\no-img.jpg" />
@@ -301,6 +302,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Captures\" />
     <Folder Include="Image\DriverId\" />
     <Folder Include="Image\DriverLB\" />
     <Folder Include="Image\DriverLF\" />
