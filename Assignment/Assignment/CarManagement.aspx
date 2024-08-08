@@ -257,7 +257,7 @@
                 <ContentTemplate>
             <table id="carTable" class="table table-striped table-bordered table-hover table-responsive">
             <thead>
-                <tr class="table-primary" style="text-align: center;">
+                <tr style="text-align: center;">
                     <th scope="col">
                         <asp:LinkButton ID="btnSortCarPlate" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark">Car Plate</asp:LinkButton>
                      </th>

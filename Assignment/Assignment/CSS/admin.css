@@ -5,6 +5,7 @@
     padding: 0;
 }
 
+
 a {
     text-decoration: none;
 }
@@ -138,4 +139,3 @@ a.sidebar-link:hover {
     font-size: 0.8em;
     color: red;
 }
-

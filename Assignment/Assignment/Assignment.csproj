@@ -78,7 +78,9 @@
     <Content Include="CSS\bookingrecorddetail.css" />
     <Content Include="CSS\home.css" />
     <Content Include="CSS\payment_pg.css" />
+    <Content Include="CSS\driverManagement.css" />
     <Content Include="CSS\tracking.css" />
+    <Content Include="driverManagement.aspx" />
     <Content Include="driver.aspx" />
     <Content Include="Image\no-img -long.png" />
     <Content Include="Image\no-img.jpg" />
@@ -169,6 +171,13 @@
     </Compile>
     <Compile Include="CarManagement.aspx.designer.cs">
       <DependentUpon>CarManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="driverManagement.aspx.cs">
+      <DependentUpon>driverManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="driverManagement.aspx.designer.cs">
+      <DependentUpon>driverManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="driver.aspx.cs">
       <DependentUpon>driver.aspx</DependentUpon>
