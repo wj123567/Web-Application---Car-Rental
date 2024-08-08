@@ -212,8 +212,8 @@
                         <div class="inputbox_left">
                             <asp:Label ID="lblDriverGender" runat="server" Text="Driver Gender :" CssClass="label_left"></asp:Label>
                                  <asp:RadioButtonList ID="rblDriverGender" runat="server" CssClass="input_left radio_btn_style" RepeatDirection="Horizontal">
-                                      <asp:ListItem Value="M" Style=";margin-right:80px;">Male</asp:ListItem>
-                                      <asp:ListItem Value="F" >Female</asp:ListItem>
+                                      <asp:ListItem Value="M" Style="margin-right:80px;">Male</asp:ListItem>
+                                      <asp:ListItem Value="F">Female</asp:ListItem>
                                  </asp:RadioButtonList>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="Please Select [Driver Gender]." CssClass="validate driver_validate" ControlToValidate="rblDriverGender" Display="Dynamic" ValidationGroup="DriverValidation" Enabled="false"></asp:RequiredFieldValidator>
                         </div> 
@@ -274,6 +274,48 @@
                     
                 </div>
             </div>
+        <div class="photo_container">
+            <div class="row">
+                <div class="col">
+                    <h3>Photo Attachment</h3>
+                    <div class="inputbox_left">
+                        <h5>Quick Snap Using WebCam</h5>
+                        <asp:Button ID="btnActivate" runat="server" Text="Button" OnClientClick="showWebcam(); return false;"/>
+                         <div class="webcamSection">
+                         <div class="webcamContainer" id="webcamContainer" style="display:none">
+                             <i class="ri-close-line webcamClose" style="font-size:40px;color:white;background-color:red;" onclick="closeWebcam();"></i>
+                          <table id="webcamTable" class="webcamTable" border="0" cellpadding="0" cellspacing="0" >
+                             <tr>
+                                 <th style="text-align:center" class="webcamTitle">Live Camera</th>
+                                 <th style="text-align:center" class="webcamTitle">Captured Picture</th>
+                             </tr>
+                             <tr>
+                                 <td class="webcamOutput"><div id="webcam"></div></td>
+                                 <td class="webcamOutput"><img id="imgCapture" /></td>
+                             </tr>
+                             <tr>
+                                 <td align="center" class="webcamExecute">
+                                     <asp:Button ID="btnCapture" runat="server"  Text="Capture" Cssclass="btnCapture"/>
+                                     
+                                 </td>
+                                 <td align="center" class="webcamExecute" >
+                                     <asp:Button ID="btnUpload" runat="server"  Text="Upload" Cssclass="btnUpload"/>
+                                    
+                                 </td>
+                             </tr>
+                         </table>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="inputbox_right" style="padding-top:40px;">
+                        <h5>Import from File</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
 
   </div>  <!-- p section-->
 
@@ -305,4 +347,55 @@
     </div>
 </div>
     
+
+        <script type="text/javascript">
+        function showWebcam() {
+            // Display the table
+            document.getElementById('webcamContainer').style.display = 'block';
+        }
+
+        function closeWebcam() {
+            var container = document.getElementById('webcamContainer');
+            // Toggle display between 'none' and 'block'
+            if (container.style.display === 'block') {
+                container.style.display = 'none';
+            } else {
+                container.style.display = 'block';
+            }
+        }
+
+        $(function () {
+            Webcam.set({
+                width: 320,
+                height: 240,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            });
+            Webcam.attach('#webcam');
+
+            $("#main_btnCapture").click(function (event) {
+                event.preventDefault(); // Prevent default behavior (postback)
+
+                Webcam.snap(function (data_uri) {
+                    $("#imgCapture")[0].src = data_uri;
+                    $("#main_btnUpload").prop("disabled", false);
+                });
+            });
+
+            $("#main_btnUpload").click(function (event) {
+                event.preventDefault(); // Prevent default behavior (postback)
+
+                $.ajax({
+                    type: "POST",
+                    url: "bookinfo.aspx/SaveCapturedImage", //send to backend
+                    data: "{data: '" + $("#imgCapture")[0].src + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert("Image uploaded successfully."); // Notify the user on success
+                    },
+                });
+            });
+        });
+</script>
 </asp:Content>

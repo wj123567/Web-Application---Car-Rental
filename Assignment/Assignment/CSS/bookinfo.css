@@ -26,7 +26,14 @@
     width: 65%;
 }
 
-.payment_container .row {
+.photo_container {
+    position: relative;
+    display: flex;
+    padding: 25px;
+    width: 65%;
+}
+
+.payment_container .row, .driver_container .row , .photo_container .row{
     width: 100%;
     margin-left: 100px;
     display: flex;
@@ -35,14 +42,6 @@
     box-sizing: border-box;
 }
 
-.driver_container .row {
-    width: 100%;
-    margin-left: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    box-sizing: border-box;
-}
 
 .box_top {
     margin-top: 200px;
@@ -59,7 +58,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.payment_container .row .col, .driver_container .row .col {
+.payment_container .row .col, .driver_container .row .col ,.photo_container .row .col{
 
     flex: 1 1 150px;
     height: auto;
@@ -76,7 +75,9 @@
     .payment_container .row .col .inputbox_left,
     .payment_container .row .col .inputbox_right,
     .driver_container .row .col .inputbox_left,
-    .driver_container .row .col .inputbox_right {
+    .driver_container .row .col .inputbox_right,
+    .photo_container .row .col .inputbox_left,
+    .photo_container .row .col .inputbox_right{
         margin: 25px 0;
     }
 
