@@ -190,7 +190,7 @@
                                 <asp:TextBox ID="txtCarPrice" runat="server" CssClass="form-control" ValidationGroup="uploadCar" placeholder="MYR 0.00"></asp:TextBox>
                                 <asp:TextBox ID="hiddenCarPrice" runat="server" Visible="True" style="display:none;"></asp:TextBox>
                               <asp:RequiredFieldValidator ID="requirePrice" runat="server" ErrorMessage="Price is Require" ControlToValidate="txtCarPrice" ValidationGroup="uploadCar" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
-                                <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Invalid Price Range (MYR 1 - MYR 1000)" MaximumValue="1000" MinimumValue="1" ControlToValidate="hiddenCarPrice" ValidationGroup="uploadCar" CssClass="validate" Display="Dynamic" CultureInvariantValues="False" Type="Currency"></asp:RangeValidator>
+                                <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Invalid Price Range (MYR 1 - MYR 1000)" MaximumValue="1000.00" MinimumValue="1.00" ControlToValidate="hiddenCarPrice" ValidationGroup="uploadCar" CssClass="validate" Display="Dynamic" CultureInvariantValues="False" Type="Double"></asp:RangeValidator>
                        <br />
                             </div>
                         </div>
@@ -385,18 +385,6 @@
             e.target.value = (value || value === 0)
                 ? localStringToNumber(value).toLocaleString(undefined, options) 
                 : ''
-        }
-
-        function checkPrice(sender, args) {
-            var priceInput = document.getElementById(sender.controltovalidate).value;
-            priceInput = priceInput.replace("MYR ", "");
-            var price = parseFloat(priceInput);
-
-            if (!isNaN(price) && price > 0 && price <= 1000) {
-                args.IsValid = true;
-            } else {
-                args.IsValid = false;
-            }
         }
 
         if (window.history.replaceState) {
