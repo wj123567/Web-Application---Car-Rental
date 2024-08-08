@@ -93,6 +93,7 @@
     <Content Include="Image\WZ\pexels-peng-liu-45946-169677.jpg" />
     <Content Include="Image\WZ\road1.jpg" />
     <Content Include="infopage.aspx" />
+    <Content Include="JS\bookinfo.js" />
     <Content Include="JS\home.js" />
     <Content Include="JS\infopage.js" />
     <Content Include="payment.aspx" />
