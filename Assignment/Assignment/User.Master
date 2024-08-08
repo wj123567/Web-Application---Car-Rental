@@ -43,9 +43,8 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="me-3">
         <div class="form-white input-group" style="width: 250px;">
-            <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded" placeholder="Search" ValidationGroup="searchBar"></asp:TextBox>
+            <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded" placeholder="Search" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
             <asp:Button ID="hiddenBtn" runat="server" Text="Button" hidden="true" OnClick="hiddenBtn_Click" ValidationGroup="searchBar"/>
-            <asp:RequiredFieldValidator ID="reqSearchBar" runat="server" ErrorMessage="RequiredFieldValidator" hidden="true" ControlToValidate="searchBar" ValidationGroup="searchBar"></asp:RequiredFieldValidator>
         </div>
       </div>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -109,5 +108,14 @@
     </form>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+    function triggerButtonClick(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            document.getElementById('<%= hiddenBtn.ClientID %>').click();
+                }
+            }
+</script>
 </body>
 </html>

@@ -60,7 +60,7 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
-                string updateString = "UPDATE Driver SET DriverName = @DriverName, DriverId = @DriverId, DriverLicense = @DriverLicense, DriverPno = @DriverPno, DriverBdate = @DriverBdate, DriverGender = @DriverGender, IDpic = @IDpic, SelfiePic = @SelfiePic, LicenseFpic = @LicenseFpic, LicenseBpic = @LicenseBpic, Approval = @Approval, UserId = @UserId WHERE Id = @Id";
+                string updateString = "UPDATE Driver SET DriverName = @DriverName, DriverId = @DriverId, DriverLicense = @DriverLicense, DriverPno = @DriverPno, DriverBdate = @DriverBdate, DriverGender = @DriverGender, IDpic = @IDpic, SelfiePic = @SelfiePic, LicenseFpic = @LicenseFpic, LicenseBpic = @LicenseBpic, Approval = @Approval, UserId = @UserId, DateApply = @dateApply WHERE Id = @Id";
 
                 SaveDriverInfo(updateString, Session["DriverID"].ToString(), "P");
             }
@@ -70,7 +70,7 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
-                string insertString = "INSERT into Driver (Id, DriverName, DriverId, DriverLicense, DriverPno, DriverBdate, DriverGender, IDpic, SelfiePic, LicenseFpic, LicenseBpic,Approval ,UserId ) values (@Id, @DriverName, @DriverId, @DriverLicense, @DriverPno, @DriverBdate, @DriverGender, @IDpic, @SelfiePic, @LicenseFpic, @LicenseBpic, @Approval, @UserId)";
+                string insertString = "INSERT into Driver (Id, DriverName, DriverId, DriverLicense, DriverPno, DriverBdate, DriverGender, IDpic, SelfiePic, LicenseFpic, LicenseBpic,Approval ,UserId , DateApply) values (@Id, @DriverName, @DriverId, @DriverLicense, @DriverPno, @DriverBdate, @DriverGender, @IDpic, @SelfiePic, @LicenseFpic, @LicenseBpic, @Approval, @UserId, @dateApply)";
                 Guid newGUID = Guid.NewGuid();
                 SaveDriverInfo(insertString, newGUID.ToString(), "P");
             }
@@ -144,6 +144,7 @@ namespace Assignment
                 com.Parameters.AddWithValue("@LicenseFpic", relPathLicenseF);
                 com.Parameters.AddWithValue("@LicenseBpic", relPathLicenseB);
                 com.Parameters.AddWithValue("@Approval", approval);
+                com.Parameters.AddWithValue("@dateApply", DateTime.Today.ToString());
                 com.Parameters.AddWithValue("@UserId", Session["Id"].ToString());
                 com.ExecuteNonQuery();
 
