@@ -188,7 +188,9 @@
                             <div class="col-md-6">
                                 <label class="small mb-1">Car Day Price</label>
                                 <asp:TextBox ID="txtCarPrice" runat="server" CssClass="form-control" ValidationGroup="uploadCar" placeholder="MYR 0.00"></asp:TextBox>
-                                <asp:CustomValidator ID="validatePrice" runat="server" ErrorMessage="CustomValidator" ClientValidationFunction="checkPrice" ControlToValidate="txtCarPrice" Text="Invalid Price" ValidationGroup="uploadCar" CssClass="validate" ValidateEmptyText="True"></asp:CustomValidator>
+                                <asp:TextBox ID="hiddenCarPrice" runat="server" Visible="True" style="display:none;"></asp:TextBox>
+                              <asp:RequiredFieldValidator ID="requirePrice" runat="server" ErrorMessage="Price is Require" ControlToValidate="txtCarPrice" ValidationGroup="uploadCar" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+                                <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Invalid Price Range (MYR 1 - MYR 1000)" MaximumValue="1000" MinimumValue="1" ControlToValidate="hiddenCarPrice" ValidationGroup="uploadCar" CssClass="validate" Display="Dynamic" CultureInvariantValues="False" Type="Currency"></asp:RangeValidator>
                        <br />
                             </div>
                         </div>
@@ -349,6 +351,7 @@
         }
 
         var currencyInput = document.getElementById('<%= txtCarPrice.ClientID %>');
+        var hiddenCarPrice = document.getElementById('<%= hiddenCarPrice.ClientID %>');
         var currency = 'MYR' 
 
         // format inital value
@@ -360,6 +363,7 @@
 
 
         function localStringToNumber(s) {
+            hiddenCarPrice.value = String(s).replace(/[^0-9.,-]+/g, "");
             return Number(String(s).replace(/[^0-9.,-]+/g, ""))
         }
 
@@ -379,7 +383,7 @@
             }
 
             e.target.value = (value || value === 0)
-                ? localStringToNumber(value).toLocaleString(undefined, options)
+                ? localStringToNumber(value).toLocaleString(undefined, options) 
                 : ''
         }
 
@@ -388,7 +392,7 @@
             priceInput = priceInput.replace("MYR ", "");
             var price = parseFloat(priceInput);
 
-            if (price > 0 && price <= 1000) {
+            if (!isNaN(price) && price > 0 && price <= 1000) {
                 args.IsValid = true;
             } else {
                 args.IsValid = false;

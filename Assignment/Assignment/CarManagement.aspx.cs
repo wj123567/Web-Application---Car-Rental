@@ -98,8 +98,6 @@ namespace Assignment
 
         protected void uploadCar(string uploadString, string imgPath)
         {
-            string price = txtCarPrice.Text.Replace("MYR ", "");
-            float prices = float.Parse(price);
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(uploadString,con);            com.Parameters.AddWithValue("@CarPlate",txtCarPlate.Text);
@@ -107,7 +105,7 @@ namespace Assignment
             com.Parameters.AddWithValue("@CarName", txtCarName.Text);
             com.Parameters.AddWithValue("@CType", ddlCarType.SelectedValue);
             com.Parameters.AddWithValue("@CarDesc", txtCarDesc.Text);
-            com.Parameters.AddWithValue("@CarDayPrice", prices);
+            com.Parameters.AddWithValue("@CarDayPrice", hiddenCarPrice.Text);
             com.Parameters.AddWithValue("@CarSeat", txtCarSeat.Text);
             com.Parameters.AddWithValue("@CarTransmission", ddlCarTransmission.SelectedValue);
             com.Parameters.AddWithValue("@CarEnergy", ddlCarEnergy.SelectedValue);
