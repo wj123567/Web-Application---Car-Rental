@@ -134,9 +134,11 @@ namespace Assignment
         protected void btnViewCar_Click(object sender, EventArgs e)
         {
             HideControls(carPanel);
+            btnDelete.Visible = true;
             Button btnView = (Button)sender;
             String carPlate = btnView.CommandArgument;
             loadCarData(carPlate);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "disableUpload()", true);
         }
 
         protected void loadCarData(String carPlate)
@@ -497,6 +499,11 @@ namespace Assignment
             {
                 args.IsValid = false;
             }
+        }
+
+        protected void btnAddNewCar_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("CarManagement.aspx");
         }
     }
 }

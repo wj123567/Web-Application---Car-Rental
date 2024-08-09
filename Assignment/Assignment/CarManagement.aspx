@@ -128,11 +128,11 @@
             <div class="card mb-0 mb-xl-0">
                 <div class="card-header">Car Picture</div>
                 <div class="card-body text-center">
-                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="car-pic-wrapper image-frame mx-auto" OnClientClick="return fileUpload()">
+                    <asp:LinkButton ID="btnUploadPic" runat="server" CssClass="car-pic-wrapper image-frame mx-auto" OnClientClick="return fileUpload()">
                      <span class="upload-text">Upload</span>
                     <asp:Image ID="imgCarPic" runat="server" CssClass="img-car-pic mb-2" Width="300px" ImageUrl="~/Image/no-img -long.png" />
                     </asp:LinkButton>
-                    <div class="small font-italic text-muted">JPG or PNG no larger than 2 MB</div>
+                    <div id="img-warning-text" class="small font-italic text-muted">JPG or PNG no larger than 2 MB</div>
                     <asp:CustomValidator ID="validateCarPic" runat="server" ControlToValidate="fuCarPic" CssClass="validate" ValidationGroup="uploadCar" ValidateEmptyText="True" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile"></asp:CustomValidator>
                     <asp:FileUpload ID="fuCarPic" runat="server" CssClass="uploadPicture" onchange="ShowPreview(event)"/>
                     <br />
@@ -250,7 +250,8 @@
     </div>        
 </asp:Panel>      
 
-    <h1 class="text-dark">Car Detail</h1>
+    <h1 class="text-dark d-inline">Car Detail</h1>
+    <asp:Button ID="btnAddNewCar" runat="server" Text="Add New Car" CssClass="btn btn-primary btn-sm mx-2 mb-2" OnClick="btnAddNewCar_Click" />
     <hr class="mt-0 mb-4">
         <div>
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
@@ -314,8 +315,23 @@
         function fileUpload() {
             document.getElementById('<%= validateCarPic.ClientID %>').enabled = true;
             document.getElementById('<%= fuCarPic.ClientID %>').click();
+            
 
             return false;
+        }
+
+        function disableUpload() {
+            linkButton = document.getElementById('<%= btnUploadPic.ClientID %>');
+
+                linkButton.onclick = function (event) {
+                event.preventDefault();
+
+            };
+
+            linkButton.classList.remove('car-pic-wrapper');
+            linkButton.classList.remove('car-pic-wrapper-no-hover');
+            linkButton.style.pointerEvents = 'none';
+            document.getElementById('img-warning-text').style.display = 'none';
         }
 
         function ShowPreview(event) {           

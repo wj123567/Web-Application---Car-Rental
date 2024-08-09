@@ -160,7 +160,7 @@
                             </div>
                         </div>
                     <asp:Button ID="btnUploadDoc" runat="server" Text="Add New Driver" CssClass='btn btn-primary' ValidationGroup="uploadDoc" OnClientClick="getCountryCode()" OnClick="btnUploadDoc_Click" />
-                    <asp:Button ID="btnUpdateDoc" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadDoc" OnClick="btnUpdateDoc_Click" Visible="False"/>
+                    <asp:Button ID="btnUpdateDoc" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadDoc" OnClick="btnUpdateDoc_Click" OnClientClick="getCountryCode()" Visible="False"/>
                     <asp:Button ID="btnDelete" runat="server" Text="Delete " cssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False"/>
                 </div>
             </div>
