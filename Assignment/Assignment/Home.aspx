@@ -34,61 +34,15 @@
         <span><i class="ri-calendar-line"></i></span>
         <div class="input_content">
             <div class="input_group">
-                <asp:Label ID="lblDeparture" runat="server" Text="PickUp" CssClass="home_label_style"></asp:Label>
+                <asp:Label ID="lblDeparture" runat="server" Text="Pick Up" CssClass="home_label_style"></asp:Label>
                 <asp:TextBox ID="txtDepartureDate" runat="server" TextMode="Date" CssClass="control_style"></asp:TextBox>
-                <asp:DropDownList ID="ddlDepartureTime" runat="server" CssClass="control_style">
-                    <asp:ListItem Value="00:00" data-depart="00:00">00:00</asp:ListItem>
-                    <asp:ListItem Value="00:30" data-depart="00:30">00:30</asp:ListItem>
-                    <asp:ListItem Value="01:00" data-depart="01:00">01:00</asp:ListItem>
-                    <asp:ListItem Value="01:30" data-depart="01:30">01:30</asp:ListItem>
-                    <asp:ListItem Value="02:00" data-depart="02:00">02:00</asp:ListItem>
-                    <asp:ListItem Value="02:30" data-depart="02:30">02:30</asp:ListItem>
-                    <asp:ListItem Value="03:00" data-depart="03:00">03:00</asp:ListItem>
-                    <asp:ListItem Value="03:30" data-depart="03:30">03:30</asp:ListItem>
-                    <asp:ListItem Value="04:00" data-depart="04:00">04:00</asp:ListItem>
-                    <asp:ListItem Value="04:30" data-depart="04:30">04:30</asp:ListItem>
-                    <asp:ListItem Value="05:00" data-depart="05:00">05:00</asp:ListItem>
-                    <asp:ListItem Value="05:30" data-depart="05:30">05:30</asp:ListItem>
-                    <asp:ListItem Value="06:00" data-depart="06:00">06:00</asp:ListItem>
-                    <asp:ListItem Value="06:30" data-depart="06:30">06:30</asp:ListItem>
-                    <asp:ListItem Value="07:00" data-depart="07:00">07:00</asp:ListItem>
-                    <asp:ListItem Value="07:30" data-depart="07:30">07:30</asp:ListItem>
-                    <asp:ListItem Value="08:00" data-depart="08:00">08:00</asp:ListItem>
-                    <asp:ListItem Value="08:30" data-depart="08:30">08:30</asp:ListItem>
-                    <asp:ListItem Value="09:00" data-depart="09:00">09:00</asp:ListItem>
-                    <asp:ListItem Value="09:30" data-depart="09:30">09:30</asp:ListItem>
-                    <asp:ListItem Value="10:00" data-depart="10:00">10:00</asp:ListItem>
-                    <asp:ListItem Value="10:30" data-depart="10:30">10:30</asp:ListItem>
-                    <asp:ListItem Value="11:00" data-depart="11:00">11:00</asp:ListItem>
-                    <asp:ListItem Value="11:30" data-depart="11:30">11:30</asp:ListItem>
-                    <asp:ListItem Value="12:00" data-depart="12:00">12:00</asp:ListItem>
-                    <asp:ListItem Value="12:30" data-depart="12:30">12:30</asp:ListItem>
-                    <asp:ListItem Value="13:00" data-depart="13:00">13:00</asp:ListItem>
-                    <asp:ListItem Value="13:30" data-depart="13:30">13:30</asp:ListItem>
-                    <asp:ListItem Value="14:00" data-depart="14:00">14:00</asp:ListItem>
-                    <asp:ListItem Value="14:30" data-depart="14:30">14:30</asp:ListItem>
-                    <asp:ListItem Value="15:00" data-depart="15:00">15:00</asp:ListItem>
-                    <asp:ListItem Value="15:30" data-depart="15:30">15:30</asp:ListItem>
-                    <asp:ListItem Value="16:00" data-depart="16:00">16:00</asp:ListItem>
-                    <asp:ListItem Value="16:30" data-depart="16:30">16:30</asp:ListItem>
-                    <asp:ListItem Value="17:00" data-depart="17:00">17:00</asp:ListItem>
-                    <asp:ListItem Value="17:30" data-depart="17:30">17:30</asp:ListItem>
-                    <asp:ListItem Value="18:00" data-depart="18:00">18:00</asp:ListItem>
-                    <asp:ListItem Value="18:30" data-depart="18:30">18:30</asp:ListItem>
-                    <asp:ListItem Value="19:00" data-depart="19:00">19:00</asp:ListItem>
-                    <asp:ListItem Value="19:30" data-depart="19:30">19:30</asp:ListItem>
-                    <asp:ListItem Value="20:00" data-depart="20:00">20:00</asp:ListItem>
-                    <asp:ListItem Value="20:30" data-depart="20:30">20:30</asp:ListItem>
-                    <asp:ListItem Value="21:00" data-depart="21:00">21:00</asp:ListItem>
-                    <asp:ListItem Value="21:30" data-depart="21:30">21:30</asp:ListItem>
-                    <asp:ListItem Value="22:00" data-depart="22:00">22:00</asp:ListItem>
-                    <asp:ListItem Value="22:30" data-depart="22:30">22:30</asp:ListItem>
-                    <asp:ListItem Value="23:00" data-depart="23:00">23:00</asp:ListItem>
-                    <asp:ListItem Value="23:30" data-depart="23:30">23:30</asp:ListItem>
-                </asp:DropDownList>
-                
-                   
+                <asp:TextBox ID="txtDepartureTime" runat="server" TextMode="Time" CssClass="control_style"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="requireDepartDate" runat="server" ErrorMessage="Pick Up Date is Required" ControlToValidate="txtDepartureDate" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
+                <br />
+                <asp:RequiredFieldValidator ID="requireDepartTime" runat="server" ErrorMessage="Pick Up Time is Required" ControlToValidate="txtDepartureTime" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
+                <br />
         </div>
+
         <p>Add Date</p>
             </div>
         </div>
@@ -99,56 +53,12 @@
             <div class="input_group">
                 <asp:Label ID="lblReturn" runat="server" Text="Drop Off" CssClass="home_label_style"></asp:Label>
                 <asp:TextBox ID="txtReturnDate" runat="server" TextMode="Date" CssClass="control_style "></asp:TextBox>
-                <asp:DropDownList ID="ddlReturnTime" runat="server" CssClass="control_style ">
-                    <asp:ListItem Value="00:00" data-depart="00:00">00:00</asp:ListItem>
-                    <asp:ListItem Value="00:30" data-depart="00:30">00:30</asp:ListItem>
-                    <asp:ListItem Value="01:00" data-depart="01:00">01:00</asp:ListItem>
-                    <asp:ListItem Value="01:30" data-depart="01:30">01:30</asp:ListItem>
-                    <asp:ListItem Value="02:00" data-depart="02:00">02:00</asp:ListItem>
-                    <asp:ListItem Value="02:30" data-depart="02:30">02:30</asp:ListItem>
-                    <asp:ListItem Value="03:00" data-depart="03:00">03:00</asp:ListItem>
-                    <asp:ListItem Value="03:30" data-depart="03:30">03:30</asp:ListItem>
-                    <asp:ListItem Value="04:00" data-depart="04:00">04:00</asp:ListItem>
-                    <asp:ListItem Value="04:30" data-depart="04:30">04:30</asp:ListItem>
-                    <asp:ListItem Value="05:00" data-depart="05:00">05:00</asp:ListItem>
-                    <asp:ListItem Value="05:30" data-depart="05:30">05:30</asp:ListItem>
-                    <asp:ListItem Value="06:00" data-depart="06:00">06:00</asp:ListItem>
-                    <asp:ListItem Value="06:30" data-depart="06:30">06:30</asp:ListItem>
-                    <asp:ListItem Value="07:00" data-depart="07:00">07:00</asp:ListItem>
-                    <asp:ListItem Value="07:30" data-depart="07:30">07:30</asp:ListItem>
-                    <asp:ListItem Value="08:00" data-depart="08:00">08:00</asp:ListItem>
-                    <asp:ListItem Value="08:30" data-depart="08:30">08:30</asp:ListItem>
-                    <asp:ListItem Value="09:00" data-depart="09:00">09:00</asp:ListItem>
-                    <asp:ListItem Value="09:30" data-depart="09:30">09:30</asp:ListItem>
-                    <asp:ListItem Value="10:00" data-depart="10:00">10:00</asp:ListItem>
-                    <asp:ListItem Value="10:30" data-depart="10:30">10:30</asp:ListItem>
-                    <asp:ListItem Value="11:00" data-depart="11:00">11:00</asp:ListItem>
-                    <asp:ListItem Value="11:30" data-depart="11:30">11:30</asp:ListItem>
-                    <asp:ListItem Value="12:00" data-depart="12:00">12:00</asp:ListItem>
-                    <asp:ListItem Value="12:30" data-depart="12:30">12:30</asp:ListItem>
-                    <asp:ListItem Value="13:00" data-depart="13:00">13:00</asp:ListItem>
-                    <asp:ListItem Value="13:30" data-depart="13:30">13:30</asp:ListItem>
-                    <asp:ListItem Value="14:00" data-depart="14:00">14:00</asp:ListItem>
-                    <asp:ListItem Value="14:30" data-depart="14:30">14:30</asp:ListItem>
-                    <asp:ListItem Value="15:00" data-depart="15:00">15:00</asp:ListItem>
-                    <asp:ListItem Value="15:30" data-depart="15:30">15:30</asp:ListItem>
-                    <asp:ListItem Value="16:00" data-depart="16:00">16:00</asp:ListItem>
-                    <asp:ListItem Value="16:30" data-depart="16:30">16:30</asp:ListItem>
-                    <asp:ListItem Value="17:00" data-depart="17:00">17:00</asp:ListItem>
-                    <asp:ListItem Value="17:30" data-depart="17:30">17:30</asp:ListItem>
-                    <asp:ListItem Value="18:00" data-depart="18:00">18:00</asp:ListItem>
-                    <asp:ListItem Value="18:30" data-depart="18:30">18:30</asp:ListItem>
-                    <asp:ListItem Value="19:00" data-depart="19:00">19:00</asp:ListItem>
-                    <asp:ListItem Value="19:30" data-depart="19:30">19:30</asp:ListItem>
-                    <asp:ListItem Value="20:00" data-depart="20:00">20:00</asp:ListItem>
-                    <asp:ListItem Value="20:30" data-depart="20:30">20:30</asp:ListItem>
-                    <asp:ListItem Value="21:00" data-depart="21:00">21:00</asp:ListItem>
-                    <asp:ListItem Value="21:30" data-depart="21:30">21:30</asp:ListItem>
-                    <asp:ListItem Value="22:00" data-depart="22:00">22:00</asp:ListItem>
-                    <asp:ListItem Value="22:30" data-depart="22:30">22:30</asp:ListItem>
-                    <asp:ListItem Value="23:00" data-depart="23:00">23:00</asp:ListItem>
-                    <asp:ListItem Value="23:30" data-depart="23:30">23:30</asp:ListItem>
-                </asp:DropDownList>
+                <asp:TextBox ID="txtReturnTime" runat="server" TextMode="Time" CssClass="control_style"></asp:TextBox>
+                 <asp:RequiredFieldValidator ID="requireReturnDate" runat="server" ErrorMessage="Drop Off Date is Required" ControlToValidate="txtReturnDate" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
+                 <br />
+                 <asp:RequiredFieldValidator ID="requireReturnTime" runat="server" ErrorMessage="Drop Off Time is Required" ControlToValidate="txtReturnTime" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
+                 <br />
+                 <asp:CompareValidator ID="compareStartEnd" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtReturnDate" ControlToValidate="txtDepartureDate" CssClass="validate" Operator="LessThan" ValidationGroup="filter" Display="Dynamic"></asp:CompareValidator>
             </div>
         <p>Add Date</p>
          </div>
@@ -156,7 +66,7 @@
         <!-- -->
         </div>
             </div>
-             <asp:Button ID="btnSearch" runat="server" Text="🔍Search" CssClass="search_btn_style" />
+             <asp:Button ID="btnSearch" runat="server" Text="🔍Search" CssClass="search_btn_style" OnClick="btnSearch_Click" />
         
        
     </section>

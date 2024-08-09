@@ -101,7 +101,7 @@
                     <div class="inputbox_full">
                         <asp:Label ID="lblNote" runat="server" Text="Note :" CssClass="label_left"></asp:Label>
                        
-                        <asp:TextBox ID="TxtNote" runat="server" TextMode="MultiLine" CSSClass="input_full"></asp:TextBox>
+                        <asp:TextBox ID="txtNote" runat="server" TextMode="MultiLine" CSSClass="input_full"></asp:TextBox>
                     </div>
                         
                    

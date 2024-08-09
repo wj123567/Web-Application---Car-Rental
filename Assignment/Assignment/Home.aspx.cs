@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace Assignment
 {
@@ -35,7 +38,30 @@ namespace Assignment
 
         }
 
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            String insertString = "INSERT INTO TestBook (location,pickup_date,pickup_time,dropoff_date,dropoff_time) VALUES (location,pickup_date,pickup_time,dropoff_date,dropoff_time)";
+            saveTripInfo(insertString);
+            Server.Transfer("infopg.aspx");
 
+        }
+
+        protected void saveTripInfo(string insertString)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(insertString, con);
+
+            com.Parameters.AddWithValue("@location", ddlLocation.SelectedValue);
+            com.Parameters.AddWithValue("@pickup_date", txtDepartureDate.Text);
+            com.Parameters.AddWithValue("@pickup_time", txtDepartureTime.Text);
+            com.Parameters.AddWithValue("@dropoff_date", txtReturnDate.Text);
+            com.Parameters.AddWithValue("@dropoff_time", txtReturnTime.Text);
+            
+
+            com.ExecuteNonQuery();
+            con.Close();
+        }
         // Mark items as disabled before rendering the page
         /*protected override void Render(HtmlTextWriter writer)
         {

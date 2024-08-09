@@ -56,24 +56,10 @@ function updateReturnDateTime() {
         // Set min attribute for return date and time
         returnDateInput.setAttribute('min', returnDateString);
 
-        //filter the return time only times equal to or later than the selected departure time.
-        filterReturnTimes(depTimeDropDown.value);
-
+       
     }
 }
 
-function filterReturnTimes(minTime) {
-    var returnTimeDropdown = document.getElementById('main_ddlReturnTime');
-    var options = returnTimeDropdown.options;
-
-    for (var i = 0; i < options.length; i++) {
-        if (options[i].value < minTime) {
-            options[i].disabled = true;
-        } else {
-            options[i].disabled = false;
-        }
-    }
-}
 
 window.onload = function () {
     document.getElementById('main_txtDepartureDate').addEventListener('change', updateReturnDateTime);

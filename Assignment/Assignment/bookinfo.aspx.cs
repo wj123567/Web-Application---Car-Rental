@@ -7,6 +7,9 @@ using System.Web.UI.WebControls;
 
 using System.IO;
 using System.Web.Services;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Net;
 
 namespace Assignment
 {
@@ -43,12 +46,41 @@ namespace Assignment
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
+            String insertString = "INSERT INTO TestBook (CustomerName,Email,Address,Country,CustomerPhone,Destination,Note,DriverName,DriverGender,DriverID,DriverPhone,DriverAge,DriverRace,DriverLicense,RentalPurpose) VALUES (@CustomerName,@Email,@Address,@Country,@CustomerPhone,@Destination,@Note,@DriverName,@DriverGender,@DriverID,@DriverPhone,@DriverAge,@DriverRace,@DriverLicense,@RentalPurpose)";
+            saveBookingInfo(insertString);
+
             Server.Transfer("payment_pg.aspx");
         }
 
         protected void previous_btn_Click(object sender, EventArgs e)
         {
             Server.Transfer("infopage.aspx");
+        }
+
+        protected void saveBookingInfo(string insertString)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(insertString, con);
+            
+            com.Parameters.AddWithValue("@CustomerName",txtName.Text);
+            com.Parameters.AddWithValue("@Email", txtEmail.Text);
+            com.Parameters.AddWithValue("@Address", txtAddress.Text);
+            com.Parameters.AddWithValue("@Country", ddlCountry.SelectedValue);
+            com.Parameters.AddWithValue("@CustomerPhone", txtPhoneNum.Text);
+            com.Parameters.AddWithValue("@Destination", ddlDestination.SelectedValue);
+            com.Parameters.AddWithValue("@Note", txtNote.Text);
+            com.Parameters.AddWithValue("@DriverName", txtDriverName.Text);
+            com.Parameters.AddWithValue("@DriverGender", rblDriverGender.SelectedValue);
+            com.Parameters.AddWithValue("@DriverID", txtDriverID.Text);
+            com.Parameters.AddWithValue("@DriverPhone", txtDriverPhoneNum.Text);
+            com.Parameters.AddWithValue("@DriverAge", ddlDriverAge.SelectedValue);
+            com.Parameters.AddWithValue("@DriverRace", ddlDriverRace.SelectedValue);
+            com.Parameters.AddWithValue("@DriverLicense", txtDriverLicenseNum.Text);
+            com.Parameters.AddWithValue("@RentalPurpose", ddlRentalPurpose.SelectedValue);
+
+            com.ExecuteNonQuery();
+            con.Close();
         }
     }
 }
