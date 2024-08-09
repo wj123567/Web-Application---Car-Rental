@@ -24,103 +24,103 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblLocation;
 
         /// <summary>
-        /// ddlLocation control.
+        /// ddlDepartureLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDepartureLocation;
 
         /// <summary>
-        /// lblDeparture control.
+        /// requireDepartureLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeparture;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireDepartureLocation;
 
         /// <summary>
-        /// txtDepartureDate control.
+        /// lblDepartureDateTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDepartureDate;
+        protected global::System.Web.UI.WebControls.Label lblDepartureDateTime;
 
         /// <summary>
-        /// txtDepartureTime control.
+        /// txtDepartureDateTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDepartureTime;
+        protected global::System.Web.UI.WebControls.TextBox txtDepartureDateTime;
 
         /// <summary>
-        /// requireDepartDate control.
+        /// requireDepartDateTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireDepartDate;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireDepartDateTime;
 
         /// <summary>
-        /// requireDepartTime control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireDepartTime;
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// lblReturn control.
+        /// ddlReturnLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblReturn;
+        protected global::System.Web.UI.WebControls.DropDownList ddlReturnLocation;
 
         /// <summary>
-        /// txtReturnDate control.
+        /// requireReturnLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReturnDate;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireReturnLocation;
 
         /// <summary>
-        /// txtReturnTime control.
+        /// lblReturnDateTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReturnTime;
+        protected global::System.Web.UI.WebControls.Label lblReturnDateTime;
 
         /// <summary>
-        /// requireReturnDate control.
+        /// txtReturnDateTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireReturnDate;
+        protected global::System.Web.UI.WebControls.TextBox txtReturnDateTime;
 
         /// <summary>
-        /// requireReturnTime control.
+        /// requireReturnDateTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireReturnTime;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireReturnDateTime;
 
         /// <summary>
         /// compareStartEnd control.

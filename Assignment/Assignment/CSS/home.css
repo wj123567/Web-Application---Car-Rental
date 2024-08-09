@@ -84,9 +84,9 @@
         }
 
 .booking_container .form_container {
-    margin-top: 50px;
+
     display: grid;
-    grid-template-columns: repeat(3,1fr) auto;
+    grid-template-columns: repeat(2,1fr) auto;
     gap: 1px;
 }
 
@@ -95,17 +95,60 @@
 }
 
 .booking_container .form_group {
+   
+    width:90%;
+    height:100%;
+    margin:auto;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-    .booking_container .form_group span {
-        padding: 10px;
-        font-size: 1.5rem;
-        color: var(--text-dark);
-        background-color: var(--extra-light);
-        border-radius: 1rem;
+.booking_container .form_group span.home_icon {
+    padding: 10px;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    background-color: var(--extra-light);
+    border-radius: 1rem;
+}
+
+.home_pickup {
+    width: 40%;
+    height: 40%;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-dark);
+    background-color: var(--extra-light);
+    border-radius: 60%;
+    text-align: center;
+    box-shadow: inset 0px 5px 10px 5px rgb(96, 130, 182,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .home_pickup:hover {
+        transform: translateX(-5px);
+        box-shadow: 0 0 80px #4169E1;
+    }
+
+.home_dropoff {
+    width: 40%;
+    height: 40%;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-dark);
+    background-color: var(--extra-light);
+    border-radius: 60%;
+    text-align: center;
+    box-shadow: inset 0px 5px 10px 5px rgb(96, 130, 182,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    .home_dropoff:hover {
+        transform: translateX(-5px);
+        box-shadow: 0 0 80px #4169E1;
     }
 
 .booking_container .input_group {
@@ -116,6 +159,7 @@
     height: auto;
     top: 0px;
     left: 0px;
+    margin-bottom:40px;
 }
 /*display:flex;*/
 
@@ -180,7 +224,7 @@
     background-color: var(--extra-light) !important;
     border-radius: 10px !important;
     text-align: center;
-    width: 40%;
+    width: 50%;
 }
 
 .search_btn_style {

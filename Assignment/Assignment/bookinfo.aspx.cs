@@ -11,13 +11,34 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Net;
 
+using System.Globalization;
+
 namespace Assignment
 {
     public partial class bookinfo : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                List<string> objcountries = new List<string>();
+                CultureInfo[] objculture = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
+                foreach (CultureInfo getculture in objculture)
+                {
+                    RegionInfo objregion = new RegionInfo(getculture.LCID);
+                    if (!(objcountries.Contains(objregion.EnglishName)))
+                    {
+                        objcountries.Add(objregion.EnglishName);
+                    }
+                }
+                objcountries.Sort();
+                ddlCountry.DataSource = objcountries;
+                ddlCountry.DataBind();
 
+                txtDriverBirth.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
+                txtDriverBirth.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
+            }
+        
         }
 
         [WebMethod]
@@ -46,7 +67,7 @@ namespace Assignment
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            String insertString = "INSERT INTO TestBook (CustomerName,Email,Address,Country,CustomerPhone,Destination,Note,DriverName,DriverGender,DriverID,DriverPhone,DriverAge,DriverRace,DriverLicense,RentalPurpose) VALUES (@CustomerName,@Email,@Address,@Country,@CustomerPhone,@Destination,@Note,@DriverName,@DriverGender,@DriverID,@DriverPhone,@DriverAge,@DriverRace,@DriverLicense,@RentalPurpose)";
+            String insertString = "INSERT INTO TestBook (CustomerName,Email,Address,Country,CustomerPhone,Destination,Note,DriverName,DriverGender,DriverID,DriverPhone,DriverBirth,DriverRace,DriverLicense,RentalPurpose) VALUES (@CustomerName,@Email,@Address,@Country,@CustomerPhone,@Destination,@Note,@DriverName,@DriverGender,@DriverID,@DriverPhone,@DriverBirth,@DriverRace,@DriverLicense,@RentalPurpose)";
             saveBookingInfo(insertString);
 
             Server.Transfer("payment_pg.aspx");
@@ -74,7 +95,7 @@ namespace Assignment
             com.Parameters.AddWithValue("@DriverGender", rblDriverGender.SelectedValue);
             com.Parameters.AddWithValue("@DriverID", txtDriverID.Text);
             com.Parameters.AddWithValue("@DriverPhone", txtDriverPhoneNum.Text);
-            com.Parameters.AddWithValue("@DriverAge", ddlDriverAge.SelectedValue);
+            com.Parameters.AddWithValue("@DriverBirth", txtDriverBirth.Text);
             com.Parameters.AddWithValue("@DriverRace", ddlDriverRace.SelectedValue);
             com.Parameters.AddWithValue("@DriverLicense", txtDriverLicenseNum.Text);
             com.Parameters.AddWithValue("@RentalPurpose", ddlRentalPurpose.SelectedValue);

@@ -59,9 +59,7 @@
                         <div class="inputbox_right" style="padding-top:60px;">
                             <asp:Label ID="lblCountryOrigin" runat="server" Text="Country of Origin : " CssClass="label_right"></asp:Label>
                             <asp:DropDownList ID="ddlCountry" runat="server" CssClass="input_right">
-                                <asp:ListItem Value="default" Selected="true" disabled="True">Please Select a Country</asp:ListItem>
-                                <asp:ListItem Value="ZW">Zimbabwe</asp:ListItem>
-
+                               
                             </asp:DropDownList>
                              <br />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Please Select [Country]." CssClass="validate" ControlToValidate="ddlCountry" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -225,22 +223,20 @@
                         </div> 
                         <div class="inputbox_left">
                            <asp:Label ID="lblDriverPhoneNum" runat="server" Text="Driver Phone Number :" CssClass="label_left"></asp:Label>
-                               <asp:TextBox ID="txtDriverPhoneNum" runat="server" CssClass="input_left"></asp:TextBox>
+                               <asp:TextBox ID="txtDriverPhoneNum" runat="server" TextMode="Phone" CssClass="form-control d-block" ></asp:TextBox>
                              <br />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Please Enter [Driver Phone Number]." CssClass="validate driver_validate" ControlToValidate="txtDriverPhoneNum" Display="Dynamic" ValidationGroup="DriverValidation" Enabled="false"></asp:RequiredFieldValidator>
+                             <asp:CustomValidator ID="validPhoneNum" runat="server" ErrorMessage="Invalid Phone Number" ClientValidationFunction="validatePhone" ControlToValidate="txtDriverPhoneNum"  CssClass="validate" ValidateEmptyText="True"></asp:CustomValidator>
                         </div>
                     </div>
                    </div>
                     <div class="col" >
                         <div id="driverFieldsRight">
                             <div class="inputbox_right" style="padding-top:80px;">
-                                <asp:Label ID="lblDriverAge" runat="server" Text="Driver Age" CssClass="label_right"></asp:Label>
-                                <asp:DropDownList ID="ddlDriverAge" runat="server" CssClass="input_right">
-                                    <asp:ListItem Value="default" Selected="True">Please Select</asp:ListItem>
-                                    <asp:ListItem Value="23">23</asp:ListItem>
-                                    <asp:ListItem Value="24">24</asp:ListItem>
-                                </asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="Please Select [Driver Age]." CssClass="validate driver_validate" ControlToValidate="ddlDriverAge" Display="Dynamic"  Enabled="false"></asp:RequiredFieldValidator>
+                                <asp:Label ID="lblDriverBirth" runat="server" Text="Driver Birth Date"  CssClass="label_right"></asp:Label>
+                                <asp:TextBox ID="txtDriverBirth" runat="server" TextMode="Date" CssClass="input_right"></asp:TextBox>
+                                <br />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="Please Select [Driver Birth Date]." CssClass="validate driver_validate" ControlToValidate="txtDriverBirth" Display="Dynamic"  Enabled="false"></asp:RequiredFieldValidator>
                             </div>    
                             <div class="inputbox_right">
                                 <asp:Label ID="lblDriverRace" runat="server" Text="Driver Race" CssClass="label_right"></asp:Label>
@@ -398,4 +394,25 @@
             });
         });
 </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/intlTelInput.min.js"></script>
+
+    <script>
+        const input = document.querySelector("#<%= txtDriverPhoneNum.ClientID %>");
+        const iti = window.intlTelInput(input, {
+            initialCountry: "auto",
+            geoIpLookup: callback => {
+                fetch("https://ipapi.co/json")
+                    .then(res => res.json())
+                    .then(data => callback(data.country_code))
+                    .catch(() => callback("us"));
+            },
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/utils.js",
+        });
+
+        function validatePhone(sender, args) {
+            args.IsValid = iti.isValidNumber();
+        }
+    </script>
+
 </asp:Content>

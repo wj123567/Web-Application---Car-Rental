@@ -17,50 +17,52 @@
         </div>
 -->
         <div class="form_container">
+            
+            
         <div class="form_group">
-            <span style="margin-left:20px;"><i class="ri-map-pin-2-line"></i></span>
+            <h5 class="home_pickup">Pick Up</h5>
+            <span class="home_icon" style="margin-left:20px;"><i class="ri-map-pin-2-line"></i></span>
             <div class="input_content">
                 <div class="input_group">
                    <asp:Label ID="lblLocation" runat="server" Text="Location" CssClass="home_label_style"></asp:Label>
-                    <asp:DropDownList ID="ddlLocation" runat="server" CssClass="control_style">
-                         
+                    <asp:DropDownList ID="ddlDepartureLocation" runat="server" CssClass="control_style"  onclick="removeFirstOption(this)">
+                        <asp:ListItem Value="default" >Select Pick Up Location</asp:ListItem> 
+                        <asp:ListItem Value="123">123</asp:ListItem>
                     </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Pick Up Location is Required" ControlToValidate="ddlDepartureLocation" InitialValue="default" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
+                    <br />
+                 <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>                    
+                <asp:TextBox ID="txtDepartureDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="requireDepartDateTime" runat="server" ErrorMessage="Pick Up Date&Time is Required" ControlToValidate="txtDepartureDateTime" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
+                    
                 </div>
-                <p>Where to pick up?</p>
+               
             </div>
         </div>
         
-        <div class="form_group">
-        <span><i class="ri-calendar-line"></i></span>
-        <div class="input_content">
-            <div class="input_group">
-                <asp:Label ID="lblDeparture" runat="server" Text="Pick Up" CssClass="home_label_style"></asp:Label>
-                <asp:TextBox ID="txtDepartureDate" runat="server" TextMode="Date" CssClass="control_style"></asp:TextBox>
-                <asp:TextBox ID="txtDepartureTime" runat="server" TextMode="Time" CssClass="control_style"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="requireDepartDate" runat="server" ErrorMessage="Pick Up Date is Required" ControlToValidate="txtDepartureDate" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
-                <br />
-                <asp:RequiredFieldValidator ID="requireDepartTime" runat="server" ErrorMessage="Pick Up Time is Required" ControlToValidate="txtDepartureTime" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
-                <br />
-        </div>
-
-        <p>Add Date</p>
-            </div>
-        </div>
         <!-- -->
         <div class="form_group">
-        <span><i class="ri-calendar-line"></i></span>
+            <h5 class="home_dropoff" >Drop Off</h5>
+        <span class="home_icon"  style="margin-left:20px;"><i class="ri-map-pin-2-line"></i></span>
         <div class="input_content">
             <div class="input_group">
-                <asp:Label ID="lblReturn" runat="server" Text="Drop Off" CssClass="home_label_style"></asp:Label>
-                <asp:TextBox ID="txtReturnDate" runat="server" TextMode="Date" CssClass="control_style "></asp:TextBox>
-                <asp:TextBox ID="txtReturnTime" runat="server" TextMode="Time" CssClass="control_style"></asp:TextBox>
-                 <asp:RequiredFieldValidator ID="requireReturnDate" runat="server" ErrorMessage="Drop Off Date is Required" ControlToValidate="txtReturnDate" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
-                 <br />
-                 <asp:RequiredFieldValidator ID="requireReturnTime" runat="server" ErrorMessage="Drop Off Time is Required" ControlToValidate="txtReturnTime" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
-                 <br />
-                 <asp:CompareValidator ID="compareStartEnd" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtReturnDate" ControlToValidate="txtDepartureDate" CssClass="validate" Operator="LessThan" ValidationGroup="filter" Display="Dynamic"></asp:CompareValidator>
+                        <asp:Label ID="Label1" runat="server" Text="Location" CssClass="home_label_style"></asp:Label>
+                        <asp:DropDownList ID="ddlReturnLocation" runat="server" CssClass="control_style">
+                             <asp:ListItem Value="default" >Select Drop Off Location</asp:ListItem> 
+                             <asp:ListItem Value="123">123</asp:ListItem>
+                        </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="requireReturnLocation" runat="server" ErrorMessage="Return Location is Required" ControlToValidate="ddlReturnLocation" InitialValue="default" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
+                <br />
+                
+                <asp:Label ID="lblReturnDateTime" runat="server" Text="Date & Time" CssClass="home_label_style" ></asp:Label>   
+                <asp:TextBox ID="txtReturnDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="requireReturnDateTime" runat="server" ErrorMessage="Drop Off Date&Time is Required" ControlToValidate="txtReturnDateTime"  CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+                
+                
+                 
+                 <asp:CompareValidator ID="compareStartEnd" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtReturnDateTime" ControlToValidate="txtDepartureDateTime" CssClass="validate" Operator="LessThan" ValidationGroup="filter" Display="Dynamic"></asp:CompareValidator>
             </div>
-        <p>Add Date</p>
+        
          </div>
          </div>
         <!-- -->
@@ -102,4 +104,6 @@
      </div>
  </div>
 </section>
+
+
 </asp:Content>

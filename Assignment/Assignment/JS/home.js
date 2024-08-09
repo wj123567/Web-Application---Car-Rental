@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+   
 });
 
 //for linking departure and arrival time
@@ -67,6 +68,7 @@ window.onload = function () {
 };
 
 
+
 /*time restriction
 document.addEventListener('DOMContentLoaded', function () {
     var timeInput = document.getElementById('main_txtDepartureTime');
@@ -81,4 +83,5 @@ document.addEventListener('DOMContentLoaded', function () {
             timeInput.value = ""; // Clear the invalid time
         }
     });
+    
 });*/
