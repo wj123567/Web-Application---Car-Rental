@@ -38,13 +38,13 @@
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted d-block">Date Time:</span>
                     <span>Start :&nbsp;</span>
-                    <asp:TextBox ID="txtStartTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline" Width="180px" ValidationGroup="filter"></asp:TextBox>
+                    <asp:TextBox ID="txtStartTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline" Width="180px" ValidationGroup="filter"></asp:TextBox>  
+                    <br />
+                    <asp:RequiredFieldValidator ID="requireStart" runat="server" ErrorMessage="Start Date is Required" ControlToValidate="txtStartTime" CssClass="validate" ValidationGroup="filter" Display="Static"></asp:RequiredFieldValidator>
                     <br />
                     <span class="mt-2">End &nbsp; :&nbsp;</span>
                     <asp:TextBox ID="txtEndTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline mt-2" Width="180px" ValidationGroup="filter"></asp:TextBox>
-                    <br />
-                    <asp:RequiredFieldValidator ID="requireStart" runat="server" ErrorMessage="Start Date is Required" ControlToValidate="txtStartTime" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
-                    <br />
+                    <br />                    
                     <asp:RequiredFieldValidator ID="requireEnd" runat="server" ErrorMessage="End Date is Required" ControlToValidate="txtEndTime" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
                     <br />
                     <asp:CompareValidator ID="compareStartEnd" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtEndTime" ControlToValidate="txtStartTime" CssClass="validate" Operator="LessThan" ValidationGroup="filter" Display="Dynamic"></asp:CompareValidator>
@@ -53,7 +53,7 @@
             <li class="nav-item">
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted">Car Brand:</span>
-                    <asp:CheckBoxList ID="cblCarBrand" runat="server" CssClass="checkboxlist" DataSourceID="CarBrand" DataTextField="BrandName" DataValueField="BrandName"></asp:CheckBoxList>
+                    <asp:CheckBoxList ID="cblCarBrand" runat="server" CssClass="checkboxlist" DataSourceID="CarBrand" DataTextField="BrandName" DataValueField="BrandName" RepeatColumns="4" RepeatLayout="Table" RepeatDirection="Horizontal"></asp:CheckBoxList>
                 </a>
             </li>
             <li class="nav-item">
