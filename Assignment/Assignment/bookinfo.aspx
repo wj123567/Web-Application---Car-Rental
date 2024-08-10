@@ -242,7 +242,7 @@
                             <asp:ListItem Value="M">1234</asp:ListItem>
                         </asp:DropDownList>
                         <div id="driverFieldsRight">
-                            <div class="inputbox_right" style="margin-top:100px" >
+                            <div class="inputbox_right"  >
                                 <asp:Label ID="lblDriverBirth" runat="server" Text="Driver Birth Date"  CssClass="label_right"></asp:Label>
                                 <asp:TextBox ID="txtDriverBirth" runat="server" TextMode="Date" CssClass="input_right"></asp:TextBox>
                                 <br />
@@ -272,7 +272,7 @@
                   </div>
                 </div>
             </div>
-        <div class="photo_container">
+        <div class="photo_container" id="photoField">
             <div class="row">
                 <div class="col">
                     <h3>Photo Attachment</h3>

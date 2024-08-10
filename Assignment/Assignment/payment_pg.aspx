@@ -26,22 +26,26 @@
         <div class="row">
           <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12 payment_left_side" >
             <h4>Payment Info</h4>
+             
             <div class="shadow-sm bg-white p-4 my-4">
                 <div class="col-sm-6 mt-5">
-                  <asp:Label ID="lblCardName" runat="server" Text="Name on the card" CssClass="label_style"></asp:Label>
+                  <asp:Label ID="lblCardName" runat="server" Text="Cardholder Name" CssClass="label_style"></asp:Label>
                   <asp:TextBox ID="txtCardName" runat="server" CssClass="form-control my-1"></asp:TextBox>
                 </div>
                 <div class="col-sm-8 mt-4">
                   <asp:Label ID="lblCardNumber" runat="server" Text="Card Number" CssClass="label_style"></asp:Label>
+                    <asp:Label ID="lblVisaCard" runat="server" Text="" CssClass="fab fa-cc-visa fa-lg"></asp:Label>
+                    <asp:Label ID="lblMasterCard" runat="server" Text="" CssClass="fab fa-cc-mastercard fa-lg"></asp:Label>
+                    <asp:Label ID="lblAmexCard" runat="server" Text="" CssClass="fab fa-cc-amex fa-lg"></asp:Label>
                   <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control my-1"></asp:TextBox>
                 </div>
                 <div class="row">
                   <div class="col-sm-3 col-xs-6 mt-4">
-                    <asp:Label ID="lblExpiry" runat="server" Text="Card Expiry (mm/yy)" CssClass="label_style"></asp:Label>
-                    <asp:TextBox ID="txtExpiry" runat="server" TextMode="Date" CssClass="form-control my-1"></asp:TextBox>
+                    <asp:Label ID="lblExpiry" runat="server" Text="Expiry Date" CssClass="label_style"></asp:Label>
+                    <asp:TextBox ID="txtExpiry" runat="server" TextMode="Month" CssClass="form-control my-1"></asp:TextBox>
                   </div>
                   <div class="col-sm-3 col-xs-6 mt-4">      
-                    <asp:Label ID="lblCvv" runat="server" Text="CVV" CssClass="label_style"></asp:Label>
+                    <asp:Label ID="lblCvv" runat="server" Text="Security Code(CVV)" CssClass="label_style"></asp:Label>
                     <asp:TextBox ID="txtCvv" runat="server" CssClass="form-control my-1"></asp:TextBox>
                   </div>
                 </div>

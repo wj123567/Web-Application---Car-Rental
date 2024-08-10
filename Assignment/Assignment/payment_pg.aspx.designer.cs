@@ -42,6 +42,33 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblCardNumber;
 
         /// <summary>
+        /// lblVisaCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblVisaCard;
+
+        /// <summary>
+        /// lblMasterCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMasterCard;
+
+        /// <summary>
+        /// lblAmexCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAmexCard;
+
+        /// <summary>
         /// txtCardNumber control.
         /// </summary>
         /// <remarks>

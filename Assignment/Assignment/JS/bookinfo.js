@@ -2,15 +2,18 @@
     const chkDriver = document.getElementById('main_chkDriver');
     const driverFieldsLeft = document.getElementById('driverFieldsLeft');
     const driverFieldsRight = document.getElementById('driverFieldsRight');
+    const photoFields = document.getElementById('photoField')
 
     function toggleDriverFields() {
         if (chkDriver.checked) {
             driverFieldsLeft.style.display = 'block';
             driverFieldsRight.style.display = 'block';
+            photoFields.style.display = 'block';
             enableDriverValidation(true);
         } else {
             driverFieldsLeft.style.display = 'none';
             driverFieldsRight.style.display = 'none';
+            photoFields.style.display = 'none';
             enableDriverValidation(false);
         }
     }
