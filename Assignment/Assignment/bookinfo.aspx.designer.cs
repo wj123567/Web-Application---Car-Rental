@@ -249,13 +249,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblDriverGender;
 
         /// <summary>
-        /// rblDriverGender control.
+        /// ddlDriverGender control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblDriverGender;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDriverGender;
 
         /// <summary>
         /// RequiredFieldValidator8 control.
@@ -330,6 +330,24 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.CustomValidator validPhoneNum;
 
         /// <summary>
+        /// lblExistingDriver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblExistingDriver;
+
+        /// <summary>
+        /// ddlExistingDriver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlExistingDriver;
+
+        /// <summary>
         /// lblDriverBirth control.
         /// </summary>
         /// <remarks>
@@ -355,33 +373,6 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator11;
-
-        /// <summary>
-        /// lblDriverRace control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDriverRace;
-
-        /// <summary>
-        /// ddlDriverRace control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDriverRace;
-
-        /// <summary>
-        /// RequiredFieldValidator12 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator12;
 
         /// <summary>
         /// lblDriverLicenseNum control.
@@ -427,6 +418,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRentalPurpose;
+
+        /// <summary>
+        /// RequiredFieldValidator12 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator12;
 
         /// <summary>
         /// btnActivate control.

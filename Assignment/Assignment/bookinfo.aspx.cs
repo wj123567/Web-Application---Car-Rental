@@ -67,7 +67,7 @@ namespace Assignment
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            String insertString = "INSERT INTO TestBook (CustomerName,Email,Address,Country,CustomerPhone,Destination,Note,DriverName,DriverGender,DriverID,DriverPhone,DriverBirth,DriverRace,DriverLicense,RentalPurpose) VALUES (@CustomerName,@Email,@Address,@Country,@CustomerPhone,@Destination,@Note,@DriverName,@DriverGender,@DriverID,@DriverPhone,@DriverBirth,@DriverRace,@DriverLicense,@RentalPurpose)";
+            String insertString = "INSERT INTO TestBook (CustomerName,Email,Address,Country,CustomerPhone,Destination,Note,DriverName,DriverGender,DriverID,DriverPhone,DriverBirth,DriverLicense,RentalPurpose) VALUES (@CustomerName,@Email,@Address,@Country,@CustomerPhone,@Destination,@Note,@DriverName,@DriverGender,@DriverID,@DriverPhone,@DriverBirth,@DriverLicense,@RentalPurpose)";
             saveBookingInfo(insertString);
 
             Server.Transfer("payment_pg.aspx");
@@ -92,11 +92,10 @@ namespace Assignment
             com.Parameters.AddWithValue("@Destination", ddlDestination.SelectedValue);
             com.Parameters.AddWithValue("@Note", txtNote.Text);
             com.Parameters.AddWithValue("@DriverName", txtDriverName.Text);
-            com.Parameters.AddWithValue("@DriverGender", rblDriverGender.SelectedValue);
+            com.Parameters.AddWithValue("@DriverGender", ddlDriverGender.SelectedValue);
             com.Parameters.AddWithValue("@DriverID", txtDriverID.Text);
             com.Parameters.AddWithValue("@DriverPhone", txtDriverPhoneNum.Text);
             com.Parameters.AddWithValue("@DriverBirth", txtDriverBirth.Text);
-            com.Parameters.AddWithValue("@DriverRace", ddlDriverRace.SelectedValue);
             com.Parameters.AddWithValue("@DriverLicense", txtDriverLicenseNum.Text);
             com.Parameters.AddWithValue("@RentalPurpose", ddlRentalPurpose.SelectedValue);
 

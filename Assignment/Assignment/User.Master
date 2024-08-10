@@ -23,6 +23,7 @@
     <script src="JS/home.js" type="text/javascript"></script>
     <script src="JS/infopage.js" type="text/javascript"></script>
     <script src="JS/bookinfo.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/css/intlTelInput.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js"></script>
     <title>OnlyCar</title>

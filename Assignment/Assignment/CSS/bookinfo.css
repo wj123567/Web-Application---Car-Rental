@@ -94,11 +94,6 @@
     display: block;
 }
 
-.radio_btn_style {
-    border:1px solid black;
-    display: flex;
-    flex-direction: row;
-}
 
 
 
@@ -235,6 +230,7 @@
     vertical-align:top;
 }
 
+
 /*input#input_verify:focus:valid {
     background: rgba(62, 0, 69, 0.9) url(wz_image/tick.png) right/contain no-repeat;
 }
@@ -342,7 +338,6 @@ input#submit:focus {
         margin-right: 20px;
     }
 }*/
-
 .charges_summary {
     margin-top: 30px;
 }
@@ -398,4 +393,27 @@ input#submit:focus {
     padding: 20px;
     margin-bottom: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* for tel css*/
+.image-frame-driver {
+    width: 200px;
+    height: 150px;
+    border: 1px solid gray;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+    .image-frame-driver img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.iti {
+    width: 100%;
 }
