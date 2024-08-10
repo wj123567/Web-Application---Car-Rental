@@ -58,10 +58,10 @@ namespace Assignment
         protected void searchCarData()
         {
 
-            string searchString = Session["Search"].ToString();
+            string searchString = Session["Search"].ToString().Replace(" ","");
             Session["Search"] = null;
 
-            string findCar = "SELECT * FROM Car WHERE CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString AND IsDelisted = 0";
+            string findCar = "SELECT * FROM Car WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) AND IsDelisted = 0";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
            
@@ -85,6 +85,8 @@ namespace Assignment
                 productRepeater.DataSource = ds.Tables["CarData"];
                         productRepeater.DataBind();
                     }
+
+
 
             con.Close();
         }

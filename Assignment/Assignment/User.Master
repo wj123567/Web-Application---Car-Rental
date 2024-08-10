@@ -80,7 +80,7 @@
               <hr class="dropdown-divider" />
             </li>
             <li>
-                <asp:Button ID="logoutBtn" runat="server" Text="Logout" CssClass="dropdown-item" OnClick="logoutBtn_Click" />
+                <asp:Button ID="logoutBtn" runat="server" Text="Logout" CssClass="dropdown-item" OnClick="logoutBtn_Click" ValidationGroup="logoutGroup" />
             </li>
           </ul>
         </li>

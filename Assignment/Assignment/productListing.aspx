@@ -85,7 +85,7 @@
         <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="btn btn-block float-end mx-3 text-white" style="background-color:#3490dc;" OnClick="btnFilter_Click" ValidationGroup="filter"/>
     </div>
 </div>
-  
+          
 <div class="container-fluid d-flex justify-content-center pt-5 mx-auto" style="width:100%">
     <div class="row">
         <asp:Label ID="lblSearchFail" runat="server"></asp:Label>  
@@ -93,8 +93,9 @@
             <ItemTemplate>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 shadow-sm" style="background-color:#effaf6;">
                     <div class="card h-100" style="background-color:#f0f9f5;">
-                        <div class="mx-auto img-size">
+                        <div class="mx-auto img-size">                        
                         <asp:Image ID="CarImage" runat="server" ImageUrl='<%# Eval("CarImage") %>' CssClass="img-fluid card-img-top" />
+                       <div style="width:1500px;"></div>
                        </div>
                         <div class="card-body pt-0 px-3">
                             <div class="d-flex flex-row justify-content-between mb-0">
