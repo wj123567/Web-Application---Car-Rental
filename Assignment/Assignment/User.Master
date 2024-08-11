@@ -20,6 +20,7 @@
     <link href="CSS/bookingrecord.css" rel="stylesheet" />
     <link href="CSS/bookingrecorddetail.css" rel="stylesheet" />
     <link href="CSS/webcam.css" rel="stylesheet" />
+    <link href="CSS/RewardPoint.css" rel="stylesheet" />
     <script src="JS/home.js" type="text/javascript"></script>
     <script src="JS/infopage.js" type="text/javascript"></script>
     <script src="JS/bookinfo.js" type="text/javascript"></script>
