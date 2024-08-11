@@ -25,11 +25,8 @@
             <div class="input_content">
                 <div class="input_group">
                    <asp:Label ID="lblLocation" runat="server" Text="Location" CssClass="home_label_style"></asp:Label>
-                    <asp:DropDownList ID="ddlDepartureLocation" runat="server" CssClass="control_style"  onclick="removeFirstOption(this)">
-                        <asp:ListItem Value="default" >Select Pick Up Location</asp:ListItem> 
-                        <asp:ListItem Value="123">123</asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Pick Up Location is Required" ControlToValidate="ddlDepartureLocation" InitialValue="default" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
+                    <asp:TextBox ID="txtDepartureLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Pick-up Location"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Pick Up Location is Required" ControlToValidate="txtDepartureLocation"  CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     <br />
                  <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>                    
                 <asp:TextBox ID="txtDepartureDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style"></asp:TextBox>
@@ -47,11 +44,8 @@
         <div class="input_content">
             <div class="input_group">
                         <asp:Label ID="Label1" runat="server" Text="Location" CssClass="home_label_style"></asp:Label>
-                        <asp:DropDownList ID="ddlReturnLocation" runat="server" CssClass="control_style">
-                             <asp:ListItem Value="default" >Select Drop Off Location</asp:ListItem> 
-                             <asp:ListItem Value="123">123</asp:ListItem>
-                        </asp:DropDownList>
-                <asp:RequiredFieldValidator ID="requireReturnLocation" runat="server" ErrorMessage="Return Location is Required" ControlToValidate="ddlReturnLocation" InitialValue="default" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:TextBox ID="txtReturnLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Return Location"> </asp:TextBox>
+                <asp:RequiredFieldValidator ID="requireReturnLocation" runat="server" ErrorMessage="Return Location is Required" ControlToValidate="txtReturnLocation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                 <br />
                 
                 <asp:Label ID="lblReturnDateTime" runat="server" Text="Date & Time" CssClass="home_label_style" ></asp:Label>   
@@ -69,9 +63,36 @@
         </div>
             </div>
              <asp:Button ID="btnSearch" runat="server" Text="🔍Search" CssClass="search_btn_style" OnClick="btnSearch_Click" />
-        
-       
     </section>
+
+</div>
+
+          <div id="locationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="modal_close">&times;</span>
+        <h2>Select Location</h2>
+        <div class="modal-body">
+            <div class="grid-container">
+                <div class="region">
+                    <h3>Region</h3>
+                    <ul>
+                        <li>Johor</li>
+                    </ul>
+                </div>
+                <div class="popular-points">
+                    <h3>Popular Pick-up Points</h3>
+                    <ul>
+                        <li>JB Sentral</li>
+                    </ul>
+                    <h3>Popular Hotels</h3>
+                    <ul>
+                        <li>Legoland Hotel</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <asp:Button ID="modalOkBtn" runat="server" Text="Ok" />
+    </div>
 </div>
 
      <section class=" plan_container">
@@ -105,5 +126,48 @@
  </div>
 </section>
 
+    <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the modal
+        var modal = document.getElementById("locationModal");
 
+        // Get the inputs that open the modal
+        var departureInput = document.getElementById('<%= txtDepartureLocation.ClientID %>');
+        var returnInput = document.getElementById('<%= txtReturnLocation.ClientID %>');
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementById("modal_close");
+
+        // Get the OK button
+        var okButton = document.getElementById("<%= modalOkBtn.ClientID %>");
+
+        // Open the modal when input is clicked
+        departureInput.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        returnInput.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        // Close the modal when the user clicks on <span> (x)
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // Close the modal when the user clicks on the OK button
+        if (okButton) {
+            okButton.onclick = function () {
+                modal.style.display = "none";
+            }
+        }
+
+        // Close the modal when the user clicks anywhere outside of the modal
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+    });
+</script>
 </asp:Content>
