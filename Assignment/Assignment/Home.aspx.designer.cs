@@ -24,13 +24,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblLocation;
 
         /// <summary>
-        /// ddlDepartureLocation control.
+        /// txtDepartureLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDepartureLocation;
+        protected global::System.Web.UI.WebControls.TextBox txtDepartureLocation;
 
         /// <summary>
         /// requireDepartureLocation control.
@@ -78,13 +78,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// ddlReturnLocation control.
+        /// txtReturnLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlReturnLocation;
+        protected global::System.Web.UI.WebControls.TextBox txtReturnLocation;
 
         /// <summary>
         /// requireReturnLocation control.
@@ -139,5 +139,14 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearch;
+
+        /// <summary>
+        /// modalOkBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button modalOkBtn;
     }
 }

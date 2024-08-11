@@ -1,30 +1,58 @@
 ﻿//for location
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
 
+    // Get the modal
+    var modal = document.getElementById("locationModal");
 
-    var ddl = document.getElementById('main_ddlLocation');
+    // Get the button that opens the modal
+    var departureInput = document.getElementById('main_txtDepartureLocation');
+    var returnInput = document.getElementById('main_txtReturnLocation');
 
-    var options = ddl.options;
+    // Get the <span> element that closes the modal
+    var span = document.getElementById("modal_close");
+    var okButton = document.getElementById("<%= modalOkBtn.ClientID %>");
 
-    for (var i = 0; i < options.length; i++) {
-        let value = options[i].value;
+    // Open the modal when input is clicked
+    departureInput.onclick = function () {
+        modal.style.display = "block";
+    }
 
-        if (value === "batu_feringghi" || value === "bukit_mertajam") {
-            options[i].classList.add("selectable"); // Example styling
-        }
+    returnInput.onclick = function () {
+        modal.style.display = "block";
+    }
 
-        if (value === "penang_island" || value === "penang_mainland") {
-            options[i].classList.add("non-selectable"); // Apply non-selectable styling
+    // Close the modal when the user clicks on <span> (x)
+    span.onclick = function () {
+        console.log("close btn clicked");
+        modal.style.display = "none";
+    }
 
-            options[i].disabled = true; // Make option disabled
+    // Close the modal when the user clicks on the OK button
+    if (okButton) {
+        okButton.onclick = function () {
+            modal.style.display = "none";
         }
     }
 
-   
-});
+    // Close the modal when the user clicks anywhere outside of the modal
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+
+});*/
+
+
+
+
+
+
+
+
 
 //for linking departure and arrival time
-function updateReturnDateTime() {
+/*function updateReturnDateTime() {
     var depDateInput = document.getElementById('main_txtDepartureDate');
     var depTimeDropDown = document.getElementById('main_ddlDepartureTime');
     var returnDateInput = document.getElementById('main_txtReturnDate');
@@ -65,7 +93,7 @@ function updateReturnDateTime() {
 window.onload = function () {
     document.getElementById('main_txtDepartureDate').addEventListener('change', updateReturnDateTime);
     document.getElementById('main_ddlDepartureTime').addEventListener('change', updateReturnDateTime);
-};
+};*/
 
 
 
