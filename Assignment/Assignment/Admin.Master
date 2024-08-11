@@ -48,7 +48,7 @@
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">User Management</a>
+                            <a href="UserManagement.aspx" class="sidebar-link">User Management</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="driverManagement.aspx" class="sidebar-link">Driver Management</a>
