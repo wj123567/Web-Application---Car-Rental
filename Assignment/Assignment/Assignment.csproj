@@ -81,6 +81,7 @@
     <Content Include="CSS\home.css" />
     <Content Include="CSS\payment_pg.css" />
     <Content Include="CSS\driverManagement.css" />
+    <Content Include="CSS\userManagement.css" />
     <Content Include="CSS\tracking.css" />
     <Content Include="driverManagement.aspx" />
     <Content Include="driver.aspx" />
