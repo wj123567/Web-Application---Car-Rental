@@ -100,6 +100,7 @@
     <Content Include="JS\infopage.js" />
     <Content Include="payment.aspx" />
     <Content Include="payment_pg.aspx" />
+    <Content Include="RewardPoint.aspx" />
     <Content Include="security.aspx" />
     <Content Include="CSS\profile.css" />
     <Content Include="CSS\admin.css" />
@@ -206,6 +207,13 @@
     </Compile>
     <Compile Include="payment_pg.aspx.designer.cs">
       <DependentUpon>payment_pg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RewardPoint.aspx.cs">
+      <DependentUpon>RewardPoint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RewardPoint.aspx.designer.cs">
+      <DependentUpon>RewardPoint.aspx</DependentUpon>
     </Compile>
     <Compile Include="security.aspx.cs">
       <DependentUpon>security.aspx</DependentUpon>
