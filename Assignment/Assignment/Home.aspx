@@ -71,27 +71,63 @@
     <div class="modal-content">
         <span class="close" id="modal_close">&times;</span>
         <h2>Select Location</h2>
+        <hr/>
         <div class="modal-body">
             <div class="grid-container">
                 <div class="region">
-                    <h3>Region</h3>
+                    <h5>Region</h5>
                     <ul>
-                        <li>Johor</li>
+                        <li data-region="penang">Penang</li>
+                        <li data-region="kedah">Kedah</li>
+                        <li data-region="johor">Johor</li>
                     </ul>
                 </div>
-                <div class="popular-points">
-                    <h3>Popular Pick-up Points</h3>
+
+                <!-- Popular Points Section for Penang -->
+                <div class="popular-points" id="penang-points">
+                    <h5>Popular Points</h5>
                     <ul>
-                        <li>JB Sentral</li>
+                        <li class="selectable-item">JB Sentral</li>
+                        <li class="selectable-item">abc</li>
                     </ul>
-                    <h3>Popular Hotels</h3>
+                    <h5>Popular Hotels</h5>
                     <ul>
-                        <li>Legoland Hotel</li>
+                        <li class="selectable-item">Legoland Hotel</li>
+                        <li class="selectable-item">abc</li>
                     </ul>
                 </div>
+
+                 <!-- Popular Points Section for Kedah -->
+                <div class="popular-points" id="kedah-points">
+                    <h5>Popular Points</h5>
+                    <ul>
+                        <li class="selectable-item">Alor Setar Sentral</li>
+                        <li class="selectable-item">Langkawi Jetty</li>
+                    </ul>
+                    <h5>Popular Hotels</h5>
+                    <ul>
+                        <li class="selectable-item">The Datai</li>
+                        <li class="selectable-item">The Andaman</li>
+                    </ul>
+                </div>
+
+                <!-- Popular Points Section for Johor -->
+                <div class="popular-points" id="johor-points">
+                    <h5>Popular Points</h5>
+                    <ul>
+                        <li class="selectable-item">JB Sentral</li>
+                        <li class="selectable-item">Larkin Bus Terminal</li>
+                    </ul>
+                    <h5>Popular Hotels</h5>
+                    <ul>
+                        <li class="selectable-item">Legoland Hotel</li>
+                        <li class="selectable-item">Thistle Johor Bahru</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
-        <asp:Button ID="modalOkBtn" runat="server" Text="Ok" />
+        <asp:Button ID="modalOkBtn" runat="server" Text="Ok" cssclass="modalbtn_style"/>
     </div>
 </div>
 
@@ -141,12 +177,21 @@
         // Get the OK button
         var okButton = document.getElementById("<%= modalOkBtn.ClientID %>");
 
+        // Variable to store the currently active textbox
+        var activeInput = null;
+
+        // Variable to store the selected value
+        var selectedPoint = "";
+        var selectedRegion = "";
+
         // Open the modal when input is clicked
         departureInput.onclick = function () {
+            activeInput = departureInput;
             modal.style.display = "block";
         }
 
         returnInput.onclick = function () {
+            activeInput = returnInput;
             modal.style.display = "block";
         }
 
@@ -155,19 +200,97 @@
             modal.style.display = "none";
         }
 
-        // Close the modal when the user clicks on the OK button
+       
+        var selectableItems = document.querySelectorAll('.selectable-item');
+        selectableItems.forEach(function (item) {
+            item.onclick = function () {
+                console.log("Item clicked:", this.textContent);
+               selectedValue = this.textContent;
+   
+            }
+        });
+
+        // Handle OK button click
         if (okButton) {
-            okButton.onclick = function () {
+            okButton.onclick = function (event) {
+                event.preventDefault(); // Prevent the default form submission(no refresh!)
+
+                // Combine selected point and region
+                var combinedValue = selectedPoint + ', ' + selectedRegion;
+                console.log("OK button clicked, combined value:", combinedValue);
+
+                if (activeInput) {
+                    // Update the active textbox with the selected value
+                    activeInput.value = combinedValue;
+                }
+
+                // Close the modal
                 modal.style.display = "none";
             }
         }
 
-        // Close the modal when the user clicks anywhere outside of the modal
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
+        //------modal-----
+        // Variable to store all popular-points sections
+        var popularPointsSections = document.querySelectorAll('.popular-points');
+
+        // Function to hide all popular points
+        function hideAllPopularPoints() {
+            popularPointsSections.forEach(function (section) {
+                section.style.display = "none";
+            });
+        }
+
+        // Function to show the popular points for a specific region
+        function showPopularPoints(region) {
+            hideAllPopularPoints();
+            var targetSection = document.getElementById(region + "-points");
+            if (targetSection) {
+                targetSection.style.display = "block";
             }
         }
+
+        // Initially hide all popular points sections
+        hideAllPopularPoints();
+
+
+        // Remove 'selected-region' class from all regions
+        function clearRegionSelection() {
+            var regionItems = document.querySelectorAll('.region li');
+            regionItems.forEach(function (item) {
+                item.classList.remove('selected-region');
+            });
+        }
+
+        // Remove 'selected-point' class from all points
+        function clearPointSelection() {
+            var selectableItems = document.querySelectorAll('.selectable-item');
+            selectableItems.forEach(function (item) {
+                item.classList.remove('selected-point');
+            });
+        }
+
+        // Handle region click
+        var regionItems = document.querySelectorAll('.region li');
+        regionItems.forEach(function (item) {
+            item.onclick = function () {
+                clearRegionSelection(); // Clear any previous selection
+                selectedRegion = this.textContent; // Capture the selected region
+                var region = this.getAttribute("data-region");
+                this.classList.add('selected-region'); // Highlight the selected region
+                showPopularPoints(region);
+            }
+        });
+
+        // Handle popular points item click
+        var selectableItems = document.querySelectorAll('.selectable-item');
+        selectableItems.forEach(function (item) {
+            item.onclick = function () {
+                clearPointSelection(); // Clear any previous selection
+                selectedPoint = this.textContent;
+                this.classList.add('selected-point'); // Highlight the selected point
+            }
+        });
+
     });
 </script>
 </asp:Content>

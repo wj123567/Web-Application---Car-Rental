@@ -127,10 +127,10 @@
     justify-content: center;
 }
 
-    .home_pickup:hover {
-        transform: translateX(-5px);
-        box-shadow: 0 0 80px #4169E1;
-    }
+
+.home_pickup:hover {
+    box-shadow: 0 0 80px #4169E1;
+}
 
 .home_dropoff {
     width: 40%;
@@ -146,10 +146,10 @@
     align-items: center;
     justify-content: center;
 }
-    .home_dropoff:hover {
-        transform: translateX(-5px);
-        box-shadow: 0 0 80px #4169E1;
-    }
+
+.home_dropoff:hover {
+    box-shadow: 0 0 80px #4169E1;
+}
 
 .booking_container .input_group {
     width: 90%;
@@ -382,6 +382,7 @@
         }
 }
 
+/* Modal */
 #locationModal {
     display:none;
     position: fixed;
@@ -392,16 +393,16 @@
     height: 100%;
     overflow: auto;
     background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.6);
 }
 
-/* Modal Content */
+
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
+    width: 40%;
 }
 
 /* Close Button */
@@ -423,13 +424,15 @@
 
 /* Grid Container */
 .grid-container {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Left column takes 1/3, right column takes 2/3 */
+    grid-template-columns: 1fr 2fr; /* Left column takes 1/3, right column takes 2/3 */
     gap: 20px;
 }
 
 /* Region Section */
 .region {
+    border: 1px solid var(--primary-color);
     background-color: #f4f4f4;
     padding: 10px;
 }
@@ -438,23 +441,55 @@
 .popular-points {
     background-color: #f9f9f9;
     padding: 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal columns */
-    gap: 20px;
+    
+}
+.modal h2{
+    font-weight:800;
+    text-align:center;
 }
 
-    .popular-points h3 {
-        grid-column: 1 / -1; /* Make the headings span across both columns */
-    }
+.modal h5{
+    font-weight:800;
+}
 
-    /* Styling for Lists */
-    .region ul,
-    .popular-points ul {
-        list-style-type: none;
-        padding: 0;
-    }
+/* Styling for Lists */
+.region ul,
+.popular-points ul {
+    list-style-type: none;
+    padding: 0;
+}
 
-    .region li,
-    .popular-points li {
-        margin-bottom: 10px;
-    }
+.region li,
+.popular-points li {
+    margin-bottom: 10px;
+    cursor:pointer;
+}
+
+.region li:hover,
+.popular-points li:hover{
+    transform:translateX(5px);
+}
+
+.region li:active,
+.popular-points li:active{
+    color:var(--primary-color);
+}
+
+.modalbtn_style {
+    background-color: var(--primary-color);
+    line-height: 2;
+    color: white;
+    font-size: 24px;
+}
+
+.selected-region {
+    background-color: var(--primary-color); 
+    color:white;
+    font-weight: bold; /* Bold text */
+}
+
+.selected-point {
+    background-color: rgba(8, 143, 143,0.4);
+
+    font-weight: bold; /* Bold text */
+}

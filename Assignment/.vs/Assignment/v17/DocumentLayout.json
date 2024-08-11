@@ -3,10 +3,11 @@
   "WorkspaceRootPath": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\rewardpoint.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\rewardpoint.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\schoolasgmt\\gtihub desk\\web\\web-application---car-rental\\assignment\\assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
+<<<<<<< Updated upstream
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\schoolasgmt\\gtihub desk\\web\\web-application---car-rental\\assignment\\assignment\\adminrewardpoint.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\adminrewardpoint.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
@@ -39,6 +40,10 @@
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\assignment\\admin.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
 >>>>>>> Stashed changes
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\admin.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+=======
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\css\\home.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\home.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+>>>>>>> Stashed changes
     }
   ],
   "DocumentGroupContainers": [
@@ -49,10 +54,14 @@
         {
 <<<<<<< Updated upstream
           "DockedWidth": 200,
+<<<<<<< Updated upstream
           "SelectedChildIndex": 5,
 =======
           "DockedWidth": 162,
           "SelectedChildIndex": 7,
+>>>>>>> Stashed changes
+=======
+          "SelectedChildIndex": 2,
 >>>>>>> Stashed changes
           "Children": [
             {
@@ -61,6 +70,7 @@
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
               "DocumentIndex": 3,
               "Title": "dbo.RewardPoint [Data]",
@@ -125,12 +135,24 @@
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
               "WhenOpened": "2024-08-11T06:07:02.079Z",
+=======
+              "DocumentIndex": 1,
+              "Title": "home.css",
+              "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\home.css",
+              "RelativeDocumentMoniker": "Assignment\\CSS\\home.css",
+              "ToolTip": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\home.css",
+              "RelativeToolTip": "Assignment\\CSS\\home.css",
+              "ViewState": "AQIAANEBAAAAAAAAAAAAAOsBAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-08-11T08:22:32.559Z",
+>>>>>>> Stashed changes
               "EditorCaption": ""
             },
             {
               "$type": "Document",
 <<<<<<< Updated upstream
               "DocumentIndex": 0,
+<<<<<<< Updated upstream
 =======
               "DocumentIndex": 4,
               "Title": "dbo.RewardPoint [Data]",
@@ -163,6 +185,17 @@
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
               "WhenOpened": "2024-08-11T06:06:09.095Z"
+=======
+              "Title": "Home.aspx",
+              "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx",
+              "RelativeDocumentMoniker": "Assignment\\Home.aspx",
+              "ToolTip": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx",
+              "RelativeToolTip": "Assignment\\Home.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-11T08:03:44.513Z",
+              "EditorCaption": ""
+>>>>>>> Stashed changes
             }
           ]
         }
