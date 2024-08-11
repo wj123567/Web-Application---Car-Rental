@@ -118,7 +118,6 @@
     <Content Include="forgetPassword.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Image\CarImage\city.png" />
-    <Content Include="Image\CarImage\vios.png" />
     <Content Include="Image\logo.png" />
     <Content Include="Image\UserProfile\admin.jpg" />
     <Content Include="Image\UserProfile\noImg.svg" />

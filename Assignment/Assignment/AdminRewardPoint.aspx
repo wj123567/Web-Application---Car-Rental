@@ -6,7 +6,7 @@
 
     <asp:Repeater ID="RewardPointsRepeater" runat="server" DataSourceID="SqlDataSource1">
         <HeaderTemplate>
-            <table class="table1">
+            <table class="table1 table-bordered">
                 <tr>
                     <td colspan="7" class="header-title" style="background-color: #000000; color: white;"><h1>Reward Points Management</h1></td>
                 </tr>
