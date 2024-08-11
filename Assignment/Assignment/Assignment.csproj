@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminRewardPoint.aspx" />
     <Content Include="bookinfo.aspx" />
     <Content Include="bookingprocess.aspx" />
     <Content Include="bookingrecord.aspx" />
@@ -137,6 +138,13 @@
     </Compile>
     <Compile Include="Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRewardPoint.aspx.cs">
+      <DependentUpon>AdminRewardPoint.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRewardPoint.aspx.designer.cs">
+      <DependentUpon>AdminRewardPoint.aspx</DependentUpon>
     </Compile>
     <Compile Include="bookinfo.aspx.cs">
       <DependentUpon>bookinfo.aspx</DependentUpon>
