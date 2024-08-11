@@ -24,8 +24,7 @@ namespace Assignment
         {   
             con.Open();
             //simulate when user successfully register
-            string query = "INSERT INTO RewardPoint (UserID, Points, CreatedAt, UpdatedAt, Status) " +
-                   "VALUES (@UserID, 0, GETDATE(), GETDATE(), 'active');";
+            string query = "INSERT INTO RewardPoint (UserID, Points, CreatedAt, UpdatedAt, Status) VALUES (@UserID, 0, GETDATE(), GETDATE(), 'active');";
             //pass query in database
             SqlCommand cmd = new SqlCommand(query, con);
 
