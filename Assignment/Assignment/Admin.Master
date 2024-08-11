@@ -14,6 +14,7 @@
     <link href="CSS/admin.css" rel="stylesheet" />
     <link href="CSS/carManagement.css" rel="stylesheet" />
     <link href="CSS/driverManagement.css" rel="stylesheet" />
+    <link href="CSS/AdminRewardpoint.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">
@@ -51,6 +52,10 @@
                         <li class="sidebar-item">
                             <a href="driverManagement.aspx" class="sidebar-link">Driver Management</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="AdminRewardPoint.aspx" class="sidebar-link">Reward Point Management</a>
+                        </li>
+                        
                     </ul>
                 </li>
                 <li class="sidebar-item">
