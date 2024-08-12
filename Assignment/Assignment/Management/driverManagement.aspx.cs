@@ -1,0 +1,238 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+using System.Runtime.Remoting.Messaging;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
+
+namespace Assignment
+{
+    public partial class driverManagement : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                loadDriverInfo("SELECT * FROM Driver");
+            }
+        }
+
+
+        protected void loadDriverInfo(string selectDriver)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectDriver, con);
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "DriverTable");
+            ViewState["DriverTable"] = ds.Tables["DriverTable"];
+            DriverReapeter.DataSource = ds.Tables["DriverTable"];
+            DriverReapeter.DataBind();
+            con.Close();
+        }
+
+        protected void DriverReapeter_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Label lblApproval = (Label)e.Item.FindControl("lblApproval");
+            Label lblBdate = (Label)e.Item.FindControl("lblBdate");
+            Label lblReject = (Label)e.Item.FindControl("lblReject");
+            Button btnView = (Button)e.Item.FindControl("btnView");
+            string approvalStatus = DataBinder.Eval(e.Item.DataItem,"Approval").ToString();
+            DateTime bDate = (DateTime)DataBinder.Eval(e.Item.DataItem,"DriverBdate");
+            string rejectReason = DataBinder.Eval(e.Item.DataItem,"rejectReason").ToString();
+
+            lblBdate.Text = bDate.ToString("dd/MM/yyyy");
+
+            switch (approvalStatus)
+            {
+                case "P":
+                    lblApproval.Text = "Pending";
+                    lblApproval.CssClass = "badge bg-warning text-light";
+                    break;
+                case "A":
+                    lblApproval.Text = "Approved";
+                    lblApproval.CssClass = "badge bg-success text-light";
+                    break;
+                case "R":
+                    lblApproval.Text = "Rejected";
+                    lblApproval.CssClass = "badge bg-danger text-light";
+                    lblReject.Text = rejectReason;
+                    break;
+                default:
+                    lblApproval.Text = "Unknown";
+                    break;
+            }
+        }
+
+        protected void btnView_Click(object sender, EventArgs e)
+        {
+            Button btnView = (Button)sender;
+            String id = btnView.CommandArgument;
+            LoadAvailableDriver(id);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "loadModal()", true);
+        }        
+
+        protected void LoadAvailableDriver(String id)
+        {
+            String selectDriver = "SELECT * FROM Driver WHERE Id = @id";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectDriver, con);
+            com.Parameters.AddWithValue("@Id",id);
+
+            SqlDataReader reader = com.ExecuteReader();
+
+            if (reader.Read())
+            {
+                Session["DriverID"] = reader["id"].ToString();
+                txtName.Text = reader["DriverName"].ToString();
+                txtDriverID.Text = reader["DriverId"].ToString();
+                txtDriverLicense.Text = reader["DriverLicense"].ToString();
+                txtPhoneNum.Text = reader["DriverPno"].ToString();
+                DateTime driverBdate = reader.GetDateTime(reader.GetOrdinal("DriverBdate"));
+                txtBirthdate.Text = driverBdate.ToString("yyyy-MM-dd");
+                ddlGender.SelectedValue = reader["driverGender"].ToString();
+                imgID.ImageUrl = reader["IDpic"].ToString();;
+                imgSelfie.ImageUrl = reader["Selfiepic"].ToString();
+                imgLicenseF.ImageUrl = reader["LicenseFpic"].ToString();
+                imgLicenseB.ImageUrl = reader["LicenseBpic"].ToString();
+            }
+            con.Close();
+            reader.Close();
+        }
+
+        protected void btnApprove_Click(object sender, EventArgs e)
+        {
+            string approve = "UPDATE Driver SET Approval = 'A', RejectReason = @REjectReason WHERE Id = @Id";
+            string rejectReason = " ";
+            updateApproval(approve, rejectReason);
+            Server.Transfer("driverManagement.aspx");
+        }
+
+        protected void btnReject2_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                string reject = "UPDATE Driver SET Approval = 'R', RejectReason = @RejectReason WHERE Id = @Id";
+                string rejectReason = " ";
+                if (ddlRejectReason.SelectedValue == "Other")
+                {
+                    rejectReason = txtOtherReason.Text;
+                }
+                else
+                {
+                    rejectReason = ddlRejectReason.SelectedValue;
+                }
+                updateApproval(reject, rejectReason);
+                Server.Transfer("driverManagement.aspx");
+            }
+        }
+
+        protected void updateApproval(string sql, string reject)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(sql, con);
+            con.Open();
+            com.Parameters.AddWithValue("@Id", Session["DriverID"].ToString());
+            com.Parameters.AddWithValue("@RejectReason", reject);
+            com.ExecuteNonQuery();
+            con.Close();
+        }
+
+        protected void ddlRejectReason_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ddlRejectReason.SelectedValue == "Other")
+            {
+                txtOtherReason.Visible = true;
+                requireOtherReason.Enabled = true;
+                updateReason.Update();
+            }
+            else
+            {
+                txtOtherReason.Visible = false;
+                requireOtherReason.Enabled = false;
+                updateReason.Update();
+            }
+        }
+
+        protected void btnSort_Click(object sender, EventArgs e)
+        {
+            LinkButton button = (LinkButton)sender;
+            string name = button.CommandName;
+            string sort = button.CommandArgument;
+            if (sort == "DESC")
+            {
+                button.CommandArgument = "ASC";
+            }
+            else
+            {
+                button.CommandArgument = "DESC";
+            }
+            DataTable carData = (DataTable)ViewState["DriverTable"];
+            DataView dataView = carData.DefaultView;
+            dataView.Sort = name + " " + sort;
+            DataTable sortedData = dataView.ToTable();
+            ViewState["DriverTable"] = sortedData;
+            DriverReapeter.DataSource = sortedData;
+            DriverReapeter.DataBind();
+            updateDriverTable.Update();
+        }
+
+        protected void DriverReapeter_ItemCreated(object sender, RepeaterItemEventArgs e)
+        {
+            Button btnView = (Button)e.Item.FindControl("btnView");
+            if (btnView != null)
+            {
+                ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
+                scriptManager.RegisterPostBackControl(btnView);
+            }
+        }
+
+        protected void hiddenBtn_Click(object sender, EventArgs e)
+        {
+            string selectDriver = "SELECT * FROM Driver WHERE DriverName Like @search OR DriverId Like @search OR DriverPno Like @search OR DriverLicense LIKE @search";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectDriver, con);
+            com.Parameters.AddWithValue("@search","%"+searchBar.Text+"%");
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "DriverTable");
+            ViewState["DriverTable"] = ds.Tables["DriverTable"];
+            DriverReapeter.DataSource = ds.Tables["DriverTable"];
+            DriverReapeter.DataBind();
+            con.Close();
+        }
+
+        protected void sortCategory(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string sort = button.CommandArgument;
+            string selectDriver = " ";
+
+
+
+            if(sort == "All")
+            {
+                selectDriver = "SELECT * FROM Driver";
+            }
+            else if(sort == "P")
+            {
+                selectDriver = "SELECT * FROM Driver WHERE Approval ='"+sort+"'"+ "ORDER BY DateApply";
+            }
+            else
+            {
+                selectDriver = "SELECT * FROM Driver WHERE Approval = '"+sort+"'";
+            }
+
+            loadDriverInfo(selectDriver);
+        }
+    }
+}

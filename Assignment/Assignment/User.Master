@@ -75,7 +75,7 @@
               <asp:Image ID="userProfilePicture" runat="server" CssClass="rounded-circle d-inline mx-2" Width="30px" />
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
-            <li><a class="dropdown-item" href="profile.aspx">Profile</a></li>
+            <li><a class="dropdown-item" href="~/UserProfile/profile.aspx">Profile</a></li>
             <li><a class="dropdown-item" href="history.aspx">History</a></li>
             <li>
               <hr class="dropdown-divider" />

@@ -67,12 +67,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AdminRewardPoint.aspx" />
+    <Content Include="Management\AdminRewardPoint.aspx" />
     <Content Include="bookinfo.aspx" />
-    <Content Include="bookingprocess.aspx" />
+    <Content Include="UserProfile\bookingprocess.aspx" />
     <Content Include="bookingrecord.aspx" />
     <Content Include="bookingrecorddetail.aspx" />
-    <Content Include="CarManagement.aspx" />
+    <Content Include="Management\CarManagement.aspx" />
     <Content Include="CSS\AdminRewardpoint.css" />
     <Content Include="CSS\bookinfo.css" />
     <Content Include="CSS\bookingprocess.css" />
@@ -83,8 +83,8 @@
     <Content Include="CSS\driverManagement.css" />
     <Content Include="CSS\userManagement.css" />
     <Content Include="CSS\tracking.css" />
-    <Content Include="driverManagement.aspx" />
-    <Content Include="driver.aspx" />
+    <Content Include="Management\driverManagement.aspx" />
+    <Content Include="UserProfile\driver.aspx" />
     <Content Include="Image\no-img -long.png" />
     <Content Include="Image\no-img.jpg" />
     <Content Include="Image\WZ\44mbziylcv6c1.jpeg" />
@@ -101,10 +101,10 @@
     <Content Include="JS\bookinfo.js" />
     <Content Include="JS\home.js" />
     <Content Include="JS\infopage.js" />
-    <Content Include="payment.aspx" />
+    <Content Include="UserProfile\payment.aspx" />
     <Content Include="payment_pg.aspx" />
     <Content Include="RewardPoint.aspx" />
-    <Content Include="security.aspx" />
+    <Content Include="UserProfile\security.aspx" />
     <Content Include="CSS\profile.css" />
     <Content Include="CSS\admin.css" />
     <Content Include="App_Data\SystemDatabase.mdf" />
@@ -123,28 +123,28 @@
     <Content Include="Image\UserProfile\admin.jpg" />
     <Content Include="Image\UserProfile\noImg.svg" />
     <Content Include="productListing.aspx" />
-    <Content Include="profile.aspx" />
+    <Content Include="UserProfile\profile.aspx" />
     <Content Include="Redemption.aspx" />
     <Content Include="resetPassword.aspx" />
     <Content Include="SignUp.aspx" />
-    <Content Include="UserManagement.aspx" />
+    <Content Include="Management\UserManagement.aspx" />
     <Content Include="validateEmail.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.Master.cs">
+    <Compile Include="Management\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin.Master.designer.cs">
+    <Compile Include="Management\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
-    <Compile Include="AdminRewardPoint.aspx.cs">
+    <Compile Include="Management\AdminRewardPoint.aspx.cs">
       <DependentUpon>AdminRewardPoint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminRewardPoint.aspx.designer.cs">
+    <Compile Include="Management\AdminRewardPoint.aspx.designer.cs">
       <DependentUpon>AdminRewardPoint.aspx</DependentUpon>
     </Compile>
     <Compile Include="bookinfo.aspx.cs">
@@ -154,11 +154,11 @@
     <Compile Include="bookinfo.aspx.designer.cs">
       <DependentUpon>bookinfo.aspx</DependentUpon>
     </Compile>
-    <Compile Include="bookingprocess.aspx.cs">
+    <Compile Include="UserProfile\bookingprocess.aspx.cs">
       <DependentUpon>bookingprocess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="bookingprocess.aspx.designer.cs">
+    <Compile Include="UserProfile\bookingprocess.aspx.designer.cs">
       <DependentUpon>bookingprocess.aspx</DependentUpon>
     </Compile>
     <Compile Include="bookingrecord.aspx.cs">
@@ -175,25 +175,25 @@
     <Compile Include="bookingrecorddetail.aspx.designer.cs">
       <DependentUpon>bookingrecorddetail.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CarManagement.aspx.cs">
+    <Compile Include="Management\CarManagement.aspx.cs">
       <DependentUpon>CarManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CarManagement.aspx.designer.cs">
+    <Compile Include="Management\CarManagement.aspx.designer.cs">
       <DependentUpon>CarManagement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="driverManagement.aspx.cs">
+    <Compile Include="Management\driverManagement.aspx.cs">
       <DependentUpon>driverManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="driverManagement.aspx.designer.cs">
+    <Compile Include="Management\driverManagement.aspx.designer.cs">
       <DependentUpon>driverManagement.aspx</DependentUpon>
     </Compile>
-    <Compile Include="driver.aspx.cs">
+    <Compile Include="UserProfile\driver.aspx.cs">
       <DependentUpon>driver.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="driver.aspx.designer.cs">
+    <Compile Include="UserProfile\driver.aspx.designer.cs">
       <DependentUpon>driver.aspx</DependentUpon>
     </Compile>
     <Compile Include="infopage.aspx.cs">
@@ -203,11 +203,11 @@
     <Compile Include="infopage.aspx.designer.cs">
       <DependentUpon>infopage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="payment.aspx.cs">
+    <Compile Include="UserProfile\payment.aspx.cs">
       <DependentUpon>payment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="payment.aspx.designer.cs">
+    <Compile Include="UserProfile\payment.aspx.designer.cs">
       <DependentUpon>payment.aspx</DependentUpon>
     </Compile>
     <Compile Include="payment_pg.aspx.cs">
@@ -224,11 +224,11 @@
     <Compile Include="RewardPoint.aspx.designer.cs">
       <DependentUpon>RewardPoint.aspx</DependentUpon>
     </Compile>
-    <Compile Include="security.aspx.cs">
+    <Compile Include="UserProfile\security.aspx.cs">
       <DependentUpon>security.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="security.aspx.designer.cs">
+    <Compile Include="UserProfile\security.aspx.designer.cs">
       <DependentUpon>security.aspx</DependentUpon>
     </Compile>
     <Compile Include="forgetPassword.aspx.cs">
@@ -248,18 +248,18 @@
     <Compile Include="productListing.aspx.designer.cs">
       <DependentUpon>productListing.aspx</DependentUpon>
     </Compile>
-    <Compile Include="profile.aspx.cs">
+    <Compile Include="UserProfile\profile.aspx.cs">
       <DependentUpon>profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="profile.aspx.designer.cs">
+    <Compile Include="UserProfile\profile.aspx.designer.cs">
       <DependentUpon>profile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="profile.Master.cs">
+    <Compile Include="UserProfile\profile.Master.cs">
       <DependentUpon>profile.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="profile.Master.designer.cs">
+    <Compile Include="UserProfile\profile.Master.designer.cs">
       <DependentUpon>profile.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -298,11 +298,11 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UserManagement.aspx.cs">
+    <Compile Include="Management\UserManagement.aspx.cs">
       <DependentUpon>UserManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="UserManagement.aspx.designer.cs">
+    <Compile Include="Management\UserManagement.aspx.designer.cs">
       <DependentUpon>UserManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="validateEmail.aspx.cs">
@@ -314,11 +314,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin.Master" />
+    <Content Include="Management\Admin.Master" />
     <None Include="packages.config" />
     <Content Include="User.Master" />
     <Content Include="Web.sitemap" />
-    <Content Include="profile.Master" />
+    <Content Include="UserProfile\profile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
