@@ -249,5 +249,11 @@ namespace Assignment
 
             return cipheredText;
         }
+
+        //You
+        private void InsertRewardPoints(Guid userId)
+        {
+            
+        }
     }
 }

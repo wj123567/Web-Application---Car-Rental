@@ -11,15 +11,16 @@
         <LayoutTemplate>
             <table class="table tableReward">
                 <tr>
-                    <td colspan="7" class="header-title table-dark"><h1>Reward Points Management</h1></td>
+                    <td colspan="8" class="header-title table-dark"><h1>Reward Points Management</h1></td>
                 </tr>
 
                 <tr class="header-section">
                     <th>Reward Point ID</th>
                     <th>User ID</th>
-                    <th>Point</th>
-                    <th>Create Date</th>
-                    <th>Update Date</th>
+                    <th>Transaction ID</th>
+                    <th>Points</th>
+                    <th>Earned Date</th>
+                    <th>Expiry Date</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -27,7 +28,7 @@
                 <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
 
                 <tr>
-                    <td colspan="7" class="asd">
+                    <td colspan="8" class="asd">
                         <asp:DataPager ID="RewardPointsPager" runat="server" PageSize="5">
                             <Fields>
                                 <asp:NextPreviousPagerField ButtonType="Link" ShowPreviousPageButton="true" ShowNextPageButton="false"/>
@@ -41,12 +42,13 @@
         </LayoutTemplate>
 
         <ItemTemplate>
-            <tr>
+            <tr class="rp-record">
                 <td><%# Eval("RewardPointID") %></td>
                 <td><%# Eval("UserID") %></td>
+                <td><%# Eval("TransactionID") %></td>
                 <td><%# Eval("Points") %></td>
-                <td><%# Eval("CreatedAt") %></td>
-                <td><%# Eval("UpdatedAt") %></td>
+                <td><%# Eval("EarnedDate") %></td>
+                <td><%# Eval("ExpiryDate") %></td>
                 <td><%# Eval("Status") %></td>
                 <td>
                     <asp:Button ID="EditButton" runat="server" Text="Edit" />
