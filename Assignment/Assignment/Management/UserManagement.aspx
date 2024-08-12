@@ -12,8 +12,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-          <asp:DropDownList ID="ddlBanReason" runat="server" CssClass="form-select" AutoPostBack="True" ValidationGroup="rejectGroup">
-              <asp:ListItem Value="0">Select Reject Reason</asp:ListItem>
+          <asp:DropDownList ID="ddlBanReason" runat="server" CssClass="form-select" AutoPostBack="True" ValidationGroup="banGroup" OnSelectedIndexChanged="ddlBanReason_SelectedIndexChanged">
+              <asp:ListItem Value="0">Select Ban Reason</asp:ListItem>
               <asp:ListItem>Invalid driving license (expired/illegible)</asp:ListItem>
               <asp:ListItem>Mismatch in driving license information</asp:ListItem>
               <asp:ListItem>Expired/invalid passport or ID</asp:ListItem>
@@ -30,14 +30,14 @@
         </ContentTemplate>
     </asp:UpdatePanel>
       <div class="modal-footer">
-        <asp:Button ID="btnCancelBan" runat="server" Text="Review Again" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewDriver" OnClientClick="return false"/>
-        <asp:Button ID="btnReject2" runat="server" Text="Reject" CssClass="btn btn-danger" ValidationGroup="rejectGroup"/>
+        <asp:Button ID="btnCancelBan" runat="server" Text="Review Again" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false"/>
+        <asp:Button ID="btnConfirmBan" runat="server" Text="Confirm Ban" CssClass="btn btn-danger" ValidationGroup="banGroup" OnClick="btnBan_Click"/>
       </div>
     </div>
   </div>   
 </div>    
     
-<div class="modal fade" id="userInfoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userInfoModal" aria-hidden="true">
+<div class="modal animate__animated animate__slideInLeft animate__faster" id="userInfoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userInfoModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
       <div class="modal-header">
@@ -83,14 +83,14 @@
     </div>
 </div>
       <div class="modal-footer">
-        <asp:Button ID="btnBan" runat="server" Text="Ban User" CssClass="btn btn-danger btn-ban btn-both" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#rejectReason" OnClientClick="return false"/>          
-        <asp:Button ID="btnUnban" runat="server" Text="Unban User" CssClass="btn btn-primary btn-unban btn-both" ValidationGroup="reviewGroup"/>          
+        <asp:Button ID="btnBan" runat="server" Text="Ban User" CssClass="btn btn-danger btn-ban btn-both" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false"/>          
+        <asp:Button ID="btnUnban" runat="server" Text="Unban User" CssClass="btn btn-primary btn-unban btn-both" ValidationGroup="reviewGroup" OnClick="btnUnban_Click"/>          
       </div>
     </div>
     </div>
   </div>
     
-    <div class="modal fade" id="userDriverModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userDriverModal" aria-hidden="true">
+    <div class="modal animate__animated animate__slideInRight animate__faster" id="userDriverModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userDriverModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
       <div class="modal-header">
@@ -131,8 +131,8 @@
     </div>
 </div>
       <div class="modal-footer">
-        <asp:Button ID="btnBan2" runat="server" Text="Ban User" CssClass="btn btn-danger btn-ban btn-both" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#rejectReason" OnClientClick="return false"/>          
-        <asp:Button ID="btnUnban2" runat="server" Text="Unban User" CssClass="btn btn-primary btn-unban btn-both" ValidationGroup="reviewGroup"/>  
+        <asp:Button ID="btnBan2" runat="server" Text="Ban User" CssClass="btn btn-danger btn-ban btn-both" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false"/>          
+        <asp:Button ID="btnUnban2" runat="server" Text="Unban User" CssClass="btn btn-primary btn-unban btn-both" ValidationGroup="reviewGroup" OnClick="btnUnban_Click"/>  
       </div>
     </div>
     </div>

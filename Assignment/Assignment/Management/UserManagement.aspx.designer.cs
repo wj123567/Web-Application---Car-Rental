@@ -87,13 +87,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button btnCancelBan;
 
         /// <summary>
-        /// btnReject2 control.
+        /// btnConfirmBan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnReject2;
+        protected global::System.Web.UI.WebControls.Button btnConfirmBan;
 
         /// <summary>
         /// userProfilePic control.

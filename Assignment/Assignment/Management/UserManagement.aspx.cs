@@ -20,6 +20,21 @@ namespace Assignment
             }
         }
 
+        protected void ddlBanReason_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlBanReason.SelectedValue == "Other")
+            {
+                txtOtherReason.Visible = true;
+                requireOtherReason.Enabled = true;
+                banReasonUpdate.Update();
+            }
+            else
+            {
+                txtOtherReason.Visible = false;
+                requireOtherReason.Enabled = false;
+                banReasonUpdate.Update();
+            }
+        }
         protected void loadUserInfo(string selectUser)
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
@@ -199,6 +214,43 @@ namespace Assignment
             }
         }
 
+        protected void btnBan_Click(object sender, EventArgs e)
+        {
+            string sql = "UPDATE ApplicationUser SET IsBan = 1 , BanReason = @banReason WHERE Id = @id";
+            banUser(sql, true);
+            Server.TransferRequest("UserManagement.aspx");
+        }
 
+        protected void btnUnban_Click(object sender, EventArgs e)
+        {
+            string sql = "UPDATE ApplicationUser SET IsBan = 0 , BanReason = @banReason WHERE Id = @id";
+            banUser(sql, false);
+            Server.TransferRequest("UserManagement.aspx");
+        }
+
+        protected void banUser(string sql,Boolean isBan)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(sql, con);
+            con.Open();
+            com.Parameters.AddWithValue("@id", Session["UserTableID"].ToString());
+            if (isBan)
+            {
+                if(ddlBanReason.SelectedValue != "Other")
+                {
+                    com.Parameters.AddWithValue("@banReason", ddlBanReason.SelectedValue);
+                }
+                else
+                {
+                    com.Parameters.AddWithValue("@banReason", txtOtherReason.Text);
+                }
+            }
+            else
+            {
+                com.Parameters.AddWithValue("@banReason", "");
+            }
+            com.ExecuteNonQuery();
+            con.Close();
+        }
     }
 }
