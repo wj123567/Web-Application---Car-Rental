@@ -30,7 +30,7 @@ namespace Assignment
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             lblDebug.Text = $"Pickup: {hdnDepartureLocation.Value}, Dropoff: {hdnReturnLocation.Value}";
-            String insertString = "INSERT INTO TestTrip (Id,Pickup_point,StartDate,Dropoff_point,EndDate) VALUES (@Id,@Pickup_point,@StartDate,@Dropoff_point,@EndDate)";
+            String insertString = "INSERT INTO TestTrip (Id,Pickup_point,Pickup_state,StartDate,Dropoff_point,Dropoff_state,EndDate) VALUES (@Id,@Pickup_point,@Pickup_state,@StartDate,@Dropoff_point,@Dropoff_state,@EndDate)";
             saveTripInfo(insertString);
            
 
@@ -38,19 +38,30 @@ namespace Assignment
 
         protected void saveTripInfo(string insertString)
         {
-            string bookID = generateRandBookID();
+            string bookID = "";
+            bool isUnique;
+            do
+            {
+                bookID = generateRandBookID();
+                isUnique = CheckBookID(bookID);
+            } while (!isUnique);
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(insertString, con);
 
             com.Parameters.AddWithValue("@Id", bookID);
-            com.Parameters.AddWithValue("@Pickup_point",hdnDepartureLocation.Value);
+            com.Parameters.AddWithValue("@Pickup_point", hdnDepartureLocation.Value);
+            com.Parameters.AddWithValue("@Pickup_state", hdnDepartureState.Value);
             com.Parameters.AddWithValue("@StartDate", Convert.ToDateTime(txtDepartureDateTime.Text));
-            com.Parameters.AddWithValue("@Dropoff_point",hdnReturnLocation.Value);
+            com.Parameters.AddWithValue("@Dropoff_point", hdnReturnLocation.Value);
+            com.Parameters.AddWithValue("@Dropoff_state", hdnReturnState.Value);
             com.Parameters.AddWithValue("@EndDate", Convert.ToDateTime(txtReturnDateTime.Text));
 
             com.ExecuteNonQuery();
             con.Close();
+                
+            
         }
 
         private String generateRandBookID()
@@ -59,6 +70,26 @@ namespace Assignment
             int randomNumber = random.Next(0, 999999);
             String formattedNumber = randomNumber.ToString("D6"); //padding with 0 if needed(6-digit)
             return "BID" + formattedNumber;
+        }
+
+        private Boolean CheckBookID(String bookID)
+        {
+            String sql = "Select Id FROM TestTrip"; 
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(sql, con);
+            
+            SqlDataReader reader = com.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if (bookID == (string)reader["Id"])
+                {
+                    return false;
+
+                }
+            }
+        return true;
         }
         // Mark items as disabled before rendering the page
         /*protected override void Render(HtmlTextWriter writer)
