@@ -2,6 +2,25 @@
 <asp:Content ID="adminUser" ContentPlaceHolderID="main" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnUserStatus" runat="server" />
+
+<div class="modal animate__animated animate__slideInDown animate__faster" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel4">User Detail</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <h5 class="text-dark">Are you sure you want to delete?</h5>
+      </div>
+      <div class="modal-footer">
+        <asp:Button ID="btnViewAgain" runat="server" Text="View User" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userInfoModal" OnClientClick="return false"/>
+        <asp:Button ID="btnConfirmDelete" runat="server" Text="Confirm Delete" CssClass="btn btn-danger" ValidationGroup="deleteGroup" OnClick="btnConfirmDelete_Click"/>
+      </div>
+    </div>
+  </div>   
+</div>
+
 <div class="modal animate__animated animate__slideInDown animate__faster" id="banReasonModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
@@ -14,13 +33,12 @@
       <div class="modal-body">
           <asp:DropDownList ID="ddlBanReason" runat="server" CssClass="form-select" AutoPostBack="True" ValidationGroup="banGroup" OnSelectedIndexChanged="ddlBanReason_SelectedIndexChanged">
               <asp:ListItem Value="0">Select Ban Reason</asp:ListItem>
-              <asp:ListItem>Invalid driving license (expired/illegible)</asp:ListItem>
-              <asp:ListItem>Mismatch in driving license information</asp:ListItem>
-              <asp:ListItem>Expired/invalid passport or ID</asp:ListItem>
-              <asp:ListItem>Mismatch in passport or ID information</asp:ListItem>
-              <asp:ListItem>Unclear document scan or image</asp:ListItem>
-              <asp:ListItem>Selfie does not match documents</asp:ListItem>
-              <asp:ListItem>Unclear selfie quality (poor lighting/visibility)</asp:ListItem>
+              <asp:ListItem>Damage to Vehicle</asp:ListItem>
+              <asp:ListItem>Violation of Rental Terms</asp:ListItem>
+              <asp:ListItem>Unsafe Driving</asp:ListItem>
+              <asp:ListItem>Suspicious Behavior</asp:ListItem>
+              <asp:ListItem>Unreported Accidents</asp:ListItem>
+              <asp:ListItem>Fraudulent Activity</asp:ListItem>
               <asp:ListItem>Other</asp:ListItem>
           </asp:DropDownList>
           <asp:RequiredFieldValidator ID="requireReason" runat="server" ErrorMessage="Reject Reason is Required" CssClass="validate" InitialValue="0" ValidationGroup="banGroup" ControlToValidate="ddlbanReason"></asp:RequiredFieldValidator>
@@ -64,10 +82,15 @@
                             <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
                         </div>
                         <div class="row gx-3 mb-3">
-                        <div class="mb-3">
+                        <div class="col-md-6">
                             <label class="small mb-1">Email address</label>
                             <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
                         </div>
+                        <div class="col-md-6">
+                                <label class="small mb-1">Roles</label>
+                                 <asp:TextBox ID="txtRoles" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                            </div>  
+                        </div>  
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
                                 <label class="small mb-1">Birthday</label>
@@ -81,9 +104,9 @@
                     </div>
                 </div>
     </div>
-</div>
       <div class="modal-footer">
-        <asp:Button ID="btnBan" runat="server" Text="Ban User" CssClass="btn btn-danger btn-ban btn-both" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false"/>          
+        <asp:Button ID="btnDel1" runat="server" Text="Delete" CssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false"/>
+        <asp:Button ID="btnBan" runat="server" Text="Ban User" CssClass="btn btn-warning btn-ban btn-both" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false"/>          
         <asp:Button ID="btnUnban" runat="server" Text="Unban User" CssClass="btn btn-primary btn-unban btn-both" ValidationGroup="reviewGroup" OnClick="btnUnban_Click"/>          
       </div>
     </div>
@@ -131,7 +154,8 @@
     </div>
 </div>
       <div class="modal-footer">
-        <asp:Button ID="btnBan2" runat="server" Text="Ban User" CssClass="btn btn-danger btn-ban btn-both" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false"/>          
+        <asp:Button ID="btnDel2" runat="server" Text="Delete" CssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false"/>
+        <asp:Button ID="btnBan2" runat="server" Text="Ban User" CssClass="btn btn-warning btn-ban btn-both" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false"/>          
         <asp:Button ID="btnUnban2" runat="server" Text="Unban User" CssClass="btn btn-primary btn-unban btn-both" ValidationGroup="reviewGroup" OnClick="btnUnban_Click"/>  
       </div>
     </div>
@@ -192,6 +216,7 @@
                     </td>
                     <td scope="col">
                     <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
+                    <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-sm text-primary" OnClick="btnDelete_Click" CommandArgument='<%# Eval("Id") %>'/>
                     </td>
                 </tr>
                 </ItemTemplate>
@@ -239,8 +264,19 @@
 
 
         function modal() {
+            addEventListener("DOMContentLoaded", (event) => {
             $('#userInfoModal').modal('toggle');
+            showhideButton();
             return false;
+            });
+        };
+
+        function modalDel() {
+            addEventListener("DOMContentLoaded", (event) => {
+                $('#ConfirmDelete').modal('toggle');
+                showhideButton();
+                return false;
+            });
         };
 
         function triggerButtonClick(event) {

@@ -74,10 +74,10 @@ namespace Assignment
 
         protected void hiddenBtn_Click(object sender, EventArgs e)
         {
-            string selectDriver = "SELECT * FROM Driver WHERE DriverName Like @search OR DriverId Like @search OR DriverPno Like @search OR DriverLicense LIKE @search";
+            string selectUser = "SELECT * FROM ApplicationUser WHERE Username Like @search OR Email Like @search";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
-            SqlCommand com = new SqlCommand(selectDriver, con);
+            SqlCommand com = new SqlCommand(selectUser, con);
             com.Parameters.AddWithValue("@search", "%" + searchBar.Text + "%");
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();
@@ -91,10 +91,12 @@ namespace Assignment
         protected void UserReapeter_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button btnView = (Button)e.Item.FindControl("btnView");
+            Button btnDelete = (Button)e.Item.FindControl("btnDelete");
             if (btnView != null)
             {
                 ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
                 scriptManager.RegisterPostBackControl(btnView);
+                scriptManager.RegisterPostBackControl(btnDelete);
             }
         }
 
@@ -126,7 +128,18 @@ namespace Assignment
             UserDriverReapeter.DataBind();
             LoadAvailableUser(id);
             loadDriverInfo(id);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "loadModal()", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modal()", true);
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            Button btnDelete = (Button)sender;
+            String id = btnDelete.CommandArgument;
+            UserDriverReapeter.DataSource = null;
+            UserDriverReapeter.DataBind();
+            LoadAvailableUser(id);
+            loadDriverInfo(id);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modalDel()", true);
         }
 
         protected void LoadAvailableUser(String id)
@@ -144,6 +157,7 @@ namespace Assignment
                 Session["UserTableID"] = reader["id"].ToString();
                 txtUsername.Text = reader["Username"].ToString();
                 txtEmailAddress.Text = reader["Email"].ToString();
+                txtRoles.Text = reader["Roles"].ToString();
                 DateTime driverBdate = reader.GetDateTime(reader.GetOrdinal("DOB"));
                 DateTime regDate = reader.GetDateTime(reader.GetOrdinal("RegistrationDate"));
                 txtBirthday.Text = driverBdate.ToString("yyyy-MM-dd");               
@@ -218,14 +232,14 @@ namespace Assignment
         {
             string sql = "UPDATE ApplicationUser SET IsBan = 1 , BanReason = @banReason WHERE Id = @id";
             banUser(sql, true);
-            Server.TransferRequest("UserManagement.aspx");
+            Server.Transfer("UserManagement.aspx");
         }
 
         protected void btnUnban_Click(object sender, EventArgs e)
         {
             string sql = "UPDATE ApplicationUser SET IsBan = 0 , BanReason = @banReason WHERE Id = @id";
             banUser(sql, false);
-            Server.TransferRequest("UserManagement.aspx");
+            Server.Transfer("UserManagement.aspx");
         }
 
         protected void banUser(string sql,Boolean isBan)
@@ -251,6 +265,18 @@ namespace Assignment
             }
             com.ExecuteNonQuery();
             con.Close();
+        }
+
+        protected void btnConfirmDelete_Click(object sender, EventArgs e)
+        {
+            string delString = "DELETE FROM ApplicationUser WHERE Id = @id";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(delString, con);
+            con.Open();
+            com.Parameters.AddWithValue("@id", Session["UserTableID"].ToString());
+            com.ExecuteNonQuery();
+            con.Close();
+            Server.Transfer("UserManagement.aspx");
         }
     }
 }

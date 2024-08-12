@@ -33,6 +33,24 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.HiddenField hdnUserStatus;
 
         /// <summary>
+        /// btnViewAgain control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewAgain;
+
+        /// <summary>
+        /// btnConfirmDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConfirmDelete;
+
+        /// <summary>
         /// banReasonUpdate control.
         /// </summary>
         /// <remarks>
@@ -123,6 +141,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtEmailAddress;
 
         /// <summary>
+        /// txtRoles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRoles;
+
+        /// <summary>
         /// txtBirthday control.
         /// </summary>
         /// <remarks>
@@ -139,6 +166,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMemberSince;
+
+        /// <summary>
+        /// btnDel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDel1;
 
         /// <summary>
         /// btnBan control.
@@ -175,6 +211,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater UserDriverReapeter;
+
+        /// <summary>
+        /// btnDel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDel2;
 
         /// <summary>
         /// btnBan2 control.
