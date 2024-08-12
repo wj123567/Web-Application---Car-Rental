@@ -33,6 +33,24 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtDepartureLocation;
 
         /// <summary>
+        /// hdnDepartureLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnDepartureLocation;
+
+        /// <summary>
+        /// hdnDepartureState control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnDepartureState;
+
+        /// <summary>
         /// requireDepartureLocation control.
         /// </summary>
         /// <remarks>
@@ -85,6 +103,24 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReturnLocation;
+
+        /// <summary>
+        /// hdnReturnLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnReturnLocation;
+
+        /// <summary>
+        /// hdnReturnState control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnReturnState;
 
         /// <summary>
         /// requireReturnLocation control.
@@ -148,5 +184,14 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button modalOkBtn;
+
+        /// <summary>
+        /// lblDebug control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDebug;
     }
 }

@@ -21,6 +21,7 @@ namespace Assignment
                 txtReturnDateTime.Attributes["min"] = DateTime.Now.AddDays(2).ToString("yyyy-MM-ddTHH:mm");
                 txtReturnDateTime.Attributes["max"] = DateTime.Now.AddMonths(4).ToString("yyyy-MM-ddTHH:mm");
 
+
             }
         }
 
@@ -28,15 +29,36 @@ namespace Assignment
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            String insertString = "INSERT INTO TestBook (location,pickup_date,pickup_time,dropoff_date,dropoff_time) VALUES (location,pickup_date,pickup_time,dropoff_date,dropoff_time)";
+            lblDebug.Text = $"Pickup: {hdnDepartureLocation.Value}, Dropoff: {hdnReturnLocation.Value}";
+            String insertString = "INSERT INTO TestTrip (Id,Pickup_point,StartDate,Dropoff_point,EndDate) VALUES (@Id,@Pickup_point,@StartDate,@Dropoff_point,@EndDate)";
             saveTripInfo(insertString);
-            Server.Transfer("infopage.aspx");
+           
 
         }
 
         protected void saveTripInfo(string insertString)
         {
-           
+            string bookID = generateRandBookID();
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(insertString, con);
+
+            com.Parameters.AddWithValue("@Id", bookID);
+            com.Parameters.AddWithValue("@Pickup_point",hdnDepartureLocation.Value);
+            com.Parameters.AddWithValue("@StartDate", Convert.ToDateTime(txtDepartureDateTime.Text));
+            com.Parameters.AddWithValue("@Dropoff_point",hdnReturnLocation.Value);
+            com.Parameters.AddWithValue("@EndDate", Convert.ToDateTime(txtReturnDateTime.Text));
+
+            com.ExecuteNonQuery();
+            con.Close();
+        }
+
+        private String generateRandBookID()
+        {
+            Random random = new Random();
+            int randomNumber = random.Next(0, 999999);
+            String formattedNumber = randomNumber.ToString("D6"); //padding with 0 if needed(6-digit)
+            return "BID" + formattedNumber;
         }
         // Mark items as disabled before rendering the page
         /*protected override void Render(HtmlTextWriter writer)

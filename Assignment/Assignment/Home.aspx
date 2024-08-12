@@ -26,6 +26,9 @@
                 <div class="input_group">
                    <asp:Label ID="lblLocation" runat="server" Text="Location" CssClass="home_label_style"></asp:Label>
                     <asp:TextBox ID="txtDepartureLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Pick-up Location"></asp:TextBox>
+                    <!-- handle viewstate prob bcs location assign thru client-side -->
+                     <asp:HiddenField ID="hdnDepartureLocation" runat="server" />
+                    <asp:HiddenField ID="hdnDepartureState" runat="server" />
                     <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Pick Up Location is Required" ControlToValidate="txtDepartureLocation"  CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     <br />
                  <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>                    
@@ -44,7 +47,9 @@
         <div class="input_content">
             <div class="input_group">
                         <asp:Label ID="Label1" runat="server" Text="Location" CssClass="home_label_style"></asp:Label>
-                        <asp:TextBox ID="txtReturnLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Return Location"> </asp:TextBox>
+                        <asp:TextBox ID="txtReturnLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Return Location"></asp:TextBox>
+                        <asp:HiddenField ID="hdnReturnLocation" runat="server" />
+                        <asp:HiddenField ID="hdnReturnState" runat="server" />
                 <asp:RequiredFieldValidator ID="requireReturnLocation" runat="server" ErrorMessage="Return Location is Required" ControlToValidate="txtReturnLocation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                 <br />
                 
@@ -62,11 +67,11 @@
         <!-- -->
         </div>
             </div>
-             <asp:Button ID="btnSearch" runat="server" Text="🔍Search" CssClass="search_btn_style" OnClick="btnSearch_Click" />
+             <asp:Button ID="btnSearch" runat="server" Text="🔍Search" CssClass="search_btn_style" OnClick="btnSearch_Click" UseSubmitBehavior="False" />
     </section>
 
 </div>
-
+    
           <div id="locationModal" class="modal">
     <div class="modal-content">
         <span class="close" id="modal_close">&times;</span>
@@ -132,6 +137,7 @@
 </div>
 
      <section class=" plan_container">
+         <asp:Label ID="lblDebug" runat="server" CssClass="debug_style" ForeColor="Red"></asp:Label>
  <p class="subheader">RENT INFORMATION</p>
  <h2 class="section_header">Plan your rent with confidence</h2>
  <p class="description">
@@ -222,6 +228,14 @@
                 if (activeInput) {
                     // Update the active textbox with the selected value
                     activeInput.value = combinedValue;
+                    // Set the hidden field value based on which input is active
+                    if (activeInput === departureInput) {
+                        document.getElementById('<%= hdnDepartureLocation.ClientID %>').value = selectedPoint;
+                        document.getElementById('<%= hdnDepartureState.ClientID %>').value = selectedRegion;
+                    } else if (activeInput === returnInput) {
+                        document.getElementById('<%= hdnReturnLocation.ClientID %>').value = selectedPoint;
+                        document.getElementById('<%= hdnReturnState.ClientID %>').value = selectedRegion;
+                    }
                 }
 
                 // Close the modal
@@ -292,5 +306,5 @@
         });
 
     });
-</script>
+    </script>
 </asp:Content>
