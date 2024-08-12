@@ -1,9 +1,9 @@
-﻿table, th, td {
+﻿.user-reward-info table, th, td {
     font-size: 40px;
     border: 1px solid black;
 }
 
-td {
+.user-reward-info td {
     padding-left: 30px;
 }
 

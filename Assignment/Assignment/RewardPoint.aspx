@@ -10,7 +10,7 @@
         <div style="text-align: right;"><a href="#" class="fs-4" style="padding-right:60px;">Point History</a></div>
         
         <div>
-            <table style="margin: 20px auto">
+            <table style="margin: 20px auto" class="user-reward-info">
                 <tr>
                     <td style="padding: 0px 30px; width:1200px;">Hi, <asp:Label ID="Label1" runat="server" Text="[Username]"></asp:Label></td>
                 </tr>

@@ -9,7 +9,7 @@
 
     <asp:ListView ID="RewardPointsListView" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="RewardPointID">
         <LayoutTemplate>
-            <table class="tableReward">
+            <table class="table tableReward">
                 <tr>
                     <td colspan="7" class="header-title table-dark"><h1>Reward Points Management</h1></td>
                 </tr>
@@ -56,7 +56,7 @@
         </ItemTemplate>
 
         <EmptyDataTemplate>
-            <table class="table">
+            <table class="table tableReward">
                 <tr>
                 <td colspan="7" class="header-title table-dark"><h1>Reward Points Management</h1></td>
             </tr>
