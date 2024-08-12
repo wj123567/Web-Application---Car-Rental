@@ -2,7 +2,7 @@
 <asp:Content ID="adminUser" ContentPlaceHolderID="main" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnUserStatus" runat="server" />
-<div class="modal fade" id="banReasonModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
+<div class="modal animate__animated animate__slideInDown animate__faster" id="banReasonModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
     <asp:UpdatePanel ID="banReasonUpdate" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
