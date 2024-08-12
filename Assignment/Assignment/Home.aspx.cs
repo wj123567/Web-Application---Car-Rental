@@ -16,24 +16,35 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
+
                 txtDepartureDateTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
                 txtDepartureDateTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-ddTHH:mm");
-                txtReturnDateTime.Attributes["min"] = DateTime.Now.AddDays(2).ToString("yyyy-MM-ddTHH:mm");
+
+                
                 txtReturnDateTime.Attributes["max"] = DateTime.Now.AddMonths(4).ToString("yyyy-MM-ddTHH:mm");
 
 
             }
         }
 
-
+        protected void txtDepartureDateTime_TextChanged(object sender, EventArgs e)
+        {
+            DateTime departureDate;
+            if (DateTime.TryParse(txtDepartureDateTime.Text, out departureDate))
+            {
+                DateTime minReturnDate = departureDate.AddDays(1);
+                txtReturnDateTime.Attributes["min"] = minReturnDate.ToString("yyyy-MM-ddTHH:mm");
+            }
+        }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            lblDebug.Text = $"Pickup: {hdnDepartureLocation.Value}, Dropoff: {hdnReturnLocation.Value}";
+            // Save departure date to the session state
+            Session["DepartureDate"] = Convert.ToDateTime(txtDepartureDateTime.Text);
+
             String insertString = "INSERT INTO TestTrip (Id,Pickup_point,Pickup_state,StartDate,Dropoff_point,Dropoff_state,EndDate) VALUES (@Id,@Pickup_point,@Pickup_state,@StartDate,@Dropoff_point,@Dropoff_state,@EndDate)";
             saveTripInfo(insertString);
-           
-
+            Server.Transfer("infopage.aspx");
         }
 
         protected void saveTripInfo(string insertString)

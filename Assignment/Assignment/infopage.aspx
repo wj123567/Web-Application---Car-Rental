@@ -7,7 +7,7 @@
             <div class="location">
                 <div class="infopg_pickup">
                     <h3>Penang Downtown</h3>
-                    <p>Tue, Jul 23, 2024, 10:00</p>
+                    <p class="departureDateSes"><%= Session["DepartureDate"] != null ? Session["DepartureDate"].ToString() : "Departure Date and Time not available" %></p>
                 </div>
                 <div class="arrow">&gt;</div>
                 <div class="infopg_dropoff">

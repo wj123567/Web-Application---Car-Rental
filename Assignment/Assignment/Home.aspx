@@ -32,7 +32,7 @@
                     <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Pick Up Location is Required" ControlToValidate="txtDepartureLocation"  CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     <br />
                  <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>                    
-                <asp:TextBox ID="txtDepartureDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style"></asp:TextBox>
+                <asp:TextBox ID="txtDepartureDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style" OnTextChanged="txtDepartureDateTime_TextChanged" ></asp:TextBox>
                 <asp:RequiredFieldValidator ID="requireDepartDateTime" runat="server" ErrorMessage="Pick Up Date&Time is Required" ControlToValidate="txtDepartureDateTime" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     
                 </div>
@@ -137,7 +137,6 @@
 </div>
 
      <section class=" plan_container">
-         <asp:Label ID="lblDebug" runat="server" CssClass="debug_style" ForeColor="Red"></asp:Label>
  <p class="subheader">RENT INFORMATION</p>
  <h2 class="section_header">Plan your rent with confidence</h2>
  <p class="description">
@@ -305,6 +304,21 @@
             }
         });
 
+        //-------DateTime----------
+        function updateReturnDateTimeMin() {
+            var departureDate = document.getElementById('<%= txtDepartureDateTime.ClientID %>').value;
+            var returnDate = document.getElementById('<%= txtReturnDateTime.ClientID %>');
+
+        if (departureDate) {
+            var departureDateObj = new Date(departureDate);
+            departureDateObj.setDate(departureDateObj.getDate() + 1); // Add one day
+            var minDate = departureDateObj.toISOString().slice(0, 16); // Format as yyyy-MM-ddTHH:mm
+
+            returnDate.min = minDate;
+        }
+    }
+
+        document.getElementById('<%= txtDepartureDateTime.ClientID %>').addEventListener('change', updateReturnDateTimeMin);
     });
     </script>
 </asp:Content>
