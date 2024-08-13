@@ -35,14 +35,25 @@ namespace Assignment
         }
 
         protected void retrievedAllData() {
-            string findCar = "SELECT * FROM Car WHERE IsDelisted = 0";
+            string pickupPoint = Session["Pickup_point"] as string;
+            string pickupState = Session["Pickup_state"] as string;
+            DateTime startDate = Convert.ToDateTime(Session["StartDate"]);
+            string dropoffPoint = Session["Dropoff_point"] as string;
+            string dropoffState = Session["Dropoff_state"] as string;
+            DateTime endDate = Convert.ToDateTime(Session["EndDate"]) ;
+
+           
+
+            string initialFilter = "SELECT C.* FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE L.LocationName = @pickupPoint AND C.IsDelisted = 0";
+            
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             
                 con.Open();
 
-            SqlCommand com = new SqlCommand(findCar, con);
-                
+            SqlCommand com = new SqlCommand(initialFilter, con);
+            com.Parameters.AddWithValue("@pickupPoint", pickupPoint);
+            
                     SqlDataAdapter da = new SqlDataAdapter(com);
                     DataSet ds = new DataSet();
                     da.Fill(ds, "CarData");
