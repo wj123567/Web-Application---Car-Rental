@@ -8,6 +8,7 @@
     z-index: 0;
     border: none;
     position: relative;
+    background-color: #effaf6 !important;
 }
 
 
@@ -16,7 +17,6 @@
     color: #673AB7;
     font-weight: normal;
 }
-
 
 
 /*Icon progressbar*/

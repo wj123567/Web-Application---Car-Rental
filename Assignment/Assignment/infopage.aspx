@@ -2,27 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
 
         <section class="info_head_container">
-  <!--   
-        <div class="header">
-            <div class="location">
-                <div class="infopg_pickup">
-                    <h3 >Penang Downtown</h3>
-                    <p class="StartDateSes"><%=Session["bookingID"] %></p>
-                </div>
-                <div class="arrow">&gt;</div>
-                <div class="infopg_dropoff">
-                    <h3>Penang Downtown</h3>
-                    <p>Fri, Jul 26, 2024, 10:00</p>
-                </div>
-            </div>
-            <div class="info">
-                <i class="ri-info-i"> You’ll need to pick up your car at 10:00</i>
-            </div>
-            <div class="edit">
-                 <asp:Button ID="btnEdit" runat="server" Text="Edit" CSSClass="edit-button" />
-            </div>
-        </div>
-    -->    
+  
          <div class="container-fluid">
 	<div class="row justify-content-center">
 		<div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
@@ -43,38 +23,34 @@
 </div>
     </section>
 
+ 
     <section class="info_banner">
         
             <div class="col_left">
-                <img src="Image/WZ/pexels-mikebirdy-170811.jpg" class="header_carimg" alt="" />
+                <asp:Image ID="carImage"  cssclass="header_carimg" runat="server" />
             </div>
 
             <div class="col_right">
                 <table class="spec_container">
                     <tr class="car_model">
-                    <th class="header_car_model" colspan="7">Perodua Alza (2nd Gen) 1.5 (A)</th>
+                    <th class="header_car_model" colspan="4">
+                        <asp:Literal ID="headerCarModel" runat="server"></asp:Literal> </th>
                     </tr>
 
                     <tr class="spec_title">
-                        <td colspan="7">Specs</td>
+                        <td colspan="4">Specs</td>
                     </tr>
                     <tr class="spec_icon">
-                        <td><i class="ri-group-line"></i></td>
-                        <td><i class="ri-luggage-deposit-line"></i></td>
-                        <td><img width="20" height="20" src="https://img.icons8.com/ios/50/speed--v1.png" alt="speed--v1" style="display:block; margin:auto;"/></td>
-                        <td><i class="ri-snowflake-line"></i></td>
-                        <td><img width="20" height="20" src="https://img.icons8.com/external-solid-design-circle/64/external-Car-Gear-car-parts-solid-design-circle.png" alt="car gear"/ style=" display:block; margin:auto;"></td>
-                        <td><img width="20" height="20" src="https://img.icons8.com/ios/50/gas-station.png" alt="gas station" style=" display:block; margin:auto;"/></td>
-                        <td><i class="ri-oil-line"></i></td>
+                        <td><i class="ri-roadster-fill"></i></td>
+                        <td><i class="ri-sofa-fill"></i></td>                  
+                        <td><i class="ri-settings-3-fill"></i></td>
+                        <td><i class="ri-flashlight-fill"></i></td>
                     </tr>
                     <tr class="spec_detail">
-                        <td>7 People</td>
-                        <td>2 Luggage</td>
-                        <td>Unlimited Mileage</td>
-                        <td>Yes</td>
-                        <td>Auto</td>
-                        <td>Full Tank</td>
-                        <td>Petrol</td>
+                        <td><asp:Literal ID="specType" runat="server"></asp:Literal></td>
+                        <td><asp:Literal ID="specSeat" runat="server"></asp:Literal></td>   
+                        <td><asp:Literal ID="specTransmission" runat="server"></asp:Literal></td>
+                        <td><asp:Literal ID="specFuel" runat="server"></asp:Literal></td>
 
                     </tr>
                 </table>
@@ -185,7 +161,7 @@
 
                     <tr >
                         <td></td>
-                        <td class="timeline StartDateSes"><%=Session["StartDate"] %></td>
+                        <td class="timeline StartDateSes"><%= DateTime.Parse(Session["StartDate"].ToString()) %></td>
                     </tr>
                     <tr>
                         <td><i class="ri-circle-line" style="color:green"> </i></td>
@@ -199,7 +175,7 @@
                
                     <tr>
                         <td></td>
-                        <td class="timeline StartDateSes" ><%=Session["EndDate"] %></td>
+                        <td class="timeline StartDateSes" ><%=DateTime.Parse(Session["EndDate"].ToString()) %></td>
                     </tr>
                     <tr>
                         <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
@@ -219,7 +195,8 @@
                 <div class="charges_summary">
                     <div class="charge_item">
                     <p class="summary_title">Rental</p>
-                    <p class ="summary_amt rental_amt" >300.00</p>
+                    <asp:Literal ID="carRental" runat="server"></asp:Literal>
+
                     </div>
                     <hr />
                     <div class="charge_item">

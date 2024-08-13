@@ -35,35 +35,31 @@ namespace Assignment
         }
 
         protected void retrievedAllData() {
-            string pickupPoint = Session["Pickup_point"] as string;
-            string pickupState = Session["Pickup_state"] as string;
-            DateTime startDate = Convert.ToDateTime(Session["StartDate"]);
-            string dropoffPoint = Session["Dropoff_point"] as string;
-            string dropoffState = Session["Dropoff_state"] as string;
-            DateTime endDate = Convert.ToDateTime(Session["EndDate"]) ;
-
-           
-
-            string initialFilter = "SELECT C.* FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE L.LocationName = @pickupPoint AND C.IsDelisted = 0";
-            
+            string pickupPoint = Session["Pickup_point"].ToString();
+            DateTime startDate = DateTime.Parse(Session["StartDate"].ToString());
+            DateTime endDate = DateTime.Parse(Session["EndDate"].ToString());
+            string findCar = "SELECT C.* FROM Car C JOIN Location L ON C.LocationId=L.Id LEFT JOIN TestTrip T ON C.CarPlate = T.CarPlateNo WHERE IsDelisted = 0 AND L.LocationName = @Pickup_point AND(T.Id IS NULL OR NOT(@startDate<T.EndDate AND @endDate>T.StartDate))";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            
-                con.Open();
 
-            SqlCommand com = new SqlCommand(initialFilter, con);
-            com.Parameters.AddWithValue("@pickupPoint", pickupPoint);
-            
-                    SqlDataAdapter da = new SqlDataAdapter(com);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds, "CarData");
+            con.Open();
 
-                    ViewState["CarData"] = ds.Tables["CarData"];    
-                    productRepeater.DataSource = ds.Tables["CarData"];
-                    productRepeater.DataBind();
-                
+            SqlCommand com = new SqlCommand(findCar, con);
+            com.Parameters.AddWithValue("@Pickup_point", pickupPoint);
+            com.Parameters.AddWithValue("@startDate", startDate);
+            com.Parameters.AddWithValue("@endDate", endDate);
 
-                con.Close();
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "CarData");
+
+            ViewState["CarData"] = ds.Tables["CarData"];
+            productRepeater.DataSource = ds.Tables["CarData"];
+            productRepeater.DataBind();
+
+
+            con.Close();
+
 
         }
         protected void searchCarData()
@@ -207,6 +203,7 @@ namespace Assignment
             String carPlate = button.CommandArgument.ToString();
 
             Session["CarPlate"] = carPlate;
+            Server.Transfer("infopage.aspx");
         }
 
         protected void btnA2Z_Click(object sender, EventArgs e)

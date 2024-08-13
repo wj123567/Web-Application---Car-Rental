@@ -102,10 +102,10 @@ namespace Assignment
             
             Session["Pickup_point"] = hdnDepartureLocation.Value;
             Session["Pickup_state"] = hdnDepartureState.Value;
-            Session["StartDate"] = Convert.ToDateTime(txtDepartureDateTime.Text);
+            Session["StartDate"] = txtDepartureDateTime.Text;
             Session["Dropoff_point"] = hdnReturnLocation.Value;
             Session["Dropoff_state"] = hdnReturnState.Value;
-            Session["EndDate"] = Convert.ToDateTime(txtReturnDateTime.Text);
+            Session["EndDate"] = txtReturnDateTime.Text;
 
 
             String insertString = "INSERT INTO TestTrip (Id,Pickup_point,Pickup_state,StartDate,Dropoff_point,Dropoff_state,EndDate) VALUES (@Id,@Pickup_point,@Pickup_state,@StartDate,@Dropoff_point,@Dropoff_state,@EndDate)";
