@@ -7,17 +7,31 @@ using System.Web.UI.WebControls;
 //step1
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web.Util;
 
 namespace Assignment
 {
     public partial class RewardPoint : System.Web.UI.Page
     {
-        //step2
-        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!IsPostBack)
+            {
+                if (Session["Id"] != null)
+                {
+                    LoadUserData(Session["Id"].ToString());
+                }
+                else
+                {
+                    Response.Redirect("~/Home.aspx");
+                }
+            }
+        }
+
+        private void LoadUserData(string userid)
+        {
+
         }
 
     }

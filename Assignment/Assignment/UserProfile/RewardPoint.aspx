@@ -1,23 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="RewardPoint.aspx.cs" Inherits="Assignment.RewardPoint" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-    <div style="width: 80%; margin: 20px auto;">
-        <div class="fs-5 text-center" style="font: 60px black; padding-top:55px;">
-            <h1>Welcome to,</h1>
-            <p style="font-size: 55px; margin-bottom: -10px;">Reward Point</p>
-
+    <div class="rp-info" style="width: 80%; margin: 20px auto;">
+        <div class="fs-5 text-center">
+            <h1 style="padding-top: 30px">Welcome to, <br />
+                <span style="font-size: 60px;">Reward Point</span>
+            </h1>
         </div>
 
-        <div style="text-align: right;"><a href="#" class="fs-4" style="padding-right:60px;">Point History</a></div>
+        <div style="text-align: right;"><a href="#" class="fs-5 " style="padding-right:60px;">Point History</a></div>
         
         <div>
-            <table style="margin: 20px auto" class="user-reward-info">
+            <table style="margin: 20px auto; width:1200px" class="user-reward-info">
                 <tr>
-                    <td style="padding: 0px 30px; width:1200px;">
-                        Hi, <asp:Label ID="Label1" runat="server" Text="[Username]"></asp:Label>
+                    <td>
+                        Hi, <asp:Label ID="Label1" runat="server" Text="[Username]" Font-Size="Larger"></asp:Label>
                     </td>
                 </tr>
                 <tr>
-                    <td style="font-size: 20px">Expired Date: <asp:Label ID="Label3" runat="server" Text="[Date expire point]"></asp:Label></td>
+                    <td>Expired Date: <asp:Label ID="Label3" runat="server" Text="[Date expire point]"></asp:Label></td>
                 </tr>
                 <tr>
                     <td>OnlyCars Rewards</td>
