@@ -72,7 +72,7 @@
 
 </div>
     
-          <div id="locationModal" class="modal">
+            <div id="locationModal" class="modal">
     <div class="modal-content">
         <span class="close" id="modal_close">&times;</span>
         <h2>Select Location</h2>
@@ -95,11 +95,7 @@
                         <li class="selectable-item">JB Sentral</li>
                         <li class="selectable-item">abc</li>
                     </ul>
-                    <h5>Popular Hotels</h5>
-                    <ul>
-                        <li class="selectable-item">Legoland Hotel</li>
-                        <li class="selectable-item">abc</li>
-                    </ul>
+
                 </div>
 
                  <!-- Popular Points Section for Kedah -->
@@ -109,11 +105,7 @@
                         <li class="selectable-item">Alor Setar Sentral</li>
                         <li class="selectable-item">Langkawi Jetty</li>
                     </ul>
-                    <h5>Popular Hotels</h5>
-                    <ul>
-                        <li class="selectable-item">The Datai</li>
-                        <li class="selectable-item">The Andaman</li>
-                    </ul>
+                    
                 </div>
 
                 <!-- Popular Points Section for Johor -->
@@ -123,11 +115,7 @@
                         <li class="selectable-item">JB Sentral</li>
                         <li class="selectable-item">Larkin Bus Terminal</li>
                     </ul>
-                    <h5>Popular Hotels</h5>
-                    <ul>
-                        <li class="selectable-item">Legoland Hotel</li>
-                        <li class="selectable-item">Thistle Johor Bahru</li>
-                    </ul>
+                   
                 </div>
 
             </div>
@@ -136,6 +124,7 @@
     </div>
 </div>
 
+   
      <section class=" plan_container">
  <p class="subheader">RENT INFORMATION</p>
  <h2 class="section_header">Plan your rent with confidence</h2>
@@ -244,6 +233,8 @@
 
         //------modal-----
         // Variable to store all popular-points sections
+
+
         var popularPointsSections = document.querySelectorAll('.popular-points');
 
         // Function to hide all popular points
@@ -319,6 +310,7 @@
     }
 
         document.getElementById('<%= txtDepartureDateTime.ClientID %>').addEventListener('change', updateReturnDateTimeMin);
+
     });
     </script>
 </asp:Content>

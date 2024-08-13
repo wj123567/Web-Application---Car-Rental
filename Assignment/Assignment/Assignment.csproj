@@ -70,6 +70,7 @@
     <Content Include="CSS\RewardPoint.css" />
     <Content Include="Management\AdminRewardPoint.aspx" />
     <Content Include="bookinfo.aspx" />
+    <Content Include="Management\BookingManagement.aspx" />
     <Content Include="UserProfile\bookingprocess.aspx" />
     <Content Include="bookingrecord.aspx" />
     <Content Include="bookingrecorddetail.aspx" />
@@ -154,6 +155,13 @@
     </Compile>
     <Compile Include="bookinfo.aspx.designer.cs">
       <DependentUpon>bookinfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\BookingManagement.aspx.cs">
+      <DependentUpon>BookingManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\BookingManagement.aspx.designer.cs">
+      <DependentUpon>BookingManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserProfile\bookingprocess.aspx.cs">
       <DependentUpon>bookingprocess.aspx</DependentUpon>
