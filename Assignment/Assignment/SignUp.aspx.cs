@@ -56,14 +56,14 @@ namespace Assignment
 
                         comInsert.ExecuteNonQuery();
 
-                        // Insert welcome transaction and get its ID
-                        int transactionID = InsertWelcomeTransaction(newGUID.ToString());
-                        //System.Diagnostics.Debug.WriteLine("Transaction ID: " + transactionID);
-                        //System.Diagnostics.Debug.WriteLine("Reward points inserted for UserID: " + newGUID.ToString());
+                    //// Insert welcome transaction and get its ID
+                    //int transactionID = InsertWelcomeTransaction(newGUID.ToString());
+                    ////System.Diagnostics.Debug.WriteLine("Transaction ID: " + transactionID);
+                    ////System.Diagnostics.Debug.WriteLine("Reward points inserted for UserID: " + newGUID.ToString());
 
-                        // Assign reward point id and points
-                        InsertInitialRewardPoints(newGUID.ToString(), transactionID);
-                    
+                    //// Assign reward point id and points
+                    //InsertInitialRewardPoints(newGUID.ToString(), transactionID);
+
                     con.Close();
 
                         Session["validateEmail"] = txtRegEmail.Text;
