@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Text;
 
 namespace Assignment
 {
@@ -20,10 +21,6 @@ namespace Assignment
                 if (Session["Id"] != null)
                 {
                     LoadUserData(Session["Id"].ToString());
-                }
-                else
-                {
-                    Server.Transfer("Home.aspx");
                 }
             }
         }
@@ -69,33 +66,28 @@ namespace Assignment
 
         protected Boolean validPassword(String simplePassword)
         {
-            byte[] key = new byte[16];
-            byte[] iv = new byte[16];
-
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
             con.Open();
 
-            Byte[] encryptPassword = new Byte[16];
+            string hashPassword = " ";
 
-            string getUserKey = "Select EncryptionKey, IVkey, Password from ApplicationUser where id = @id";
+            string getUserId = "Select Password from ApplicationUser where id = @id";
 
-            SqlCommand comKey = new SqlCommand(getUserKey, con);
+            SqlCommand comId = new SqlCommand(getUserId, con);
 
-            comKey.Parameters.AddWithValue("@id", Session["Id"].ToString());
+            comId.Parameters.AddWithValue("@id", Session["Id"].ToString());
 
-            SqlDataReader reader = comKey.ExecuteReader();
+            SqlDataReader reader = comId.ExecuteReader();
 
             if (reader.Read())
             {
-                encryptPassword = Convert.FromBase64String(reader["Password"].ToString());
-                key = Convert.FromBase64String(reader["EncryptionKey"].ToString());
-                iv = Convert.FromBase64String(reader["IVkey"].ToString());
+                hashPassword = reader["Password"].ToString();
             }
 
             reader.Close();
 
-            if (simplePassword == Decrypt(encryptPassword, key, iv))
+            if (hashPassword == HashPassword(simplePassword, Session["Id"].ToString()))
             {
                 return true;
             }
@@ -104,6 +96,7 @@ namespace Assignment
                 return false;
             }
         }
+
         protected void validCurrentPassword_ServerValidate(object source, ServerValidateEventArgs args)
         {
             String simplePassword = txtCurrentPass.Text;
@@ -124,31 +117,19 @@ namespace Assignment
             {
                 String Id = Session["Id"].ToString();
 
-                byte[] key = new byte[16];
-                byte[] iv = new byte[16];
-
-                RandomNumberGenerator rng = RandomNumberGenerator.Create();
-
-                rng.GetBytes(key);
-                rng.GetBytes(iv);
-
                 string simplePassword = txtNewPassword.Text;
-                byte[] cipherPassword = Encrypt(simplePassword, key, iv);
-                String cipherPasswordString = Convert.ToBase64String(cipherPassword);
-                String keyString = Convert.ToBase64String(key);
-                String ivString = Convert.ToBase64String(iv);
+
+                string hashPassword = HashPassword(simplePassword, Id);
 
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
-                string updateUser = "UPDATE ApplicationUser SET Password = @Password, EncryptionKey= @encryptKey, IVkey = @IVkey WHERE Id = @id";
+                string updateUser = "UPDATE ApplicationUser SET Password = @Password WHERE Id = @id";
 
                 try
                 {
                     con.Open();
                     SqlCommand comUpdate = new SqlCommand(updateUser, con);
-                    comUpdate.Parameters.AddWithValue("password", cipherPasswordString);
-                    comUpdate.Parameters.AddWithValue("encryptKey", keyString);
-                    comUpdate.Parameters.AddWithValue("IVkey", ivString);
+                    comUpdate.Parameters.AddWithValue("password", hashPassword);
                     comUpdate.Parameters.AddWithValue("id", Id.ToString());
                     comUpdate.ExecuteNonQuery();
 
@@ -164,48 +145,29 @@ namespace Assignment
 
         }
 
-        protected string Decrypt(byte[] cipheredText, byte[] key, byte[] iv)
+        protected string HashPassword(string password, string salt)
         {
-            string simpleText = " ";
-            Aes aes = Aes.Create();
+            // Combine the password and salt
+            string combinedPassword = password + salt;
 
-            ICryptoTransform decryptor = aes.CreateDecryptor(key, iv);
-
-            using (MemoryStream ms = new MemoryStream(cipheredText))
+            // Choose the hash algorithm (SHA-256 or SHA-512)
+            using (var sha256 = SHA256.Create())
             {
-                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                // Convert the combined password string to a byte array
+                byte[] bytes = Encoding.UTF8.GetBytes(combinedPassword);
+
+                // Compute the hash value of the byte array
+                byte[] hash = sha256.ComputeHash(bytes);
+
+                // Convert the byte array to a hexadecimal string
+                StringBuilder result = new StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
                 {
-
-                    StreamReader reader = new StreamReader(cs);
-
-                    simpleText = reader.ReadToEnd();
+                    result.Append(hash[i].ToString("x2"));
                 }
+
+                return result.ToString();
             }
-
-            return simpleText;
-        }
-
-        protected byte[] Encrypt(string simpleText, byte[] key, byte[] iv)
-        {
-            byte[] cipheredText;
-
-            Aes aes = Aes.Create();
-
-            ICryptoTransform encryptor = aes.CreateEncryptor(key, iv);
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                {
-                    using (StreamWriter writer = new StreamWriter(cs))
-                    {
-                        writer.Write(simpleText);
-                    }
-                    cipheredText = ms.ToArray();
-                }
-            }
-
-            return cipheredText;
         }
 
         protected void rblOtpSwitch_SelectedIndexChanged(object sender, EventArgs e)

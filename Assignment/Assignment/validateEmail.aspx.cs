@@ -109,7 +109,7 @@ namespace Assignment
             MailMessage mail = new MailMessage();
             mail.To.Add(Session["validateEmail"].ToString());
             mail.From = new MailAddress("chongwj-pm23@student.tarc.edu.my");
-            mail.Subject = "Forget Password Verification Code";
+            mail.Subject = "Email Verification Code";
 
             string emailBody = "";
 
@@ -128,6 +128,7 @@ namespace Assignment
             smtpClient.Send(mail);
 
             labelValidateSend.Visible = true;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Timer", "startResendTimer()", true);
 
         }
 

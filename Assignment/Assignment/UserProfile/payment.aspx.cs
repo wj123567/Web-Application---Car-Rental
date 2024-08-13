@@ -24,10 +24,6 @@ namespace Assignment
                     txtExpDate.Attributes["max"] = DateTime.Now.AddYears(+6).ToString("yyyy-MM");
                     txtExpDate.Attributes["min"] = DateTime.Now.AddMonths(+1).ToString("yyyy-MM");
                 }
-                else
-                {
-                    Server.Transfer("home.aspx");
-                }
                 
             }
         }
