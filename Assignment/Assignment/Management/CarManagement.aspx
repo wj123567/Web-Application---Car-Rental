@@ -252,10 +252,11 @@
 
     <h1 class="text-dark d-inline">Car Detail</h1>
     <asp:Button ID="btnAddNewCar" runat="server" Text="Add New Car" CssClass="btn btn-primary btn-sm mx-2 mb-2" OnClick="btnAddNewCar_Click" />
-    <hr class="mt-0 mb-4">
+    <hr class="mt-0 mb-4">                
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+        <ContentTemplate>
         <div>
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-                <ContentTemplate>
+
             <table id="carTable" class="table table-striped table-bordered table-hover table-responsive">
             <thead>
                 <tr style="text-align: center;">
@@ -304,12 +305,16 @@
                 </asp:Repeater>
             </tbody>
         </table>
-                </ContentTemplate>
-                </asp:UpdatePanel>
         <div>
         </div>
     </div>
-
+        <asp:Button ID="btnPrevious" runat="server" Text="Previous" OnClick="btnPrevious_Click" Enabled="False" CssClass="btn btn-primary btn-sm" />
+        <asp:Label ID="lblPageInfo" runat="server" Text="Page 1" CssClass="text-dark mx-2"></asp:Label>
+        <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="btnNext_Click" CssClass="btn btn-primary btn-sm" />
+                        
+    </div>
+    </ContentTemplate>
+    </asp:UpdatePanel>
     </div>
     <script>
         function fileUpload() {

@@ -23,22 +23,67 @@ namespace Assignment
 
             
         }
-        
+
+        private int PageSize = 5;  // Number of records per page
+        private int PageNumber
+        {
+            get { return ViewState["PageNumber"] != null ? (int)ViewState["PageNumber"] : 1; }
+            set { ViewState["PageNumber"] = value; }
+        }
+
         protected void loadCarData()
         {
-            string selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id";
+            string selectCar = "WITH PaginatedCars AS (SELECT C.*, L.LocationName, ROW_NUMBER() OVER (ORDER BY C.LocationId) AS RowNum FROM Car C JOIN Location L ON C.LocationId = L.Id) SELECT * FROM PaginatedCars WHERE RowNum BETWEEN (@PageSize * (@PageNumber - 1) + 1) AND (@PageSize * @PageNumber) ORDER BY RowNum";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectCar, con);
+            com.Parameters.AddWithValue("@PageSize", PageSize);
+            com.Parameters.AddWithValue("@PageNumber", PageNumber);
+
             SqlDataAdapter da = new SqlDataAdapter(com);      
             DataSet ds = new DataSet();
             da.Fill(ds, "CarTable");
             ViewState["CarTable"] = ds.Tables["CarTable"];
             repeaterCarTable.DataSource = ds.Tables["CarTable"];
             repeaterCarTable.DataBind();
+            UpdatePageInfo();
         }
 
+        protected void UpdatePageInfo()
+        {
+            int totalRows = getTotalRow();
+            int totalPage = (int)Math.Ceiling((double)totalRows / (double)PageSize);
+            lblPageInfo.Text = "Page " + PageNumber + " of " + totalPage;
+
+            btnPrevious.Enabled = PageNumber > 1;
+            btnNext.Enabled = PageNumber < totalPage; 
+        }
+
+        protected void btnPrevious_Click(object sender, EventArgs e)
+        {
+            PageNumber--;
+            loadCarData();
+            UpdatePageInfo();
+            UpdatePanel1.Update();
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            PageNumber++;
+            loadCarData();
+            UpdatePageInfo();
+            UpdatePanel1.Update();
+        }
+
+        protected int getTotalRow()
+        {
+            string selectAll = "SELECT COUNT(*) FROM Car";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(selectAll, con);
+            con.Open();
+            return (int)com.ExecuteScalar();
+        }
         protected void ddlCarBrand_DataBound(object sender, EventArgs e)
         {
             ddlCarBrand.Items.Insert(0, new ListItem("Select Brand", "0"));
