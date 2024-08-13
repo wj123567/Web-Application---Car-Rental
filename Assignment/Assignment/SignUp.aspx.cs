@@ -67,17 +67,20 @@ namespace Assignment
 
                         comInsert.ExecuteNonQuery();
 
-                        //Insert welcome transaction and get its ID
+                        // Insert welcome transaction and get its ID
                         int transactionID = InsertWelcomeTransaction(newGUID.ToString());
+                        //System.Diagnostics.Debug.WriteLine("Transaction ID: " + transactionID);
+                        //System.Diagnostics.Debug.WriteLine("Reward points inserted for UserID: " + newGUID.ToString());
 
-                        //Assign reward point id and points
+                        // Assign reward point id and points
                         InsertInitialRewardPoints(newGUID.ToString(), transactionID);
-
-                        con.Close();
+                    
+                    con.Close();
 
                         Session["validateEmail"] = txtRegEmail.Text;
                         Session["validateId"] = newGUID.ToString();
-                    ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='validateEmail.aspx';", true);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='validateEmail.aspx';", true);
+                        
                 }
                     catch (Exception ex)
                     {
@@ -262,7 +265,7 @@ namespace Assignment
             {
                 con.Open();
 
-                string insertTransaction = "Insert into Transaction Values (@userid, @amount, @transactiondate, @description); Select SCOPE_IDENTITY();";
+                string insertTransaction = "Insert into RewardPointTransaction(UserID, Amount, TransactionDate, Description) Values (@userid, @amount, @transactiondate, @description); Select SCOPE_IDENTITY();";
 
                 using (SqlCommand comInsertTransaction = new SqlCommand(insertTransaction, con))
                 {
