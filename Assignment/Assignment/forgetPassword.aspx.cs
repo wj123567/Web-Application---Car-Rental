@@ -86,6 +86,7 @@ namespace Assignment
             smtpClient.Send(mail);
 
             labelForgetSend.Visible = true;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Timer", "startResendTimer()", true);
 
         }
 

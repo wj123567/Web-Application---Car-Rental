@@ -115,6 +115,13 @@
     accent-color: #3490dc;
 }
 
+.disable-resend {
+    pointer-events: none !important;
+    background-color: #ccc !important;
+    color: #666666 !important;
+    opacity: 0.65 !important;
+}
+
 
 
 
