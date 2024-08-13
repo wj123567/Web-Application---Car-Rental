@@ -33,7 +33,7 @@ namespace Assignment
 
         protected void loadCarData()
         {
-            string selectCar = "WITH PaginatedCars AS (SELECT C.*, L.LocationName, ROW_NUMBER() OVER (ORDER BY C.LocationId) AS RowNum FROM Car C JOIN Location L ON C.LocationId = L.Id) SELECT * FROM PaginatedCars WHERE RowNum BETWEEN (@PageSize * (@PageNumber - 1) + 1) AND (@PageSize * @PageNumber) ORDER BY RowNum";
+            string selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id ORDER BY C.CarPlate OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
