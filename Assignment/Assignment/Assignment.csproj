@@ -104,7 +104,7 @@
     <Content Include="JS\infopage.js" />
     <Content Include="UserProfile\payment.aspx" />
     <Content Include="payment_pg.aspx" />
-    <Content Include="RewardPoint.aspx" />
+    <Content Include="UserProfile\RewardPoint.aspx" />
     <Content Include="UserProfile\security.aspx" />
     <Content Include="CSS\profile.css" />
     <Content Include="CSS\admin.css" />
@@ -218,11 +218,11 @@
     <Compile Include="payment_pg.aspx.designer.cs">
       <DependentUpon>payment_pg.aspx</DependentUpon>
     </Compile>
-    <Compile Include="RewardPoint.aspx.cs">
+    <Compile Include="UserProfile\RewardPoint.aspx.cs">
       <DependentUpon>RewardPoint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="RewardPoint.aspx.designer.cs">
+    <Compile Include="UserProfile\RewardPoint.aspx.designer.cs">
       <DependentUpon>RewardPoint.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserProfile\security.aspx.cs">
