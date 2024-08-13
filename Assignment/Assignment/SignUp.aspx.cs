@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Security.Cryptography;
 using System.IO;
+using System.Web.Util;
 
 namespace Assignment
 {
@@ -64,10 +65,13 @@ namespace Assignment
                         comInsert.Parameters.AddWithValue("encryptKey", keyString);
                         comInsert.Parameters.AddWithValue("IVkey", ivString);
 
+                        comInsert.ExecuteNonQuery();
 
+                        //Insert welcome transaction and get its ID
+                        int transactionID = InsertWelcomeTransaction(newGUID.ToString());
 
-                    comInsert.ExecuteNonQuery();
-
+                        //Assign reward point id and points
+                        InsertInitialRewardPoints(newGUID.ToString(), transactionID);
 
                         con.Close();
 
@@ -251,9 +255,47 @@ namespace Assignment
         }
 
         //You
-        private void InsertRewardPoints(Guid userId)
+
+        private int InsertWelcomeTransaction(string userId)
         {
-            
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
+            {
+                con.Open();
+
+                string insertTransaction = "Insert into Transaction Values (@userid, @amount, @transactiondate, @description); Select SCOPE_IDENTITY();";
+
+                using (SqlCommand comInsertTransaction = new SqlCommand(insertTransaction, con))
+                {
+                    comInsertTransaction.Parameters.AddWithValue("userid", userId);
+                    comInsertTransaction.Parameters.AddWithValue("amount", 0.00);
+                    comInsertTransaction.Parameters.AddWithValue("transactiondate", DateTime.Now);
+                    comInsertTransaction.Parameters.AddWithValue("description", "Welcome Reward Points!");
+
+                    return Convert.ToInt32(comInsertTransaction.ExecuteScalar());
+                }
+            }
         }
+        private void InsertInitialRewardPoints(string userId, int transactionId)
+        {
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
+            {
+                con.Open();
+
+                string insertRewardPoint = "Insert into RewardPoint(UserID, TransactionID, Points, EarnedDate, ExpiryDate, Status) Values (@userid, @transactionid, @points, @earndate, @expirydate, @status)";
+
+                using (SqlCommand comInsertInitialReward = new SqlCommand(insertRewardPoint,con))
+                {
+                    comInsertInitialReward.Parameters.AddWithValue("userid", userId);
+                    comInsertInitialReward.Parameters.AddWithValue("transactionid", transactionId);
+                    comInsertInitialReward.Parameters.AddWithValue("points", 100);
+                    comInsertInitialReward.Parameters.AddWithValue("earndate", DateTime.Now);
+                    comInsertInitialReward.Parameters.AddWithValue("expirydate", DateTime.Now.AddYears(1));
+                    comInsertInitialReward.Parameters.AddWithValue("status", "active");
+
+                    comInsertInitialReward.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }
