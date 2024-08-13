@@ -39,7 +39,7 @@
                 countdown--;
             } else {
                 // Enable the button when the countdown reaches zero
-                document.getElementById('<%= sendForgetCode.ClientID %>').disabled = false;
+                resendBtn.disabled = false;
                 resendBtn.classList.remove('disable-resend');
                 resendBtn.value = 'Send';
 

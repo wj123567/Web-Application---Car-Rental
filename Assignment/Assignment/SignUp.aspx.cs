@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Security.Cryptography;
 using System.IO;
 using System.Web.Util;
+using System.Text;
 
 namespace Assignment
 {
@@ -34,36 +35,24 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
-                byte[] key = new byte[16];
-                byte[] iv = new byte[16];
 
-                RandomNumberGenerator rng = RandomNumberGenerator.Create();
-
-                rng.GetBytes(key);
-                rng.GetBytes(iv);
-
+                Guid newGUID = Guid.NewGuid();
                 string simplePassword = txtRegPassword.Text;
-                byte[] cipherPassword = Encrypt(simplePassword,key,iv);
-                String cipherPasswordString = Convert.ToBase64String(cipherPassword);
-                String keyString = Convert.ToBase64String(key);
-                String ivString = Convert.ToBase64String(iv);
+
+                string passwordHash = HashPassword(simplePassword,newGUID.ToString());
 
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
                 con.Open();
                     try
-                    {
-                        Guid newGUID = Guid.NewGuid();
-
-                        string insertUser = "insert into ApplicationUser (Id, Username, Email, Password, DOB, registrationDate, EncryptionKey, IVkey) values (@id,@username,@email,@password,@dob,@registrationDate,@encryptKey,@IVkey)";
+                    {                       
+                        string insertUser = "insert into ApplicationUser (Id, Username, Email, Password, DOB, registrationDate) values (@id,@username,@email,@password,@dob,@registrationDate)";
                         SqlCommand comInsert = new SqlCommand(insertUser, con);
                         comInsert.Parameters.AddWithValue("id", newGUID.ToString());
                         comInsert.Parameters.AddWithValue("username", txtUname.Text);
                         comInsert.Parameters.AddWithValue("email", txtRegEmail.Text);
-                        comInsert.Parameters.AddWithValue("password", cipherPasswordString);
+                        comInsert.Parameters.AddWithValue("password", passwordHash);
                         comInsert.Parameters.AddWithValue("dob", txtRegDOB.Text);
                         comInsert.Parameters.AddWithValue("registrationDate", DateTime.Now);
-                        comInsert.Parameters.AddWithValue("encryptKey", keyString);
-                        comInsert.Parameters.AddWithValue("IVkey", ivString);
 
                         comInsert.ExecuteNonQuery();
 
@@ -89,7 +78,6 @@ namespace Assignment
                 }
 
         }
-
         protected void btnForget_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
@@ -103,19 +91,18 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
-                byte[] key = new byte[16];
-                byte[] iv = new byte[16];
                 String simplePassword = txtPassword.Text;
+                String id = " ";
 
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
                 con.Open();
 
-                Byte[] encryptPassword = new Byte[16];
+                string hashPassword = " ";
 
-                string getUserKey = "Select EncryptionKey, IVkey, Password from ApplicationUser where email = @email";
+                string getUserId = "Select Id, Password from ApplicationUser where email = @email";
 
-                SqlCommand comKey = new SqlCommand(getUserKey, con);
+                SqlCommand comKey = new SqlCommand(getUserId, con);
 
                 comKey.Parameters.AddWithValue("@Email", txtEmail.Text);
 
@@ -123,14 +110,14 @@ namespace Assignment
 
                 if (reader.Read())
                 {
-                    encryptPassword = Convert.FromBase64String(reader["Password"].ToString());
-                    key = Convert.FromBase64String(reader["EncryptionKey"].ToString());
-                    iv = Convert.FromBase64String(reader["IVkey"].ToString());
+                    hashPassword = reader["Password"].ToString();
+                    id = reader["Id"].ToString();
                 }
 
                 reader.Close();
 
-                if (simplePassword == Decrypt(encryptPassword, key, iv)){
+                if (hashPassword == HashPassword(simplePassword, id))
+                {
                     string getUserData = "Select Id, EmailVerification  from ApplicationUser where email = @email";
 
                     SqlCommand com = new SqlCommand(getUserData, con);
@@ -212,51 +199,31 @@ namespace Assignment
             }
             con.Close();
         }
-    
-        protected string Decrypt(byte[] cipheredText, byte[] key, byte[] iv)
+
+        protected string HashPassword(string password, string salt)
         {
-            string simpleText = " ";
-            Aes aes = Aes.Create();
+            // Combine the password and salt
+            string combinedPassword = password + salt;
 
-            ICryptoTransform decryptor = aes.CreateDecryptor(key, iv);
-
-            using (MemoryStream ms = new MemoryStream(cipheredText))
+            // Choose the hash algorithm (SHA-256 or SHA-512)
+            using (var sha256 = SHA256.Create())
             {
-                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                // Convert the combined password string to a byte array
+                byte[] bytes = Encoding.UTF8.GetBytes(combinedPassword);
+
+                // Compute the hash value of the byte array
+                byte[] hash = sha256.ComputeHash(bytes);
+
+                // Convert the byte array to a hexadecimal string
+                StringBuilder result = new StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
                 {
-
-                    StreamReader reader = new StreamReader(cs);
-
-                    simpleText = reader.ReadToEnd();
+                    result.Append(hash[i].ToString("x2"));
                 }
+
+                return result.ToString();
             }
-
-            return simpleText;
         }
-
-        protected byte[] Encrypt(string simpleText, byte[] key, byte[] iv)
-        {
-            byte[] cipheredText;
-
-            Aes aes = Aes.Create();
-
-            ICryptoTransform encryptor = aes.CreateEncryptor(key, iv);
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
-                {
-                    using (StreamWriter writer = new StreamWriter(cs))
-                    {
-                        writer.Write(simpleText);
-                    }
-                    cipheredText = ms.ToArray();
-                }
-            }
-
-            return cipheredText;
-        }
-
         //You
 
         private int InsertWelcomeTransaction(string userId)

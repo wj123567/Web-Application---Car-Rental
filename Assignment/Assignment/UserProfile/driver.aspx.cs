@@ -25,10 +25,6 @@ namespace Assignment
                     txtBirthdate.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
                     txtBirthdate.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
                 }
-                else
-                {
-                    Server.Transfer("../Home.aspx");
-                }
             }
         }
 

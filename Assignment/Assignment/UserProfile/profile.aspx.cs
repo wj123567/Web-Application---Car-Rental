@@ -22,10 +22,6 @@ namespace Assignment
             {
                 LoadUserData(Session["Id"].ToString());
             }
-            else
-            {
-                Server.Transfer("../Home.aspx");
-            }
             }
         }
 

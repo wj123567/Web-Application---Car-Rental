@@ -15,6 +15,41 @@
         </div>
 
     <script>
+
+        let timer;
+        let countdown = 60; // Set the countdown duration in seconds
+
+        function startResendTimer() {
+            addEventListener("DOMContentLoaded", (event) => {
+                // Disable the button during the countdown
+                document.getElementById('<%= sendNewCode.ClientID %>').disabled = true;
+
+                // Start the countdown
+                timer = setInterval(updateTimer, 1000); s
+            });
+        }
+
+        function updateTimer() {
+            var resendBtn = document.getElementById('<%= sendNewCode.ClientID %>')
+            resendBtn.classList.add('disable-resend');
+
+            if (countdown > 0) {
+                resendBtn.value = `Resend in ${countdown} seconds`;
+                countdown--;
+            } else {
+                // Enable the button when the countdown reaches zero
+                resendBtn.disabled = false;
+                resendBtn.classList.remove('disable-resend');
+                resendBtn.value = 'Send';
+
+                // Reset countdown for the next attempt
+                countdown = 60;
+
+                // Stop the timer
+                clearInterval(timer);
+            }
+        }
+
         history.pushState(null, null, location.href);
         window.onpopstate = function () {
             history.go(1);

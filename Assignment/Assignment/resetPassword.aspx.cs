@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Security.Cryptography;
 using System.IO;
 using System.Threading;
+using System.Text;
 
 namespace Assignment
 {
@@ -25,62 +26,40 @@ namespace Assignment
             }
         }
 
-        protected byte[] Encrypt(string simpleText, byte[] key, byte[] iv)
+        protected string HashPassword(string password, string salt)
         {
-            byte[] cipheredText;
+            // Combine the password and salt
+            string combinedPassword = password + salt;
 
-            Aes aes = Aes.Create();
-
-            ICryptoTransform encryptor = aes.CreateEncryptor(key, iv);
-
-            using (MemoryStream ms = new MemoryStream())
+            // Choose the hash algorithm (SHA-256 or SHA-512)
+            using (var sha256 = SHA256.Create())
             {
-                using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                // Convert the combined password string to a byte array
+                byte[] bytes = Encoding.UTF8.GetBytes(combinedPassword);
+
+                // Compute the hash value of the byte array
+                byte[] hash = sha256.ComputeHash(bytes);
+
+                // Convert the byte array to a hexadecimal string
+                StringBuilder result = new StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
                 {
-                    using (StreamWriter writer = new StreamWriter(cs))
-                    {
-                        writer.Write(simpleText);
-                    }
-                    cipheredText = ms.ToArray();
+                    result.Append(hash[i].ToString("x2"));
                 }
+
+                return result.ToString();
             }
-
-            return cipheredText;
-        }
-
-        protected string Decrypt(byte[] cipheredText, byte[] key, byte[] iv)
-        {
-            string simpleText = " ";
-            Aes aes = Aes.Create();
-
-            ICryptoTransform decryptor = aes.CreateDecryptor(key, iv);
-
-            using (MemoryStream ms = new MemoryStream(cipheredText))
-            {
-                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
-                {
-
-                    StreamReader reader = new StreamReader(cs);
-
-                    simpleText = reader.ReadToEnd();
-                }
-            }
-
-            return simpleText;
         }
 
         protected Boolean PasswordCheck(String simplePassword)
         {
-            byte[] key = new byte[16];
-            byte[] iv = new byte[16];
+            string hashPassword = " ";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
             con.Open();
 
-            Byte[] encryptPassword = new Byte[16];
-
-            string getUserKey = "Select EncryptionKey, IVkey, Password from ApplicationUser where id = @id";
+            string getUserKey = "Select Password from ApplicationUser where id = @id";
 
             SqlCommand comKey = new SqlCommand(getUserKey, con);
 
@@ -90,14 +69,12 @@ namespace Assignment
 
             if (reader.Read())
             {
-                encryptPassword = Convert.FromBase64String(reader["Password"].ToString());
-                key = Convert.FromBase64String(reader["EncryptionKey"].ToString());
-                iv = Convert.FromBase64String(reader["IVkey"].ToString());
+                hashPassword = reader["Password"].ToString();
             }
 
             reader.Close();
 
-            if (simplePassword == Decrypt(encryptPassword, key, iv))
+            if (hashPassword == HashPassword(simplePassword, Session["forgetId"].ToString()))
             {
                 return true;
             }
@@ -120,32 +97,20 @@ namespace Assignment
             {
                 String Id = Session["forgetId"].ToString();
 
-                byte[] key = new byte[16];
-                byte[] iv = new byte[16];
-
-                RandomNumberGenerator rng = RandomNumberGenerator.Create();
-
-                rng.GetBytes(key);
-                rng.GetBytes(iv);
-
                 string simplePassword = txtRegPassword.Text;
-                byte[] cipherPassword = Encrypt(simplePassword, key, iv);
-                String cipherPasswordString = Convert.ToBase64String(cipherPassword);
-                String keyString = Convert.ToBase64String(key);
-                String ivString = Convert.ToBase64String(iv);
+
+                string hashPassword = HashPassword(simplePassword, Session["forgetId"].ToString());
 
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
-                string updateUser = "UPDATE ApplicationUser SET Password = @Password, EncryptionKey= @encryptKey, IVkey = @IVkey WHERE Id = @id";
+                string updateUser = "UPDATE ApplicationUser SET Password = @Password WHERE Id = @id";
 
                 try
                 {
                     con.Open();
                     SqlCommand comUpdate = new SqlCommand(updateUser, con);
-                    comUpdate.Parameters.AddWithValue("password", cipherPasswordString);
-                    comUpdate.Parameters.AddWithValue("encryptKey", keyString);
-                    comUpdate.Parameters.AddWithValue("IVkey", ivString);
-                    comUpdate.Parameters.AddWithValue("id", Id.ToString()); 
+                    comUpdate.Parameters.AddWithValue("@password", hashPassword);
+                    comUpdate.Parameters.AddWithValue("@id", Id.ToString()); 
                     comUpdate.ExecuteNonQuery();
 
 
