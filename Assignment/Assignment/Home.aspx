@@ -81,41 +81,12 @@
             <div class="grid-container">
                 <div class="region">
                     <h5>Region</h5>
-                    <ul>
-                        <li data-region="penang">Penang</li>
-                        <li data-region="kedah">Kedah</li>
-                        <li data-region="johor">Johor</li>
-                    </ul>
+                    <ul id="RegionListPlaceholder" runat="server"></ul>
                 </div>
 
                 <!-- Popular Points Section for Penang -->
-                <div class="popular-points" id="penang-points">
-                    <h5>Popular Points</h5>
-                    <ul>
-                        <li class="selectable-item">JB Sentral</li>
-                        <li class="selectable-item">abc</li>
-                    </ul>
-
-                </div>
-
-                 <!-- Popular Points Section for Kedah -->
-                <div class="popular-points" id="kedah-points">
-                    <h5>Popular Points</h5>
-                    <ul>
-                        <li class="selectable-item">Alor Setar Sentral</li>
-                        <li class="selectable-item">Langkawi Jetty</li>
-                    </ul>
+                <div id="PopularPointsPlaceholder" runat="server">
                     
-                </div>
-
-                <!-- Popular Points Section for Johor -->
-                <div class="popular-points" id="johor-points">
-                    <h5>Popular Points</h5>
-                    <ul>
-                        <li class="selectable-item">JB Sentral</li>
-                        <li class="selectable-item">Larkin Bus Terminal</li>
-                    </ul>
-                   
                 </div>
 
             </div>
@@ -194,13 +165,28 @@
             modal.style.display = "none";
         }
 
+        function initializeEventListeners() {
+            // Handle region click
+            var regionItems = document.querySelectorAll('.region li');
+            regionItems.forEach(function (item) {
+                item.onclick = function () {
+                    clearRegionSelection(); // Clear any previous selection
+                    selectedRegion = this.textContent; // Capture the selected region
+                    var region = this.getAttribute("data-region");
+                    this.classList.add('selected-region'); // Highlight the selected region
+                    showPopularPoints(region);
+                }
+            });
+        }
        
+        
+        // Handle popular points item click
         var selectableItems = document.querySelectorAll('.selectable-item');
         selectableItems.forEach(function (item) {
             item.onclick = function () {
-                console.log("Item clicked:", this.textContent);
-               selectedValue = this.textContent;
-   
+                clearPointSelection(); // Clear any previous selection
+                selectedPoint = this.textContent;
+                this.classList.add('selected-point'); // Highlight the selected point
             }
         });
 
@@ -285,16 +271,7 @@
             }
         });
 
-        // Handle popular points item click
-        var selectableItems = document.querySelectorAll('.selectable-item');
-        selectableItems.forEach(function (item) {
-            item.onclick = function () {
-                clearPointSelection(); // Clear any previous selection
-                selectedPoint = this.textContent;
-                this.classList.add('selected-point'); // Highlight the selected point
-            }
-        });
-
+        
         //-------DateTime----------
         function updateReturnDateTimeMin() {
             var departureDate = document.getElementById('<%= txtDepartureDateTime.ClientID %>').value;

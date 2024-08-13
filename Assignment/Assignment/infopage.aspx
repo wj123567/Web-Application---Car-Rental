@@ -2,12 +2,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
 
         <section class="info_head_container">
-     
+  <!--   
         <div class="header">
             <div class="location">
                 <div class="infopg_pickup">
-                    <h3>Penang Downtown</h3>
-                    <p class="departureDateSes"><%= Session["DepartureDate"] != null ? Session["DepartureDate"].ToString() : "Departure Date and Time not available" %></p>
+                    <h3 >Penang Downtown</h3>
+                    <p class="StartDateSes"><%=Session["bookingID"] %></p>
                 </div>
                 <div class="arrow">&gt;</div>
                 <div class="infopg_dropoff">
@@ -22,7 +22,7 @@
                  <asp:Button ID="btnEdit" runat="server" Text="Edit" CSSClass="edit-button" />
             </div>
         </div>
-        
+    -->    
          <div class="container-fluid">
 	<div class="row justify-content-center">
 		<div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
@@ -177,18 +177,19 @@
     </div>
         <div class="right-side">
             <div class="box_right">
-                <div class="pickup_container">
+                <div class="pickup_container" style="margin-bottom:20px;">
                     <h6 class="pickup_title">Pickup & Return</h6>
                 </div>
 
                 <table class="pickup_table">
+
                     <tr >
                         <td></td>
-                        <td class="timeline">Tue, Jul 23 · 10:00 AM</td>
+                        <td class="timeline StartDateSes"><%=Session["StartDate"] %></td>
                     </tr>
                     <tr>
                         <td><i class="ri-circle-line" style="color:green"> </i></td>
-                        <td style="padding-top:20px;">Sungai Nibong Express Bus Terminal</td>
+                        <td class="PickupPointSes"><%=Session["Pickup_point"] %></td>
                     </tr>
 
                     <tr>
@@ -196,24 +197,19 @@
                         <td style="padding-bottom:20px;">(Pickup point)</td>
                     </tr>
                
-
                     <tr>
                         <td></td>
-                        <td class="timeline">Wed, Jul 23 · 10:00 AM</td>
+                        <td class="timeline StartDateSes" ><%=Session["EndDate"] %></td>
                     </tr>
                     <tr>
                         <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
-                        <td style="padding-top:20px;">Sungai Nibong Express Bus Terminal</td>
+                        <td class="DropoffPointSes"><%=Session["Dropoff_point"] %></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td style="padding-bottom:20px;">(Drop off point)</td>
                     </tr>
                
-                    <tr>
-                        <td><i class="ri-time-line" style="color:blue"></i></td>
-                        <td> 1 day 0 hour 0 minute</td>
-                    </tr>
                 </table>
                 
                 

@@ -93,45 +93,40 @@
             
              <div class="payment_right_side">
             <div class="box_right">
-         <div class="pickup_container">
-             <h6 class="pickup_title">Pickup & Return</h6>
-         </div>
-
-         <table class="pickup_table">
-             <tr >
-                 <td></td>
-                 <td class="timeline">Tue, Jul 23 · 10:00 AM</td>
-             </tr>
-             <tr>
-                 <td><i class="ri-circle-line" style="color:green"> </i></td>
-                 <td style="padding-top:20px;">Sungai Nibong Express Bus Terminal</td>
-             </tr>
-
-             <tr>
-                 <td></td>
-                 <td style="padding-bottom:20px;">(Pickup point)</td>
-             </tr>
+         <div class="pickup_container" style="margin-bottom:20px;">
+            <h6 class="pickup_title">Pickup & Return</h6>
+        </div>
         
-
-             <tr>
-                 <td></td>
-                 <td class="timeline">Wed, Jul 23 · 10:00 AM</td>
-             </tr>
-             <tr>
-                 <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
-                 <td style="padding-top:20px;">Sungai Nibong Express Bus Terminal</td>
-             </tr>
-             <tr>
-                 <td></td>
-                 <td style="padding-bottom:20px;">(Drop off point)</td>
-             </tr>
+        <table class="pickup_table">
         
-             <tr>
-                 <td><i class="ri-time-line" style="color:blue"></i></td>
-                 <td> 1 day 0 hour 0 minute</td>
-             </tr>
-         </table>
-         
+            <tr >
+                <td></td>
+                <td class="timeline StartDateSes"><%=Session["StartDate"] %></td>
+            </tr>
+            <tr>
+                <td><i class="ri-circle-line" style="color:green"> </i></td>
+                <td class="PickupPointSes"><%=Session["Pickup_point"] %></td>
+            </tr>
+        
+            <tr>
+                <td></td>
+                <td style="padding-bottom:20px;">(Pickup point)</td>
+            </tr>
+                       
+            <tr>
+                <td></td>
+                <td class="timeline StartDateSes" ><%=Session["EndDate"] %></td>
+            </tr>
+            <tr>
+                <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
+                <td class="DropoffPointSes"><%=Session["Dropoff_point"] %></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="padding-bottom:20px;">(Drop off point)</td>
+            </tr>
+                       
+        </table>
          
      </div>
      <div class="box_right">
