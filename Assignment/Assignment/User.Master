@@ -76,6 +76,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
             <li><a class="dropdown-item" href="/UserProfile/profile.aspx">Profile</a></li>
+            <li><a class="dropdown-item" href="/UserProfile/RewardPoint.aspx">Reward Point</a></li>
             <li><a class="dropdown-item" href="history.aspx">History</a></li>
             <li>
               <hr class="dropdown-divider" />
