@@ -108,7 +108,7 @@ namespace Assignment
             Session["EndDate"] = txtReturnDateTime.Text;
 
 
-            String insertString = "INSERT INTO TestTrip (Id,Pickup_point,Pickup_state,StartDate,Dropoff_point,Dropoff_state,EndDate) VALUES (@Id,@Pickup_point,@Pickup_state,@StartDate,@Dropoff_point,@Dropoff_state,@EndDate)";
+            String insertString = "INSERT INTO Booking (Id,Pickup_point,StartDate,Dropoff_point,EndDate) VALUES (@Id,@Pickup_point,@StartDate,@Dropoff_point,@EndDate)";
             saveTripInfo(insertString);
             Server.Transfer("productListing.aspx");
 
@@ -131,10 +131,8 @@ namespace Assignment
 
             com.Parameters.AddWithValue("@Id", bookID);
             com.Parameters.AddWithValue("@Pickup_point", hdnDepartureLocation.Value);
-            com.Parameters.AddWithValue("@Pickup_state", hdnDepartureState.Value);
             com.Parameters.AddWithValue("@StartDate", Convert.ToDateTime(txtDepartureDateTime.Text));
-            com.Parameters.AddWithValue("@Dropoff_point", hdnReturnLocation.Value);
-            com.Parameters.AddWithValue("@Dropoff_state", hdnReturnState.Value);
+            com.Parameters.AddWithValue("@Dropoff_point", hdnReturnLocation.Value);  
             com.Parameters.AddWithValue("@EndDate", Convert.ToDateTime(txtReturnDateTime.Text));
 
             com.ExecuteNonQuery();
