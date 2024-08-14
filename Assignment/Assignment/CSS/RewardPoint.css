@@ -1,19 +1,144 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-.rp-info {
-    font-family: 'roboto', sans-serif !important;
+.RP {
+    margin: 0 auto;
+    margin-bottom: 100px;
+    height: auto;
+    width: 100%;
+    padding: 80px 0px;
+    color: white;
+    font-size: clamp(1rem, 2vw + 1rem, 2.5rem);
+    font-family: 'Leelawadee UI', sans-serif;
+    font-weight: bolder;
+    flex-direction: row;
+    justify-content: center;
+    overflow: hidden;
+    background-image: url('../image/rewardpoint/bg4.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: right;
+    position: relative;
+    isolation: isolate;
 }
 
-.user-reward-info table, .user-reward-info th, .user-reward-info td {
-    font-size: 40px;
-    border: 1px solid black;
-    padding: 0px 30px;
+.RP::after {
+    opacity: 0.6;
+    content: '';
+    inset: 0;
+    background: black;
+    z-index: -1;
+    position: absolute;
 }
 
-.user-reward-info td {
-    padding-left: 30px;
+.RP .RPHeader {
+    padding: 20px 0 20px 0;
 }
 
-.btnPayment {
-    font-size: 30px;
+    .RP .RPHeader h2 {
+        display: inline-block;
+        border-radius: 10px;
+        padding: 30px 0;
+        width: 80%;
+        font-weight: 800;
+        font-size: clamp(2rem, 2vw + 1rem, 45px);
+    }
+
+    .RP .RPHeader-1 {
+        font-weight: bold;
+        font-size: clamp(60px, 2vw + 1rem, 2.5rem) !important;
+    }
+
+.RP .RP-left {
+    margin-left: 260px;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+
+.RP .RP-left .RPHeader-Bottom {
+    margin-bottom: 40px;
+}
+
+.RP .RP-left .RPHeader-Bottom .btn {
+    margin-top: 60px;
+    width: 150px;
+    height: 70px;
+    font-size: 28px;
+}
+
+.RP .RP-right{
+    margin: 0 auto;
+    flex:20%;
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.RP .RP-right .right-upperside {
+    text-align: end;
+    font-size: 15px;
+    margin: 30px 240px 30px 0;
+}
+
+.RP .RP-right .right-upperside a {
+    color:white;
+    width: auto;
+}
+
+    .RP .RP-right .right-upperside a:hover {
+        color: lightblue;
+    }
+
+.RP .RP-right .right-lowerside-1 {
+    display: flex;
+    justify-content:center;
+}
+
+.RPImage {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.RP .RP-right .right-lowerside-2 {
+    width: 50%;
+}
+
+@media (max-width: 1400px) {
+    .RP {
+        background-size: cover;
+        width: 100%;
+        flex-direction: column;
+        overflow-x: hidden;
+    }
+
+        .RP .RP-left {
+            padding: 0 10px;
+            margin: 0 auto;
+        }
+
+    .RP-right {
+        padding: 0 10px;
+        align-items: center;
+    }
+
+    .RPImage {
+        max-width: 80%;
+    }
+
+    .RP .RP-right .right-upperside a{
+        text-align:left;
+        margin: 0 auto;
+    }
+
+    .RP .RP-left .RPHeader-Bottom .btn {
+        max-height: 40px;
+        max-width: 110px;
+        font-size: 20px;
+    }
+} 

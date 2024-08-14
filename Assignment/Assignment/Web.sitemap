@@ -4,6 +4,5 @@
     <siteMapNode url="productListing.aspx" title="Car"  description="" />
     <siteMapNode url="#" title="Help"  description="" />
     <siteMapNode url="order.aspx" title="Order"  description="" />
-	<siteMapNode url="Redemption.aspx" title="Reward Points" description="" />
   </siteMapNode>
 </siteMap>
