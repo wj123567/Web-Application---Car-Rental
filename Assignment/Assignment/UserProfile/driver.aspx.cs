@@ -223,43 +223,7 @@ namespace Assignment
                 Response.Redirect("driver.aspx");
             }
         }
-
-        protected void DriverReapeter_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            Label lblApproval = (Label)e.Item.FindControl("lblApproval");
-            Label lblReject = (Label)e.Item.FindControl("lblReject");
-            Button btnView = (Button)e.Item.FindControl("btnView");
-            Button btnEdit = (Button)e.Item.FindControl("btnEdit");
-            string approvalStatus = DataBinder.Eval(e.Item.DataItem,"Approval").ToString();
-            string rejectReason = DataBinder.Eval(e.Item.DataItem,"rejectReason").ToString();
-
-            switch (approvalStatus)
-            {
-                case "P":
-                    lblApproval.Text = "Pending";
-                    lblApproval.CssClass = "badge bg-warning text-light";
-                    btnView.Visible = true;
-                    btnEdit.Visible = false;
-                    break;
-                case "A":
-                    lblApproval.Text = "Approved";
-                    lblApproval.CssClass = "badge bg-success text-light";
-                    btnView.Visible = true;
-                    btnEdit.Visible = false;
-                    break;
-                case "R":
-                    lblApproval.Text = "Rejected";
-                    lblApproval.CssClass = "badge bg-danger text-light";
-                    btnView.Visible = false;
-                    btnEdit.Visible = true;
-                    lblReject.Text = "Reject Reason:" + rejectReason;
-                    break;
-                default:
-                    lblApproval.Text = "Unknown";
-                    break;
-            }
-        }
- 
+S        
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             ShowControls(editPanel);
