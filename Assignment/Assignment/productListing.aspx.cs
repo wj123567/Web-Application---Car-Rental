@@ -29,7 +29,15 @@ namespace Assignment
                 }
                 else
                 {
+                    try
+                    {
                     retrievedAllData();
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("Home.aspx");
+                    }
+                    
                 }
             }
         }
@@ -38,6 +46,9 @@ namespace Assignment
             string pickupPoint = Session["Pickup_point"].ToString();
             DateTime startDate = DateTime.Parse(Session["StartDate"].ToString());
             DateTime endDate = DateTime.Parse(Session["EndDate"].ToString());
+            ddlLocation.SelectedValue = pickupPoint;
+            txtStartTime.Text = startDate.ToString("yyyy-MM-ddTHH:mm");
+            txtEndTime.Text = endDate.ToString("yyyy-MM-ddTHH:mm");
             string findCar = "SELECT C.* FROM Car C JOIN Location L ON C.LocationId=L.Id LEFT JOIN TestTrip T ON C.CarPlate = T.CarPlateNo WHERE IsDelisted = 0 AND L.LocationName = @Pickup_point AND(T.Id IS NULL OR NOT(@startDate<T.EndDate AND @endDate>T.StartDate))";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
@@ -119,9 +130,9 @@ namespace Assignment
                 }
             }
 
-            string carInfo = "SELECT C.* FROM Car C WHERE IsDelisted = 0 ";
+            string carInfo = "SELECT C.* FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE IsDelisted = 0 ";
 
-            carInfo += " AND LocationId = '" + ddlLocation.SelectedValue +"'";
+            carInfo += " AND L.LocationName = '" + ddlLocation.SelectedValue +"'";
 
             carInfo += " AND C.CarPlate NOT IN(SELECT B.CarPlate FROM Booking B WHERE (B.StartDate >= @startDate AND B.StartDate <= @endDate) OR (B.EndDate >= @startDate AND b.EndDate <= @endDate)) ";
 
