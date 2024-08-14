@@ -4,7 +4,7 @@
 (if not document.querySelector('.addon_total').textContent = total.toFixed(2); will shows error)
 */
 
-document.addEventListener('DOMContentLoaded', function () {
+/*document.addEventListener('DOMContentLoaded', function () {
     function updateTotal() {
         let total = 0.00;
         const quantities = document.querySelectorAll('.quantity_input');
@@ -27,9 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const grandTotalToFixed = grandTotal.toFixed(2);
 
         // Update the grand total in the summary_total element
-
         document.querySelector('.grand_total').textContent = grandTotalToFixed;
-
+        
         //save the grandTotal
         localStorage.setItem("grandTotal", grandTotalToFixed);
 
@@ -119,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault(); // Prevent typing in the input field
         });
     });
-});
+});*/
 
 //link the car type,addonprice, grand total...
 

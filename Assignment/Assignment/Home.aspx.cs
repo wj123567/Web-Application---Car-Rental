@@ -106,7 +106,7 @@ namespace Assignment
             Session["Dropoff_point"] = hdnReturnLocation.Value;
             Session["Dropoff_state"] = hdnReturnState.Value;
             Session["EndDate"] = txtReturnDateTime.Text;
-
+            
 
             String insertString = "INSERT INTO Booking (Id,Pickup_point,StartDate,Dropoff_point,EndDate) VALUES (@Id,@Pickup_point,@StartDate,@Dropoff_point,@EndDate)";
             saveTripInfo(insertString);
@@ -124,7 +124,7 @@ namespace Assignment
                 isUnique = CheckBookID(bookID);
             } while (!isUnique);
             //store bookingID
-            Session["bookingID"] = bookID;
+            Session["BookingID"] = bookID;
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(insertString, con);

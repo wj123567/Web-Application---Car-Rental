@@ -96,13 +96,31 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblTotalDayRent;
 
         /// <summary>
-        /// carRental control.
+        /// lblCarRental control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal carRental;
+        protected global::System.Web.UI.WebControls.Label lblCarRental;
+
+        /// <summary>
+        /// lblAddOnPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAddOnPrice;
+
+        /// <summary>
+        /// lblTotalPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotalPrice;
 
         /// <summary>
         /// previous_btn control.
@@ -130,6 +148,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblstickyCarModel;
+
+        /// <summary>
+        /// lblStickyTotalPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStickyTotalPrice;
 
         /// <summary>
         /// btnNext control.

@@ -31,7 +31,7 @@ namespace Assignment
 
                     // Assuming you have a method to get car details by carPlate
                     GetCarDetailsByCarPlate(carPlate);
-   
+                    
                 }
                 BindAddOns();
             }
@@ -81,20 +81,24 @@ namespace Assignment
                             TimeSpan dateDifference = endDate - startDate;
                             int dayDifference = dateDifference.Days; // This will be 3
 
+                            //the total car rental
                             lblTotalDayRent.Text = dayDifference.ToString() + " Days";
+
                             decimal carDayPrice;
-                            decimal totalCost;
+                            decimal totalRentalCost;
                             if (decimal.TryParse(reader["CarDayPrice"].ToString(), out carDayPrice))
                             {
-                                totalCost = carDayPrice * dayDifference;
-                                carRental.Text = totalCost.ToString("F2"); // Format as currency
+                                totalRentalCost = carDayPrice * dayDifference;
+                                lblCarRental.Text = totalRentalCost.ToString("F2"); // Format as currency
                             }
                             else
                             {
-                                carRental.Text = "Price not available";
+                                lblCarRental.Text = "Price not available";
                             }
-
+                            
+                            
                         };
+                        
                     }
                 }
 
@@ -119,7 +123,7 @@ namespace Assignment
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string sql = "SELECT Name, Description, Price, Url, MaxQuantity FROM AddOn";
+                string sql = "SELECT Id,Name, Description, Price, Url, MaxQuantity FROM AddOn";
 
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);
                 DataTable dt = new DataTable();
@@ -128,9 +132,61 @@ namespace Assignment
             }
         }
 
+        protected void ProcessQuantities()
+        {
+            decimal totalAddOnPrice = 0m; // Variable to hold the total price
+
+            string bookID = Session["BookingID"].ToString();
+            foreach (RepeaterItem item in rptAddOns.Items)
+            {
+                // Find the TextBox and HiddenField controls
+                TextBox txtQuantity = item.FindControl("txtAddOnQuantity") as TextBox;
+                
+
+                //for insert
+                HiddenField hfAddOnID = item.FindControl("hfAddOnID") as HiddenField;
+                if (txtQuantity !=null && hfAddOnID != null)
+                {
+                    int quantity;
+                    int addOnID;
+
+                    // Try to parse the values
+                    if (int.TryParse(txtQuantity.Text, out quantity) && int.TryParse(hfAddOnID.Value, out addOnID))
+                    {
+                        
+                        //got only insert, no ignore
+                        if (quantity > 0)
+                        {
+                            string sql = "INSERT INTO BookingAddOn(BookingId,AddOnId, Quantity) VALUES(@BookingId,@AddOnId,@Quantity)";
+                            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+                            SqlCommand cmd = new SqlCommand(sql, con);
+                            cmd.Parameters.AddWithValue("@BookingId", bookID);
+                            cmd.Parameters.AddWithValue("@AddOnId", addOnID);
+                            cmd.Parameters.AddWithValue("@Quantity", quantity);
+
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+
+
+                            // Example: Add to a total price (assuming you have the price information)
+                            // decimal price = GetPriceForAddOn(addOnID);
+                            // total += price * quantity;
+                        }
+                    }
+                }
+            }
+
+            // Update your label or process the total price accordingly
+            // lblTotalPrice.Text = total.ToString("F2");
+        }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            Session["CarRental"] = carRental.Text;
+            Session["CarRental"] = lblCarRental.Text;
+            Session["CarName"] = headerCarModel.Text;
+            Session["TotalDayRent"] = lblTotalDayRent.Text;
+            Session["TotalAddOn"] =;
+            ProcessQuantities();
             Server.Transfer("bookinfo.aspx");
         }
 

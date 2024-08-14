@@ -37,8 +37,26 @@ namespace Assignment
 
                 txtDriverBirth.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
                 txtDriverBirth.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
+
+                //----retrieve the sync data 
+                retrieveData();
+                
             }
         
+        }
+
+        protected void retrieveData()
+        {
+            string totalDayRent = Session["TotalDayRent"].ToString();
+            string carName = Session["CarName"].ToString();
+            string totalAddOn = Session["TotalAddOn"].ToString();
+            string carRental = Session["CarRental"].ToString();
+
+            lblTotalDayRent.Text = totalDayRent;
+            lblAddOnPrice.Text = totalAddOn;
+            lblCarRental.Text = carRental;
+            lblstickyCarModel.Text = carName;
+
         }
 
         [WebMethod]

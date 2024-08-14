@@ -116,35 +116,39 @@
                 </div>
                 
                 <table class="pickup_table">
-                
-                    <tr >
-                        <td></td>
-                        <td class="timeline StartDateSes"><%=Session["StartDate"] %></td>
-                    </tr>
-                    <tr>
-                        <td><i class="ri-circle-line" style="color:green"> </i></td>
-                        <td class="PickupPointSes"><%=Session["Pickup_point"] %></td>
-                    </tr>
-                
-                    <tr>
-                        <td></td>
-                        <td style="padding-bottom:20px;">(Pickup point)</td>
-                    </tr>
-                               
-                    <tr>
-                        <td></td>
-                        <td class="timeline StartDateSes" ><%=Session["EndDate"] %></td>
-                    </tr>
-                    <tr>
-                        <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
-                        <td class="DropoffPointSes"><%=Session["Dropoff_point"] %></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td style="padding-bottom:20px;">(Drop off point)</td>
-                    </tr>
-                               
-                </table>
+
+                <tr >
+                    <td></td>
+                    <td class="timeline StartDateSes"><%= DateTime.Parse(Session["StartDate"].ToString()) %></td>
+                </tr>
+                <tr>
+                    <td><i class="ri-circle-line" style="color:green"> </i></td>
+                    <td class="PickupPointSes"><%=Session["Pickup_point"] %></td>
+                </tr>
+            
+                <tr>
+                    <td></td>
+                    <td style="padding-bottom:20px;">(Pickup point)</td>
+                </tr>
+                           
+                <tr>
+                    <td></td>
+                    <td class="timeline StartDateSes" ><%=DateTime.Parse(Session["EndDate"].ToString()) %></td>
+                </tr>
+                <tr>
+                    <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
+                    <td class="DropoffPointSes"><%=Session["Dropoff_point"] %></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="padding-bottom:20px;">(Drop off point)</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <asp:Label ID="lblTotalDayRent" runat="server" Text=""></asp:Label></td>
+                </tr>
+            </table>
                     
                 </div>
 
@@ -154,12 +158,12 @@
                     <div class="charges_summary">
                         <div class="charge_item">
                         <p class="summary_title">Rental</p>
-                        <p class ="summary_amt rental_amt">0.00</p>
+                         <asp:Label ID="lblCarRental" runat="server" CssClass="summary_amt rental_amt" Text=""></asp:Label>
                         </div>
                         <hr />
                         <div class="charge_item">
                         <p class="summary_title">Rental</p>
-                        <p class ="summary_amt summary_add_on">0.00</p>
+                        <asp:Label ID="lblAddOnPrice" runat="server" CssClass="summary_amt summary_add_on" Text="0.00"></asp:Label>
                         </div>
                         <hr />
                         <div class="charge_item">
@@ -173,8 +177,8 @@
                         </div>
                         <hr />
                         <div class="charge_item summary_total">
-                        <p class="summary_title">Total Price(MYR):</p>
-                        <p class="summary_amt grand_total"><span><sub>approx</sub></span>0.00</p>
+                        <p class="summary_title">Total Price(RM):</p>
+                         <asp:Label ID="lblTotalPrice" runat="server" Text="0.00" CssClass="summary_amt grand_total"></asp:Label>
                         </div>
                     </div>
                 
@@ -323,7 +327,7 @@
             <img src="photo/pexels-peng-liu-45946-169677.jpg" alt="Selected Car">
             <div>
                 <span>Selected Car</span>
-                <h4 class="sticky_bar_car_model"></h4>
+                 <asp:Label ID="lblstickyCarModel" CssClass="sticky_car_info" runat="server" Text=""></asp:Label>
             </div>
         </div>
         <div class="price_details">
