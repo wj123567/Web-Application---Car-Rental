@@ -1,62 +1,84 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="payment_pg.aspx.cs" Inherits="Assignment.payment_pg" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" SelectCommand="SELECT * FROM [PaymentCard]"></asp:SqlDataSource>
+    <!--
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    -->
 
-                 <div class="container-fluid">
-	            <div class="row justify-content-center">
-		            <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
-                        <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-
-                    <!-- progressbar -->
-                            <ul id="progressbar">
-                                <li id="bar_vehicle" class="active">Vehicle</li>
-                                <li id="bar_addon" class="active">Add-ons</li>
-                                <li id="bar_driver_info">Driver Info</li>
-                                <li id="bar_payment">Payment</li>
-                            </ul>
-                            <br/>
-
-                        </div>
-                     </div>
-	            </div>
+    <!-- Modal Structure -->
+<div id="paymentModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Payment Status</h5>
+     
             </div>
-
-<section class="info_body_container"> 
-   <div class="left-side">
-        <asp:Label ID="lblPaymentText" runat="server" Text=""></asp:Label>
-       <div class="card-body px-0">          
-    <asp:Repeater ID="paymentRepeater" runat="server" OnItemDataBound="paymentRepeater_ItemDataBound">
-     <ItemTemplate>
-    <div class="d-flex align-items-center justify-content-between px-4">
-        <div class="d-flex align-items-center">
-            <asp:Label ID="lblCardType" runat="server" Text="" CssClass="fab fa-cc-visa fa-2x"></asp:Label>
-            <div class="ms-4">
-            <div class="d-block">
-            <span class="d-inline">Card ending in</span>
-            <asp:Label ID="lblCardNumber" runat="server" Text='<%# Eval("CardNumber") %>' CssClass="d-inline" />
+            <div class="modal-body">
+                <p>Your payment is being processed...</p>
             </div>
-            <div class="d-block">
-                <span class="text-xs text-muted">Expires</span>
-                <asp:Label ID="lblExp" runat="server" Text='<%# Eval("ExpDate") %>' CssClass="text-xs text-muted" />
-            </div>
+            <div class="modal-footer">
+                <asp:Button ID="modalOkBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-target="#cardAddModal" data-bs-toggle="modal" data-bs-dismiss="modal" OnClientClick="return false;" />
             </div>
         </div>
-        
-    </div>                  
-    <hr>
-            </ItemTemplate>
-        </asp:Repeater>
-            
+    </div>
 </div>
+
+    <div id="cardAddModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="cardAddModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Payment Card</h5>
+               
+            </div>
+            <div class="modal-body">
+                <p>Payment Card has been added to your profile...</p>
+            </div>
+            <div class="modal-footer">
+                <asp:Button ID="modalCloseBtn" runat="server" CssClass="btn btn-primary" Text="Close" OnClick="modalCloseBtn_Click" />
+            </div>
+        </div>
+    </div>
+</div>
+
+     <div class="container-fluid">
+ <div class="row justify-content-center">
+  <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+
+        <!-- progressbar -->
+                <ul id="progressbar">
+                    <li id="bar_vehicle" class="active">Vehicle</li>
+                    <li id="bar_addon" class="active">Add-ons</li>
+                    <li id="bar_driver_info">Driver Info</li>
+                    <li id="bar_payment">Payment</li>
+                </ul>
+                <br/>
+
+            </div>
+         </div>
+ </div>
+</div>
+
+    <asp:DropDownList ID="ddlExistingCard" runat="server" DataSourceID="SqlDataSource1" DataTextField="CardNumber" DataValueField="Id"></asp:DropDownList>
+
+<section class="info_body_container"> 
+   
+   <div class="left-side">
+        <asp:Label ID="lblPaymentText" runat="server" Text=""></asp:Label>
+       
       <div class="box_left">
            <div class="paymentpg_container">
         <div class="row">
-          <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12 payment_left_side" >
-            <h4>Payment Info</h4>
+          <div class=" col-xs-12 payment_left_side" >
+           
              
             <div class="shadow-sm bg-white p-4 my-4">
+                <h4>Payment Info</h4>
                 <div class="col-sm-6 mt-5">
+                     
                   <asp:Label ID="lblCardName" runat="server" Text="Cardholder Name" CssClass="label_style"></asp:Label>
                   <asp:TextBox ID="txtCardName" runat="server" CssClass="form-control my-1"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"  ErrorMessage="Card Name is Required" ControlToValidate="txtCardName" ValidationGroup="PaymentValidation"  CssClass="validate"  Display="Static"></asp:RequiredFieldValidator>
                 </div>
                 <div class="col-sm-8 mt-4">
                   <asp:Label ID="lblCardNumber" runat="server" Text="Card Number" CssClass="label_style"></asp:Label>
@@ -64,38 +86,21 @@
                     <asp:Label ID="lblMasterCard" runat="server" Text="" CssClass="fab fa-cc-mastercard fa-lg"></asp:Label>
                     <asp:Label ID="lblAmexCard" runat="server" Text="" CssClass="fab fa-cc-amex fa-lg"></asp:Label>
                   <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control my-1"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"  ErrorMessage="Card Number is Required" ControlToValidate="txtCardNumber" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                 </div>
                 <div class="row">
-                  <div class="col-sm-3 col-xs-6 mt-4">
+                  <div class="col-sm-4 col-xs-6 mt-4">
                     <asp:Label ID="lblExpiry" runat="server" Text="Expiry Date" CssClass="label_style"></asp:Label>
                     <asp:TextBox ID="txtExpiry" runat="server" TextMode="Month" CssClass="form-control my-1"></asp:TextBox>
+                      <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Card Expiry Date is Required" ControlToValidate="txtExpiry" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                   </div>
-                  <div class="col-sm-3 col-xs-6 mt-4">      
+                  <div class="col-sm-4 col-xs-6 mt-4">      
                     <asp:Label ID="lblCvv" runat="server" Text="Security Code(CVV)" CssClass="label_style"></asp:Label>
                     <asp:TextBox ID="txtCvv" runat="server" CssClass="form-control my-1"></asp:TextBox>
+                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"  ErrorMessage="CVV is Required" ControlToValidate="txtCvv" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-sm-4 col-xs-12 mt-4">
-                    <asp:Label ID="lblTerm" runat="server" Text="Choose term" CssClass="label_style"></asp:Label>
-                    <asp:DropDownList ID="ddlTerm" runat="server" CssClass="form-control my-1">
-                        <asp:ListItem Value="1Year">1 Year</asp:ListItem>
-                        <asp:ListItem Value="3Year">3 Year</asp:ListItem>
-                        <asp:ListItem Value="5Year">5 Year</asp:ListItem>
-                    </asp:DropDownList>
-                     
-                  </div>
-                  <div class="col-sm-4 col-xs-6 mt-4">                  
-                    <asp:Label ID="lblSchedule" runat="server" Text="Payment Schedule" CssClass="label_style"></asp:Label>
-                    <asp:DropDownList ID="ddlSchedule" runat="server" CssClass="form-control my-1">
-                        <asp:ListItem Value="Quarterly">Quarterly</asp:ListItem>
-                        <asp:ListItem Value="Half Yearly">Half Yearly</asp:ListItem>
-                        <asp:ListItem Value="Full">Full</asp:ListItem>
-                    </asp:DropDownList>
-                    
-                  </div>
-                  
-                </div>
+                
                 <div class="my-3">
                   <small class="text-secondary">I authorize some insurance company to charge my debit / credit card for the total amount of xxx.xx</small>
                 </div>
@@ -105,12 +110,12 @@
                       <asp:Button ID="btnPaymentPgBack" runat="server" Text="Go Back" CssClass="paymentpg_backbtn prev_btn w-100" OnClick="btnPaymentPgBack_Click"/>
                     </div>
                     <div class="col">
-                     <asp:Button ID="btnPaymentPgPay" runat="server" Text="Pay Now" CssClass="paymentpg_paybtn next-btn w-100" OnClick="btnPaymentPgPay_Click"/>
+                     <asp:Button ID="btnPaymentPgPay" runat="server" Text="Pay Now" CssClass="paymentpg_paybtn next-btn w-100" data-bs-toggle="modal" data-bs-target="#paymentModal" OnClientClick="return validateForm();"/>
                     </div>
                   </div>
                 </div>
     
-                <asp:GridView ID="GridView1" runat="server" Width="643px"></asp:GridView>
+                
     
     
             </div>
@@ -197,4 +202,18 @@
 </div>
     </div>
     </section>
+    <script>
+        function validateForm(event) {
+            // Trigger ASP.NET validation
+            var isValid = Page_ClientValidate('PaymentValidation');
+            alert('Form is valid: ' + isValid); // Debugging line
+            if (!isValid) {
+                event.preventDefault(); // Prevent the default action (e.g., modal opening)
+                return false; // Prevent showing the modal if the form is not valid
+            }
+
+            // Proceed with showing the modal
+            return true;
+        }
+    </script>
 </asp:Content>
