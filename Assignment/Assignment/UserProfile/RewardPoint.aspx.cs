@@ -42,5 +42,9 @@ namespace Assignment
             }
         }
 
+        protected void btnRedeem_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Redemption.aspx");
+        }
     }
 }

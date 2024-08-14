@@ -68,6 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CSS\RewardPoint.css" />
+    <Content Include="Image\RewardPoint\OnlyCars.jpg" />
+    <Content Include="Image\RewardPoint\bg1.png" />
+    <Content Include="Image\RewardPoint\bg2.png" />
+    <Content Include="Image\RewardPoint\bg3.png" />
+    <Content Include="Image\RewardPoint\bg4.png" />
+    <Content Include="Image\RewardPoint\bg-5.png" />
     <Content Include="Management\AdminRewardPoint.aspx" />
     <Content Include="bookinfo.aspx" />
     <Content Include="Management\BookingManagement.aspx" />
@@ -126,7 +132,7 @@
     <Content Include="Image\UserProfile\noImg.svg" />
     <Content Include="productListing.aspx" />
     <Content Include="UserProfile\profile.aspx" />
-    <Content Include="Redemption.aspx" />
+    <Content Include="UserProfile\Redemption.aspx" />
     <Content Include="resetPassword.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="Management\UserManagement.aspx" />
@@ -272,11 +278,11 @@
       <DependentUpon>profile.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Redemption.aspx.cs">
+    <Compile Include="UserProfile\Redemption.aspx.cs">
       <DependentUpon>Redemption.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Redemption.aspx.designer.cs">
+    <Compile Include="UserProfile\Redemption.aspx.designer.cs">
       <DependentUpon>Redemption.aspx</DependentUpon>
     </Compile>
     <Compile Include="resetPassword.aspx.cs">
