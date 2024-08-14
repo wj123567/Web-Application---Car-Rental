@@ -134,7 +134,7 @@ namespace Assignment
 
             carInfo += " AND L.LocationName = '" + ddlLocation.SelectedValue +"'";
 
-            carInfo += " AND C.CarPlate NOT IN(SELECT B.CarPlate FROM Booking B WHERE (B.StartDate >= @startDate AND B.StartDate <= @endDate) OR (B.EndDate >= @startDate AND b.EndDate <= @endDate)) ";
+            carInfo += "AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL)";
 
             if (brandSelected.Count()>0)
             {
@@ -184,7 +184,7 @@ namespace Assignment
             DateTime startDate = DateTime.Parse(txtStartTime.Text);
             DateTime endDate = DateTime.Parse(txtEndTime.Text);
 
-             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(carInfo, con);
             com.Parameters.AddWithValue("@startDate", startDate);

@@ -185,7 +185,6 @@ namespace Assignment
             Session["CarRental"] = lblCarRental.Text;
             Session["CarName"] = headerCarModel.Text;
             Session["TotalDayRent"] = lblTotalDayRent.Text;
-            Session["TotalAddOn"] =;
             ProcessQuantities();
             Server.Transfer("bookinfo.aspx");
         }
