@@ -1,24 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\validateemail.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\validateemail.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\validateemail.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\validateemail.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\forgetpassword.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\forgetpassword.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\css\\signup.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\signup.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -26,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -47,58 +30,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "forgetPassword.aspx",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\forgetPassword.aspx",
-              "RelativeDocumentMoniker": "Assignment\\forgetPassword.aspx",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\forgetPassword.aspx",
-              "RelativeToolTip": "Assignment\\forgetPassword.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-08-14T08:43:13.507Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "validateEmail.aspx",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\validateEmail.aspx",
-              "RelativeDocumentMoniker": "Assignment\\validateEmail.aspx",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\validateEmail.aspx",
-              "RelativeToolTip": "Assignment\\validateEmail.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-08-14T08:41:58.016Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SignUp.css",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\SignUp.css",
-              "RelativeDocumentMoniker": "Assignment\\CSS\\SignUp.css",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\SignUp.css",
-              "RelativeToolTip": "Assignment\\CSS\\SignUp.css",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAC8AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-08-14T08:41:42.294Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "validateEmail.aspx.cs",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\validateEmail.aspx.cs",
-              "RelativeDocumentMoniker": "Assignment\\validateEmail.aspx.cs",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\validateEmail.aspx.cs",
-              "RelativeToolTip": "Assignment\\validateEmail.aspx.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAmwDoAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-14T08:12:22.075Z",
-              "EditorCaption": ""
             }
           ]
         },

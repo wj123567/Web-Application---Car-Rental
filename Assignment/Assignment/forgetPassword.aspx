@@ -8,6 +8,7 @@
              <asp:TextBox ID="txtforgetVerify" runat="server" CssClass="inputField" placeholder="Verification Code"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="reqOtp" runat="server" ErrorMessage="Otp is Require" ValidationGroup="checkOtp" CssClass="validate" Display="Dynamic" ControlToValidate="txtforgetVerify"></asp:RequiredFieldValidator>
                 <asp:CustomValidator ID="validateVerificationCode" runat="server" ErrorMessage="The Verification Code is Incorrect" OnServerValidate="validateVerificationCode_ServerValidate" ValidationGroup="checkOtp" CssClass="validate" Display="Dynamic"></asp:CustomValidator>
+                <br />
             <asp:Label ID="labelForgetSend" runat="server" Text="Verification Code Has Been Sent" Visible="False" CssClass="validate"></asp:Label>
             <asp:Button ID="sendForgetCode" runat="server" CssClass="btnUser mx-auto"  Text="Send" OnClick="sendForgetCode_Click" ValidationGroup="sendOtp" />
 
