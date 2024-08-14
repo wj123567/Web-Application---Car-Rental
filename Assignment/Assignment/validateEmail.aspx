@@ -5,7 +5,8 @@
             <h1 class="verifyHead">Verify Email</h1>
             <asp:TextBox ID="txtVerifyEmail" runat="server" CssClass="inputField" placeholder="Email" ReadOnly="True" ValidationGroup="checkOtp"></asp:TextBox>
              <asp:TextBox ID="txtNewVerify" runat="server" CssClass="inputField" placeholder="Verification Code" ValidationGroup="checkOtp"></asp:TextBox>
-             <asp:CustomValidator ID="validateVerificationCode" runat="server" ErrorMessage="The Verification Code is Incorrect" OnServerValidate="validateVerificationCode_ServerValidate" ValidationGroup="checkOtp" CssClass="validate" ControlToValidate="txtNewVerify"></asp:CustomValidator>
+             <asp:RequiredFieldValidator ID="reqOtp" runat="server" ErrorMessage="Otp is Require" ValidationGroup="checkOtp" CssClass="validate" Display="Dynamic" ControlToValidate="txtNewVerify"></asp:RequiredFieldValidator>
+             <asp:CustomValidator ID="validateVerificationCode" runat="server" ErrorMessage="The Verification Code is Incorrect" OnServerValidate="validateVerificationCode_ServerValidate" ValidationGroup="checkOtp" CssClass="validate" ControlToValidate="txtNewVerify" Display="Dynamic"></asp:CustomValidator>
                 <br />
             <asp:Label ID="labelValidateSend" runat="server" Text="Verification Code Has Been Sent" Visible="False" CssClass="validate"></asp:Label>
             <asp:Button ID="sendNewCode" runat="server" CssClass="btnUser mx-auto"  Text="Send" OnClick="sendNewCode_Click" ValidationGroup="SendOtp" />

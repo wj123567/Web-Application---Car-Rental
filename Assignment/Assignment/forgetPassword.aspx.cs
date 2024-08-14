@@ -31,37 +31,22 @@ namespace Assignment
 
         protected void sendForgetCode_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            String findUserID = "Select Id from ApplicationUser WHERE Email = @email";
-
-            con.Open();
-            SqlCommand findCom = new SqlCommand(findUserID, con);
-            findCom.Parameters.AddWithValue("@email", Session["forgetEmail"].ToString());
-
-            SqlDataReader reader = findCom.ExecuteReader();
-            
-            String UserID = " ";
-
-            if (reader.Read())
-            {
-                UserID = reader["Id"].ToString();
-                Session["forgetId"] = UserID;
-            }
-            reader.Close();
-            con.Close();
-
             Random random = new Random();
-            int otp = random.Next(100000,999999);
+            int otp = random.Next(100000, 999999);
+
+            String addOtp = "UPDATE ApplicationUser SET OtpCode = @OtpCode, OtpCreatedTime = @DateCreated WHERE Email = @Email";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);           
 
             con.Open();
-            String addOtp = "insert into UserOtp (DateCreated, OtpKey, UserID) values (@DateCreated, @OtpKey, @UserID)";
 
-            SqlCommand insertCom = new SqlCommand(addOtp, con);
-            insertCom.Parameters.AddWithValue("@DateCreated",DateTime.Now);
-            insertCom.Parameters.AddWithValue("@OtpKey", otp);
-            insertCom.Parameters.AddWithValue("@UserID", UserID);
+            SqlCommand com = new SqlCommand(addOtp, con);
 
-            insertCom.ExecuteNonQuery();
+            com.Parameters.AddWithValue("@DateCreated",DateTime.Now);
+            com.Parameters.AddWithValue("@OtpCode", otp);
+            com.Parameters.AddWithValue("@Email", txtForgetEmail.Text);
+
+            com.ExecuteNonQuery();
             con.Close();
 
             MailMessage mail = new MailMessage();
@@ -92,44 +77,44 @@ namespace Assignment
 
         protected void validateVerificationCode_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            if (Session["forgetId"] != null)
-            {
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-                String findUserOtp = "SELECT TOP 1 OtpKey, DateCreated FROM UserOtp WHERE UserID = @UserID ORDER BY DateCreated DESC";
+                String findUserOtp = "SELECT Id, OtpCode, OtpCreatedTime FROM ApplicationUser WHERE Email = @Email";
+                String setCode = "UPDATE ApplicationUser SET OtpCode = NULL WHERE Email = @Email";
 
                 con.Open();
-                string id = Session["forgetId"].ToString();
-                SqlCommand findCom = new SqlCommand(findUserOtp, con);
-                findCom.Parameters.AddWithValue("@UserID", id);
+                string email = txtForgetEmail.Text;
+                SqlCommand com = new SqlCommand(findUserOtp, con);
+                com.Parameters.AddWithValue("@Email", email);
 
-                SqlDataReader reader = findCom.ExecuteReader();
+                SqlDataReader reader = com.ExecuteReader();
 
                 string sysOtp = " ";
                 DateTime dateTime = DateTime.Now;
 
                 if (reader.Read())
                 {
-                    sysOtp = reader["OtpKey"].ToString();
-                    dateTime = reader.GetDateTime(reader.GetOrdinal("DateCreated"));
+                    Session["forgetId"] = reader["Id"].ToString();
+                    sysOtp = reader["OtpCode"].ToString();
+                    dateTime = reader.GetDateTime(reader.GetOrdinal("OtpCreatedTime"));
                 }
 
-                con.Close();
+                reader.Close();
 
                 TimeSpan time = DateTime.Now - dateTime;
 
                 if (txtforgetVerify.Text == sysOtp && time < TimeSpan.FromMinutes(5))
                 {
                     args.IsValid = true;
+                    com = new SqlCommand(setCode, con);
+                    com.Parameters.AddWithValue("@Email", email);
+                    com.ExecuteNonQuery();
+
                 }
                 else
                 {
                     args.IsValid = false;
                 }
-            }
-            else
-            {
-                args.IsValid = false;
-            }
+                con.Close();
 
 
         }

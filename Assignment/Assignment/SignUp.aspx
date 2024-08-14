@@ -17,7 +17,6 @@
              <asp:RegularExpressionValidator ID="regexEmail" runat="server" ErrorMessage="Invalid Email" CssClass="validate" ValidationGroup="LoginGroup" ControlToValidate="txtEmail" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
              <asp:CustomValidator ID="emailNotExist" runat="server" ErrorMessage="Email Not Exist" CssClass="validate" OnServerValidate="emailNotExist_ServerValidate" Display="Dynamic" ValidationGroup="LoginGroup" ControlToValidate="txtEmail" ValidateEmptyText="False"></asp:CustomValidator>
             <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="inputField" placeholder="Password" ValidationGroup="LoginGroup"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="requirePassword" runat="server" ErrorMessage="Password is Required" Display="Dynamic" CssClass="validate" ControlToValidate="txtPassword" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
             <asp:Label ID="labelValidUser" runat="server" Text="Label" Visible="False" CssClass="validate"></asp:Label>
             <br />
             <input id="cbShowPass" type="checkbox" onClick="showPass()"/>

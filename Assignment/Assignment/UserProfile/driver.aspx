@@ -52,7 +52,7 @@
         <asp:LinkButton ID="btnAddNew" runat="server" OnClick="btnAddNew_Click">
                <div class="card-body rounded border border-dark px-0 py-2 mb-3" Style="background-color:#effaf6">
                    <div class="d-flex align-items-center px-4">
-                   <h5 class="mx-auto my-auto text-muted">Add New Driver</h5>
+                   <h5 class="mx-auto my-auto text-muted">Add Driver</h5>
                    </div>
                </div>
         </asp:LinkButton>
