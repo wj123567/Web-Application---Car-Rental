@@ -222,8 +222,7 @@ namespace Assignment
                 fuLicenseB.SaveAs(savePathLicenseB);
                 Response.Redirect("driver.aspx");
             }
-        }
-S        
+        }       
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             ShowControls(editPanel);
