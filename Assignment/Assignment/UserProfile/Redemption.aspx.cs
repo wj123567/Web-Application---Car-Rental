@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Assignment
 {
@@ -11,7 +13,30 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!IsPostBack)
+            {
+                if (Session["Id"] != null)
+                {
+                    LoadUserData(Session["Id"].ToString());
+                }
+                else
+                {
+                    Response.Redirect("~/Home.aspx");
+                }
+            }
+        }
+
+        private void LoadUserData(string userid)
+        {
+            string username = " ";
+            string latestExpiryDate = " ";
+            string latestExpiryPoint = " ";
+            string currentPoints = " ";
+
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
+            {
+
+            }
         }
 
     }
