@@ -33,6 +33,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Literal headerCarModel;
 
         /// <summary>
+        /// ltrCarPlate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrCarPlate;
+
+        /// <summary>
         /// specType control.
         /// </summary>
         /// <remarks>
@@ -69,31 +78,22 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Literal specFuel;
 
         /// <summary>
-        /// txtQuantity1 control.
+        /// rptAddOns control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuantity1;
+        protected global::System.Web.UI.WebControls.Repeater rptAddOns;
 
         /// <summary>
-        /// txtQuantity2 control.
+        /// lblTotalDayRent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuantity2;
-
-        /// <summary>
-        /// txtQuantity3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuantity3;
+        protected global::System.Web.UI.WebControls.Label lblTotalDayRent;
 
         /// <summary>
         /// carRental control.
@@ -112,6 +112,24 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button previous_btn;
+
+        /// <summary>
+        /// imgSticky control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgSticky;
+
+        /// <summary>
+        /// lblstickyCarModel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblstickyCarModel;
 
         /// <summary>
         /// btnNext control.

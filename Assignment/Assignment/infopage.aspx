@@ -36,6 +36,9 @@
                     <th class="header_car_model" colspan="4">
                         <asp:Literal ID="headerCarModel" runat="server"></asp:Literal> </th>
                     </tr>
+                    <tr class="carPlate_style" >
+                        <td colspan="4"><asp:Literal ID="ltrCarPlate" runat="server"></asp:Literal></td>
+                    </tr>
 
                     <tr class="spec_title">
                         <td colspan="4">Specs</td>
@@ -70,74 +73,50 @@
                  <div class="addon_header">
                      <i class="ri-add-circle-line"></i><span>Add On</span>
  
+
+                <asp:Repeater ID="rptAddOns" runat="server">
+                <HeaderTemplate>
                 <table class="addon_container">
-                    
-                   
+  
                     <tr class="addon_title">
                         <th style="width:10%"></th>
                         <th style="width:50%"></th>
                         <th style=" width:20%; text-align:center; ">Price</th>
                         <th style=" width:20%; text-align:center; ">Quantity</th>
                     </tr>
+                 </HeaderTemplate>
+                  <ItemTemplate>
                     <tr class="addon_list">
-                        <td rowspan="2"><img width="30" height="30" src="https://img.icons8.com/ios/50/car-crash.png" alt="car-crash"/></td>
-                        <td class="addon_list_title">Liability Reduction Option (LRO)</td>
-                        <td class="text_center" data-price="20.00">20.00</td>
+                        <td rowspan="2"><asp:Image ID="imgIcon" runat="server" Width="30px" Height="30px" ImageUrl='<%# Eval("Url") %>' /></td>
+                        <td class="addon_list_title"><%# Eval("Name") %></td>
+                        <td class="text_center" data-price='<%# Eval("Price") %>'><%# Eval("Price","{0:F2}") %></td>
                         <td rowspan="2" style="text-align:center">
-                            <asp:TextBox ID="txtQuantity1" runat="server" TextMode="Number" CssClass="quantity_style quantity_input" min="0" max="1" value="0"></asp:TextBox>
+                            <asp:TextBox ID="txtAddOnQuantity" runat="server" TextMode="Number" CssClass="quantity_style quantity_input" min="0" max='<%# Eval("MaxQuantity") %>' value="0"></asp:TextBox>
 
                         </td>
                     </tr>
                     <tr class="addon_list">
-                        <td class="addon_subinfo">Recommended to reduce an excess and liability for major accident or vehicle loss</td>
+                        <td class="addon_subinfo"><%# Eval("Description") %></td>
                     </tr>
                     <tr class="separator">
                         <td style="visibility:hidden">a</td>
                     </tr>
-                    <!-- next -->
-                     <tr class="addon_list">
-                        <td rowspan="2"><i class="ri-group-line" style="text-align:center;vertical-align:middle;height:100%"></i></td>
-                        <td class="addon_list_title">Additional Driver</td>
-                        <td class="text_center" data-price="20.00">20.00</td>
-                        <td rowspan="2" style="text-align:center">
-                            <asp:TextBox ID="txtQuantity2" runat="server" TextMode="Number" CssClass="quantity_style quantity_input" min="0" max="3" step="1" value="0"></asp:TextBox>
-                            
-                        </td>
-                     </tr>
-                     <tr class="addon_list">
-                         <td class="addon_subinfo">Mandatory to purchase for second driver and above</td>
-                     </tr>
-                     <tr class="separator">
-                        <td style="visibility:hidden">a</td>                 
-                     </tr> 
                    
-                    <!-- next -->
-                    <tr class="addon_list">
-                       <td rowspan="2"><img width="30" height="30" src="https://img.icons8.com/windows/32/baby-car-seat.png" alt="baby-car-seat"/></td>
-                       <td class="addon_list_title">Child Seat (Non-Isofix)</td>
-                       <td class="text_center" data-price="15.00">15.00</td>
-                       <td rowspan="2" style="text-align:center">
-                           <asp:TextBox ID="txtQuantity3" runat="server" TextMode="Number" CssClass="quantity_style quantity_input" min="0" max="2" step="1" value="0">
+                    </ItemTemplate>
 
-                           </asp:TextBox></td>
-                    </tr>
-                    <tr class="addon_list">
-                        <td class="addon_subinfo">*Subject to availability - Age 1~3y with max. 15kg.</td>
-                    </tr>
-                    <tr class="separator">
-                       <td style="visibility:hidden">a</td>                 
-                    </tr> 
-                    
+                     <FooterTemplate>
                     <tr>
                         <td class="end_text" colspan="3">TOTAL(RM)</td>
-                        <td class="end_text addon_total">0.00</td>
+                        <td class="end_text addon_total">
+                            <asp:Label ID="lblAddOnPrice" runat="server" Text="0.00"></asp:Label></td>
                     </tr>
 
                     <tr class="separator">
                        <td style="visibility:hidden">a</td>                 
                     </tr> 
                 </table>
-
+                </FooterTemplate>
+                </asp:Repeater>
         </div>    
         </div>
             <div class="box_left">
@@ -185,7 +164,11 @@
                         <td></td>
                         <td style="padding-bottom:20px;">(Drop off point)</td>
                     </tr>
-               
+                    <tr>
+                        <td></td>
+                        <td>
+                            <asp:Label ID="lblTotalDayRent" runat="server" Text=""></asp:Label></td>
+                    </tr>
                 </table>
                 
                 
@@ -232,10 +215,11 @@
     <asp:Button ID="previous_btn" runat="server" Text="Previous" cssclass="previous_btn_style prev_btn" OnClick="previous_btn_Click" />
 </div>
         <div class="selected_car">
-            <img src="" class="sticky_bar_carimg" alt="Selected Car">
-            <div>
-                <span>Selected Car</span>
-                <h4 class="sticky_bar_car_model"></h4>
+        <asp:Image ID="imgSticky" runat="server" cssclass="sticky_bar_carimg" />
+            
+            <div >
+                <span class="title_style">Selected Car</span>
+                <asp:Label ID="lblstickyCarModel" CssClass="sticky_car_info" runat="server" Text=""></asp:Label>
             </div>
         </div>
         <div class="price_details">

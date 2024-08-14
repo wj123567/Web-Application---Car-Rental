@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
@@ -32,6 +33,7 @@ namespace Assignment
                     GetCarDetailsByCarPlate(carPlate);
    
                 }
+                BindAddOns();
             }
             
         }
@@ -58,10 +60,13 @@ namespace Assignment
                         
                         {
 
-                            headerCarModel.Text = reader["CarBrand"].ToString() + " " +reader["CarName"].ToString()+"["+reader["CarPlate"]+"]";
+                            headerCarModel.Text = reader["CarBrand"].ToString() + " " + reader["CarName"].ToString();
+                            lblstickyCarModel.Text = reader["CarBrand"].ToString() + " " + reader["CarName"].ToString();
+                            ltrCarPlate.Text="Plate Number: "+reader["CarPlate"].ToString();
                             specType.Text = reader["CType"].ToString();
                             specSeat.Text = reader["CarSeat"].ToString() +" People";
                             carImage.ImageUrl = reader["CarImage"].ToString();
+                            imgSticky.ImageUrl = reader["CarImage"].ToString();
                             specTransmission.Text = reader["CarTransmission"].ToString();
                             specFuel.Text = reader["CarEnergy"].ToString();
 
@@ -75,16 +80,20 @@ namespace Assignment
                             // Calculate the difference in days
                             TimeSpan dateDifference = endDate - startDate;
                             int dayDifference = dateDifference.Days; // This will be 3
+
+                            lblTotalDayRent.Text = dayDifference.ToString() + " Days";
                             decimal carDayPrice;
+                            decimal totalCost;
                             if (decimal.TryParse(reader["CarDayPrice"].ToString(), out carDayPrice))
                             {
-                                decimal totalCost = carDayPrice * dayDifference;
+                                totalCost = carDayPrice * dayDifference;
                                 carRental.Text = totalCost.ToString("F2"); // Format as currency
                             }
                             else
                             {
                                 carRental.Text = "Price not available";
                             }
+
                         };
                     }
                 }
@@ -96,11 +105,32 @@ namespace Assignment
           
         }
 
-       
-       
-     
+        private void BindAddOns()
+        {
+            // Assuming you have a method GetAddOns() that returns a DataTable or List<AddOn>
+            var addOns = GetAddOns();
+
+            rptAddOns.DataSource = addOns;
+            rptAddOns.DataBind();
+        }
+
+        private DataTable GetAddOns()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string sql = "SELECT Name, Description, Price, Url, MaxQuantity FROM AddOn";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+
         protected void btnNext_Click(object sender, EventArgs e)
         {
+            Session["CarRental"] = carRental.Text;
             Server.Transfer("bookinfo.aspx");
         }
 

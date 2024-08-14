@@ -110,66 +110,16 @@ function updateProgressBar(step) {
     });
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Select all quantity inputs
+    var quantityInputs = document.querySelectorAll('.quantity_input');
+
+    quantityInputs.forEach(function (input) {
+        input.addEventListener('keypress', function (event) {
+            event.preventDefault(); // Prevent typing in the input field
+        });
+    });
+});
 
 //link the car type,addonprice, grand total...
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Function to update the sticky bar text
-    function updateStickyBarText() {
-        var headerElement = document.querySelector(".header_car_model");
-        if (headerElement) {
-            localStorage.setItem("carModel", headerElement.textContent);
-        }
-        var stickyBarElement = document.querySelector(".sticky_bar_car_model");
-        if (stickyBarElement) {
-            var carModel = localStorage.getItem("carModel");
-
-            stickyBarElement.textContent = carModel;
-
-        }
-
-
-
-        console.log("Header Element: ", headerElement);
-        console.log("Sticky Bar Element: ", stickyBarElement);
-
-        if (headerElement && stickyBarElement) {
-            console.log("Header Text: ", headerElement.textContent);
-            stickyBarElement.textContent = headerElement.textContent;
-            console.log("Sticky Bar Text: ", stickyBarElement.textContent);
-        }
-        else {
-            console.error("Elements not found!");
-        }
-    }
-
-    // Call the function to set the initial text
-    updateStickyBarText();
-
-    // Optional: If the text content of the header changes dynamically, observe for changes
-    var headerElement = document.querySelector(".header_car_model");
-    if (headerElement) {
-        var observer = new MutationObserver(function (mutations) {
-            updateStickyBarText();
-        });
-
-        // Configure the observer to listen for changes in the header text
-        observer.observe(headerElement, {
-            characterData: true,
-            childList: true,
-            subtree: true
-        });
-    }
-});
-
-//link the car img 
-document.addEventListener('DOMContentLoaded', function () {
-    // Get the source and target image elements
-    const sourceImage = document.querySelector('.header_carimg');
-    const targetImage = document.querySelector('.sticky_bar_carimg');
-
-    if (sourceImage && targetImage) {
-        // Set the src of targetImage to the src of sourceImage
-        targetImage.src = sourceImage.src;
-    }
-});
