@@ -501,6 +501,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button previous_btn;
 
         /// <summary>
+        /// imgSticky control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgSticky;
+
+        /// <summary>
         /// lblstickyCarModel control.
         /// </summary>
         /// <remarks>
@@ -508,6 +517,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblstickyCarModel;
+
+        /// <summary>
+        /// lblStickyTotalPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStickyTotalPrice;
 
         /// <summary>
         /// btnNext2 control.

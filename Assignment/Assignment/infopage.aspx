@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="infopage.aspx.cs" Inherits="Assignment.infopage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-
+<asp:HiddenField ID="hdnTotalAddOn" runat="server" />
+<asp:HiddenField ID="hdnTotalPrice" runat="server" />
         <section class="info_head_container">
   
          <div class="container-fluid">
@@ -110,7 +111,7 @@
                         <td class="end_text" colspan="3">TOTAL(RM)</td>
                         <td class="end_text addon_total">
                             <asp:Label ID="lblTotalAddOn" runat="server" Text="0.00"></asp:Label> 
-                           
+                            
                         </td>
                     </tr>
 
@@ -170,7 +171,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <asp:Label ID="lblTotalDayRent" runat="server" Text=""></asp:Label></td>
+                            Rental Period:<asp:Label ID="lblTotalDayRent" runat="server" Text=""></asp:Label></td>
                     </tr>
                 </table>
                 
@@ -255,6 +256,7 @@
                 });
 
                 document.querySelector('.addon_total').textContent = total.toFixed(2);  //decimal place
+                document.getElementById('<%= hdnTotalAddOn.ClientID %>').value = total.toFixed(2);
                 // Update the total in the summary_add_on element
                 document.querySelector('.summary_add_on').textContent = total.toFixed(2);
 
@@ -264,7 +266,7 @@
                 const grandTotal = rentalAmount + total;
                 const grandTotalToFixed = grandTotal.toFixed(2);
 
-               
+                document.getElementById('<%= hdnTotalPrice.ClientID %>').value = grandTotalToFixed;
 
                 // Update the grand total in the summary_total element
                 document.querySelector('.grand_total').textContent = grandTotalToFixed;
@@ -279,7 +281,6 @@
                 var stickyBarPrice = document.querySelector(".sticky_bar_price");
                 if (stickyBarPrice) {
                     var getGrandTotal = localStorage.getItem("grandTotal");
-                    console.log("123", getGrandTotal);
                     stickyBarPrice.textContent = "RM" + getGrandTotal;
 
                 }

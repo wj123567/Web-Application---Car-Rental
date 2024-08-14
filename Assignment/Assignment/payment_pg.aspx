@@ -20,9 +20,35 @@
 	            </div>
             </div>
 
-
-    <div class="bg-light py-4 paymentpg_body">
-      <div class="paymentpg_container">
+<section class="info_body_container"> 
+   <div class="left-side">
+        <asp:Label ID="lblPaymentText" runat="server" Text=""></asp:Label>
+       <div class="card-body px-0">          
+    <asp:Repeater ID="paymentRepeater" runat="server" OnItemDataBound="paymentRepeater_ItemDataBound">
+     <ItemTemplate>
+    <div class="d-flex align-items-center justify-content-between px-4">
+        <div class="d-flex align-items-center">
+            <asp:Label ID="lblCardType" runat="server" Text="" CssClass="fab fa-cc-visa fa-2x"></asp:Label>
+            <div class="ms-4">
+            <div class="d-block">
+            <span class="d-inline">Card ending in</span>
+            <asp:Label ID="lblCardNumber" runat="server" Text='<%# Eval("CardNumber") %>' CssClass="d-inline" />
+            </div>
+            <div class="d-block">
+                <span class="text-xs text-muted">Expires</span>
+                <asp:Label ID="lblExp" runat="server" Text='<%# Eval("ExpDate") %>' CssClass="text-xs text-muted" />
+            </div>
+            </div>
+        </div>
+        
+    </div>                  
+    <hr>
+            </ItemTemplate>
+        </asp:Repeater>
+            
+</div>
+      <div class="box_left">
+           <div class="paymentpg_container">
         <div class="row">
           <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12 payment_left_side" >
             <h4>Payment Info</h4>
@@ -89,83 +115,86 @@
     
             </div>
           </div>
-
-            
-             <div class="payment_right_side">
-            <div class="box_right">
-         <div class="pickup_container" style="margin-bottom:20px;">
-            <h6 class="pickup_title">Pickup & Return</h6>
-        </div>
-        
-        <table class="pickup_table">
-        
-            <tr >
-                <td></td>
-                <td class="timeline StartDateSes"><%=Session["StartDate"] %></td>
-            </tr>
-            <tr>
-                <td><i class="ri-circle-line" style="color:green"> </i></td>
-                <td class="PickupPointSes"><%=Session["Pickup_point"] %></td>
-            </tr>
-        
-            <tr>
-                <td></td>
-                <td style="padding-bottom:20px;">(Pickup point)</td>
-            </tr>
-                       
-            <tr>
-                <td></td>
-                <td class="timeline StartDateSes" ><%=Session["EndDate"] %></td>
-            </tr>
-            <tr>
-                <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
-                <td class="DropoffPointSes"><%=Session["Dropoff_point"] %></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td style="padding-bottom:20px;">(Drop off point)</td>
-            </tr>
-                       
-        </table>
-         
-     </div>
-     <div class="box_right">
-         <h6 class="charge_title">Summary of Charges</h6>
-         <div class="charges_summary">
-             <div class="charge_item">
-             <p class="summary_title">Rental</p>
-             <p class ="summary_amt">0.00</p>
-             </div>
-             <hr />
-             <div class="charge_item">
-             <p class="summary_title">Rental</p>
-             <p class ="summary_amt">0.00</p>
-             </div>
-             <hr />
-             <div class="charge_item">
-             <p class="summary_title">Rental</p>
-             <p class ="summary_amt">0.00</p>
-             </div>
-             <hr />
-             <div class="charge_item">
-             <p class="summary_title">Rental</p>
-             <p class ="summary_amt">0.00</p>
-             </div>
-             <hr />
-             <div class="charge_item summary_total">
-             <p class="summary_title">Total Price(MYR):</p>
-             <p class="summary_amt"><span><sub>approx</sub></span>0.00</p>
-             </div>
-         </div>
-
-     </div>
-    
-     </div>
-
-        </div>
-      </div>
-
+            </div>
+               </div>
+          </div>
+   </div>
+    <div class="right-side">
+        <div class="box_right">
+    <div class="pickup_container" style="margin-bottom:20px;">
+        <h6 class="pickup_title">Pickup & Return</h6>
     </div>
 
+    <table class="pickup_table">
 
+        <tr >
+            <td></td>
+            <td class="timeline StartDateSes">123</td>
+        </tr>
+        <tr>
+            <td><i class="ri-circle-line" style="color:green"> </i></td>
+            <td class="PickupPointSes">123</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td style="padding-bottom:20px;">(Pickup point)</td>
+        </tr>
+   
+        <tr>
+            <td></td>
+            <td class="timeline StartDateSes" >123</td>
+        </tr>
+        <tr>
+            <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
+            <td class="DropoffPointSes">123></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="padding-bottom:20px;">(Drop off point)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                Rental Period:<asp:Label ID="lblTotalDayRent" runat="server" Text=""></asp:Label></td>
+        </tr>
+    </table>
+    
+    
+</div>
+<div class="box_right">
+    <h6 class="charge_title">Summary of Charges</h6>
+    <div class="charges_summary">
+        <div class="charge_item">
+        <p class="summary_title">Rental</p>
+          <asp:Label ID="lblCarRental" runat="server" CssClass="summary_amt rental_amt" Text=""></asp:Label>
+
+        </div>
+        <hr />
+        <div class="charge_item">
+        <p class="summary_title">Add-ons</p>
+            <asp:Label ID="lblAddOnPrice" runat="server" CssClass="summary_amt summary_add_on" Text="0.00"></asp:Label>
+        </div>
+
+        <hr />
+        <div class="charge_item">
+        <p class="summary_title">Rental</p>
+        <p class ="summary_amt">0.00</p>
+        </div>
+        <hr />
+        <div class="charge_item">
+        <p class="summary_title">Rental</p>
+        <p class ="summary_amt">0.00</p>
+        </div>
+        <hr />
+        <div class="charge_item summary_total">
+        <p class="summary_title">Total Price(RM):</p>
+         <asp:Label ID="lblTotalPrice" runat="server" Text="0.00" CssClass="summary_amt grand_total"></asp:Label>
+        
+        </div>
+    </div>
+
+</div>
+    </div>
+    </section>
 </asp:Content>

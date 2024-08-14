@@ -51,12 +51,16 @@ namespace Assignment
             string carName = Session["CarName"].ToString();
             string totalAddOn = Session["TotalAddOn"].ToString();
             string carRental = Session["CarRental"].ToString();
+            string totalPrice = Session["TotalPrice"].ToString();
+            string imageURL = Session["CarImg"].ToString();
 
             lblTotalDayRent.Text = totalDayRent;
             lblAddOnPrice.Text = totalAddOn;
             lblCarRental.Text = carRental;
             lblstickyCarModel.Text = carName;
-
+            lblTotalPrice.Text = totalPrice;
+            lblStickyTotalPrice.Text = "RM"+totalPrice;
+            imgSticky.ImageUrl = imageURL;
         }
 
         [WebMethod]

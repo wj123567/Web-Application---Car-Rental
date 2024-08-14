@@ -1,20 +1,21 @@
-﻿.paymentpg_body {
+﻿/*.paymentpg_body {
     width: 100%;
 }
 
 .paymentpg_container {
     width: 90%;
-    margin: auto;
     box-sizing: border-box;
+    margin: auto;
 }
 
     .paymentpg_container .row {
+        width:100%;
+        margin:auto;
     }
 
 .payment_left_side {
     width: 50%;
     padding: 20px;
-    margin-left: 200px;
     box-sizing: border-box;
 }
 
@@ -24,7 +25,7 @@
     margin: auto;
     box-sizing: border-box;
 }
-
+*/
 
 small {
     font-size: 12px;
