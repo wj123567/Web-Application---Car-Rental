@@ -107,7 +107,6 @@
     <Content Include="Image\WZ\road1.jpg" />
     <Content Include="infopage.aspx" />
     <Content Include="JS\bookinfo.js" />
-    <Content Include="JS\infopage.js" />
     <Content Include="UserProfile\payment.aspx" />
     <Content Include="payment_pg.aspx" />
     <Content Include="UserProfile\RewardPoint.aspx" />

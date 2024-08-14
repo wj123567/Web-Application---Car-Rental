@@ -15,6 +15,24 @@ namespace Assignment
     {
 
         /// <summary>
+        /// hdnTotalAddOn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnTotalAddOn;
+
+        /// <summary>
+        /// hdnTotalPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnTotalPrice;
+
+        /// <summary>
         /// carImage control.
         /// </summary>
         /// <remarks>
