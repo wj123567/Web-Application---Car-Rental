@@ -132,9 +132,9 @@ namespace Assignment
             }
         }
 
-        protected void ProcessBookingAddOn()
+        protected void ProcessQuantities()
         {
-            
+            decimal totalAddOnPrice = 0m; // Variable to hold the total price
 
             string bookID = Session["BookingID"].ToString();
             foreach (RepeaterItem item in rptAddOns.Items)
@@ -182,14 +182,10 @@ namespace Assignment
         }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            Session["CarImg"] = carImage.ImageUrl;
             Session["CarRental"] = lblCarRental.Text;
             Session["CarName"] = headerCarModel.Text;
             Session["TotalDayRent"] = lblTotalDayRent.Text;
-            Session["TotalAddOn"] = hdnTotalAddOn.Value;
-            Session["TotalPrice"]=hdnTotalPrice.Value;
-
-            ProcessBookingAddOn();
+            ProcessQuantities();
             Server.Transfer("bookinfo.aspx");
         }
 
