@@ -1,17 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="Redemption.aspx.cs" Inherits="Assignment.Redemption" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+<asp:Content ID="Redemption" ContentPlaceHolderID="main" runat="server">
+    <div class="redemption-container">
+        <div class="redemption-container-header">
+            <h2>Redeem What You Like?</h2>
+        </div>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [ItemStatus], [RedeemItemId], [ItemPoints], [ItemImage], [ItemDescription] FROM [RedeemItem] WHERE ([ItemStatus] = @ItemStatus)">
-        <SelectParameters>
-            <asp:Parameter DefaultValue="active" Name="ItemStatus" Type="String"></asp:Parameter>
-        </SelectParameters>
-    </asp:SqlDataSource>
-
-    <asp:Repeater ID="rptRedemption" runat="server">
-        <ItemTemplate>
-            
-        </ItemTemplate>
-    </asp:Repeater>
+        <div class="redemption-container-body">
+            <asp:ListView ID="ListView1" runat="server"></asp:ListView>
+        </div>
+    </div>
     
 </asp:Content>
