@@ -35,7 +35,7 @@
     
                         <div class="card p-3">
         
-                            <div class="d-flex justify-content-evenly align-items-center" style="flex:350px">
+                            <div class="d-flex justify-content-between align-items-center" style="flex:280px">
                                 <div class="mt-2">
                                     <div class="mt-5">
                                         <h1 class="main-heading mt-0"><%# Eval("ItemName") %></h1>
