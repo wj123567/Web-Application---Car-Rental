@@ -51,6 +51,24 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblPaymentText;
 
         /// <summary>
+        /// rptCards control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptCards;
+
+        /// <summary>
+        /// txtExistCardNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtExistCardNumber;
+
+        /// <summary>
         /// lblCardName control.
         /// </summary>
         /// <remarks>

@@ -16,12 +16,34 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
-            
+                BindCards();
 
             }
         }
 
-        
+        private void BindCards()
+        {
+            // Assuming you have a method GetAddOns() that returns a DataTable or List<AddOn>
+            var addCards = GetCards();
+
+            rptCards.DataSource = addCards;
+            rptCards.DataBind();
+        }
+
+        private DataTable GetCards()
+        {
+           
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connectionString)) { 
+            
+                string sql = "SELECT CardNumber FROM PaymentCard";
+                
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
 
         protected void btnPaymentPgBack_Click(object sender, EventArgs e)
         {

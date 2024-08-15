@@ -73,28 +73,38 @@
              
             <div class="shadow-sm bg-white p-4 my-4">
                 <h4>Payment Info</h4>
+
+                <asp:Repeater ID="rptCards" runat="server">
+                    <ItemTemplate>
                 <div class="d-flex flex-row align-items-center mb-4 pb-1">
           <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
           <div class="flex-fill mx-3">
             <div class=" data-mdb-input-init form-outline">
-              <input type="text" id="formControlLgXc" class="form-control form-control-lg"
-                value="**** **** **** 3193" />
+                <table>
+                    <td><%# Eval("CardNumber") %> </td>
+                </table>
+                
               <label class="form-label" for="formControlLgXc">Card Number</label>
             </div>
           </div>
           <a href="#!">Remove card</a>
         </div>
+          </ItemTemplate>
+         </asp:Repeater>
+                        
 <div class="d-flex flex-row align-items-center mb-4 pb-1">
           <img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png" />
           <div class="flex-fill mx-3">
             <div  class="form-outline">
               <input type="text" id="formControlLgXs" class="form-control form-control-lg"
                 value="**** **** **** 4296" />
+                <asp:TextBox ID="txtExistCardNumber" runat="server" CssClass="form-control form-control-lg" text="" ReadOnly="true"></asp:TextBox>
               <label class="form-label" for="formControlLgXs">Card Number</label>
             </div>
           </div>
           <a href="#!">Remove card</a>
         </div>
+        
                 <div class="col-sm-6 mt-5">
                      
                   <asp:Label ID="lblCardName" runat="server" Text="Cardholder Name" CssClass="label_style"></asp:Label>

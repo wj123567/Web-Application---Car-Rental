@@ -14,11 +14,6 @@ namespace Assignment
 	public partial class infopage : System.Web.UI.Page
 	{
        
-
-      
-        
-
-        
   
  
         protected void Page_Load(object sender, EventArgs e)
@@ -58,8 +53,7 @@ namespace Assignment
                     while (reader.Read())
                     {
                         
-                        {
-
+                        {   
                             headerCarModel.Text = reader["CarBrand"].ToString() + " " + reader["CarName"].ToString();
                             lblstickyCarModel.Text = reader["CarBrand"].ToString() + " " + reader["CarName"].ToString();
                             ltrCarPlate.Text="Plate Number: "+reader["CarPlate"].ToString();
@@ -134,7 +128,6 @@ namespace Assignment
 
         protected void ProcessQuantities()
         {
-            decimal totalAddOnPrice = 0m; // Variable to hold the total price
 
             string bookID = Session["BookingID"].ToString();
             foreach (RepeaterItem item in rptAddOns.Items)
@@ -168,7 +161,6 @@ namespace Assignment
                             cmd.ExecuteNonQuery();
                             con.Close();
 
-
                             // Example: Add to a total price (assuming you have the price information)
                             // decimal price = GetPriceForAddOn(addOnID);
                             // total += price * quantity;
@@ -185,6 +177,9 @@ namespace Assignment
             Session["CarRental"] = lblCarRental.Text;
             Session["CarName"] = headerCarModel.Text;
             Session["TotalDayRent"] = lblTotalDayRent.Text;
+            Session["TotalPrice"] = hdnTotalPrice.Value;
+            Session["TotalAddOn"] = hdnTotalAddOn.Value;
+            Session["CarImg"] = carImage.ImageUrl;
             ProcessQuantities();
             Server.Transfer("bookinfo.aspx");
         }

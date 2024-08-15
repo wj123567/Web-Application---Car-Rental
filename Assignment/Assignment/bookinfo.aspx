@@ -31,7 +31,7 @@
     
                         <div class="inputbox_left">
                             <asp:Label ID="lblName" runat="server" Text="Name :" CssClass="label_left"></asp:Label>
-                            <asp:TextBox ID="txtName" runat="server" CssClass="input_left"></asp:TextBox>
+                            <asp:TextBox ID="txtName" runat="server" CssClass="input_left" ReadOnly="true"></asp:TextBox>
                             <br />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please Enter [Name]." CssClass="validate" ControlToValidate="txtName" Display="Dynamic">
                             </asp:RequiredFieldValidator>
@@ -40,61 +40,15 @@
     
                         <div class="inputbox_left">
                             <asp:Label ID="lblEmail" runat="server" Text="Email Address : " CssClass="label_left"></asp:Label>
-                            <asp:TextBox ID="txtEmail" runat="server" CssClass="input_left" TextMode="Email"></asp:TextBox>
+                            <asp:TextBox ID="txtEmail" runat="server" CssClass="input_left" TextMode="Email" ReadOnly="true"></asp:TextBox>
                             <br />
                              <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please Enter [Email Address]." CssClass="validate" ControlToValidate="txtEmail" Display="Dynamic"></asp:RequiredFieldValidator>
                         </div>
     
-    
-                        <div class="inputbox_left">
-                            <asp:Label ID="lblAddress" runat="server" Text="Residential Address :" CssClass="label_left"></asp:Label>
-                            <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" CssClass="input_full"></asp:TextBox>
-                             <br />
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Please Enter [Residential Address]." CssClass="validate" ControlToValidate="txtAddress" Display="Dynamic"></asp:RequiredFieldValidator>
-                        </div>
+                        
                     </div>
     
-                    <div class="col">
-
-                        <div class="inputbox_right" style="padding-top:60px;">
-                            <asp:Label ID="lblCountryOrigin" runat="server" Text="Country of Origin : " CssClass="label_right"></asp:Label>
-                            <asp:DropDownList ID="ddlCountry" runat="server" CssClass="input_right">
-                               
-                            </asp:DropDownList>
-                             <br />
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Please Select [Country]." CssClass="validate" ControlToValidate="ddlCountry" Display="Dynamic"></asp:RequiredFieldValidator>
-                        </div>
-    
-                        <div class="inputbox_select">
-                            <asp:Label ID="lblPhoneNum" runat="server" Text="Phone Number : " CssClass="label_right"></asp:Label>
-                                <asp:TextBox ID="txtPhoneNum" runat="server" CssClass="input_right"></asp:TextBox>
-                             <br />
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Please Enter [Phone Number]." CssClass="validate" ControlToValidate="txtPhoneNum" Display="Dynamic"></asp:RequiredFieldValidator>
-                        </div>
-    
-                        <div class="inputbox_right">
-                            <asp:Label ID="lblDestination" runat="server" Text="Destination in Malaysia: " CssClass="label_right"></asp:Label>
-                            <asp:DropDownList ID="ddlDestination" runat="server" CssClass="input_right">
-                                <asp:ListItem Value="0" >Select your Destination</asp:ListItem>
-                                <asp:ListItem Value="PNG">Penang</asp:ListItem>
-                                <asp:ListItem Value="KDH">Kedah</asp:ListItem>
-                                <asp:ListItem Value="TRG">Terengganu</asp:ListItem>
-                                <asp:ListItem Value="JHR">Johor</asp:ListItem>
-                                <asp:ListItem Value="NSN">Negeri Sembilan</asp:ListItem>
-                                <asp:ListItem Value="MLK">Melaka</asp:ListItem>
-                                <asp:ListItem Value="PHG">Pahang</asp:ListItem>
-                                <asp:ListItem Value="KTN">Kelantan</asp:ListItem>
-                                <asp:ListItem Value="PRK">Perak</asp:ListItem>
-                                <asp:ListItem Value="PLS">Perlis</asp:ListItem>
-                                <asp:ListItem Value="SBH">Sabah</asp:ListItem>
-                                <asp:ListItem Value="SWK">Sarawak</asp:ListItem>
-                                <asp:ListItem Value="SGR">Selangor</asp:ListItem>
-                            </asp:DropDownList> 
-                             <br />
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="Please Select [Destination State]." CssClass="validate" ControlToValidate="ddlDestination" InitialValue="0" Display="Dynamic"></asp:RequiredFieldValidator>
-                        </div>
-
-                      </div>
+     
 
                     <div class="inputbox_full">
                         <asp:Label ID="lblNote" runat="server" Text="Note :" CssClass="label_left"></asp:Label>
@@ -205,13 +159,13 @@
                        <div id="driverFieldsLeft">
                        <div class="inputbox_left">
                             <asp:Label ID="lblDriverName" runat="server" Text="Driver Name :" CssClass="label_left"></asp:Label>
-                            <asp:TextBox ID="txtDriverName" runat="server" CssClass="input_left" placeholder="Enter Driver Name"></asp:TextBox>
+                            <asp:TextBox ID="txtDriverName" runat="server" CssClass="input_left" placeholder="Enter Driver Name" ReadOnly="true"></asp:TextBox>
                              <br />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="Please Enter [Driver Name]." CssClass="validate driver_validate" ControlToValidate="txtDriverName" Display="Dynamic"  Enabled="false"></asp:RequiredFieldValidator>
                         </div>
                         <div class="inputbox_left">
                             <asp:Label ID="lblDriverGender" runat="server" Text="Driver Gender :" CssClass="label_left"></asp:Label> 
-                            <asp:DropDownList ID="ddlDriverGender" runat="server" CssClass="input_left">
+                            <asp:DropDownList ID="ddlDriverGender" runat="server" CssClass="input_left" enabled="false">
                                 <asp:ListItem Value="0">Select Gender</asp:ListItem>
                                 <asp:ListItem Value="M">Male</asp:ListItem>
                                 <asp:ListItem Value="F">Female</asp:ListItem>
@@ -221,13 +175,13 @@
                         </div> 
                         <div class="inputbox_left">
                            <asp:Label ID="lblDriverID" runat="server" Text="Driver ID :" CssClass="label_left"></asp:Label>
-                               <asp:TextBox ID="txtDriverID" runat="server" CssClass="input_left" placeholder="e.g. 543210987654"> </asp:TextBox>
+                               <asp:TextBox ID="txtDriverID" runat="server" CssClass="input_left" placeholder="e.g. 543210987654" ReadOnly="true"> </asp:TextBox>
                              <br />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ErrorMessage="Please Enter [Driver ID]." CssClass="validate driver_validate" ControlToValidate="txtDriverID" Display="Dynamic"  Enabled="false"></asp:RequiredFieldValidator>
                         </div> 
                         <div class="inputbox_left">
                             <asp:Label ID="lblDriverPhoneNum" runat="server" Text="Driver Phone Number :" CssClass="label_left"></asp:Label>
-                               <asp:TextBox ID="txtDriverPhoneNum" runat="server" TextMode="Phone" CssClass="input_right" ></asp:TextBox>
+                               <asp:TextBox ID="txtDriverPhoneNum" runat="server" TextMode="Phone" CssClass="input_right" ReadOnly="true" ></asp:TextBox>
                              <br />
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ErrorMessage="Please Enter [Driver Phone Number]." CssClass="validate driver_validate" ControlToValidate="txtDriverPhoneNum" Display="Dynamic" ValidationGroup="DriverValidation" Enabled="false"></asp:RequiredFieldValidator>
                             <asp:CustomValidator ID="validPhoneNum" runat="server" ErrorMessage="Invalid Phone Number" ClientValidationFunction="validatePhone" ControlToValidate="txtDriverPhoneNum"  CssClass="validate" ValidateEmptyText="True" Enabled="false"></asp:CustomValidator>
@@ -244,14 +198,14 @@
                         <div id="driverFieldsRight">
                             <div class="inputbox_right"  >
                                 <asp:Label ID="lblDriverBirth" runat="server" Text="Driver Birth Date"  CssClass="label_right"></asp:Label>
-                                <asp:TextBox ID="txtDriverBirth" runat="server" TextMode="Date" CssClass="input_right"></asp:TextBox>
+                                <asp:TextBox ID="txtDriverBirth" runat="server" TextMode="Date" CssClass="input_right" ReadOnly="true"></asp:TextBox>
                                 <br />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ErrorMessage="Please Select [Driver Birth Date]." CssClass="validate driver_validate" ControlToValidate="txtDriverBirth" Display="Dynamic"  Enabled="false"></asp:RequiredFieldValidator>
                             </div>    
                            
                             <div class="inputbox_right">
                                 <asp:Label ID="lblDriverLicenseNum" runat="server" Text="Driver License Number" CssClass="label_right"></asp:Label>
-                                    <asp:TextBox ID="txtDriverLicenseNum" runat="server" CssClass="input_right" placeholder="e.g. 543210987654"></asp:TextBox>
+                                    <asp:TextBox ID="txtDriverLicenseNum" runat="server" CssClass="input_right" placeholder="e.g. 543210987654" ReadOnly="true"></asp:TextBox>
                                 <br />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ErrorMessage="Please Enter [Driver License Num]." CssClass="validate driver_validate" ControlToValidate="txtDriverLicenseNum" Display="Dynamic"  Enabled="false"></asp:RequiredFieldValidator>
                              </div>   

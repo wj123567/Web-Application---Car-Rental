@@ -13,7 +13,7 @@ namespace Assignment
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        string bookID = "";
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -100,25 +100,27 @@ namespace Assignment
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             // Save departure date to the session state
-            
+
             Session["Pickup_point"] = hdnDepartureLocation.Value;
             Session["Pickup_state"] = hdnDepartureState.Value;
             Session["StartDate"] = txtDepartureDateTime.Text;
             Session["Dropoff_point"] = hdnReturnLocation.Value;
             Session["Dropoff_state"] = hdnReturnState.Value;
             Session["EndDate"] = txtReturnDateTime.Text;
-            
+
 
             String insertString = "INSERT INTO Booking (Id,UserId,Pickup_point,StartDate,Dropoff_point,EndDate) VALUES (@Id,@UserId,@Pickup_point,@StartDate,@Dropoff_point,@EndDate)";
-            if (Session["Id"]!=null)
-                saveTripInfo(insertString, Session["Id"].ToString());
+           
+            saveTripInfo(insertString, Session["Id"].ToString());
+            
+            
             Server.Transfer("productListing.aspx");
 
         }
 
         protected void saveTripInfo(string insertString, string userId)
         {
-            
+            string bookID = "";
             bool isUnique;
             do
             {

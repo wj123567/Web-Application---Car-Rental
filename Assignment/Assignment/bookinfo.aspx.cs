@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using System.Net;
 
 using System.Globalization;
+using System.Drawing.Drawing2D;
 
 namespace Assignment
 {
@@ -21,26 +22,17 @@ namespace Assignment
         {
             if (!IsPostBack)
             {
-                List<string> objcountries = new List<string>();
-                CultureInfo[] objculture = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
-                foreach (CultureInfo getculture in objculture)
-                {
-                    RegionInfo objregion = new RegionInfo(getculture.LCID);
-                    if (!(objcountries.Contains(objregion.EnglishName)))
-                    {
-                        objcountries.Add(objregion.EnglishName);
-                    }
-                }
-                objcountries.Sort();
-                ddlCountry.DataSource = objcountries;
-                ddlCountry.DataBind();
+              
 
                 txtDriverBirth.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
                 txtDriverBirth.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
 
                 //----retrieve the sync data 
                 retrieveData();
-                
+                //retrieve user info
+                retrieveUserData();
+                //retrieve driver info
+                retrieveDriverData();
             }
         
         }
@@ -61,6 +53,77 @@ namespace Assignment
             lblTotalPrice.Text = totalPrice;
             lblStickyTotalPrice.Text = "RM"+totalPrice;
             imgSticky.ImageUrl = imageURL;
+        }
+
+        protected void retrieveUserData()
+        {
+            string userId = Session["Id"].ToString();
+            // Define your SQL query
+            string query = "SELECT * FROM Applicationuser WHERE Id = @userId";
+
+            // Assuming you're using ADO.NET for database access
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(query, con);
+                command.Parameters.AddWithValue("@userId", userId);
+
+                con.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        {
+                            txtName.Text = reader["Username"].ToString() ;
+                            txtEmail.Text = reader["Email"].ToString();
+                                               
+                        };
+
+                    }
+                }
+
+                reader.Close();
+                con.Close();
+            }
+
+        }
+
+        protected void retrieveDriverData()
+        {
+            string userId = Session["Id"].ToString();
+            // Define your SQL query
+            string query = "SELECT * FROM Driver WHERE UserId = @userId";
+
+            // Assuming you're using ADO.NET for database access
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
+            {
+                SqlCommand command = new SqlCommand(query, con);
+                command.Parameters.AddWithValue("@userId", userId);
+
+                con.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        {
+                            txtDriverName.Text = reader["DriverName"].ToString();
+                            txtDriverBirth.Text = reader["DriverBdate"].ToString();
+                            txtDriverPhoneNum.Text = reader["DriverPno"].ToString();
+                            ddlDriverGender.SelectedValue = reader["DriverGender"].ToString();
+                            txtDriverLicenseNum.Text = reader["DriverLicense"].ToString();
+                            txtDriverID.Text = reader["DriverId"].ToString();
+
+                        };
+
+                    }
+                }
+
+                reader.Close();
+                con.Close();
+            }
         }
 
         [WebMethod]
@@ -108,10 +171,6 @@ namespace Assignment
             
             com.Parameters.AddWithValue("@CustomerName",txtName.Text);
             com.Parameters.AddWithValue("@Email", txtEmail.Text);
-            com.Parameters.AddWithValue("@Address", txtAddress.Text);
-            com.Parameters.AddWithValue("@Country", ddlCountry.SelectedValue);
-            com.Parameters.AddWithValue("@CustomerPhone", txtPhoneNum.Text);
-            com.Parameters.AddWithValue("@Destination", ddlDestination.SelectedValue);
             com.Parameters.AddWithValue("@Note", txtNote.Text);
             com.Parameters.AddWithValue("@DriverName", txtDriverName.Text);
             com.Parameters.AddWithValue("@DriverGender", ddlDriverGender.SelectedValue);
