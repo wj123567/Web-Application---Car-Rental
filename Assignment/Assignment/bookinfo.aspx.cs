@@ -115,8 +115,8 @@ namespace Assignment
                         
                             txtDriverName.Text = reader["DriverName"].ToString();
                             driverBDate = reader.GetDateTime(reader.GetOrdinal("DriverBDate"));
-                        txtDriverBirth.Text = driverBDate.ToString("dd/MM/yyyy");
-                        txtDriverPhoneNum.Text = reader["DriverPno"].ToString();
+                            txtDriverBirth.Text = driverBDate.ToString("yyyy-MM-dd");
+                            txtDriverPhoneNum.Text = reader["DriverPno"].ToString();
                             ddlDriverGender.SelectedValue = reader["DriverGender"].ToString();
                             txtDriverLicenseNum.Text = reader["DriverLicense"].ToString();
                             txtDriverID.Text = reader["DriverId"].ToString();
