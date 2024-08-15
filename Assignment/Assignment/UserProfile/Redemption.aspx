@@ -31,35 +31,21 @@
 
                 <%-- ItemTemplate defines how each item should look --%>
                 <ItemTemplate>
-                    <div class="height d-inline-block">
-    
-                        <div class="card p-3">
-        
-                            <div class="d-flex justify-content-between align-items-center" style="flex:280px">
-                                <div class="mt-2">
-                                    <div class="mt-5">
-                                        <h1 class="main-heading mt-0"><%# Eval("ItemName") %></h1>
-                                        <div class="d-flex flex-row user-ratings">
-                                            <div class="ratings">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            </div>
-                                            <h6 class="text-muted ml-1">4/5</h6>
-                                        </div>
-                                    </div>
+                    <div class="RItem d-inline-block">
+                        <div class="vouchercard p-3 d-flex flex-column justify-content-around">                            
+                            <div class="d-flex flex-column justify-content-around" style="width: 90%">
+                                <div class="voucher-head" style="flex:1">
+                                    <h1 class="ItemName mt-0"><%# Eval("ItemName") %></h1>
                                 </div>
-                                <div class="image">
-                                    <asp:Image ID="ItemImage" runat="server" ImageUrl='<%# ResolveUrl(Eval("ItemImage").ToString()) %>' Width="100px" Height="150px" />
+                                <div class="image" style="flex:3">
+                                    <asp:Image ID="ItemImage" runat="server" ImageUrl='<%# ResolveUrl(Eval("ItemImage").ToString()) %>' CssClass="ItemImage" />
                                 </div>
                             </div>
         
                             <p><%# Eval("ItemDescription") %> </p>
         
-                            <button class="btn btn-danger">Add to cart</button>
+                            <button class="btn btn-danger resize">Add to cart</button>
                         </div>
-    
                     </div>
                 </ItemTemplate>
 
