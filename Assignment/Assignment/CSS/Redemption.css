@@ -1,6 +1,4 @@
-﻿
-
-div#content .redemption-container {
+﻿ .redemption-container {
     font-size: clamp(1vw, 2vw, 5vw);
     font-family: 'Leelawadee UI', sans-serif;
     margin: 40px auto;
@@ -11,8 +9,7 @@ div#content .redemption-container {
     font-weight: 900;
 }
 
-/*boostrap css start*/
-
+boostrap css start
 
 .card {
     width: 350px;
@@ -27,7 +24,7 @@ div#content .redemption-container {
 }
 
 .main-heading {
- /*   font-size: 40px;*/
+    font-size: 40px;
     color: red !important;
     font-size: clamp(1vw, 2vw, 5vw);
 }
@@ -44,4 +41,4 @@ div#content .redemption-container {
     height: 48px;
     font-size: 18px;
 }
-/*boostrap css end*/
+boostrap css end
