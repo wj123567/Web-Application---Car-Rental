@@ -172,6 +172,12 @@ namespace Assignment
 
                     productRepeater.DataSource = ds;
                     productRepeater.DataBind();
+                    Session["Pickup_point"] = ddlPULocation.SelectedValue;
+                    Session["Dropoff_point"] = ddlDFLocation.SelectedValue;
+                    Session["StartDate"] = txtStartTime.Text;
+                    Session["EndDate"] = txtEndTime.Text;
+                    Session["Dropoff_state"] = ddlDFState.SelectedValue;
+                    Session["Pickup_state"] = ddlPUState.SelectedValue;
                 }
             }
         }
