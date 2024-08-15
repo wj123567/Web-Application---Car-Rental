@@ -21,7 +21,7 @@
     
     <asp:LinkButton ID="btnDW" runat="server" CssClass="text-dark mx-2" Visible="False" OnClick="btnDW_Click">
         <i class="fa-solid fa-money-bill"></i>
-        <i class="fa-solid fa-arrow-down"></i>
+        <i class="fa-solid fa-arrow-down fa-lg"></i>
     </asp:LinkButton>
     </div>
 

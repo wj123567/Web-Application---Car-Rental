@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -45,7 +46,10 @@ namespace Assignment
             ddlDFState.SelectedValue = Session["Dropoff_state"].ToString();
             txtStartTime.Text = startDate.ToString("yyyy-MM-ddTHH:mm");
             txtEndTime.Text = endDate.ToString("yyyy-MM-ddTHH:mm");
-            string findCar = "SELECT C.* FROM Car C JOIN Location L ON C.LocationId=L.Id LEFT JOIN TestTrip T ON C.CarPlate = T.CarPlateNo WHERE IsDelisted = 0 AND L.LocationName = @Pickup_point AND(T.Id IS NULL OR NOT(@startDate<T.EndDate AND @endDate>T.StartDate))";
+            string findCar = "SELECT C.* FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE IsDelisted = 0 AND L.LocationName = @Pickup_point AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL)";
+
+            //initial one
+            //"SELECT C.*FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN TestTrip T ON C.CarPlate = T.CarPlateNo WHERE IsDelisted = 0 AND L.LocationName = @Pickup_point AND(T.Id IS NULL OR NOT(@startDate < T.EndDate AND @endDate > T.StartDate))"
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
@@ -93,9 +97,7 @@ namespace Assignment
                 }
             }
 
-            string carInfo = "SELECT C.* FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE IsDelisted = 0";
-            carInfo += " AND L.LocationName = @LocationName";
-            carInfo += " AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL)";
+            string carInfo = "SELECT C.* FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE IsDelisted = 0 AND L.LocationName = @LocationName AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL)";
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@LocationName", ddlPULocation.SelectedValue));
