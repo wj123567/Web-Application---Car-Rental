@@ -181,7 +181,7 @@ namespace Assignment
             String carPlate = button.CommandArgument.ToString();
 
             Session["CarPlate"] = carPlate;
-            Server.Transfer("infopage.aspx");
+            Response.Redirect("infopage.aspx");
         }
 
         protected void btnA2Z_Click(object sender, EventArgs e)

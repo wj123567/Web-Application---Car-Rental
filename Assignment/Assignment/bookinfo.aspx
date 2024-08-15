@@ -150,7 +150,7 @@
                        <h3 class="title">Driver Info</h3>
 
                        <div class="check_driver">
-                       <asp:CheckBox ID="chkDriver" runat="server" cssclass="driver_checkbox_style" Checked="True"/>
+                       <asp:CheckBox ID="chkDriver" runat="server" cssclass="driver_checkbox_style" />
                        <asp:Label ID="lblDriver" runat="server" Text="I am making this reservation for a new driver." CSSClass="driver_check_label"></asp:Label>     
                        </div>
 
@@ -294,7 +294,7 @@
             </div>
         </div>
         <div class="next_button">
-            <asp:Button ID="btnNext2" runat="server" Text="Next" cssclass="next_btn_style next_btn" OnClick="btnNext_Click"/>
+            <asp:Button ID="btnNext" runat="server" Text="Next" cssclass="next_btn_style next_btn" OnClick="btnNext_Click"/>
         </div>
     </div>
 </div>

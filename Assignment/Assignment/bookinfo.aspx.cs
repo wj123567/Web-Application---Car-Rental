@@ -95,6 +95,7 @@ namespace Assignment
         {
             string userId = Session["Id"].ToString();
             DateTime driverBDate = DateTime.Now;
+
             // Define your SQL query
             string query = "SELECT * FROM Driver WHERE UserId = @userId";
 
@@ -111,16 +112,16 @@ namespace Assignment
                 {
                     while (reader.Read())
                     {
-                        {
+                        
                             txtDriverName.Text = reader["DriverName"].ToString();
                             driverBDate = reader.GetDateTime(reader.GetOrdinal("DriverBDate"));
-                            txtDriverBirth.Text = driverBDate.ToString();
-                            txtDriverPhoneNum.Text = reader["DriverPno"].ToString();
+                        txtDriverBirth.Text = driverBDate.ToString("dd/MM/yyyy");
+                        txtDriverPhoneNum.Text = reader["DriverPno"].ToString();
                             ddlDriverGender.SelectedValue = reader["DriverGender"].ToString();
                             txtDriverLicenseNum.Text = reader["DriverLicense"].ToString();
                             txtDriverID.Text = reader["DriverId"].ToString();
                             
-                        }
+                        
 
                     };
                        
@@ -158,36 +159,15 @@ namespace Assignment
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            String insertString = "INSERT INTO TestBook (CustomerName,Email,Address,Country,CustomerPhone,Destination,Note,DriverName,DriverGender,DriverID,DriverPhone,DriverBirth,DriverLicense,RentalPurpose) VALUES (@CustomerName,@Email,@Address,@Country,@CustomerPhone,@Destination,@Note,@DriverName,@DriverGender,@DriverID,@DriverPhone,@DriverBirth,@DriverLicense,@RentalPurpose)";
-            saveBookingInfo(insertString);
-
-            Server.Transfer("payment_pg.aspx");
+            Response.Redirect("payment_pg.aspx");
+           
         }
 
         protected void previous_btn_Click(object sender, EventArgs e)
         {
-            Server.Transfer("infopage.aspx");
+            Response.Redirect("infopage.aspx");
         }
 
-        protected void saveBookingInfo(string insertString)
-        {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            con.Open();
-            SqlCommand com = new SqlCommand(insertString, con);
-            
-            com.Parameters.AddWithValue("@CustomerName",txtName.Text);
-            com.Parameters.AddWithValue("@Email", txtEmail.Text);
-            com.Parameters.AddWithValue("@Note", txtNote.Text);
-            com.Parameters.AddWithValue("@DriverName", txtDriverName.Text);
-            com.Parameters.AddWithValue("@DriverGender", ddlDriverGender.SelectedValue);
-            com.Parameters.AddWithValue("@DriverID", txtDriverID.Text);
-            com.Parameters.AddWithValue("@DriverPhone", txtDriverPhoneNum.Text);
-            com.Parameters.AddWithValue("@DriverBirth", txtDriverBirth.Text);
-            com.Parameters.AddWithValue("@DriverLicense", txtDriverLicenseNum.Text);
-            com.Parameters.AddWithValue("@RentalPurpose", ddlRentalPurpose.SelectedValue);
-
-            com.ExecuteNonQuery();
-            con.Close();
-        }
+       
     }
 }

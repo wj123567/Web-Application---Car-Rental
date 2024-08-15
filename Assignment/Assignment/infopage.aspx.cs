@@ -136,12 +136,10 @@ namespace Assignment
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
-
-
-            // If session ID is empty or null, show the modal
-            ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "handleButtonClick();", true);
+ 
+             ScriptManager.RegisterStartupScript(this, GetType(), "showModal", " handleButtonClick();", true);
             
-
+            
             Session["TotalPrice"] = hdnTotalPrice.Value;
             Session["TotalAddOn"] = hdnTotalAddOn.Value;
 
@@ -149,7 +147,7 @@ namespace Assignment
 
         protected void previous_btn_Click(object sender, EventArgs e)
         {
-            Server.Transfer("Home.aspx");
+            Response.Redirect("Home.aspx");
         }
 
         

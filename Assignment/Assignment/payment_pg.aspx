@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="payment_pg.aspx.cs" Inherits="Assignment.payment_pg" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" SelectCommand="SELECT * FROM [PaymentCard]"></asp:SqlDataSource>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    
     <!--
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     -->
@@ -17,24 +19,7 @@
                 <p>Your payment is being processed...</p>
             </div>
             <div class="modal-footer">
-                <asp:Button ID="modalOkBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-target="#cardAddModal" data-bs-toggle="modal" data-bs-dismiss="modal" OnClientClick="return false;" />
-            </div>
-        </div>
-    </div>
-</div>
-
-    <div id="cardAddModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="cardAddModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Payment Card</h5>
-               
-            </div>
-            <div class="modal-body">
-                <p>Payment Card has been added to your profile...</p>
-            </div>
-            <div class="modal-footer">
-                <asp:Button ID="modalCloseBtn" runat="server" CssClass="btn btn-primary" Text="Close" OnClick="modalCloseBtn_Click" />
+                <asp:Button ID="modalOkBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" OnClick="modalOkBtn_Click" />
             </div>
         </div>
     </div>
@@ -73,37 +58,27 @@
              
             <div class="shadow-sm bg-white p-4 my-4">
                 <h4>Payment Info</h4>
-
-                <asp:Repeater ID="rptCards" runat="server">
+                <div class="existingcard_container">
+                <h5>Existing Card</h5>
+                <asp:Repeater ID="rptCards" runat="server" >
                     <ItemTemplate>
-                <div class="d-flex flex-row align-items-center mb-4 pb-1">
+                <div class="d-flex flex-row align-items-center mt-3 mb-3 pb-1">
           <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
           <div class="flex-fill mx-3">
             <div class=" data-mdb-input-init form-outline">
                 <table>
-                    <td><%# Eval("CardNumber") %> </td>
+                    <td><%# FormatCardNumber(Eval("CardNumber").ToString()) %> </td>
                 </table>
                 
               <label class="form-label" for="formControlLgXc">Card Number</label>
             </div>
           </div>
-          <a href="#!">Remove card</a>
+                    <asp:Button ID="Button1" runat="server" Text="Button" />
         </div>
           </ItemTemplate>
          </asp:Repeater>
-                        
-<div class="d-flex flex-row align-items-center mb-4 pb-1">
-          <img class="img-fluid" src="https://img.icons8.com/color/48/000000/visa.png" />
-          <div class="flex-fill mx-3">
-            <div  class="form-outline">
-              <input type="text" id="formControlLgXs" class="form-control form-control-lg"
-                value="**** **** **** 4296" />
-                <asp:TextBox ID="txtExistCardNumber" runat="server" CssClass="form-control form-control-lg" text="" ReadOnly="true"></asp:TextBox>
-              <label class="form-label" for="formControlLgXs">Card Number</label>
-            </div>
-          </div>
-          <a href="#!">Remove card</a>
-        </div>
+         </div>               
+
         
                 <div class="col-sm-6 mt-5">
                      
@@ -141,7 +116,7 @@
                       <asp:Button ID="btnPaymentPgBack" runat="server" Text="Go Back" CssClass="paymentpg_backbtn prev_btn w-100" OnClick="btnPaymentPgBack_Click"/>
                     </div>
                     <div class="col">
-                     <asp:Button ID="btnPaymentPgPay" runat="server" Text="Pay Now" CssClass="paymentpg_paybtn next-btn w-100"  OnClientClick="return validateForm();"/>
+                     <asp:Button ID="btnPaymentPgPay" runat="server" Text="Pay Now" CssClass="paymentpg_paybtn next-btn w-100"   OnClientClick="return validateForm();"/>
                     </div>
                   </div>
                 </div>
@@ -234,21 +209,33 @@
     </div>
     </section>
     <script>
+        function loadModal() {
+            document.addEventListener("DOMContentLoaded", modal);
+
+        }
+
+        function modal() {
+            addEventListener("DOMContentLoaded", (event) => {
+                $('#paymentModal').modal('toggle');
+                return false;
+            });
+        };
+
+
         function validateForm(event) {
             // Trigger ASP.NET validation
             var isValid = Page_ClientValidate('PaymentValidation');
-            alert('Form is valid: ' + isValid); // Debugging line
+            
             if (!isValid) {
                 event.preventDefault(); // Prevent the default action (e.g., modal opening)
                 return false; // Prevent showing the modal if the form is not valid
             }
-
-            // If the form is valid, manually trigger the modal
-            var paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
-            paymentModal.show();
-
-            // Proceed with showing the modal
-            return false;
+            else {
+                $('#paymentModal').modal('show'); // Use 'show' to display the modal
+                // Proceed with showing the modal
+                return false;
+            }
+            
         }
     </script>
 </asp:Content>

@@ -15,7 +15,7 @@
                 <p>Login / Register an account before booking a car.</p>
             </div>
             <div class="modal-footer">
-                <asp:Button ID="modalOkBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal"  />
+                <asp:Button ID="modalOkBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" OnClientClick="redirectToHome(); return false;"/>
             </div>
 
        </div>
@@ -383,30 +383,39 @@
             });
         });
 
-
-        function showModal() {
-            // Show the modal
-            var myModal = new bootstrap.Modal(document.getElementById('infoPgModal'));
-            myModal.show();
+        function loadModal() {
+            document.addEventListener("DOMContentLoaded", modal);
+           
         }
+
+        function modal() {
+            addEventListener("DOMContentLoaded", (event) => {
+                $('#infoPgModal').modal('toggle');
+                return false;
+            });
+        };
 
         function closeModal() {
             var myModal = new bootstrap.Modal(document.getElementById('infoPgModal'));
             myModal.hide();
         }
 
-        function handleButtonClick() {
-        var sessionId = '<%= Session["Id"] %>'.trim(); // Get session id and trim any extra whitespace
-        console.log("Session ID:", sessionId); // Debugging line
-
-        if (sessionId === '' || sessionId === 'null') {
-            showModal(); // Show the modal if session id is empty or 'null'
-            return false; // Prevent default action (navigation)
-        } else {
-            window.location.href = 'bookinfo.aspx'; // Redirect to another page if session id is set
-            return false; // Ensure default action is allowed for redirection
+        function redirectToHome() {
+            window.location.href = 'Home.aspx';
         }
-    }
 
+        function handleButtonClick() {
+            var sessionId = '<%= Session["Id"] %>'.trim(); // Get session id and trim any extra whitespace
+            console.log("Session ID:", sessionId); // Debugging line
+
+            if (sessionId === '' || sessionId === 'null') {
+                modal(); // Show the modal if session id is empty or 'null'
+                return false;
+
+            } else {
+                window.location.href = 'bookinfo.aspx'; // Redirect to another page if session id is set
+                return false; // Ensure default action is allowed for redirection
+            }
+        }
     </script>
 </asp:Content>
