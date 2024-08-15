@@ -116,8 +116,8 @@
                         </div>
                         <hr />
                         <div class="charge_item">
-                        <p class="summary_title">Rental</p>
-                        <asp:Label ID="lblAddOnPrice" runat="server" CssClass="summary_amt summary_add_on" Text="0.00"></asp:Label>
+                        <p class="summary_title">Add-ons</p>
+                        <asp:Label ID="lblAddOnPrice" runat="server" CssClass="summary_amt summary_add_on" Text=""></asp:Label>
                         </div>
                         <hr />
                         <div class="charge_item">

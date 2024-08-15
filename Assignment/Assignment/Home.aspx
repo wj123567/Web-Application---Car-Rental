@@ -73,7 +73,7 @@
 </div>
     
             <div id="locationModal" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" id="modal-content">
         <span class="close" id="modal_close">&times;</span>
         <h2>Select Location</h2>
         <hr/>

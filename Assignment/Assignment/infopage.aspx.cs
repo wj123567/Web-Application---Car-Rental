@@ -13,9 +13,6 @@ namespace Assignment
 {
 	public partial class infopage : System.Web.UI.Page
 	{
-       
-  
- 
         protected void Page_Load(object sender, EventArgs e)
 		{
             if (!Page.IsPostBack)
@@ -28,6 +25,14 @@ namespace Assignment
                     GetCarDetailsByCarPlate(carPlate);
                     
                 }
+
+                // Check if Session["id"] is null or empty
+                if (Session["id"] == null || string.IsNullOrEmpty(Session["id"].ToString()))
+                {
+                    // Set a JavaScript variable to indicate that the modal should be shown
+                    ClientScript.RegisterStartupScript(this.GetType(), "ShowModal", "showModal();", true);
+                }
+
                 BindAddOns();
             }
             
@@ -64,6 +69,12 @@ namespace Assignment
                             specTransmission.Text = reader["CarTransmission"].ToString();
                             specFuel.Text = reader["CarEnergy"].ToString();
 
+
+                            
+                            Session["CarName"]    = headerCarModel.Text; 
+                            Session["CarImg"]     = carImage.ImageUrl;
+                            
+                            
                             DateTime startDateTime = DateTime.Parse(Session["StartDate"].ToString());
                             DateTime endDateTime = DateTime.Parse(Session["EndDate"].ToString());
 
@@ -77,13 +88,14 @@ namespace Assignment
 
                             //the total car rental
                             lblTotalDayRent.Text = dayDifference.ToString() + " Days";
-
+                            Session["TotalDayRent"] = lblTotalDayRent.Text;
                             decimal carDayPrice;
                             decimal totalRentalCost;
                             if (decimal.TryParse(reader["CarDayPrice"].ToString(), out carDayPrice))
                             {
                                 totalRentalCost = carDayPrice * dayDifference;
                                 lblCarRental.Text = totalRentalCost.ToString("F2"); // Format as currency
+                                Session["CarRental"] = lblCarRental.Text;
                             }
                             else
                             {
@@ -126,67 +138,24 @@ namespace Assignment
             }
         }
 
-        protected void ProcessQuantities()
-        {
 
-            string bookID = Session["BookingID"].ToString();
-            foreach (RepeaterItem item in rptAddOns.Items)
-            {
-                // Find the TextBox and HiddenField controls
-                TextBox txtQuantity = item.FindControl("txtAddOnQuantity") as TextBox;
-                
-
-                //for insert
-                HiddenField hfAddOnID = item.FindControl("hfAddOnID") as HiddenField;
-                if (txtQuantity !=null && hfAddOnID != null)
-                {
-                    int quantity;
-                    int addOnID;
-
-                    // Try to parse the values
-                    if (int.TryParse(txtQuantity.Text, out quantity) && int.TryParse(hfAddOnID.Value, out addOnID))
-                    {
-                        
-                        //got only insert, no ignore
-                        if (quantity > 0)
-                        {
-                            string sql = "INSERT INTO BookingAddOn(BookingId,AddOnId, Quantity) VALUES(@BookingId,@AddOnId,@Quantity)";
-                            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-                            SqlCommand cmd = new SqlCommand(sql, con);
-                            cmd.Parameters.AddWithValue("@BookingId", bookID);
-                            cmd.Parameters.AddWithValue("@AddOnId", addOnID);
-                            cmd.Parameters.AddWithValue("@Quantity", quantity);
-
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-                            con.Close();
-
-                            // Example: Add to a total price (assuming you have the price information)
-                            // decimal price = GetPriceForAddOn(addOnID);
-                            // total += price * quantity;
-                        }
-                    }
-                }
-            }
-
-            // Update your label or process the total price accordingly
-            // lblTotalPrice.Text = total.ToString("F2");
-        }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            Session["CarRental"] = lblCarRental.Text;
-            Session["CarName"] = headerCarModel.Text;
-            Session["TotalDayRent"] = lblTotalDayRent.Text;
+            hdnTotalPrice.Value=lblAddOnPrice.Text;
+
+
             Session["TotalPrice"] = hdnTotalPrice.Value;
-            Session["TotalAddOn"] = hdnTotalAddOn.Value;
-            Session["CarImg"] = carImage.ImageUrl;
-            ProcessQuantities();
-            Server.Transfer("bookinfo.aspx");
+            Session["TotalAddOn"] = lblAddOnPrice.Text;
+
+            
         }
 
         protected void previous_btn_Click(object sender, EventArgs e)
         {
             Server.Transfer("Home.aspx");
         }
+
+        
+
     }
 }

@@ -1,7 +1,27 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="infopage.aspx.cs" Inherits="Assignment.infopage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-<asp:HiddenField ID="hdnTotalAddOn" runat="server" />
-<asp:HiddenField ID="hdnTotalPrice" runat="server" />
+
+
+
+    <div class="modal fade" id="infoPgModal" tabindex="-1" aria-labelledby="infoPgModalLabel" data-bs-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title mx-auto fs-3 fw-bold text-info">Reminder</h5>
+     
+            </div>
+            <div class="modal-body fs-5 text-dark">
+                <p>Login / Register an account before booking a car.</p>
+            </div>
+            <div class="modal-footer">
+                <asp:Button ID="modalOkBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" OnClientClick="closeModal(); return false;" />
+            </div>
+
+       </div>
+    </div>
+</div>
+
         <section class="info_head_container">
   
          <div class="container-fluid">
@@ -111,7 +131,7 @@
                         <td class="end_text" colspan="3">TOTAL(RM)</td>
                         <td class="end_text addon_total">
                             <asp:Label ID="lblTotalAddOn" runat="server" Text="0.00"></asp:Label> 
-                            
+                           
                         </td>
                     </tr>
 
@@ -189,6 +209,7 @@
                     <div class="charge_item">
                     <p class="summary_title">Add-ons</p>
                         <asp:Label ID="lblAddOnPrice" runat="server" CssClass="summary_amt summary_add_on" Text="0.00"></asp:Label>
+                         <asp:HiddenField ID="hdnTotalAddOn" runat="server" />
                     </div>
 
                     <hr />
@@ -205,7 +226,7 @@
                     <div class="charge_item summary_total">
                     <p class="summary_title">Total Price(RM):</p>
                      <asp:Label ID="lblTotalPrice" runat="server" Text="0.00" CssClass="summary_amt grand_total"></asp:Label>
-                    
+                    <asp:HiddenField ID="hdnTotalPrice" runat="server" />
                     </div>
                 </div>
 
@@ -238,7 +259,7 @@
             </div>
         </div>
         <div class="next_button">
-            <asp:Button ID="btnNext" runat="server" Text="Next" cssclass="next_btn_style next_btn" OnClick="btnNext_Click"/>
+            <asp:Button ID="btnNext" runat="server" Text="Next" cssclass="next_btn_style next_btn"  OnClientClick="return handleButtonClick();"/>
         </div>
     </div>
 </div>
@@ -266,7 +287,7 @@
                 const grandTotal = rentalAmount + total;
                 const grandTotalToFixed = grandTotal.toFixed(2);
 
-                document.getElementById('<%= hdnTotalPrice.ClientID %>').value = grandTotalToFixed;
+                document.getElementById('<%= hdnTotalPrice.ClientID %>').value = grandTotal.toFixed(2);
 
                 // Update the grand total in the summary_total element
                 document.querySelector('.grand_total').textContent = grandTotalToFixed;
@@ -362,6 +383,31 @@
             });
         });
 
+
+        function showModal() {
+            // Show the modal
+            var myModal = new bootstrap.Modal(document.getElementById('infoPgModal'));
+            myModal.show();
+        }
+
+        function closeModal() {
+            var myModal = new bootstrap.Modal(document.getElementById('infoPgModal'));
+            myModal.hide();
+        }
+
+    function handleButtonClick() {
+        // Check if the modal should be shown or redirect
+        var sessionId = '<%= Session["Id"] %>'.toString(); // Get session id and trim any extra whitespace
+     console.log("Session ID:", sessionId); // Debugging line
+
+     if (sessionId === '' || sessionId === 'null') {
+        showModal(); // Show the modal if session id is empty
+        return false; // Prevent default action (navigation)
+    } else {
+         window.location.href = 'bookinfo.aspx'; // Redirect to another page if session id is set
+         return false;//redirect and dw refresh
+     }
+    }
 
     </script>
 </asp:Content>

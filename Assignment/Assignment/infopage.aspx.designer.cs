@@ -15,22 +15,13 @@ namespace Assignment
     {
 
         /// <summary>
-        /// hdnTotalAddOn control.
+        /// modalOkBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnTotalAddOn;
-
-        /// <summary>
-        /// hdnTotalPrice control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnTotalPrice;
+        protected global::System.Web.UI.WebControls.Button modalOkBtn;
 
         /// <summary>
         /// carImage control.
@@ -132,6 +123,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblAddOnPrice;
 
         /// <summary>
+        /// hdnTotalAddOn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnTotalAddOn;
+
+        /// <summary>
         /// lblTotalPrice control.
         /// </summary>
         /// <remarks>
@@ -139,6 +139,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotalPrice;
+
+        /// <summary>
+        /// hdnTotalPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnTotalPrice;
 
         /// <summary>
         /// previous_btn control.

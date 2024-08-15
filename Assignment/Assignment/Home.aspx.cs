@@ -108,17 +108,12 @@ namespace Assignment
             Session["Dropoff_state"] = hdnReturnState.Value;
             Session["EndDate"] = txtReturnDateTime.Text;
 
-
-            String insertString = "INSERT INTO Booking (Id,UserId,Pickup_point,StartDate,Dropoff_point,EndDate) VALUES (@Id,@UserId,@Pickup_point,@StartDate,@Dropoff_point,@EndDate)";
            
-            saveTripInfo(insertString, Session["Id"].ToString());
-            
-            
             Server.Transfer("productListing.aspx");
 
         }
 
-        protected void saveTripInfo(string insertString, string userId)
+        protected void saveTripInfo()
         {
             string bookID = "";
             bool isUnique;
@@ -131,21 +126,6 @@ namespace Assignment
             //store bookingID
             Session["BookingID"] = bookID;
 
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            con.Open();
-            SqlCommand com = new SqlCommand(insertString, con);
-
-            com.Parameters.AddWithValue("@Id", bookID);
-            com.Parameters.AddWithValue("@UserId", userId);
-            com.Parameters.AddWithValue("@Pickup_point", hdnDepartureLocation.Value);
-            com.Parameters.AddWithValue("@StartDate", Convert.ToDateTime(txtDepartureDateTime.Text));
-            com.Parameters.AddWithValue("@Dropoff_point", hdnReturnLocation.Value);  
-            com.Parameters.AddWithValue("@EndDate", Convert.ToDateTime(txtReturnDateTime.Text));
-
-            com.ExecuteNonQuery();
-            con.Close();
-                
-            
         }
 
         private String generateRandBookID()
@@ -158,7 +138,7 @@ namespace Assignment
 
         private Boolean CheckBookID(String bookID)
         {
-            String sql = "Select Id FROM TestTrip"; 
+            String sql = "Select Id FROM Booking"; 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(sql, con);
@@ -170,7 +150,6 @@ namespace Assignment
                 if (bookID == (string)reader["Id"])
                 {
                     return false;
-
                 }
             }
         return true;

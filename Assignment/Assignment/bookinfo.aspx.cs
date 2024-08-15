@@ -41,17 +41,19 @@ namespace Assignment
         {
             string totalDayRent = Session["TotalDayRent"].ToString();
             string carName = Session["CarName"].ToString();
-            string totalAddOn = Session["TotalAddOn"].ToString();
-            string carRental = Session["CarRental"].ToString();
-            string totalPrice = Session["TotalPrice"].ToString();
             string imageURL = Session["CarImg"].ToString();
+            string totalPrice = Session["TotalPrice"] as string ?? "0.00";
+            string totalAddOn = Session["TotalAddOn"] as string ?? "0.00";
+            string carRental = Session["CarRental"].ToString();
+            
+            
 
             lblTotalDayRent.Text = totalDayRent;
             lblAddOnPrice.Text = totalAddOn;
             lblCarRental.Text = carRental;
             lblstickyCarModel.Text = carName;
             lblTotalPrice.Text = totalPrice;
-            lblStickyTotalPrice.Text = "RM"+totalPrice;
+            lblStickyTotalPrice.Text = "RM"+ totalPrice;
             imgSticky.ImageUrl = imageURL;
         }
 
