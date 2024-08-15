@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="productListing.aspx.cs" Inherits="Assignment.productListing" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:SqlDataSource ID="CarBrand" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [CarBrand] ORDER BY [BrandName]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="CarLocation" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [Id], [LocationName] FROM [Location]"></asp:SqlDataSource>
-
+    <asp:SqlDataSource ID="LocationState" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT DISTINCT [LocationState] FROM [Location]"></asp:SqlDataSource>
 <div>
     <div class="float-start mx-2 mt-4">
     <asp:LinkButton ID="btnA2Z" runat="server" CssClass="text-dark mx-2" OnClick="btnA2Z_Click">
@@ -11,6 +12,16 @@
 
     <asp:LinkButton ID="btnZ2A" runat="server" CssClass="text-dark mx-2" OnClick="btnZ2A_Click" Visible="False">
         <i class="fa-solid fa-arrow-down-z-a fa-xl"></i>
+    </asp:LinkButton>    
+    
+    <asp:LinkButton ID="btnPU" runat="server" CssClass="text-dark mx-2" OnClick="btnPU_Click">
+        <i class="fa-solid fa-money-bill"></i>
+        <i class="fa-solid fa-arrow-up fa-lg"></i>
+    </asp:LinkButton>    
+    
+    <asp:LinkButton ID="btnDW" runat="server" CssClass="text-dark mx-2" Visible="False" OnClick="btnDW_Click">
+        <i class="fa-solid fa-money-bill"></i>
+        <i class="fa-solid fa-arrow-down"></i>
     </asp:LinkButton>
     </div>
 
@@ -27,13 +38,32 @@
     </div>
     <div class="offcanvas-body px-0">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-start" id="menu">
-          <li class="nav-item">
+            <li class="nav-item">
                 <a href="#" class="nav-link text-black">
-                    <span class="text-muted">Location:</span>
-                    <asp:DropDownList ID="ddlLocation" runat="server" CssClass="form-select" DataSourceID="CarLocation" DataTextField="LocationName" DataValueField="LocationName" Width="225px" ValidationGroup="filter" OnDataBound="ddlLocation_DataBound"></asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="requireLocation" runat="server" ErrorMessage="Location is Required" ControlToValidate="ddlLocation" CssClass="validate" InitialValue="0" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
+            <span class="text-muted">Search:</span>
+            <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded" placeholder="Search" Width="250px" Height="40px" onkeypress="triggerButtonClick(event)"></asp:TextBox>
                 </a>
             </li>
+            <asp:UpdatePanel ID="updateLocation" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+                <ContentTemplate>
+          <li class="nav-item">
+                <a href="#" class="nav-link text-black">
+                    <span class="text-muted d-block">Pick Up Location:</span>
+                    <asp:DropDownList ID="ddlPUState" runat="server" CssClass="form-select d-inline" DataSourceID="LocationState" DataTextField="LocationState" DataValueField="LocationState" Width="100px" ValidationGroup="filter" AutoPostBack="True" OnSelectedIndexChanged="ddlPUState_SelectedIndexChanged"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlPULocation" runat="server" CssClass="form-select d-inline" Width="200px" ValidationGroup="filter" OnDataBound="ddlPULocation_DataBound"></asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="requirePULocation" runat="server" ErrorMessage="Location is Required" ControlToValidate="ddlPULocation" CssClass="validate" InitialValue="0" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link text-black">
+                    <span class="text-muted d-block">Drop Off Location:</span>
+                    <asp:DropDownList ID="ddlDFState" runat="server" CssClass="form-select d-inline" DataSourceID="LocationState" DataTextField="LocationState" DataValueField="LocationState" Width="100px" ValidationGroup="filter" OnSelectedIndexChanged="ddlDFState_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                    <asp:DropDownList ID="ddlDFLocation" runat="server" CssClass="form-select d-inline" Width="200px" ValidationGroup="filter" OnDataBound="ddlDFLocation_DataBound"></asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="requireDFLocation" runat="server" ErrorMessage="Location is Required" ControlToValidate="ddlDFLocation" CssClass="validate" InitialValue="0" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
+                </a>
+            </li>
+                </ContentTemplate>
+            </asp:UpdatePanel>
             <li class="nav-item">
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted d-block">Date Time:</span>
@@ -89,7 +119,7 @@
 <div class="container-fluid d-flex justify-content-center pt-5 mx-auto" style="width:100%">
     <div class="row">
         <asp:Label ID="lblSearchFail" runat="server"></asp:Label>  
-        <asp:Repeater ID="productRepeater" runat="server">
+        <asp:Repeater ID="productRepeater" runat="server" OnItemDataBound="productRepeater_ItemDataBound">
             <ItemTemplate>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 shadow-sm" style="background-color:#effaf6;">
                     <div class="card h-100" style="background-color:#f0f9f5;">
@@ -105,9 +135,8 @@
                                     <asp:Label ID="lblCarPlate" runat="server" Text='<%# Eval("CarPlate") %>' CssClass="text-muted d-block" Font-Size="0.9em" />
                                 </div>
                                 <div>
-                                    <span>Rm </span>
-                                    <asp:Label ID="lblCarDayPrice" runat="server" Text='<%# Eval("CarDayPrice") %>'/>
-                                    <span class="text-muted d-block" style="font-size:0.9em">per day</span>
+                                    <asp:Label ID="lblCarPrice" runat="server" Text=''/>
+                                    <asp:Label ID="lblDay" runat="server" Text='' CssClass="text-muted d-block" Font-Size="0.9em" />
                                 </div>
                             </div>
                             <hr class="mt-2">
@@ -148,6 +177,13 @@
 <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
+    }
+
+    function triggerButtonClick(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            document.getElementById('<%= btnFilter.ClientID %>').click();
+        }
     }
 </script>
 </asp:Content>
