@@ -36,21 +36,21 @@ namespace Assignment
         {
             //System.Diagnostics.Debug.WriteLine("SessionId.toString: " + userid);
 
-            string username = " ";
-            string currentPoints = " ";
-            string expiryPoints = " ";
-            string expiryDate = " ";
+            //string username = " ";
+            //string currentPoints = " ";
+            //string expiryPoints = " ";
+            //string expiryDate = " ";
 
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
             {
-                string sql = "SELECT au.Username, bk.PointsRemaining" +
-                                " FROM Booking bk" +
-                                " JOIN ApplicationUser au ON bk.UserId = au.Id" +
-                                " WHERE au.Id = @userid";
+                string sql = "SELECT au.Username, au.RewardPoints, bk.PointsRemaining, bk.EarnDate" +
+                    " FROM ApplicationUser au" +
+                    " JOIN Booking bk ON au.Id = bk.UserId" +
+                    " WHERE au.Id = @userId";
 
                 using (SqlCommand cmd = new SqlCommand(sql,con))
                 {
-                    cmd.Parameters.AddWithValue("userid", userid);
+                    cmd.Parameters.AddWithValue("@userId", userid);
 
                     con.Open();
                     using (SqlDataReader rd = cmd.ExecuteReader())
@@ -58,7 +58,7 @@ namespace Assignment
                         if (rd.Read())
                         {
                             lblUsername.Text = rd["Username"].ToString();
-                            lblTotalPoints.Text = "Total Points: " + rd["PointsRemaining"].ToString() + "Pts";
+                            lblTotalPoints.Text = "Total Points: " + rd["RewardPoints"].ToString() + " Pts";
                         }
                     }
                 }
