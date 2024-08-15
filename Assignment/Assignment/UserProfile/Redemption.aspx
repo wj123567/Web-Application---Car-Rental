@@ -21,28 +21,46 @@
             <h2>Redeem What You Like?</h2>
         </div>
 
-        <div class="redemption-container-body">
-            <asp:ListView ID="lvredeemitems" runat="server">
+        <div class="redemption-container-body d-flex flex-row justify-content-around flex-wrap">
+            <asp:ListView ID="lvredeemitems" runat="server" DataSourceID="SqlDataSource1">
                 <%-- layouttemplate is the overall layout wraps the ItemTemplate  --%>
                 <LayoutTemplate>
-                    <ul>
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server">
                     </asp:PlaceHolder>
-                    </ul>
-                    
                 </LayoutTemplate>
 
                 <%-- ItemTemplate defines how each item should look --%>
                 <ItemTemplate>
-                    <li>
-                        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-                            <img src='<%# Eval("ItemImage") %>' alt='<%# Eval("ItemName") %>' style="width: 100px; height: 100px; float: left; margin-right: 10px;" />
-                            <h3><%# Eval("ItemName") %></h3>
-                            <p>Points Required: <%# Eval("ItemPoints") %></p>
-                            <p><%# Eval("ItemDescription") %></p>
-                            <p>Status: <%# Eval("Status") %></p>
+                    <div class="height d-inline-block">
+    
+                        <div class="card p-3">
+        
+                            <div class="d-flex justify-content-evenly align-items-center" style="flex:350px">
+                                <div class="mt-2">
+                                    <div class="mt-5">
+                                        <h1 class="main-heading mt-0"><%# Eval("ItemName") %></h1>
+                                        <div class="d-flex flex-row user-ratings">
+                                            <div class="ratings">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            </div>
+                                            <h6 class="text-muted ml-1">4/5</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="image">
+                                    <asp:Image ID="ItemImage" runat="server" ImageUrl='<%# ResolveUrl(Eval("ItemImage").ToString()) %>' Width="100px" Height="150px" />
+                                </div>
+                            </div>
+        
+                            <p><%# Eval("ItemDescription") %> </p>
+        
+                            <button class="btn btn-danger">Add to cart</button>
                         </div>
-                    </li>
+    
+                    </div>
                 </ItemTemplate>
 
             </asp:ListView>
