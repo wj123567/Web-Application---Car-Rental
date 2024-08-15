@@ -11,7 +11,7 @@
             <div class="RPHeader-Bottom" style="flex: 1;">
                 <p>
                     Hi, 
-
+                    
                 <asp:Label ID="lblUsername" runat="server" Text="[Username]"></asp:Label>
                 </p>
 
