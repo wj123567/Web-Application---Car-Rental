@@ -10,7 +10,7 @@
 
 <asp:Content ID="Redemption" ContentPlaceHolderID="main" runat="server">
     <%-- connect sql data source --%>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [ItemPoints], [RedeemItemId], [ItemName], [ItemImage] FROM [RedeemItem] WHERE ([Status] = @Status)">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT ItemName, ItemPoints, ItemDescription, ItemImage FROM RedeemItem WHERE (Status = @Status)">
         <SelectParameters>
             <asp:Parameter DefaultValue="active" Name="Status" Type="String"></asp:Parameter>
         </SelectParameters>
@@ -25,17 +25,24 @@
             <asp:ListView ID="lvredeemitems" runat="server">
                 <%-- layouttemplate is the overall layout wraps the ItemTemplate  --%>
                 <LayoutTemplate>
-                    <asp:PlaceHolder ID="itemPlaceholder" runat="server">
+                    <ul>
+                        <asp:PlaceHolder ID="itemPlaceholder" runat="server">
                     </asp:PlaceHolder>
+                    </ul>
+                    
                 </LayoutTemplate>
 
                 <%-- ItemTemplate defines how each item should look --%>
                 <ItemTemplate>
-                    <div class="height d-flex justify-content-center align-items-center">
-                <div class="card p-3">
-                    <h4>Test Item</h4>
-                </div>
-            </div>
+                    <li>
+                        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+                            <img src='<%# Eval("ItemImage") %>' alt='<%# Eval("ItemName") %>' style="width: 100px; height: 100px; float: left; margin-right: 10px;" />
+                            <h3><%# Eval("ItemName") %></h3>
+                            <p>Points Required: <%# Eval("ItemPoints") %></p>
+                            <p><%# Eval("ItemDescription") %></p>
+                            <p>Status: <%# Eval("Status") %></p>
+                        </div>
+                    </li>
                 </ItemTemplate>
 
             </asp:ListView>
