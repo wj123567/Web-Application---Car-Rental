@@ -47,7 +47,7 @@ namespace Assignment
 
             if (reader.Read())
             {
-                Session["forgetId"] = reader["Id"].ToString();
+                Session["validateId"] = reader["Id"].ToString();
                 sysOtp = reader["OtpCode"].ToString();
                 dateTime = reader.GetDateTime(reader.GetOrdinal("OtpCreatedTime"));
             }
