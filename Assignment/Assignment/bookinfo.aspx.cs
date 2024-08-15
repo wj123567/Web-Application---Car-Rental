@@ -92,6 +92,7 @@ namespace Assignment
         protected void retrieveDriverData()
         {
             string userId = Session["Id"].ToString();
+            DateTime driverBDate = DateTime.Now;
             // Define your SQL query
             string query = "SELECT * FROM Driver WHERE UserId = @userId";
 
@@ -110,15 +111,18 @@ namespace Assignment
                     {
                         {
                             txtDriverName.Text = reader["DriverName"].ToString();
-                            txtDriverBirth.Text = reader["DriverBdate"].ToString();
+                            driverBDate = reader.GetDateTime(reader.GetOrdinal("DriverBDate"));
+                            txtDriverBirth.Text = driverBDate.ToString();
                             txtDriverPhoneNum.Text = reader["DriverPno"].ToString();
                             ddlDriverGender.SelectedValue = reader["DriverGender"].ToString();
                             txtDriverLicenseNum.Text = reader["DriverLicense"].ToString();
                             txtDriverID.Text = reader["DriverId"].ToString();
+                            
+                        }
 
-                        };
-
-                    }
+                    };
+                       
+                        
                 }
 
                 reader.Close();
