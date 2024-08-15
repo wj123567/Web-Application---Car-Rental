@@ -118,7 +118,7 @@ namespace Assignment
 
                 if (hashPassword == HashPassword(simplePassword, id))
                 {
-                    string getUserData = "Select Id, EmailVerification  from ApplicationUser where email = @email";
+                    string getUserData = "Select Id, EmailVerification, TwoStepVerification from ApplicationUser where email = @email";
 
                     SqlCommand com = new SqlCommand(getUserData, con);
 
@@ -126,25 +126,27 @@ namespace Assignment
 
                     reader = com.ExecuteReader();
                     string emailValidation = " ";
-                    String Id = " ";
+                    string Id = " ";
+                    string twoStepValidation = "";
 
                     if (reader.Read())
                     {
                         Id = reader["Id"].ToString();
                         emailValidation = reader["EmailVerification"].ToString();
+                        twoStepValidation = reader["TwoStepVerification"].ToString();
                         
                     }
 
-                    if(emailValidation == "1")
-                    {
-                        Session["Id"] = Id;
-                        Response.Redirect("Home.aspx");
-                    }
-                    else
+                    if(emailValidation == "0" || twoStepValidation == "1")
                     {
                         Session["validateId"] = Id;
                         Session["validateEmail"] = txtEmail.Text;
                         Response.Redirect("validateEmail.aspx");
+                    }
+                    else
+                    {
+                        Session["Id"] = Id;
+                        Response.Redirect("Home.aspx");
                     }
                     
                 }

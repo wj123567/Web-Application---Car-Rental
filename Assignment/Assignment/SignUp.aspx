@@ -16,7 +16,7 @@
              <asp:RequiredFieldValidator ID="requireEmail" runat="server" ErrorMessage="Email is Required" Display="Dynamic" CssClass="validate" ControlToValidate="txtEmail" ValidationGroup="LoginGroup"></asp:RequiredFieldValidator>
              <asp:RegularExpressionValidator ID="regexEmail" runat="server" ErrorMessage="Invalid Email" CssClass="validate" ValidationGroup="LoginGroup" ControlToValidate="txtEmail" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
              <asp:CustomValidator ID="emailNotExist" runat="server" ErrorMessage="Email Not Exist" CssClass="validate" OnServerValidate="emailNotExist_ServerValidate" Display="Dynamic" ValidationGroup="LoginGroup" ControlToValidate="txtEmail" ValidateEmptyText="False"></asp:CustomValidator>
-            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="inputField" placeholder="Password" ValidationGroup="LoginGroup"></asp:TextBox>
+            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="inputField" placeholder="Password" ValidationGroup="LoginGroup" onkeypress="triggerLoginButtonClick(event)"></asp:TextBox>
             <asp:Label ID="labelValidUser" runat="server" Text="Label" Visible="False" CssClass="validate"></asp:Label>
             <br />
             <input id="cbShowPass" type="checkbox" onClick="showPass()"/>
@@ -39,7 +39,7 @@
             <asp:RegularExpressionValidator ID="regRegEmail" runat="server" ControlToValidate="txtRegEmail" ErrorMessage="Invalid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validate" ValidationGroup="SignUpGroup" Display="Dynamic"></asp:RegularExpressionValidator>
             <asp:CustomValidator ID="emailExist" runat="server" ErrorMessage="Email Already Exist" ControlToValidate="txtRegEmail" CssClass="validate" OnServerValidate="emailExist_ServerValidate" Display="Dynamic" ValidationGroup="SignUpGroup"></asp:CustomValidator>
             <asp:TextBox ID="txtRegPassword" runat="server" TextMode="Password" CssClass="inputField" placeholder="Password" onkeyup="validatePassword()" ValidationGroup="SignUpGroup"></asp:TextBox>
-                        <asp:CheckBox ID="cbEight" runat="server" Text="must contain at least eight characters" Enabled="True" Checked="False" CssClass="passCheckBox" ValidationGroup="SignUpGroup" />
+                        <asp:CheckBox ID="cbEight" runat="server" Text="at least eight characters" Enabled="True" Checked="False" CssClass="passCheckBox" ValidationGroup="SignUpGroup" />
             <br />
                         <asp:CheckBox ID="cbNum" runat="server" Text="at least one number" Enabled="True" CssClass="passCheckBox" ValidationGroup="SignUpGroup" />
             <br />
@@ -74,6 +74,13 @@
         var switches = document.getElementById("switchIndicator")
         var loginform = document.getElementById("loginForm")
         var switchForm = document.getElementById("switchForm")
+
+        function triggerLoginButtonClick(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                document.getElementById('<%= btnLogIn.ClientID %>').click();
+                }
+            }
 
         function signUp() {
             signup.style.left = "55px";

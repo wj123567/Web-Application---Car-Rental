@@ -47,6 +47,7 @@
         <div class="form-white input-group" style="width: 250px;">
             <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded" placeholder="Search" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
             <asp:Button ID="hiddenBtn" runat="server" Text="Button" hidden="true" OnClick="hiddenBtn_Click" ValidationGroup="searchBar"/>
+            <asp:RequiredFieldValidator ID="reqSearchString" runat="server" ErrorMessage="RequiredFieldValidator" ValidationGroup="searchBar" ControlToValidate="searchBar" Display="None"></asp:RequiredFieldValidator>
         </div>
       </div>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">

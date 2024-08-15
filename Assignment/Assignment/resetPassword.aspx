@@ -4,10 +4,10 @@
             <div id="resetInputGroup" class="inputGroup" style="top:50px">
             <h1 class="verifyHead">Reset Password</h1>
             <asp:TextBox ID="txtRegPassword" runat="server" TextMode="Password" CssClass="inputField" placeholder="Password" onkeyup="validatePassword()" ValidationGroup="SignUpGroup"></asp:TextBox>
-                     <asp:CustomValidator ID="validNewPassword" runat="server" ErrorMessage="New Password Cannot be same as Old Password" CssClass="validate" ControlToValidate="txtRegPassword" ValidationGroup="SignUpGroup" OnServerValidate="validNewPassword_ServerValidate"></asp:CustomValidator>
+                     <asp:CustomValidator ID="validNewPassword" runat="server" ErrorMessage="New Password Cannot be same as Old Password" CssClass="validate" ControlToValidate="txtRegPassword" ValidationGroup="SignUpGroup" OnServerValidate="validNewPassword_ServerValidate" Display="Dynamic"></asp:CustomValidator>
                 <br />
 
-                        <asp:CheckBox ID="cbEight" runat="server" Text="must contain at least eight characters" Enabled="True" Checked="False" CssClass="passCheckBox" ValidationGroup="SignUpGroup" />
+                        <asp:CheckBox ID="cbEight" runat="server" Text="at least eight characters" Enabled="True" Checked="False" CssClass="passCheckBox" ValidationGroup="SignUpGroup" />
             <br />
                         <asp:CheckBox ID="cbNum" runat="server" Text="at least one number" Enabled="True" CssClass="passCheckBox" ValidationGroup="SignUpGroup" />
             <br />
