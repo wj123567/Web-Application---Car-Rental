@@ -1,173 +1,112 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookingrecord.aspx.cs" Inherits="Assignment.bookingrecord" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    
     <div class="booking_container">
         <p class="booking_title">Car Rental Booking</p>
-    <table class="table align-middle mb-0 bg-white">
+
+        <asp:UpdatePanel ID="updatebookingRecordTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+        <ContentTemplate>
+    <table class="table align-middle mb-0 bg-white booking_record_table" id="bookingRecordTable">
         <thead class="bg-light">
           <tr class="header_row_title">
-            <th class="booking_id">Booking ID</th>
-             <th class="booking_status">Status</th>
-            <th class="booking_vehicle">Vehicle</th>
-            <th class="booking_pickup">Pick Up </th>
-            <th class="booking_dropoff">Drop Off </th>
-            <th class="booking_price">Price</th>
-             <th class="booking_edit"></th>
+            <th class="booking_id">
+                <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark">
+                Booking ID
+                </asp:LinkButton>
+                
+            </th>
+             <th class="booking_status">
+                 <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark">
+                 Status
+                </asp:LinkButton>
+             </th>
+            <th class="booking_vehicle">
+                <asp:LinkButton ID="btnSortVehicle" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark">
+                Vehicle
+                </asp:LinkButton>
+            </th>
+            <th class="booking_pickup">
+                <asp:LinkButton ID="btnSortPickUp" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="PickUp" CssClass="text-dark">
+                Pick Up 
+                </asp:LinkButton>
+            </th>
+            <th class="booking_dropoff">
+                <asp:LinkButton ID="btnSortDropOff" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DropOff" CssClass="text-dark">
+                Drop Off 
+                </asp:LinkButton>
+            </th>
+            <th class="booking_price">
+                <asp:LinkButton ID="btnSortPrice" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Price" CssClass="text-dark">
+                Price
+                </asp:LinkButton>
+            </th>
+             <th class="booking_edit" style="width:5%;"></th>
           </tr>
         </thead>
         <tbody>
+
+    <asp:Repeater ID="rptBookingList" runat="server">
+    <ItemTemplate>
           <tr>
         <td>
           <div class=" align-items-center">    
             <div class="ms-1">
-              <p class="fw-bold mb-1">John Doe</p>
+              <p class="fw-bold mb-1"><%# Eval("Id") %></p>
             </div>
           </div>
         </td>
       
            <td>         
-               <span class="status_icon badge bg-secondary rounded-pill d-inline">Pending for payment</span>
+               <span class="status_icon badge <%# GetBadgeClass(Eval("Status").ToString()) %> rounded-pill d-inline">
+                   <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
+                   
+               </span>
           </td>
       
         <td>
-          <p class="fw-normal mb-1">abcde</p>
+        <p class="fw-normal mb-1"><%# Eval("CarPlate") %></p>
       
         </td>
-        
+
+              <!-- car type maybe-->
+
         <td>
-          <p class="fw-normal mb-1">place</p>
-          <p class="text-muted mb-0">time</p>
+          <p class="fw-normal mb-1"><%# Eval("Pickup_point") %></p>
+          <p class="text-muted mb-0"><%# Eval("StartDate") %></p>
       
         </td>
         <td>
-            <p class="fw-normal mb-1">place</p>
-            <p class="text-muted mb-0">time</p>
+            <p class="fw-normal mb-1"><%# Eval("Dropoff_point") %></p>
+            <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
         </td>
           <td>
-              <p class="fw-normal mb-1">123</p>
+              <p class="fw-normal mb-1"><%# Eval("Price") %></p>
           </td>
          
           <td>
               <asp:Button ID="btnEdit1" runat="server" CSSclass="edit_btn_style" Text="Edit" />
           </td>
       </tr>
+      </ItemTemplate>
+     </asp:Repeater>  
          
-            <!-- -->
-            <tr>
-        <td>
-          <div class=" align-items-center">    
-            <div class="ms-1">
-              <p class="fw-bold mb-1">John Doe</p>
-            </div>
-          </div>
-        </td>
-      
-           <td>         
-               <span class="status_icon badge bg-success rounded-pill d-inline">Active</span>
-          </td>
-      
-        <td>
-          <p class="fw-normal mb-1">abcde</p>
-      
-        </td>
-        
-        <td>
-          <p class="fw-normal mb-1">place</p>
-          <p class="text-muted mb-0">time</p>
-      
-        </td>
-        <td>
-            <p class="fw-normal mb-1">place</p>
-            <p class="text-muted mb-0">time</p>
-        </td>
-          <td>
-              <p class="fw-normal mb-1">123</p>
-          </td>
-         
-          <td>
-              <asp:Button ID="btnEdit2" runat="server" CSSclass="edit_btn_style" Text="Edit" />
-          </td>
-      </tr>
-            <!-- -->
-          <tr>
-        <td>
-          <div class=" align-items-center">    
-            <div class="ms-1">
-              <p class="fw-bold mb-1">John Doe</p>
-            </div>
-          </div>
-        </td>
-      
-           <td>         
-               <span class="status_icon badge bg-primary rounded-pill d-inline">Processing</span>
-          </td>
-      
-        <td>
-          <p class="fw-normal mb-1">abcde</p>
-      
-        </td>
-        
-        <td>
-          <p class="fw-normal mb-1">place</p>
-          <p class="text-muted mb-0">time</p>
-      
-        </td>
-        <td>
-            <p class="fw-normal mb-1">place</p>
-            <p class="text-muted mb-0">time</p>
-        </td>
-          <td>
-              <p class="fw-normal mb-1">123</p>
-          </td>
-         
-          <td>
-              <asp:Button ID="btnEdit3" runat="server" CSSclass="edit_btn_style" Text="Edit" />
-          </td>
-      </tr>
-            <!-- -->
-            <tr>
-        <td>
-          <div class=" align-items-center">    
-            <div class="ms-1">
-              <p class="fw-bold mb-1">John Doe</p>
-            </div>
-          </div>
-        </td>
-      
-           <td>         
-               <span class="status_icon badge bg-warning rounded-pill d-inline">Booked</span>
-          </td>
-      
-        <td>
-          <p class="fw-normal mb-1">abcde</p>
-      
-        </td>
-        
-        <td>
-          <p class="fw-normal mb-1">place</p>
-          <p class="text-muted mb-0">time</p>
-      
-        </td>
-        <td>
-            <p class="fw-normal mb-1">place</p>
-            <p class="text-muted mb-0">time</p>
-        </td>
-          <td>
-              <p class="fw-normal mb-1">123</p>
-          </td>
-         
-          <td>
-              <asp:Button ID="btnEdit4" runat="server" CSSclass="edit_btn_style" Text="Edit" />
-          </td>
-      </tr>
+          
         </tbody>
       </table>
+    </ContentTemplate>
+
+
+    </asp:UpdatePanel>
+      </div>
       
+
         <h4>Test Retrieve</h4>
         <asp:GridView ID="gvBook" runat="server" CellPadding="10">
             <Columns>
                 <asp:HyperLinkField DataNavigateUrlFields="CustomerName" DataNavigateUrlFormatString="bookingrecorddetail.aspx?CustomerName={0}" ShowHeader="False" Text="View More" />
             </Columns>
         </asp:GridView>
- </div>
-       
+ 
 </asp:Content>

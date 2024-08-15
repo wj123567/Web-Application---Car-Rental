@@ -15,32 +15,8 @@
     font-weight: 800;
 }
 
-.booking_id {
-    width: 10%;
-}
-
-.booking_vehicle {
-    width: 20%;
-}
-
-.booking_pickup {
-    width: 20%;
-}
-
-.booking_dropoff {
-    width: 20%;
-}
-
-.booking_price {
-    width: 10%;
-}
-
-.booking_status {
-    width: 10%;
-}
-
-.booking_edit {
-    width: 10%;
+.booking_record_table{
+ 
 }
 
 .status_icon {
