@@ -275,7 +275,7 @@
 
          <div class="bar_content">
               <div class="previous_button">
-    <asp:Button ID="previous_btn" runat="server" Text="Previous" cssclass="previous_btn_style prev_btn" OnClick="previous_btn_Click"/>
+         <asp:Button ID="previous_btn" runat="server" Text="Previous" cssclass="previous_btn_style prev_btn" OnClick="previous_btn_Click"/>
 </div>
         <div class="selected_car">
             <asp:Image ID="imgSticky" runat="server" cssclass="sticky_bar_carimg"/>

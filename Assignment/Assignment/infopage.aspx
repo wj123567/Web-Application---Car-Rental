@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="infopage.aspx.cs" Inherits="Assignment.infopage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-
-
+    <asp:HiddenField ID="hdnSessionId" runat="server" />
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <div class="modal fade" id="infoPgModal" tabindex="-1" aria-labelledby="infoPgModalLabel" data-bs-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered ">
@@ -15,7 +15,7 @@
                 <p>Login / Register an account before booking a car.</p>
             </div>
             <div class="modal-footer">
-                <asp:Button ID="modalOkBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" OnClientClick="closeModal(); return false;" />
+                <asp:Button ID="modalOkBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal"  />
             </div>
 
        </div>
@@ -259,7 +259,7 @@
             </div>
         </div>
         <div class="next_button">
-            <asp:Button ID="btnNext" runat="server" Text="Next" cssclass="next_btn_style next_btn"  OnClientClick="return handleButtonClick();"/>
+            <asp:Button ID="btnNext" runat="server" Text="Next" cssclass="next_btn_style next_btn" OnClick="btnNext_Click"/>
         </div>
     </div>
 </div>
@@ -395,18 +395,17 @@
             myModal.hide();
         }
 
-    function handleButtonClick() {
-        // Check if the modal should be shown or redirect
-        var sessionId = '<%= Session["Id"] %>'.toString(); // Get session id and trim any extra whitespace
-     console.log("Session ID:", sessionId); // Debugging line
+        function handleButtonClick() {
+        var sessionId = '<%= Session["Id"] %>'.trim(); // Get session id and trim any extra whitespace
+        console.log("Session ID:", sessionId); // Debugging line
 
-     if (sessionId === '' || sessionId === 'null') {
-        showModal(); // Show the modal if session id is empty
-        return false; // Prevent default action (navigation)
-    } else {
-         window.location.href = 'bookinfo.aspx'; // Redirect to another page if session id is set
-         return false;//redirect and dw refresh
-     }
+        if (sessionId === '' || sessionId === 'null') {
+            showModal(); // Show the modal if session id is empty or 'null'
+            return false; // Prevent default action (navigation)
+        } else {
+            window.location.href = 'bookinfo.aspx'; // Redirect to another page if session id is set
+            return false; // Ensure default action is allowed for redirection
+        }
     }
 
     </script>

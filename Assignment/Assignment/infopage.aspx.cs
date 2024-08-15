@@ -26,12 +26,7 @@ namespace Assignment
                     
                 }
 
-                // Check if Session["id"] is null or empty
-                if (Session["id"] == null || string.IsNullOrEmpty(Session["id"].ToString()))
-                {
-                    // Set a JavaScript variable to indicate that the modal should be shown
-                    ClientScript.RegisterStartupScript(this.GetType(), "ShowModal", "showModal();", true);
-                }
+                hdnSessionId.Value = Session["Id"] as string ?? string.Empty;
 
                 BindAddOns();
             }
@@ -141,13 +136,15 @@ namespace Assignment
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            hdnTotalPrice.Value=lblAddOnPrice.Text;
 
+
+            // If session ID is empty or null, show the modal
+            ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "handleButtonClick();", true);
+            
 
             Session["TotalPrice"] = hdnTotalPrice.Value;
-            Session["TotalAddOn"] = lblAddOnPrice.Text;
+            Session["TotalAddOn"] = hdnTotalAddOn.Value;
 
-            
         }
 
         protected void previous_btn_Click(object sender, EventArgs e)
