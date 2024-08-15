@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Management/admin.Master" AutoEventWireup="true" CodeBehind="driverManagement.aspx.cs" Inherits="Assignment.driverManagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+     <link href="../CSS/driverManagement.css" rel="stylesheet" />
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
 <div class="modal fade" id="rejectReason" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">

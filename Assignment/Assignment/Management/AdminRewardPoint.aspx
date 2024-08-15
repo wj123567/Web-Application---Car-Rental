@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Management/Admin.Master" AutoEventWireup="true" CodeBehind="AdminRewardPoint.aspx.cs" Inherits="Assignment.AdminRewardPoint" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-
+    <link href="../CSS/AdminRewardpoint.css" rel="stylesheet" />
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
         ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' 
         SelectCommand="SELECT * FROM [RewardPoint]">

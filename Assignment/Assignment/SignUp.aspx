@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="Assignment.SignUp" %>
-
 <asp:Content ID="userReg" ContentPlaceHolderID="main" runat="server">
+    <link href="CSS/SignUp.css" rel="stylesheet" />
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div id="loginForm">
         <div id="switchForm" class="btn-group d-flex justify-content-center">
