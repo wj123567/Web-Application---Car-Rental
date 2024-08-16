@@ -247,7 +247,15 @@ namespace Assignment
             double totalPrice = days * int.Parse(carDayPrice);
 
             lblCarPrice.Text = "RM " + totalPrice;
-            lblDay.Text = "For " +days + " days";
+            if(days == 1)
+            {
+                lblDay.Text = "For " +days + " day";
+            }
+            else
+            {
+                lblDay.Text = "For " + days + " days";
+            }
+            
         }
 
         protected void ddlDFState_SelectedIndexChanged(object sender, EventArgs e)
