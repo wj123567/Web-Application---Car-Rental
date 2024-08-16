@@ -2,28 +2,27 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <link href="../CSS/AdminRewardpoint.css" rel="stylesheet" />
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-        ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' 
-        SelectCommand="SELECT * FROM [RewardPoint]">
-    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT ApplicationUser.Username, Booking.Price, Booking.EarnDate, Booking.PointsRemaining, Booking.PointsStatus FROM ApplicationUser INNER JOIN Booking ON ApplicationUser.Id = Booking.UserId"></asp:SqlDataSource>
 
-    <asp:ListView ID="RewardPointsListView" runat="server" DataSourceID="SqlDataSource1" DataKeyNames="RewardPointID">
+    <asp:ListView ID="RewardPointsListView" runat="server" DataSourceID="SqlDataSource1">
         <LayoutTemplate>
-            <table class="table tableReward">
-                <tr>
-                    <td colspan="8" class="header-title table-dark"><h1>Reward Points Management</h1></td>
-                </tr>
-
-                <tr class="header-section">
-                    <th>Reward Point ID</th>
-                    <th>User ID</th>
-                    <th>Transaction ID</th>
-                    <th>Points</th>
-                    <th>Earned Date</th>
-                    <th>Expiry Date</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
+            <table class="table tableReward table-striped">
+                <thead>
+                    <tr>
+                        <td colspan="8" class="header-title table-dark"><h1>Reward Points Management</h1></td>
+                        <tr class="header-section">
+                            <th>Username</th>
+                            <th>EarnedPoints</th>
+                            <th>Remaining Points</th>
+                            <th>Earned Date</th>
+                            <th>Expiry Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tr>
+                </thead>
+                
+                
 
                 <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
 
@@ -43,13 +42,12 @@
 
         <ItemTemplate>
             <tr class="rp-record">
-                <td><%# Eval("RewardPointID") %></td>
-                <td><%# Eval("UserID") %></td>
-                <td><%# Eval("TransactionID") %></td>
-                <td><%# Eval("Points") %></td>
-                <td><%# Eval("EarnedDate") %></td>
-                <td><%# Eval("ExpiryDate") %></td>
-                <td><%# Eval("Status") %></td>
+                <td><%# Eval("Username") %></td>
+                <td><%# Eval("Price") %></td>
+                <td><%# Eval("PointsRemaining") %></td>
+                <td><%# Eval("EarnDate") %></td>
+                <td><%# Eval("EarnDate") %> + 1</td>
+                <td><%# Eval("PointsStatus") %></td>
                 <td>
                     <asp:Button ID="EditButton" runat="server" Text="Edit" />
                     <asp:Button ID="DeleteButton" runat="server" Text="Delete" />
