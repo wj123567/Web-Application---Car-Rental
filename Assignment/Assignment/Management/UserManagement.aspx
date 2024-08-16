@@ -3,6 +3,7 @@
     <link href="../CSS/userManagement.css" rel="stylesheet" />
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnUserStatus" runat="server" />
+
 <div class="modal animate__animated animate__slideInDown animate__faster" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
@@ -210,13 +211,16 @@
                     <td scope="col">
                         <asp:Label ID="lblRegdate" runat="server"></asp:Label>
                     </td>
-                    <td scope="col"><%# Eval("Roles") %></td>
+                    <td scope="col">                    
+                        <asp:DropDownList ID="ddlRoles" runat="server" CssClass="form-select form-select-sm" AutoPostBack="True" OnSelectedIndexChanged="ddlRolesSelect">
+                        </asp:DropDownList>
+                        <asp:HiddenField ID="hdnIdField" runat="server" Value='<%# Eval("Id") %>' />
+                    </td>
                     <td scope="col">
                         <asp:Label ID="lblUserStatus" runat="server"></asp:Label>
                     </td>
                     <td scope="col">
                     <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
-                    <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-sm text-primary" OnClick="btnDelete_Click" CommandArgument='<%# Eval("Id") %>'/>
                     </td>
                 </tr>
                 </ItemTemplate>
@@ -228,7 +232,6 @@
                         <asp:AsyncPostBackTrigger ControlID="hiddenBtn" EventName="Click" />
                     </Triggers>
                 </asp:UpdatePanel>
-         
     </div>
     </div>   
     <script>

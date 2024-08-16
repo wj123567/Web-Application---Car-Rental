@@ -87,7 +87,7 @@ namespace Assignment
 
             reader.Close();
 
-            if (hashPassword == HashPassword(simplePassword, Session["Id"].ToString()))
+            if (hashPassword == Security.hashing(simplePassword, Session["Id"].ToString()))
             {
                 return true;
             }
@@ -119,7 +119,7 @@ namespace Assignment
 
                 string simplePassword = txtNewPassword.Text;
 
-                string hashPassword = HashPassword(simplePassword, Id);
+                string hashPassword = Security.hashing(simplePassword, Id);
 
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
@@ -144,32 +144,6 @@ namespace Assignment
             }
 
         }
-
-        protected string HashPassword(string password, string salt)
-        {
-            // Combine the password and salt
-            string combinedPassword = password + salt;
-
-            // Choose the hash algorithm (SHA-256 or SHA-512)
-            using (var sha256 = SHA256.Create())
-            {
-                // Convert the combined password string to a byte array
-                byte[] bytes = Encoding.UTF8.GetBytes(combinedPassword);
-
-                // Compute the hash value of the byte array
-                byte[] hash = sha256.ComputeHash(bytes);
-
-                // Convert the byte array to a hexadecimal string
-                StringBuilder result = new StringBuilder();
-                for (int i = 0; i < hash.Length; i++)
-                {
-                    result.Append(hash[i].ToString("x2"));
-                }
-
-                return result.ToString();
-            }
-        }
-
         protected void rblOtpSwitch_SelectedIndexChanged(object sender, EventArgs e)
         {
             int option = int.Parse(rblOtpSwitch.SelectedValue);

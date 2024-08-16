@@ -167,6 +167,7 @@
     <Compile Include="Management\BookingManagement.aspx.designer.cs">
       <DependentUpon>BookingManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Security.cs" />
     <Compile Include="UserProfile\bookingprocess.aspx.cs">
       <DependentUpon>bookingprocess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

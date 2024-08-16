@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -38,7 +39,6 @@ namespace Assignment
         protected void loadUserInfo(string selectUser)
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            con.Open();
             SqlCommand com = new SqlCommand(selectUser, con);
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();
@@ -91,12 +91,11 @@ namespace Assignment
         protected void UserReapeter_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button btnView = (Button)e.Item.FindControl("btnView");
-            Button btnDelete = (Button)e.Item.FindControl("btnDelete");
+
             if (btnView != null)
             {
                 ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
                 scriptManager.RegisterPostBackControl(btnView);
-                scriptManager.RegisterPostBackControl(btnDelete);
             }
         }
 
@@ -105,6 +104,7 @@ namespace Assignment
             Label lblRegDate = (Label)e.Item.FindControl("lblRegDate");
             Label lblBdate = (Label)e.Item.FindControl("lblBdate");
             Label lblUserStatus = (Label)e.Item.FindControl("lblUserStatus");
+            DropDownList ddlRoles = (DropDownList)e.Item.FindControl("ddlRoles");
             DateTime bDate = (DateTime)DataBinder.Eval(e.Item.DataItem, "DOB");
             DateTime regDate = (DateTime)DataBinder.Eval(e.Item.DataItem, "RegistrationDate");
             string isBan = DataBinder.Eval(e.Item.DataItem, "IsBan").ToString();
@@ -112,12 +112,36 @@ namespace Assignment
             lblBdate.Text = bDate.ToString("dd/MM/yyyy");
             lblRegDate.Text = regDate.ToString("dd/MM/yyyy");
 
-            if(isBan == "0")
+            ddlRoles.Items.Add(new ListItem("Admin", "Admin"));
+            ddlRoles.Items.Add(new ListItem("Customer", "Customer"));
+
+            string roles = DataBinder.Eval(e.Item.DataItem, "Roles").ToString();            
+            ddlRoles.SelectedValue = roles;
+
+            if (isBan == "0")
             {
                 lblUserStatus.Text = "Active";
             }else if (isBan == "1") { 
                 lblUserStatus.Text = "Banned";
             }
+        }
+
+        protected void ddlRolesSelect(object sender, EventArgs e)
+        {
+            DropDownList ddlRoles = (DropDownList)sender;
+            RepeaterItem item = (RepeaterItem)ddlRoles.NamingContainer;
+            HiddenField hfUserId = (HiddenField)item.FindControl("hdnIdField");
+            string userId = hfUserId.Value;
+            string roles = ddlRoles.SelectedValue;
+
+            string sql = "UPDATE ApplicationUser SET Roles = @roles WHERE Id = @id";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(sql, con);
+            con.Open();
+            com.Parameters.AddWithValue("@roles", roles);
+            com.Parameters.AddWithValue("@id", userId);
+            com.ExecuteNonQuery();
+            con.Close();
         }
 
         protected void btnView_Click(object sender, EventArgs e)
@@ -129,17 +153,6 @@ namespace Assignment
             LoadAvailableUser(id);
             loadDriverInfo(id);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modal()", true);
-        }
-
-        protected void btnDelete_Click(object sender, EventArgs e)
-        {
-            Button btnDelete = (Button)sender;
-            String id = btnDelete.CommandArgument;
-            UserDriverReapeter.DataSource = null;
-            UserDriverReapeter.DataBind();
-            LoadAvailableUser(id);
-            loadDriverInfo(id);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modalDel()", true);
         }
 
         protected void LoadAvailableUser(String id)

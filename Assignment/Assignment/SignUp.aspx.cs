@@ -39,7 +39,7 @@ namespace Assignment
                 Guid newGUID = Guid.NewGuid();
                 string simplePassword = txtRegPassword.Text;
 
-                string passwordHash = HashPassword(simplePassword,newGUID.ToString());
+                string passwordHash = Security.hashing(simplePassword,newGUID.ToString());
 
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
                 con.Open();
@@ -116,7 +116,7 @@ namespace Assignment
 
                 reader.Close();
 
-                if (hashPassword == HashPassword(simplePassword, id))
+                if (hashPassword == Security.hashing(simplePassword, id))
                 {
                     string getUserData = "Select Id, EmailVerification, TwoStepVerification from ApplicationUser where email = @email";
 
@@ -201,33 +201,7 @@ namespace Assignment
             }
             con.Close();
         }
-
-        protected string HashPassword(string password, string salt)
-        {
-            // Combine the password and salt
-            string combinedPassword = password + salt;
-
-            // Choose the hash algorithm (SHA-256 or SHA-512)
-            using (var sha256 = SHA256.Create())
-            {
-                // Convert the combined password string to a byte array
-                byte[] bytes = Encoding.UTF8.GetBytes(combinedPassword);
-
-                // Compute the hash value of the byte array
-                byte[] hash = sha256.ComputeHash(bytes);
-
-                // Convert the byte array to a hexadecimal string
-                StringBuilder result = new StringBuilder();
-                for (int i = 0; i < hash.Length; i++)
-                {
-                    result.Append(hash[i].ToString("x2"));
-                }
-
-                return result.ToString();
-            }
-        }
-        //You
-
+        
         private int InsertWelcomeTransaction(string userId)
         {
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
