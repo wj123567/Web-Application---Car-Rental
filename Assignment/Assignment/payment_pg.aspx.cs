@@ -43,7 +43,7 @@ namespace Assignment
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string sql = "SELECT CardNumber FROM PaymentCard WHERE UserId = @UserId";
+                string sql = "SELECT * FROM PaymentCard WHERE UserId = @UserId";
 
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
@@ -90,7 +90,47 @@ namespace Assignment
             Response.Redirect("bookingrecord.aspx");
         }
 
+        protected void btnExistCard_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
 
+            string cardId = button.CommandArgument;
+
+            FillCardInfo(cardId);
+
+        }
+
+        protected void FillCardInfo(string cardId)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string sql = "Select * FROM PaymentCard WHERE Id=@Id";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+                    
+                // Adding the parameter to the SqlCommand
+                cmd.Parameters.AddWithValue("@Id", cardId);
+                con.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                    
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        txtCardNumber.Text = reader["CardNumber"].ToString();
+                        txtCardName.Text = reader["CardHolderName"].ToString();
+                        DateTime expDate = reader.GetDateTime(reader.GetOrdinal("ExpDate"));
+                        txtExpiry.Text = expDate.ToString("yyyy-MM");
+                        txtCvv.Text = reader["CVV"].ToString();
+                    }
+                }
+
+
+            }
+            
+        }
 
     }
 }

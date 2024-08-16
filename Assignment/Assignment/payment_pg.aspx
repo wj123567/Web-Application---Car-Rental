@@ -73,7 +73,7 @@
               <label class="form-label" for="formControlLgXc">Card Number</label>
             </div>
           </div>
-                    <asp:Button ID="Button1" runat="server" Text="Button" />
+                    <asp:Button ID="btnExistCard" runat="server" Text="Button"  CommandArgument='<%# Eval("Id") %>' OnClick="btnExistCard_Click"/>
         </div>
           </ItemTemplate>
          </asp:Repeater>
