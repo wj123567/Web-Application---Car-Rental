@@ -28,10 +28,6 @@ namespace Assignment
 
         private void LoadUserData(string userid)
         {
-            string username = " ";
-            string latestExpiryDate = " ";
-            string latestExpiryPoint = " ";
-            string currentPoints = " ";
 
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
             {

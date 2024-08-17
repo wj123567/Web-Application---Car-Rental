@@ -1,0 +1,1159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SystemDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AddOn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="maxQuantity" Type="int" />
+        </EntityType>
+        <EntityType Name="ApplicationUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="256" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="RegistrationDate" Type="date" />
+          <Property Name="Roles" Type="varchar" MaxLength="10" />
+          <Property Name="ProfilePicture" Type="varchar(max)" />
+          <Property Name="TwoStepVerification" Type="int" />
+          <Property Name="EmailVerification" Type="int" />
+          <Property Name="IsBan" Type="int" />
+          <Property Name="BanReason" Type="varchar(max)" />
+          <Property Name="OtpCode" Type="int" />
+          <Property Name="OtpCreatedTime" Type="datetime" />
+          <Property Name="RewardPoints" Type="int" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CarPlate" Type="varchar" MaxLength="10" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" />
+          <Property Name="DriverId" Type="varchar" MaxLength="50" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Pickup_point" Type="varchar" MaxLength="50" />
+          <Property Name="Dropoff_point" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="PaymentCardId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="float" />
+          <Property Name="EarnDate" Type="datetime" />
+          <Property Name="PointsRemaining" Type="int" />
+          <Property Name="PointsStatus" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="BookingAddOn">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="AddOnId" />
+          </Key>
+          <Property Name="BookingId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AddOnId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="float" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="CarPlate" />
+          </Key>
+          <Property Name="CarPlate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CarBrand" Type="varchar" MaxLength="15" />
+          <Property Name="CarName" Type="varchar" MaxLength="50" />
+          <Property Name="CType" Type="varchar" MaxLength="10" />
+          <Property Name="CarDesc" Type="varchar(max)" />
+          <Property Name="CarImage" Type="nvarchar(max)" />
+          <Property Name="CarDayPrice" Type="float" />
+          <Property Name="CarSeat" Type="int" />
+          <Property Name="CarTransmission" Type="varchar" MaxLength="10" />
+          <Property Name="CarEnergy" Type="varchar" MaxLength="10" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="IsDelisted" Type="int" />
+        </EntityType>
+        <EntityType Name="CarBrand">
+          <Key>
+            <PropertyRef Name="BrandName" />
+          </Key>
+          <Property Name="BrandName" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DriverName" Type="varchar(max)" />
+          <Property Name="DriverId" Type="varchar" MaxLength="50" />
+          <Property Name="DriverLicense" Type="varchar" MaxLength="50" />
+          <Property Name="DriverPno" Type="varchar" MaxLength="50" />
+          <Property Name="DriverBdate" Type="date" />
+          <Property Name="DriverGender" Type="char" MaxLength="1" />
+          <Property Name="IDpic" Type="varchar(max)" />
+          <Property Name="Selfiepic" Type="varchar(max)" />
+          <Property Name="LicenseFpic" Type="varchar(max)" />
+          <Property Name="LicenseBpic" Type="varchar(max)" />
+          <Property Name="Approval" Type="char" MaxLength="1" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" />
+          <Property Name="RejectReason" Type="varchar(max)" />
+          <Property Name="DateApply" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationName" Type="varchar" MaxLength="50" />
+          <Property Name="LocationState" Type="varchar" MaxLength="50" />
+          <Property Name="LocationAddress" Type="varchar(max)" />
+          <Property Name="LocationPostcode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PaymentCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CardNumber" Type="varchar" MaxLength="16" />
+          <Property Name="CardHolderName" Type="varchar" MaxLength="50" />
+          <Property Name="ExpDate" Type="date" />
+          <Property Name="CVV" Type="int" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" />
+          <Property Name="CardType" Type="varchar" MaxLength="10" />
+          <Property Name="IsDefault" Type="int" />
+        </EntityType>
+        <EntityType Name="RedeemItem">
+          <Key>
+            <PropertyRef Name="RedeemItemId" />
+          </Key>
+          <Property Name="RedeemItemId" Type="int" Nullable="false" />
+          <Property Name="ItemName" Type="varchar" MaxLength="50" />
+          <Property Name="ItemPoints" Type="int" />
+          <Property Name="ItemDescription" Type="varchar(max)" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="ItemImage" Type="varchar(max)" />
+          <Property Name="RedemptionID" Type="int" />
+        </EntityType>
+        <EntityType Name="Redemption">
+          <Key>
+            <PropertyRef Name="RedemptionID" />
+          </Key>
+          <Property Name="RedemptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" />
+          <Property Name="RedeemDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TestBook">
+          <Key>
+            <PropertyRef Name="CustomerName" />
+          </Key>
+          <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerPhone" Type="varchar" MaxLength="20" />
+          <Property Name="Destination" Type="varchar" MaxLength="50" />
+          <Property Name="Note" Type="varchar" MaxLength="50" />
+          <Property Name="DriverName" Type="varchar" MaxLength="50" />
+          <Property Name="DriverGender" Type="char" MaxLength="4" />
+          <Property Name="DriverID" Type="varchar" MaxLength="20" />
+          <Property Name="DriverPhone" Type="varchar" MaxLength="20" />
+          <Property Name="DriverAge" Type="int" />
+          <Property Name="DriverRace" Type="varchar" MaxLength="10" />
+          <Property Name="DriverLicense" Type="varchar" MaxLength="20" />
+          <Property Name="RentalPurpose" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TestTrip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="Pickup_point" Type="varchar" MaxLength="50" />
+          <Property Name="Pickup_state" Type="varchar" MaxLength="50" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="Dropoff_point" Type="varchar" MaxLength="50" />
+          <Property Name="Dropoff_state" Type="varchar" MaxLength="50" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="CarPlateNo" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="256" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="RegistrationDate" Type="date" />
+          <Property Name="EncryptionKey" Type="varchar" MaxLength="256" />
+          <Property Name="IVkey" Type="varchar" MaxLength="256" />
+          <Property Name="Roles" Type="char" MaxLength="10" />
+          <Property Name="ProfilePicture" Type="varchar(max)" />
+          <Property Name="TwoStepVerification" Type="int" />
+          <Property Name="EmailVerification" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\WEB-APPLICATION- - -CAR-RENTAL\ASSIGNMENT\ASSIGNMENT\APP_DATA\SYSTEMDATABASE.MDF.dbo.UserRewardPointsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserRewardPointsView">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RewardPoints" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="PointsRemaining" Type="int" />
+        </EntityType>
+        <Association Name="FK_Booking_ToApplicationUser">
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_ToCar">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="CarPlate" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="CarPlate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_ToDriver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_ToPaymentCard">
+          <End Role="PaymentCard" Type="Self.PaymentCard" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="PaymentCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingAddOn_ToAddOn">
+          <End Role="AddOn" Type="Self.AddOn" Multiplicity="1" />
+          <End Role="BookingAddOn" Type="Self.BookingAddOn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddOn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingAddOn">
+              <PropertyRef Name="AddOnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingAddOn_ToBooking">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="BookingAddOn" Type="Self.BookingAddOn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingAddOn">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Car_ToCarBrand">
+          <End Role="CarBrand" Type="Self.CarBrand" Multiplicity="0..1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarBrand">
+              <PropertyRef Name="BrandName" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="CarBrand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Car_ToLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Driver_ToApplicationUser">
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
+          <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Driver">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCard_ToApplicationUser">
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PaymentCard" Type="Self.PaymentCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCard">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RedeemItem_Redemption">
+          <End Role="Redemption" Type="Self.Redemption" Multiplicity="0..1" />
+          <End Role="RedeemItem" Type="Self.RedeemItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Redemption">
+              <PropertyRef Name="RedemptionID" />
+            </Principal>
+            <Dependent Role="RedeemItem">
+              <PropertyRef Name="RedemptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Redemption_ApplicationUser">
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
+          <End Role="Redemption" Type="Self.Redemption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Redemption">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestTrip_ToCar">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="TestTrip" Type="Self.TestTrip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="CarPlate" />
+            </Principal>
+            <Dependent Role="TestTrip">
+              <PropertyRef Name="CarPlateNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SystemDatabaseModelStoreContainer">
+          <EntitySet Name="AddOn" EntityType="Self.AddOn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationUser" EntityType="Self.ApplicationUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingAddOn" EntityType="Self.BookingAddOn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarBrand" EntityType="Self.CarBrand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentCard" EntityType="Self.PaymentCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RedeemItem" EntityType="Self.RedeemItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Redemption" EntityType="Self.Redemption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestBook" EntityType="Self.TestBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestTrip" EntityType="Self.TestTrip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRewardPointsView" EntityType="Self.UserRewardPointsView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserRewardPointsView].[Username] AS [Username], 
+    [UserRewardPointsView].[RewardPoints] AS [RewardPoints], 
+    [UserRewardPointsView].[Price] AS [Price], 
+    [UserRewardPointsView].[PointsRemaining] AS [PointsRemaining]
+    FROM [dbo].[UserRewardPointsView] AS [UserRewardPointsView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Booking_ToApplicationUser" Association="Self.FK_Booking_ToApplicationUser">
+            <End Role="ApplicationUser" EntitySet="ApplicationUser" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_ToCar" Association="Self.FK_Booking_ToCar">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_ToDriver" Association="Self.FK_Booking_ToDriver">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_ToPaymentCard" Association="Self.FK_Booking_ToPaymentCard">
+            <End Role="PaymentCard" EntitySet="PaymentCard" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingAddOn_ToAddOn" Association="Self.FK_BookingAddOn_ToAddOn">
+            <End Role="AddOn" EntitySet="AddOn" />
+            <End Role="BookingAddOn" EntitySet="BookingAddOn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingAddOn_ToBooking" Association="Self.FK_BookingAddOn_ToBooking">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="BookingAddOn" EntitySet="BookingAddOn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_ToCarBrand" Association="Self.FK_Car_ToCarBrand">
+            <End Role="CarBrand" EntitySet="CarBrand" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_ToLocation" Association="Self.FK_Car_ToLocation">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Driver_ToApplicationUser" Association="Self.FK_Driver_ToApplicationUser">
+            <End Role="ApplicationUser" EntitySet="ApplicationUser" />
+            <End Role="Driver" EntitySet="Driver" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCard_ToApplicationUser" Association="Self.FK_PaymentCard_ToApplicationUser">
+            <End Role="ApplicationUser" EntitySet="ApplicationUser" />
+            <End Role="PaymentCard" EntitySet="PaymentCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RedeemItem_Redemption" Association="Self.FK_RedeemItem_Redemption">
+            <End Role="Redemption" EntitySet="Redemption" />
+            <End Role="RedeemItem" EntitySet="RedeemItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Redemption_ApplicationUser" Association="Self.FK_Redemption_ApplicationUser">
+            <End Role="ApplicationUser" EntitySet="ApplicationUser" />
+            <End Role="Redemption" EntitySet="Redemption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestTrip_ToCar" Association="Self.FK_TestTrip_ToCar">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="TestTrip" EntitySet="TestTrip" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SystemDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AddOn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="maxQuantity" Type="Int32" />
+          <NavigationProperty Name="BookingAddOns" Relationship="Self.FK_BookingAddOn_ToAddOn" FromRole="AddOn" ToRole="BookingAddOn" />
+        </EntityType>
+        <EntityType Name="ApplicationUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
+          <Property Name="Roles" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TwoStepVerification" Type="Int32" />
+          <Property Name="EmailVerification" Type="Int32" />
+          <Property Name="IsBan" Type="Int32" />
+          <Property Name="BanReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OtpCode" Type="Int32" />
+          <Property Name="OtpCreatedTime" Type="DateTime" Precision="3" />
+          <Property Name="RewardPoints" Type="Int32" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_ToApplicationUser" FromRole="ApplicationUser" ToRole="Booking" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Driver_ToApplicationUser" FromRole="ApplicationUser" ToRole="Driver" />
+          <NavigationProperty Name="PaymentCards" Relationship="Self.FK_PaymentCard_ToApplicationUser" FromRole="ApplicationUser" ToRole="PaymentCard" />
+          <NavigationProperty Name="Redemptions" Relationship="Self.FK_Redemption_ApplicationUser" FromRole="ApplicationUser" ToRole="Redemption" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CarPlate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DriverId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Pickup_point" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dropoff_point" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentCardId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="EarnDate" Type="DateTime" Precision="3" />
+          <Property Name="PointsRemaining" Type="Int32" />
+          <Property Name="PointsStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ApplicationUser" Relationship="Self.FK_Booking_ToApplicationUser" FromRole="Booking" ToRole="ApplicationUser" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Booking_ToCar" FromRole="Booking" ToRole="Car" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_Booking_ToDriver" FromRole="Booking" ToRole="Driver" />
+          <NavigationProperty Name="PaymentCard" Relationship="Self.FK_Booking_ToPaymentCard" FromRole="Booking" ToRole="PaymentCard" />
+          <NavigationProperty Name="BookingAddOns" Relationship="Self.FK_BookingAddOn_ToBooking" FromRole="Booking" ToRole="BookingAddOn" />
+        </EntityType>
+        <EntityType Name="BookingAddOn">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="AddOnId" />
+          </Key>
+          <Property Name="BookingId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AddOnId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <NavigationProperty Name="AddOn" Relationship="Self.FK_BookingAddOn_ToAddOn" FromRole="BookingAddOn" ToRole="AddOn" />
+          <NavigationProperty Name="Booking" Relationship="Self.FK_BookingAddOn_ToBooking" FromRole="BookingAddOn" ToRole="Booking" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="CarPlate" />
+          </Key>
+          <Property Name="CarPlate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CarBrand" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CarName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CarDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CarImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CarDayPrice" Type="Double" />
+          <Property Name="CarSeat" Type="Int32" />
+          <Property Name="CarTransmission" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CarEnergy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="IsDelisted" Type="Int32" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_ToCar" FromRole="Car" ToRole="Booking" />
+          <NavigationProperty Name="CarBrand1" Relationship="Self.FK_Car_ToCarBrand" FromRole="Car" ToRole="CarBrand" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Car_ToLocation" FromRole="Car" ToRole="Location" />
+          <NavigationProperty Name="TestTrips" Relationship="Self.FK_TestTrip_ToCar" FromRole="Car" ToRole="TestTrip" />
+        </EntityType>
+        <EntityType Name="CarBrand">
+          <Key>
+            <PropertyRef Name="BrandName" />
+          </Key>
+          <Property Name="BrandName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK_Car_ToCarBrand" FromRole="CarBrand" ToRole="Car" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DriverName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DriverId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DriverLicense" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DriverPno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DriverBdate" Type="DateTime" Precision="0" />
+          <Property Name="DriverGender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IDpic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Selfiepic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LicenseFpic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LicenseBpic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Approval" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RejectReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateApply" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ApplicationUser" Relationship="Self.FK_Driver_ToApplicationUser" FromRole="Driver" ToRole="ApplicationUser" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_ToDriver" FromRole="Driver" ToRole="Booking" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LocationState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LocationAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LocationPostcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK_Car_ToLocation" FromRole="Location" ToRole="Car" />
+        </EntityType>
+        <EntityType Name="PaymentCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CardNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="CardHolderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExpDate" Type="DateTime" Precision="0" />
+          <Property Name="CVV" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CardType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsDefault" Type="Int32" />
+          <NavigationProperty Name="ApplicationUser" Relationship="Self.FK_PaymentCard_ToApplicationUser" FromRole="PaymentCard" ToRole="ApplicationUser" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_ToPaymentCard" FromRole="PaymentCard" ToRole="Booking" />
+        </EntityType>
+        <EntityType Name="RedeemItem">
+          <Key>
+            <PropertyRef Name="RedeemItemId" />
+          </Key>
+          <Property Name="RedeemItemId" Type="Int32" Nullable="false" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemPoints" Type="Int32" />
+          <Property Name="ItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RedemptionID" Type="Int32" />
+          <NavigationProperty Name="Redemption" Relationship="Self.FK_RedeemItem_Redemption" FromRole="RedeemItem" ToRole="Redemption" />
+        </EntityType>
+        <EntityType Name="Redemption">
+          <Key>
+            <PropertyRef Name="RedemptionID" />
+          </Key>
+          <Property Name="RedemptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RedeemDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ApplicationUser" Relationship="Self.FK_Redemption_ApplicationUser" FromRole="Redemption" ToRole="ApplicationUser" />
+          <NavigationProperty Name="RedeemItems" Relationship="Self.FK_RedeemItem_Redemption" FromRole="Redemption" ToRole="RedeemItem" />
+        </EntityType>
+        <EntityType Name="TestBook">
+          <Key>
+            <PropertyRef Name="CustomerName" />
+          </Key>
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DriverName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DriverGender" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="DriverID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DriverPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DriverAge" Type="Int32" />
+          <Property Name="DriverRace" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DriverLicense" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RentalPurpose" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TestTrip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Pickup_point" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pickup_state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="Dropoff_point" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dropoff_state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="CarPlateNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_TestTrip_ToCar" FromRole="TestTrip" ToRole="Car" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
+          <Property Name="EncryptionKey" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="IVkey" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Roles" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ProfilePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TwoStepVerification" Type="Int32" />
+          <Property Name="EmailVerification" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_BookingAddOn_ToAddOn">
+          <End Role="AddOn" Type="Self.AddOn" Multiplicity="1" />
+          <End Role="BookingAddOn" Type="Self.BookingAddOn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddOn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingAddOn">
+              <PropertyRef Name="AddOnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_ToApplicationUser">
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Driver_ToApplicationUser">
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
+          <End Role="Driver" Type="Self.Driver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Driver">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentCard_ToApplicationUser">
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PaymentCard" Type="Self.PaymentCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentCard">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Redemption_ApplicationUser">
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
+          <End Role="Redemption" Type="Self.Redemption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Redemption">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_ToCar">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="CarPlate" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="CarPlate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_ToDriver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_ToPaymentCard">
+          <End Role="PaymentCard" Type="Self.PaymentCard" Multiplicity="0..1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="PaymentCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingAddOn_ToBooking">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="BookingAddOn" Type="Self.BookingAddOn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingAddOn">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Car_ToCarBrand">
+          <End Role="CarBrand" Type="Self.CarBrand" Multiplicity="0..1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CarBrand">
+              <PropertyRef Name="BrandName" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="CarBrand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Car_ToLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestTrip_ToCar">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="TestTrip" Type="Self.TestTrip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="CarPlate" />
+            </Principal>
+            <Dependent Role="TestTrip">
+              <PropertyRef Name="CarPlateNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RedeemItem_Redemption">
+          <End Role="Redemption" Type="Self.Redemption" Multiplicity="0..1" />
+          <End Role="RedeemItem" Type="Self.RedeemItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Redemption">
+              <PropertyRef Name="RedemptionID" />
+            </Principal>
+            <Dependent Role="RedeemItem">
+              <PropertyRef Name="RedemptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SystemDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AddOns" EntityType="Self.AddOn" />
+          <EntitySet Name="ApplicationUsers" EntityType="Self.ApplicationUser" />
+          <EntitySet Name="Bookings" EntityType="Self.Booking" />
+          <EntitySet Name="BookingAddOns" EntityType="Self.BookingAddOn" />
+          <EntitySet Name="Cars" EntityType="Self.Car" />
+          <EntitySet Name="CarBrands" EntityType="Self.CarBrand" />
+          <EntitySet Name="Drivers" EntityType="Self.Driver" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="PaymentCards" EntityType="Self.PaymentCard" />
+          <EntitySet Name="RedeemItems" EntityType="Self.RedeemItem" />
+          <EntitySet Name="Redemptions" EntityType="Self.Redemption" />
+          <EntitySet Name="TestBooks" EntityType="Self.TestBook" />
+          <EntitySet Name="TestTrips" EntityType="Self.TestTrip" />
+          <EntitySet Name="UserRegistrations" EntityType="Self.UserRegistration" />
+          <AssociationSet Name="FK_BookingAddOn_ToAddOn" Association="Self.FK_BookingAddOn_ToAddOn">
+            <End Role="AddOn" EntitySet="AddOns" />
+            <End Role="BookingAddOn" EntitySet="BookingAddOns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_ToApplicationUser" Association="Self.FK_Booking_ToApplicationUser">
+            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Driver_ToApplicationUser" Association="Self.FK_Driver_ToApplicationUser">
+            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+            <End Role="Driver" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentCard_ToApplicationUser" Association="Self.FK_PaymentCard_ToApplicationUser">
+            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+            <End Role="PaymentCard" EntitySet="PaymentCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Redemption_ApplicationUser" Association="Self.FK_Redemption_ApplicationUser">
+            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+            <End Role="Redemption" EntitySet="Redemptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_ToCar" Association="Self.FK_Booking_ToCar">
+            <End Role="Car" EntitySet="Cars" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_ToDriver" Association="Self.FK_Booking_ToDriver">
+            <End Role="Driver" EntitySet="Drivers" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_ToPaymentCard" Association="Self.FK_Booking_ToPaymentCard">
+            <End Role="PaymentCard" EntitySet="PaymentCards" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingAddOn_ToBooking" Association="Self.FK_BookingAddOn_ToBooking">
+            <End Role="Booking" EntitySet="Bookings" />
+            <End Role="BookingAddOn" EntitySet="BookingAddOns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_ToCarBrand" Association="Self.FK_Car_ToCarBrand">
+            <End Role="CarBrand" EntitySet="CarBrands" />
+            <End Role="Car" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Car_ToLocation" Association="Self.FK_Car_ToLocation">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Car" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestTrip_ToCar" Association="Self.FK_TestTrip_ToCar">
+            <End Role="Car" EntitySet="Cars" />
+            <End Role="TestTrip" EntitySet="TestTrips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RedeemItem_Redemption" Association="Self.FK_RedeemItem_Redemption">
+            <End Role="Redemption" EntitySet="Redemptions" />
+            <End Role="RedeemItem" EntitySet="RedeemItems" />
+          </AssociationSet>
+          <EntitySet Name="UserRewardPointsViews" EntityType="SystemDatabaseModel.UserRewardPointsView" />
+        </EntityContainer>
+        <EntityType Name="UserRewardPointsView">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RewardPoints" Type="Int32" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="PointsRemaining" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SystemDatabaseModelStoreContainer" CdmEntityContainer="SystemDatabaseEntities">
+          <EntitySetMapping Name="AddOns">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.AddOn">
+              <MappingFragment StoreEntitySet="AddOn">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="maxQuantity" ColumnName="maxQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationUsers">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.ApplicationUser">
+              <MappingFragment StoreEntitySet="ApplicationUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="TwoStepVerification" ColumnName="TwoStepVerification" />
+                <ScalarProperty Name="EmailVerification" ColumnName="EmailVerification" />
+                <ScalarProperty Name="IsBan" ColumnName="IsBan" />
+                <ScalarProperty Name="BanReason" ColumnName="BanReason" />
+                <ScalarProperty Name="OtpCode" ColumnName="OtpCode" />
+                <ScalarProperty Name="OtpCreatedTime" ColumnName="OtpCreatedTime" />
+                <ScalarProperty Name="RewardPoints" ColumnName="RewardPoints" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bookings">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.Booking">
+              <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CarPlate" ColumnName="CarPlate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Pickup_point" ColumnName="Pickup_point" />
+                <ScalarProperty Name="Dropoff_point" ColumnName="Dropoff_point" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PaymentCardId" ColumnName="PaymentCardId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="EarnDate" ColumnName="EarnDate" />
+                <ScalarProperty Name="PointsRemaining" ColumnName="PointsRemaining" />
+                <ScalarProperty Name="PointsStatus" ColumnName="PointsStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingAddOns">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.BookingAddOn">
+              <MappingFragment StoreEntitySet="BookingAddOn">
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+                <ScalarProperty Name="AddOnId" ColumnName="AddOnId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.Car">
+              <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="CarPlate" ColumnName="CarPlate" />
+                <ScalarProperty Name="CarBrand" ColumnName="CarBrand" />
+                <ScalarProperty Name="CarName" ColumnName="CarName" />
+                <ScalarProperty Name="CType" ColumnName="CType" />
+                <ScalarProperty Name="CarDesc" ColumnName="CarDesc" />
+                <ScalarProperty Name="CarImage" ColumnName="CarImage" />
+                <ScalarProperty Name="CarDayPrice" ColumnName="CarDayPrice" />
+                <ScalarProperty Name="CarSeat" ColumnName="CarSeat" />
+                <ScalarProperty Name="CarTransmission" ColumnName="CarTransmission" />
+                <ScalarProperty Name="CarEnergy" ColumnName="CarEnergy" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="IsDelisted" ColumnName="IsDelisted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarBrands">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.CarBrand">
+              <MappingFragment StoreEntitySet="CarBrand">
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="DriverLicense" ColumnName="DriverLicense" />
+                <ScalarProperty Name="DriverPno" ColumnName="DriverPno" />
+                <ScalarProperty Name="DriverBdate" ColumnName="DriverBdate" />
+                <ScalarProperty Name="DriverGender" ColumnName="DriverGender" />
+                <ScalarProperty Name="IDpic" ColumnName="IDpic" />
+                <ScalarProperty Name="Selfiepic" ColumnName="Selfiepic" />
+                <ScalarProperty Name="LicenseFpic" ColumnName="LicenseFpic" />
+                <ScalarProperty Name="LicenseBpic" ColumnName="LicenseBpic" />
+                <ScalarProperty Name="Approval" ColumnName="Approval" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
+                <ScalarProperty Name="DateApply" ColumnName="DateApply" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="LocationState" ColumnName="LocationState" />
+                <ScalarProperty Name="LocationAddress" ColumnName="LocationAddress" />
+                <ScalarProperty Name="LocationPostcode" ColumnName="LocationPostcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentCards">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.PaymentCard">
+              <MappingFragment StoreEntitySet="PaymentCard">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CardHolderName" ColumnName="CardHolderName" />
+                <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+                <ScalarProperty Name="CVV" ColumnName="CVV" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RedeemItems">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.RedeemItem">
+              <MappingFragment StoreEntitySet="RedeemItem">
+                <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemPoints" ColumnName="ItemPoints" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
+                <ScalarProperty Name="RedemptionID" ColumnName="RedemptionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Redemptions">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
+              <MappingFragment StoreEntitySet="Redemption">
+                <ScalarProperty Name="RedemptionID" ColumnName="RedemptionID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestBooks">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.TestBook">
+              <MappingFragment StoreEntitySet="TestBook">
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="DriverGender" ColumnName="DriverGender" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="DriverPhone" ColumnName="DriverPhone" />
+                <ScalarProperty Name="DriverAge" ColumnName="DriverAge" />
+                <ScalarProperty Name="DriverRace" ColumnName="DriverRace" />
+                <ScalarProperty Name="DriverLicense" ColumnName="DriverLicense" />
+                <ScalarProperty Name="RentalPurpose" ColumnName="RentalPurpose" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestTrips">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.TestTrip">
+              <MappingFragment StoreEntitySet="TestTrip">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Pickup_point" ColumnName="Pickup_point" />
+                <ScalarProperty Name="Pickup_state" ColumnName="Pickup_state" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Dropoff_point" ColumnName="Dropoff_point" />
+                <ScalarProperty Name="Dropoff_state" ColumnName="Dropoff_state" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="CarPlateNo" ColumnName="CarPlateNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRegistrations">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.UserRegistration">
+              <MappingFragment StoreEntitySet="UserRegistration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="EncryptionKey" ColumnName="EncryptionKey" />
+                <ScalarProperty Name="IVkey" ColumnName="IVkey" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="TwoStepVerification" ColumnName="TwoStepVerification" />
+                <ScalarProperty Name="EmailVerification" ColumnName="EmailVerification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRewardPointsViews">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.UserRewardPointsView">
+              <MappingFragment StoreEntitySet="UserRewardPointsView">
+                <ScalarProperty Name="PointsRemaining" ColumnName="PointsRemaining" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="RewardPoints" ColumnName="RewardPoints" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

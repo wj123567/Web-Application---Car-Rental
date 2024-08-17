@@ -234,3 +234,7 @@ C:\Users\zobby\Documents\NetBeansProjects\JavaAssignment\Web-Application---Car-R
 C:\Users\zobby\Documents\NetBeansProjects\JavaAssignment\Web-Application---Car-Rental\Assignment\Assignment\obj\Debug\Assignment.csproj.Up2Date
 C:\Users\zobby\Documents\NetBeansProjects\JavaAssignment\Web-Application---Car-Rental\Assignment\Assignment\obj\Debug\Assignment.dll
 C:\Users\zobby\Documents\NetBeansProjects\JavaAssignment\Web-Application---Car-Rental\Assignment\Assignment\obj\Debug\Assignment.pdb
+C:\Users\zobby\Documents\NetBeansProjects\JavaAssignment\Web-Application---Car-Rental\Assignment\Assignment\bin\EntityFramework.dll
+C:\Users\zobby\Documents\NetBeansProjects\JavaAssignment\Web-Application---Car-Rental\Assignment\Assignment\bin\EntityFramework.SqlServer.dll
+C:\Users\zobby\Documents\NetBeansProjects\JavaAssignment\Web-Application---Car-Rental\Assignment\Assignment\bin\EntityFramework.xml
+C:\Users\zobby\Documents\NetBeansProjects\JavaAssignment\Web-Application---Car-Rental\Assignment\Assignment\bin\EntityFramework.SqlServer.xml

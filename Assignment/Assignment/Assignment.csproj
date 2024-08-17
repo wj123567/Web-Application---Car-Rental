@@ -43,7 +43,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -67,6 +75,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CarRentalSystemModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CarRentalSystemModel.Context.cs</LastGenOutput>
+      <DependentUpon>CarRentalSystemModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="CarRentalSystemModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CarRentalSystemModel.edmx</DependentUpon>
+      <LastGenOutput>CarRentalSystemModel.cs</LastGenOutput>
+    </Content>
     <Content Include="CSS\RewardPoint.css" />
     <Content Include="Image\RewardPoint\OnlyCars.jpg" />
     <Content Include="Image\RewardPoint\bg1.png" />
@@ -77,6 +95,7 @@
     <Content Include="Management\AdminRewardPoint.aspx" />
     <Content Include="bookinfo.aspx" />
     <Content Include="Management\BookingManagement.aspx" />
+    <Content Include="Management\testModel.aspx" />
     <Content Include="UserProfile\bookingprocess.aspx" />
     <Content Include="bookingrecord.aspx" />
     <Content Include="bookingrecorddetail.aspx" />
@@ -139,6 +158,45 @@
     <Content Include="Home.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddOn.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationUser.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Booking.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BookingAddOn.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Car.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarBrand.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarRentalSystemModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarRentalSystemModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarRentalSystemModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarRentalSystemModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarRentalSystemModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Driver.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Management\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -167,7 +225,30 @@
     <Compile Include="Management\BookingManagement.aspx.designer.cs">
       <DependentUpon>BookingManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Management\testModel.aspx.cs">
+      <DependentUpon>testModel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\testModel.aspx.designer.cs">
+      <DependentUpon>testModel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentCard.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RedeemItem.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Redemption.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Security.cs" />
+    <Compile Include="TestBook.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestTrip.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserProfile\bookingprocess.aspx.cs">
       <DependentUpon>bookingprocess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -319,6 +400,12 @@
     <Compile Include="Management\UserManagement.aspx.designer.cs">
       <DependentUpon>UserManagement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserRegistration.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRewardPointsView.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="validateEmail.aspx.cs">
       <DependentUpon>validateEmail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -329,6 +416,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Management\Admin.Master" />
+    <EntityDeploy Include="CarRentalSystemModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CarRentalSystemModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="CarRentalSystemModel.edmx.diagram">
+      <DependentUpon>CarRentalSystemModel.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="User.Master" />
     <Content Include="Web.sitemap" />
@@ -345,6 +439,9 @@
     <Folder Include="Image\DriverLB\" />
     <Folder Include="Image\DriverLF\" />
     <Folder Include="Image\DriverSelfie\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

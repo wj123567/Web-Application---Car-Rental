@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eef309d98bcd4830b6dba3cb67c2411b" Name="Diagram1" ZoomLevel="163">
+        <EntityTypeShape EntityType="SystemDatabaseModel.AddOn" Width="1.5" PointX="5.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.ApplicationUser" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.Booking" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.BookingAddOn" Width="1.5" PointX="7.5" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.Car" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.CarBrand" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.Driver" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.Location" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.PaymentCard" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.RedeemItem" Width="1.5" PointX="5.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.Redemption" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.TestBook" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.TestTrip" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.UserRegistration" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_BookingAddOn_ToAddOn" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_Booking_ToApplicationUser" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_Driver_ToApplicationUser" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_PaymentCard_ToApplicationUser" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_Redemption_ApplicationUser" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_Booking_ToCar" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_Booking_ToDriver" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_Booking_ToPaymentCard" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_BookingAddOn_ToBooking" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_Car_ToCarBrand" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_Car_ToLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_TestTrip_ToCar" ManuallyRouted="false" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_RedeemItem_Redemption" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.UserRewardPointsView" Width="1.5" PointX="10.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
