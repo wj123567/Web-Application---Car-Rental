@@ -109,6 +109,10 @@
     width: 50%;
 }
 
+p.ex-1 {
+    font-size: clamp(10px, 2vw + 1rem, 30px);
+}
+
 @media (max-width: 1400px) {
     .RP {
         background-size: cover;

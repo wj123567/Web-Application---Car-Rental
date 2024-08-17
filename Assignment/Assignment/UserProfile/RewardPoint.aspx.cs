@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.Util;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Data;
 
 namespace Assignment
 {
@@ -59,6 +60,28 @@ namespace Assignment
                         {
                             lblUsername.Text = rd["Username"].ToString();
                             lblTotalPoints.Text = "Total Points: " + rd["RewardPoints"].ToString() + " Pts";
+                        }
+                    }
+                }
+
+
+                string sqlGetExpiryDate = "SELECT EarnDate FROM Booking WHERE UserId = @userid";
+
+                using (SqlCommand cmd = new SqlCommand(sqlGetExpiryDate, con))
+                {
+                    cmd.Parameters.AddWithValue("@userid", userid);
+
+                    using (SqlDataReader rd = cmd.ExecuteReader())
+                    {
+                        if (rd.Read())
+                        {
+                            DateTime earnDate = Convert.ToDateTime(rd["EarnDate"]);
+                            DateTime expiryDate = earnDate.AddYears(1);
+                            lblExpiryDate.Text = expiryDate.ToString();
+                        }
+                        else
+                        {
+                            lblExpiryDate.Text = "No Points Yet ~";
                         }
                     }
                 }
