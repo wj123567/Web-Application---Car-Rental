@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="forgetPassword.aspx.cs" Inherits="Assignment.forgetPassword" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-
+    <link href="CSS/SignUp.css" rel="stylesheet" />
      <div id="loginForm">
             <div id="forgetInputGroup" class="inputGroup">
             <h1 class="verifyHead">Forget Password</h1>

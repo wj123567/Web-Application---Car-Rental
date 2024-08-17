@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="validateEmail.aspx.cs" Inherits="Assignment.validateEmail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <link href="CSS/SignUp.css" rel="stylesheet" />
         <div id="loginForm">
             <div id="verifyInputGroup" class="inputGroup">
             <h1 class="verifyHead">Verify Email</h1>

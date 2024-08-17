@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="resetPassword.aspx.cs" Inherits="Assignment.resetPassword" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <link href="CSS/SignUp.css" rel="stylesheet" />
          <div id="loginForm">
             <div id="resetInputGroup" class="inputGroup" style="top:50px">
             <h1 class="verifyHead">Reset Password</h1>
