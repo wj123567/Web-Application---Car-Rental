@@ -9,7 +9,7 @@
             <table class="table tableReward table-striped">
                 <thead>
                     <tr>
-                        <td colspan="8" class="header-title table-dark"><h1>Reward Points Management</h1></td>
+                        <td colspan="7" class="header-title table-dark"><h1>Reward Points Management</h1></td>
                         <tr class="header-section">
                             <th>Username</th>
                             <th>EarnedPoints</th>
@@ -22,12 +22,10 @@
                     </tr>
                 </thead>
                 
-                
-
                 <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
 
                 <tr>
-                    <td colspan="8" class="asd">
+                    <td colspan="7" class="asd">
                         <asp:DataPager ID="RewardPointsPager" runat="server" PageSize="5">
                             <Fields>
                                 <asp:NextPreviousPagerField ButtonType="Link" ShowPreviousPageButton="true" ShowNextPageButton="false"/>
@@ -46,7 +44,9 @@
                 <td><%# Eval("Price") %></td>
                 <td><%# Eval("PointsRemaining") %></td>
                 <td><%# Eval("EarnDate") %></td>
-                <td><%# Eval("EarnDate") %> + 1</td>
+                <td>
+                    <asp:Label ID="lblExpiryDate" runat="server" Text='<%# Eval("EarnDate") != DBNull.Value ? ((DateTime)Eval("EarnDate")).AddYears(1).ToString() : "N/A" %>'></asp:Label>
+                </td>
                 <td><%# Eval("PointsStatus") %></td>
                 <td>
                     <asp:Button ID="EditButton" runat="server" Text="Edit" />
@@ -63,7 +63,7 @@
 
             <tr>                                                                
                 <td colspan="7" style="font: 50px black;">No Data Available
-                    <span style="float: right; text-align:center;"><asp:Button ID="btnInsert" runat="server" Text="Create" CssClass="btn btn-warning" style="width:100px; margin-bottom:10px;" OnClick="btnInsert_Click" ViewStateMode="Inherit" /></span>
+                    <span style="float: right; text-align:center;"><asp:Button ID="btnInsert" runat="server" Text="Create" CssClass="btn btn-warning" style="width:100px; margin-bottom:10px;"/></span>
                 </td>
             </tr>
         </EmptyDataTemplate>

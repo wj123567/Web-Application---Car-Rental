@@ -18,6 +18,13 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Id"] != null)
+            {
+                //System.Diagnostics.Debug.WriteLine("SessionId: " + Session["Id"]);
+                LoadUserData(Session["Id"].ToString());
+
+            }
+
             if (!IsPostBack)
             {
                 if (Session["Id"] != null)
@@ -44,6 +51,7 @@ namespace Assignment
 
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
             {
+                //get username and total points
                 string sql = "SELECT au.Username, au.RewardPoints, bk.PointsRemaining, bk.EarnDate" +
                     " FROM ApplicationUser au" +
                     " JOIN Booking bk ON au.Id = bk.UserId" +
@@ -64,8 +72,8 @@ namespace Assignment
                     }
                 }
 
-
-                string sqlGetExpiryDate = "SELECT EarnDate FROM Booking WHERE UserId = @userid";
+                //Get expiry date by the earliest and is active
+                string sqlGetExpiryDate = "SELECT EarnDate, PointsRemaining FROM Booking WHERE UserId = @userid AND PointsStatus = 'active' ORDER BY EarnDate ASC";
 
                 using (SqlCommand cmd = new SqlCommand(sqlGetExpiryDate, con))
                 {
@@ -77,6 +85,7 @@ namespace Assignment
                         {
                             DateTime earnDate = Convert.ToDateTime(rd["EarnDate"]);
                             DateTime expiryDate = earnDate.AddYears(1);
+                            lblExpiryPoints.Text = rd["PointsRemaining"].ToString();
                             lblExpiryDate.Text = expiryDate.ToString();
                         }
                         else
@@ -85,6 +94,8 @@ namespace Assignment
                         }
                     }
                 }
+
+
             }
         }
 
