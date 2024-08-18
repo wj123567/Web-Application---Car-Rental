@@ -1,17 +1,36 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookingrecord.aspx.cs" Inherits="Assignment.bookingrecord" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <link href="CSS/bookingrecord.css" rel="stylesheet" />
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     
     <div class="booking_container">
         <p class="booking_title">Car Rental Booking</p>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-8 search_style">
+                    <div class="form">
+                    <i class="fa fa-search"></i>
+                    <asp:TextBox ID="txtBookingSearch" cssclass="form-control form-input" runat="server"  placeholder="Search.."></asp:TextBox>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                   <asp:DropDownList ID="ddlStatusFilter" runat="server" cssclass="form-control statusddl_style" AutoPostBack="True" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
+                        <asp:ListItem Value="All" Text="All Statuses" />
+                        <asp:ListItem Value="Processing" Text="Processing" />
+                        <asp:ListItem Value="Booked" Text="Booked" />
+                        <asp:ListItem Value="Cancelled" Text="Cancelled" />
+                   </asp:DropDownList>
+                </div>
+                <div class="col-6 col-md-2 text-end">
+                    
+                    <asp:Button ID="btnFilter" runat="server"   cssclass="btn btn-secondary filter_btn" Text="Filter" />
+                   <i class="ri-filter-fill"></i>
 
-        <asp:DropDownList ID="ddlStatusFilter" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
-    <asp:ListItem Value="All" Text="All Statuses" />
-    <asp:ListItem Value="Processing" Text="Processing" />
-    <asp:ListItem Value="Booked" Text="Booked" />
-    <asp:ListItem Value="Cancelled" Text="Cancelled" />
-        </asp:DropDownList>
+            </div>
+        </div>
+      
 
         <asp:UpdatePanel ID="updatebookingRecordTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
         <ContentTemplate>
@@ -52,14 +71,15 @@
              <th class="booking_edit" style="width:5%;"></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="bookingtable_record">
 
-    <asp:Repeater ID="rptBookingList" runat="server">
+    <asp:Repeater ID="rptBookingList" runat="server" >
     <ItemTemplate>
-          <tr>
+          <tr class="rows1">
         <td>
           <div class=" align-items-center">    
             <div class="ms-1">
+                <asp:HiddenField ID="hdnBookingId" runat="server" />
               <p class="fw-bold mb-1"><%# Eval("Id") %></p>
             </div>
           </div>
@@ -93,21 +113,22 @@
           </td>
          
           <td>
-              <asp:Button ID="btnEdit1" runat="server" CSSclass="edit_btn_style" Text="Edit" />
+              <asp:Button ID="btnView" runat="server" CSSclass="edit_btn_style" Text="View" OnClick="btnView_Click"  CommandArgument='<%# Eval("Id") %>'/>
           </td>
       </tr>
       </ItemTemplate>
      </asp:Repeater>  
-         
-          
+           
         </tbody>
+       
       </table>
     </ContentTemplate>
 
 
     </asp:UpdatePanel>
+
       </div>
-      
+  
 
         <h4>Test Retrieve</h4>
         <asp:GridView ID="gvBook" runat="server" CellPadding="10">
@@ -116,25 +137,34 @@
             </Columns>
         </asp:GridView>
  
-    <!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-<!-- DataTables JS -->
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+ 
+
+    	
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        
+    <script type="text/javascript" src="JS/paging.js"></script>
 
     <script>
-     $(document).ready(function() {
-         $('#bookingRecordTable').DataTable({
-         "pageLength": 10,        // Show 10 entries per page
-         "order": [],             // Disable initial sorting
-         "columnDefs": [
-             {
-                 "targets": 3,     // Index of Start Date column
-                 "type": "date"    // Data type of Start Date column
-             }
-         ]
-     });
-     });
+        $(document).ready(function () {
+            var searchBoxId = "#" + '<%= txtBookingSearch.ClientID %>';
+
+         
+            $(searchBoxId).on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#bookingtable_record tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('#bookingRecordTable').paging({ limit: 10 });
+        });
+
     </script>
+ 
 </asp:Content>

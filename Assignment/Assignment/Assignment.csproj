@@ -92,6 +92,7 @@
     <Content Include="Image\RewardPoint\bg3.png" />
     <Content Include="Image\RewardPoint\bg4.png" />
     <Content Include="Image\RewardPoint\bg-5.png" />
+    <Content Include="JS\paging.js" />
     <Content Include="Management\AdminRewardPoint.aspx" />
     <Content Include="bookinfo.aspx" />
     <Content Include="Management\BookingManagement.aspx" />

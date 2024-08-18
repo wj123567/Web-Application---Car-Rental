@@ -44,7 +44,7 @@ namespace Assignment
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string sql = "SELECT * FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate ";
+                string sql = "SELECT * FROM Booking b FULL OUTER JOIN Car c ON b.CarPlate = c.CarPlate ";
 
 
                 // Apply status filter if necessary
@@ -109,11 +109,27 @@ namespace Assignment
             updatebookingRecordTable.Update();
         }
 
+        protected void btnView_Click(object sender, EventArgs e)
+        {
+            // Retrieve the Button that raised the event
+            Button btnView = (Button)sender;
+
+            // Get the ID from the CommandArgument
+            string bookingId = btnView.CommandArgument;
+
+            // Store the bookingId in session
+            Session["bookingrecordID"] = bookingId;
+
+            Response.Redirect("bookingrecorddetail.aspx");
+        }
+
         protected void ddlStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedStatus = ddlStatusFilter.SelectedValue;
             GetBookRecords(selectedStatus);
         }
 
+
+       
     }
     }

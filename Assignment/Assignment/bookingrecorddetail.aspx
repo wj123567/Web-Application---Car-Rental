@@ -35,24 +35,35 @@
                               </tr>
    
                               <tr class="booking_car_table_info">
-                                  <th style="width:30%">Vehicle</th>
-                                  <td style="width:70%">abcd</td>
+                                  <th style="width:30%">Plate Number:</th>
+                                  <td style="width:70%">
+                                      <asp:Label ID="lblPlateNum" runat="server" Text="Label"></asp:Label>
+
+                                  </td>
                               </tr>
                                <tr class="booking_car_table_info">
                                    <th style="width:30%">Pick Up Location</th>
-                                   <td style="width:70%">abcd</td>
+                                   <td style="width:70%">
+                                       <asp:Label ID="lblPickUpLocation" runat="server" Text="Label"></asp:Label>
+                                   </td>
                                </tr>
                                <tr class="booking_car_table_info">
                                    <th style="width:30%">Pick Up Time</th>
-                                   <td style="width:70%">abcd</td>
+                                   <td style="width:70%">
+                                       <asp:Label ID="lblPickUpTime" runat="server" Text="Label"></asp:Label>
+                                   </td>
                                </tr>
                                <tr class="booking_car_table_info">
                                    <th style="width:30%">Drop Off Location</th>
-                                   <td style="width:70%">abcd</td>
+                                   <td style="width:70%">
+                                       <asp:Label ID="lblDropOffLocation" runat="server" Text="Label"></asp:Label>
+                                   </td>
                                </tr>
                                <tr class="booking_car_table_info">
                                    <th style="width:30%">Drop Off Time</th>
-                                   <td style="width:70%">abcd</td>
+                                   <td style="width:70%">
+                                       <asp:Label ID="lblDropOffTime" runat="server" Text="Label"></asp:Label>
+                                   </td>
                                </tr>
                               
                           </table>

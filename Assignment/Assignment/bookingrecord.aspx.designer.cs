@@ -24,6 +24,15 @@ namespace Assignment
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// txtBookingSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBookingSearch;
+
+        /// <summary>
         /// ddlStatusFilter control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlStatusFilter;
+
+        /// <summary>
+        /// btnFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFilter;
 
         /// <summary>
         /// updatebookingRecordTable control.
