@@ -32,7 +32,9 @@
                     <th></th>
                   </tr>
                 </thead>
+                  
                 <tbody>
+                    <i class="ri-filter-line"></i>
                   <tr>
                     <td >Anity Pugh</td>
                     <td>abcdefg</td>

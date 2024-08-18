@@ -38,7 +38,7 @@ namespace Assignment
         }
 
 
-        private void GetBookRecords()
+        private void GetBookRecords(string statusFilter = "All")
         {
             
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
@@ -47,7 +47,21 @@ namespace Assignment
                 string sql = "SELECT * FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate ";
 
 
-                    using (SqlDataAdapter da = new SqlDataAdapter(sql,con))
+                // Apply status filter if necessary
+                if (statusFilter != "All")
+                {
+                    sql += " WHERE b.Status = @Status";
+                }
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                if (statusFilter != "All")
+                {
+                    cmd.Parameters.AddWithValue("@Status", statusFilter);
+                }
+
+
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
                     DataSet ds = new DataSet();
                     da.Fill(ds, "BookingRecordTable");
@@ -93,6 +107,12 @@ namespace Assignment
             rptBookingList.DataSource = sortedData;
             rptBookingList.DataBind();
             updatebookingRecordTable.Update();
+        }
+
+        protected void ddlStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedStatus = ddlStatusFilter.SelectedValue;
+            GetBookRecords(selectedStatus);
         }
 
     }

@@ -6,9 +6,16 @@
     <div class="booking_container">
         <p class="booking_title">Car Rental Booking</p>
 
+        <asp:DropDownList ID="ddlStatusFilter" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
+    <asp:ListItem Value="All" Text="All Statuses" />
+    <asp:ListItem Value="Processing" Text="Processing" />
+    <asp:ListItem Value="Booked" Text="Booked" />
+    <asp:ListItem Value="Cancelled" Text="Cancelled" />
+        </asp:DropDownList>
+
         <asp:UpdatePanel ID="updatebookingRecordTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
         <ContentTemplate>
-    <table class="table align-middle mb-0 bg-white booking_record_table" id="bookingRecordTable">
+    <table class="table align-middle mb-0 bg-white booking_record_table datatable" id="bookingRecordTable">
         <thead class="bg-light">
           <tr class="header_row_title">
             <th class="booking_id">
@@ -109,4 +116,25 @@
             </Columns>
         </asp:GridView>
  
+    <!-- jQuery -->
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+    <script>
+     $(document).ready(function() {
+         $('#bookingRecordTable').DataTable({
+         "pageLength": 10,        // Show 10 entries per page
+         "order": [],             // Disable initial sorting
+         "columnDefs": [
+             {
+                 "targets": 3,     // Index of Start Date column
+                 "type": "date"    // Data type of Start Date column
+             }
+         ]
+     });
+     });
+    </script>
 </asp:Content>
