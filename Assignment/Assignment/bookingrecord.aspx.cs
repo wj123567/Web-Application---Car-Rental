@@ -15,22 +15,6 @@ namespace Assignment
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack) { 
-
-                string sql = "SELECT * from TestBook";
-                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-
-                SqlCommand cmd = new SqlCommand(sql, con);
-
-                con.Open();
-
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                gvBook.DataSource = dr;
-                gvBook.DataBind();
-
-                dr.Close();
-                con.Close();
-
                 GetBookRecords();
             }
   
@@ -81,6 +65,8 @@ namespace Assignment
                     return "bg-primary";
                 case "Booked":
                     return "bg-success";
+                case "Cancelled":
+                    return "bg-danger";
                 default:
                     return "bg-default"; // Or any default class
             }

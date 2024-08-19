@@ -1,7 +1,11 @@
 ﻿.booking_container {
-    width: 90%;
+    width: 95%;
     margin: auto;
     margin-top: 50px;
+}
+
+.container{
+   
 }
 
 .header_row_title {
