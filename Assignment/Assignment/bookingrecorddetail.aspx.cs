@@ -31,7 +31,7 @@ namespace Assignment
         {
             // Replace with your actual database connection string
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
-
+            decimal addonTotal = calcAddOnTotal(bookingId);
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
@@ -52,9 +52,42 @@ namespace Assignment
                         lblPickUpTime.Text = Convert.ToDateTime(reader["StartDate"]).ToString("dd/MM/yyyy HH:mm:ss tt");
                         lblDropOffLocation.Text = reader["Dropoff_point"].ToString();
                         lblDropOffTime.Text = Convert.ToDateTime(reader["EndDate"]).ToString("dd-MM-yyyy HH:mm:ss tt");
+                        lblAddOnPrice.Text= addonTotal.ToString("F2");
                     }
                 }
             }
+        }
+
+        private decimal calcAddOnTotal(string bookingId)
+        {
+            decimal addonTotal=0;
+            lblAddOnDesc.Text = "";
+            // Replace with your actual database connection string
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                string query = "SELECT b.Quantity,a.Price,a.Name FROM BookingAddOn b JOIN AddOn a ON b.AddOnId = a.Id WHERE b.BookingId = @BookingId";
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@BookingId", bookingId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        int quantity = Convert.ToInt16(reader["Quantity"]);
+                        decimal price = Convert.ToDecimal(reader["Price"]);
+                        addonTotal += quantity * price;
+                        lblAddOnDesc.Text += "("+ reader["Name"].ToString() + "*" + reader["Quantity"].ToString()+ ")" ;
+
+      
+                    }
+                    
+                }
+            }
+            return addonTotal;
         }
 
     }

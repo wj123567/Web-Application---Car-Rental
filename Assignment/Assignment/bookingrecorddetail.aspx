@@ -83,18 +83,22 @@
                             </tr>
                               <tr class="booking_price_table_info">
                                   <td colspan="2">Rental</td>  
-                                  <td colspan="2" style="border-right:none">123</td>
+                                  <td colspan="2" style="border-right:none">
+                                      <asp:Label ID="lblRental" runat="server" Text="Label"></asp:Label>
+                                  </td>
                               </tr>
                               
                               <tr class="booking_price_table_info">
                                   <td colspan="2" style="border-bottom: 2px solid gray">
                                       Add on
+                                      <br />
                                       <span class="addon_description">
-                                          (abcdeasdasdasdsadasdsadasdsadsadsadsadasdsadsadasdasdasdasdsadsadsa)
-
+                                          <asp:Label ID="lblAddOnDesc" runat="server" Text="Label"></asp:Label>
                                       </span>
                                   </td>
-                                  <td colspan="2" style="border-right:none; border-bottom: 2px solid gray">123</td>
+                                  <td colspan="2" style="border-right:none; border-bottom: 2px solid gray">
+                                      <asp:Label ID="lblAddOnPrice" runat="server" Text="Label"></asp:Label>
+                                  </td>
                               </tr>
                               
 
