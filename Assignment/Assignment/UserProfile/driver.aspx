@@ -135,7 +135,7 @@
   </div>   
 </div>
 
-    <div class="container-xl px-4 mt-4">
+    <div class="container-fluid px-4 mt-4">
     <div class="mb-1">
     <h1 class="d-inline">Driver Info</h1>
     <div class="d-inline">

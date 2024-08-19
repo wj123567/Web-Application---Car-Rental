@@ -85,6 +85,7 @@
       <DependentUpon>CarRentalSystemModel.edmx</DependentUpon>
       <LastGenOutput>CarRentalSystemModel.cs</LastGenOutput>
     </Content>
+    <Content Include="CSS\productListing.css" />
     <Content Include="CSS\RewardPoint.css" />
     <Content Include="Image\RewardPoint\OnlyCars.jpg" />
     <Content Include="Image\RewardPoint\bg1.png" />

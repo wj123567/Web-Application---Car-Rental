@@ -1,0 +1,21 @@
+﻿#img-holder {
+    width: 1500px; /* The maximum width is 1500px */
+}
+
+@media screen and (max-width: 1200px) {
+    #img-holder {
+        max-width: 1000px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #img-holder {
+        max-width: 700px; 
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #img-holder {
+        max-width: 300px; 
+    }
+}
