@@ -28,7 +28,7 @@ namespace Assignment
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string sql = "SELECT * FROM Booking b FULL OUTER JOIN Car c ON b.CarPlate = c.CarPlate ";
+                string sql = "SELECT * FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate ";
 
 
                 // Apply status filter if necessary
@@ -77,6 +77,7 @@ namespace Assignment
             LinkButton button = (LinkButton)sender;
             string name = button.CommandName;
             string sort = button.CommandArgument;
+
             if (sort == "DESC")
             {
                 button.CommandArgument = "ASC";
@@ -85,15 +86,22 @@ namespace Assignment
             {
                 button.CommandArgument = "DESC";
             }
+
             DataTable bookingData = (DataTable)ViewState["BookingRecordTable"];
             DataView dataView = bookingData.DefaultView;
             dataView.Sort = name + " " + sort;
             DataTable sortedData = dataView.ToTable();
+
+            // Update ViewState and Repeater
             ViewState["BookingRecordTable"] = sortedData;
             rptBookingList.DataSource = sortedData;
             rptBookingList.DataBind();
             updatebookingRecordTable.Update();
+
+            // Trigger client-side pagination reinitialization
+            ScriptManager.RegisterStartupScript(this, GetType(), "ReinitializePagination", "$('#bookingRecordTable').paging({ limit: 10 });", true);
         }
+    
 
         protected void btnView_Click(object sender, EventArgs e)
         {

@@ -138,6 +138,7 @@
         </tbody>
        
       </table>
+           
     </ContentTemplate>
 
 
@@ -159,9 +160,7 @@
 
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
- 
-
-    	
+	
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         
     <script type="text/javascript" src="JS/paging.js"></script>
@@ -178,7 +177,13 @@
                 });
             });
 
-            $('#bookingRecordTable').paging({ limit: 5 });
+            function initializePagination() {
+                $('#bookingRecordTable').paging({ limit: 10 });
+            }
+
+            initializePagination(); // Initialize on page load
+
+           
         });
 
     </script>
