@@ -48,7 +48,7 @@
                 <asp:Menu ID="Menu1" runat="server" DataSourceID="UserSiteMap" Orientation="Horizontal" StaticDisplayLevels="2" StaticMenuItemStyle-CssClass="nav-link mx-2" CssClass="nav-item" StaticSelectedStyle-ForeColor="#3490DC"></asp:Menu>
                 </asp:placeholder>
                 <asp:PlaceHolder ID="admin" runat="server" Visible="False">
-                <li class="nav-item"><a class= "nav-link" href="admin.aspx">Admin</a></li>
+                <li class="nav-item"><a class= "nav-link" href="Management/dashboard.aspx">Admin</a></li>
                 </asp:PlaceHolder>
       </ul>
 
