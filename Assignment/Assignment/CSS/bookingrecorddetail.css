@@ -19,9 +19,18 @@
 .booking_col_right {
     box-sizing: border-box;
     display: flex;
-    width: 40%;
+    width: 40%; 
     border: 1px solid yellow;
     font-size: 16px;
+}
+
+.booking_record img{
+    width: 350px;
+    height: 200px;
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .booking_car_table {

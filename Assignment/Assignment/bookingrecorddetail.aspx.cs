@@ -36,7 +36,7 @@ namespace Assignment
             {
                 con.Open();
 
-                string query = "SELECT * FROM Booking WHERE Id = @BookingId";
+                string query = "SELECT * FROM Booking b JOIN Car c ON b.CarPlate=c.CarPlate WHERE b.Id = @BookingId";
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@BookingId", bookingId);
 
@@ -45,6 +45,8 @@ namespace Assignment
                     if (reader.Read())
                     {
                         // Populate the table with the data
+                        lblBookingNumber.Text = bookingId;
+                        img_car.ImageUrl = reader["CarImage"].ToString();
                         lblPlateNum.Text = reader["CarPlate"].ToString();
                         lblPickUpLocation.Text = reader["Pickup_point"].ToString();
                         lblPickUpTime.Text = Convert.ToDateTime(reader["StartDate"]).ToString("dd/MM/yyyy HH:mm:ss tt");

@@ -9,7 +9,7 @@
 }
 
 .header_row_title {
-    border: 1px solid red;
+
 }
 
 .booking_title {
@@ -21,6 +21,15 @@
 
 .booking_record_table{
  
+}
+
+#bookingtable_record {
+    background-color: red; /* You can choose a different color if you want */
+}
+
+.booking_status span {
+    display: block;
+    width: 100%;
 }
 
 .status_icon {

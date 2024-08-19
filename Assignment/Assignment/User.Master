@@ -16,7 +16,6 @@
     <link href="CSS/tracking.css" rel="stylesheet" />
     <link href="CSS/payment.css" rel="stylesheet" />
     <link href="CSS/payment_pg.css" rel="stylesheet" />
-    <link href="CSS/bookingrecorddetail.css" rel="stylesheet" />
     <link href="CSS/webcam.css" rel="stylesheet" />
     <link href="CSS/RewardPoint.css" rel="stylesheet" />
     <script src="JS/home.js" type="text/javascript"></script>

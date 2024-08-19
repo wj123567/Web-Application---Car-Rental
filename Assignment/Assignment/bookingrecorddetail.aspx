@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookingrecorddetail.aspx.cs" Inherits="Assignment.bookingrecorddetail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+        <link href="CSS/bookingrecorddetail.css" rel="stylesheet" />
 
        <!-- Page Content -->
     <main id="page-content" >
@@ -23,11 +24,14 @@
                 <div>
                   
                   <!-- row -->
-                  <div class="row justify-content-between">
-                      <img src= "Image/WZ/pexels-mikebirdy-170811.jpg" style="width:250px;height:200px;border-radius:50%;margin:auto;margin-top:40px;margin-bottom:40px;"/>
-                      
+                  <div class="row justify-content-between booking_record">
+                      <asp:Image ID="img_car" runat="server" />
                           <table class="booking_car_table">
-                              <caption style="caption-side:top">Booking Number:</caption>
+                              <caption style="caption-side:top">
+                                  Booking Number:
+                                  <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label>
+                              </caption>
+
                               <tr class="booking_car_table_header">
                                   <th colspan="5">
                                       CAR RENTAL INFO

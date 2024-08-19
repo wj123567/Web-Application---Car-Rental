@@ -15,6 +15,24 @@ namespace Assignment
     {
 
         /// <summary>
+        /// img_car control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image img_car;
+
+        /// <summary>
+        /// lblBookingNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBookingNumber;
+
+        /// <summary>
         /// lblPlateNum control.
         /// </summary>
         /// <remarks>

@@ -87,6 +87,10 @@ namespace Assignment
                 button.CommandArgument = "DESC";
             }
 
+            // Trigger client-side icon update
+            ScriptManager.RegisterStartupScript(this, GetType(), "UpdateSortIcon", "updateSortIcons();", true);
+
+
             DataTable bookingData = (DataTable)ViewState["BookingRecordTable"];
             DataView dataView = bookingData.DefaultView;
             dataView.Sort = name + " " + sort;
@@ -98,8 +102,13 @@ namespace Assignment
             rptBookingList.DataBind();
             updatebookingRecordTable.Update();
 
+            // Store the current sort direction
+            hdnSortDirection.Value = button.CommandArgument; // Store current sort direction
+
             // Trigger client-side pagination reinitialization
             ScriptManager.RegisterStartupScript(this, GetType(), "ReinitializePagination", "$('#bookingRecordTable').paging({ limit: 10 });", true);
+
+           
         }
     
 

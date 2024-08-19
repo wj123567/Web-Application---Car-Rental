@@ -37,46 +37,49 @@
     <table class="table align-middle mb-0 bg-white booking_record_table datatable" id="bookingRecordTable">
         <thead class="bg-light">
           <tr class="header_row_title">
+
+              <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
+
             <th class="booking_id">
-                <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark">
-                Booking ID
+                <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark  sort-button">
+                Booking ID<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px;font-size:25px;"></i>
                 </asp:LinkButton>
                 
             </th>
              <th class="booking_status" style="border:1px solid green">
-                 <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark">
-                 <span style="border:1px solid red">Status <i class="ri-arrow-up-s-fill" style="margin-right:10px;"></i></span>
+                 <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark sort-button">
+                 Status 
                 </asp:LinkButton>
              </th>
             <th class="booking_vehicle">
-                <asp:LinkButton ID="btnSortVehicle" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark">
-                Vehicle Plate No.
+                <asp:LinkButton ID="btnSortVehicle" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark sort-button">
+                Vehicle Plate No. 
                 </asp:LinkButton>
             </th>
             <th class="booking_pickup">
-                <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="PickUp" CssClass="text-dark">
-                Pick Up Location
+                <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Pickup_point" CssClass="text-dark  sort-button">
+                Pick Up Location <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px;font-size:25px;"></i>
                 </asp:LinkButton>
             </th>            
              <th class="booking_pickup">
-                <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="PickUp" CssClass="text-dark">
-                Pick Up Time
+                <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="StartDate" CssClass="text-dark  sort-button">
+                Pick Up Time <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px;font-size:25px;"></i>
                 </asp:LinkButton>
             </th>
 
             <th class="booking_dropoff">
-                <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DropOff" CssClass="text-dark">
-                Drop Off Location
+                <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Dropoff_point" CssClass="text-dark sort-button">
+                Drop Off Location<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px;font-size:25px;"></i>
                 </asp:LinkButton>
             </th>            
              <th class="booking_dropoff">
-                <asp:LinkButton ID="btnSortDropOffTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DropOff" CssClass="text-dark">
-                Drop Off Time
+                <asp:LinkButton ID="btnSortDropOffTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EndDate" CssClass="text-dark sort-button">
+                Drop Off Time<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px;font-size:25px;"></i>
                 </asp:LinkButton>
             </th>
             <th class="booking_price">
-                <asp:LinkButton ID="btnSortPrice" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Price" CssClass="text-dark">
-                Price
+                <asp:LinkButton ID="btnSortPrice" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Price" CssClass="text-dark  sort-button">
+                Price<i class="sort-icon ri-arrow-up-s-fill" style="margin-right:10px;font-size:25px;"></i>
                 </asp:LinkButton>
             </th>
              <th class="booking_edit" style="width:5%;"></th>
@@ -166,6 +169,7 @@
     <script type="text/javascript" src="JS/paging.js"></script>
 
     <script>
+
         $(document).ready(function () {
             var searchBoxId = "#" + '<%= txtBookingSearch.ClientID %>';
 
@@ -183,8 +187,28 @@
 
             initializePagination(); // Initialize on page load
 
-           
+            
         });
+
+
+        function updateSortIcons() {
+            // Get the current sort direction from the HiddenField
+            var sortDirection = document.getElementById('<%= hdnSortDirection.ClientID %>').value;
+
+            // Update icon classes based on the current sort direction
+            document.querySelectorAll('.sort-button').forEach(function (button) {
+                var icon = button.querySelector('.sort-icon');
+                if (icon) {
+                    if (sortDirection === 'ASC') {
+                        icon.classList.remove('ri-arrow-up-s-fill');
+                        icon.classList.add('ri-arrow-down-s-fill');
+                    } else {
+                        icon.classList.remove('ri-arrow-down-s-fill');
+                        icon.classList.add('ri-arrow-up-s-fill');
+                    }
+                }
+            });
+        }
 
     </script>
  
