@@ -97,6 +97,8 @@
     <Content Include="Management\AdminRewardPoint.aspx" />
     <Content Include="bookinfo.aspx" />
     <Content Include="Management\BookingManagement.aspx" />
+    <Content Include="Management\dashboard.aspx" />
+    <Content Include="Management\test.aspx" />
     <Content Include="Management\testModel.aspx" />
     <Content Include="UserProfile\bookingprocess.aspx" />
     <Content Include="bookingrecord.aspx" />
@@ -226,6 +228,20 @@
     </Compile>
     <Compile Include="Management\BookingManagement.aspx.designer.cs">
       <DependentUpon>BookingManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\dashboard.aspx.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\dashboard.aspx.designer.cs">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
     </Compile>
     <Compile Include="Management\testModel.aspx.cs">
       <DependentUpon>testModel.aspx</DependentUpon>

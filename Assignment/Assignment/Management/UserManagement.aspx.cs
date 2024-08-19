@@ -291,5 +291,40 @@ namespace Assignment
             con.Close();
             Server.Transfer("UserManagement.aspx");
         }
+
+        protected void emailExist_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            SystemDatabaseEntities db = new SystemDatabaseEntities();
+            string email = args.Value;
+
+            if(db.ApplicationUsers.Any(u => u.Email == email))
+            {
+                args.IsValid = false;
+                addUpdatePanel.Update();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "addNewmodal()", true);
+            }
+            else
+            {
+                args.IsValid = true;
+            }
+        }
+
+        protected void btnAddUser_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+               if (fuAddProfile.HasFile)
+               {
+                 string yeet = "nice";
+               }
+
+                Server.Transfer("UserManagement.aspx");
+            }
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("UserManagement.aspx");
+        }
     }
 }

@@ -14,3 +14,25 @@
     height: 100%;
     object-fit: cover;
 }
+
+.modal .form-control, .modal .form-select {
+    border: 1px solid #a1a1a1;
+}
+
+.modal{
+    color: black;
+}
+
+.upload-text {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.profile-pic-wrapper:hover .upload-text {
+    opacity: 1;
+}
