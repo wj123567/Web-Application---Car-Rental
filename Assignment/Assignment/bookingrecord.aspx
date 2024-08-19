@@ -43,24 +43,35 @@
                 </asp:LinkButton>
                 
             </th>
-             <th class="booking_status">
+             <th class="booking_status" style="border:1px solid green">
                  <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark">
-                 Status
+                 <span style="border:1px solid red">Status <i class="ri-arrow-up-s-fill" style="margin-right:10px;"></i></span>
                 </asp:LinkButton>
              </th>
             <th class="booking_vehicle">
                 <asp:LinkButton ID="btnSortVehicle" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark">
-                Vehicle
+                Vehicle Plate No.
                 </asp:LinkButton>
             </th>
             <th class="booking_pickup">
-                <asp:LinkButton ID="btnSortPickUp" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="PickUp" CssClass="text-dark">
-                Pick Up 
+                <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="PickUp" CssClass="text-dark">
+                Pick Up Location
+                </asp:LinkButton>
+            </th>            
+             <th class="booking_pickup">
+                <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="PickUp" CssClass="text-dark">
+                Pick Up Time
                 </asp:LinkButton>
             </th>
+
             <th class="booking_dropoff">
-                <asp:LinkButton ID="btnSortDropOff" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DropOff" CssClass="text-dark">
-                Drop Off 
+                <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DropOff" CssClass="text-dark">
+                Drop Off Location
+                </asp:LinkButton>
+            </th>            
+             <th class="booking_dropoff">
+                <asp:LinkButton ID="btnSortDropOffTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DropOff" CssClass="text-dark">
+                Drop Off Time
                 </asp:LinkButton>
             </th>
             <th class="booking_price">
@@ -94,27 +105,32 @@
       
         <td>
         <p class="fw-normal mb-1"><%# Eval("CarPlate") %></p>
-      
         </td>
-
-              <!-- car type maybe-->
 
         <td>
           <p class="fw-normal mb-1"><%# Eval("Pickup_point") %></p>
-          <p class="text-muted mb-0"><%# Eval("StartDate") %></p>
-      
+
         </td>
+
+        <td>
+          <p class="text-muted mb-0"><%# Eval("StartDate") %></p>
+        </td>
+
         <td>
             <p class="fw-normal mb-1"><%# Eval("Dropoff_point") %></p>
-            <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
         </td>
-          <td>
+        
+        <td>
+              <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
+        </td>
+
+        <td>
               <p class="fw-normal mb-1"><%# Eval("Price") %></p>
-          </td>
+        </td>
          
-          <td>
+        <td>
               <asp:Button ID="btnView" runat="server" CSSclass="edit_btn_style" Text="View" OnClick="btnView_Click"  CommandArgument='<%# Eval("Id") %>'/>
-          </td>
+        </td>
       </tr>
       </ItemTemplate>
      </asp:Repeater>  
@@ -122,13 +138,14 @@
         </tbody>
        
       </table>
+           
     </ContentTemplate>
 
 
     </asp:UpdatePanel>
 
       </div>
-  
+  </div>
 
         <h4>Test Retrieve</h4>
         <asp:GridView ID="gvBook" runat="server" CellPadding="10">
@@ -143,9 +160,7 @@
 
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
- 
-
-    	
+	
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         
     <script type="text/javascript" src="JS/paging.js"></script>
@@ -162,7 +177,13 @@
                 });
             });
 
-            $('#bookingRecordTable').paging({ limit: 10 });
+            function initializePagination() {
+                $('#bookingRecordTable').paging({ limit: 10 });
+            }
+
+            initializePagination(); // Initialize on page load
+
+           
         });
 
     </script>
