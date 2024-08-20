@@ -82,7 +82,7 @@
         </ul>
         <div class="card-body row">
         <asp:Label ID="lblDriverText" runat="server" CssClass="text-dark"></asp:Label>
-        <asp:Repeater ID="UserDriverReapeter" runat="server" OnItemDataBound="UserDriverReapeter_ItemDataBound">
+        <asp:Repeater ID="UserDriverReapeter" runat="server">
             <ItemTemplate>
                 <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
                     <div class="d-flex align-items-center justify-content-between px-4">
@@ -238,7 +238,9 @@
     <td>
           <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
     </td>
-     
+     <td>
+         -
+     </td>
     <td>
           <asp:Button ID="btnView" runat="server" CSSclass="edit_btn_style" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
     </td>
@@ -258,97 +260,76 @@
   </div>
   </div>   
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-     <script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        
+    <script type="text/javascript" src="../JS/paging.js"></script>
+
+
+    <script>
          $(document).ready(function () {
              var searchBoxId = "#" + '<%= txtBookingSearch.ClientID %>';
 
   
-     $(searchBoxId).on("keyup", function () {
-         var value = $(this).val().toLowerCase();
-         $("#bookingtable_record tr").filter(function () {
-             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-         });
-     });
+            $(searchBoxId).on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#bookingtable_record tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
 
-     function initializePagination() {
-         $('#bookingRecordTable').paging({ limit: 10 });
-     }
+            function initializePagination() {
+                $('#bookingRecordTable').paging({ limit: 10 });
+            }
 
-     initializePagination(); // Initialize on page load
-
-     
- });
+            initializePagination(); // Initialize on page load
 
 
- function updateSortIcons() {
-     // Get the current sort direction from the HiddenField
-     var sortDirection = document.getElementById('<%= hdnSortDirection.ClientID %>').value;
 
-     // Update icon classes based on the current sort direction
-     document.querySelectorAll('.sort-button').forEach(function (button) {
-         var icon = button.querySelector('.sort-icon');
-         if (icon) {
-             if (sortDirection === 'ASC') {
-                 icon.classList.remove('ri-arrow-up-s-fill');
-                 icon.classList.add('ri-arrow-down-s-fill');
-             } else {
-                 icon.classList.remove('ri-arrow-down-s-fill');
-                 icon.classList.add('ri-arrow-up-s-fill');
+             function updateSortIcons() {
+                 // Get the current sort direction from the HiddenField
+                 var sortDirection = document.getElementById('<%= hdnSortDirection.ClientID %>').value;
+
+                 // Update icon classes based on the current sort direction
+                 document.querySelectorAll('.sort-button').forEach(function (button) {
+                     var icon = button.querySelector('.sort-icon');
+                     if (icon) {
+                         if (sortDirection === 'ASC') {
+                             icon.classList.remove('ri-arrow-up-s-fill');
+                             icon.classList.add('ri-arrow-down-s-fill');
+                         } else {
+                             icon.classList.remove('ri-arrow-down-s-fill');
+                             icon.classList.add('ri-arrow-up-s-fill');
+                         }
+                     }
+                 });
              }
-         }
-     });
- }
 
 
-     if (window.history.replaceState) {
-         window.history.replaceState(null, null, window.location.href);
-     }
 
-     function loadModal() {
-         document.addEventListener("DOMContentLoaded", modal);
-         document.addEventListener("DOMContentLoaded", showhideButton);
-     }
+             function loadModal() {
+                 document.addEventListener("DOMContentLoaded", modal);
+             }
 
-     function showhideButton() {
-         var hdnUserStatus = document.getElementById('<%= hdnUserStatus.ClientID %>').value;
-         var buttonGroup = document.querySelectorAll(".btn-both");
-         var button = null;
+             function modal() {
+                 addEventListener("DOMContentLoaded", (event) => {
+                     $('#userInfoModal').modal('toggle');
+                     return false;
+                 });
+             };
 
-         buttonGroup.forEach(function (btn) {
-             btn.style.display = "none";
-         });
-
-         if (hdnUserStatus == "0") {
-             button = document.querySelectorAll(".btn-ban");
-         } else {
-             button = document.querySelectorAll(".btn-unban");
-         }
-
-         button.forEach(function (btn) {
-             btn.style.display = "block";
-         });
-     }
+        });
 
 
-     function modal() {
-         addEventListener("DOMContentLoaded", (event) => {
-         $('#userInfoModal').modal('toggle');
-         showhideButton();
-         return false;
-         });
-     };
-
-     function modalDel() {
-         addEventListener("DOMContentLoaded", (event) => {
-             $('#ConfirmDelete').modal('toggle');
-             showhideButton();
-             return false;
-         });
-     };
+   
 
 
-     </script>
+
+    </script>
 
 </asp:Content>

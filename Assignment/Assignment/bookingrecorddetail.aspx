@@ -202,6 +202,7 @@
            
 
 <script>
+
     function loadModal() {
     document.addEventListener("DOMContentLoaded", modal);
    

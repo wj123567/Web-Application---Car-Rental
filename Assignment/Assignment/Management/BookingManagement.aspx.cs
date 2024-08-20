@@ -104,13 +104,17 @@ namespace Assignment.Management
         protected void btnView_Click(object sender, EventArgs e)
         {
             Button btnView = (Button)sender;
-            String id = btnView.CommandArgument;
-            
+            /*String id = btnView.CommandArgument;*/
+            //here hard code
+            //here hard code
+            //here hard code
+            String id = "ae0a1581-21ea-4ea6-920c-80bef28a0129";
             UserDriverReapeter.DataSource = null;
             UserDriverReapeter.DataBind();
             LoadAvailableUser(id);
             loadDriverInfo(id);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modal()", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "modal()", true);
+           
         }
 
         protected void LoadAvailableUser(String id)
@@ -134,15 +138,7 @@ namespace Assignment.Management
                 txtBirthday.Text = driverBdate.ToString("yyyy-MM-dd");
                 txtMemberSince.Text = regDate.ToString("yyyy-MM-dd");
                 userProfilePic.ImageUrl = reader["ProfilePicture"].ToString();
-                string isBan = reader["IsBan"].ToString();
-                if (isBan == "0")
-                {
-                    hdnUserStatus.Value = "0";
-                }
-                else if (isBan == "1")
-                {
-                    hdnUserStatus.Value = "1";
-                }
+               
             }
             con.Close();
             reader.Close();

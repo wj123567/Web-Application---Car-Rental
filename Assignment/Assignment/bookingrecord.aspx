@@ -33,7 +33,7 @@
         </div>
       
 
-        <asp:UpdatePanel ID="updatebookingRecordTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+        <asp:UpdatePanel ID="updatebookingRecordTable" class="bookingRecordTablePanel" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
         <ContentTemplate>
     <table class="table align-middle mb-0 booking_record_table datatable" id="bookingRecordTable">
         <thead class="bg-secondary" style=" line-height:2;">
@@ -108,7 +108,7 @@
                </span>
           </td>
       
-        <td>
+        <td class="carplate_data">
         <p class="fw-normal mb-1"><%# Eval("CarPlate") %></p>
         </td>
 
@@ -129,7 +129,7 @@
               <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
         </td>
 
-        <td>
+        <td class="price_data">
               <p class="fw-normal mb-1"><%# Eval("Price") %></p>
         </td>
          
