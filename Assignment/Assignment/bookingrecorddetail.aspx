@@ -35,9 +35,7 @@
               <div class="card-body">
                 <div class="mb-6">
                   <!-- heading -->
-                  <h2 class="mb-0">Thank you for your booking</h2>
-                  <p class="mb-0">We appreciate your booking, were currently processing it. So hard tight and we will send
-                    you confirmation very soon!</p>
+                  <h2 class="mb-0">Booking ID: <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label></h2>
                 </div>
                 <div>
                   
@@ -45,10 +43,6 @@
                   <div class="row justify-content-between booking_record">
                       <asp:Image ID="img_car" runat="server" />
                           <table class="booking_car_table">
-                              <caption style="caption-side:top">
-                                  Booking Number:
-                                  <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label>
-                              </caption>
 
                               <tr class="booking_car_table_header">
                                   <th colspan="5">

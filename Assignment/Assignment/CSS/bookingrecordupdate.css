@@ -1,0 +1,112 @@
+﻿
+.booking_content_box {
+    margin-top: 30px;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+}
+
+.booking_col_left {
+    box-sizing: border-box;
+    display: flex;
+    width: 60%;
+    border: 1px solid gray;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+
+.booking_col_right {
+    box-sizing: border-box;
+    display: flex;
+    width: 40%;
+    border: 1px solid yellow;
+    font-size: 16px;
+}
+
+.booking_record img {
+    width: 350px;
+    height: 200px;
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.booking_car_table {
+    width: 100%;
+}
+
+.booking_car_table_header {
+    text-align: center;
+    line-height: 3;
+    font-weight: 800;
+    font-size: 24px;
+    border-top: 2px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+
+.booking_car_table_info {
+    width: 100%;
+    line-height: 2;
+}
+
+    .booking_car_table_info th, .booking_car_table_info td {
+        border: 1px solid gray;
+    }
+
+    .booking_car_table_info th {
+        padding-left: 40px;
+        border-left: none;
+    }
+
+    .booking_car_table_info td {
+        padding-left: 20px;
+        border-right: none;
+    }
+
+.booking_price_table {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.booking_price_table_header {
+    line-height: 3;
+    font-weight: 800;
+    font-size: 24px;
+    text-transform: uppercase;
+    border-top: none;
+    border-bottom: 1px solid gray;
+}
+
+.booking_price_table_title {
+    line-height: 2;
+}
+
+    .booking_price_table_title th {
+        font-size: 20px;
+        border-right: 1px solid gray;
+    }
+
+.booking_price_table_info {
+    line-height: 2;
+}
+
+    .booking_price_table_info td {
+        border-right: 1px solid gray;
+    }
+
+.addon_description {
+    color: gray;
+    font-style: italic;
+}
+
+.booking_summary_container {
+    margin-top: 20px;
+}
+
+
+
