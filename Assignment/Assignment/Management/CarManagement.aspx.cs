@@ -45,24 +45,33 @@ namespace Assignment
             repeaterCarTable.DataSource = ds.Tables["CarTable"];
             repeaterCarTable.DataBind();
             con.Close();
-            UpdatePageInfo();
+            UpdatePageInfo(false, getTotalRow());            
         }
 
-        protected void UpdatePageInfo()
+        protected void UpdatePageInfo(bool isSearching, int row)
         {
-            int totalRows = getTotalRow();
-            int totalPage = (int)Math.Ceiling((double)totalRows / (double)PageSize);
-            lblPageInfo.Text = "Page " + PageNumber + " of " + totalPage;
+            if (!isSearching)
+            {
+                int totalPage = (int)Math.Ceiling((double)row / (double)PageSize);
+                lblPageInfo.Text = "Page " + PageNumber + " of " + totalPage;
+                lblTotalRecord.Text = "Total Record: " + row;
+                btnPrevious.Enabled = PageNumber > 1;
+                btnNext.Enabled = PageNumber < totalPage;
+            }
+            else if (isSearching)
+            {
+                lblPageInfo.Text = "Page " + 1 + " of " + 1;
+                lblTotalRecord.Text = "Total Record: " + row;
+                btnPrevious.Enabled = false;
+                btnNext.Enabled = false;
+            }
 
-            btnPrevious.Enabled = PageNumber > 1;
-            btnNext.Enabled = PageNumber < totalPage; 
         }
 
         protected void btnPrevious_Click(object sender, EventArgs e)
         {
             PageNumber--;
             loadCarData();
-            UpdatePageInfo();
             UpdatePanel1.Update();
         }
 
@@ -70,7 +79,6 @@ namespace Assignment
         {
             PageNumber++;
             loadCarData();
-            UpdatePageInfo();
             UpdatePanel1.Update();
         }
 
@@ -547,6 +555,66 @@ namespace Assignment
         protected void btnAddNewCar_Click(object sender, EventArgs e)
         {
             Server.Transfer("CarManagement.aspx");
+        }
+        protected void hiddenBtn_Click(object sender, EventArgs e)
+        {
+            string findCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR CarPlate LIKE @searchString";
+            string search = searchBar.Text.Replace(" ","");
+            if (search == "")
+            {
+                loadCarData();
+                UpdatePanel1.Update();
+            }
+            else
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+                SqlCommand com = new SqlCommand(findCar, con);
+                con.Open();
+                com.Parameters.AddWithValue("@searchString", "%" + search + "%");
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "CarTable");
+                int row = ds.Tables["CarTable"].Rows.Count;
+                ViewState["CarTable"] = ds.Tables["CarTable"];
+                repeaterCarTable.DataSource = ds.Tables["CarTable"];
+                repeaterCarTable.DataBind();
+                con.Close();
+                UpdatePageInfo(true, row);
+                UpdatePanel1.Update();
+            }
+        }
+
+        protected void ddlTableLocation_DataBound(object sender, EventArgs e)
+        {
+            ddlTableLocation.Items.Insert(0, new ListItem("All Location", "0"));            
+        }
+
+        protected void ddlTableLocation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string loc = ddlTableLocation.SelectedValue;
+            string selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE C.LocationId = @LocationId";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(selectCar, con);
+            if (loc == "0")
+            {
+                loadCarData();
+                UpdatePanel1.Update();
+            }
+            else
+            {
+                con.Open();
+                com.Parameters.AddWithValue("@LocationId", loc);
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "CarTable");
+                int row = ds.Tables["CarTable"].Rows.Count;
+                ViewState["CarTable"] = ds.Tables["CarTable"];
+                repeaterCarTable.DataSource = ds.Tables["CarTable"];
+                repeaterCarTable.DataBind();
+                con.Close();
+                UpdatePageInfo(true, row);
+                UpdatePanel1.Update();
+            }
         }
     }
 }

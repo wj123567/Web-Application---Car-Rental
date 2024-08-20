@@ -149,7 +149,7 @@
          </div>
          <div class="col">
          <div class="float-end" style="width: 250px;">
-            <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Search" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
+            <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Name/Phone/Id/Passport/LicenseNo" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
             <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" style="display:none;"/>
          </div>
          </div>
@@ -157,7 +157,7 @@
     <div>
                 <asp:UpdatePanel ID="updateDriverTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                 <ContentTemplate>
-            <table id="driverTable" class="table table-striped table-bordered table-hover table-responsive">
+            <table id="driverTable" class="table table-striped table-bordered table-hover table-responsive mb-2">
             <thead>
                 <tr style="text-align: center;">
                     <th scope="col">
@@ -206,6 +206,14 @@
                 </asp:Repeater>
             </tbody>
         </table>
+        <div>
+        <div class="float-start">
+        <asp:Button ID="btnPrevious" runat="server" Text="Previous" OnClick="btnPrevious_Click" Enabled="False" CssClass="btn btn-primary btn-sm" />
+        <asp:Label ID="lblPageInfo" runat="server" Text="" CssClass="text-dark mx-2"></asp:Label>
+        <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="btnNext_Click" CssClass="btn btn-primary btn-sm" />
+        </div>  
+        <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
+        </div>
                 </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="btnAll" EventName="Click" />

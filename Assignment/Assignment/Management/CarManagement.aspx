@@ -256,9 +256,16 @@
     <hr class="mt-0 mb-4">                
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
         <ContentTemplate>
-        <div>
-
-            <table id="carTable" class="table table-striped table-bordered table-hover table-responsive">
+        <div>            
+            <div class="w-auto d-inline float-start mb-2">           
+            <span class="w-auto d-inline">Location: </span>
+            <asp:DropDownList ID="ddlTableLocation" runat="server" DataSourceID="carLocation" DataTextField="LocationName" DataValueField="Id" CssClass="form-select form-select-sm d-inline w-auto border-dark" OnDataBound="ddlTableLocation_DataBound" AutoPostBack="True" OnSelectedIndexChanged="ddlTableLocation_SelectedIndexChanged"></asp:DropDownList>
+            </div>
+            <div class="float-end mb-2">
+            <asp:TextBox ID="searchBar" runat="server" CssClass="form-control form-control-sm rounded border-dark" placeholder="car plate/brand/name/type" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
+            <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" style="display:none;"/>
+            </div>
+            <table id="carTable" class="table table-striped table-bordered table-hover table-responsive mb-2 mt-4">
             <thead>
                 <tr style="text-align: center;">
                     <th scope="col">
@@ -309,10 +316,14 @@
         <div>
         </div>
     </div>
+        <div>
+        <div class="float-start">
         <asp:Button ID="btnPrevious" runat="server" Text="Previous" OnClick="btnPrevious_Click" Enabled="False" CssClass="btn btn-primary btn-sm" />
-        <asp:Label ID="lblPageInfo" runat="server" Text="Page 1" CssClass="text-dark mx-2"></asp:Label>
+        <asp:Label ID="lblPageInfo" runat="server" Text="" CssClass="text-dark mx-2"></asp:Label>
         <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="btnNext_Click" CssClass="btn btn-primary btn-sm" />
-                        
+        </div>  
+        <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
+        </div>                        
     </div>
     </ContentTemplate>
     </asp:UpdatePanel>
@@ -324,6 +335,13 @@
             
 
             return false;
+        }
+
+        function triggerButtonClick(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                document.getElementById('<%= hiddenBtn.ClientID %>').click();
+                    }
         }
 
         function disableUpload() {

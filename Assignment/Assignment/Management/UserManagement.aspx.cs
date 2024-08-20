@@ -15,7 +15,7 @@ namespace Assignment
     public partial class UserManagement : System.Web.UI.Page
     {
 
-        private int PageSize = 5;
+        private int PageSize = 10;
         private int PageNumber
         {
             get { return Session["PageNumber"] != null ? (int)Session["PageNumber"] : 1; }
@@ -135,18 +135,28 @@ namespace Assignment
         {
             string selectUser = "SELECT * FROM ApplicationUser WHERE Username Like @search OR Email Like @search";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            con.Open();
-            SqlCommand com = new SqlCommand(selectUser, con);
-            com.Parameters.AddWithValue("@search", "%" + searchBar.Text + "%");
-            SqlDataAdapter da = new SqlDataAdapter(com);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "UserTable");
-            int row = ds.Tables["UserTable"].Rows.Count;
-            ViewState["UserTable"] = ds.Tables["UserTable"];
-            UserReapeter.DataSource = ds.Tables["UserTable"];
-            UserReapeter.DataBind();
-            con.Close();
-            UpdatePageInfo(true,row);
+            string search = searchBar.Text.Replace(" ","");
+            if (search == "")
+            {
+                loadUserInfo();
+                updateUserTable.Update();
+                return;
+            }
+            else
+            {
+                con.Open();
+                SqlCommand com = new SqlCommand(selectUser, con);
+                com.Parameters.AddWithValue("@search", "%" + searchBar.Text + "%");
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                DataSet ds = new DataSet();
+                da.Fill(ds, "UserTable");
+                int row = ds.Tables["UserTable"].Rows.Count;
+                ViewState["UserTable"] = ds.Tables["UserTable"];
+                UserReapeter.DataSource = ds.Tables["UserTable"];
+                UserReapeter.DataBind();
+                con.Close();
+                UpdatePageInfo(true, row);
+            }
         }
 
 
