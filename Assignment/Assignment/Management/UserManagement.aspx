@@ -224,7 +224,7 @@
             <br />
                         <asp:CheckBox ID="cbNum" runat="server" Text="at least one number" Enabled="True" CssClass="passCheckBox" ValidationGroup="addUser" />
             <br />
-                        <asp:CheckBox ID="cbUpLow" runat="server" Text="both lower and uppercase letters" Enabled="True" CssClass="addUser" />
+                        <asp:CheckBox ID="cbUpLow" runat="server" Text="both lower and uppercase letters" Enabled="True" CssClass="passCheckBox" ValidationGroup="addUser"/>
             <br />
                          <asp:CheckBox ID="cbSpecial" runat="server" Text="must contain one special characters" Enabled="True" CssClass="passCheckBox" ValidationGroup="addUser" />
                     <asp:CustomValidator ID="validatePassword" runat="server" ControlToValidate="txtAddPassword" ErrorMessage="Invalid Password" ValidationGroup="addUser" CssClass="validate" ClientValidationFunction="validatePassword" ValidateEmptyText="True" Visible="false"></asp:CustomValidator>

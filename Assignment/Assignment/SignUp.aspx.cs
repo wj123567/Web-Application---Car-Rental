@@ -168,7 +168,7 @@ namespace Assignment
             string checkUser = "select count(*) from ApplicationUser where Email = @email";
             SqlCommand comCheck = new SqlCommand(checkUser, con);
             comCheck.Parameters.AddWithValue("email", txtRegEmail.Text);
-            int temp = Convert.ToInt32(comCheck.ExecuteScalar().ToString());
+            int temp = (int)comCheck.ExecuteScalar();
             if (temp != 0)
             {
                 args.IsValid = false;
@@ -187,15 +187,38 @@ namespace Assignment
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             string checkUser = "select count(*) from ApplicationUser where Email = @email";
+            string checkBan = "select count(*) from ApplicationUser where Email = @email AND IsBan = 1 ";
+            string reason = " ";
+            string checkReason = "select BanReason from ApplicationUser where Email = @email";
             SqlCommand comCheck = new SqlCommand(checkUser, con);
-            comCheck.Parameters.AddWithValue("email", txtEmail.Text);
-            int temp = Convert.ToInt32(comCheck.ExecuteScalar().ToString());
+            comCheck.Parameters.AddWithValue("email", args.Value);
+            int temp = (int)comCheck.ExecuteScalar();
             if (temp == 1)
             {
-                args.IsValid = true;
+                comCheck = new SqlCommand(checkBan, con);
+                comCheck.Parameters.AddWithValue("email", args.Value);
+                int temp2 = (int)comCheck.ExecuteScalar();
+                if (temp2 == 1)
+                {
+                    comCheck = new SqlCommand(checkReason, con);
+                    comCheck.Parameters.AddWithValue("email", args.Value);
+                    SqlDataReader reader = comCheck.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        reason = reader["BanReason"].ToString();
+                    }
+                    emailNotExist.ErrorMessage = "Ban Reason: " + reason +". Please contact customer support";
+                    args.IsValid = false;
+                    updateLogin.Update();
+                }
+                else
+                {
+                    args.IsValid = true;
+                }               
             }
             else
             {
+                emailNotExist.ErrorMessage = "Email not exist";
                 args.IsValid = false;
                 updateLogin.Update();
             }
