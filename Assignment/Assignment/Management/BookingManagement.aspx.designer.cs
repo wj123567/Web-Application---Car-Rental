@@ -33,69 +33,6 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.HiddenField hdnUserStatus;
 
         /// <summary>
-        /// banReasonUpdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel banReasonUpdate;
-
-        /// <summary>
-        /// ddlBanReason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlBanReason;
-
-        /// <summary>
-        /// requireReason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireReason;
-
-        /// <summary>
-        /// txtOtherReason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOtherReason;
-
-        /// <summary>
-        /// requireOtherReason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireOtherReason;
-
-        /// <summary>
-        /// btnCancelBan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelBan;
-
-        /// <summary>
-        /// btnConfirmBan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConfirmBan;
-
-        /// <summary>
         /// userProfilePic control.
         /// </summary>
         /// <remarks>
@@ -150,31 +87,13 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.TextBox txtMemberSince;
 
         /// <summary>
-        /// btnDel1 control.
+        /// btnUserNext control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDel1;
-
-        /// <summary>
-        /// btnBan control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBan;
-
-        /// <summary>
-        /// btnUnban control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnUnban;
+        protected global::System.Web.UI.WebControls.Button btnUserNext;
 
         /// <summary>
         /// lblDriverText control.
@@ -195,102 +114,138 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Repeater UserDriverReapeter;
 
         /// <summary>
-        /// searchBar control.
+        /// btnDriverNext control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox searchBar;
+        protected global::System.Web.UI.WebControls.Button btnDriverNext;
 
         /// <summary>
-        /// hiddenBtn control.
+        /// txtBookingSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button hiddenBtn;
+        protected global::System.Web.UI.WebControls.TextBox txtBookingSearch;
 
         /// <summary>
-        /// updateUserTable control.
+        /// ddlStatusFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateUserTable;
+        protected global::System.Web.UI.WebControls.DropDownList ddlStatusFilter;
 
         /// <summary>
-        /// btnSortId control.
+        /// btnFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortId;
+        protected global::System.Web.UI.WebControls.Button btnFilter;
 
         /// <summary>
-        /// btnSortUsername control.
+        /// updatebookingRecordTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortUsername;
+        protected global::System.Web.UI.UpdatePanel updatebookingRecordTable;
 
         /// <summary>
-        /// btnSortEmail control.
+        /// btnSortID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortEmail;
+        protected global::System.Web.UI.WebControls.LinkButton btnSortID;
 
         /// <summary>
-        /// btnSortDOB control.
+        /// btnSortStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortDOB;
+        protected global::System.Web.UI.WebControls.LinkButton btnSortStatus;
 
         /// <summary>
-        /// btnSortRegDate control.
+        /// hdnSortDirection control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortRegDate;
+        protected global::System.Web.UI.WebControls.HiddenField hdnSortDirection;
 
         /// <summary>
-        /// btnSortRoles control.
+        /// btnSortVehicle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortRoles;
+        protected global::System.Web.UI.WebControls.LinkButton btnSortVehicle;
 
         /// <summary>
-        /// btnSortBan control.
+        /// btnSortPickUpLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortBan;
+        protected global::System.Web.UI.WebControls.LinkButton btnSortPickUpLocation;
 
         /// <summary>
-        /// UserReapeter control.
+        /// btnSortPickUpTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater UserReapeter;
+        protected global::System.Web.UI.WebControls.LinkButton btnSortPickUpTime;
+
+        /// <summary>
+        /// btnSortDropOffLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortDropOffLocation;
+
+        /// <summary>
+        /// btnSortDropOffTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortDropOffTime;
+
+        /// <summary>
+        /// LinkButton1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+
+        /// <summary>
+        /// rptBookingList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptBookingList;
     }
 }

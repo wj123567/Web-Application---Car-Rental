@@ -3,6 +3,23 @@
 
      <link href="CSS/bookingrecordupdate.css" rel="stylesheet" />
 
+<div id="confirmModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Save Update Changes</h5>
+     
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to update those changes?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <asp:Button ID="modalYesBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" OnClick="modalYesBtn_Click" />
+            </div>
+        </div>
+    </div>
+</div>
            <!-- Page Content -->
     <main id="page-content" >
       
@@ -75,33 +92,41 @@
                             <tr class="booking_price_table_title" >
                                 <th colspan="2" style="width:60%">Type</th>
                                 <th  style="width:20%">Initial Quantity</th>
-                                <th  style="border-right:none;width:20%">New Quantity</th>
+                                <th  style="width:20%">New Quantity</th>
                             </tr>
 
-                       <asp:Repeater ID="rptAddOnList" runat="server" >
+                       <asp:Repeater ID="rptAddOnList" runat="server" OnItemDataBound="rptAddOnList_ItemDataBound">
                        <ItemTemplate>
                               <tr class="booking_price_table_info">
                                   <td colspan="2">
-                                     <%# Eval("Name") %>
+                                     <%# Eval("Name").ToString() == "No Record Found" ? "No Record Found" : Eval("Name") %>
                                   </td>  
-                                  <td style="border-right:none">
-                                      <asp:Label ID="lblInitialQuantity" runat="server" Text="Label"></asp:Label>
+                                  <td >
+                                      <%# Eval("Name").ToString() == "No Record Found" ? "" : Eval("Quantity") %>
                                   </td>
                                   <td>
-                                      <asp:DropDownList ID="ddlNewQuantity" runat="server">
+                                      <asp:DropDownList ID="ddlNewQuantity" CssClass="btn btn-light ddlQuantity_style" runat="server" Visible='<%# Eval("Name").ToString() != "No Record Found" %>'>
 
                                       </asp:DropDownList>
                                   </td>
                               </tr>
-                                 
-                              
+
                          </ItemTemplate>
                         </asp:Repeater>  
-                          </table>
 
+                          </table>
+                      
                   </div>
-                  
-                  
+
+                    <!--confirm btn-->
+                    <div class="container">
+                    <div class="row justify-content-end">
+                        <div class="col-auto">
+                    <asp:Button ID="btnConfirm" runat="server" CssClass="confirm_btn_style" Text="Confirm" OnClick="btnConfirm_Click" />
+                        </div>
+                    </div>
+                  </div>
+
                   <div class="booking_summary_container">
                     <!-- list -->
                     <ul class="list-unstyled mb-0">
@@ -143,4 +168,20 @@
         </div>
       </section>
     </main>
+
+
+<script>
+    function loadModal() {
+    document.addEventListener("DOMContentLoaded", modal);
+   
+}
+
+    function modal() {
+    addEventListener("DOMContentLoaded", (event) => {
+        $('#confirmModal').modal('toggle');
+        return false;
+    });
+    };
+
+</script>
 </asp:Content>

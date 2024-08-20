@@ -68,9 +68,11 @@
 
 .booking_price_table {
     width: 100%;
+    margin-top:20px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    border:1px solid gray;
 }
 
 .booking_price_table_header {
@@ -78,7 +80,6 @@
     font-weight: 800;
     font-size: 24px;
     text-transform: uppercase;
-    border-top: none;
     border-bottom: 1px solid gray;
 }
 
@@ -89,6 +90,7 @@
     .booking_price_table_title th {
         font-size: 20px;
         border-right: 1px solid gray;
+        border-bottom:1px solid gray;
     }
 
 .booking_price_table_info {
@@ -108,5 +110,31 @@
     margin-top: 20px;
 }
 
+.ddlQuantity_style{
+    width:60%;
+    border:1px solid gray;
+}
 
+.confirm_btn_style {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:20px;
+    line-height: 1;
+    color: #ffffff;
+    font-size: 18px;
+    border-radius: 1px;
+    width: 120px;
+    height: 40px;
+    font-weight: bold;
+    border-bottom: 4px solid #179e43;
+    transition: 0.3s;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    background-color: #19d256;
+}
 
+    .confirm_btn_style:hover {
+        box-shadow: 0 0 rgba(0, 0, 0, 0.4);
+        border-bottom-width: 2px;
+        transform: translateY(2px);
+    }

@@ -5,6 +5,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     
     <div class="booking_container">
+       
         <p class="booking_title">Car Rental Booking</p>
         
         <div class="container">
@@ -34,22 +35,23 @@
 
         <asp:UpdatePanel ID="updatebookingRecordTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
         <ContentTemplate>
-    <table class="table align-middle mb-0 bg-white booking_record_table datatable" id="bookingRecordTable">
-        <thead class="bg-light">
-          <tr class="header_row_title">
+    <table class="table align-middle mb-0 booking_record_table datatable" id="bookingRecordTable">
+        <thead class="bg-secondary" style=" line-height:2;">
+          <tr class="header_row_title" >
 
-              <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
+              
 
             <th class="booking_id">
                 <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark  sort-button">
-                Booking ID<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px;font-size:25px;"></i>
+                Booking ID<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
                 
             </th>
-             <th class="booking_status" style="border:1px solid green">
+             <th class="booking_status">
                  <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark sort-button">
                  Status 
                 </asp:LinkButton>
+                 <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
              </th>
             <th class="booking_vehicle">
                 <asp:LinkButton ID="btnSortVehicle" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark sort-button">
@@ -58,28 +60,28 @@
             </th>
             <th class="booking_pickup">
                 <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Pickup_point" CssClass="text-dark  sort-button">
-                Pick Up Location <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px;font-size:25px;"></i>
+                Pick Up Location <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>            
              <th class="booking_pickup">
                 <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="StartDate" CssClass="text-dark  sort-button">
-                Pick Up Time <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px;font-size:25px;"></i>
+                Pick Up Time <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>
 
             <th class="booking_dropoff">
                 <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Dropoff_point" CssClass="text-dark sort-button">
-                Drop Off Location<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px;font-size:25px;"></i>
+                Drop Off Location<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>            
              <th class="booking_dropoff">
                 <asp:LinkButton ID="btnSortDropOffTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EndDate" CssClass="text-dark sort-button">
-                Drop Off Time<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px;font-size:25px;"></i>
+                Drop Off Time<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>
             <th class="booking_price">
                 <asp:LinkButton ID="btnSortPrice" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Price" CssClass="text-dark  sort-button">
-                Price<i class="sort-icon ri-arrow-up-s-fill" style="margin-right:10px;font-size:25px;"></i>
+                Price<i class="sort-icon ri-arrow-up-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>
              <th class="booking_edit" style="width:5%;"></th>

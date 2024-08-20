@@ -64,7 +64,7 @@
                     </a>
                             <ul id="multi" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
+                                    <a href="BookingManagement.aspx" class="sidebar-link">Booking Management</a>
                                 </li>
                                 <li class="sidebar-item">
                                     <a href="#" class="sidebar-link">Link 2</a>
