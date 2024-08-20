@@ -52,8 +52,14 @@ namespace Assignment
                         lblPickUpTime.Text = Convert.ToDateTime(reader["StartDate"]).ToString("dd/MM/yyyy HH:mm:ss tt");
                         lblDropOffLocation.Text = reader["Dropoff_point"].ToString();
                         lblDropOffTime.Text = Convert.ToDateTime(reader["EndDate"]).ToString("dd-MM-yyyy HH:mm:ss tt");
+                        string status = reader["Status"].ToString();
+                        
                         lblAddOnPrice.Text= addonTotal.ToString("F2");
+
+                        lblBookStatus.Text = status;
+                        lblBookStatus.CssClass = $"badge {GetBadgeClass(status)}";
                     }
+                    
                 }
             }
         }
@@ -90,5 +96,20 @@ namespace Assignment
             return addonTotal;
         }
 
+        protected string GetBadgeClass(string status)
+        {
+            switch (status)
+            {
+                case "Processing":
+                    
+                    return "bg-primary";
+                case "Booked":
+                    return "bg-success";
+                case "Cancelled":
+                    return "bg-danger";
+                default:
+                    return "bg-default"; // Or any default class
+            }
+        }
     }
 }

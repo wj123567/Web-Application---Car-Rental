@@ -135,44 +135,55 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <!-- card -->
-            <div class="card mt-4">
-              <!-- card body -->
-              <div class="card-body">
-               
-                <div class="row">
-                  <div class="col-md-6 col-12">
-                    <!-- address -->
-                    <h4>Payment Status</h4>
-                    <p>
-                      Done
-                    </p>
-                    <p class="mb-0 text-dark">
-                      Ending with 1243
-                    </p>
-                    <p class="mb-0">Expires 21/23</p>
-                    
-                  </div>
-                  <div class="col-md-6 col-12">
-                    <!-- text -->
-                    <h4 class="mb-3">Booking Status</h4> 
-                     <p>
-                        Done
-                     </p>
-                  </div>
-                    <div class="mt-4 text_center invoice_container">
-                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-info invoice_style">
-                        <i class="ri-file-download-line"> Download Invoice</i>
-                    </asp:LinkButton>
-                    </div>
-                </div>
-              </div>
-            </div>
+                 <!-- card -->
+ <div class="card mt-4">
+   <!-- card body -->
+   <div class="card-body">
+    
+     <div class="row">
+       <div class="col-md-6 col-12">
+         <!-- address -->
+         <h4>Payment Status</h4>
+         <p>
+           <span class=" badge bg-success">Paid</span>
+         </p>
+         <p class="mb-0 text-dark">
+           Ending with <asp:Label ID="lblCardNumberEnd" runat="server" Text="Label"></asp:Label>
+         </p>
+         <p class="mb-0">Expires 21/23</p>
+         
+       </div>
+       <div class="col-md-6 col-12">
+         <!-- text -->
+         <h4 class="mb-3">Booking Status</h4> 
+          <p>
+             <asp:Label ID="lblBookStatus" CssClass="badge"  runat="server" Text="Label"></asp:Label>
+          </p>
+       </div>
+        
+   </div>
+ </div>
 
-              
+<div class="container">
+     <div class="row justify-content-end">
+           <div class="col-auto">
+               <asp:Button ID="btnEdit" CssClass="book_edit_btn" runat="server" Text="Edit" />
+               </div>
+           <div class="col-auto">
+               <asp:Button ID="btnDelete" runat="server" Text="Delete" />
+               </div>
+      </div>
+</div>
 
+ </div>
+<div class="mt-4 text_center invoice_container">
+<asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-info invoice_style">
+    <i class="ri-file-download-line"> Download Invoice</i>
+</asp:LinkButton>
+</div>
+                
           </div>
+             
         </div>
       </section>
     </main>
