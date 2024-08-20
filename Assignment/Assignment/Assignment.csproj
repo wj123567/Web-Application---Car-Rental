@@ -75,6 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bookingRecordUpdate.aspx" />
     <Content Include="CarRentalSystemModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CarRentalSystemModel.Context.cs</LastGenOutput>
@@ -85,6 +86,7 @@
       <DependentUpon>CarRentalSystemModel.edmx</DependentUpon>
       <LastGenOutput>CarRentalSystemModel.cs</LastGenOutput>
     </Content>
+    <Content Include="CSS\bookingrecordupdate.css" />
     <Content Include="CSS\productListing.css" />
     <Content Include="CSS\RewardPoint.css" />
     <Content Include="Image\RewardPoint\OnlyCars.jpg" />
@@ -173,6 +175,13 @@
     </Compile>
     <Compile Include="BookingAddOn.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bookingRecordUpdate.aspx.cs">
+      <DependentUpon>bookingRecordUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="bookingRecordUpdate.aspx.designer.cs">
+      <DependentUpon>bookingRecordUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Car.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>

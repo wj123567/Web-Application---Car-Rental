@@ -15,13 +15,13 @@ namespace Assignment
     {
 
         /// <summary>
-        /// img_car control.
+        /// modalYesBtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image img_car;
+        protected global::System.Web.UI.WebControls.Button modalYesBtn;
 
         /// <summary>
         /// lblBookingNumber control.
@@ -31,6 +31,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBookingNumber;
+
+        /// <summary>
+        /// img_car control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image img_car;
 
         /// <summary>
         /// lblPlateNum control.
