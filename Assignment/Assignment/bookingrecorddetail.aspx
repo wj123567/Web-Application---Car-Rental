@@ -2,6 +2,24 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
         <link href="CSS/bookingrecorddetail.css" rel="stylesheet" />
 
+    <div id="deleteModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Booking Cancellation</h5>
+     
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel the booking</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <asp:Button ID="modalYesBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" OnClick="modalYesBtn_Click" />
+            </div>
+        </div>
+    </div>
+</div>
+
        <!-- Page Content -->
     <main id="page-content" >
       
@@ -167,10 +185,10 @@
 <div class="container">
      <div class="row justify-content-end">
            <div class="col-auto">
-               <asp:Button ID="btnEdit" CssClass="book_edit_btn" runat="server" Text="Edit" />
+               <asp:Button ID="btnEdit" CssClass="booking_edit_btn" runat="server" Text="Edit" />
                </div>
            <div class="col-auto">
-               <asp:Button ID="btnDelete" runat="server" Text="Delete" />
+               <asp:Button ID="btnDelete" CssClass="booking_delete_btn" runat="server" Text="Delete" OnClick="btnDelete_Click"/>
                </div>
       </div>
 </div>
@@ -188,4 +206,20 @@
       </section>
     </main>
            
+
+    <script>
+    function loadModal() {
+    document.addEventListener("DOMContentLoaded", modal);
+   
+}
+
+    function modal() {
+    addEventListener("DOMContentLoaded", (event) => {
+        $('#deleteModal').modal('toggle');
+        return false;
+    });
+    };
+
+       
+    </script>
 </asp:Content>

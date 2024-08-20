@@ -15,6 +15,15 @@ namespace Assignment
     {
 
         /// <summary>
+        /// modalYesBtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button modalYesBtn;
+
+        /// <summary>
         /// img_car control.
         /// </summary>
         /// <remarks>

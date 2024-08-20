@@ -22,6 +22,7 @@ namespace Assignment
                 {
                     // Fetch booking details from the database
                     GetBookingDetails(bookingId);
+                    
                 }
             }
 
@@ -109,6 +110,45 @@ namespace Assignment
                     return "bg-danger";
                 default:
                     return "bg-default"; // Or any default class
+            }
+        }
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, GetType(), "showModal", " modal();", true);
+        }
+        
+
+        protected void modalYesBtn_Click(object sender, EventArgs e)
+        {
+            // Retrieve BookingId from session
+            
+
+            deleteBooking();
+            
+            Response.Redirect("bookingrecord.aspx");
+        }
+
+        private void deleteBooking()
+        {
+            double addOnPrice = Convert.ToDouble(lblAddOnPrice.Text);
+
+            
+            string bookingId = Session["BookingRecordId"] as string;
+
+           
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+
+                    string query = "DELETE FROM Booking where Id = @BookingId ";
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@BookingId", bookingId);
+
+                    cmd.ExecuteNonQuery();
+                
+               
+                
             }
         }
     }
