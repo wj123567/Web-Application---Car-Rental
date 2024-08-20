@@ -13,7 +13,12 @@ namespace Assignment
 {
     public partial class CarManagement : System.Web.UI.Page
     {
-        
+        private int PageSize = 5;  // Number of records per page
+        private int PageNumber
+        {
+            get { return Session["PageNumber"] != null ? (int)Session["PageNumber"] : 1; }
+            set { Session["PageNumber"] = value; }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -22,13 +27,6 @@ namespace Assignment
             }
 
             
-        }
-
-        private int PageSize = 5;  // Number of records per page
-        private int PageNumber
-        {
-            get { return ViewState["PageNumber"] != null ? (int)ViewState["PageNumber"] : 1; }
-            set { ViewState["PageNumber"] = value; }
         }
 
         protected void loadCarData()
@@ -40,13 +38,13 @@ namespace Assignment
             SqlCommand com = new SqlCommand(selectCar, con);
             com.Parameters.AddWithValue("@PageSize", PageSize);
             com.Parameters.AddWithValue("@PageNumber", PageNumber);
-
             SqlDataAdapter da = new SqlDataAdapter(com);      
             DataSet ds = new DataSet();
             da.Fill(ds, "CarTable");
             ViewState["CarTable"] = ds.Tables["CarTable"];
             repeaterCarTable.DataSource = ds.Tables["CarTable"];
             repeaterCarTable.DataBind();
+            con.Close();
             UpdatePageInfo();
         }
 

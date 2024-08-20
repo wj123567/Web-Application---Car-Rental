@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -13,11 +14,19 @@ namespace Assignment
 {
     public partial class UserManagement : System.Web.UI.Page
     {
+
+        private int PageSize = 5;
+        private int PageNumber
+        {
+            get { return Session["PageNumber"] != null ? (int)Session["PageNumber"] : 1; }
+            set { Session["PageNumber"] = value; }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                loadUserInfo("SELECT * FROM ApplicationUser");
+                loadUserInfo();
+                txtAddBdate.Attributes["max"] = DateTime.Now.AddYears(-18).ToString("yyyy-MM-dd");
             }
         }
 
@@ -36,17 +45,67 @@ namespace Assignment
                 banReasonUpdate.Update();
             }
         }
-        protected void loadUserInfo(string selectUser)
+        protected void loadUserInfo()
         {
+            
+            string selectUser = "SELECT * FROM ApplicationUser ORDER BY Username OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            SqlCommand com = new SqlCommand(selectUser, con);
+            SqlCommand com = new SqlCommand(selectUser, con);            
+            com.Parameters.AddWithValue("@Pagesize", PageSize);
+            com.Parameters.AddWithValue("@PageNumber", PageNumber);
+            con.Open();
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds, "UserTable");
+            int row = ds.Tables["UserTable"].Rows.Count;
             ViewState["UserTable"] = ds.Tables["UserTable"];
             UserReapeter.DataSource = ds.Tables["UserTable"];
             UserReapeter.DataBind();
             con.Close();
+            UpdatePageInfo(false, getTotalRow());
+        }
+
+        protected void UpdatePageInfo(bool isSearching, int row)
+        {
+            if (!isSearching)
+            {
+            int totalPage = (int)Math.Ceiling((double)row / (double)PageSize);
+            lblPageInfo.Text = "Page " + PageNumber + " of " + totalPage;
+            lblTotalRecord.Text = "Total Record: "+ row;
+            btnPrevious.Enabled = PageNumber > 1;
+            btnNext.Enabled = PageNumber < totalPage;
+            }
+            else if (isSearching)
+            {
+                lblPageInfo.Text = "Page " + 1 + " of " + 1;
+                lblTotalRecord.Text = "Total Record: " + row;
+                btnPrevious.Enabled = false;
+                btnNext.Enabled = false;
+            }
+
+        }
+
+        protected void btnPrevious_Click(object sender, EventArgs e)
+        {
+            PageNumber--;
+            loadUserInfo();
+            updateUserTable.Update();
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            PageNumber++;
+            loadUserInfo();
+            updateUserTable.Update();
+        }
+
+        protected int getTotalRow()
+        {
+           String selectAll = "SELECT COUNT(*) FROM ApplicationUser";       
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(selectAll, con);
+            con.Open();
+            return (int)com.ExecuteScalar();
         }
 
         protected void btnSort_Click(object sender, EventArgs e)
@@ -82,11 +141,14 @@ namespace Assignment
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds, "UserTable");
+            int row = ds.Tables["UserTable"].Rows.Count;
             ViewState["UserTable"] = ds.Tables["UserTable"];
             UserReapeter.DataSource = ds.Tables["UserTable"];
             UserReapeter.DataBind();
             con.Close();
+            UpdatePageInfo(true,row);
         }
+
 
         protected void UserReapeter_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
@@ -313,10 +375,44 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
-               if (fuAddProfile.HasFile)
-               {
-                 string yeet = "nice";
-               }
+                SystemDatabaseEntities db = new SystemDatabaseEntities();
+                string folderLocation = Server.MapPath("~/Image/UserProfile");
+                string relfolderLocation = "~/Image/UserProfile";
+                string relPath = "";
+                Guid guid = Guid.NewGuid();
+                if (fuAddProfile.HasFile)
+                {
+                    int fileSize = fuAddProfile.PostedFile.ContentLength;
+                    string ext = Path.GetExtension(fuAddProfile.FileName);
+                    string fileName = guid + ext;
+                    string savePath = Path.Combine(folderLocation, fileName);
+                    relPath = Path.Combine(relfolderLocation, fileName);
+                    fuAddProfile.SaveAs(savePath);
+                }
+                else
+                {
+                    relPath = "~/Image/UserProfile/noImg.svg";
+                }
+
+                ApplicationUser user = new ApplicationUser()
+                {
+                    Id = guid.ToString(),
+                    Username = txtAddUsername.Text,
+                    Email = txtAddEmail.Text,
+                    Password = Security.hashing(txtAddPassword.Text,guid.ToString()),
+                    DOB = DateTime.Parse(txtAddBdate.Text),
+                    RegistrationDate = DateTime.Now,
+                    Roles = ddlAddRoles.SelectedValue,
+                    ProfilePicture = relPath,
+                    TwoStepVerification = 0,
+                    EmailVerification = 0,
+                    IsBan = 0,
+                    BanReason = "",
+                    RewardPoints = 0,
+                };
+
+                db.ApplicationUsers.Add(user);
+                db.SaveChanges();
 
                 Server.Transfer("UserManagement.aspx");
             }

@@ -243,7 +243,7 @@
     </div>
       <div class="modal-footer">
         <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-danger" OnClick="btnCancel_Click"/>      
-        <asp:Button ID="btnAddUser" runat="server" Text="Add New User" CssClass="btn btn-primary btn-unban btn-both" ValidationGroup="addUser" OnClick="btnAddUser_Click"/>          
+        <asp:Button ID="btnAddUser" runat="server" Text="Add New User" CssClass="btn btn-primary" ValidationGroup="addUser" OnClick="btnAddUser_Click"/>          
       </div>
 </ContentTemplate>
     <Triggers>
@@ -263,14 +263,14 @@
              <asp:Button ID="btnAddNewUser" runat="server" Text="Add New User" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewUser" OnClientClick="return false"/>
          </div>
          <div class="float-end" style="width: 250px;">             
-            <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Search" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
+            <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Email/Username " ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
             <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" style="display:none;"/>
          </div>
          </div>
     <div>
                 <asp:UpdatePanel ID="updateUserTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                 <ContentTemplate>
-            <table id="userTable" class="table table-striped table-bordered table-hover table-responsive">
+            <table id="userTable" class="table table-striped table-bordered table-hover table-responsive mb-2">
             <thead>
                 <tr style="text-align: center;">                  
                     <th scope="col">
@@ -320,11 +320,22 @@
                 </asp:Repeater>
             </tbody>
         </table>
+
+        <div>
+        <div class="float-start">
+        <asp:Button ID="btnPrevious" runat="server" Text="Previous" OnClick="btnPrevious_Click" Enabled="False" CssClass="btn btn-primary btn-sm" />
+        <asp:Label ID="lblPageInfo" runat="server" Text="" CssClass="text-dark mx-2"></asp:Label>
+        <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="btnNext_Click" CssClass="btn btn-primary btn-sm" />
+        </div>  
+        <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
+        </div>
                 </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="hiddenBtn" EventName="Click" />
                     </Triggers>
                 </asp:UpdatePanel>
+      
+
     </div>
     </div>   
     <script>
