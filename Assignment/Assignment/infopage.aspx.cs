@@ -5,6 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.Xml;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -149,8 +151,17 @@ namespace Assignment
         {
             Response.Redirect("Home.aspx");
         }
+        protected void btnSort_Click(object sender, EventArgs e)
+        {
+            //the sender object passed to the event handler will be a reference to that Button object
+            var button = (Button)sender;
+            string sortOrder = button.CommandArgument;
 
-        
+            // Update the button text to reflect the selected sort option
+            btnSort.Text = "Sort: " + button.Text;
 
+            // Sort comments based on the selected sort order
+
+        }
     }
 }
