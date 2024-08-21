@@ -261,9 +261,6 @@
   </div>   
 
 
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -272,6 +269,18 @@
 
 
     <script>
+
+        function loadModal() {
+            document.addEventListener("DOMContentLoaded", modal);
+        }
+
+        function modal() {
+            addEventListener("DOMContentLoaded", (event) => {
+                $('#userInfoModal').modal('toggle');
+                return false;
+            });
+        };
+
          $(document).ready(function () {
              var searchBoxId = "#" + '<%= txtBookingSearch.ClientID %>';
 
@@ -311,25 +320,9 @@
              }
 
 
-
-             function loadModal() {
-                 document.addEventListener("DOMContentLoaded", modal);
-             }
-
-             function modal() {
-                 addEventListener("DOMContentLoaded", (event) => {
-                     $('#userInfoModal').modal('toggle');
-                     return false;
-                 });
-             };
-
-        });
-
-
-   
-
-
+         });
 
     </script>
+    
 
 </asp:Content>
