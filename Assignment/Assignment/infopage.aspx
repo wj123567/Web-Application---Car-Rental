@@ -79,6 +79,7 @@
                     </tr>
                 </table>
 
+                <%-- you --%>
                 <div class="review-container d-flex flex-column">
                     <h1 style="font-weight: 800;">Review &nbsp;<span style="font-size:20px; vertical-align:middle;">(1,485 total)</span></h1>
                     <div class="reviewrow-1  d-flex flex-row">
@@ -178,65 +179,52 @@
                     <div class="comment-sort d-flex flex-row justify-content-between align-items-center">
                         <div class="comment-sort1"><b>Product Reviews</b></div>
                         <div class="dropdown comment-sort2">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button id="sortButton" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Sort: Recent
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="infopage.aspx?sort=recent">Recent</a></li>
-                                <li><a class="dropdown-item" href="infopage.aspx?sort=ratingHigh">Rating: High to Low</a></li>
-                                <li><a class="dropdown-item" href="infopage.aspx?sort=ratingLow">Rating: Low to High</a></li>
+                                <li><a class="dropdown-item" href="infopage.aspx?sort=recent" onclick="updateSortText('Recent')">Recent</a></li>
+                                <li><a class="dropdown-item" href="infopage.aspx?sort=ratingHigh" onclick="updateSortText('Rating: High to Low')">Rating: High to Low</a></li>
+                                <li><a class="dropdown-item" href="infopage.aspx?sort=ratingLow" onclick="updateSortText('Rating: Low to High')">Rating: Low to High</a></li>
                             </ul>
                         </div>
                     </div>
 
-                    <%-- customer comment section --%>
-                    <%--<div class="comment-container card">
-                        <div class="card-body">
-	                        <div class="row">
-        	                    <div class="col-md-2">
-        	                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-        	                        <p class="text-success text-center">15 Minutes Ago</p>
-        	                    </div>
-
-                                <div class="col-md-10">
-        	                        <p class="comment-stars">
-        	                            <a class="float-left" href="#">
-                                            <strong>
-                                    <asp:Label ID="lblUsername" runat="server" Text="Username"></asp:Label>
-                                            </strong>
-        	                            </a>
-                                        &nbsp;
-        	                            <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-
-        	                       </p>
-        	                       <div class="clearfix"></div>
-        	                        <p>//comment</p>
-        	                        <p>
-        	                            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
-        	                            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-        	                       </p>
-        	                    </div>
-                        </div>
-                    </div>
-                    </div>--%>
-
                     <asp:ListView ID="CommentsListView" runat="server">
-    <ItemTemplate>
-        <div>
-            <p><strong><%# Eval("Username") %></strong> said:</p>
-            <p><%# Eval("ReviewText") %></p>
-            <p>Rating: <%# Eval("UserRating") %></p>
-            <p>Comment Time: <%# Eval("CommentTime", "{0:MM/dd/yyyy HH:mm}") %></p>
-        </div>
-    </ItemTemplate>
-    <LayoutTemplate>
-        <div id="itemPlaceholder" runat="server" />
-    </LayoutTemplate>
-</asp:ListView>
+                        <ItemTemplate>
+                            <div class="comment-user d-flex flex-row">
+                                <div class="card text-center comment-user-left" style="flex: 1;">
+                                    <img src='<%# Eval("profilePicture") %>' alt="Profile Picture" class="profilePic"/>
+                                    <p style="font-size: clamp(12px, 3vh, 18px); font-weight:bold; margin-top:20px; "><%# Eval("CommentTime", "{0:dd/MM/yyyy HH:mm}") %></p>
+                                </div>
+
+                                <div class="d-flex flex-column vh-80" style="margin-left: 15px; flex:3">
+                                    <div class="d-flex flex-row justify-content-between mb-3"  style="margin-bottom: 20px">
+                                        <div class=""><a href="#" style="font-size: 20px;"><strong><%# Eval("Username") %></strong></a>
+                                        </div>
+                                        <div>
+                                            <span class="rating">
+                                                <%# GetStarRating((int)Eval("userRating")) %> 
+                                            </span>
+                                        </div>                          
+                                    </div>
+                                    <div class="review-text mb-3">
+                                        <p><%# Eval("ReviewText") %></p>
+                                    </div>
+                                    <div class="align-self-end mt-auto">
+                                        <a class="btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ItemTemplate>
+
+                        <LayoutTemplate>
+                            <%-- customer comment section --%>
+                            <div class="container-md" id="itemPlaceHolder" runat="server">
+                            </div>
+                        </LayoutTemplate>
+                    </asp:ListView>
 
                  </div>
             </div>
@@ -572,6 +560,27 @@
             }
         }
 
-        
+        //you
+        //function updateSortText(sortOption) {
+        //    document.getElementById("sortButton").innerText = 'Sort: ' + sortOption;
+        //}
+
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sortOption = urlParams.get('sort');
+            const sortButton = document.getElementById('sortButton');
+            switch (sortOption) {
+                case 'ratingHigh':
+                    sortButton.innerText = "Sort: Rating: High to Low";
+                    break;
+                case 'ratingLow':
+                    sortButton.innerText = "Sort: Rating: Low to High";
+                    break;
+                default:
+                    sortButton.innerText = "Sort: Recent";
+                    break;
+            }
+        }
+
     </script>
 </asp:Content>
