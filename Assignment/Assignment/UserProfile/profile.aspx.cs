@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.IO;
 using System.Web.UI.WebControls;
 using static System.Net.Mime.MediaTypeNames;
+using System.Web.Security;
 
 
 namespace Assignment
@@ -18,11 +19,32 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
-            if (Session["Id"] != null)
+                if (Session["Id"] != null)
+                {
+                    LoadUserData(Session["Id"].ToString());
+                }
+                else
+                {
+                    Session["Id"] = getCookies();
+                    LoadUserData(Session["Id"].ToString());
+                }
+            }
+        }
+
+        protected string getCookies()
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            string userId = null;
+            if (authCookie != null)
             {
-                LoadUserData(Session["Id"].ToString());
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                if (ticket != null)
+                {
+                    userId = ticket.Name;
+                }
             }
-            }
+
+            return userId;
         }
 
         protected void LoadUserData(String id)

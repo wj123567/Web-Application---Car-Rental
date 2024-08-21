@@ -25,9 +25,9 @@ namespace Assignment
 
         }
 
-        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        protected void Application_PostAuthenticateRequest(object sender, EventArgs e)
         {
-
+            Security.ProcessRoles();
         }
 
         protected void Application_Error(object sender, EventArgs e)

@@ -19,13 +19,13 @@ namespace Assignment
         {
             if (!IsPostBack)
             {
-                if (Session["Id"] == null)
+                if (!User.Identity.IsAuthenticated)
                 {
                 txtRegDOB.Attributes["max"] = DateTime.Now.AddYears(-18).ToString("yyyy-MM-dd");
                 }
                 else
                 {
-                    Server.Transfer("Home.aspx");
+                    Response.Redirect("Home.aspx");
                 }
 
             }
@@ -118,7 +118,7 @@ namespace Assignment
 
                 if (hashPassword == Security.hashing(simplePassword, id))
                 {
-                    string getUserData = "Select Id, EmailVerification, TwoStepVerification from ApplicationUser where email = @email";
+                    string getUserData = "Select Id, EmailVerification, TwoStepVerification, Roles from ApplicationUser where email = @email";
 
                     SqlCommand com = new SqlCommand(getUserData, con);
 
@@ -128,13 +128,15 @@ namespace Assignment
                     string emailValidation = " ";
                     string Id = " ";
                     string twoStepValidation = "";
+                    string roles = " ";
 
                     if (reader.Read())
                     {
                         Id = reader["Id"].ToString();
                         emailValidation = reader["EmailVerification"].ToString();
                         twoStepValidation = reader["TwoStepVerification"].ToString();
-                        
+                        roles = reader["Roles"].ToString();
+
                     }
 
                     if(emailValidation == "0" || twoStepValidation == "1")
@@ -146,7 +148,7 @@ namespace Assignment
                     else
                     {
                         Session["Id"] = Id;
-                        Response.Redirect("Home.aspx");
+                        Security.LoginUser(Id, roles, true);
                     }
                     
                 }
@@ -187,9 +189,8 @@ namespace Assignment
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             string checkUser = "select count(*) from ApplicationUser where Email = @email";
-            string checkBan = "select count(*) from ApplicationUser where Email = @email AND IsBan = 1 ";
-            string reason = " ";
-            string checkReason = "select BanReason from ApplicationUser where Email = @email";
+            string checkBan = "select BanReason from ApplicationUser where Email = @email AND IsBan = 1 ";
+            string reason = " ";           
             SqlCommand comCheck = new SqlCommand(checkUser, con);
             comCheck.Parameters.AddWithValue("email", args.Value);
             int temp = (int)comCheck.ExecuteScalar();
@@ -197,24 +198,21 @@ namespace Assignment
             {
                 comCheck = new SqlCommand(checkBan, con);
                 comCheck.Parameters.AddWithValue("email", args.Value);
-                int temp2 = (int)comCheck.ExecuteScalar();
-                if (temp2 == 1)
-                {
-                    comCheck = new SqlCommand(checkReason, con);
-                    comCheck.Parameters.AddWithValue("email", args.Value);
-                    SqlDataReader reader = comCheck.ExecuteReader();
-                    if (reader.Read())
+                SqlDataReader reader = comCheck.ExecuteReader();
+                    if (reader.HasRows)
                     {
+                        if (reader.Read())
+                        {
                         reason = reader["BanReason"].ToString();
+                        }    
+                        emailNotExist.ErrorMessage = "Ban Reason: " + reason + ". Please contact customer support";
+                        args.IsValid = false;
+                        updateLogin.Update();
                     }
-                    emailNotExist.ErrorMessage = "Ban Reason: " + reason +". Please contact customer support";
-                    args.IsValid = false;
-                    updateLogin.Update();
-                }
-                else
-                {
+                    else
+                    {
                     args.IsValid = true;
-                }               
+                    }               
             }
             else
             {

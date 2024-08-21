@@ -52,8 +52,8 @@
             <asp:RequiredFieldValidator ID="reqConfirmPass" runat="server" ErrorMessage="Confirm Password is Required" ControlToValidate="txtConfirmPass" ValidationGroup="SignUpGroup" Display="Dynamic" CssClass="validate"></asp:RequiredFieldValidator>
             <asp:CompareValidator ID="validPassword" runat="server" ErrorMessage="Both Password Must be Same" ControlToCompare="txtRegPassword" ControlToValidate="txtConfirmPass" CssClass="validate" ValidationGroup="SignUpGroup" Display="Dynamic"></asp:CompareValidator>
             <br />
-            <p class="label">Date of Birth:</p>
-            <asp:TextBox ID="txtRegDOB" runat="server" TextMode="Date" ValidationGroup="SignUpGroup"></asp:TextBox>
+            <p class="label d-inline">Date of Birth:</p>
+            <asp:TextBox ID="txtRegDOB" runat="server" TextMode="Date" ValidationGroup="SignUpGroup" CssClass="form-control w-50 form-control-sm d-inline border-rounded"></asp:TextBox>
             <br />
             <asp:RequiredFieldValidator runat="server" ErrorMessage="Date of Birth cannot be empty" ID="validDOB" ControlToValidate="txtRegDOB" CssClass="validate" ValidationGroup="SignUpGroup"></asp:RequiredFieldValidator>
             <br />

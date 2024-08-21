@@ -21,7 +21,7 @@ namespace Assignment
             {
                 if (Session["forgetId"] == null)
                 {
-                    Server.Transfer("forgetPassword.aspx");
+                    Response.Redirect("forgetPassword.aspx");
                 }
             }
         }

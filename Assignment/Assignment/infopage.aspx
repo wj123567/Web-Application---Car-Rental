@@ -175,8 +175,34 @@
 	                    </div>
                     </div>
 
-                    <div class="comment-container">
+                    <div class="comment-sort d-flex flex-row justify-content-end align-items-center">
+                        <div class="comment-sort1" style="flex:2"><b>Product Reviews</b></div>
+                        <div class="comment-sort2 dropdown" style="flex:1">
+                            <asp:Panel ID="SortPanel" runat="server" CssClass="dropdown">
+                                <asp:Button ID="btnSort" runat="server" CssClass="btn btn-secondary dropdown-toggle" Text="Sort: Relevance" OnClick="btnSort_Click"/>
+                                <div class="dropdown-menu">
+                                    <asp:Button ID="btnRelevance" runat="server" CssClass="dropdown-item" Text="Relevance" CommandArgument="Relevance" OnClick="btnSort_Click" />
+                                    <asp:Button ID="btnRecent" runat="server" CssClass="dropdown-item" Text="Relevance" CommandArgument="Recent" OnClick="btnSort_Click" />
+                                    <asp:Button ID="btnRatingDesc" runat="server" CssClass="dropdown-item" Text="Relevance" CommandArgument="Rating: High to Low" OnClick="btnSort_Click" />
+                                    <asp:Button ID="btnRatingAsc" runat="server" CssClass="dropdown-item" Text="Relevance" CommandArgument="Rating: Low to High" OnClick="btnSort_Click" />
+                                </div>
+                            </asp:Panel>
 
+                            <%--<input type="checkbox" id="toggle-icon" hidden>
+                            <label for="toggle-icon">
+                              <i class="fa-solid fa-arrow-up-1-9"></i>
+                              <i class="fa-solid fa-arrow-down-9-1"></i>
+                            </label>
+                            <span class="d-inline-block">Sort: </span>
+                            <span class="d-inline-block">Relevance</span> --%>  
+                        </div>
+                        <div class="comment-sort3" style="flex:1">
+                            <input type="checkbox" id="toggle-icons" hidden>
+                            <label for="toggle-icons">
+                              <i class="fa-solid fa-arrow-up-1-9"></i>
+                              <i class="fa-solid fa-arrow-down-9-1"></i>
+                            </label>
+                        </div>
                     </div>
                  </div>
             </div>
