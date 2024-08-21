@@ -22,7 +22,8 @@ namespace Assignment
         {
             if (!IsPostBack)
             {
-              
+                int currentStep = (int)(Session["CurrentStep"] ?? 1);
+                UpdateProgressBar(currentStep);
 
                 txtDriverBirth.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
                 txtDriverBirth.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
@@ -159,15 +160,29 @@ namespace Assignment
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
+            int currentStep = (int)(Session["CurrentStep"] ?? 1);
+            currentStep = Math.Min(currentStep + 1, 4);
+            Session["CurrentStep"] = currentStep;
+            UpdateProgressBar(currentStep);
             Response.Redirect("payment_pg.aspx");
            
         }
 
         protected void previous_btn_Click(object sender, EventArgs e)
         {
+            int currentStep = (int)(Session["CurrentStep"] ?? 1);
+            currentStep = Math.Max(currentStep - 1, 1);
+            Session["CurrentStep"] = currentStep;
+            UpdateProgressBar(currentStep);
             Response.Redirect("infopage.aspx");
         }
 
-       
+        private void UpdateProgressBar(int currentStep)
+        {
+            // Register a script to update the progress bar client-side
+            string script = $"updateProgressBar({currentStep});";
+            ScriptManager.RegisterStartupScript(this, GetType(), "UpdateProgressBar", script, true);
+        }
+
     }
 }

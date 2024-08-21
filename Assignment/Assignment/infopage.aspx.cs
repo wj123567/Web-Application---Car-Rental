@@ -14,14 +14,19 @@ using System.Xml.Linq;
 
 namespace Assignment
 {
-	public partial class infopage : System.Web.UI.Page
+	public partial class infopage :System .Web.UI.Page
 	{
         protected void Page_Load(object sender, EventArgs e)
 		{
+            
             if (!Page.IsPostBack)
             {
+                Session["CurrentStep"] = 2;
+                int currentStep = (int)(Session["CurrentStep"]);
+                UpdateProgressBar(currentStep);
                 if (Session["CarPlate"] != null)
                 {
+                 
                     string carPlate = Session["CarPlate"].ToString();
 
                     // Assuming you have a method to get car details by carPlate
@@ -39,6 +44,7 @@ namespace Assignment
             }
             
         }
+
 
         private void LoadComments(string sortOption)
         {
@@ -178,20 +184,26 @@ namespace Assignment
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
- 
-             ScriptManager.RegisterStartupScript(this, GetType(), "showModal", " handleButtonClick();", true);
-            
-            
+            int currentStep = (int)(Session["CurrentStep"] ?? 1);
+            currentStep = Math.Min(currentStep + 1, 4);
+            Session["CurrentStep"] = currentStep;
+            UpdateProgressBar(currentStep);
             Session["TotalPrice"] = hdnTotalPrice.Value;
             Session["TotalAddOn"] = hdnTotalAddOn.Value;
-
+            Response.Redirect("bookInfo.aspx");
         }
 
         protected void previous_btn_Click(object sender, EventArgs e)
         {
+           
             Response.Redirect("Home.aspx");
         }
-       
 
+        private void UpdateProgressBar(int currentStep)
+        {
+            // Register a script to update the progress bar client-side
+            string script = $"updateProgressBar({currentStep});";
+            ScriptManager.RegisterStartupScript(this, GetType(), "UpdateProgressBar", script, true);
+        }
     }
 }

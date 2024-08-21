@@ -18,8 +18,10 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
-                          
-                    BindCards();
+                int currentStep = (int)(Session["CurrentStep"] ?? 1);
+                UpdateProgressBar(currentStep);
+
+                BindCards();
                      
 
             }
@@ -75,6 +77,10 @@ namespace Assignment
 
         protected void btnPaymentPgBack_Click(object sender, EventArgs e)
         {
+            int currentStep = (int)(Session["CurrentStep"] ?? 1);
+            currentStep = Math.Max(currentStep - 1, 1);
+            Session["CurrentStep"] = currentStep;
+            UpdateProgressBar(currentStep);
             Response.Redirect("bookinfo.aspx");
         }
 
@@ -82,6 +88,13 @@ namespace Assignment
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "validateForm();", true);
 
+        }
+
+        private void UpdateProgressBar(int currentStep)
+        {
+            // Register a script to update the progress bar client-side
+            string script = $"updateProgressBar({currentStep});";
+            ScriptManager.RegisterStartupScript(this, GetType(), "UpdateProgressBar", script, true);
         }
 
         protected void modalOkBtn_Click(object sender, EventArgs e)

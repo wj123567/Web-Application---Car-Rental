@@ -86,6 +86,7 @@
       <DependentUpon>CarRentalSystemModel.edmx</DependentUpon>
       <LastGenOutput>CarRentalSystemModel.cs</LastGenOutput>
     </Content>
+    <Content Include="CSS\addonManagement.css" />
     <Content Include="CSS\bookingManagement.css" />
     <Content Include="CSS\bookingrecordupdate.css" />
     <Content Include="CSS\productListing.css" />
@@ -97,6 +98,7 @@
     <Content Include="Image\RewardPoint\bg4.png" />
     <Content Include="Image\RewardPoint\bg-5.png" />
     <Content Include="JS\paging.js" />
+    <Content Include="Management\AddOnManagement.aspx" />
     <Content Include="Management\AdminRewardPoint.aspx" />
     <Content Include="bookinfo.aspx" />
     <Content Include="Management\BookingManagement.aspx" />
@@ -210,6 +212,13 @@
     </Compile>
     <Compile Include="Location.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Management\AddOnManagement.aspx.cs">
+      <DependentUpon>AddOnManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\AddOnManagement.aspx.designer.cs">
+      <DependentUpon>AddOnManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Management\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>

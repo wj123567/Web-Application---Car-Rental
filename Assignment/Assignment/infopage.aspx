@@ -245,24 +245,24 @@
     <section class="info_body_container"> 
         <div class="left-side">
             <div class="box_left">
-                 <div class="addon_header">
+                 <div class="addon_header" style="margin-bottom:20px;">
                      <i class="ri-add-circle-line"></i><span>Add On</span>
- 
+                    </div> 
 
                 <asp:Repeater ID="rptAddOns" runat="server">
                 <HeaderTemplate>
                 <table class="addon_container">
   
-                    <tr class="addon_title">
+                    <tr class="addon_title" >
                         <th style="width:10%"></th>
-                        <th style="width:50%"></th>
+                        <th style="width:50%;padding-left:5%;">Type</th>
                         <th style=" width:20%; text-align:center; ">Price</th>
                         <th style=" width:20%; text-align:center; ">Quantity</th>
                     </tr>
                  </HeaderTemplate>
                   <ItemTemplate>
                     <tr class="addon_list">
-                        <td rowspan="2"><asp:Image ID="imgIcon" runat="server" Width="30px" Height="30px" ImageUrl='<%# Eval("Url") %>' /></td>
+                        <td rowspan="2"><asp:Image ID="imgIcon" runat="server" Width="45px" Height="45px" ImageUrl='<%# Eval("Url") %>' /></td>
                         <td class="addon_list_title"><%# Eval("Name") %></td>
                         <td class="text_center" data-price='<%# Eval("Price") %>'><%# Eval("Price","{0:F2}") %></td>
                         
@@ -295,7 +295,7 @@
                 </table>
                 </FooterTemplate>
                 </asp:Repeater>
-        </div>    
+           
         </div>
             <div class="box_left">
                 Box 2 - Left
@@ -475,56 +475,18 @@
         });
 
         
-
-        document.addEventListener('DOMContentLoaded', function () {
-
-            // Retrieve current step from session storage
-            let currentStep = parseInt(sessionStorage.getItem('currentStep')) || 1;
-
-            // Update progress bar based on current step
-            updateProgressBar(currentStep);
-
-            // Handle next button clicks
-            const nextButtons = document.getElementsByClassName('next_btn');
-            Array.from(nextButtons).forEach(button => {
-                button.addEventListener('click', function () {
-                    currentStep++;
-                    // Ensure currentStep stays within the valid range
-                    if (currentStep > 3) currentStep = 1;
-
-                    // Save the current step to session storage
-                    sessionStorage.setItem('currentStep', currentStep);
-                });
-            });
-
-            // Handle previous button clicks
-            const prevButtons = document.getElementsByClassName('prev_btn');
-            Array.from(prevButtons).forEach(button => {
-                button.addEventListener('click', function () {
-                    currentStep--;
-                    // Ensure currentStep stays within the valid range
-                    if (currentStep < 1) currentStep = 3;
-
-                    // Save the current step to session storage
-                    sessionStorage.setItem('currentStep', currentStep);
-
-
-                });
-            });
-        });
-        //step 是 1(infopg),2,3 index=0,1,2 so when step 1, index 0,1 on;step 2;
         function updateProgressBar(step) {
-            const steps = ['bar_addon', 'bar_driver_info', 'bar_payment'];
+            const steps = ['bar_vehicle', 'bar_addon', 'bar_driver_info', 'bar_payment'];
             steps.forEach((id, index) => {
                 const element = document.getElementById(id);
-                if (index + 1 === step || index + 2 === step || index + 3 === step) {
+                if (index < step) {
                     element.classList.add('active');
                 } else {
                     element.classList.remove('active');
                 }
-
             });
         }
+        
 
         document.addEventListener('DOMContentLoaded', function () {
             // Select all quantity inputs

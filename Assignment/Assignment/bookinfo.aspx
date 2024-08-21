@@ -369,6 +369,18 @@
         function validatePhone(sender, args) {
             args.IsValid = iti.isValidNumber();
         }
+
+        function updateProgressBar(step) {
+            const steps = ['bar_vehicle', 'bar_addon', 'bar_driver_info', 'bar_payment'];
+            steps.forEach((id, index) => {
+                const element = document.getElementById(id);
+                if (index < step) {
+                    element.classList.add('active');
+                } else {
+                    element.classList.remove('active');
+                }
+            });
+        }
     </script>
 
 </asp:Content>

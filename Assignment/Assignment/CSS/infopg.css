@@ -274,6 +274,7 @@
 .addon_list img {
     display: block;
     margin: auto;
+    mix-blend-mode:multiply;
 }
 
 .addon_list i {
@@ -547,6 +548,29 @@ h6.charge_title {
     height: 10px;
 }
 
+
+@media only screen and (max-width:1000px){
+    .addon_list img{
+        display:none;
+    }
+
+    .box_left{
+        margin-left:10px;
+        width:90%;
+    }
+
+    .box_right{
+        width:80%;
+        margin-right:10px;
+    }
+
+    .addon_container{
+        font-size:12px;
+    }
+    .addon_subinfo{
+        display:none;
+    }
+}
 /*.left-side .box:nth-child(1) {
     height: 150px;
 }
