@@ -145,6 +145,7 @@
         color: #2E236C;
     }
 
+/*you*/
 .review-container {
     margin: 3% 4%;
     margin-bottom: 10px;
@@ -196,6 +197,16 @@
         border-radius: 15px;
         background-color: orange !important;
     }
+
+.comment-sort {
+    width:100%;
+}
+
+.comment-sort .comment-sort1 {
+    /*justify-self: start;
+    margin-right:auto;*/
+}
+
 
 /*body part*/
 .info_body_container {
