@@ -113,7 +113,7 @@ namespace Assignment.Management
             UserDriverReapeter.DataBind();
             LoadAvailableUser(id);
             loadDriverInfo(id);
-            ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "modal()", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modal()", true);
            
         }
 
