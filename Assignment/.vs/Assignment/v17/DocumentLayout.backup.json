@@ -1,19 +1,28 @@
 {
   "Version": 1,
+<<<<<<< Updated upstream
   "WorkspaceRootPath": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\",
+  "Documents": [],
+=======
+  "WorkspaceRootPath": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\userprofile\\profile.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\userprofile\\profile.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\assignment\\infopage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\infopage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\userprofile\\profile.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\userprofile\\profile.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\assignment\\css\\infopg.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\infopg.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/5AF93BBAFA68F486F57EA5CCB10E9041__Y2S1_ASSIGNMENT_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.ApplicationUser.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\users\\zobby\\documents\\netbeansprojects\\javaassignment\\web-application---car-rental\\assignment\\assignment\\infopage.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\infopage.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/A70C90FD59758EF89689BEAD389644EF_S_JAVAASSIGNMENT_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.Reviews.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     }
   ],
+>>>>>>> Stashed changes
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -21,7 +30,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 195,
-          "SelectedChildIndex": 9,
+<<<<<<< Updated upstream
+          "SelectedChildIndex": -1,
+=======
+          "SelectedChildIndex": 10,
+>>>>>>> Stashed changes
           "Children": [
             {
               "$type": "Bookmark",
@@ -45,47 +58,59 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+<<<<<<< Updated upstream
+=======
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "dbo.Reviews [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/A70C90FD59758EF89689BEAD389644EF_S_JAVAASSIGNMENT_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.Reviews.sql",
+              "ToolTip": "dbo.Reviews [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-08-21T12:50:31.299Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "dbo.ApplicationUser [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/5AF93BBAFA68F486F57EA5CCB10E9041__Y2S1_ASSIGNMENT_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.ApplicationUser.sql",
-              "ToolTip": "dbo.ApplicationUser [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-08-21T15:25:32.254Z",
+              "Title": "infopage.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\infopage.aspx.cs",
+              "RelativeDocumentMoniker": "Assignment\\infopage.aspx.cs",
+              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\infopage.aspx.cs",
+              "RelativeToolTip": "Assignment\\infopage.aspx.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAnwDoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T12:54:22.708Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "profile.aspx.cs",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\profile.aspx.cs",
-              "RelativeDocumentMoniker": "Assignment\\UserProfile\\profile.aspx.cs",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\profile.aspx.cs",
-              "RelativeToolTip": "Assignment\\UserProfile\\profile.aspx.cs",
-              "ViewState": "AgIAAKwAAAAAAAAAAAAiwPEAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-21T13:58:00.81Z",
+              "Title": "infopg.css",
+              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\infopg.css",
+              "RelativeDocumentMoniker": "Assignment\\CSS\\infopg.css",
+              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\infopg.css",
+              "RelativeToolTip": "Assignment\\CSS\\infopg.css",
+              "ViewState": "AgIAANYAAAAAAAAAAAAIwO0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-08-21T00:03:22.733Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "profile.aspx",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\profile.aspx",
-              "RelativeDocumentMoniker": "Assignment\\UserProfile\\profile.aspx",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\profile.aspx",
-              "RelativeToolTip": "Assignment\\UserProfile\\profile.aspx",
+              "Title": "infopage.aspx",
+              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\infopage.aspx",
+              "RelativeDocumentMoniker": "Assignment\\infopage.aspx",
+              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\infopage.aspx",
+              "RelativeToolTip": "Assignment\\infopage.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-08-21T13:57:59.5Z",
+              "WhenOpened": "2024-08-20T23:43:29.159Z",
               "EditorCaption": ""
+>>>>>>> Stashed changes
             }
           ]
         },
