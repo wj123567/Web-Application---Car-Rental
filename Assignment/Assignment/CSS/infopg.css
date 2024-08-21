@@ -178,7 +178,8 @@
         background-color: #faf1eb;
     }
 
-.rating-block .checked, .rating-line .checked {
+.rating-block .checked, .rating-line .checked, .comment-stars .checked {
+
     color: orange;
 }
     .rating-block .unchecked {
@@ -200,13 +201,20 @@
 
 .comment-sort {
     width:100%;
+    margin: 10px auto;
+    font-size: 25px !important;
+    
 }
 
-.comment-sort .comment-sort1 {
-    /*justify-self: start;
-    margin-right:auto;*/
-}
+    .comment-sort .comment-sort1 {
+        border-bottom: solid;
+        border-width: 1px;
+        margin-right: 5%;
+    }
 
+    .comment-sort .comment-sort2 {
+        margin-left: auto;
+    }
 
 /*body part*/
 .info_body_container {

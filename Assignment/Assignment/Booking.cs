@@ -18,6 +18,7 @@ namespace Assignment
         public Booking()
         {
             this.BookingAddOns = new HashSet<BookingAddOn>();
+            this.Reviews = new HashSet<Review>();
         }
     
         public string Id { get; set; }
@@ -41,5 +42,7 @@ namespace Assignment
         public virtual PaymentCard PaymentCard { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookingAddOn> BookingAddOns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

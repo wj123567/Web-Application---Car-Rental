@@ -146,6 +146,16 @@
     <Property Name="UserId" Type="varchar" MaxLength="50" />
     <Property Name="RedeemDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="Reviews">
+    <Key>
+      <PropertyRef Name="ReviewId" />
+    </Key>
+    <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingId" Type="varchar" MaxLength="10" />
+    <Property Name="ReviewText" Type="nvarchar(max)" />
+    <Property Name="Rating" Type="int" />
+    <Property Name="ReviewDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="TestBook">
     <Key>
       <PropertyRef Name="CustomerName" />
@@ -268,7 +278,9 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_BookingAddOn_ToBooking">
-    <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="BookingAddOn" Type="Self.BookingAddOn" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Booking">
@@ -353,6 +365,18 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Reviews_Booking">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="0..1" />
+    <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reviews">
+        <PropertyRef Name="BookingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TestTrip_ToCar">
     <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
     <End Role="TestTrip" Type="Self.TestTrip" Multiplicity="*" />
@@ -377,6 +401,7 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
     <EntitySet Name="PaymentCard" EntityType="Self.PaymentCard" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RedeemItem" EntityType="Self.RedeemItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Redemption" EntityType="Self.Redemption" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TestBook" EntityType="Self.TestBook" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TestTrip" EntityType="Self.TestTrip" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
@@ -435,6 +460,10 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
     <AssociationSet Name="FK_Redemption_ApplicationUser" Association="Self.FK_Redemption_ApplicationUser">
       <End Role="ApplicationUser" EntitySet="ApplicationUser" />
       <End Role="Redemption" EntitySet="Redemption" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reviews_Booking" Association="Self.FK_Reviews_Booking">
+      <End Role="Booking" EntitySet="Booking" />
+      <End Role="Reviews" EntitySet="Reviews" />
     </AssociationSet>
     <AssociationSet Name="FK_TestTrip_ToCar" Association="Self.FK_TestTrip_ToCar">
       <End Role="Car" EntitySet="Car" />
