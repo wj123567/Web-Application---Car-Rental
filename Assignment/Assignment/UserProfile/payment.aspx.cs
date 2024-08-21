@@ -9,6 +9,7 @@ using System.Data;
 using System.Xml.Linq;
 using System.Drawing;
 using System.Configuration;
+using System.Web.Security;
 
 namespace Assignment
 {
@@ -24,8 +25,28 @@ namespace Assignment
                     txtExpDate.Attributes["max"] = DateTime.Now.AddYears(+6).ToString("yyyy-MM");
                     txtExpDate.Attributes["min"] = DateTime.Now.AddMonths(+1).ToString("yyyy-MM");
                 }
-                
+                else
+                {
+                    Session["Id"] = getCookies();
+                    LoadUserData(Session["Id"].ToString());
+                }
+
             }
+        }
+        protected string getCookies()
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            string userId = null;
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                if (ticket != null)
+                {
+                    userId = ticket.Name;
+                }
+            }
+
+            return userId;
         }
 
         protected void LoadUserData(string id)

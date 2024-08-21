@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Web.Security;
 
 namespace Assignment
 {
@@ -18,14 +19,35 @@ namespace Assignment
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-            {
+            {                
                 if (Session["Id"] != null)
                 {
                     loadUserInfo(Session["Id"].ToString());
                     txtBirthdate.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
                     txtBirthdate.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
                 }
+                else
+                {
+                    Session["Id"] = getCookies();
+                    loadUserInfo(Session["Id"].ToString());
+                }
             }
+        }
+
+        protected string getCookies()
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            string userId = null;
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                if (ticket != null)
+                {
+                    userId = ticket.Name;
+                }
+            }
+
+            return userId;
         }
 
 

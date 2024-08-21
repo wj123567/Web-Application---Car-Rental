@@ -113,7 +113,7 @@
                 
             </li>
         </ul>
-        <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="btn btn-block float-end mx-3 text-white" style="background-color:#3490dc;" OnClick="btnFilter_Click" ValidationGroup="filter"/>
+        <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="btn btn-block float-end mx-3 text-white" style="background-color:#3d5cb8;" OnClick="btnFilter_Click" ValidationGroup="filter"/>
     </div>
 </div>
           
@@ -165,7 +165,7 @@
                             </div>
                         </div>
                         <div class="mx-3 mb-3">
-                            <asp:Button ID="btnProductRent" runat="server" Text="Rent" CssClass="btn btn-block text-white" style="background-color:#3490dc;" CommandArgument='<%# Eval("CarPlate") %>' OnClick="btnProductRent_Click" />
+                            <asp:Button ID="btnProductRent" runat="server" Text="Rent" CssClass="btn btn-block text-white" style="background-color:#3d5cb8;" CommandArgument='<%# Eval("CarPlate") %>' OnClick="btnProductRent_Click" />
                         </div>
                     </div>
                 </div>

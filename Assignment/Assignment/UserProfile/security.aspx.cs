@@ -9,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Text;
+using System.Web.Security;
 
 namespace Assignment
 {
@@ -22,7 +23,28 @@ namespace Assignment
                 {
                     LoadUserData(Session["Id"].ToString());
                 }
+                else
+                {
+                    Session["Id"] = getCookies();
+                    LoadUserData(Session["Id"].ToString());
+                }
             }
+        }
+
+        protected string getCookies()
+        {
+            HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            string userId = null;
+            if (authCookie != null)
+            {
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                if (ticket != null)
+                {
+                    userId = ticket.Name;
+                }
+            }
+
+            return userId;
         }
         protected void LoadUserData(String id)
         {

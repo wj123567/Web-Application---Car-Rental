@@ -66,11 +66,18 @@
                     </a>
                 </li>
             </ul>
-            <div class="sidebar-footer">
-                <asp:LinkButton ID="userProfileLogout" runat="server" CssClass="sidebar-link" OnClick="userProfileLogout_Click">
-                    <i class="lni lni-exit"></i>
-                    <span>Logout</span>
-                </asp:LinkButton>
+            <div class="sidebar-footer border-top">
+              <a href="#" class="d-flex p-3 link-dark text-decoration-none dropdown-toggle sidebar-link align-items-center" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+                <asp:Image ID="userProfilePicture" runat="server" CssClass="rounded-circle" Width="26px" Height="26px" ImageUrl="~/Image/UserProfile/noImg.svg" />
+                  <asp:Label ID="lblUsername" runat="server" Text="Username" CssClass="mx-2"></asp:Label>
+              </a>
+              <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+                <li><a class="dropdown-item" href="../Home.aspx">Home</a></li>
+                <li><a class="dropdown-item" href="../UserProfile/profile.aspx">Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                <asp:LinkButton ID="btnLogout" runat="server" CssClass="dropdown-item" OnClick="userProfileLogout_Click">Log out</asp:LinkButton>
+              </ul>
             </div>
         </aside>
         <div class="main p-3">
