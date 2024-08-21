@@ -105,58 +105,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Literal specFuel;
 
         /// <summary>
-        /// SortPanel control.
+        /// CommentsListView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel SortPanel;
-
-        /// <summary>
-        /// btnSort control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSort;
-
-        /// <summary>
-        /// btnRelevance control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRelevance;
-
-        /// <summary>
-        /// btnRecent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRecent;
-
-        /// <summary>
-        /// btnRatingDesc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRatingDesc;
-
-        /// <summary>
-        /// btnRatingAsc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRatingAsc;
+        protected global::System.Web.UI.WebControls.ListView CommentsListView;
 
         /// <summary>
         /// rptAddOns control.

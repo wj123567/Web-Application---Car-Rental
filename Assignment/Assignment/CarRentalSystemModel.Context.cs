@@ -40,5 +40,6 @@ namespace Assignment
         public virtual DbSet<TestTrip> TestTrips { get; set; }
         public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
         public virtual DbSet<UserRewardPointsView> UserRewardPointsViews { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using System.Security.Cryptography.Xml;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace Assignment
 {
@@ -31,8 +32,47 @@ namespace Assignment
                 hdnSessionId.Value = Session["Id"] as string ?? string.Empty;
 
                 BindAddOns();
+
+                //you
+                string sortOption = Request.QueryString["sort"];
+                LoadComments(sortOption);
             }
             
+        }
+
+        private void LoadComments(string sortOption)
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                var query = from Review in db.Reviews
+                            join Booking in db.Bookings on Review.BookingId equals Booking.Id
+                            join ApplicationUser in db.ApplicationUsers on Booking.UserId equals ApplicationUser.Id
+                            select new
+                            {
+                                profilePicture = ApplicationUser.ProfilePicture,
+                                commentTime = Review.ReviewDate,
+                                username = ApplicationUser.Username,
+                                reviewText = Review.ReviewText,
+                                userRating = Review.Rating
+                            };
+                switch (sortOption)
+                {
+                    case "ratingHigh":
+                        query = query.OrderByDescending(c => c.userRating);
+                        break;
+                    case "ratingLow":
+                        query = query.OrderBy(c => c.userRating);
+                        break;
+                    default:
+                        query = query.OrderByDescending((c) => c.commentTime);
+                        break;
+                }
+
+                var comments = query.ToList();
+                CommentsListView.DataSource = comments;
+                CommentsListView.DataBind();
+
+            }
         }
 
         public void GetCarDetailsByCarPlate(string carPlate)
@@ -151,17 +191,7 @@ namespace Assignment
         {
             Response.Redirect("Home.aspx");
         }
-        protected void btnSort_Click(object sender, EventArgs e)
-        {
-            //the sender object passed to the event handler will be a reference to that Button object
-            var button = (Button)sender;
-            string sortOrder = button.CommandArgument;
+       
 
-            // Update the button text to reflect the selected sort option
-            btnSort.Text = "Sort: " + button.Text;
-
-            // Sort comments based on the selected sort order
-
-        }
     }
 }

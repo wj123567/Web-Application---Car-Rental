@@ -175,35 +175,69 @@
 	                    </div>
                     </div>
 
-                    <div class="comment-sort d-flex flex-row justify-content-end align-items-center">
-                        <div class="comment-sort1" style="flex:2"><b>Product Reviews</b></div>
-                        <div class="comment-sort2 dropdown" style="flex:1">
-                            <asp:Panel ID="SortPanel" runat="server" CssClass="dropdown">
-                                <asp:Button ID="btnSort" runat="server" CssClass="btn btn-secondary dropdown-toggle" Text="Sort: Relevance" OnClick="btnSort_Click"/>
-                                <div class="dropdown-menu">
-                                    <asp:Button ID="btnRelevance" runat="server" CssClass="dropdown-item" Text="Relevance" CommandArgument="Relevance" OnClick="btnSort_Click" />
-                                    <asp:Button ID="btnRecent" runat="server" CssClass="dropdown-item" Text="Relevance" CommandArgument="Recent" OnClick="btnSort_Click" />
-                                    <asp:Button ID="btnRatingDesc" runat="server" CssClass="dropdown-item" Text="Relevance" CommandArgument="Rating: High to Low" OnClick="btnSort_Click" />
-                                    <asp:Button ID="btnRatingAsc" runat="server" CssClass="dropdown-item" Text="Relevance" CommandArgument="Rating: Low to High" OnClick="btnSort_Click" />
-                                </div>
-                            </asp:Panel>
-
-                            <%--<input type="checkbox" id="toggle-icon" hidden>
-                            <label for="toggle-icon">
-                              <i class="fa-solid fa-arrow-up-1-9"></i>
-                              <i class="fa-solid fa-arrow-down-9-1"></i>
-                            </label>
-                            <span class="d-inline-block">Sort: </span>
-                            <span class="d-inline-block">Relevance</span> --%>  
-                        </div>
-                        <div class="comment-sort3" style="flex:1">
-                            <input type="checkbox" id="toggle-icons" hidden>
-                            <label for="toggle-icons">
-                              <i class="fa-solid fa-arrow-up-1-9"></i>
-                              <i class="fa-solid fa-arrow-down-9-1"></i>
-                            </label>
+                    <div class="comment-sort d-flex flex-row justify-content-between align-items-center">
+                        <div class="comment-sort1"><b>Product Reviews</b></div>
+                        <div class="dropdown comment-sort2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sort: Recent
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="infopage.aspx?sort=recent">Recent</a></li>
+                                <li><a class="dropdown-item" href="infopage.aspx?sort=ratingHigh">Rating: High to Low</a></li>
+                                <li><a class="dropdown-item" href="infopage.aspx?sort=ratingLow">Rating: Low to High</a></li>
+                            </ul>
                         </div>
                     </div>
+
+                    <%-- customer comment section --%>
+                    <%--<div class="comment-container card">
+                        <div class="card-body">
+	                        <div class="row">
+        	                    <div class="col-md-2">
+        	                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+        	                        <p class="text-success text-center">15 Minutes Ago</p>
+        	                    </div>
+
+                                <div class="col-md-10">
+        	                        <p class="comment-stars">
+        	                            <a class="float-left" href="#">
+                                            <strong>
+                                    <asp:Label ID="lblUsername" runat="server" Text="Username"></asp:Label>
+                                            </strong>
+        	                            </a>
+                                        &nbsp;
+        	                            <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+
+        	                       </p>
+        	                       <div class="clearfix"></div>
+        	                        <p>//comment</p>
+        	                        <p>
+        	                            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+        	                            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+        	                       </p>
+        	                    </div>
+                        </div>
+                    </div>
+                    </div>--%>
+
+                    <asp:ListView ID="CommentsListView" runat="server">
+    <ItemTemplate>
+        <div>
+            <p><strong><%# Eval("Username") %></strong> said:</p>
+            <p><%# Eval("ReviewText") %></p>
+            <p>Rating: <%# Eval("UserRating") %></p>
+            <p>Comment Time: <%# Eval("CommentTime", "{0:MM/dd/yyyy HH:mm}") %></p>
+        </div>
+    </ItemTemplate>
+    <LayoutTemplate>
+        <div id="itemPlaceholder" runat="server" />
+    </LayoutTemplate>
+</asp:ListView>
+
                  </div>
             </div>
     </section>

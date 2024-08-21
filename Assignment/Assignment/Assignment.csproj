@@ -270,6 +270,9 @@
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Review.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Security.cs" />
     <Compile Include="TestBook.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
