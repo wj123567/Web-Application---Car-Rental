@@ -1,6 +1,78 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserProfile/profile.Master" AutoEventWireup="true" CodeBehind="profile.aspx.cs" Inherits="Assignment.profile" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [ApplicationUser]"></asp:SqlDataSource>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:HiddenField ID="hdnEmail" runat="server" />
+ <div class="modal fade" id="changeEmail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="changeEmail" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+    <asp:UpdatePanel ID="updateChangeEmail" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel2">Validate Email</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <span>Email:</span>
+          <asp:TextBox ID="txtIniMail" runat="server" CssClass="form-control" ValidationGroup="verifyMail" Enabled="False"></asp:TextBox> 
+          <div class="mt-2">
+          <span>Verification Code:</span>       
+          <asp:TextBox ID="txtIniCode" runat="server" CssClass="form-control d-inline" ValidationGroup="verifyMail" Width="73%" Placeholder="Verification Code"></asp:TextBox>
+          <asp:Button ID="btnSendIniCode" runat="server" Text="Send" CssClass="btn btn-primary d-inline" Width="25%" Style="margin-left: 3px;" OnClick="btnSendIniCode_Click" OnClientClick="getEmail()"/>
+          <asp:CustomValidator ID="cvIniCode" runat="server" ErrorMessage="Invalid Otp" CssClass="validate" ControlToValidate="txtIniCode" ValidationGroup="verifyMail" Display="Dynamic" OnServerValidate="validateVerificationCode_ServerValidate"></asp:CustomValidator>
+          <asp:RequiredFieldValidator ID="reqIniCode" runat="server" ErrorMessage="Otp is Require" ValidationGroup="verifyMail" ControlToValidate="txtIniCode" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+            <br />
+            <asp:Label ID="labelValidateSend" runat="server" Text="Verification Code Has Been Sent" Visible="False" CssClass="validate"></asp:Label>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancel_Click"/>
+        <asp:Button ID="btnVerify" runat="server" Text="Verify" CssClass="btn btn-primary" ValidationGroup="verifyMail" OnClick="btnVerify_Click"/>        
+      </div>
+      </ContentTemplate>
+        <Triggers>
+            <asp:PostBackTrigger ControlID="btnVerify" />
+        </Triggers>
+      </asp:UpdatePanel>
+    </div>
+  </div>   
+</div>
+    
+    <div class="modal fade" id="changeEmail2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="changeEmail2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+    <asp:UpdatePanel ID="updateChangeEmail2" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel3">Change New Email</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <span>New Email:</span>
+          <asp:TextBox ID="txtIniMail2" runat="server" CssClass="form-control" ValidationGroup="verifyMail2" Placeholder="Email"></asp:TextBox> 
+            <asp:RequiredFieldValidator ID="reqIniEmail2" runat="server" ErrorMessage="Email is required" ControlToValidate="txtIniMail2" CssClass="validate" ValidationGroup="verifyMail2" Display="Dynamic"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="regIniMail2" runat="server" ControlToValidate="txtIniMail2" ErrorMessage="Invalid Email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="validate" ValidationGroup="verifyMail2" Display="Dynamic"></asp:RegularExpressionValidator>
+            <asp:CustomValidator ID="emailExist" runat="server" ErrorMessage="Email Already Exist" ControlToValidate="txtIniMail2" CssClass="validate" OnServerValidate="emailExist_ServerValidate" Display="Dynamic" ValidationGroup="verifyMail2"></asp:CustomValidator>
+          <div class="mt-2">
+          <span>Verification Code:</span>       
+          <asp:TextBox ID="txtIniCode2" runat="server" CssClass="form-control d-inline" ValidationGroup="verifyMailCode" Width="73%" Placeholder="Verification Code"></asp:TextBox>
+          <asp:Button ID="btnSendIniCode2" runat="server" Text="Send" CssClass="btn btn-primary d-inline" Width="25%" Style="margin-left: 3px;" OnClick="btnSendIniCode_Click" ValidationGroup="verifyMail2" OnClientClick="getEmail2()"/>
+          <asp:CustomValidator ID="cvIniCode2" runat="server" ErrorMessage="Invalid Otp" CssClass="validate" ControlToValidate="txtIniCode2" ValidationGroup="verifyMailCode" Display="Dynamic" OnServerValidate="validateVerificationCode_ServerValidate"></asp:CustomValidator>
+          <asp:RequiredFieldValidator ID="reqIniCode2" runat="server" ErrorMessage="Otp is Require" ValidationGroup="verifyMailCode" ControlToValidate="txtIniCode2" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+            <br />
+            <asp:Label ID="labelValidateSend2" runat="server" Text="Verification Code Has Been Sent" Visible="False" CssClass="validate"></asp:Label>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <asp:Button ID="btnCancel2" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancel2_Click"/>
+        <asp:Button ID="btnChangeValidMail" runat="server" Text="Change Email" CssClass="btn btn-primary" ValidationGroup="verifyMailCode" OnClick="btnChangeValidMail_Click"/>        
+      </div>
+      </ContentTemplate>
+      </asp:UpdatePanel>
+    </div>
+  </div>   
+</div>
+
 <div class="container-xl px-4 mt-4">
     <h1>User Profile</h1>
     <hr class="mt-0 mb-4">
@@ -34,8 +106,9 @@
                         </div>
                         <div class="row gx-3 mb-3">
                         <div class="mb-3">
-                            <label class="small mb-1">Email address</label>
-                            <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control" ReadOnly="True" Enabled="False"></asp:TextBox>
+                            <label class="small mb-1 d-block">Email address</label>
+                            <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control d-inline" ReadOnly="True" Enabled="False" Width="82%"></asp:TextBox>
+                            <asp:Button ID="btnChangeEmail" runat="server" Text="Change Email" CssClass="btn d-inline btn-primary" data-bs-toggle="modal" data-bs-target="#changeEmail" OnClientClick="return transferText()" Width="16%" style="margin-left:2px;"/>
                         </div>
                         <div class="row gx-3 mb-3">
                             <div class="col-md-6">
@@ -95,6 +168,44 @@
         }
 
         args.IsValid = true;
+    }
+
+    function transferText() {
+        var email = document.getElementById('<%= txtEmailAddress.ClientID %>').value;
+        document.getElementById('<%= txtIniMail.ClientID %>').value = email;
+        return false;
+    }
+
+    function modal2() {
+        addEventListener("DOMContentLoaded", (event) => {
+            console.log("I'm in")
+            $('#changeEmail2').modal('toggle');
+            showhideButton();
+            return false;
+        });
+    };
+
+    function modal() {
+        addEventListener("DOMContentLoaded", (event) => {
+            console.log("I'm in")
+            $('#changeEmail').modal('toggle');
+            showhideButton();
+            return false;
+        });
+    };
+
+    function getEmail() {
+        document.getElementById('<%= hdnEmail.ClientID %>').value = document.getElementById('<%= txtIniMail.ClientID %>').value;
+    }
+
+    function getEmail2() {
+        document.getElementById('<%= hdnEmail.ClientID %>').value = document.getElementById('<%= txtIniMail2.ClientID %>').value;
+    }
+
+
+
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
     }
 
 </script>
