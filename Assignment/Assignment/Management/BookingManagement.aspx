@@ -3,11 +3,180 @@
     <link href="../CSS/bookingManagement.css" rel="stylesheet" />
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
     <asp:HiddenField ID="hdnUserStatus" runat="server" />
 
+<div class="modal fade" id="rejectReason" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+    <asp:UpdatePanel ID="updateReason" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
+        <ContentTemplate>
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-black" id="staticBackdropLabel">Reject Reason</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <asp:DropDownList ID="ddlRejectReason" runat="server" CssClass="form-select" AutoPostBack="True" ValidationGroup="rejectGroup" OnSelectedIndexChanged="ddlRejectReason_SelectedIndexChanged">
+              <asp:ListItem Value="0">Select Reject Reason</asp:ListItem>
+              <asp:ListItem>Invalid driving license (expired/illegible)</asp:ListItem>
+              <asp:ListItem>Unclear document scan or image</asp:ListItem>
+              <asp:ListItem>Booking Photo Attached unmatch with existing photos</asp:ListItem>
+              <asp:ListItem>Unclear selfie quality (poor lighting/visibility)</asp:ListItem>
+              <asp:ListItem>Other</asp:ListItem>
+          </asp:DropDownList>
+          <asp:RequiredFieldValidator ID="requireReason" runat="server" ErrorMessage="Reject Reason is Required" CssClass="validate" InitialValue="0" ValidationGroup="rejectGroup" ControlToValidate="ddlRejectReason"></asp:RequiredFieldValidator>
+          <asp:TextBox ID="txtOtherReason" runat="server" ValidationGroup="rejectGroup" CssClass="form-control mt-1" placeholder="Other Reason" Visible="False"></asp:TextBox>
+          <asp:RequiredFieldValidator ID="requireOtherReason" runat="server" ErrorMessage="Other Reason is Required" CssClass="validate" ValidationGroup="rejectGroup" ControlToValidate="txtOtherReason" Enabled="False"></asp:RequiredFieldValidator>
+      </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+      <div class="modal-footer">
+        <asp:Button ID="btnCancelReject" runat="server" Text="Review Again" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewBooking" OnClientClick="return false"/>
+        <asp:Button ID="btnReject2" runat="server" Text="Reject" CssClass="btn btn-danger" ValidationGroup="rejectGroup" OnClick="btnReject2_Click"/>
+      </div>
+    </div>
+  </div>   
+</div>
+
+    <div class="modal modal-xl fade" id="reviewBooking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reviewDriver" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel4">Booking Detail</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body row">
+            <div class="col">
+                <h5 class="text-dark">Driver Info</h5>
+                <hr class="mt-0 mb-4">
+                <div class="mb-3">
+                    <label class="small mb-1">Driver Name</label>
+                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Enter driver name" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+                </div>
+                <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="small mb-1">Driver ID/Passport Number</label>
+                        <asp:TextBox ID="txtDriverID" runat="server" CssClass="form-control" placeholder="e.g. 543210987654" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small mb-1">Driver License Number</label>
+                        <asp:TextBox ID="txtDriverLicense" runat="server" CssClass="form-control" placeholder="e.g. 543210987654" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="small mb-1">Driver Gender</label>
+                        <asp:DropDownList ID="ddlGender" runat="server" CssClass="form-select" ValidationGroup="reviewGroup" Enabled="False">
+                            <asp:ListItem Value="0">Select Gender</asp:ListItem>
+                            <asp:ListItem Value="M">Male</asp:ListItem>
+                            <asp:ListItem Value="F">Female</asp:ListItem>
+                        </asp:DropDownList>
+                     </div>
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="inputBirthday">Driver Birthdate</label>
+                        <asp:TextBox ID="txtBirthdate" runat="server" CssClass="form-control" TextMode="Date" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="small mb-1 d-block">Driver Phone number</label>
+                        <asp:TextBox ID="txtPhoneNum" runat="server" CssClass="form-control d-block" TextMode="Phone" ReadOnly="True" ValidationGroup="reviewGroup"></asp:TextBox>
+                    </div>
+                </div>
+                </div>
+             <div class="col">
+     <h5 class="text-dark">Booking Info</h5>
+     <hr class="mt-0 mb-4">
+     <div class="mb-3">
+         <h6 class="text-dark mb-1">Pick Up</h6>
+     </div>
+     <div class="row gx-3 mb-3">
+         <div class="col-md-6">
+             <label class="small mb-1">Pick Up Location</label>
+             <asp:TextBox ID="txtPickUpLocation" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+         </div>
+         <div class="col-md-6">
+             <label class="small mb-1">Pick Up Time</label>
+             <asp:TextBox ID="txtPickUpTime" runat="server" CssClass="form-control" TextMode="DateTimeLocal" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+         </div>
+     </div>
+     <div class="mb-3">
+     <h6 class="text-dark mb-1">Drop Off</h6>
+     </div>
+     <div class="row gx-3 mb-5">
+         <div class="col-md-6">
+             <label class="small mb-1">Drop off Location</label>
+                 <asp:TextBox ID="txtDropOffLocation" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+          </div>
+         <div class="col-md-6">
+             <label class="small mb-1" for="inputBirthday">Drop off Time</label>
+             <asp:TextBox ID="txtDropOffTime" runat="server" CssClass="form-control" TextMode="DateTimeLocal" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+         </div>
+     </div>
+     <div class="mb-3">
+     <h6 class="text-dark mb-1">Additional Info</h6>
+     </div>
+     <div class="row gx-3 mb-3">
+         <div class="col">
+             <label class="small mb-1 d-block">Notes:</label>
+             <asp:TextBox ID="TextBox5" runat="server" CssClass="form-control d-block" TextMode="MultiLine" Rows="5"  ReadOnly="True" ValidationGroup="reviewGroup"></asp:TextBox>
+         </div>
+     </div>
+     </div>
+            <div class="col">
+                <h5 class="text-dark">Supporting Document</h5>
+                <hr class="mt-0 mb-4">
+             <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="small mb-1">Booking Photo Attached</label>
+                    <div class="d-flex flex-column align-items-centers">
+                    <div class="image-frame-driver mx-auto">
+                        <asp:Image ID="imgID" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
+                     </div>
+                        <asp:Label ID="lblIdPic" runat="server" CssClass="validate mx-auto"></asp:Label>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small mb-1">Driver ID/Passport Picture</label>
+                    <div class="d-flex flex-column align-items-centers">
+                    <div class="image-frame-driver mx-auto">
+                        <asp:Image ID="imgSelfie" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
+                     </div>
+                    </div>
+                    </div>
+                </div>                     
+             <div class="row gx-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="small mb-1">Driver License (Front)</label>
+                    <div class="d-flex flex-column align-items-centers">
+                    <div class="image-frame-driver mx-auto">
+                        <asp:Image ID="imgLicenseF" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
+                     </div>
+                    </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small mb-1">Driver License (Back)</label>
+                    <div class="d-flex flex-column align-items-centers">
+                    <div class="image-frame-driver mx-auto">
+                        <asp:Image ID="imgLicenseB" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
+                     </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+    </div>
+</div>
+      <div class="modal-footer">
+        <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnApprove_Click"/>
+        <asp:Button ID="btnReject" runat="server" Text="Reject" CssClass="btn btn-danger" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#rejectReason" OnClientClick="return false"/>
+      </div>
+    </div>
+  </div>   
+</div>
 
 
-    <div class="modal animate__animated animate__slideInLeft animate__faster" id="userInfoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userInfoModal" aria-hidden="true">
+       <div class="modal animate__animated animate__slideInLeft animate__faster" id="userInfoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userInfoModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
       <div class="modal-header">
@@ -57,14 +226,13 @@
                 </div>
     </div>
       <div class="modal-footer">
-       <asp:Button ID="btnUserNext" CssClass="btn btn-primary" runat="server" Text="Next" />
+          <asp:Button ID="btnUserNext"  CssClass="btn btn-primary " runat="server" Text="Next"  data-bs-toggle="modal" data-bs-target="#reviewBooking" OnClientClick="return false" />
       </div>
     </div>
     </div>
-  </div>
+  </div>  
 
-
-     <div class="modal animate__animated animate__slideInRight animate__faster" id="userDriverModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userDriverModal" aria-hidden="true">
+    <div class="modal animate__animated animate__slideInRight animate__faster" id="userDriverModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userDriverModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
       <div class="modal-header">
@@ -82,7 +250,7 @@
         </ul>
         <div class="card-body row">
         <asp:Label ID="lblDriverText" runat="server" CssClass="text-dark"></asp:Label>
-        <asp:Repeater ID="UserDriverReapeter" runat="server">
+        <asp:Repeater ID="UserDriverReapeter" runat="server" OnItemDataBound="UserDriverReapeter_ItemDataBound">
             <ItemTemplate>
                 <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
                     <div class="d-flex align-items-center justify-content-between px-4">
@@ -105,11 +273,14 @@
     </div>
 </div>
       <div class="modal-footer">
-          <asp:Button ID="btnDriverNext" CssClass="btn btn-primary" runat="server" Text="Next" />
-    </div>
+          <asp:Button ID="btnDriverNext"  CssClass="btn btn-primary " runat="server" Text="Next"  data-bs-toggle="modal" data-bs-target="#reviewBooking" OnClientClick="return false"/>
+      </div>
     </div>
     </div>
   </div>
+
+
+     
 
 
 
@@ -133,9 +304,7 @@
            </asp:DropDownList>
         </div>
         <div class="col-6 col-md-2 text-end">
-            
-            <asp:Button ID="btnFilter" runat="server"   cssclass="btn btn-secondary filter_btn" Text="Filter" />
-           <i class="ri-filter-fill"></i>
+            <asp:Button ID="btnFilter" runat="server"   cssclass="btn btn-secondary filter_btn" Text="Filter"  OnClick="btnFilter_Click" /> 
 
     </div>
 </div>
@@ -201,7 +370,7 @@
     </thead>
     <tbody id="bookingtable_record">
 
-<asp:Repeater ID="rptBookingList" runat="server" >
+<asp:Repeater ID="rptBookingList" runat="server" OnItemCreated="repeaterBookingList_ItemCreated">
 <ItemTemplate>
       <tr class="rows1">
     <td>
@@ -246,21 +415,16 @@
     </td>
   </tr>
   </ItemTemplate>
- </asp:Repeater>  
-       
+ </asp:Repeater>   
     </tbody>
-   
   </table>
        
 </ContentTemplate>
-
-
+    
 </asp:UpdatePanel>
        
   </div>
   </div>   
-
-
 
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -270,8 +434,24 @@
 
     <script>
 
-        function loadModal() {
-            document.addEventListener("DOMContentLoaded", modal);
+
+        function updateSortIcons() {
+            // Get the current sort direction from the HiddenField
+            var sortDirection = document.getElementById('<%= hdnSortDirection.ClientID %>').value;
+
+            // Update icon classes based on the current sort direction
+            document.querySelectorAll('.sort-button').forEach(function (button) {
+                var icon = button.querySelector('.sort-icon');
+                if (icon) {
+                    if (sortDirection === 'ASC') {
+                        icon.classList.remove('ri-arrow-up-s-fill');
+                        icon.classList.add('ri-arrow-down-s-fill');
+                    } else {
+                        icon.classList.remove('ri-arrow-down-s-fill');
+                        icon.classList.add('ri-arrow-up-s-fill');
+                    }
+                }
+            });
         }
 
         function modal() {
@@ -279,7 +459,7 @@
                 $('#userInfoModal').modal('toggle');
                 return false;
             });
-        };
+        }
 
          $(document).ready(function () {
              var searchBoxId = "#" + '<%= txtBookingSearch.ClientID %>';
@@ -299,28 +479,9 @@
             initializePagination(); // Initialize on page load
 
 
-
-             function updateSortIcons() {
-                 // Get the current sort direction from the HiddenField
-                 var sortDirection = document.getElementById('<%= hdnSortDirection.ClientID %>').value;
-
-                 // Update icon classes based on the current sort direction
-                 document.querySelectorAll('.sort-button').forEach(function (button) {
-                     var icon = button.querySelector('.sort-icon');
-                     if (icon) {
-                         if (sortDirection === 'ASC') {
-                             icon.classList.remove('ri-arrow-up-s-fill');
-                             icon.classList.add('ri-arrow-down-s-fill');
-                         } else {
-                             icon.classList.remove('ri-arrow-down-s-fill');
-                             icon.classList.add('ri-arrow-up-s-fill');
-                         }
-                     }
-                 });
-             }
-
-
          });
+       
+        
 
     </script>
     
