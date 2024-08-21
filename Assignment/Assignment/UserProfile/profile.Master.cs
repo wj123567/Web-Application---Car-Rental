@@ -71,7 +71,7 @@ namespace Assignment
         {
             Session["Id"] = null;
             FormsAuthentication.SignOut();
-            Response.Redirect("Home.aspx");
+            Response.Redirect("~/Home.aspx");
         }
     }
 }

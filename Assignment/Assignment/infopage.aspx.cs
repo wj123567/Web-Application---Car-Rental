@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.Xml;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -61,6 +62,8 @@ namespace Assignment
                                 reviewText = Review.ReviewText,
                                 userRating = Review.Rating
                             };
+
+
                 switch (sortOption)
                 {
                     case "ratingHigh":
@@ -70,6 +73,7 @@ namespace Assignment
                         query = query.OrderBy(c => c.userRating);
                         break;
                     default:
+
                         query = query.OrderByDescending((c) => c.commentTime);
                         break;
                 }
@@ -80,6 +84,26 @@ namespace Assignment
 
             }
         }
+
+        public string GetStarRating(int rating)
+        {
+
+            // Create the star rating HTML
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i <= 5; i++)
+            {
+                if (i <= rating)
+                {
+                    sb.Append("<span class='fa fa-star' style='color: orange;'></span>"); // Filled star
+                }
+                else
+                {
+                    sb.Append("<span class='fa fa-star' style='color: lightgray;'></span>"); // Empty star
+                }
+            }
+            return sb.ToString();
+        }
+
 
         public void GetCarDetailsByCarPlate(string carPlate)
         {
