@@ -116,7 +116,13 @@ namespace Assignment
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "showModal", " modal();", true);
         }
-        
+
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("bookingRecordUpdate.aspx");
+        }
+
+
 
         protected void modalYesBtn_Click(object sender, EventArgs e)
         {

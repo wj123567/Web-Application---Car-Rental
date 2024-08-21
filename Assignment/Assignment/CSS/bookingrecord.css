@@ -19,9 +19,6 @@
     font-weight: 800;
 }
 
-.booking_record_table{
- 
-}
 
 #bookingtable_record {
     background-color: red; /* You can choose a different color if you want */
@@ -120,3 +117,54 @@
         background: rgb(135, 206, 235);
         font-weight: bold;
     }
+
+@media only screen and (max-width: 992px){
+    .booking_record_table {
+        width: 50%;
+    }
+
+    .container{
+        margin-left:10px;
+        margin-right:10px;
+    }
+}
+
+@media only screen and (max-width: 860px){
+    .booking_price,.price_data, .booking_vehicle, .carplate_data {
+        display: none;
+    }
+ 
+
+    .booking_vehicle{
+        display:none;
+    }
+
+    @media only screen and (max-width: 700px){
+        table{
+            font-size:14px;
+        }
+
+        .status_icon {
+            font-size: 12px;
+        }
+
+        .edit_btn_style {
+            font-size: 12px;
+            padding: 2px 5px;
+        }
+
+        @media only screen and (max-width: 585px){
+            table {
+                font-size: 12px;
+            }
+
+            .status_icon {
+                font-size: 8px;
+            }
+
+            .edit_btn_style {
+                font-size: 8px;
+                padding: 2px 5px;
+            }
+        }
+}

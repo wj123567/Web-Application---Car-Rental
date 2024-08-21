@@ -51,7 +51,7 @@
                 <asp:Image ID="carImage"  cssclass="header_carimg" runat="server" />
             </div>
 
-            <div class="col_right">
+            <div class="col_right d-flex flex-column">
                 <table class="spec_container">
                     <tr class="car_model">
                     <th class="header_car_model" colspan="4">
@@ -79,13 +79,107 @@
                     </tr>
                 </table>
 
-                <table class="review_container">
-                    <tr>
-                        <th>Review</th>
-                    </tr>
-                </table>
+                <div class="review-container d-flex flex-column">
+                    <h1 style="font-weight: 800;">Review &nbsp;<span style="font-size:20px; vertical-align:middle;">(1,485 total)</span></h1>
+                    <div class="reviewrow-1  d-flex flex-row">
+				        <div class="rating-block">
+                            <h2>Average user rating</h2>
+                            <h3 class="bold padding-bottom-7">4.3 <small>/ 5</small></h3>
+                            <div>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star unchecked"></span>
+                            </div>
+                        </div>
+
+                        <div class="rating-line">
+                            <h2>Rating breakdown</h2>
+                            <%-- 5 --%>
+                            <div class="rateline d-flex">
+                                <div class="left-progress" style="line-height:1;">
+                                    <div style="height:9px; margin:5px 5px;">5 
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
+                                </div>
+                                <div class="progress" style="width:50%; height: 10px; margin:10px 5px;">
+                                      <div class="progress-bar bg-dark" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                      </div>
+                                </div>
+                                <div class="right-progress">
+                                    <p style="line-height:1; margin:5px 5px;">1</p>
+                                </div>
+                            </div>
+                            <%-- 4 --%>
+                            <div class="rateline d-flex">
+                                <div class="left-progress" style="line-height:1;">
+                                    <div style="height:9px; margin:5px 5px;">4 
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
+                                </div>
+                                <div class="progress" style="width:50%; height: 10px; margin:10px 5px;">
+                                      <div class="progress-bar bg-dark" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                      </div>
+                                </div>
+                                <div class="right-progress">
+                                    <p style="line-height:1; margin:5px 5px;">1</p>
+                                </div>
+                            </div>
+                            <%-- 3 --%>
+                            <div class="rateline d-flex">
+                                <div class="left-progress" style="line-height:1;">
+                                    <div style="height:9px; margin:5px 5px;">3 
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
+                                </div>
+                                <div class="progress" style="width:50%; height: 10px; margin:10px 5px;">
+                                      <div class="progress-bar bg-dark" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                      </div>
+                                </div>
+                                <div class="right-progress">
+                                    <p style="line-height:1; margin:5px 5px;">1</p>
+                                </div>
+                            </div>
+                            <%-- 2 --%>
+                            <div class="rateline d-flex">
+                                <div class="left-progress" style="line-height:1;">
+                                    <div style="height:9px; margin:5px 5px;">2 
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
+                                </div>
+                                <div class="progress" style="width:50%; height: 10px; margin:10px 5px;">
+                                      <div class="progress-bar bg-dark" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                      </div>
+                                </div>
+                                <div class="right-progress">
+                                    <p style="line-height:1; margin:5px 5px;">0</p>
+                                </div>
+                            </div>
+                            <%-- 1 --%>
+                            <div class="rateline d-flex">
+                                <div class="left-progress" style="line-height:1;">
+                                    <div style="height:9px; margin:5px 5px;">1 
+                                        <span class="fa fa-star checked"></span>
+                                    </div>
+                                </div>
+                                <div class="progress" style="width:50%; height: 10px; margin:10px 5px;">
+                                      <div class="progress-bar bg-dark" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                      </div>
+                                </div>
+                                <div class="right-progress">
+                                    <p style="line-height:1; margin:5px 5px;">0</p>
+                                </div>
+                            </div>
+
+	                    </div>
+                    </div>
+
+                    <div class="comment-container">
+
+                    </div>
+                 </div>
             </div>
-       
     </section>
 
     <section class="info_body_container"> 
@@ -417,5 +511,7 @@
                 return false; // Ensure default action is allowed for redirection
             }
         }
+
+        
     </script>
 </asp:Content>

@@ -73,13 +73,13 @@
 .info_banner {
     margin-bottom: 50px;
     width: 100%;
-    height: 50vh;
+    height: 60vh;
     box-sizing: border-box;
     display: flex;
 }
 
 .col_left {
-    width: 50%;
+    width: 40%;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -98,7 +98,7 @@
     }
 
 .col_right {
-    width: 50%;
+    width: 60%;
     box-sizing: border-box;
     background-color: #F9FaFb;
     border-top-right-radius: 40px;
@@ -145,11 +145,58 @@
         color: #2E236C;
     }
 
-.review_container {
-    margin-top: 20px;
-    width: 100%;
-    border: 1px solid #29bb29;
+.review-container {
+    margin: 3% 4%;
+    margin-bottom: 10px;
+    width:90%;
+    height: auto;
+    padding: 1% 1%;
+    /*border: 1px solid black;*/
+    overflow-y: auto;
+    border-radius: 15px;
 }
+    .review-container cmd-1 {
+        width: 100%;
+        border: 1px solid red;
+    }
+
+    .review-container .reviewrow-1 .rating-block {
+        border-start-start-radius: 10px;
+        border-end-start-radius: 10px;
+        padding: 15px;
+        flex: 1;
+        background-color: #faf1eb;
+    }
+
+
+    .review-container .reviewrow-1 .rating-line {
+        border-start-end-radius: 10px;
+        border-end-end-radius: 10px;
+        padding: 15px;
+        flex: 2;
+        background-color: #faf1eb;
+    }
+
+.rating-block .checked, .rating-line .checked {
+    color: orange;
+}
+    .rating-block .unchecked {
+        color: lightgray;
+    }
+
+.rating-line .rateline {
+    margin: 10px 0;
+}
+
+.rating-line .progress-bar {
+    border-radius: 15px;
+}
+
+    .rating-line .progress-bar:hover {
+        border-radius: 15px;
+        background-color: orange !important;
+    }
+
 /*body part*/
 .info_body_container {
     font-family: Arial, sans-serif;

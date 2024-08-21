@@ -1,0 +1,119 @@
+﻿.booking_container {
+    width: 95%;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.container {
+}
+
+.header_row_title {
+}
+
+.booking_title {
+    text-align: center;
+    padding: 40px;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+
+
+#bookingtable_record {
+    background-color: red; /* You can choose a different color if you want */
+}
+
+.booking_status span {
+    display: block;
+    width: 100%;
+}
+
+.status_icon {
+    font-size: 16px;
+}
+
+.edit_btn_style {
+    background-color: #c2fbd7;
+    border-radius: 100px;
+    box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+    color: green;
+    cursor: pointer;
+    font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+    padding: 7px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 250ms;
+    border: 0;
+    font-size: 16px;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+    .edit_btn_style:hover {
+        box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+        transform: scale(1.05) rotate(-1deg);
+    }
+
+.form {
+    position: relative;
+}
+
+    .form .fa-search {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: #9ca3af;
+    }
+
+.form-input {
+    height: 55px;
+    text-indent: 33px;
+    border-radius: 10px;
+}
+
+.statusddl_style {
+    height: 55px;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.form-input:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.filter_btn {
+    width: 70px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.row {
+    margin-bottom: 30px;
+}
+
+
+.paging-nav {
+    text-align: right;
+    margin-top: 50px;
+    padding: 10px;
+}
+
+
+    .paging-nav a {
+        margin: auto 1px;
+        width: 25px;
+        height: 25px;
+        text-decoration: none;
+        display: inline-block;
+        padding: 10px 15px;
+        background: rgb(135, 206, 235,0.4);
+        color: black;
+        border-radius: 3px;
+    }
+
+
+    .paging-nav .selected-page {
+        background: rgb(135, 206, 235);
+        font-weight: bold;
+    }

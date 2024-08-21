@@ -14,23 +14,52 @@ namespace Assignment.Management
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                GetBookRecords();
+            }
         }
 
-        protected void hiddenBtn_Click(object sender, EventArgs e)
+
+        private void GetBookRecords(string statusFilter = "All")
         {
-            string selectUser = "SELECT * FROM ApplicationUser WHERE Username Like @search OR Email Like @search";
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            con.Open();
-            SqlCommand com = new SqlCommand(selectUser, con);
-            com.Parameters.AddWithValue("@search", "%" + searchBar.Text + "%");
-            SqlDataAdapter da = new SqlDataAdapter(com);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "UserTable");
-            ViewState["UserTable"] = ds.Tables["UserTable"];
-            UserReapeter.DataSource = ds.Tables["UserTable"];
-            UserReapeter.DataBind();
-            con.Close();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string sql = "SELECT * FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate ";
+
+
+                // Apply status filter if necessary
+                if (statusFilter != "All")
+                {
+                    sql += " WHERE b.Status = @Status";
+                }
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                if (statusFilter != "All")
+                {
+                    cmd.Parameters.AddWithValue("@Status", statusFilter);
+                }
+
+
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    DataSet ds = new DataSet();
+                    da.Fill(ds, "BookingRecordTable");
+                    ViewState["BookingRecordTable"] = ds.Tables["BookingRecordTable"];
+                    rptBookingList.DataSource = ds.Tables["BookingRecordTable"];
+                    rptBookingList.DataBind();
+                }
+
+            }
+        }
+
+        protected void ddlStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedStatus = ddlStatusFilter.SelectedValue;
+            GetBookRecords(selectedStatus);
         }
 
         protected void btnSort_Click(object sender, EventArgs e)
@@ -38,6 +67,7 @@ namespace Assignment.Management
             LinkButton button = (LinkButton)sender;
             string name = button.CommandName;
             string sort = button.CommandArgument;
+
             if (sort == "DESC")
             {
                 button.CommandArgument = "ASC";
@@ -46,36 +76,45 @@ namespace Assignment.Management
             {
                 button.CommandArgument = "DESC";
             }
-            DataTable carData = (DataTable)ViewState["UserTable"];
-            DataView dataView = carData.DefaultView;
+
+            // Trigger client-side icon update
+            ScriptManager.RegisterStartupScript(this, GetType(), "UpdateSortIcon", "updateSortIcons();", true);
+
+
+            DataTable bookingData = (DataTable)ViewState["BookingRecordTable"];
+            DataView dataView = bookingData.DefaultView;
             dataView.Sort = name + " " + sort;
             DataTable sortedData = dataView.ToTable();
-            ViewState["UserTable"] = sortedData;
-            UserReapeter.DataSource = sortedData;
-            UserReapeter.DataBind();
-            updateUserTable.Update();
+
+            // Update ViewState and Repeater
+            ViewState["BookingRecordTable"] = sortedData;
+            rptBookingList.DataSource = sortedData;
+            rptBookingList.DataBind();
+            updatebookingRecordTable.Update();
+
+            // Store the current sort direction
+            hdnSortDirection.Value = button.CommandArgument; // Store current sort direction
+
+            // Trigger client-side pagination reinitialization
+            ScriptManager.RegisterStartupScript(this, GetType(), "ReinitializePagination", "$('#bookingRecordTable').paging({ limit: 10 });", true);
+
         }
+
 
         protected void btnView_Click(object sender, EventArgs e)
         {
             Button btnView = (Button)sender;
-            String id = btnView.CommandArgument;
+            /*String id = btnView.CommandArgument;*/
+            //here hard code
+            //here hard code
+            //here hard code
+            String id = "ae0a1581-21ea-4ea6-920c-80bef28a0129";
             UserDriverReapeter.DataSource = null;
             UserDriverReapeter.DataBind();
             LoadAvailableUser(id);
             loadDriverInfo(id);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modal()", true);
-        }
-
-        protected void btnDelete_Click(object sender, EventArgs e)
-        {
-            Button btnDelete = (Button)sender;
-            String id = btnDelete.CommandArgument;
-            UserDriverReapeter.DataSource = null;
-            UserDriverReapeter.DataBind();
-            LoadAvailableUser(id);
-            loadDriverInfo(id);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modalDel()", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "Popup", "modal()", true);
+           
         }
 
         protected void LoadAvailableUser(String id)
@@ -99,15 +138,7 @@ namespace Assignment.Management
                 txtBirthday.Text = driverBdate.ToString("yyyy-MM-dd");
                 txtMemberSince.Text = regDate.ToString("yyyy-MM-dd");
                 userProfilePic.ImageUrl = reader["ProfilePicture"].ToString();
-                string isBan = reader["IsBan"].ToString();
-                if (isBan == "0")
-                {
-                    hdnUserStatus.Value = "0";
-                }
-                else if (isBan == "1")
-                {
-                    hdnUserStatus.Value = "1";
-                }
+               
             }
             con.Close();
             reader.Close();
@@ -136,7 +167,8 @@ namespace Assignment.Management
             con.Close();
         }
 
-        protected void UserReapeter_ItemCreated(object sender, RepeaterItemEventArgs e)
+
+      /*  protected void UserReapeter_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button btnView = (Button)e.Item.FindControl("btnView");
             Button btnDelete = (Button)e.Item.FindControl("btnDelete");
@@ -248,6 +280,6 @@ namespace Assignment.Management
                 requireOtherReason.Enabled = false;
                 banReasonUpdate.Update();
             }
-        }
+        }*/
     }
 }

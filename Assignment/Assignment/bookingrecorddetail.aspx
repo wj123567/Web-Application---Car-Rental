@@ -35,7 +35,7 @@
               <div class="card-body">
                 <div class="mb-6">
                   <!-- heading -->
-                  <h2 class="mb-0">Booking ID: <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label></h2>
+                  <h3 class="mb-0">Booking ID: <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label></h3>
                 </div>
                 <div>
                   
@@ -179,11 +179,11 @@
 <div class="container">
      <div class="row justify-content-end">
            <div class="col-auto">
-               <asp:Button ID="btnEdit" CssClass="booking_edit_btn" runat="server" Text="Edit" />
-               </div>
+               <asp:Button ID="btnEdit" CssClass="booking_edit_btn" runat="server" Text="Edit" OnClick="btnEdit_Click" />
+           </div>
            <div class="col-auto">
                <asp:Button ID="btnDelete" CssClass="booking_delete_btn" runat="server" Text="Delete" OnClick="btnDelete_Click"/>
-               </div>
+            </div>
       </div>
 </div>
 
@@ -201,7 +201,8 @@
     </main>
            
 
-    <script>
+<script>
+
     function loadModal() {
     document.addEventListener("DOMContentLoaded", modal);
    
@@ -214,6 +215,5 @@
     });
     };
 
-       
-    </script>
+</script>
 </asp:Content>

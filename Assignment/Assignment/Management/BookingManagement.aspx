@@ -1,42 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Management/Admin.Master" AutoEventWireup="true" CodeBehind="BookingManagement.aspx.cs" Inherits="Assignment.Management.BookingManagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <link href="../CSS/bookingManagement.css" rel="stylesheet" />
+
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnUserStatus" runat="server" />
 
-
-    <div class="modal animate__animated animate__slideInDown animate__faster" id="banReasonModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered"">
-    <div class="modal-content">
-    <asp:UpdatePanel ID="banReasonUpdate" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
-        <ContentTemplate>
-      <div class="modal-header">
-        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">Ban Reason</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <asp:DropDownList ID="ddlBanReason" runat="server" CssClass="form-select" AutoPostBack="True" ValidationGroup="banGroup" OnSelectedIndexChanged="ddlBanReason_SelectedIndexChanged">
-              <asp:ListItem Value="0">Select Ban Reason</asp:ListItem>
-              <asp:ListItem>Damage to Vehicle</asp:ListItem>
-              <asp:ListItem>Violation of Rental Terms</asp:ListItem>
-              <asp:ListItem>Unsafe Driving</asp:ListItem>
-              <asp:ListItem>Suspicious Behavior</asp:ListItem>
-              <asp:ListItem>Unreported Accidents</asp:ListItem>
-              <asp:ListItem>Fraudulent Activity</asp:ListItem>
-              <asp:ListItem>Other</asp:ListItem>
-          </asp:DropDownList>
-          <asp:RequiredFieldValidator ID="requireReason" runat="server" ErrorMessage="Reject Reason is Required" CssClass="validate" InitialValue="0" ValidationGroup="banGroup" ControlToValidate="ddlbanReason"></asp:RequiredFieldValidator>
-          <asp:TextBox ID="txtOtherReason" runat="server" ValidationGroup="banGroup" CssClass="form-control mt-1" placeholder="Other Reason" Visible="False"></asp:TextBox>
-          <asp:RequiredFieldValidator ID="requireOtherReason" runat="server" ErrorMessage="Other Reason is Required" CssClass="validate" ValidationGroup="banGroup" ControlToValidate="txtOtherReason" Enabled="False"></asp:RequiredFieldValidator>
-      </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-      <div class="modal-footer">
-        <asp:Button ID="btnCancelBan" runat="server" Text="Review Again" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false"/>
-        <asp:Button ID="btnConfirmBan" runat="server" Text="Confirm Ban" CssClass="btn btn-danger" ValidationGroup="banGroup" OnClick="btnBan_Click"/>
-      </div>
-    </div>
-  </div>   
-</div>    
 
 
     <div class="modal animate__animated animate__slideInLeft animate__faster" id="userInfoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userInfoModal" aria-hidden="true">
@@ -89,162 +57,279 @@
                 </div>
     </div>
       <div class="modal-footer">
-        <asp:Button ID="btnDel1" runat="server" Text="Delete" CssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false"/>
-        <asp:Button ID="btnBan" runat="server" Text="Ban User" CssClass="btn btn-warning btn-ban btn-both" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false"/>          
-        <asp:Button ID="btnUnban" runat="server" Text="Unban User" CssClass="btn btn-primary btn-unban btn-both" ValidationGroup="reviewGroup" OnClick="btnUnban_Click"/>          
+       <asp:Button ID="btnUserNext" CssClass="btn btn-primary" runat="server" Text="Next" />
       </div>
     </div>
     </div>
   </div>
 
+
+     <div class="modal animate__animated animate__slideInRight animate__faster" id="userDriverModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userDriverModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel3">Available Driver</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-tabs mb-2 justify-content-center" id="driverModalTab">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="userInfoTab2" data-bs-toggle="modal" data-bs-target="#userInfoModal" type="button">User Info</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="driverInfoTab2" data-bs-toggle="modal" data-bs-target="#userDriverModal" type="button">Driver Info</button>
+          </li>
+        </ul>
         <div class="card-body row">
-    <asp:Label ID="lblDriverText" runat="server" CssClass="text-dark"></asp:Label>
-    <asp:Repeater ID="UserDriverReapeter" runat="server" OnItemDataBound="UserDriverReapeter_ItemDataBound">
-        <ItemTemplate>
-            <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
-                <div class="d-flex align-items-center justify-content-between px-4">
-                    <div class="d-flex align-items-center">
-                         <i class="fa-regular fa-id-card" style="font-size:1.5em;"></i>
-                        <div class="mx-4">
-                                <asp:Label ID="lblDriverName" runat="server" Text='<%# Eval("DriverName") %>' CssClass="small d-block" />
-                                <asp:Label ID="lblDriverBdate" runat="server" Text='<%# "Driver Id: " + Eval("DriverID") %>' CssClass="text-xs text-muted d-inline" />
-                            <br />
-                                <asp:Label ID="lblReject" runat="server" CssClass="text-danger small"></asp:Label>
+        <asp:Label ID="lblDriverText" runat="server" CssClass="text-dark"></asp:Label>
+        <asp:Repeater ID="UserDriverReapeter" runat="server">
+            <ItemTemplate>
+                <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
+                    <div class="d-flex align-items-center justify-content-between px-4">
+                        <div class="d-flex align-items-center">
+                             <i class="fa-regular fa-id-card" style="font-size:1.5em;"></i>
+                            <div class="mx-4">
+                                    <asp:Label ID="lblDriverName" runat="server" Text='<%# Eval("DriverName") %>' CssClass="small d-block" />
+                                    <asp:Label ID="lblDriverBdate" runat="server" Text='<%# "Driver Id: " + Eval("DriverID") %>' CssClass="text-xs text-muted d-inline" />
+                                <br />
+                                    <asp:Label ID="lblReject" runat="server" CssClass="text-danger small"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center ms-4 small">
+                            <asp:Label ID="lblApproval" runat="server"></asp:Label>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center ms-4 small">
-                        <asp:Label ID="lblApproval" runat="server"></asp:Label>
-                    </div>
                 </div>
-            </div>
-        </ItemTemplate>
-    </asp:Repeater>
+            </ItemTemplate>
+        </asp:Repeater>
+    </div>
 </div>
+      <div class="modal-footer">
+          <asp:Button ID="btnDriverNext" CssClass="btn btn-primary" runat="server" Text="Next" />
+    </div>
+    </div>
+    </div>
+  </div>
+
+
 
       <div class="container-xl px-4 mt-4">
-  <h1 class="text-dark">User Management</h1>
+  <h1 class="text-dark">Car Rental Booking Management</h1>
   <hr class="mt-0 mb-4">
-   <div class="row">
-       <div class="float-end" style="width: 250px;">
-          <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Search" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
-          <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" style="display:none;"/>
-       </div>
-       </div>
+
+              <div class="row">
+        <div class="col-6 col-md-8 search_style">
+            <div class="form">
+            <i class="fa fa-search"></i>
+            <asp:TextBox ID="txtBookingSearch" cssclass="form-control form-input" runat="server"  placeholder="Search.."></asp:TextBox>
+            </div>
+        </div>
+        <div class="col-6 col-md-2">
+           <asp:DropDownList ID="ddlStatusFilter" runat="server" cssclass="form-control statusddl_style" AutoPostBack="True" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
+                <asp:ListItem Value="All" Text="All Statuses" />
+                <asp:ListItem Value="Processing" Text="Processing" />
+                <asp:ListItem Value="Booked" Text="Booked" />
+                <asp:ListItem Value="Cancelled" Text="Cancelled" />
+           </asp:DropDownList>
+        </div>
+        <div class="col-6 col-md-2 text-end">
+            
+            <asp:Button ID="btnFilter" runat="server"   cssclass="btn btn-secondary filter_btn" Text="Filter" />
+           <i class="ri-filter-fill"></i>
+
+    </div>
+</div>
+
   <div>
-              <asp:UpdatePanel ID="updateUserTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-              <ContentTemplate>
-          <table id="userTable" class="table table-striped table-bordered table-hover table-responsive">
-          <thead>
-              <tr style="text-align: center;">
-                  <th scope="col">
-                      <asp:LinkButton ID="btnSortId" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark">User Id</asp:LinkButton>
-                   </th>                    
-                  <th scope="col">
-                      <asp:LinkButton ID="btnSortUsername" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Username" CssClass="text-dark">Username</asp:LinkButton>
-                   </th>
-                  <th scope="col">                        
-                      <asp:LinkButton ID="btnSortEmail" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Email" CssClass="text-dark">Email</asp:LinkButton></th>
-                  <th scope="col">                        
-                      <asp:LinkButton ID="btnSortDOB" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DOB" CssClass="text-dark">Date of Birth</asp:LinkButton></th>
-                  <th scope="col">                        
-                      <asp:LinkButton ID="btnSortRegDate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RegistrationDate" CssClass="text-dark">Registration Date</asp:LinkButton></th>
-                  <th scope="col">                        
-                      <asp:LinkButton ID="btnSortRoles" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Roles" CssClass="text-dark">Roles</asp:LinkButton></th>                     
-                  <th scope="col">                        
-                      <asp:LinkButton ID="btnSortBan" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="IsBan" CssClass="text-dark">User Status</asp:LinkButton></th>               
-                  <th scope="col">Actions</th>
-              </tr>
-          </thead>                
-          <tbody>
-              <asp:Repeater ID="UserReapeter" runat="server"  OnItemDataBound="UserReapeter_ItemDataBound" OnItemCreated="UserReapeter_ItemCreated">
-              <ItemTemplate>
-              <tr style="text-align: center;">
-                  <td scope="col"><%# Eval("Id") %></td>
-                  <td scope="col"><%# Eval("UserName") %></td>
-                  <td scope="col"><%# Eval("Email") %></td>
-                  <td scope="col">
-                      <asp:Label ID="lblBdate" runat="server"></asp:Label>
-                  </td>                    
-                  <td scope="col">
-                      <asp:Label ID="lblRegdate" runat="server"></asp:Label>
-                  </td>
-                  <td scope="col"><%# Eval("Roles") %></td>
-                  <td scope="col">
-                      <asp:Label ID="lblUserStatus" runat="server"></asp:Label>
-                  </td>
-                  <td scope="col">
-                  <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
-                  <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-sm text-primary" OnClick="btnDelete_Click" CommandArgument='<%# Eval("Id") %>'/>
-                  </td>
-              </tr>
-              </ItemTemplate>
-              </asp:Repeater>
-          </tbody>
-      </table>
-              </ContentTemplate>
-                  <Triggers>
-                      <asp:AsyncPostBackTrigger ControlID="hiddenBtn" EventName="Click" />
-                  </Triggers>
-              </asp:UpdatePanel>
+
+<asp:UpdatePanel ID="updatebookingRecordTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+    <ContentTemplate>
+<table class="table align-middle mb-0 booking_record_table datatable" id="bookingRecordTable">
+    <thead class="bg-secondary" style=" line-height:2;">
+      <tr class="header_row_title" >
+
+         
+
+        <th class="booking_id">
+            <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark  sort-button">
+            Booking ID<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+            </asp:LinkButton>
+            
+        </th>
+         <th class="booking_status">
+             <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark sort-button">
+             Status 
+            </asp:LinkButton>
+             <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
+         </th>
+        <th class="booking_vehicle">
+            <asp:LinkButton ID="btnSortVehicle" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark sort-button">
+            Vehicle Plate No. 
+            </asp:LinkButton>
+        </th>
+        <th class="booking_pickup">
+            <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Pickup_point" CssClass="text-dark  sort-button">
+            Pick Up Location <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+            </asp:LinkButton>
+        </th>            
+         <th class="booking_pickup">
+            <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="StartDate" CssClass="text-dark  sort-button">
+            Pick Up Time <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+            </asp:LinkButton>
+        </th>
+
+        <th class="booking_dropoff">
+            <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Dropoff_point" CssClass="text-dark sort-button">
+            Drop Off Location<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+            </asp:LinkButton>
+        </th>            
+         <th class="booking_dropoff">
+            <asp:LinkButton ID="btnSortDropOffTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EndDate" CssClass="text-dark sort-button">
+            Drop Off Time<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+            </asp:LinkButton>
+        </th>
+         <th class="booking_reject">
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EndDate" CssClass="text-dark sort-button">
+            Reject Reason<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+            </asp:LinkButton>
+        </th>
+
+         <th class="booking_edit" style="width:5%;text-align:center;">
+             Action
+         </th>
+      </tr>
+    </thead>
+    <tbody id="bookingtable_record">
+
+<asp:Repeater ID="rptBookingList" runat="server" >
+<ItemTemplate>
+      <tr class="rows1">
+    <td>
+      <div class=" align-items-center">    
+        <div class="ms-1">
+            <asp:HiddenField ID="hdnBookingId" runat="server" />
+          <p class="fw-bold mb-1"><%# Eval("Id") %></p>
+        </div>
+      </div>
+    </td>
+  
+       <td>         
+             <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
+               
+      </td>
+  
+    <td>
+    <p class="fw-normal mb-1"><%# Eval("CarPlate") %></p>
+    </td>
+
+    <td>
+      <p class="fw-normal mb-1"><%# Eval("Pickup_point") %></p>
+
+    </td>
+
+    <td>
+      <p class="text-muted mb-0"><%# Eval("StartDate") %></p>
+    </td>
+
+    <td>
+        <p class="fw-normal mb-1"><%# Eval("Dropoff_point") %></p>
+    </td>
+    
+    <td>
+          <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
+    </td>
+     <td>
+         -
+     </td>
+    <td>
+          <asp:Button ID="btnView" runat="server" CSSclass="edit_btn_style" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
+    </td>
+  </tr>
+  </ItemTemplate>
+ </asp:Repeater>  
+       
+    </tbody>
+   
+  </table>
+       
+</ContentTemplate>
+
+
+</asp:UpdatePanel>
        
   </div>
   </div>   
 
-     <script>
 
-     if (window.history.replaceState) {
-         window.history.replaceState(null, null, window.location.href);
-     }
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-     function loadModal() {
-         document.addEventListener("DOMContentLoaded", modal);
-         document.addEventListener("DOMContentLoaded", showhideButton);
-     }
-
-     function showhideButton() {
-         var hdnUserStatus = document.getElementById('<%= hdnUserStatus.ClientID %>').value;
-         var buttonGroup = document.querySelectorAll(".btn-both");
-         var button = null;
-
-         buttonGroup.forEach(function (btn) {
-             btn.style.display = "none";
-         });
-
-         if (hdnUserStatus == "0") {
-             button = document.querySelectorAll(".btn-ban");
-         } else {
-             button = document.querySelectorAll(".btn-unban");
-         }
-
-         button.forEach(function (btn) {
-             btn.style.display = "block";
-         });
-     }
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
-     function modal() {
-         addEventListener("DOMContentLoaded", (event) => {
-         $('#userInfoModal').modal('toggle');
-         showhideButton();
-         return false;
-         });
-     };
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        
+    <script type="text/javascript" src="../JS/paging.js"></script>
 
-     function modalDel() {
-         addEventListener("DOMContentLoaded", (event) => {
-             $('#ConfirmDelete').modal('toggle');
-             showhideButton();
-             return false;
-         });
-     };
 
-     function triggerButtonClick(event) {
-         if (event.keyCode == 13) {
-             event.preventDefault(); 
-             document.getElementById('<%= hiddenBtn.ClientID %>').click();
-         }
-     }
+    <script>
+         $(document).ready(function () {
+             var searchBoxId = "#" + '<%= txtBookingSearch.ClientID %>';
 
-     </script>
+  
+            $(searchBoxId).on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#bookingtable_record tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            function initializePagination() {
+                $('#bookingRecordTable').paging({ limit: 10 });
+            }
+
+            initializePagination(); // Initialize on page load
+
+
+
+             function updateSortIcons() {
+                 // Get the current sort direction from the HiddenField
+                 var sortDirection = document.getElementById('<%= hdnSortDirection.ClientID %>').value;
+
+                 // Update icon classes based on the current sort direction
+                 document.querySelectorAll('.sort-button').forEach(function (button) {
+                     var icon = button.querySelector('.sort-icon');
+                     if (icon) {
+                         if (sortDirection === 'ASC') {
+                             icon.classList.remove('ri-arrow-up-s-fill');
+                             icon.classList.add('ri-arrow-down-s-fill');
+                         } else {
+                             icon.classList.remove('ri-arrow-down-s-fill');
+                             icon.classList.add('ri-arrow-up-s-fill');
+                         }
+                     }
+                 });
+             }
+
+
+
+             function loadModal() {
+                 document.addEventListener("DOMContentLoaded", modal);
+             }
+
+             function modal() {
+                 addEventListener("DOMContentLoaded", (event) => {
+                     $('#userInfoModal').modal('toggle');
+                     return false;
+                 });
+             };
+
+        });
+
+
+   
+
+
+
+    </script>
 
 </asp:Content>
