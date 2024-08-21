@@ -69,7 +69,7 @@
                 <a href="#" class="nav-link text-black">
                     <span class="text-muted d-block">Date Time:</span>
                     <span>Start :&nbsp;</span>
-                    <asp:TextBox ID="txtStartTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline" Width="180px" ValidationGroup="filter"></asp:TextBox>  
+                    <asp:TextBox ID="txtStartTime" runat="server" TextMode="DateTimeLocal" CssClass="form-control d-inline" Width="180px" ValidationGroup="filter" onchange="restrictDate(this)"></asp:TextBox>  
                     <br />
                     <asp:RequiredFieldValidator ID="requireStart" runat="server" ErrorMessage="Start Date is Required" ControlToValidate="txtStartTime" CssClass="validate" ValidationGroup="filter" Display="Static"></asp:RequiredFieldValidator>
                     <br />
@@ -185,6 +185,11 @@
             event.preventDefault();
             document.getElementById('<%= btnFilter.ClientID %>').click();
         }
+    }
+
+    function restrictDate(date) {       
+        var endTimeElement = document.getElementById('<%= txtEndTime.ClientID %>');
+        endTimeElement.min = date.value;
     }
 </script>
 </asp:Content>
