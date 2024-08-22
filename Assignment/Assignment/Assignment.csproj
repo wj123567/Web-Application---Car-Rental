@@ -99,6 +99,7 @@
     <Content Include="Image\RewardPoint\bg-5.png" />
     <Content Include="JS\paging.js" />
     <Content Include="Management\AddOnManagement.aspx" />
+    <Content Include="Management\AdminRedemption.aspx" />
     <Content Include="Management\AdminRewardPoint.aspx" />
     <Content Include="bookinfo.aspx" />
     <Content Include="Management\BookingManagement.aspx" />
@@ -226,6 +227,13 @@
     </Compile>
     <Compile Include="Management\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Management\AdminRedemption.aspx.cs">
+      <DependentUpon>AdminRedemption.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\AdminRedemption.aspx.designer.cs">
+      <DependentUpon>AdminRedemption.aspx</DependentUpon>
     </Compile>
     <Compile Include="Management\AdminRewardPoint.aspx.cs">
       <DependentUpon>AdminRewardPoint.aspx</DependentUpon>

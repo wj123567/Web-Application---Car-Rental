@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="RewardPoint.aspx.cs" Inherits="Assignment.RewardPoint" %>
 <asp:Content ID="rewardPoint" ContentPlaceHolderID="main" runat="server">
     <%--<div style="min-height: 50px; overflow:auto; width:100%"></div>--%>
+    
     <div class="RP d-flex flex-wrap">
         <div class="RP-left" style="flex:1;">
             <div class="RPHeader">
@@ -29,7 +30,27 @@
 
         <div class="RP-right";>
             <div class="right-upperside">
-                <a href="#">Points History</a>
+                <a href="#wocao" class="" data-bs-toggle="modal">Points History</a>
+            </div>
+            <!-- Modal Structure -->
+
+            <div id="wocao" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Points History</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body content goes here.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="right-lowerside-1">
                 <div class="right-lowerside-2">
@@ -40,4 +61,5 @@
         </div>
     </div>
 
+    
 </asp:Content>
