@@ -62,14 +62,39 @@
                     <div class="col-2">
                          <asp:Button ID="btnDelete" CssClass="booking_delete_btn" runat="server" Text="Cancel" OnClick="btnDelete_Click"/>
                     </div>
-             </div>          
+            </div>          
      
     
                 <div>
                   
                   <!-- row -->
                   <div class="row justify-content-between booking_record">
-                      <asp:Image ID="img_car" runat="server" />
+                      <div class="d-flex flex-row flex-wrap">
+                          <div style="flex:1;"><asp:Image ID="img_car" runat="server" /></div>
+                          <div style="flex:3;">
+                              <div class="rating-container" style="border:1px solid lightgray;">
+                                  <div class="rate-first-row">
+                                    <h5 style="display: inline-block; font-size: clamp(18px, 3vh, 33px)">
+                                        <strong>Rate Here: </strong>
+                                    </h5>
+                                    <div class="rating d-inline-block" style="flex:1">
+                                        <asp:LinkButton ID="btnStar1" runat="server"><i class="fa-solid fa-star checked"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnStar2" runat="server"><i class="fa-solid fa-star checked"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnStar3" runat="server"><i class="fa-solid fa-star checked"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnStar4" runat="server"><i class="fa-solid fa-star checked"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnStar5" runat="server"><i class="fa-solid fa-star checked"></i></asp:LinkButton>
+                                    </div>
+                                  </div>
+                                  <div class="rate-second-row">
+                                      <asp:TextBox ID="txtComment" runat="server" TextMode="MultiLine" Rows="5" Columns="100" CssClass="txtComment"></asp:TextBox>
+                                  </div>
+                                  <br />
+                                  <div class="align-end"><asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-success"/></div>
+                              </div>
+                          </div>
+                      </div>
+
+
                           <table class="booking_car_table">
 
                               <tr class="booking_car_table_header">
@@ -174,7 +199,8 @@
                     </ul>
                   </div>
                 </div>
-              </div>
+
+            </div>
                  <!-- card -->
  <div class="card mt-4">
    <!-- card body -->

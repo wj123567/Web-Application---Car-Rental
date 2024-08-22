@@ -166,3 +166,49 @@
         border-bottom-width: 2px;
         transform: translateY(2px);
     }
+
+    /*You*/
+.rating-container {
+    border: 1px solid lightgray;
+    border-radius: 12px;
+    padding: 3%;
+    margin: 2%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    background-color: white;
+    color: black;
+}
+
+.rate-first-row {
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 10px;
+}
+
+.rating {
+    margin: 0 0 10px 10px;
+    vertical-align: middle;
+}
+
+.rating i {
+    color: lightgray;
+    cursor: pointer;
+    font-size: 22px;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Hover state: Orange color */
+.rating i:hover,
+.rating i:hover ~ i {
+    color: orange;
+}
+
+/* Clicked state: Orange color */
+.rating i.checked {
+    color: orange;
+}
+
+.txtComment {
+    padding: 10px;
+    resize: none;
+    overflow-y: auto;
+    width: 100%;
+}

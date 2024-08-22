@@ -13,6 +13,7 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!Page.IsPostBack)
             {
                 // Retrieve BookingId from session
@@ -24,13 +25,16 @@ namespace Assignment
                     GetBookingDetails(bookingId);
                     
                 }
+
+                txtComment.Attributes.Add("placeholder", "Write Your Comment Here!");
             }
 
         }
 
         private void GetBookingDetails(string bookingId)
         {
-            // Replace with your actual database connection string
+
+            
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             decimal addonTotal = calcAddOnTotal(bookingId);
             using (SqlConnection con = new SqlConnection(connectionString))
