@@ -9,12 +9,6 @@
 </asp:Content>
 
 <asp:Content ID="Redemption" ContentPlaceHolderID="main" runat="server">
-    <%-- connect sql data source --%>
-    <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT ItemName, ItemPoints, ItemDescription, ItemImage FROM RedeemItem WHERE (Status = @Status)">
-        <SelectParameters>
-            <asp:Parameter DefaultValue="active" Name="Status" Type="String"></asp:Parameter>
-        </SelectParameters>
-    </asp:SqlDataSource>--%>
 
     <div class="redemption-container">
         <div class="redemption-container-header">
@@ -43,7 +37,7 @@
         
                             <p><%# Eval("ItemDescription") %> </p>
         
-                            <button class="btn btn-danger resize">Add to cart</button>
+                            <button class="btn btn-danger resize">Redeem</button>
                         </div>
                     </div>
                 </ItemTemplate>

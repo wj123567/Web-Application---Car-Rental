@@ -44,11 +44,6 @@ namespace Assignment
         {
             //System.Diagnostics.Debug.WriteLine("SessionId.toString: " + userid);
 
-            //string username = " ";
-            //string currentPoints = " ";
-            //string expiryPoints = " ";
-            //string expiryDate = " ";
-
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
             {
                 //get username and total points

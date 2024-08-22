@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\users\\zobby\\documents\\netbeansprojects\\javaassignment\\web-application---car-rental\\assignment\\assignment\\management\\adminredemption.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\adminredemption.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -43,19 +38,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AdminRedemption.aspx",
-              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AdminRedemption.aspx",
-              "RelativeDocumentMoniker": "Assignment\\Management\\AdminRedemption.aspx",
-              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AdminRedemption.aspx",
-              "RelativeToolTip": "Assignment\\Management\\AdminRedemption.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-08-22T12:52:29.017Z",
-              "EditorCaption": ""
             }
           ]
         },
