@@ -54,7 +54,9 @@
                         <li class="sidebar-item">
                             <a href="AdminRewardPoint.aspx" class="sidebar-link">Reward Point Management</a>
                         </li>
-                        
+                        <li class="sidebar-item">
+                            <a href="AdminRedemption.aspx" class="sidebar-link">Redemption Management</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="sidebar-item">

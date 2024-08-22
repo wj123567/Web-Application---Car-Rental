@@ -29,6 +29,14 @@ namespace Assignment
                     Session["Id"] = getCookies();
                     LoadUserData(Session["Id"].ToString());
                 }
+
+                if (Session["Id"] != null)
+                {
+                    if (Session["OTPCountdown"] != null)
+                    {
+                        verifyTimer.Enabled = true;                   
+                    }
+                }
             }
         }
 
@@ -189,6 +197,12 @@ namespace Assignment
             txtIniMail.Text = txtEmailAddress.Text;
             labelValidateSend.Visible = true;
             labelValidateSend2.Visible = true;
+
+            int countdownDuration = 60; 
+
+                
+             Session["OTPCountdown"] = countdownDuration;
+             verifyTimer.Enabled = true;
             }
         }
 
@@ -240,6 +254,9 @@ namespace Assignment
             {
                 labelValidateSend2.Visible = false;
                 txtIniMail2.Enabled = true;
+                verifyTimer.Enabled = false;
+                Session.Remove("OTPCountdown");
+                ScriptManager.RegisterStartupScript(this, GetType(), "UpdateCountdown", $"startCountdown({0});", true);                
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modal2()", true);
             }
             else if(!Page.IsValid)
@@ -281,6 +298,9 @@ namespace Assignment
                 com.Parameters.AddWithValue("@Id", Session["Id"]);
                 com.ExecuteNonQuery();
                 con.Close();
+                verifyTimer.Enabled = false;
+                Session.Remove("OTPCountdown");
+                ScriptManager.RegisterStartupScript(this, GetType(), "UpdateCountdown", $"startCountdown({0});", true);
                 Response.Redirect("profile.aspx");
 
             }
@@ -290,14 +310,39 @@ namespace Assignment
             }
         }
 
-        protected void btnCancel2_Click(object sender, EventArgs e)
+        protected void btnCancel_Click(object sender, EventArgs e)
         {
+            verifyTimer.Enabled = false;
+            Session.Remove("OTPCountdown");
+            ScriptManager.RegisterStartupScript(this, GetType(), "UpdateCountdown", $"startCountdown({0});", true);
             Response.Redirect("profile.aspx");
         }
 
-        protected void btnCancel_Click(object sender, EventArgs e)
+        protected void verifyTimer_Tick(object sender, EventArgs e)
         {
-            Response.Redirect("profile.aspx");
+            if(Session["OTPCountdown"] != null)
+            {
+                int remainingTime = (int)Session["OTPCountdown"];
+
+                if (remainingTime > 0)
+                {
+                    remainingTime--;
+                    Session["OTPCountdown"] = remainingTime;
+
+                    btnSendIniCode.Enabled = false;
+                    btnSendIniCode2.Enabled = false;
+
+                    ScriptManager.RegisterStartupScript(this, GetType(), "UpdateCountdown", $"startCountdown({remainingTime});", true);
+                }
+                else
+                {
+                    Session.Remove("OTPCountdown");
+                }
+            }
+            else
+            {
+                verifyTimer.Enabled = false;
+            }
         }
     }
 }
