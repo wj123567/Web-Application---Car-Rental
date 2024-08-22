@@ -47,7 +47,8 @@ namespace Assignment.Management
             repeaterAddOnTable.DataSource = ds.Tables["AddOnTable"];
             repeaterAddOnTable.DataBind();
             con.Close();
-            UpdatePageInfo(false, getTotalRow());
+            int totalRow = getTotalRow();
+            lblTotalRecord.Text= "Total Record(s) = "+totalRow.ToString();
         }
 
         protected void btnSort_Click(object sender, EventArgs e)
@@ -89,27 +90,10 @@ namespace Assignment.Management
             SqlCommand com = new SqlCommand(selectAll, con);
             con.Open();
             return (int)com.ExecuteScalar();
+           
         }
 
-        protected void UpdatePageInfo(bool isSearching, int row)
-        {
-            if (!isSearching)
-            {
-                int totalPage = (int)Math.Ceiling((double)row / (double)PageSize);
-                lblPageInfo.Text = "Page " + PageNumber + " of " + totalPage;
-                lblTotalRecord.Text = "Total Record: " + row;
-                btnPrevious.Enabled = PageNumber > 1;
-                btnNext.Enabled = PageNumber < totalPage;
-            }
-            else if (isSearching)
-            {
-                lblPageInfo.Text = "Page " + 1 + " of " + 1;
-                lblTotalRecord.Text = "Total Record: " + row;
-                btnPrevious.Enabled = false;
-                btnNext.Enabled = false;
-            }
-
-        }
+      
 
 
         protected void btnUploadAddOn_Click(object sender, EventArgs e)

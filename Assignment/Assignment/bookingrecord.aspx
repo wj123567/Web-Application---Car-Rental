@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookingrecord.aspx.cs" Inherits="Assignment.bookingrecord" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <link href="CSS/bookingrecord.css" rel="stylesheet" />
+    <link href="CSS/paging.css" rel="stylesheet" />
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     
@@ -16,12 +17,13 @@
                     <asp:TextBox ID="txtBookingSearch" cssclass="form-control form-input" runat="server"  placeholder="Search.."></asp:TextBox>
                     </div>
                 </div>
-                <div class="col-6 col-md-4">
+                <div class="col-6 col-md-2">
                    <asp:DropDownList ID="ddlStatusFilter" runat="server" cssclass="form-control statusddl_style" AutoPostBack="True" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
                         <asp:ListItem Value="All" Text="All Statuses" />
                         <asp:ListItem Value="Pending" Text="Pending" />
                         <asp:ListItem Value="Booked" Text="Booked" />
                         <asp:ListItem Value="Cancelled" Text="Cancelled" />
+                        <asp:ListItem Value="Completed" Text="Completed" />
                    </asp:DropDownList>
                 </div>
                
@@ -38,6 +40,7 @@
 
         <asp:UpdatePanel ID="updatebookingRecordTable" class="bookingRecordTablePanel" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
         <ContentTemplate>
+            <div class="table-responsive">
     <table class="table align-middle mb-0 booking_record_table datatable" id="bookingRecordTable">
         <thead class="bg-secondary" style=" line-height:2;">
           <tr class="header_row_title" >
@@ -144,9 +147,9 @@
      </asp:Repeater>  
            
         </tbody>
-       
+        <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
       </table>
-           
+           </div>
     </ContentTemplate>
 
 
@@ -155,8 +158,6 @@
       </div>
   </div>
 
-      
- 
 
 
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

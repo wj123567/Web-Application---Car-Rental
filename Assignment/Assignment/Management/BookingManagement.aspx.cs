@@ -62,6 +62,19 @@ namespace Assignment.Management
                 }
 
             }
+            int totalRow = getTotalRow();
+            lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
+
+        }
+
+        protected int getTotalRow()
+        {
+            string selectAll = "SELECT COUNT(*) FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(selectAll, con);
+            con.Open();
+            return (int)com.ExecuteScalar();
+
         }
 
         protected string GetBadgeClass(string status)
@@ -74,6 +87,8 @@ namespace Assignment.Management
                     return "bg-success";
                 case "Cancelled":
                     return "bg-danger";
+                case "Completed":
+                    return "bg-warning";
                 default:
                     return "bg-default"; // Or any default class
             }
@@ -152,7 +167,6 @@ namespace Assignment.Management
             //here hard code
             //here hard code
 
-          /*  String id = "ae0a1581-21ea-4ea6-920c-80bef28a0129";*/
             String userId= checkUser();
             
             LoadAvailableUser(userId);
@@ -163,18 +177,26 @@ namespace Assignment.Management
 
         }
 
-       
+       protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+            Button btnView = (Button)sender;
+            String bookingId = btnView.CommandArgument;
+            string approvesql = "UPDATE Booking SET Status = 'Completed' WHERE Id = @Id";
+            updateAfterBookStatus(approvesql,bookingId);
+            Response.Redirect("BookingManagement.aspx");
+            
+        }
 
         protected void repeaterBookingList_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button btnView = (Button)e.Item.FindControl("btnView");
-            
+            Button btnUpdate = (Button)e.Item.FindControl("btnUpdate");
             
             if (btnView != null)
             {
                 ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
                 scriptManager.RegisterPostBackControl(btnView);
-                
+                scriptManager.RegisterPostBackControl(btnUpdate);
             }
 
            
@@ -296,10 +318,10 @@ namespace Assignment.Management
                 txtPickUpTime.Text = pickup_time.ToString("yyyy-MM-dd hh:mm:ss");
                 txtDropOffTime.Text = dropoff_time.ToString("yyyy-MM-dd hh:mm:ss");
 
-               /* if (reader["Notes"].ToString() != null)
+                if (reader["Notes"].ToString() != null)
                 {
                     txtAdditionalNotes.Text = reader["Notes"].ToString();
-                }*/
+                }
             }
             con.Close();
             reader.Close();
@@ -336,17 +358,17 @@ namespace Assignment.Management
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-            string approve = "UPDATE Booking SET Approval = 'A', RejectReason = @RejectReason WHERE Id = @Id";
+            string approve = "UPDATE Booking SET Status = 'Cancelled', RejectReason = @RejectReason WHERE Id = @Id";
             string rejectReason = " ";
             updateApproval(approve, rejectReason);
-            Server.Transfer("BookingManagement.aspx");
+            Response.Redirect("BookingManagement.aspx");
         }
 
         protected void btnReject2_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
-               /* string reject = "UPDATE Driver SET Approval = 'R', RejectReason = @RejectReason WHERE Id = @Id";
+                string reject = "UPDATE Booking SET Status = 'Booked', RejectReason = @RejectReason WHERE Id = @Id";
                 string rejectReason = " ";
                 if (ddlRejectReason.SelectedValue == "Other")
                 {
@@ -356,17 +378,18 @@ namespace Assignment.Management
                 {
                     rejectReason = ddlRejectReason.SelectedValue;
                 }
-                updateApproval(reject, rejectReason);*/
-                Server.Transfer("BookingManagement.aspx");
+                updateApproval(reject, rejectReason);
+                
+                Response.Redirect("BookingManagement.aspx");
             }
         }
 
         protected void updateApproval(string sql, string reject)
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            SqlCommand com = new SqlCommand(sql, con);
             con.Open();
-            com.Parameters.AddWithValue("@Id", Session["DriverID"].ToString());
+            SqlCommand com = new SqlCommand(sql, con);
+            com.Parameters.AddWithValue("@Id", Session["BookingId"].ToString());
             com.Parameters.AddWithValue("@RejectReason", reject);
             com.ExecuteNonQuery();
             con.Close();
@@ -386,8 +409,18 @@ namespace Assignment.Management
                 requireOtherReason.Enabled = false;
                 updateReason.Update();
             }
+
         }
 
+        protected void updateAfterBookStatus(String updatesql, String bookingId)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(updatesql, con);
+            com.Parameters.AddWithValue("@Id", bookingId);
+            com.ExecuteNonQuery();
+            con.Close();
+        }
         protected void btnOk_Click(object sender, EventArgs e)
         {
             Response.Redirect("BookingManagement.aspx");

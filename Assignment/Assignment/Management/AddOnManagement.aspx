@@ -2,7 +2,27 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
      <link href="../CSS/carManagement.css" rel="stylesheet" />
      <link href="../CSS/addonManagement.css" rel="stylesheet" />
+    <link href="../CSS/paging.css" rel="stylesheet" />
 
+    <style>
+    .form{
+    position: relative;
+    }
+    
+    .form .fa-search {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: #9ca3af;
+    }
+    
+    .form-input {
+        height: 55px;
+        text-indent: 33px;
+        border-radius: 10px;
+    }
+    </style>
+   
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
      <asp:HiddenField ID="hdnAddOnId" runat="server" />
      <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
@@ -112,13 +132,13 @@
         <asp:UpdatePanel ID="updateAddOn" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
         <ContentTemplate>
         <div>            
-           
-            <div class="float-start mb-2">
+           <div class="col-6 col-md-8 search_style">
+            <div class="form">
+            <i class="fa fa-search"></i>
             <asp:TextBox ID="txtAddOnSearch" cssclass="form-control form-input" runat="server"  placeholder="Search.."></asp:TextBox>
-            
-           
             </div>
-
+               </div>
+            <div class="table-responsive">
             <table id="addOnTable" class="addon_table table table-striped table-bordered table-hover mb-2 mt-4">
             <thead>
                 <tr style="text-align: center;">
@@ -164,23 +184,28 @@
                 </ItemTemplate>
                 </asp:Repeater>
             </tbody>
-        </table>
+                <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
+        </table>    
+           </div>
         <div>
+             
         </div>
     </div>
         <div>
-        <div class="float-start">
-        <asp:Button ID="btnPrevious" runat="server" Text="Previous" OnClick="btnPrevious_Click" Enabled="False" CssClass="btn btn-primary btn-sm" />
-        <asp:Label ID="lblPageInfo" runat="server" Text="" CssClass="text-dark mx-2"></asp:Label>
-        <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="btnNext_Click" CssClass="btn btn-primary btn-sm" />
-        </div>  
-        <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
-        </div>                        
+        
+        
+        
+                             
     </div>
     </ContentTemplate>
     </asp:UpdatePanel>
     </div>
 </div>
+
+
+     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+     
+ <script type="text/javascript" src="../JS/paging.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -193,6 +218,12 @@
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
+
+            function initializePagination() {
+                $('#addOnTable').paging({ limit: 10 });
+            }
+
+            initializePagination(); // Initialize on page load
 
         });
 

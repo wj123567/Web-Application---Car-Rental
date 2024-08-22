@@ -93,31 +93,7 @@
     }
 
 
-.paging-nav {
-     text-align:right;
-     margin-top:50px;
-     padding:10px; 
-}
-
-
-    .paging-nav a {
-        margin: auto 1px;
-        width: 25px;
-        height: 25px;
-        text-decoration: none;
-        display: inline-block;
-        padding: 10px 15px;
-        background: rgb(135, 206, 235,0.4);
-        color: black;
-        border-radius: 3px;
-    }
-
-
-    .paging-nav .selected-page {
-        background: rgb(135, 206, 235);
-        font-weight: bold;
-    }
-
+/*
 @media only screen and (max-width: 992px){
     .booking_record_table {
         width: 50%;
@@ -167,4 +143,4 @@
                 padding: 2px 5px;
             }
         }
-}
+}*/

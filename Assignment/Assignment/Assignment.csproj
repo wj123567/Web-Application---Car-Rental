@@ -90,6 +90,7 @@
     <Content Include="CSS\AdminRedemption.css" />
     <Content Include="CSS\bookingManagement.css" />
     <Content Include="CSS\bookingrecordupdate.css" />
+    <Content Include="CSS\paging.css" />
     <Content Include="CSS\productListing.css" />
     <Content Include="CSS\RewardPoint.css" />
     <Content Include="Image\RewardPoint\OnlyCars.jpg" />

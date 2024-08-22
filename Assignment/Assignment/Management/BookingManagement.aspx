@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Management/Admin.Master" AutoEventWireup="true" CodeBehind="BookingManagement.aspx.cs" Inherits="Assignment.Management.BookingManagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <link href="../CSS/bookingManagement.css" rel="stylesheet" />
- 
+    <link href="../CSS/paging.css" rel="stylesheet" />
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnBookingId" runat="server" />
@@ -19,11 +19,11 @@
       <div class="modal-body">
           <asp:DropDownList ID="ddlRejectReason" runat="server" CssClass="form-select" AutoPostBack="True" ValidationGroup="rejectGroup" OnSelectedIndexChanged="ddlRejectReason_SelectedIndexChanged">
               <asp:ListItem Value="0">Select Reject Reason</asp:ListItem>
-              <asp:ListItem>Invalid driving license (expired/illegible)</asp:ListItem>
-              <asp:ListItem>Unclear document scan or image</asp:ListItem>
-              <asp:ListItem>Booking Photo Attached unmatch with existing photos</asp:ListItem>
-              <asp:ListItem>Unclear selfie quality (poor lighting/visibility)</asp:ListItem>
-              <asp:ListItem>Other</asp:ListItem>
+              <asp:ListItem Value="Vehicle already dispatched">Vehicle already dispatched</asp:ListItem>
+              <asp:ListItem Value="Payment Already Processed">Payment Already Processed</asp:ListItem>
+              <asp:ListItem Value="Late Cancellation Request">Late Cancellation Request</asp:ListItem>
+              <asp:ListItem Value="Preparation Costs Incurred">Preparation Costs Incurred</asp:ListItem>
+              <asp:ListItem >Other</asp:ListItem>
           </asp:DropDownList>
           <asp:RequiredFieldValidator ID="requireReason" runat="server" ErrorMessage="Reject Reason is Required" CssClass="validate" InitialValue="0" ValidationGroup="rejectGroup" ControlToValidate="ddlRejectReason"></asp:RequiredFieldValidator>
           <asp:TextBox ID="txtOtherReason" runat="server" ValidationGroup="rejectGroup" CssClass="form-control mt-1" placeholder="Other Reason" Visible="False"></asp:TextBox>
@@ -97,9 +97,9 @@
               <button type="button" class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#userInfoModal">Back</button>
           </div>
           <div class="ms-auto">
-        <asp:Button ID="btnOk" runat="server" Text="Ok" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnOk_Click"/>
-        <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnApprove_Click"/>
-        <asp:Button ID="btnReject" runat="server" Text="Reject" CssClass="btn btn-danger" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#rejectReason" OnClientClick="return false"/>
+        <asp:Button ID="btnOk" runat="server" Text="Close" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnOk_Click"/>
+        <asp:Button ID="btnApprove" runat="server" Text="Approve Cancellation" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnApprove_Click"/>
+        <asp:Button ID="btnReject" runat="server" Text="Reject Cancellation" CssClass="btn btn-danger" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#rejectReason" OnClientClick="return false"/>
          </div>
       </div>
     </div>
@@ -228,12 +228,10 @@
                 <asp:ListItem Value="Pending" Text="Pending" />
                 <asp:ListItem Value="Booked" Text="Booked" />
                 <asp:ListItem Value="Cancelled" Text="Cancelled" />
+               <asp:ListItem Value="Completed" Text="Completed" />
            </asp:DropDownList>
         </div>
-        <div class="col-6 col-md-2 text-end">
-            <asp:Button ID="btnFilter" runat="server"   cssclass="btn btn-secondary filter_btn" Text="Filter"   /> 
-
-    </div>
+        
 </div>
 
   <div>
@@ -339,16 +337,18 @@
             <p class="text-muted mb-0"><%# Eval("CancelReason") %></p>
         </td>
          <td>
-             <asp:Label ID="lblRejectReason" runat="server" Text="-"></asp:Label>
+             <p class="text-muted mb-0"><%# Eval("RejectReason") %>
          </td>
         <td>
              <asp:Button ID="btnView" runat="server" CSSclass="btn btn-sm text-primary" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
+             <asp:Button ID="btnUpdate" runat="server" CSSclass="btn btn-sm text-primary" Text="Done" OnClick="btnUpdate_Click" CommandArgument='<%# Eval("Id") %>'/>
             
         </td>
       </tr>
       </ItemTemplate>
      </asp:Repeater>   
         </tbody>
+         <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
       </table>
        </div>
     </ContentTemplate>

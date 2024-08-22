@@ -18,9 +18,7 @@ namespace Assignment
                 GetBookRecords();
             }
   
-
         }
-
 
         private void GetBookRecords(string statusFilter = "All")
         {
@@ -55,6 +53,18 @@ namespace Assignment
                     }
                
             }
+            int totalRow = getTotalRow();
+            lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
+        }
+
+        protected int getTotalRow()
+        {
+            string selectAll = "SELECT COUNT(*) FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(selectAll, con);
+            con.Open();
+            return (int)com.ExecuteScalar();
+
         }
 
         protected string GetBadgeClass(string status)
@@ -67,6 +77,8 @@ namespace Assignment
                     return "bg-success";
                 case "Cancelled":
                     return "bg-danger";
+                case "Completed":
+                    return "bg-warning";
                 default:
                     return "bg-default"; // Or any default class
             }
