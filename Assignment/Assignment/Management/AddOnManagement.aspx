@@ -5,7 +5,7 @@
 
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
      <asp:HiddenField ID="hdnAddOnId" runat="server" />
-
+     <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
 
         <div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
@@ -40,6 +40,8 @@
                <asp:Image ID="imgAddOnPic" runat="server" CssClass="img-car-pic mb-2" Width="300px" ImageUrl="~/Image/no-img -long.png" />
                </asp:LinkButton>
                <div id="img-warning-text" class="small font-italic text-muted">JPG or PNG no larger than 2 MB</div>
+               <asp:RequiredFieldValidator ID="rqfuAddOnPic" runat="server" ControlToValidate="fuAddOnPic" ErrorMessage="Please upload an image."  InitialValue=""  ValidationGroup="uploadCar"  Display="Dynamic"  CssClass="validate">
+</asp:RequiredFieldValidator>
                <asp:CustomValidator ID="validateAddOnPic" runat="server" ControlToValidate="fuAddOnPic" CssClass="validate" ValidationGroup="uploadCar" ValidateEmptyText="True" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile"></asp:CustomValidator>
                <asp:FileUpload ID="fuAddOnPic" runat="server" CssClass="uploadPicture" onchange="ShowPreview(event)"/>
                <br />
@@ -112,27 +114,39 @@
         <div>            
            
             <div class="float-start mb-2">
-            <asp:TextBox ID="searchBar" runat="server" CssClass="form-control form-control-sm rounded border-dark" placeholder="Search..." ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
-            <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" style="display:none;"/>
+            <asp:TextBox ID="txtAddOnSearch" cssclass="form-control form-input" runat="server"  placeholder="Search.."></asp:TextBox>
+            
+           
             </div>
 
             <table id="addOnTable" class="addon_table table table-striped table-bordered table-hover mb-2 mt-4">
             <thead>
                 <tr style="text-align: center;">
                     <th scope="col" class="name_header">
-                        <asp:LinkButton ID="btnSortName" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="AddOnName" CssClass="text-dark">Add On Name</asp:LinkButton>
-                     </th>
+                        <asp:LinkButton ID="btnSortName" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Name" CssClass="text-dark sort-button">
+                            Add On Name<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                        </asp:LinkButton>
+                    </th>
                     <th scope="col" class="desc_header">                        
-                        <asp:LinkButton ID="btnSortDescription" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="AddOnDesc" CssClass="text-dark">Add On Description</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortDescription" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Description" CssClass="text-dark sort-button">
+                            Add On Description<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px">
+
+                        </asp:LinkButton></th>
                     <th scope="col" class="price_header">                        
-                        <asp:LinkButton ID="btnSortPrice" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="AddOnPrice" CssClass="text-dark">Add On Price</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortPrice" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Price" CssClass="text-dark sort-button">
+                            Add On Price
+                            <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                        </asp:LinkButton></th>
                     <th scope="col" class="quantity_header">                        
-                        <asp:LinkButton ID="btnSortMaxQuantity" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="AddOnMax" CssClass="text-dark">Add On Maximum Quantity</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortMaxQuantity" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="maxQuantity" CssClass="text-dark sort-button">
+                            Add On Maximum Quantity
+                            <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                        </asp:LinkButton></th>
                     
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="addOnTable_record">
                 <asp:Repeater ID="repeaterAddOnTable" runat="server" OnItemCreated="repeaterAddOnTable_ItemCreated">
                 <ItemTemplate>
                 <tr style="text-align: center;">
@@ -169,6 +183,19 @@
 </div>
 
     <script>
+        $(document).ready(function () {
+            var searchBoxId = "#" + '<%= txtAddOnSearch.ClientID %>';
+
+
+            $(searchBoxId).on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#addOnTable_record tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+        });
+
         function fileUpload() {
             document.getElementById('<%= validateAddOnPic.ClientID %>').enabled = true;
              document.getElementById('<%= fuAddOnPic.ClientID %>').click();
@@ -224,5 +251,23 @@
 
         }
 
+        function updateSortIcons() {
+            // Get the current sort direction from the HiddenField
+            var sortDirection = document.getElementById('<%= hdnSortDirection.ClientID %>').value;
+
+             // Update icon classes based on the current sort direction
+             document.querySelectorAll('.sort-button').forEach(function (button) {
+                 var icon = button.querySelector('.sort-icon');
+                 if (icon) {
+                     if (sortDirection === 'ASC') {
+                         icon.classList.remove('ri-arrow-up-s-fill');
+                         icon.classList.add('ri-arrow-down-s-fill');
+                     } else {
+                         icon.classList.remove('ri-arrow-down-s-fill');
+                         icon.classList.add('ri-arrow-up-s-fill');
+                     }
+                 }
+             });
+        }
     </script>
 </asp:Content>

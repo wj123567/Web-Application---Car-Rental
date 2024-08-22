@@ -43,11 +43,43 @@ namespace Assignment.Management
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds, "AddOnTable");
-            ViewState["CarTable"] = ds.Tables["AddOnTable"];
+            ViewState["AddOnTable"] = ds.Tables["AddOnTable"];
             repeaterAddOnTable.DataSource = ds.Tables["AddOnTable"];
             repeaterAddOnTable.DataBind();
             con.Close();
             UpdatePageInfo(false, getTotalRow());
+        }
+
+        protected void btnSort_Click(object sender, EventArgs e)
+        {
+            LinkButton button = (LinkButton)sender;
+            string name = button.CommandName;
+            string sort = button.CommandArgument;
+            if (sort == "DESC")
+            {
+                button.CommandArgument = "ASC";
+            }
+            else
+            {
+                button.CommandArgument = "DESC";
+            }
+
+            // Trigger client-side icon update
+            ScriptManager.RegisterStartupScript(this, GetType(), "UpdateSort", "updateSortIcons();", true);
+
+
+            DataTable AddOnData = (DataTable)ViewState["AddOnTable"];
+            DataView dataView = AddOnData.DefaultView;
+            dataView.Sort = name + " " + sort;
+            DataTable sortedData = dataView.ToTable();
+
+            ViewState["AddOnTable"] = sortedData;
+            repeaterAddOnTable.DataSource = sortedData;
+            repeaterAddOnTable.DataBind();
+            updateAddOn.Update();
+
+            // Store the current sort direction
+            hdnSortDirection.Value = button.CommandArgument; // Store current sort direction
         }
 
         protected int getTotalRow()
@@ -149,8 +181,8 @@ namespace Assignment.Management
         }
 
         protected void btnAddNewCar_Click(object sender, EventArgs e)
-        {
-            /*Server.Transfer("CarManagement.aspx");*/
+        { 
+            Server.Transfer("AddOnManagement.aspx");
         }
 
         protected void hiddenBtn_Click(object sender, EventArgs e)
@@ -286,6 +318,8 @@ namespace Assignment.Management
                 }
             }
         }
+
+       
 
         protected void repeaterAddOnTable_ItemCreated(object sender, RepeaterItemEventArgs e)
         {

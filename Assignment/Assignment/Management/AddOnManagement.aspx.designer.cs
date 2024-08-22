@@ -33,6 +33,15 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.HiddenField hdnAddOnId;
 
         /// <summary>
+        /// hdnSortDirection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSortDirection;
+
+        /// <summary>
         /// btnConfirmDelete control.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,15 @@ namespace Assignment.Management
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image imgAddOnPic;
+
+        /// <summary>
+        /// rqfuAddOnPic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqfuAddOnPic;
 
         /// <summary>
         /// validateAddOnPic control.
@@ -213,22 +231,13 @@ namespace Assignment.Management
         protected global::System.Web.UI.UpdatePanel updateAddOn;
 
         /// <summary>
-        /// searchBar control.
+        /// txtAddOnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox searchBar;
-
-        /// <summary>
-        /// hiddenBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button hiddenBtn;
+        protected global::System.Web.UI.WebControls.TextBox txtAddOnSearch;
 
         /// <summary>
         /// btnSortName control.
