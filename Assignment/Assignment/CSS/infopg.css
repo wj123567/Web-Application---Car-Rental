@@ -83,18 +83,34 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    position: relative;
+    position:relative;
     background-color: #33479b;
     border-top-left-radius: 40px;
     border-bottom-left-radius: 40px;
 }
 
-    .col_left img {
-        width: 60%;
+
+
+.image-frame {
+    width: 350px;
+    height: 250px;
+    border: 1px solid gray;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    position:absolute;
+    left:10%;
+}
+
+    .image-frame img {
+        width: 100%;
         height: auto;
         display: block;
-        position: absolute;
+        
         right: 5%;
+        object-fit: cover;
     }
 
 .col_right {
@@ -591,6 +607,8 @@ h6.charge_title {
     .addon_subinfo{
         display:none;
     }
+
+   
 }
 /*.left-side .box:nth-child(1) {
     height: 150px;

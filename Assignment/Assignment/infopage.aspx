@@ -47,8 +47,10 @@
  
     <section class="info_banner">
         
-            <div class="col_left">
+            <div class="col_left ">
+                <div class="image-frame">
                 <asp:Image ID="carImage"  cssclass="header_carimg" runat="server" />
+                </div>  
             </div>
 
             <div class="col_right d-flex flex-column">
