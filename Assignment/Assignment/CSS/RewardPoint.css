@@ -1,5 +1,23 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+.modal {
+    color: black;
+    position: fixed; /* Fixed positioning to stay in view */
+    top: 10%;
+    z-index: 1050 !important; /* Ensure it is above the backdrop */
+}
+
+.modal-backdrop {
+    z-index: 1040 !important; /* Ensure it is below the modal */
+    position: fixed; /* Required for full viewport coverage */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
+
 .RP {
     margin: 0 auto;
     margin-bottom: 100px;
@@ -19,17 +37,20 @@
     background-attachment: fixed;
     background-position: right;
     position: relative;
-    isolation: isolate;
+    z-index: 0;
 }
 
-.RP::after {
-    opacity: 0.6;
-    content: '';
-    inset: 0;
-    background: black;
-    z-index: -1;
-    position: absolute;
-}
+    /* Overlay effect without isolation */
+    .RP::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+        z-index: -1; /* Ensure it’s behind other content */
+    }
 
 .RP .RPHeader {
     padding: 20px 0 20px 0;
