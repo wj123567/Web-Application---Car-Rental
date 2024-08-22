@@ -101,8 +101,7 @@ namespace Assignment
         {
             switch (status)
             {
-                case "Processing":
-                    
+                case "Pending":         
                     return "bg-primary";
                 case "Booked":
                     return "bg-success";
