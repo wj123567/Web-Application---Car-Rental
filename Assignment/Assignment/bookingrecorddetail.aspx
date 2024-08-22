@@ -1,20 +1,38 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookingrecorddetail.aspx.cs" Inherits="Assignment.bookingrecorddetail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
         <link href="CSS/bookingrecorddetail.css" rel="stylesheet" />
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-    <div id="deleteModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div id="cancelModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered " role="document">
         <div class="modal-content">
+             <asp:UpdatePanel ID="updateReason" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
+            <ContentTemplate>
             <div class="modal-header">
                 <h5 class="modal-title">Booking Cancellation</h5>
      
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to cancel the booking</p>
+                <asp:DropDownList ID="ddlCancelReason" runat="server" CssClass="form-select" AutoPostBack="True" ValidationGroup="rejectGroup" OnSelectedIndexChanged="ddlCancelReason_SelectedIndexChanged">
+                    <asp:ListItem Value="0">Select Reject Reason</asp:ListItem>
+                    <asp:ListItem>Change of Plans</asp:ListItem>
+                    <asp:ListItem>Found a Better Deal</asp:ListItem>
+                    <asp:ListItem>Vehicle No Longer Needed</asp:ListItem>
+                    <asp:ListItem>Booking Mistake</asp:ListItem>
+                    <asp:ListItem>Unexpected Emergency</asp:ListItem>
+                    <asp:ListItem>Other</asp:ListItem>
+
+                </asp:DropDownList>
+
+                 <asp:RequiredFieldValidator ID="requireReason" runat="server" ErrorMessage="Cancel Reason is Required" CssClass="validate" InitialValue="0" ValidationGroup="rejectGroup" ControlToValidate="ddlCancelReason"></asp:RequiredFieldValidator>
+                 <asp:TextBox ID="txtOtherReason" runat="server" ValidationGroup="rejectGroup" CssClass="form-control mt-1" placeholder="Other Reason" Visible="False"></asp:TextBox>
+                 <asp:RequiredFieldValidator ID="requireOtherReason" runat="server" ErrorMessage="Other Reason is Required" CssClass="validate" ValidationGroup="rejectGroup" ControlToValidate="txtOtherReason" Enabled="False"></asp:RequiredFieldValidator>
             </div>
+            </ContentTemplate>
+            </asp:UpdatePanel>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <asp:Button ID="modalYesBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" OnClick="modalYesBtn_Click" />
+                <asp:Button ID="modalYesBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" ValidationGroup="rejectGroup" OnClick="modalYesBtn_Click" />
             </div>
         </div>
     </div>
@@ -33,10 +51,20 @@
             <div class="card">
               <!-- card body -->
               <div class="card-body">
-                <div class="mb-6">
+              <div class="row">
+                <div class="col-8">
                   <!-- heading -->
                   <h3 class="mb-0">Booking ID: <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label></h3>
-                </div>
+                    </div>
+                   <div class=" col-2 ">
+                         <asp:Button ID="btnEdit" CssClass="booking_edit_btn" runat="server" Text="Edit" OnClick="btnEdit_Click" />
+                   </div>
+                    <div class="col-2">
+                         <asp:Button ID="btnDelete" CssClass="booking_delete_btn" runat="server" Text="Cancel" OnClick="btnDelete_Click"/>
+                    </div>
+             </div>          
+     
+    
                 <div>
                   
                   <!-- row -->
@@ -176,16 +204,7 @@
    </div>
  </div>
 
-<div class="container">
-     <div class="row justify-content-end">
-           <div class="col-auto">
-               <asp:Button ID="btnEdit" CssClass="booking_edit_btn" runat="server" Text="Edit" OnClick="btnEdit_Click" />
-           </div>
-           <div class="col-auto">
-               <asp:Button ID="btnDelete" CssClass="booking_delete_btn" runat="server" Text="Cancel" OnClick="btnDelete_Click"/>
-            </div>
-      </div>
-</div>
+
 
  </div>
 <div class="mt-4 text_center invoice_container">
@@ -211,7 +230,7 @@
 
     function modal() {
     addEventListener("DOMContentLoaded", (event) => {
-        $('#deleteModal').modal('toggle');
+        $('#cancelModal').modal('toggle');
         return false;
     });
     };

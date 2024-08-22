@@ -125,36 +125,51 @@ namespace Assignment
 
         protected void modalYesBtn_Click(object sender, EventArgs e)
         {
+            if (Page.IsValid)
+            {
+                string cancel = "UPDATE Booking SET Status = 'Pending', CancelReason = @CancelReason WHERE Id = @Id";
+                string rejectReason = " ";
+                if (ddlCancelReason.SelectedValue == "Other")
+                {
+                    rejectReason = txtOtherReason.Text;
+                }
+                else
+                {
+                    rejectReason = ddlCancelReason.SelectedValue;
+                }
+                updateCancelRequest(cancel, rejectReason);
+                Server.Transfer("bookingrecord.aspx");
+            }
             // Retrieve BookingId from session
-            
 
-            deleteBooking();
+           
             
             Response.Redirect("bookingrecord.aspx");
         }
-
-        private void deleteBooking()
+        protected void ddlCancelReason_SelectedIndexChanged(object sender, EventArgs e)
         {
-            double addOnPrice = Convert.ToDouble(lblAddOnPrice.Text);
-
-            
-            string bookingId = Session["BookingRecordId"] as string;
-
-           
-            string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(connectionString))
+            if (ddlCancelReason.SelectedValue == "Other")
             {
-                con.Open();
-
-                    string query = "DELETE FROM Booking where Id = @BookingId ";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@BookingId", bookingId);
-
-                    cmd.ExecuteNonQuery();
-                
-               
-                
+                txtOtherReason.Visible = true;
+                requireOtherReason.Enabled = true;
+                updateReason.Update();
             }
+            else
+            {
+                txtOtherReason.Visible = false;
+                requireOtherReason.Enabled = false;
+                updateReason.Update();
+            }
+        }
+        private void updateCancelRequest(string sql, string cancel)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(sql, con);
+            con.Open();
+            com.Parameters.AddWithValue("@Id", Session["BookingRecordId"].ToString());
+            com.Parameters.AddWithValue("@CancelReason", cancel);
+            com.ExecuteNonQuery();
+            con.Close();
         }
     }
 }

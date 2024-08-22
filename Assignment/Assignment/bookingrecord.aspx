@@ -155,12 +155,7 @@
       </div>
   </div>
 
-        <h4>Test Retrieve</h4>
-        <asp:GridView ID="gvBook" runat="server" CellPadding="10">
-            <Columns>
-                <asp:HyperLinkField DataNavigateUrlFields="CustomerName" DataNavigateUrlFormatString="bookingrecorddetail.aspx?CustomerName={0}" ShowHeader="False" Text="View More" />
-            </Columns>
-        </asp:GridView>
+      
  
 
 

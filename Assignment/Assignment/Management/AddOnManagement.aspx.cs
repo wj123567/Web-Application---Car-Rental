@@ -181,28 +181,6 @@ namespace Assignment.Management
               }*/
         }
 
-        protected void btnSortCarPlate_Click(object sender, EventArgs e)
-        {
-            /*LinkButton button = (LinkButton)sender;
-            string name = button.CommandName;
-            string sort = button.CommandArgument;
-            if (sort == "DESC")
-            {
-                button.CommandArgument = "ASC";
-            }
-            else
-            {
-                button.CommandArgument = "DESC";
-            }
-            DataTable carData = ViewState["CarTable"] as DataTable;
-            DataView dataView = carData.DefaultView;
-            dataView.Sort = name + " " + sort;
-            DataTable sortedData = dataView.ToTable();
-            ViewState["CarTable"] = sortedData;
-            repeaterCarTable.DataSource = sortedData;
-            repeaterCarTable.DataBind();
-            UpdatePanel1.Update();*/
-        }
 
 
         protected void btnEditAddOn_Click(object sender, EventArgs e)

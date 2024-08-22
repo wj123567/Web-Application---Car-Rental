@@ -24,15 +24,6 @@ namespace Assignment.Management
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// hdnUserStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnUserStatus;
-
-        /// <summary>
         /// updateReason control.
         /// </summary>
         /// <remarks>
@@ -195,49 +186,13 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.TextBox TextBox5;
 
         /// <summary>
-        /// imgID control.
+        /// btnOk control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgID;
-
-        /// <summary>
-        /// lblIdPic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblIdPic;
-
-        /// <summary>
-        /// imgSelfie control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgSelfie;
-
-        /// <summary>
-        /// imgLicenseF control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLicenseF;
-
-        /// <summary>
-        /// imgLicenseB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLicenseB;
+        protected global::System.Web.UI.WebControls.Button btnOk;
 
         /// <summary>
         /// btnApprove control.
@@ -256,15 +211,6 @@ namespace Assignment.Management
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReject;
-
-        /// <summary>
-        /// userProfilePic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image userProfilePic;
 
         /// <summary>
         /// txtUsername control.
@@ -411,15 +357,6 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.HiddenField hdnSortDirection;
 
         /// <summary>
-        /// btnSortVehicle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortVehicle;
-
-        /// <summary>
         /// btnSortPickUpLocation control.
         /// </summary>
         /// <remarks>
@@ -456,13 +393,22 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.LinkButton btnSortDropOffTime;
 
         /// <summary>
-        /// LinkButton1 control.
+        /// btnCancelReason control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancelReason;
+
+        /// <summary>
+        /// btnRejectReason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnRejectReason;
 
         /// <summary>
         /// rptBookingList control.

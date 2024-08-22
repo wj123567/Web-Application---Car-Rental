@@ -64,7 +64,20 @@ namespace Assignment.Management
             }
         }
 
-      
+        protected string GetBadgeClass(string status)
+        {
+            switch (status)
+            {
+                case "Pending":
+                    return "bg-primary";
+                case "Booked":
+                    return "bg-success";
+                case "Cancelled":
+                    return "bg-danger";
+                default:
+                    return "bg-default"; // Or any default class
+            }
+        }
 
         protected void ddlStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -115,12 +128,27 @@ namespace Assignment.Management
         protected void btnView_Click(object sender, EventArgs e)
         {
             Button btnView = (Button)sender;
-           
+            RepeaterItem item = (RepeaterItem)btnView.NamingContainer;
+            HiddenField hdnStatus = (HiddenField)item.FindControl("hdnBookStatus");
+            string status = hdnStatus.Value;
+            if (status == "Pending")
+            {
+                btnOk.Visible = false;
+                btnApprove.Visible = true;
+                btnReject.Visible = true;
+            }
+            else
+            {
+                btnOk.Visible = true;
+                btnApprove.Visible = false;
+                btnReject.Visible = false;
+            }
             //here hard code
             //here hard code
             //here hard code
+
             String id = "ae0a1581-21ea-4ea6-920c-80bef28a0129";
-      
+            
             LoadAvailableUser(id);
             loadDriverInfo(id);
            
@@ -149,7 +177,7 @@ namespace Assignment.Management
         protected void repeaterBookingList_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button btnView = (Button)e.Item.FindControl("btnView");
-           
+            
             
             if (btnView != null)
             {
@@ -163,23 +191,31 @@ namespace Assignment.Management
 
         protected void repeaterBookingList_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            Button btnEdit = (Button)e.Item.FindControl("btnEdit");
-            String BookingId = btnEdit.CommandArgument;
-
+            /*  Button btnEdit = (Button)e.Item.FindControl("btnEdit");
+              String BookingId = btnEdit.CommandArgument;*/
+            Button btnView = (Button)e.Item.FindControl("btnView");
+            String BookingId = btnView.CommandArgument;
             String checkStatus = "SELECT Status FROM Booking WHERE Id = @Id";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(checkStatus, con);
 
             com.Parameters.AddWithValue("@Id", BookingId);
-
+            
             SqlDataReader reader = com.ExecuteReader();
             if (reader.Read())
             {
-                if (reader["Status"].ToString() != "Processing")
+                if (reader["Status"].ToString() == "Pending")
                 {
-                    btnEdit.Visible = false;
+                    btnOk.Visible = false;
+                   
                 }
+                else
+                {
+                    btnApprove.Visible = false;
+                    btnReject.Visible = false;
+                }
+                
             }
         }
 
@@ -206,7 +242,7 @@ namespace Assignment.Management
                 DateTime regDate = reader.GetDateTime(reader.GetOrdinal("RegistrationDate"));
                 txtBirthday.Text = driverBdate.ToString("yyyy-MM-dd");
                 txtMemberSince.Text = regDate.ToString("yyyy-MM-dd");
-                userProfilePic.ImageUrl = reader["ProfilePicture"].ToString();
+                
                
             }
             con.Close();
@@ -246,6 +282,7 @@ namespace Assignment.Management
             switch (approvalStatus)
             {
                 case "P":
+
                     lblApproval.Text = "Pending";
                     lblApproval.CssClass = "badge bg-warning text-light";
                     break;
@@ -306,6 +343,11 @@ namespace Assignment.Management
                 requireOtherReason.Enabled = false;
                 updateReason.Update();
             }
+        }
+
+        protected void btnOk_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("BookingManagement.aspx");
         }
 
         /*  protected void UserReapeter_ItemCreated(object sender, RepeaterItemEventArgs e)

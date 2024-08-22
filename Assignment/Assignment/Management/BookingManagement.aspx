@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Management/Admin.Master" AutoEventWireup="true" CodeBehind="BookingManagement.aspx.cs" Inherits="Assignment.Management.BookingManagement" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <link href="../CSS/bookingManagement.css" rel="stylesheet" />
+ 
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-    <asp:HiddenField ID="hdnUserStatus" runat="server" />
+    
 
 <div class="modal fade" id="rejectReason" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
@@ -38,6 +39,7 @@
   </div>   
 </div>
 
+   
     <div class="modal modal-xl fade" id="reviewBooking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reviewDriver" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
@@ -124,52 +126,18 @@
          </div>
      </div>
      </div>
-            <div class="col">
-                <h5 class="text-dark">Supporting Document</h5>
-                <hr class="mt-0 mb-4">
-             <div class="row gx-3 mb-3">
-                    <div class="col-md-6">
-                        <label class="small mb-1">Booking Photo Attached</label>
-                    <div class="d-flex flex-column align-items-centers">
-                    <div class="image-frame-driver mx-auto">
-                        <asp:Image ID="imgID" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
-                     </div>
-                        <asp:Label ID="lblIdPic" runat="server" CssClass="validate mx-auto"></asp:Label>
-                    </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="small mb-1">Driver ID/Passport Picture</label>
-                    <div class="d-flex flex-column align-items-centers">
-                    <div class="image-frame-driver mx-auto">
-                        <asp:Image ID="imgSelfie" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
-                     </div>
-                    </div>
-                    </div>
-                </div>                     
-             <div class="row gx-3 mb-3">
-                    <div class="col-md-6">
-                        <label class="small mb-1">Driver License (Front)</label>
-                    <div class="d-flex flex-column align-items-centers">
-                    <div class="image-frame-driver mx-auto">
-                        <asp:Image ID="imgLicenseF" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
-                     </div>
-                    </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="small mb-1">Driver License (Back)</label>
-                    <div class="d-flex flex-column align-items-centers">
-                    <div class="image-frame-driver mx-auto">
-                        <asp:Image ID="imgLicenseB" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
-                     </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
+            
     </div>
 </div>
-      <div class="modal-footer">
+      <div class="modal-footer d-flex justify-content-between">
+          <div >
+              <button type="button" class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#userInfoModal">Back</button>
+          </div>
+          <div class="ms-auto">
+        <asp:Button ID="btnOk" runat="server" Text="Ok" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnOk_Click"/>
         <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnApprove_Click"/>
         <asp:Button ID="btnReject" runat="server" Text="Reject" CssClass="btn btn-danger" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#rejectReason" OnClientClick="return false"/>
+         </div>
       </div>
     </div>
   </div>   
@@ -193,9 +161,7 @@
           </li>
         </ul>
         <div class="row">
-                    <div class="Userprofile-image-frame mx-auto">
-                    <asp:Image ID="userProfilePic" runat="server" CssClass="img-account-profile rounded-circle mb-2 mx-auto" Width="100px"/>
-                    </div>
+                    
                     
                     <div>
                         <div class="mb-3">
@@ -298,7 +264,7 @@
         <div class="col-6 col-md-2">
            <asp:DropDownList ID="ddlStatusFilter" runat="server" cssclass="form-control statusddl_style" AutoPostBack="True" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
                 <asp:ListItem Value="All" Text="All Statuses" />
-                <asp:ListItem Value="Processing" Text="Processing" />
+                <asp:ListItem Value="Pending" Text="Pending" />
                 <asp:ListItem Value="Booked" Text="Booked" />
                 <asp:ListItem Value="Cancelled" Text="Cancelled" />
            </asp:DropDownList>
@@ -311,118 +277,121 @@
 
   <div>
 
-<asp:UpdatePanel ID="updatebookingRecordTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-    <ContentTemplate>
-<table class="table table-striped table-bordered table-hover mb-2 mt-4 booking_record_table datatable" id="bookingRecordTable">
-    <thead class="bg-secondary" style=" line-height:2;">
-      <tr class="header_row_title" >
+    <asp:UpdatePanel ID="updatebookingRecordTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+        <ContentTemplate>
+         <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover mb-2 mt-4 booking_record_table " id="bookingRecordTable">
+        <thead class="bg-secondary" style=" line-height:2;">
+          <tr class="header_row_title" >
 
          
 
-        <th class="booking_id">
-            <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark  sort-button">
-            Booking ID<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-            </asp:LinkButton>
+            <th class="booking_id">
+                <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark sort-button">
+                Booking ID<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                </asp:LinkButton>
             
-        </th>
-         <th class="booking_status">
-             <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark sort-button">
-             Status 
-            </asp:LinkButton>
-             <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
-         </th>
-        <th class="booking_vehicle">
-            <asp:LinkButton ID="btnSortVehicle" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark sort-button">
-            Vehicle Plate No. 
-            </asp:LinkButton>
-        </th>
-        <th class="booking_pickup">
-            <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Pickup_point" CssClass="text-dark  sort-button">
-            Pick Up Location <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-            </asp:LinkButton>
-        </th>            
-         <th class="booking_pickup">
-            <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="StartDate" CssClass="text-dark  sort-button">
-            Pick Up Time <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-            </asp:LinkButton>
-        </th>
+            </th>
+             <th class="booking_status">
+                 <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark sort-button">
+                 Status 
+                </asp:LinkButton>
+                 <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
+             </th>
+        
+            <th class="booking_pickup">
+                <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Pickup_point" CssClass="text-dark  sort-button">
+                Pick Up Location <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                </asp:LinkButton>
+            </th>            
+             <th class="booking_pickup">
+                <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="StartDate" CssClass="text-dark  sort-button">
+                Pick Up Time <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                </asp:LinkButton>
+            </th>
 
-        <th class="booking_dropoff">
-            <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Dropoff_point" CssClass="text-dark sort-button">
-            Drop Off Location<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-            </asp:LinkButton>
-        </th>            
-         <th class="booking_dropoff">
-            <asp:LinkButton ID="btnSortDropOffTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EndDate" CssClass="text-dark sort-button">
-            Drop Off Time<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-            </asp:LinkButton>
-        </th>
-         <th class="booking_reject">
-            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EndDate" CssClass="text-dark sort-button">
-            Reject Reason<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-            </asp:LinkButton>
-        </th>
+            <th class="booking_dropoff">
+                <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Dropoff_point" CssClass="text-dark sort-button">
+                Drop Off Location<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                </asp:LinkButton>
+            </th>            
+             <th class="booking_dropoff">
+                <asp:LinkButton ID="btnSortDropOffTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EndDate" CssClass="text-dark sort-button">
+                Drop Off Time<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                </asp:LinkButton>
+            </th>
+             <th class="booking_cancel">
+                <asp:LinkButton ID="btnCancelReason" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CancelReason" CssClass="text-dark sort-button">
+                Cancel Reason<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                </asp:LinkButton>
+            </th>
+             <th class="booking_reject">
+                <asp:LinkButton ID="btnRejectReason" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RejectReason" CssClass="text-dark sort-button">
+                Reject Reason<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                </asp:LinkButton>
+            </th>
 
-         <th class="booking_edit" style="width:5%;text-align:center;">
-             Action
-         </th>
+             <th class="booking_edit" style="width:5%;text-align:center;">
+                 Action
+             </th>
+          </tr>
+        </thead>
+        <tbody id="bookingtable_record">
+
+    <asp:Repeater ID="rptBookingList" runat="server" OnItemDataBound="repeaterBookingList_ItemDataBound" OnItemCreated="repeaterBookingList_ItemCreated">
+    <ItemTemplate>
+          <tr class="rows1">
+        <td>
+          <div class=" align-items-center">    
+            <div class="ms-1">
+                <asp:HiddenField ID="hdnBookingId" runat="server" />
+              <p class="fw-bold mb-1"><%# Eval("Id") %></p>
+            </div>
+          </div>
+        </td>
+  
+           <td>      
+               <span class="status_icon badge <%# GetBadgeClass(Eval("Status").ToString()) %> rounded-pill d-inline">
+                 <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
+                </span>   
+               <asp:HiddenField ID="hdnBookStatus" runat="server"  Value='<%# Eval("Status") %>'/>
+          </td>
+  
+  
+        <td>
+          <p class="fw-normal mb-1"><%# Eval("Pickup_point") %></p>
+
+        </td>
+
+        <td>
+          <p class="text-muted mb-0"><%# Eval("StartDate") %></p>
+        </td>
+
+        <td>
+            <p class="fw-normal mb-1"><%# Eval("Dropoff_point") %></p>
+        </td>
+    
+        <td>
+              <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
+        </td>
+        <td>
+            <p class="text-muted mb-0"><%# Eval("CancelReason") %></p>
+        </td>
+         <td>
+             <asp:Label ID="lblRejectReason" runat="server" Text="-"></asp:Label>
+         </td>
+        <td>
+             <asp:Button ID="btnView" runat="server" CSSclass="btn btn-sm text-primary" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
+            
+        </td>
       </tr>
-    </thead>
-    <tbody id="bookingtable_record">
-
-<asp:Repeater ID="rptBookingList" runat="server" OnItemDataBound="repeaterBookingList_ItemDataBound" OnItemCreated="repeaterBookingList_ItemCreated">
-<ItemTemplate>
-      <tr class="rows1">
-    <td>
-      <div class=" align-items-center">    
-        <div class="ms-1">
-            <asp:HiddenField ID="hdnBookingId" runat="server" />
-          <p class="fw-bold mb-1"><%# Eval("Id") %></p>
-        </div>
-      </div>
-    </td>
-  
-       <td>         
-             <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
-               
-      </td>
-  
-    <td>
-    <p class="fw-normal mb-1"><%# Eval("CarPlate") %></p>
-    </td>
-
-    <td>
-      <p class="fw-normal mb-1"><%# Eval("Pickup_point") %></p>
-
-    </td>
-
-    <td>
-      <p class="text-muted mb-0"><%# Eval("StartDate") %></p>
-    </td>
-
-    <td>
-        <p class="fw-normal mb-1"><%# Eval("Dropoff_point") %></p>
-    </td>
-    
-    <td>
-          <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
-    </td>
-     <td>
-         -
-     </td>
-    <td>
-         <asp:Button ID="btnView" runat="server" CSSclass="btn btn-sm text-primary" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
-         <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEdit_Click" CommandArgument='<%# Eval("Id") %>'/>
-    </td>
-  </tr>
-  </ItemTemplate>
- </asp:Repeater>   
-    </tbody>
-  </table>
-       
-</ContentTemplate>
-    
-</asp:UpdatePanel>
+      </ItemTemplate>
+     </asp:Repeater>   
+        </tbody>
+      </table>
+       </div>
+    </ContentTemplate>
+    </asp:UpdatePanel>
        
   </div>
   </div>   
