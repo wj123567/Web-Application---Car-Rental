@@ -3,6 +3,11 @@
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [ApplicationUser]"></asp:SqlDataSource>
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnEmail" runat="server" />
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+        <asp:Timer ID="verifyTimer" runat="server" Interval="1000" OnTick="verifyTimer_Tick"></asp:Timer>
+        </ContentTemplate>
+    </asp:UpdatePanel>
  <div class="modal fade" id="changeEmail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="changeEmail" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
@@ -64,7 +69,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <asp:Button ID="btnCancel2" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancel2_Click"/>
+        <asp:Button ID="btnCancel2" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancel_Click"/>
         <asp:Button ID="btnChangeValidMail" runat="server" Text="Change Email" CssClass="btn btn-primary" ValidationGroup="verifyMailCode" OnClick="btnChangeValidMail_Click"/>        
       </div>
       </ContentTemplate>
@@ -201,6 +206,24 @@
     function getEmail2() {
         document.getElementById('<%= hdnEmail.ClientID %>').value = document.getElementById('<%= txtIniMail2.ClientID %>').value;
     }
+
+    function startCountdown(seconds) {
+        var countdown = seconds;
+        var button = document.getElementById('<%= btnSendIniCode.ClientID %>');
+        var button2 = document.getElementById('<%= btnSendIniCode2.ClientID %>');
+            button.disabled = true;
+            button2.disabled = true;
+
+            if (countdown > 0) {
+                button.value = "Resend " + countdown;
+                button2.value = "Resend " + countdown;
+            } else {
+                button.disabled = false;
+                button2.disabled = false;
+                button.value = "Send";
+                button2.value = "Send";
+            }
+        }
 
 
 

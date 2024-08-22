@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -32,7 +33,7 @@ namespace Assignment
         protected void validateVerificationCode_ServerValidate(object source, ServerValidateEventArgs args)
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            String findUserOtp = "SELECT Id, OtpCode, OtpCreatedTime FROM ApplicationUser WHERE Email = @Email";
+            String findUserOtp = "SELECT Id, OtpCode, OtpCreatedTime, Roles FROM ApplicationUser WHERE Email = @Email";
             String setCode = "UPDATE ApplicationUser SET OtpCode = NULL WHERE Email = @Email";
 
             con.Open();
@@ -48,6 +49,7 @@ namespace Assignment
             if (reader.Read())
             {
                 Session["validateId"] = reader["Id"].ToString();
+                hdnRoles.Value = reader["Roles"].ToString();
                 sysOtp = reader["OtpCode"].ToString();
                 dateTime = reader.GetDateTime(reader.GetOrdinal("OtpCreatedTime"));
             }
@@ -113,8 +115,10 @@ namespace Assignment
             smtpClient.Send(mail);
 
             labelValidateSend.Visible = true;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Timer", "startResendTimer()", true);
 
+            int countdownDuration = 60;
+            ViewState["OTPCountdown"] = countdownDuration;
+            verifyTimer.Enabled = true;
         }
 
         protected void btnNewVerify_Click(object sender, EventArgs e)
@@ -135,6 +139,7 @@ namespace Assignment
                     Session["validateEmail"] = null;
                     lblSucValidate.Text = "Email Successfully Validate";
                     Session["Id"] = Session["validateId"];
+                    Security.LoginUser(Session["Id"].ToString(), hdnRoles.Value, true);
                     Response.AddHeader("REFRESH", "2;Home.aspx");
                 }
                 catch (Exception ex) 
@@ -142,6 +147,32 @@ namespace Assignment
                     Response.Write("Error: " + ex.ToString());
                 }
 
+            }
+        }
+
+        protected void verifyTimer_Tick(object sender, EventArgs e)
+        {
+            if (ViewState["OTPCountdown"] != null)
+            {
+                int remainingTime = (int)ViewState["OTPCountdown"];
+
+                if (remainingTime > 0)
+                {
+                    remainingTime--;
+                    ViewState["OTPCountdown"] = remainingTime;
+
+                    sendNewCode.Enabled = false;
+
+                    ScriptManager.RegisterStartupScript(this, GetType(), "UpdateCountdown", $"startCountdown({remainingTime});", true);
+                }
+                else
+                {
+                    ViewState.Remove("OTPCountdown");
+                }
+            }
+            else
+            {
+                verifyTimer.Enabled = false;
             }
         }
     }

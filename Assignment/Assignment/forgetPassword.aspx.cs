@@ -71,8 +71,9 @@ namespace Assignment
             smtpClient.Send(mail);
 
             labelForgetSend.Visible = true;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Timer", "startResendTimer()", true);
-
+            int countdownDuration = 60;
+            ViewState["OTPCountdown"] = countdownDuration;
+            verifyTimer.Enabled = true;
         }
 
         protected void validateVerificationCode_ServerValidate(object source, ServerValidateEventArgs args)
@@ -119,11 +120,37 @@ namespace Assignment
 
         }
 
+        protected void verifyTimer_Tick(object sender, EventArgs e)
+        {
+            if (ViewState["OTPCountdown"] != null)
+            {
+                int remainingTime = (int)ViewState["OTPCountdown"];
+
+                if (remainingTime > 0)
+                {
+                    remainingTime--;
+                    ViewState["OTPCountdown"] = remainingTime;
+
+                    sendForgetCode.Enabled = false;
+
+                    ScriptManager.RegisterStartupScript(this, GetType(), "UpdateCountdown", $"startCountdown({remainingTime});", true);
+                }
+                else
+                {
+                    ViewState.Remove("OTPCountdown");
+                }
+            }
+            else
+            {
+                verifyTimer.Enabled = false;
+            }
+        }
+
         protected void btnForgetVerify_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
-                Server.Transfer("resetPassword.aspx");
+                Response.Redirect("resetPassword.aspx");
             }
         }
     }

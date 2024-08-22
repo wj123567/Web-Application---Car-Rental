@@ -1,6 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="validateEmail.aspx.cs" Inherits="Assignment.validateEmail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <link href="CSS/SignUp.css" rel="stylesheet" />
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+        <asp:Timer ID="verifyTimer" runat="server" Interval="1000" OnTick="verifyTimer_Tick"></asp:Timer>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+
+    <asp:HiddenField ID="hdnRoles" runat="server" />
         <div id="loginForm">
             <div id="verifyInputGroup" class="inputGroup">
             <h1 class="verifyHead">Verify Email</h1>
@@ -18,39 +27,20 @@
 
     <script>
 
-        let timer;
-        let countdown = 60; // Set the countdown duration in seconds
-
-        function startResendTimer() {
-            addEventListener("DOMContentLoaded", (event) => {
-                // Disable the button during the countdown
-                document.getElementById('<%= sendNewCode.ClientID %>').disabled = true;
-
-                // Start the countdown
-                timer = setInterval(updateTimer, 1000); s
-            });
-        }
-
-        function updateTimer() {
-            var resendBtn = document.getElementById('<%= sendNewCode.ClientID %>')
-            resendBtn.classList.add('disable-resend');
+        function startCountdown(seconds) {
+            var countdown = seconds;
+            var button = document.getElementById('<%= sendNewCode.ClientID %>');
+            button.classList.add('disable-resend');
 
             if (countdown > 0) {
-                resendBtn.value = `Resend in ${countdown} seconds`;
-                countdown--;
+                button.value = "Resend in " + countdown;
+                button2.value = "Resend in " + countdown;
             } else {
-                // Enable the button when the countdown reaches zero
-                resendBtn.disabled = false;
-                resendBtn.classList.remove('disable-resend');
-                resendBtn.value = 'Send';
-
-                // Reset countdown for the next attempt
-                countdown = 60;
-
-                // Stop the timer
-                clearInterval(timer);
+                button.classList.remove('disable-resend');
+                button.disabled = false;
+                button.value = "Send";
             }
-        }
+    }
 
         history.pushState(null, null, location.href);
         window.onpopstate = function () {
