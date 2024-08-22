@@ -16,20 +16,23 @@
                     <asp:TextBox ID="txtBookingSearch" cssclass="form-control form-input" runat="server"  placeholder="Search.."></asp:TextBox>
                     </div>
                 </div>
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-md-4">
                    <asp:DropDownList ID="ddlStatusFilter" runat="server" cssclass="form-control statusddl_style" AutoPostBack="True" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
                         <asp:ListItem Value="All" Text="All Statuses" />
-                        <asp:ListItem Value="Processing" Text="Processing" />
+                        <asp:ListItem Value="Pending" Text="Pending" />
                         <asp:ListItem Value="Booked" Text="Booked" />
                         <asp:ListItem Value="Cancelled" Text="Cancelled" />
                    </asp:DropDownList>
                 </div>
-                <div class="col-6 col-md-2 text-end">
+               
+                <div class="row mt-4">
+                     <div class ="col">
+                        <asp:Button ID="btnToReview" runat="server" Text="All" CssClass="btn btn-lg border border-dark sort-button-group" OnClick="sortReview" OnClientClick="colorButton(this)" BackColor="#3490DC" ForeColor="White" />
+                         <asp:Button ID="btnReviewed" runat="server" Text="Pending" CssClass="btn btn-lg border border-dark sort-button-group" OnClick="sortReview" OnClientClick="colorButton(this)"/>
+                        
+                     </div>
                     
-                    <asp:Button ID="btnFilter" runat="server"   cssclass="btn btn-secondary filter_btn" Text="Filter" />
-                   <i class="ri-filter-fill"></i>
-
-            </div>
+                </div>
         </div>
       
 
@@ -211,6 +214,19 @@
                 }
             });
         }
+
+        function colorButton(button) {
+            var buttonGroup = document.querySelectorAll(".sort-button-group");
+
+            buttonGroup.forEach(function (btn) {
+                btn.style.backgroundColor = "";
+                btn.style.color = "";
+            });
+
+            button.style.backgroundColor = "#3490dc";
+            button.style.color = "#fff";
+        }
+
 
     </script>
  

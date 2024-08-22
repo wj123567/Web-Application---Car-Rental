@@ -42,13 +42,22 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.DropDownList ddlStatusFilter;
 
         /// <summary>
-        /// btnFilter control.
+        /// btnToReview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnFilter;
+        protected global::System.Web.UI.WebControls.Button btnToReview;
+
+        /// <summary>
+        /// btnReviewed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnReviewed;
 
         /// <summary>
         /// updatebookingRecordTable control.
