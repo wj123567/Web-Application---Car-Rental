@@ -24,6 +24,15 @@ namespace Assignment.Management
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// hdnBookingId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnBookingId;
+
+        /// <summary>
         /// updateReason control.
         /// </summary>
         /// <remarks>
@@ -87,60 +96,6 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Button btnReject2;
 
         /// <summary>
-        /// txtName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtName;
-
-        /// <summary>
-        /// txtDriverID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDriverID;
-
-        /// <summary>
-        /// txtDriverLicense control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDriverLicense;
-
-        /// <summary>
-        /// ddlGender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlGender;
-
-        /// <summary>
-        /// txtBirthdate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBirthdate;
-
-        /// <summary>
-        /// txtPhoneNum control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPhoneNum;
-
-        /// <summary>
         /// txtPickUpLocation control.
         /// </summary>
         /// <remarks>
@@ -177,13 +132,13 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.TextBox txtDropOffTime;
 
         /// <summary>
-        /// TextBox5 control.
+        /// txtAdditionalNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
+        protected global::System.Web.UI.WebControls.TextBox txtAdditionalNotes;
 
         /// <summary>
         /// btnOk control.
@@ -276,13 +231,13 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Label lblDriverText;
 
         /// <summary>
-        /// UserDriverReapeter control.
+        /// UserDriverRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater UserDriverReapeter;
+        protected global::System.Web.UI.WebControls.Repeater UserDriverRepeater;
 
         /// <summary>
         /// btnDriverNext control.

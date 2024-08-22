@@ -4,7 +4,7 @@
  
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
+    <asp:HiddenField ID="hdnBookingId" runat="server" />
     
 
 <div class="modal fade" id="rejectReason" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
@@ -49,44 +49,7 @@
       </div>
       <div class="modal-body">
         <div class="card-body row">
-            <div class="col">
-                <h5 class="text-dark">Driver Info</h5>
-                <hr class="mt-0 mb-4">
-                <div class="mb-3">
-                    <label class="small mb-1">Driver Name</label>
-                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Enter driver name" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
-                </div>
-                <div class="row gx-3 mb-3">
-                    <div class="col-md-6">
-                        <label class="small mb-1">Driver ID/Passport Number</label>
-                        <asp:TextBox ID="txtDriverID" runat="server" CssClass="form-control" placeholder="e.g. 543210987654" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="small mb-1">Driver License Number</label>
-                        <asp:TextBox ID="txtDriverLicense" runat="server" CssClass="form-control" placeholder="e.g. 543210987654" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
-                    </div>
-                </div>
-                <div class="row gx-3 mb-3">
-                    <div class="col-md-6">
-                        <label class="small mb-1">Driver Gender</label>
-                        <asp:DropDownList ID="ddlGender" runat="server" CssClass="form-select" ValidationGroup="reviewGroup" Enabled="False">
-                            <asp:ListItem Value="0">Select Gender</asp:ListItem>
-                            <asp:ListItem Value="M">Male</asp:ListItem>
-                            <asp:ListItem Value="F">Female</asp:ListItem>
-                        </asp:DropDownList>
-                     </div>
-                    <div class="col-md-6">
-                        <label class="small mb-1" for="inputBirthday">Driver Birthdate</label>
-                        <asp:TextBox ID="txtBirthdate" runat="server" CssClass="form-control" TextMode="Date" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
-                    </div>
-                </div>
-                <div class="row gx-3 mb-3">
-                    <div class="col-md-6">
-                        <label class="small mb-1 d-block">Driver Phone number</label>
-                        <asp:TextBox ID="txtPhoneNum" runat="server" CssClass="form-control d-block" TextMode="Phone" ReadOnly="True" ValidationGroup="reviewGroup"></asp:TextBox>
-                    </div>
-                </div>
-                </div>
+           
              <div class="col">
      <h5 class="text-dark">Booking Info</h5>
      <hr class="mt-0 mb-4">
@@ -122,7 +85,7 @@
      <div class="row gx-3 mb-3">
          <div class="col">
              <label class="small mb-1 d-block">Notes:</label>
-             <asp:TextBox ID="TextBox5" runat="server" CssClass="form-control d-block" TextMode="MultiLine" Rows="5"  ReadOnly="True" ValidationGroup="reviewGroup"></asp:TextBox>
+             <asp:TextBox ID="txtAdditionalNotes" runat="server" CssClass="form-control d-block" TextMode="MultiLine" Rows="5"  ReadOnly="True" ValidationGroup="reviewGroup"></asp:TextBox>
          </div>
      </div>
      </div>
@@ -160,9 +123,7 @@
             <button class="nav-link" id="driverInfoTab" data-bs-toggle="modal" data-bs-target="#userDriverModal" type="button">Driver Info</button>
           </li>
         </ul>
-        <div class="row">
-                    
-                    
+        <div class="row">                              
                     <div>
                         <div class="mb-3">
                             <label class="small mb-1">Username</label>
@@ -216,7 +177,7 @@
         </ul>
         <div class="card-body row">
         <asp:Label ID="lblDriverText" runat="server" CssClass="text-dark"></asp:Label>
-        <asp:Repeater ID="UserDriverReapeter" runat="server" OnItemDataBound="UserDriverReapeter_ItemDataBound">
+        <asp:Repeater ID="UserDriverRepeater" runat="server" OnItemDataBound="UserDriverRepeater_ItemDataBound">
             <ItemTemplate>
                 <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
                     <div class="d-flex align-items-center justify-content-between px-4">
@@ -344,7 +305,7 @@
         <td>
           <div class=" align-items-center">    
             <div class="ms-1">
-                <asp:HiddenField ID="hdnBookingId" runat="server" />
+                
               <p class="fw-bold mb-1"><%# Eval("Id") %></p>
             </div>
           </div>

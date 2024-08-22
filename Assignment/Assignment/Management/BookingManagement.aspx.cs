@@ -12,7 +12,7 @@ namespace Assignment.Management
 {
     public partial class BookingManagement : System.Web.UI.Page
     {
-        
+        //session["BookingId"]
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -131,6 +131,11 @@ namespace Assignment.Management
             RepeaterItem item = (RepeaterItem)btnView.NamingContainer;
             HiddenField hdnStatus = (HiddenField)item.FindControl("hdnBookStatus");
             string status = hdnStatus.Value;
+
+            //keep the id into session
+            String BookingId = btnView.CommandArgument;
+            Session["BookingId"] = BookingId;
+
             if (status == "Pending")
             {
                 btnOk.Visible = false;
@@ -147,32 +152,18 @@ namespace Assignment.Management
             //here hard code
             //here hard code
 
-            String id = "ae0a1581-21ea-4ea6-920c-80bef28a0129";
+          /*  String id = "ae0a1581-21ea-4ea6-920c-80bef28a0129";*/
+            String userId= checkUser();
             
-            LoadAvailableUser(id);
-            loadDriverInfo(id);
-           
+            LoadAvailableUser(userId);
+            loadDriverInfo(userId);
+            loadBookingInfo(Session["BookingId"].ToString());
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "modal();", true);
 
         }
 
-        protected void btnEdit_Click(object sender, EventArgs e)
-        {
-            /*Button btnView = (Button)sender;
-
-            //here hard code
-            //here hard code
-            //here hard code
-            String id = "ae0a1581-21ea-4ea6-920c-80bef28a0129";
-
-            LoadAvailableUser(id);
-            loadDriverInfo(id);
-
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "modal();", true);*/
-
-        }
+       
 
         protected void repeaterBookingList_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
@@ -193,6 +184,7 @@ namespace Assignment.Management
         {
             /*  Button btnEdit = (Button)e.Item.FindControl("btnEdit");
               String BookingId = btnEdit.CommandArgument;*/
+
             Button btnView = (Button)e.Item.FindControl("btnView");
             String BookingId = btnView.CommandArgument;
             String checkStatus = "SELECT Status FROM Booking WHERE Id = @Id";
@@ -220,7 +212,19 @@ namespace Assignment.Management
         }
 
 
+        protected string checkUser()
+        {
+            String selectUser = "SELECT a.Id FROM ApplicationUser a JOIN Booking b ON a.Id=b.UserId WHERE b.Id = @Id";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectUser, con);
+            com.Parameters.AddWithValue("@Id", Session["BookingId"].ToString());
 
+            Object result = com.ExecuteScalar();
+
+            String userId = result as String;
+            return userId;
+        }
 
         protected void LoadAvailableUser(String id)
         {
@@ -228,6 +232,7 @@ namespace Assignment.Management
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
+            
             com.Parameters.AddWithValue("@Id", id);
 
             SqlDataReader reader = com.ExecuteReader();
@@ -266,13 +271,41 @@ namespace Assignment.Management
             else
             {
                 lblDriverText.Text = " ";
-                UserDriverReapeter.DataSource = ds.Tables["DriverData"];
-                UserDriverReapeter.DataBind();
+                UserDriverRepeater.DataSource = ds.Tables["DriverData"];
+                UserDriverRepeater.DataBind();
             }
             con.Close();
         }
 
-        protected void UserDriverReapeter_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void loadBookingInfo(String BookingId)
+        {
+            String selectBooking = "SELECT * FROM Booking WHERE Id = @Id";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectBooking, con);
+            com.Parameters.AddWithValue("@id", BookingId);
+            
+            SqlDataReader reader = com.ExecuteReader();
+            if (reader.Read())
+            {
+                txtPickUpLocation.Text = reader["Pickup_point"].ToString();
+                txtDropOffLocation.Text = reader["Dropoff_point"].ToString();
+
+                DateTime pickup_time = reader.GetDateTime(reader.GetOrdinal("StartDate"));
+                DateTime dropoff_time = reader.GetDateTime(reader.GetOrdinal("EndDate"));
+                txtPickUpTime.Text = pickup_time.ToString("yyyy-MM-dd hh:mm:ss");
+                txtDropOffTime.Text = dropoff_time.ToString("yyyy-MM-dd hh:mm:ss");
+
+               /* if (reader["Notes"].ToString() != null)
+                {
+                    txtAdditionalNotes.Text = reader["Notes"].ToString();
+                }*/
+            }
+            con.Close();
+            reader.Close();
+        }
+
+        protected void UserDriverRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             Label lblApproval = (Label)e.Item.FindControl("lblApproval");
             Label lblReject = (Label)e.Item.FindControl("lblReject");
@@ -303,9 +336,9 @@ namespace Assignment.Management
 
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-           /* string approve = "UPDATE Driver SET Approval = 'A', RejectReason = @RejectReason WHERE Id = @Id";
+            string approve = "UPDATE Booking SET Approval = 'A', RejectReason = @RejectReason WHERE Id = @Id";
             string rejectReason = " ";
-            updateApproval(approve, rejectReason);*/
+            updateApproval(approve, rejectReason);
             Server.Transfer("BookingManagement.aspx");
         }
 
@@ -328,6 +361,16 @@ namespace Assignment.Management
             }
         }
 
+        protected void updateApproval(string sql, string reject)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(sql, con);
+            con.Open();
+            com.Parameters.AddWithValue("@Id", Session["DriverID"].ToString());
+            com.Parameters.AddWithValue("@RejectReason", reject);
+            com.ExecuteNonQuery();
+            con.Close();
+        }
 
         protected void ddlRejectReason_SelectedIndexChanged(object sender, EventArgs e)
         {
