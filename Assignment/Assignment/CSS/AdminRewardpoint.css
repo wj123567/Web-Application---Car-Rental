@@ -1,22 +1,14 @@
-﻿.tableReward {
-    margin: 10px auto;
-    margin-top: 50px;
-    width: 80%;
+﻿.RewardPointContainer {
+    color: black;
 }
 
-.tableReward th, .tableReward td, .tableReward .rp-record td{
-    padding: 15px;
+.RewardPointContainer .title {
+    font-weight: bold;
+    border-bottom: 1px solid lightgray;
 }
-
-.header-title {
-    padding: 15px 10px !important;
-    border: none !important; /* Forces the removal of the border */
+.RewardPointContainer .Add {
+    margin: 2% auto;
 }
-
-.header-title h1 {
-    margin: 0; 
-}
-
 
 #main_RewardPointsListView_RewardPointsPager{
     display: flex;

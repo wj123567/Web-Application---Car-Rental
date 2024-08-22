@@ -1,0 +1,12 @@
+﻿.Redemption {
+    color: black;
+}
+
+    .Redemption .title {
+        font-weight: bold;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .Redemption .Add {
+        margin: 2% auto;
+    }
