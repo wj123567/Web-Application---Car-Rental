@@ -304,7 +304,7 @@
            </asp:DropDownList>
         </div>
         <div class="col-6 col-md-2 text-end">
-            <asp:Button ID="btnFilter" runat="server"   cssclass="btn btn-secondary filter_btn" Text="Filter"  OnClick="btnFilter_Click" /> 
+            <asp:Button ID="btnFilter" runat="server"   cssclass="btn btn-secondary filter_btn" Text="Filter"   /> 
 
     </div>
 </div>
@@ -313,7 +313,7 @@
 
 <asp:UpdatePanel ID="updatebookingRecordTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
     <ContentTemplate>
-<table class="table align-middle mb-0 booking_record_table datatable" id="bookingRecordTable">
+<table class="table table-striped table-bordered table-hover mb-2 mt-4 booking_record_table datatable" id="bookingRecordTable">
     <thead class="bg-secondary" style=" line-height:2;">
       <tr class="header_row_title" >
 
@@ -370,7 +370,7 @@
     </thead>
     <tbody id="bookingtable_record">
 
-<asp:Repeater ID="rptBookingList" runat="server" OnItemCreated="repeaterBookingList_ItemCreated">
+<asp:Repeater ID="rptBookingList" runat="server" OnItemDataBound="repeaterBookingList_ItemDataBound" OnItemCreated="repeaterBookingList_ItemCreated">
 <ItemTemplate>
       <tr class="rows1">
     <td>
@@ -411,7 +411,8 @@
          -
      </td>
     <td>
-          <asp:Button ID="btnView" runat="server" CSSclass="edit_btn_style" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
+         <asp:Button ID="btnView" runat="server" CSSclass="btn btn-sm text-primary" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
+         <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEdit_Click" CommandArgument='<%# Eval("Id") %>'/>
     </td>
   </tr>
   </ItemTemplate>

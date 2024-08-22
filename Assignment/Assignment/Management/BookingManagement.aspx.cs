@@ -12,12 +12,14 @@ namespace Assignment.Management
 {
     public partial class BookingManagement : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                
-               
+               GetBookRecords();
+
             }
         }
 
@@ -29,8 +31,9 @@ namespace Assignment.Management
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 string sql = "SELECT * FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate ";
-                DateTime checkDate = DateTime.Now.AddDays(7);
-                String parseCheckDate = checkDate.ToString();
+
+                /*DateTime checkDate = DateTime.Now.AddDays(7);
+                String parseCheckDate = checkDate.ToString();*/
 
                 // Apply status filter if necessary
                 if (statusFilter != "All")
@@ -38,13 +41,7 @@ namespace Assignment.Management
                     sql += " WHERE b.Status = @Status";
 
                 }
-
-                if (statusFilter == "Date")
-                {
-
-                    sql += "WHERE b.Status = 'Processing' AND StartDate =@startDate";
-                }
-
+               
 
                 SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -52,10 +49,7 @@ namespace Assignment.Management
                 {
                     cmd.Parameters.AddWithValue("@Status", statusFilter);
                 }
-                if (statusFilter == "Date")
-                {
-                    cmd.Parameters.AddWithValue("@startDate", parseCheckDate);
-                }
+                
 
 
                 using (SqlDataAdapter da = new SqlDataAdapter(cmd))
@@ -70,11 +64,7 @@ namespace Assignment.Management
             }
         }
 
-        protected void btnFilter_Click(object sender, EventArgs e)
-        {
-            GetBookRecords("Date");
-
-        }
+      
 
         protected void ddlStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -138,9 +128,28 @@ namespace Assignment.Management
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "modal();", true);
 
         }
+
+        protected void btnEdit_Click(object sender, EventArgs e)
+        {
+            /*Button btnView = (Button)sender;
+
+            //here hard code
+            //here hard code
+            //here hard code
+            String id = "ae0a1581-21ea-4ea6-920c-80bef28a0129";
+
+            LoadAvailableUser(id);
+            loadDriverInfo(id);
+
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "modal();", true);*/
+
+        }
+
         protected void repeaterBookingList_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button btnView = (Button)e.Item.FindControl("btnView");
+           
             
             if (btnView != null)
             {
@@ -148,7 +157,34 @@ namespace Assignment.Management
                 scriptManager.RegisterPostBackControl(btnView);
                 
             }
+
+           
         }
+
+        protected void repeaterBookingList_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Button btnEdit = (Button)e.Item.FindControl("btnEdit");
+            String BookingId = btnEdit.CommandArgument;
+
+            String checkStatus = "SELECT Status FROM Booking WHERE Id = @Id";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(checkStatus, con);
+
+            com.Parameters.AddWithValue("@Id", BookingId);
+
+            SqlDataReader reader = com.ExecuteReader();
+            if (reader.Read())
+            {
+                if (reader["Status"].ToString() != "Processing")
+                {
+                    btnEdit.Visible = false;
+                }
+            }
+        }
+
+
+
 
         protected void LoadAvailableUser(String id)
         {

@@ -182,7 +182,7 @@
                <asp:Button ID="btnEdit" CssClass="booking_edit_btn" runat="server" Text="Edit" OnClick="btnEdit_Click" />
            </div>
            <div class="col-auto">
-               <asp:Button ID="btnDelete" CssClass="booking_delete_btn" runat="server" Text="Delete" OnClick="btnDelete_Click"/>
+               <asp:Button ID="btnDelete" CssClass="booking_delete_btn" runat="server" Text="Cancel" OnClick="btnDelete_Click"/>
             </div>
       </div>
 </div>
