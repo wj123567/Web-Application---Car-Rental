@@ -17,7 +17,7 @@ namespace Assignment
             {
                 if (Session["Id"] != null)
                 {
-                    LoadUserData(Session["Id"].ToString());
+                    LoadRedeemItem();
                 }
                 else
                 {
@@ -26,14 +26,16 @@ namespace Assignment
             }
         }
 
-        private void LoadUserData(string userid)
+        private void LoadRedeemItem()
         {
-
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
+            using (var db = new SystemDatabaseEntities())
             {
+                var redeemItems = db.RedeemItems.Where(item => item.Status == "active").ToList();
+
+                lvredeemitems.DataSource = redeemItems;
+                lvredeemitems.DataBind();
 
             }
         }
-
     }
 }

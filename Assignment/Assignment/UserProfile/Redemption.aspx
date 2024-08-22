@@ -10,11 +10,11 @@
 
 <asp:Content ID="Redemption" ContentPlaceHolderID="main" runat="server">
     <%-- connect sql data source --%>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT ItemName, ItemPoints, ItemDescription, ItemImage FROM RedeemItem WHERE (Status = @Status)">
+    <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT ItemName, ItemPoints, ItemDescription, ItemImage FROM RedeemItem WHERE (Status = @Status)">
         <SelectParameters>
             <asp:Parameter DefaultValue="active" Name="Status" Type="String"></asp:Parameter>
         </SelectParameters>
-    </asp:SqlDataSource>
+    </asp:SqlDataSource>--%>
 
     <div class="redemption-container">
         <div class="redemption-container-header">
@@ -22,11 +22,10 @@
         </div>
 
         <div class="redemption-container-body d-flex flex-row justify-content-around flex-wrap">
-            <asp:ListView ID="lvredeemitems" runat="server" DataSourceID="SqlDataSource1">
+            <asp:ListView ID="lvredeemitems" runat="server">
                 <%-- layouttemplate is the overall layout wraps the ItemTemplate  --%>
                 <LayoutTemplate>
-                        <asp:PlaceHolder ID="itemPlaceholder" runat="server">
-                    </asp:PlaceHolder>
+                        <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
                 </LayoutTemplate>
 
                 <%-- ItemTemplate defines how each item should look --%>
@@ -38,7 +37,7 @@
                                     <h1 class="ItemName mt-0"><%# Eval("ItemName") %></h1>
                                 </div>
                                 <div class="image" style="flex:3">
-                                    <asp:Image ID="ItemImage" runat="server" ImageUrl='<%# ResolveUrl(Eval("ItemImage").ToString()) %>' CssClass="ItemImage" />
+                                    <asp:Image ID="ItemImage" runat="server" ImageUrl='<%# Eval("ItemImage") %>' CssClass="ItemImage" />
                                 </div>
                             </div>
         
