@@ -18,6 +18,8 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
+                //----retrieve the sync data 
+                retrieveData();
                 int currentStep = (int)(Session["CurrentStep"] ?? 1);
                 UpdateProgressBar(currentStep);
 
@@ -25,6 +27,22 @@ namespace Assignment
                      
 
             }
+        }
+
+        protected void retrieveData()
+        {
+            string totalDayRent = Session["TotalDayRent"].ToString();
+            string totalPrice = Session["TotalPrice"] as string ?? "0.00";
+            string totalAddOn = Session["TotalAddOn"] as string ?? "0.00";
+            string carRental = Session["CarRental"].ToString();
+
+
+
+            lblTotalDayRent.Text = totalDayRent;
+            lblAddOnPrice.Text = totalAddOn;
+            lblCarRental.Text = carRental;
+
+            lblTotalPrice.Text = totalPrice; 
         }
 
         private void BindCards()

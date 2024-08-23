@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookinfo.aspx.cs" Inherits="Assignment.bookinfo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <link href="CSS/stickybar.css" rel="stylesheet" />
+
 
              <div class="container-fluid">
 	<div class="row justify-content-center">
@@ -63,7 +65,7 @@
                 </div>
 
                 <div class="book_right-side">
-                    <div class="right_stickybox">
+                    
                     <div class="book_box_right ">
                 <div class="pickup_container" style="margin-bottom:20px;">
                     <h6 class="pickup_title">Pickup & Return</h6>
@@ -125,11 +127,7 @@
                         <p class ="summary_amt">0.00</p>
                         </div>
                         <hr />
-                        <div class="charge_item">
-                        <p class="summary_title">Rental</p>
-                        <p class ="summary_amt">0.00</p>
-                        </div>
-                        <hr />
+                       
                         <div class="charge_item summary_total">
                         <p class="summary_title">Total Price(RM):</p>
                          <asp:Label ID="lblTotalPrice" runat="server" Text="0.00" CssClass="summary_amt grand_total"></asp:Label>
@@ -137,7 +135,7 @@
                     </div>
                 
                 </div>
-                    </div>
+                   
                 </div>
 
 
@@ -271,30 +269,34 @@
    
   </div>  <!-- p section-->
 
-         <div class="sticky_bar">
-
-         <div class="bar_content">
-              <div class="previous_button">
-         <asp:Button ID="previous_btn" runat="server" Text="Previous" cssclass="previous_btn_style prev_btn" OnClick="previous_btn_Click"/>
-</div>
-        <div class="selected_car">
-            <asp:Image ID="imgSticky" runat="server" cssclass="sticky_bar_carimg"/>
-            <div>
-                <span class="title_style">Selected Car</span>
-                 <asp:Label ID="lblstickyCarModel" CssClass="sticky_car_info" runat="server" Text=""></asp:Label>
+     <div class="sticky_bar">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-between bar_content">
+            
+            <!-- Left Side: Previous Button, Car Image, and Car Information -->
+            <div class="d-flex col-auto align-items-center">
+                <div class="previous_button">
+                    <asp:Button ID="previous_btn" runat="server" Text="Previous" cssclass="previous_btn_style btn btn-primary" OnClick="previous_btn_Click" />
+                </div>
+                <div class="d-flex align-items-center ms-3 selected_car">
+                    <asp:Image ID="imgSticky" runat="server" cssclass="sticky_bar_carimg img-fluid rounded-circle me-3" />
+                    <div class="d-flex flex-column">
+                        <span class="title_style">Selected Car</span>
+                        <asp:Label ID="lblstickyCarModel" CssClass="sticky_car_info" runat="server" Text=""></asp:Label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="price_details">
-            <div>
-                <p>Grand Total</p>
-                
+            
+            <!-- Right Side: Price Details and Next Button -->
+            <div class="d-flex col-auto align-items-center justify-content-end">
+                <div class="price_details text-end me-3">
+                    <p>Grand Total</p>
+                    <asp:Label ID="lblStickyTotalPrice" runat="server" Text="0.00" CssClass="sticky_bar_price"></asp:Label>
+                </div>
+                <div class="next_button">
+                    <asp:Button ID="btnNext" runat="server" Text="Next" cssclass="next_btn_style btn btn-primary" OnClick="btnNext_Click" />
+                </div>
             </div>
-            <div>
-               <asp:Label ID="lblStickyTotalPrice" runat="server" Text="0.00" CssClass="sticky_bar_price"></asp:Label>
-            </div>
-        </div>
-        <div class="next_button">
-            <asp:Button ID="btnNext" runat="server" Text="Next" cssclass="next_btn_style next_btn" OnClick="btnNext_Click"/>
         </div>
     </div>
 </div>
@@ -381,6 +383,42 @@
                 }
             });
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const chkDriver = document.getElementById('<%= chkDriver.ClientID %>');
+            const driverFieldsLeft = document.getElementById('driverFieldsLeft');
+            const driverFieldsRight = document.getElementById('driverFieldsRight');
+            const photoFields = document.getElementById('photoField')
+
+            function toggleDriverFields() {
+                if (chkDriver.checked) {
+                    driverFieldsLeft.style.display = 'block';
+                    driverFieldsRight.style.display = 'block';
+                    photoFields.style.display = 'block';
+                    enableDriverValidation(true);
+                } else {
+                    driverFieldsLeft.style.display = 'none';
+                    driverFieldsRight.style.display = 'none';
+                    photoFields.style.display = 'none';
+                    enableDriverValidation(false);
+                }
+            }
+
+            function enableDriverValidation(enable) {
+                const validators = document.querySelectorAll('.driver_validate');
+                validators.forEach(function (validator) {
+                    ValidatorEnable(validator, enable);
+                });
+
+            }
+
+            // Attach the event listener to the checkbox
+            chkDriver.addEventListener('change', toggleDriverFields);
+
+
+            // Initial check on page load
+            toggleDriverFields();
+        });
     </script>
 
 </asp:Content>

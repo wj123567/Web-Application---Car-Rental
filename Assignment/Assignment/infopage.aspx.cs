@@ -220,7 +220,7 @@ namespace Assignment
         protected void previous_btn_Click(object sender, EventArgs e)
         {
            
-            Response.Redirect("Home.aspx");
+            Response.Redirect("productListing.aspx");
         }
 
         private void UpdateProgressBar(int currentStep)

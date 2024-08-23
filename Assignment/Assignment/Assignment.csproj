@@ -93,6 +93,7 @@
     <Content Include="CSS\paging.css" />
     <Content Include="CSS\productListing.css" />
     <Content Include="CSS\RewardPoint.css" />
+    <Content Include="CSS\stickybar.css" />
     <Content Include="Image\RewardPoint\OnlyCars.jpg" />
     <Content Include="Image\RewardPoint\bg1.png" />
     <Content Include="Image\RewardPoint\bg2.png" />
@@ -137,7 +138,6 @@
     <Content Include="Image\WZ\pexels-peng-liu-45946-169677.jpg" />
     <Content Include="Image\WZ\road1.jpg" />
     <Content Include="infopage.aspx" />
-    <Content Include="JS\bookinfo.js" />
     <Content Include="UserProfile\payment.aspx" />
     <Content Include="payment_pg.aspx" />
     <Content Include="UserProfile\RewardPoint.aspx" />

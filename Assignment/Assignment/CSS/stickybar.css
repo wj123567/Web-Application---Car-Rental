@@ -1,0 +1,66 @@
+﻿.sticky_bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it stays above other elements */
+    padding: 10px 0;
+    box-sizing: border-box;
+}
+
+.bar_content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.selected_car img {
+    width: 80px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.title_style {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #F5E8DD;
+    border-radius: 20px;
+    color: #33479b;
+}
+
+.sticky_car_info {
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+.price_details p {
+    color: #888;
+    margin: 0;
+}
+
+.next_btn_style, .previous_btn_style {
+    background-color: #33479b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+    .next_btn_style:hover, .previous_btn_style:hover {
+        background-color: #33479b;
+        opacity: 0.9;
+    }
+
+@media only screen and (max-width:580px) {
+    .sticky_bar_carimg {
+        display: none;
+    }
+}

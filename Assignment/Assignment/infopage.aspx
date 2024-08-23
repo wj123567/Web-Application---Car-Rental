@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="infopage.aspx.cs" Inherits="Assignment.infopage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <link href="CSS/stickybar.css" rel="stylesheet" />
     <asp:HiddenField ID="hdnSessionId" runat="server" />
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
@@ -362,48 +363,47 @@
                     <p class ="summary_amt">0.00</p>
                     </div>
                     <hr />
-                    <div class="charge_item">
-                    <p class="summary_title">Rental</p>
-                    <p class ="summary_amt">0.00</p>
-                    </div>
-                    <hr />
+                   
                     <div class="charge_item summary_total">
-                    <p class="summary_title">Total Price(RM):</p>
+                    <p class="summary_title">Total (MYR):</p>
                      <asp:Label ID="lblTotalPrice" runat="server" Text="0.00" CssClass="summary_amt grand_total"></asp:Label>
                     <asp:HiddenField ID="hdnTotalPrice" runat="server" />
                     </div>
                 </div>
 
             </div>
-            <div class="box_right">Box 3 - Right</div>
+            
         </div>
     </section>
 
-    <div class="sticky_bar">
-
-         <div class="bar_content">
-              <div class="previous_button">
-    <asp:Button ID="previous_btn" runat="server" Text="Previous" cssclass="previous_btn_style prev_btn" OnClick="previous_btn_Click" />
-</div>
-        <div class="selected_car">
-        <asp:Image ID="imgSticky" runat="server" cssclass="sticky_bar_carimg" />
+<div class="sticky_bar">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-between bar_content">
             
-            <div >
-                <span class="title_style">Selected Car</span>
-                <asp:Label ID="lblstickyCarModel" CssClass="sticky_car_info" runat="server" Text=""></asp:Label>
+            <!-- Left Side: Previous Button, Car Image, and Car Information -->
+            <div class="d-flex col-auto align-items-center">
+                <div class="previous_button">
+                    <asp:Button ID="previous_btn" runat="server" Text="Previous" cssclass="previous_btn_style btn btn-primary" OnClick="previous_btn_Click" />
+                </div>
+                <div class="d-flex align-items-center ms-3 selected_car">
+                    <asp:Image ID="imgSticky" runat="server" cssclass="sticky_bar_carimg img-fluid rounded-circle me-3" />
+                    <div class="d-flex flex-column">
+                        <span class="title_style">Selected Car</span>
+                        <asp:Label ID="lblstickyCarModel" CssClass="sticky_car_info" runat="server" Text=""></asp:Label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="price_details">
-            <div>
-                <p>Grand Total</p>
-                
+            
+            <!-- Right Side: Price Details and Next Button -->
+            <div class="d-flex col-auto align-items-center justify-content-end">
+                <div class="price_details text-end me-3">
+                    <p>Grand Total</p>
+                    <asp:Label ID="lblStickyTotalPrice" runat="server" Text="0.00" CssClass="sticky_bar_price"></asp:Label>
+                </div>
+                <div class="next_button">
+                    <asp:Button ID="btnNext" runat="server" Text="Next" cssclass="next_btn_style btn btn-primary" OnClick="btnNext_Click" />
+                </div>
             </div>
-            <div>
-                <asp:Label ID="lblStickyTotalPrice" runat="server" Text="0.00" CssClass="sticky_bar_price"></asp:Label>
-            </div>
-        </div>
-        <div class="next_button">
-            <asp:Button ID="btnNext" runat="server" Text="Next" cssclass="next_btn_style next_btn" OnClick="btnNext_Click"/>
         </div>
     </div>
 </div>

@@ -138,37 +138,37 @@
 
     <table class="pickup_table">
 
-        <tr >
-            <td></td>
-            <td class="timeline StartDateSes">123</td>
-        </tr>
-        <tr>
-            <td><i class="ri-circle-line" style="color:green"> </i></td>
-            <td class="PickupPointSes">123</td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td style="padding-bottom:20px;">(Pickup point)</td>
-        </tr>
-   
-        <tr>
-            <td></td>
-            <td class="timeline StartDateSes" >123</td>
-        </tr>
-        <tr>
-            <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
-            <td class="DropoffPointSes">123></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td style="padding-bottom:20px;">(Drop off point)</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                Rental Period:<asp:Label ID="lblTotalDayRent" runat="server" Text=""></asp:Label></td>
-        </tr>
+       <tr >
+    <td></td>
+    <td class="timeline StartDateSes"><%= DateTime.Parse(Session["StartDate"].ToString()) %></td>
+       </tr>
+       <tr>
+           <td><i class="ri-circle-line" style="color:green"> </i></td>
+           <td class="PickupPointSes"><%=Session["Pickup_point"] %></td>
+       </tr>
+                   
+       <tr>
+           <td></td>
+           <td style="padding-bottom:20px;">(Pickup point)</td>
+       </tr>
+                  
+       <tr>
+           <td></td>
+           <td class="timeline StartDateSes" ><%=DateTime.Parse(Session["EndDate"].ToString()) %></td>
+       </tr>
+       <tr>
+           <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
+           <td class="DropoffPointSes"><%=Session["Dropoff_point"] %></td>
+       </tr>
+       <tr>
+           <td></td>
+           <td style="padding-bottom:20px;">(Drop off point)</td>
+       </tr>
+       <tr>
+    <td></td>
+    <td>
+        Rental Period: <asp:Label ID="lblTotalDayRent" runat="server" Text=""></asp:Label></td>
+</tr>
     </table>
     
     

@@ -379,13 +379,8 @@ input#submit:focus {
     padding-left: 100px;
 }
 
-.right_stickybox {
-    position: sticky;
-    top: 80px;
-}
 
 .book_box_right {
-    width: 90%; /* Ensure it uses full width of .right-side */
     min-height: 200px;
     height: auto;
     border: 1px solid #ccc;
@@ -416,4 +411,11 @@ input#submit:focus {
 
 .iti {
     width: 100%;
+}
+
+@media only screen and (max-width:1000px) {
+    .book_right-side{
+        padding-left:0;
+        padding-left:20px;
+    }
 }
