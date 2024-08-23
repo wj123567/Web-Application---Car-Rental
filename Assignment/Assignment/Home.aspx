@@ -6,8 +6,9 @@
         <h1 class="section_header">Find and Book Your Car <br/> A Great Experience</h1>
     </header>
 
-
+         <div class="container">
     <section class="section_container booking_container">
+        
         <div class="content_container">
 <!--
         <div class="booking_nav">
@@ -66,13 +67,15 @@
          </div>
         <!-- -->
         </div>
+
             </div>
              <asp:Button ID="btnSearch" runat="server" Text="🔍Search" CssClass="search_btn_style" OnClick="btnSearch_Click" UseSubmitBehavior="False" />
     </section>
-
+</div> 
 </div>
     
-            <div id="locationModal" class="modal">
+            <div id="locationModal" class="modal ">
+             <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content" id="modal-content">
         <span class="close" id="modal_close">&times;</span>
         <h2>Select Location</h2>
@@ -92,6 +95,7 @@
             </div>
         </div>
         <asp:Button ID="modalOkBtn" runat="server" Text="Ok" cssclass="modalbtn_style"/>
+    </div>
     </div>
 </div>
 

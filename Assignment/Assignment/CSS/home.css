@@ -399,10 +399,8 @@
 
 #modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 40%;
 }
 
 /* Close Button */
@@ -432,7 +430,7 @@
 
 /* Region Section */
 .region {
-    border: 1px solid var(--primary-color);
+    
     background-color: #f4f4f4;
     padding: 10px;
 }
@@ -492,4 +490,33 @@
     background-color: rgba(8, 143, 143,0.4);
 
     font-weight: bold; /* Bold text */
+}
+
+@media only screen and (max-width:996px){
+    .container{
+        max-width:850px;
+    }
+}
+
+@media only screen and (max-width:800px)
+{
+    .form_container,.booking_container{
+        display:block !important;
+    }
+
+    .home_dropoff {
+        width: 60%;
+        height: 100%;
+        border-radius: 10px;
+        box-shadow: inset 0px 2px 8px 3px rgb(96, 130, 182,0.8);
+        line-height: 2;
+    }
+
+    .home_pickup {
+        width: 60%;
+        height: 100%;
+        border-radius: 10px;
+        box-shadow: inset 0px 2px 8px 3px rgb(96, 130, 182,0.8);
+        line-height: 2;
+    }
 }

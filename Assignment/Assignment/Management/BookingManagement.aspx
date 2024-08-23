@@ -8,7 +8,7 @@
     
 
 <div class="modal fade" id="rejectReason" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered"">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
     <asp:UpdatePanel ID="updateReason" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
         <ContentTemplate>
