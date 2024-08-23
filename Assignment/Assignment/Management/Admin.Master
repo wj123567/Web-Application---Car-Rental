@@ -71,7 +71,7 @@
                                     <a href="BookingManagement.aspx" class="sidebar-link">Booking Management</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
+                                    <a href="AddOnManagement.aspx" class="sidebar-link">Add On Management</a>
                                 </li>
                             </ul>
                         </li>

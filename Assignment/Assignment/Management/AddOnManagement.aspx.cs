@@ -90,7 +90,7 @@ namespace Assignment.Management
             SqlCommand com = new SqlCommand(selectAll, con);
             con.Open();
             return (int)com.ExecuteScalar();
-           
+          
         }
 
       

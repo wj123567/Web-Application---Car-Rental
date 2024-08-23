@@ -87,8 +87,9 @@ namespace Assignment
                 // Inject the generated HTML into the placeholders
                 RegionListPlaceholder.InnerHtml = regionListHtml.ToString();
                 PopularPointsPlaceholder.InnerHtml = popularPointsHtml.ToString();
+                con.Close();
             }
-
+            
             // Reinitialize JavaScript event listeners
             ScriptManager.RegisterStartupScript(this, GetType(), "initializeEventListeners", "initializeEventListeners();", true);
         }
@@ -158,6 +159,7 @@ namespace Assignment
                     return false;
                 }
             }
+            con.Close();
         return true;
         }
         // Mark items as disabled before rendering the page
@@ -192,7 +194,7 @@ namespace Assignment
                     con.Open();
                     cmd.ExecuteNonQuery();
                 }
-
+                con.Close() ;
             }
         }
     }

@@ -7,8 +7,36 @@
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\addonmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\addonmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\schoolasgmt\\gtihub desk\\web\\web-application---car-rental\\assignment\\assignment\\management\\bookingmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\bookingmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\schoolasgmt\\gtihub desk\\web\\web-application---car-rental\\assignment\\assignment\\bookinfo.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\bookinfo.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecorddetail.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assignment\\bookingrecorddetail.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\infopage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\infopage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\schoolasgmt\\gtihub desk\\web\\web-application---car-rental\\assignment\\assignment\\home.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\home.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\bookingmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\bookingmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\admin.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\admin.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\drivermanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
@@ -19,20 +47,8 @@
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\usermanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\bookingrecorddetail.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\bookingrecorddetail.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\bookingrecord.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\bookingrecord.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\addonmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\addonmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\addonmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\addonmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\carmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -43,20 +59,12 @@
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\carmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\bookingrecorddetail.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\bookingrecorddetail.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\drivermanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\drivermanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\css\\infopg.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\infopg.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\infopage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\infopage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\css\\profile.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -78,12 +86,16 @@
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\bookingrecord.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\admin.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\admin.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecord.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assignment\\bookingrecord.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecorddetail.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assignment\\bookingrecorddetail.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     }
   ],
   "DocumentGroupContainers": [
@@ -93,11 +105,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 195,
-          "SelectedChildIndex": 17,
+          "SelectedChildIndex": 20,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "dbo.AddOn [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__GITHUB_DESK_WEB_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.AddOn.sql",
               "ToolTip": "dbo.AddOn [Data]",
@@ -107,7 +119,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "AddOnManagement.aspx",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AddOnManagement.aspx",
               "RelativeDocumentMoniker": "Assignment\\Management\\AddOnManagement.aspx",
@@ -120,20 +132,21 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "AddOnManagement.aspx.cs",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AddOnManagement.aspx.cs",
               "RelativeDocumentMoniker": "Assignment\\Management\\AddOnManagement.aspx.cs",
               "ToolTip": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AddOnManagement.aspx.cs",
               "RelativeToolTip": "Assignment\\Management\\AddOnManagement.aspx.cs",
-              "ViewState": "AQIAABsBAAAAAAAAAAAUwCcBAAANAAAA",
+              "ViewState": "AQIAAPcAAAAAAAAAAAAUwEIBAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-21T13:03:14.369Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "CarManagement.aspx",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\CarManagement.aspx",
               "RelativeDocumentMoniker": "Assignment\\Management\\CarManagement.aspx",
@@ -146,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "CarManagement.aspx.cs",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\CarManagement.aspx.cs",
               "RelativeDocumentMoniker": "Assignment\\Management\\CarManagement.aspx.cs",
@@ -159,7 +172,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 22,
               "Title": "bookingrecord.aspx",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecord.aspx",
               "RelativeDocumentMoniker": "Assignment\\bookingrecord.aspx",
@@ -172,7 +185,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 23,
               "Title": "bookingrecorddetail.aspx",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecorddetail.aspx",
               "RelativeDocumentMoniker": "Assignment\\bookingrecorddetail.aspx",
@@ -185,20 +198,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 4,
               "Title": "bookingrecorddetail.aspx.cs",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecorddetail.aspx.cs",
               "RelativeDocumentMoniker": "Assignment\\bookingrecorddetail.aspx.cs",
               "ToolTip": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecorddetail.aspx.cs",
               "RelativeToolTip": "Assignment\\bookingrecorddetail.aspx.cs",
-              "ViewState": "AQIAAHoAAAAAAAAAAAAswIUAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-22T07:24:05.529Z",
               "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "driverManagement.aspx",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\driverManagement.aspx",
               "RelativeDocumentMoniker": "Assignment\\Management\\driverManagement.aspx",
@@ -211,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "driverManagement.aspx.cs",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\driverManagement.aspx.cs",
               "RelativeDocumentMoniker": "Assignment\\Management\\driverManagement.aspx.cs",
@@ -224,7 +236,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "BookingManagement.aspx",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\BookingManagement.aspx",
               "RelativeDocumentMoniker": "Assignment\\Management\\BookingManagement.aspx",
@@ -233,11 +245,12 @@
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
               "WhenOpened": "2024-08-22T14:22:57.547Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "UserManagement.aspx",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\UserManagement.aspx",
               "RelativeDocumentMoniker": "Assignment\\Management\\UserManagement.aspx",
@@ -249,12 +262,51 @@
               "IsPinned": true
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "bookinfo.aspx.cs",
+              "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookinfo.aspx.cs",
+              "RelativeDocumentMoniker": "Assignment\\bookinfo.aspx.cs",
+              "ToolTip": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookinfo.aspx.cs",
+              "RelativeToolTip": "Assignment\\bookinfo.aspx.cs",
+              "ViewState": "AQIAAJkAAAAAAAAAAAAmwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T17:59:22.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Home.aspx.cs",
+              "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx.cs",
+              "RelativeDocumentMoniker": "Assignment\\Home.aspx.cs",
+              "ToolTip": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx.cs",
+              "RelativeToolTip": "Assignment\\Home.aspx.cs",
+              "ViewState": "AQIAAKQAAAAAAAAAAAAuwMQAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T17:57:23.032Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BookingManagement.aspx.cs",
+              "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\BookingManagement.aspx.cs",
+              "RelativeDocumentMoniker": "Assignment\\Management\\BookingManagement.aspx.cs",
+              "ToolTip": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\BookingManagement.aspx.cs",
+              "RelativeToolTip": "Assignment\\Management\\BookingManagement.aspx.cs",
+              "ViewState": "AQIAAJ0BAAAAAAAAAAAowPQAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T17:48:15.995Z",
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 5,
               "Title": "infopage.aspx",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\infopage.aspx",
               "RelativeDocumentMoniker": "Assignment\\infopage.aspx",
@@ -262,11 +314,12 @@
               "RelativeToolTip": "Assignment\\infopage.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-08-22T03:45:01.033Z"
+              "WhenOpened": "2024-08-22T03:45:01.033Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "infopg.css",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\infopg.css",
               "RelativeDocumentMoniker": "Assignment\\CSS\\infopg.css",
@@ -278,7 +331,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "profile.aspx",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\profile.aspx",
               "RelativeDocumentMoniker": "Assignment\\UserProfile\\profile.aspx",
@@ -290,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "profile.css",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\profile.css",
               "RelativeDocumentMoniker": "Assignment\\CSS\\profile.css",
@@ -315,7 +368,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "bookingrecord.css",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\bookingrecord.css",
               "RelativeDocumentMoniker": "Assignment\\CSS\\bookingrecord.css",
@@ -327,7 +380,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "addonManagement.css",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\addonManagement.css",
               "RelativeDocumentMoniker": "Assignment\\CSS\\addonManagement.css",
@@ -339,7 +392,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 8,
               "Title": "Admin.Master",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\Admin.Master",
               "RelativeDocumentMoniker": "Assignment\\Management\\Admin.Master",
@@ -347,11 +400,12 @@
               "RelativeToolTip": "Assignment\\Management\\Admin.Master",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-08-21T14:04:10.892Z"
+              "WhenOpened": "2024-08-21T14:04:10.892Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "Web.config",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Web.config",
               "RelativeDocumentMoniker": "Assignment\\Web.config",

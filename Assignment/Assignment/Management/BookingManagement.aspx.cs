@@ -60,7 +60,7 @@ namespace Assignment.Management
                     rptBookingList.DataSource = ds.Tables["BookingRecordTable"];
                     rptBookingList.DataBind();
                 }
-
+                con.Close();
             }
             int totalRow = getTotalRow();
             lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
@@ -151,17 +151,17 @@ namespace Assignment.Management
             String BookingId = btnView.CommandArgument;
             Session["BookingId"] = BookingId;
 
-            if (status == "Pending")
-            {
-                btnOk.Visible = false;
-                btnApprove.Visible = true;
-                btnReject.Visible = true;
-            }
-            else
+            if (status == "Completed")
             {
                 btnOk.Visible = true;
                 btnApprove.Visible = false;
                 btnReject.Visible = false;
+            }
+            else
+            {
+                btnOk.Visible = true;
+                btnApprove.Visible = true;
+                btnReject.Visible = true;
             }
             //here hard code
             //here hard code
@@ -219,16 +219,13 @@ namespace Assignment.Management
             SqlDataReader reader = com.ExecuteReader();
             if (reader.Read())
             {
-                if (reader["Status"].ToString() == "Pending")
-                {
-                    btnOk.Visible = false;
-                   
-                }
-                else
+                if (reader["Status"].ToString() == "Complted")
                 {
                     btnApprove.Visible = false;
                     btnReject.Visible = false;
+
                 }
+               
                 
             }
         }
@@ -245,7 +242,9 @@ namespace Assignment.Management
             Object result = com.ExecuteScalar();
 
             String userId = result as String;
+            con.Close();
             return userId;
+            
         }
 
         protected void LoadAvailableUser(String id)
