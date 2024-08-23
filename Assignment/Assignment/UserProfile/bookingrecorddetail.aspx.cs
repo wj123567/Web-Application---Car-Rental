@@ -17,7 +17,7 @@ namespace Assignment
             if (!Page.IsPostBack)
             {
                 // Retrieve BookingId from session
-                string bookingId = Session["BookingRecordId"] as string;
+                string bookingId = Session["bookingrecordID"] as string;
 
                 if (!string.IsNullOrEmpty(bookingId))
                 {
@@ -142,11 +142,9 @@ namespace Assignment
                     rejectReason = ddlCancelReason.SelectedValue;
                 }
                 updateCancelRequest(cancel, rejectReason);
-                Server.Transfer("bookingrecord.aspx");
             }
             // Retrieve BookingId from session
 
-           
             
             Response.Redirect("bookingrecord.aspx");
         }
@@ -170,7 +168,7 @@ namespace Assignment
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(sql, con);
             con.Open();
-            com.Parameters.AddWithValue("@Id", Session["BookingRecordId"].ToString());
+            com.Parameters.AddWithValue("@Id", Session["bookingrecordID"].ToString());
             com.Parameters.AddWithValue("@CancelReason", cancel);
             com.ExecuteNonQuery();
             con.Close();

@@ -75,7 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bookingRecordUpdate.aspx" />
+    <Content Include="UserProfile\bookingRecordUpdate.aspx" />
     <Content Include="CarRentalSystemModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CarRentalSystemModel.Context.cs</LastGenOutput>
@@ -110,8 +110,8 @@
     <Content Include="Management\test.aspx" />
     <Content Include="Management\testModel.aspx" />
     <Content Include="UserProfile\bookingprocess.aspx" />
-    <Content Include="bookingrecord.aspx" />
-    <Content Include="bookingrecorddetail.aspx" />
+    <Content Include="UserProfile\bookingrecord.aspx" />
+    <Content Include="UserProfile\bookingrecorddetail.aspx" />
     <Content Include="Management\CarManagement.aspx" />
     <Content Include="CSS\AdminRewardpoint.css" />
     <Content Include="CSS\bookinfo.css" />
@@ -182,11 +182,11 @@
     <Compile Include="BookingAddOn.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="bookingRecordUpdate.aspx.cs">
+    <Compile Include="UserProfile\bookingRecordUpdate.aspx.cs">
       <DependentUpon>bookingRecordUpdate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="bookingRecordUpdate.aspx.designer.cs">
+    <Compile Include="UserProfile\bookingRecordUpdate.aspx.designer.cs">
       <DependentUpon>bookingRecordUpdate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Car.cs">
@@ -306,18 +306,18 @@
     <Compile Include="UserProfile\bookingprocess.aspx.designer.cs">
       <DependentUpon>bookingprocess.aspx</DependentUpon>
     </Compile>
-    <Compile Include="bookingrecord.aspx.cs">
+    <Compile Include="UserProfile\bookingrecord.aspx.cs">
       <DependentUpon>bookingrecord.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="bookingrecord.aspx.designer.cs">
+    <Compile Include="UserProfile\bookingrecord.aspx.designer.cs">
       <DependentUpon>bookingrecord.aspx</DependentUpon>
     </Compile>
-    <Compile Include="bookingrecorddetail.aspx.cs">
+    <Compile Include="UserProfile\bookingrecorddetail.aspx.cs">
       <DependentUpon>bookingrecorddetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="bookingrecorddetail.aspx.designer.cs">
+    <Compile Include="UserProfile\bookingrecorddetail.aspx.designer.cs">
       <DependentUpon>bookingrecorddetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Management\CarManagement.aspx.cs">

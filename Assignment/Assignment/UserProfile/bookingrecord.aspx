@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookingrecord.aspx.cs" Inherits="Assignment.bookingrecord" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-    <link href="CSS/bookingrecord.css" rel="stylesheet" />
-    <link href="CSS/paging.css" rel="stylesheet" />
+    <link href="../CSS/bookingrecord.css" rel="stylesheet" />
+    <link href="../CSS/paging.css" rel="stylesheet" />
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     
@@ -167,7 +167,7 @@
 	
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         
-    <script type="text/javascript" src="JS/paging.js"></script>
+    <script type="text/javascript" src="../JS/paging.js"></script>
 
     <script>
 

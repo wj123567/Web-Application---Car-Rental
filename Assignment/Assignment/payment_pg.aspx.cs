@@ -16,6 +16,7 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!Page.IsPostBack)
             {
                 //----retrieve the sync data 
@@ -24,7 +25,7 @@ namespace Assignment
                 UpdateProgressBar(currentStep);
 
                 BindCards();
-                     
+                
 
             }
         }
@@ -52,6 +53,7 @@ namespace Assignment
 
             rptCards.DataSource = addCards;
             rptCards.DataBind();
+
         }
 
         private DataTable GetCards()
@@ -80,6 +82,26 @@ namespace Assignment
                 
             }
             
+            
+        }
+
+        protected string getCardsPhoto(string cardType)
+        {
+            /* string sql = @"SELECT CardType from PaymentCard p JOIN ApplicationUser a ON p.UserId = a.Id 
+                             JOIN Booking ON a.Id = b.UserId WHERE b.UserId = @UserId";*/
+            switch (cardType)
+            {
+                case "Master":
+                    return "Image/WZ/mastercard.png";
+                case "Visa":
+                    return "Image/WZ/visa.png";
+                case "American Express":
+                    return "Image/WZ/amex.png";
+                default:
+                    return "";
+
+            }
+
         }
         protected string FormatCardNumber(string cardNumber)
         {
@@ -118,7 +140,7 @@ namespace Assignment
         protected void modalOkBtn_Click(object sender, EventArgs e)
         {
             // Redirect to bookingrecord.aspx after the modal "OK" button is clicked
-            Response.Redirect("bookingrecord.aspx");
+            Response.Redirect("Home.aspx");
         }
 
         protected void btnExistCard_Click(object sender, EventArgs e)
@@ -128,7 +150,8 @@ namespace Assignment
             string cardId = button.CommandArgument;
 
             FillCardInfo(cardId);
-
+            int currentStep = 4;
+            UpdateProgressBar(currentStep);
         }
 
         protected void FillCardInfo(string cardId)

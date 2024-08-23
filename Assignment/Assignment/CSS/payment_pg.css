@@ -67,3 +67,100 @@ h6 {
     .existingcard_container{
         margin-top:25px;
     }
+
+/* modal extra*/
+#paymentModal h5{
+
+}
+
+#confirmBookModal h5 {
+    margin: auto;
+    text-align: center;
+}
+
+.congrats {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.congrats_start {
+    font-size: 24px;
+    font-weight: 800;
+    color: rgb(255, 68, 51);
+    animation: showup 7s infinite;
+}
+
+.congrats_end {
+    font-size: 24px;
+    color: rgba(255, 95, 31,0.9);
+    width: 0px;
+    animation: reveal 7s infinite;
+}
+
+    .congrats_end span {
+        margin-left: -455px;
+        animation: slidein 7s infinite;
+    }
+
+@keyframes showup {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes slidein {
+    0% {
+        margin-left: -800px;
+    }
+
+    20% {
+        margin-left: -800px;
+    }
+
+    35% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: 0px;
+    }
+}
+
+@keyframes reveal {
+    0% {
+        opacity: 0;
+        width: 0px;
+    }
+
+    20% {
+        opacity: 1;
+        width: 0px;
+    }
+
+    30% {
+        width: 455px;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        width: 455px;
+    }
+}
+

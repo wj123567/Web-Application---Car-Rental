@@ -2,21 +2,43 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" SelectCommand="SELECT * FROM [PaymentCard]"></asp:SqlDataSource>
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    
+    <asp:HiddenField ID="hdnCardType" runat="server" />
     <!--
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     -->
 
     <!-- Modal Structure -->
 <div id="paymentModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Payment Status</h5>
      
             </div>
             <div class="modal-body">
-                <p>Your payment is being processed...</p>
+                <p>Payment has been made!</p>
+            </div>
+            <div class="modal-footer">
+               
+                <asp:Button ID="modalNextBtn" runat="server" CssClass="btn btn-primary" Text="Next" data-bs-dismiss="modal" OnClientClick="triggerSweetAlert(); return false;" ClientIDMode="Static"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="confirmBookModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+             <div class="modal-header">
+                
+                <h5 class="modal-title">Booking Done</h5>
+               
+            </div>
+            <div class="modal-body">
+                <div class="congrats congrats_start">Congratulation!</div>
+                 <div class="congrats congrats_end"> 
+                  <span>You have successfully rented your desired car.</span>
+                </div>
             </div>
             <div class="modal-footer">
                 <asp:Button ID="modalOkBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" OnClick="modalOkBtn_Click" />
@@ -58,12 +80,15 @@
              
             <div class="shadow-sm bg-white p-4 my-4">
                 <h4>Payment Info</h4>
-                <div class="existingcard_container">
+            <div class="existingcard_container">
                 <h5>Existing Card</h5>
-                <asp:Repeater ID="rptCards" runat="server" >
-                    <ItemTemplate>
-                <div class="d-flex flex-row align-items-center mt-3 mb-3 pb-1">
-          <img class="img-fluid" src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+
+          <asp:Repeater ID="rptCards" runat="server" >
+          <ItemTemplate>
+            <div class="container-fluid">
+          <div class="d-flex flex-row align-items-center mt-3 mb-3 pb-1">
+              <asp:Image ID="imgCard" runat="server" src='<%# getCardsPhoto(Eval("CardType").ToString()) %>'/>
+              
           <div class="flex-fill mx-3">
             <div class=" data-mdb-input-init form-outline">
                 <table>
@@ -73,8 +98,10 @@
               <label class="form-label" for="formControlLgXc">Card Number</label>
             </div>
           </div>
-                    <asp:Button ID="btnExistCard" runat="server" Text="Button"  CommandArgument='<%# Eval("Id") %>' OnClick="btnExistCard_Click"/>
+              
+                    <asp:Button ID="btnExistCard" runat="server" Text="Apply"  CssClass="btn btn-dark" CommandArgument='<%# Eval("Id") %>' OnClick="btnExistCard_Click" />
         </div>
+                </div>
           </ItemTemplate>
          </asp:Repeater>
          </div>               
@@ -83,7 +110,7 @@
                 <div class="col-sm-6 mt-5">
                      
                   <asp:Label ID="lblCardName" runat="server" Text="Cardholder Name" CssClass="label_style"></asp:Label>
-                  <asp:TextBox ID="txtCardName" runat="server" CssClass="form-control my-1"></asp:TextBox>
+                  <asp:TextBox ID="txtCardName" runat="server" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"  ErrorMessage="Card Name is Required" ControlToValidate="txtCardName" ValidationGroup="PaymentValidation"  CssClass="validate"  Display="Static"></asp:RequiredFieldValidator>
                 </div>
                 <div class="col-sm-8 mt-4">
@@ -91,18 +118,19 @@
                     <asp:Label ID="lblVisaCard" runat="server" Text="" CssClass="fab fa-cc-visa fa-lg"></asp:Label>
                     <asp:Label ID="lblMasterCard" runat="server" Text="" CssClass="fab fa-cc-mastercard fa-lg"></asp:Label>
                     <asp:Label ID="lblAmexCard" runat="server" Text="" CssClass="fab fa-cc-amex fa-lg"></asp:Label>
-                  <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control my-1"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"  ErrorMessage="Card Number is Required" ControlToValidate="txtCardNumber" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
+                  <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control my-1" placeholder="0000 0000 0000 0000" MaxLength="19" ValidationGroup="PaymentValidation"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"  ErrorMessage="Card Number is Required." ControlToValidate="txtCardNumber" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
+                     <asp:CustomValidator ID="validateCard" runat="server" ErrorMessage="Card is Invalid." CssClass="validate" ValidationGroup="PaymentValidation" ClientValidationFunction="validateCard" ControlToValidate="txtCardNumber" ValidateEmptyText="True" Display="Dynamic"></asp:CustomValidator>
                 </div>
                 <div class="row">
                   <div class="col-sm-4 col-xs-6 mt-4">
                     <asp:Label ID="lblExpiry" runat="server" Text="Expiry Date" CssClass="label_style"></asp:Label>
-                    <asp:TextBox ID="txtExpiry" runat="server" TextMode="Month" CssClass="form-control my-1"></asp:TextBox>
+                    <asp:TextBox ID="txtExpiry" runat="server" TextMode="Month" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
                       <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Card Expiry Date is Required" ControlToValidate="txtExpiry" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                   </div>
                   <div class="col-sm-4 col-xs-6 mt-4">      
                     <asp:Label ID="lblCvv" runat="server" Text="Security Code(CVV)" CssClass="label_style"></asp:Label>
-                    <asp:TextBox ID="txtCvv" runat="server" CssClass="form-control my-1"></asp:TextBox>
+                    <asp:TextBox ID="txtCvv" runat="server" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
                      <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"  ErrorMessage="CVV is Required" ControlToValidate="txtCvv" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                   </div>
                 </div>
@@ -201,13 +229,18 @@
         <div class="charge_item summary_total">
         <p class="summary_title">Total Price(RM):</p>
          <asp:Label ID="lblTotalPrice" runat="server" Text="0.00" CssClass="summary_amt grand_total"></asp:Label>
-        
+           
         </div>
     </div>
 
 </div>
     </div>
     </section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script>
         function loadModal() {
             document.addEventListener("DOMContentLoaded", modal);
@@ -246,6 +279,89 @@
                     element.classList.add('active');
                 } else {
                     element.classList.remove('active');
+                }
+            });
+        }
+
+        function validateCard(sender, args) {
+            var cardInput = document.getElementById('<%= txtCardNumber.ClientID %>');
+            var cardNumber = cardInput.value.replace(/\s/g, '');
+            var isVisa = false;
+            var isMaster = false;
+            var isAmex = false;
+
+            isVisa = isVisaCard(cardNumber);
+            isMaster = isMasterCard(cardNumber);
+            isAmex = isAmexCard(cardNumber);
+
+            console.log(document.getElementById('<%= hdnCardType.ClientID %>').value);
+
+            if (isVisa || isMaster || isAmex) {
+                args.IsValid = true;
+            } else {
+                args.IsValid = false;
+            }
+
+        }
+
+        function isVisaCard(cardNumber) {
+            var cardno = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+            if (cardno.test(cardNumber)) {
+                var card = document.getElementById('<%= lblVisaCard.ClientID %>');
+        card.className = "fab fa-cc-visa fa-lg text-primary";
+        document.getElementById('<%= hdnCardType.ClientID %>').value = 'Visa';
+        console.log(document.getElementById('<%= hdnCardType.ClientID %>').value);
+        return true;
+            }
+        else {
+        var card = document.getElementById('<%= lblVisaCard.ClientID %>');
+                card.className = "fab fa-cc-visa fa-lg";
+                return false;
+            }
+        }
+
+        function isMasterCard(cardNumber) {
+            var cardno = /^(?:5[1-5][0-9]{14})$/;
+            if (cardno.test(cardNumber)) {
+                var card = document.getElementById('<%= lblMasterCard.ClientID %>');
+        card.className = "fab fa-cc-mastercard fa-lg text-primary";
+        document.getElementById('<%= hdnCardType.ClientID %>').value = 'Master';
+        console.log(document.getElementById('<%= hdnCardType.ClientID %>').value);
+        return true;
+            }
+            else {
+        var card = document.getElementById('<%= lblMasterCard.ClientID %>');
+        card.className = "fab fa-cc-mastercard fa-lg";
+        return false;
+            }
+        }
+
+function isAmexCard(cardNumber) {
+    var cardno = /^(?:3[47][0-9]{13})$/;
+    if (cardno.test(cardNumber)) {
+        var card = document.getElementById('<%= lblAmexCard.ClientID %>');
+        card.className = "fab fa-cc-amex fa-lg text-primary";
+        document.getElementById('<%= hdnCardType.ClientID %>').value = 'Amex';
+        return true;
+    }
+    else {
+        var card = document.getElementById('<%= lblAmexCard.ClientID %>');
+        card.className = "fab fa-cc-amex fa-lg";
+        return false;
+    }
+        }
+
+        
+        function triggerSweetAlert() {
+            swal({
+                title: "Congratulation!",
+                text: "You have successfully rented your desired car.",
+                icon: "success",
+                buttons: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    // Do something on confirmation, e.g., redirect
+                    window.location.href = 'Home.aspx'; // Example action
                 }
             });
         }

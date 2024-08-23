@@ -128,7 +128,7 @@
     color: #ffffff;
     font-size: 18px;
     border-radius: 1px;
-    width: 120px ;
+    width: 80px ;
     height: 40px;
     font-weight: bold;
     border-bottom: 4px solid #179e43 ;
@@ -152,7 +152,7 @@
     color: #ffffff;
     font-size: 18px;
     border-radius: 1px;
-    width: 120px;
+    width: 80px;
     height: 40px;
     font-weight: bold;
     border-bottom: 4px solid #fc5f3d;
@@ -211,4 +211,23 @@
     resize: none;
     overflow-y: auto;
     width: 100%;
+}
+
+@media only screen and (max-width:600px){
+    .col-8{
+        width:50%;
+    }
+    .col-2{
+        width:25%;
+    }
+}
+
+@media only screen and (max-width:410px) {
+    .col-8 {
+        width: 40%;
+    }
+
+    .col-2 {
+        width: 30%;
+    }
 }

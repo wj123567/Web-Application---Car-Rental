@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookingrecorddetail.aspx.cs" Inherits="Assignment.bookingrecorddetail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-        <link href="CSS/bookingrecorddetail.css" rel="stylesheet" />
+        <link href="../CSS/bookingrecorddetail.css" rel="stylesheet" />
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <div id="cancelModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">

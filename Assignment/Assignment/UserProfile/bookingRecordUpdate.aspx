@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookingRecordUpdate.aspx.cs" Inherits="Assignment.bookingRecordUpdate" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 
-     <link href="CSS/bookingrecordupdate.css" rel="stylesheet" />
+     <link href="../CSS/bookingrecordupdate.css" rel="stylesheet" />
 
 <div id="confirmModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -38,7 +38,7 @@
                   <h2 class="mb-0">Update for Booking ID: <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label></h2>
                 </div>
                 <div>
-                  
+              </div>    
                   <!-- row -->
                   <div class="row justify-content-between booking_record">
                       
