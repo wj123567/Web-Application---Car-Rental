@@ -59,12 +59,6 @@
                         <span>Driver</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a href="bookingprocess.aspx" class="sidebar-link">
-                        <i class="ri-contacts-book-2-fill"></i>
-                        <span>Booking</span>
-                    </a>
-                </li>
             </ul>
             <div class="sidebar-footer border-top">
               <a href="#" class="d-flex p-3 link-dark text-decoration-none dropdown-toggle sidebar-link align-items-center" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
