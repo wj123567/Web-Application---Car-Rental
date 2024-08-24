@@ -222,42 +222,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
 
         /// <summary>
-        /// lblDriverPhoneNum control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDriverPhoneNum;
-
-        /// <summary>
-        /// txtDriverPhoneNum control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDriverPhoneNum;
-
-        /// <summary>
-        /// RequiredFieldValidator10 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator10;
-
-        /// <summary>
-        /// validPhoneNum control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator validPhoneNum;
-
-        /// <summary>
         /// lblExistingDriver control.
         /// </summary>
         /// <remarks>
@@ -294,13 +258,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtDriverBirth;
 
         /// <summary>
-        /// RequiredFieldValidator11 control.
+        /// rqDriverBirth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator11;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqDriverBirth;
 
         /// <summary>
         /// lblDriverLicenseNum control.
@@ -321,40 +285,49 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtDriverLicenseNum;
 
         /// <summary>
-        /// RequiredFieldValidator13 control.
+        /// rqDriverLicenseNum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator13;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqDriverLicenseNum;
 
         /// <summary>
-        /// lblRentalPurpse control.
+        /// lblDriverPhoneNum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRentalPurpse;
+        protected global::System.Web.UI.WebControls.Label lblDriverPhoneNum;
 
         /// <summary>
-        /// ddlRentalPurpose control.
+        /// txtDriverPhoneNum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRentalPurpose;
+        protected global::System.Web.UI.WebControls.TextBox txtDriverPhoneNum;
 
         /// <summary>
-        /// RequiredFieldValidator12 control.
+        /// rqDriverPhoneNum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator12;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqDriverPhoneNum;
+
+        /// <summary>
+        /// validPhoneNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator validPhoneNum;
 
         /// <summary>
         /// btnActivate control.
