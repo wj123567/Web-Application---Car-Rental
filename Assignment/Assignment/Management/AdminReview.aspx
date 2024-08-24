@@ -5,6 +5,58 @@
             <h1>Review Management</h1>
         </div>
         <br />
+        <br />
+
+        <table class="table table-bordered">
+            <thead>
+                <tr class="table-striped">
+                    <th>Review Id</th>
+                    <th>Username</th>
+                    <th>Review Text</th>
+                    <th>Rating</th>
+                    <th>Review Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Lim Ah Kao</td>
+                    <td>This car is super good! I give 10 stars for this booking! Nice experience! Will try the services next time</td>
+                    <td>5</td>
+                    <td>2024-8-24 12:01:10 PM</td>
+                    <td>
+                        <asp:LinkButton ID="asd" runat="server" CommandName="Edit">
+                            <i class="fas fa-edit" style="color: #ffbb00;"></i>
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="asds" runat="server" CommandName="Delete">
+                            <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Lim Ah Boo</td>
+                    <td>This car is super good! I give 10 stars for this booking! Nice experience! Will try the services next time</td>
+                    <td>4</td>
+                    <td>2024-8-25 22:01:10 PM</td>
+                    <td>
+                        <asp:LinkButton ID="asdf" runat="server" CommandName="Edit">
+                            <i class="fas fa-edit" style="color: #ffbb00;"></i>
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="asf" runat="server" CommandName="Delete">
+                            <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+
         <%-- ListView --%>
             <%-- DataKeyNames - Specifies PK --%>
             <asp:ListView ID="lvReview" runat="server">
