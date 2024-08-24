@@ -75,6 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Management\AdminReview.aspx" />
     <Content Include="UserProfile\bookingRecordUpdate.aspx" />
     <Content Include="CarRentalSystemModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -181,6 +182,13 @@
     </Compile>
     <Compile Include="BookingAddOn.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Management\AdminReview.aspx.cs">
+      <DependentUpon>AdminReview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\AdminReview.aspx.designer.cs">
+      <DependentUpon>AdminReview.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserProfile\bookingRecordUpdate.aspx.cs">
       <DependentUpon>bookingRecordUpdate.aspx</DependentUpon>

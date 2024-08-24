@@ -1,15 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="Redemption.aspx.cs" Inherits="Assignment.Redemption" %>
-<asp:Content ID="RedemptionHead" ContentPlaceHolderID="head" runat="server">
+<%--<asp:Content ID="RedemptionHead" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"   
  crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"   
  integrity="sha384-ogbw9D3nTbior7kPJkRoyDqiy58zaSyEyXuVxPoVgwmTJMKEu1exv0j4ovwIwEM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</asp:Content>
+</asp:Content>--%>
 
 <asp:Content ID="Redemption" ContentPlaceHolderID="main" runat="server">
-
+    
     <div class="redemption-container">
         <div class="redemption-container-header">
             <h2>Redeem What You Like?</h2>
@@ -36,8 +36,8 @@
                             </div>
         
                             <p><%# Eval("ItemDescription") %> </p>
-        
-                            <button class="btn btn-danger resize">Redeem</button>
+                            <%--<asp:LinkButton ID="btnRedeem" runat="server" CssClass="btn btn-danger resize">Redeem</asp:LinkButton>--%>
+                            <button id="btnRedeem" type="button" class="btn btn-danger resize" data-bs-toggle="modal" data-bs-target="#Redeem">Redeem</button>
                         </div>
                     </div>
                 </ItemTemplate>
@@ -45,5 +45,33 @@
             </asp:ListView>
         </div>
     </div>
-    
+    <!-- Redeem -->
+    <div class="modal fade" id="Redeem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Redeem Confimation</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to redeem VoucherProMax?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button id="confirmRedeem" type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm Redeem</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const btnRedeem = document.getElementById("btnRedeem");
+        const confirmRedeem = document.getElementById("confirmRedeem");
+        const redeemModal = new bootstrap.Modal(document.getElementById("Redeem"));
+
+        confirmRedeem.addEventListener("click", function () {
+            btnRedeem.textContent = "Redeemed";
+            btnRedeem.disabled = true;
+        });
+    </script>
 </asp:Content>

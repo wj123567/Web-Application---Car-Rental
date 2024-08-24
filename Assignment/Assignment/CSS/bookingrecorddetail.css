@@ -203,7 +203,7 @@
 
 /* Clicked state: Orange color */
 .rating i.checked {
-    color: orange;
+   /* color: orange;*/
 }
 
 .txtComment {

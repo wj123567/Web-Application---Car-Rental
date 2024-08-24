@@ -89,7 +89,8 @@
                                       <asp:TextBox ID="txtComment" runat="server" TextMode="MultiLine" Rows="5" Columns="100" CssClass="txtComment"></asp:TextBox>
                                   </div>
                                   <br />
-                                  <div class="align-end"><asp:Button ID="btnSubmit" runat="server" Text="Submit" CssClass="btn btn-success"/></div>
+                                  <div class="">
+                                      <asp:LinkButton ID="submit" runat="server" CssClass="btn btn-success" data-bs-toggle="modal" data-bs-target="#submitComment">Submit</asp:LinkButton></div>
                               </div>
                           </div>
                       </div>
@@ -244,8 +245,30 @@
         </div>
             </div>
       </section>
+
+       <%-- you Modal --%>
+        <!-- Modal -->
+        <div class="modal fade" id="submitComment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Submit Successful!
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </main>
-           
+
+
+
+       
 
 <script>
 

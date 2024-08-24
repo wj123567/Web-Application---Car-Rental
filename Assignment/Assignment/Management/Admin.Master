@@ -58,6 +58,9 @@
                         <li class="sidebar-item">
                             <a href="AdminRedemption.aspx" class="sidebar-link">Redemption Management</a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="AdminReview.aspx" class="sidebar-link">Review Management</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="sidebar-item">
