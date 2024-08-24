@@ -1,0 +1,12 @@
+﻿.Review {
+    color: black;
+}
+
+    .Review .title {
+        font-weight: bold;
+        border-bottom: 1px solid lightgray;
+    }
+
+    .Review .Add {
+        margin: 2% auto;
+    }

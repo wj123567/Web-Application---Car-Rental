@@ -63,8 +63,12 @@
                         </td>
                         <td><%# Eval("PointsStatus") %></td>
                         <td>
-                            <asp:Button ID="EditButton" runat="server" Text="Edit" />
-                            <asp:Button ID="DeleteButton" runat="server" Text="Delete" />
+                            <asp:LinkButton ID="EditButton" runat="server" CommandName="Edit">
+                                <i class="fas fa-edit" style="color: #ffbb00;"></i>
+                            </asp:LinkButton>
+                            <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete">
+                                <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
+                            </asp:LinkButton>
                         </td>
                     </tr>
                 </ItemTemplate>
