@@ -118,7 +118,7 @@
                              
                     
                     <asp:Button ID="btnUploadAddOn" runat="server" Text="Add" CssClass='btn btn-primary' ValidationGroup="uploadCar" OnClick="btnUploadAddOn_Click"/>
-                    <asp:Button ID="btnUpdateAddOn" runat="server" Text="Update" CssClass='btn btn-primary' ValidationGroup="uploadCar" Visible="False" OnClick="btnUpdateAddOn_Click"/>
+                    <asp:Button ID="btnUpdateAddOn" runat="server" Text="Update" CssClass='btn btn-primary'  Visible="False" OnClick="btnUpdateAddOn_Click"/>
                     <asp:Button ID="btnDelete" runat="server" Text="Delete " cssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False"/>                                      
                 </div>
             </div>            
