@@ -11,7 +11,21 @@ namespace Assignment.Management
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                BindListView();
+            }
+        }
 
+        private void BindListView()
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                var reviewData = db.Reviews.ToList();
+
+                lvReview.DataSource = reviewData;
+                lvReview.DataBind();
+            }
         }
     }
 }
