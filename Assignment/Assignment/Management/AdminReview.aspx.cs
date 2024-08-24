@@ -21,10 +21,10 @@ namespace Assignment.Management
         {
             using (var db = new SystemDatabaseEntities())
             {
-                var reviewData = db.Reviews.ToList();
+                //var query = 
 
-                lvReview.DataSource = reviewData;
-                lvReview.DataBind();
+                //lvReview.DataSource = reviewData;
+                //lvReview.DataBind();
             }
         }
     }

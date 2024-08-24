@@ -10,3 +10,7 @@
     .Review .Add {
         margin: 2% auto;
     }
+
+.Review td {
+    padding: 12px;
+}

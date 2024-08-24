@@ -228,6 +228,8 @@ namespace Assignment.Management
                
                 
             }
+            con.Close();
+            reader.Close();
         }
 
 

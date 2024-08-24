@@ -14,7 +14,7 @@
         <%-- DataKeyNames - Specifies PK --%>
         <asp:ListView ID="lvRedeemItems" runat="server" DataKeyNames="RedeemItemId" OnItemEditing="lvRedeemItems_ItemEditing" OnItemUpdating="lvRedeemItems_ItemUpdating" OnItemCanceling="lvRedeemItems_ItemCanceling" >
             <LayoutTemplate>
-                <table class="table table-striped table-bordered table-responsive">
+                <table class="table table-striped table-bordered table-responsive redeemTable">
                     <thead>
                         <tr class="">
                             <th>ItemName</th>
