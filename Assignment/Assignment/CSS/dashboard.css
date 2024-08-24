@@ -1,0 +1,8 @@
+﻿.chart-canvas {
+    width: 100% !important;
+    height: 300px !important; /* Adjust the height as needed */
+}
+
+.top-customer tr td {
+    padding-left: 24px;
+}

@@ -15,6 +15,8 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <link href="../CSS/admin.css" rel="stylesheet" />      
     <link href="../CSS/AdminRedemption.css" rel="stylesheet" />
+    <link href="../CSS/dashboard.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">
