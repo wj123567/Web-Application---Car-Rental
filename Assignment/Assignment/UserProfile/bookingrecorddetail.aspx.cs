@@ -131,7 +131,7 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
-                string cancel = "UPDATE Booking SET Status = 'Pending', CancelReason = @CancelReason WHERE Id = @Id";
+                string cancel = "UPDATE Booking SET Status = 'Pending', UpdateReason = @UpdateReason WHERE Id = @Id";
                 string rejectReason = " ";
                 if (ddlCancelReason.SelectedValue == "Other")
                 {
@@ -169,7 +169,7 @@ namespace Assignment
             SqlCommand com = new SqlCommand(sql, con);
             con.Open();
             com.Parameters.AddWithValue("@Id", Session["bookingrecordID"].ToString());
-            com.Parameters.AddWithValue("@CancelReason", cancel);
+            com.Parameters.AddWithValue("@UpdateReason", cancel);
             com.ExecuteNonQuery();
             con.Close();
         }
