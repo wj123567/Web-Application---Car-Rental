@@ -27,14 +27,7 @@
                    </asp:DropDownList>
                 </div>
                
-                <div class="row mt-4">
-                     <div class ="col">
-                        <asp:Button ID="btnToReview" runat="server" Text="All" CssClass="btn btn-lg border border-dark sort-button-group" OnClick="sortReview" OnClientClick="colorButton(this)" BackColor="#3490DC" ForeColor="White" />
-                         <asp:Button ID="btnReviewed" runat="server" Text="Pending" CssClass="btn btn-lg border border-dark sort-button-group" OnClick="sortReview" OnClientClick="colorButton(this)"/>
-                        
-                     </div>
-                    
-                </div>
+              
         </div>
       
 
