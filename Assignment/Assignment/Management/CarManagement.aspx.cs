@@ -16,8 +16,8 @@ namespace Assignment
         private int PageSize = 5;  // Number of records per page
         private int PageNumber
         {
-            get { return Session["PageNumber"] != null ? (int)Session["PageNumber"] : 1; }
-            set { Session["PageNumber"] = value; }
+            get { return ViewState["PageNumber"] != null ? (int)ViewState["PageNumber"] : 1; }
+            set { ViewState["PageNumber"] = value; }
         }
         protected void Page_Load(object sender, EventArgs e)
         {
