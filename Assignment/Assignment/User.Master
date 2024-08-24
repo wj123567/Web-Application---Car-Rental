@@ -57,10 +57,13 @@
                         
        <asp:PlaceHolder ID="loginUser" runat="server" Visible="False">
         <li class="nav-item me-3 me-lg-0 dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown"
+          <a class="nav-link dropdown-toggle align-items-center" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-              <asp:Label ID="userName" runat="server" Text="Label"></asp:Label>
-              <asp:Image ID="userProfilePicture" runat="server" CssClass="rounded-circle d-inline mx-2" Width="30px" />
+              <asp:Label ID="userName" runat="server" Text="Label" CssClass="mx-2 d-inline"></asp:Label>
+              <div class="profile-image-frame">
+              <asp:Image ID="userProfilePicture" runat="server" CssClass="rounded-circle" Width="30px" Height="30px" />
+              </div>
+
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
             <li><a class="dropdown-item" href="/UserProfile/profile.aspx">Profile</a></li>
