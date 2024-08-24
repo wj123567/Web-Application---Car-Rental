@@ -62,7 +62,9 @@
             </ul>
             <div class="sidebar-footer border-top">
               <a href="#" class="d-flex p-3 link-dark text-decoration-none dropdown-toggle sidebar-link align-items-center" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
-                <asp:Image ID="userProfilePicture" runat="server" CssClass="rounded-circle" Width="26px" Height="26px" ImageUrl="~/Image/UserProfile/noImg.svg" />
+                <div class="Masterprofile-image-frame">
+                <asp:Image ID="userProfilePicture" runat="server" CssClass="rounded-circle" Width="30px" Height="30px" ImageUrl="~/Image/UserProfile/noImg.svg" />
+                </div>
                   <asp:Label ID="lblUsername" runat="server" Text="Username" CssClass="mx-2"></asp:Label>
               </a>
               <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">

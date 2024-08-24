@@ -88,7 +88,7 @@
                 <div class="card-body text-center">
                     <asp:LinkButton ID="LinkButton1" runat="server" CssClass="profile-pic-wrapper profile-image-frame mx-auto" OnClientClick="return fileUpload()">
                      <span class="upload-text">Upload</span>
-                    <asp:Image ID="userProfilePic" runat="server" CssClass="img-account-profile rounded-circle mb-2" Width="100px"/>
+                    <asp:Image ID="userProfilePic" runat="server" CssClass="img-account-profile rounded-circle" Width="100px"/>
                     </asp:LinkButton>
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 2 MB</div>
                     <asp:Button ID="userUploadProfile" runat="server" Text="Upload new image" CssClass="btn btn-primary" OnClick="userUploadProfile_Click" ValidationGroup="uploadProfilePic" Enabled="False" />
