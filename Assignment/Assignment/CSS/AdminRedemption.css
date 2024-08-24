@@ -10,3 +10,7 @@
     .Redemption .Add {
         margin: 2% auto;
     }
+
+    .redeemTable td{
+        padding:12px;
+    }
