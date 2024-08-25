@@ -419,3 +419,37 @@ input#submit:focus {
         padding-left:20px;
     }
 }
+
+@media only screen and (max-width:605px) {
+    .row {
+        margin-left: 30px !important;
+    }
+
+    .book_right-side {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width:515px) {
+
+    .bar_content {
+        padding: 0;
+        margin-left:0 !important;
+        margin-right:0 !important;
+    }
+
+    .previous_btn_style {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .next_btn_style {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .book_box_right {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}

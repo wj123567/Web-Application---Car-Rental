@@ -69,8 +69,10 @@
         opacity: 0.9;
     }
 
-@media only screen and (max-width:580px) {
+@media only screen and (max-width:605px) {
+
     .selected_car_frame, .sticky_bar_carimg {
         display: none;
     }
 }
+
