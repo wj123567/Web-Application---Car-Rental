@@ -5,7 +5,7 @@
     position: relative;
     padding-top: 50px;
     box-sizing: border-box;
-    border: 1px solid red;
+/*    border: 1px solid red;*/
     text-transform: capitalize;
     transition: all .2s linear;
 }
@@ -13,7 +13,7 @@
 .payment_container {
     position: relative;
     display: flex;
-    border: 1px solid blue;
+/*    border: 1px solid blue;*/
     padding: 25px;
     width: 65%;
 }
