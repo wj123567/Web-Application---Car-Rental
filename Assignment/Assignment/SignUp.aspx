@@ -139,8 +139,6 @@
                 args.IsValid = false;
             }
         }
-
-
     </script>
 
 </asp:Content>
