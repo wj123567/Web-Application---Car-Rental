@@ -387,7 +387,7 @@
                 </div>
                 <div class="d-flex align-items-center ms-3 selected_car">
                     <div class="selected_car_frame">
-                    <asp:Image ID="imgSticky" runat="server" cssclass="sticky_bar_carimg img-fluid me-3" />
+                    <asp:Image ID="imgSticky" runat="server" cssclass="sticky_bar_carimg img-fluid me-3"/>
                     </div>
                     <div class="d-flex flex-column">
                         <span class="title_style">Selected Car</span>

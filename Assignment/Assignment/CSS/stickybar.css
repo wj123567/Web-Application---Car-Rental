@@ -17,7 +17,7 @@
 }
 
 .selected_car_frame {
-    width: 100px;
+    width: 120px;
     height: 60px;
     overflow: hidden;
     display: inline;
