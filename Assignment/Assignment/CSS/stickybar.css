@@ -16,10 +16,19 @@
     padding: 0 15px;
 }
 
-.selected_car img {
-    width: 80px;
+.selected_car_frame {
+    width: 100px;
     height: 60px;
-    border-radius: 50%;
+    overflow: hidden;
+    display: inline;
+    align-items: center;
+    justify-content: center;
+}
+
+.selected_car_frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .title_style {
@@ -60,7 +69,7 @@
     }
 
 @media only screen and (max-width:580px) {
-    .sticky_bar_carimg {
+    .selected_car_frame, .sticky_bar_carimg {
         display: none;
     }
 }
