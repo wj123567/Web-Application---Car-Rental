@@ -271,7 +271,9 @@
                     <asp:Button ID="previous_btn" runat="server" Text="Previous" cssclass="previous_btn_style btn btn-primary" OnClick="previous_btn_Click" />
                 </div>
                 <div class="d-flex align-items-center ms-3 selected_car">
-                    <asp:Image ID="imgSticky" runat="server" cssclass="sticky_bar_carimg img-fluid rounded-circle me-3" />
+                    <div class="selected_car_frame">
+                        <asp:Image ID="imgSticky" runat="server" cssclass="sticky_bar_carimg img-fluid me-3" />
+                    </div>                    
                     <div class="d-flex flex-column">
                         <span class="title_style">Selected Car</span>
                         <asp:Label ID="lblstickyCarModel" CssClass="sticky_car_info" runat="server" Text=""></asp:Label>
