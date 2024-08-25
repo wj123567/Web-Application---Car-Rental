@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -37,7 +38,8 @@ namespace Assignment
             string userId = null;
             if (authCookie != null)
             {
-                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt
+                (authCookie.Value);
                 if (ticket != null)
                 {
                     userId = ticket.Name;
@@ -47,16 +49,17 @@ namespace Assignment
             return userId;
         }
 
-        protected void LoadUserData(String id)
+        protected void LoadUserData(string id)
         {
-            String Username = " ";
-            String profilePicture = " ";
+            string Username = " ";
+            string profilePicture = " ";
+            string role = " ";
 
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);            
+
+            string getUserData = "Select Username, ProfilePicture,Roles from ApplicationUser where Id = @id";
 
             conn.Open();
-
-            string getUserData = "Select Username, ProfilePicture from ApplicationUser where Id = @id";
 
             SqlCommand com = new SqlCommand(getUserData, conn);
 
@@ -64,18 +67,35 @@ namespace Assignment
 
             SqlDataReader reader = com.ExecuteReader();
 
-            if (reader.Read())
+            if (reader.HasRows)
             {
-                Username = reader["Username"].ToString();
-                profilePicture = reader["ProfilePicture"].ToString();
+                if (reader.Read())
+                {
+                    Username = reader["Username"].ToString();
+                    profilePicture = reader["ProfilePicture"].ToString();
+                    role = reader["Roles"].ToString();
+                }
+
+                conn.Close();
+
+                if (!Thread.CurrentPrincipal.IsInRole(role))
+                {
+                    Session["Id"] = null;
+                    FormsAuthentication.SignOut();
+                    Response.Redirect("Home.aspx");
+                }
+
+                Guest.Visible = false;
+                userName.Text = Username.ToString();
+                userProfilePicture.ImageUrl = profilePicture;
+                loginUser.Visible = true;
             }
-
-            conn.Close();
-
-            Guest.Visible = false;
-            userName.Text = Username.ToString();
-            userProfilePicture.ImageUrl = profilePicture;
-            loginUser.Visible = true;
+            else
+            {
+                Session["Id"] = null;
+                FormsAuthentication.SignOut();
+                Response.Redirect("Home.aspx");
+            }
         }
 
         protected void logoutBtn_Click(object sender, EventArgs e)

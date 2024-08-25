@@ -34,7 +34,6 @@
 
             if (countdown > 0) {
                 button.value = "Resend in " + countdown;
-                button2.value = "Resend in " + countdown;
             } else {
                 button.classList.remove('disable-resend');
                 button.disabled = false;

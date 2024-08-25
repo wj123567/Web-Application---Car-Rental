@@ -26,6 +26,11 @@ namespace Assignment
                 {
                     Response.Redirect("SignUp.aspx");
                 }
+
+                if (Session["OtpCountdown"] != null)
+                {
+                    sendForgetCode.Enabled = false;
+                }
             }
         }
 
@@ -67,12 +72,12 @@ namespace Assignment
             smtpClient.EnableSsl = true;
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Host = "smtp.gmail.com";
-            smtpClient.Credentials = new System.Net.NetworkCredential("chongwj-pm23@student.tarc.edu.my", "WeiJia_081104");
+            smtpClient.Credentials = new System.Net.NetworkCredential("chongwj-pm23@student.tarc.edu.my", "ChongWj@TarUmt");
             smtpClient.Send(mail);
 
             labelForgetSend.Visible = true;
             int countdownDuration = 60;
-            ViewState["OTPCountdown"] = countdownDuration;
+            Session["OTPCountdown"] = countdownDuration;
             verifyTimer.Enabled = true;
         }
 
@@ -122,14 +127,14 @@ namespace Assignment
 
         protected void verifyTimer_Tick(object sender, EventArgs e)
         {
-            if (ViewState["OTPCountdown"] != null)
+            if (Session["OTPCountdown"] != null)
             {
-                int remainingTime = (int)ViewState["OTPCountdown"];
+                int remainingTime = (int)Session["OTPCountdown"];
 
                 if (remainingTime > 0)
                 {
                     remainingTime--;
-                    ViewState["OTPCountdown"] = remainingTime;
+                    Session["OTPCountdown"] = remainingTime;
 
                     sendForgetCode.Enabled = false;
 
@@ -137,7 +142,7 @@ namespace Assignment
                 }
                 else
                 {
-                    ViewState.Remove("OTPCountdown");
+                    Session.Remove("OTPCountdown");
                 }
             }
             else
@@ -150,6 +155,7 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
+                Session.Remove("OTPCountdown");
                 Response.Redirect("resetPassword.aspx");
             }
         }
