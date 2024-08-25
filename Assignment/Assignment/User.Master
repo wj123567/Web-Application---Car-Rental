@@ -61,7 +61,7 @@
             aria-expanded="false">
               <asp:Label ID="userName" runat="server" Text="Label" CssClass="mx-2 d-inline"></asp:Label>
               <div class="profile-image-frame">
-              <asp:Image ID="userProfilePicture" runat="server" CssClass="rounded-circle" Width="30px" Height="30px" />
+              <asp:Image ID="userProfilePicture" runat="server" CssClass="rounded-circle"/>
               </div>
 
           </a>
