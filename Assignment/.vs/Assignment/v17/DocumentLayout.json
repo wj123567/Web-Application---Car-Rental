@@ -3,12 +3,101 @@
   "WorkspaceRootPath": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\",
   "Documents": [
     {
+<<<<<<< Updated upstream
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\schoolasgmt\\gtihub desk\\web\\web-application---car-rental\\assignment\\assignment\\css\\bookinfo.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\bookinfo.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+=======
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\github desk\\web\\web-application---car-rental\\assignment\\assignment\\css\\webcam.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\webcam.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\github desk\\web\\web-application---car-rental\\assignment\\assignment\\bookinfo.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\bookinfo.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\github desk\\web\\web-application---car-rental\\assignment\\assignment\\css\\bookinfo.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\bookinfo.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\github desk\\web\\web-application---car-rental\\assignment\\assignment\\management\\bookingmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\bookingmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\github desk\\web\\web-application---car-rental\\assignment\\assignment\\user.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\user.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\github desk\\web\\web-application---car-rental\\assignment\\assignment\\css\\home.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\home.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\drivermanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\drivermanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\usermanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\usermanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\bookingrecorddetail.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\bookingrecorddetail.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\bookingrecord.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\bookingrecord.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\addonmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\addonmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\addonmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\addonmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\carmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\carmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\carmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\carmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\bookingrecorddetail.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\bookingrecorddetail.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\management\\drivermanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\drivermanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\css\\infopg.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\infopg.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\infopage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\infopage.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\css\\profile.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\profile.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\userprofile\\profile.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\userprofile\\profile.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\css\\addonmanagement.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\addonmanagement.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+>>>>>>> Stashed changes
     },
     {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\assignment\\user.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
@@ -33,16 +122,248 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
+<<<<<<< Updated upstream
           "DockedWidth": 200,
           "SelectedChildIndex": 6,
           "Children": [
             {
+=======
+          "DockedWidth": 195,
+          "SelectedChildIndex": 14,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "dbo.AddOn [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__GITHUB_DESK_WEB_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.AddOn.sql",
+              "ToolTip": "dbo.AddOn [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-08-21T12:55:52.689Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AddOnManagement.aspx",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AddOnManagement.aspx",
+              "RelativeDocumentMoniker": "Assignment\\Management\\AddOnManagement.aspx",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AddOnManagement.aspx",
+              "RelativeToolTip": "Assignment\\Management\\AddOnManagement.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-21T12:52:36.43Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AddOnManagement.aspx.cs",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AddOnManagement.aspx.cs",
+              "RelativeDocumentMoniker": "Assignment\\Management\\AddOnManagement.aspx.cs",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AddOnManagement.aspx.cs",
+              "RelativeToolTip": "Assignment\\Management\\AddOnManagement.aspx.cs",
+              "ViewState": "AQIAABsBAAAAAAAAAAAUwCcBAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T13:03:14.369Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CarManagement.aspx",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\CarManagement.aspx",
+              "RelativeDocumentMoniker": "Assignment\\Management\\CarManagement.aspx",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\CarManagement.aspx",
+              "RelativeToolTip": "Assignment\\Management\\CarManagement.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-21T13:02:50.237Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CarManagement.aspx.cs",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\CarManagement.aspx.cs",
+              "RelativeDocumentMoniker": "Assignment\\Management\\CarManagement.aspx.cs",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\CarManagement.aspx.cs",
+              "RelativeToolTip": "Assignment\\Management\\CarManagement.aspx.cs",
+              "ViewState": "AQIAABIBAAAAAAAAAAAMwCgBAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-21T13:02:51.546Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "bookingrecord.aspx",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecord.aspx",
+              "RelativeDocumentMoniker": "Assignment\\bookingrecord.aspx",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecord.aspx",
+              "RelativeToolTip": "Assignment\\bookingrecord.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-22T06:45:06.712Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "bookingrecorddetail.aspx",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecorddetail.aspx",
+              "RelativeDocumentMoniker": "Assignment\\bookingrecorddetail.aspx",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecorddetail.aspx",
+              "RelativeToolTip": "Assignment\\bookingrecorddetail.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-22T07:23:19.889Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "bookingrecorddetail.aspx.cs",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecorddetail.aspx.cs",
+              "RelativeDocumentMoniker": "Assignment\\bookingrecorddetail.aspx.cs",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookingrecorddetail.aspx.cs",
+              "RelativeToolTip": "Assignment\\bookingrecorddetail.aspx.cs",
+              "ViewState": "AQIAAHoAAAAAAAAAAAAswIUAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-22T07:24:05.529Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "driverManagement.aspx",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\driverManagement.aspx",
+              "RelativeDocumentMoniker": "Assignment\\Management\\driverManagement.aspx",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\driverManagement.aspx",
+              "RelativeToolTip": "Assignment\\Management\\driverManagement.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-22T08:18:24.638Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "driverManagement.aspx.cs",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\driverManagement.aspx.cs",
+              "RelativeDocumentMoniker": "Assignment\\Management\\driverManagement.aspx.cs",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\driverManagement.aspx.cs",
+              "RelativeToolTip": "Assignment\\Management\\driverManagement.aspx.cs",
+              "ViewState": "AQIAAMIAAAAAAAAAAAD4v9kAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-22T08:20:56.277Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BookingManagement.aspx",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\BookingManagement.aspx",
+              "RelativeDocumentMoniker": "Assignment\\Management\\BookingManagement.aspx",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\BookingManagement.aspx",
+              "RelativeToolTip": "Assignment\\Management\\BookingManagement.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-22T14:22:57.547Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UserManagement.aspx",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\UserManagement.aspx",
+              "RelativeDocumentMoniker": "Assignment\\Management\\UserManagement.aspx",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\UserManagement.aspx",
+              "RelativeToolTip": "Assignment\\Management\\UserManagement.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-22T08:18:21.215Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "bookinfo.css",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\bookinfo.css",
+              "RelativeDocumentMoniker": "Assignment\\CSS\\bookinfo.css",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\bookinfo.css",
+              "RelativeToolTip": "Assignment\\CSS\\bookinfo.css",
+              "ViewState": "AQIAADcBAAAAAAAAAAAAABMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-08-23T02:20:04.675Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "bookinfo.aspx",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookinfo.aspx",
+              "RelativeDocumentMoniker": "Assignment\\bookinfo.aspx",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\bookinfo.aspx",
+              "RelativeToolTip": "Assignment\\bookinfo.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-23T02:16:05.306Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "webcam.css",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\webcam.css",
+              "RelativeDocumentMoniker": "Assignment\\CSS\\webcam.css",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\webcam.css",
+              "RelativeToolTip": "Assignment\\CSS\\webcam.css",
+              "ViewState": "AQIAADMAAAAAAAAAAAAAAE4AAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-08-23T02:21:09.518Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "home.css",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\home.css",
+              "RelativeDocumentMoniker": "Assignment\\CSS\\home.css",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\home.css",
+              "RelativeToolTip": "Assignment\\CSS\\home.css",
+              "ViewState": "AQIAANYBAAAAAAAAAAAcwLYBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-08-23T02:16:50.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "User.Master",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\User.Master",
+              "RelativeDocumentMoniker": "Assignment\\User.Master",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\User.Master",
+              "RelativeToolTip": "Assignment\\User.Master",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-23T02:16:34.45Z",
+              "EditorCaption": ""
+            },
+            {
+>>>>>>> Stashed changes
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 5,
+=======
+              "DocumentIndex": 18,
+>>>>>>> Stashed changes
               "Title": "infopage.aspx",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\infopage.aspx",
               "RelativeDocumentMoniker": "Assignment\\infopage.aspx",
@@ -50,11 +371,102 @@
               "RelativeToolTip": "Assignment\\infopage.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+<<<<<<< Updated upstream
               "WhenOpened": "2024-08-25T11:02:10.577Z",
+=======
+              "WhenOpened": "2024-08-22T03:45:01.033Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "infopg.css",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\infopg.css",
+              "RelativeDocumentMoniker": "Assignment\\CSS\\infopg.css",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\infopg.css",
+              "RelativeToolTip": "Assignment\\CSS\\infopg.css",
+              "ViewState": "AQIAAEgAAAAAAAAAAAAjwGEAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-08-22T03:44:33.32Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "profile.aspx",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\profile.aspx",
+              "RelativeDocumentMoniker": "Assignment\\UserProfile\\profile.aspx",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\profile.aspx",
+              "RelativeToolTip": "Assignment\\UserProfile\\profile.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-22T03:42:41.602Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "profile.css",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\profile.css",
+              "RelativeDocumentMoniker": "Assignment\\CSS\\profile.css",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\profile.css",
+              "RelativeToolTip": "Assignment\\CSS\\profile.css",
+              "ViewState": "AQIAAKcAAAAAAAAAAAAjwLUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-08-22T03:42:04.089Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Home.aspx",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx",
+              "RelativeDocumentMoniker": "Assignment\\Home.aspx",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx",
+              "RelativeToolTip": "Assignment\\Home.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-22T03:38:48.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "bookingrecord.css",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\bookingrecord.css",
+              "RelativeDocumentMoniker": "Assignment\\CSS\\bookingrecord.css",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\bookingrecord.css",
+              "RelativeToolTip": "Assignment\\CSS\\bookingrecord.css",
+              "ViewState": "AQIAAGMAAAAAAAAAAAAAAJAAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-08-21T14:20:25.074Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "addonManagement.css",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\addonManagement.css",
+              "RelativeDocumentMoniker": "Assignment\\CSS\\addonManagement.css",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\addonManagement.css",
+              "RelativeToolTip": "Assignment\\CSS\\addonManagement.css",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-08-21T14:13:29.284Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Admin.Master",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\Admin.Master",
+              "RelativeDocumentMoniker": "Assignment\\Management\\Admin.Master",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\Admin.Master",
+              "RelativeToolTip": "Assignment\\Management\\Admin.Master",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2024-08-21T14:04:10.892Z",
+>>>>>>> Stashed changes
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+<<<<<<< Updated upstream
               "DocumentIndex": 4,
               "Title": "stickybar.css",
               "DocumentMoniker": "C:\\schoolasgmt\\gtihub desk\\web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\stickybar.css",
@@ -116,6 +528,17 @@
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
               "WhenOpened": "2024-08-25T10:49:14.043Z",
+=======
+              "DocumentIndex": 25,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Web.config",
+              "RelativeDocumentMoniker": "Assignment\\Web.config",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Web.config",
+              "RelativeToolTip": "Assignment\\Web.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-08-21T12:51:42.37Z",
+>>>>>>> Stashed changes
               "EditorCaption": ""
             }
           ]

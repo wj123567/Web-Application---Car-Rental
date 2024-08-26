@@ -216,6 +216,7 @@
                   </div>
                 </div>
             </div>
+    <div class="container">
         <div class="photo_container" id="photoField">
             <div class="row">
                 <div class="col">
@@ -260,6 +261,7 @@
         
    
   </div>  <!-- p section-->
+        </div>
 
      <div class="sticky_bar">
     <div class="container-fluid">
@@ -312,40 +314,43 @@
             }
         }
 
-        $(function () {
-            Webcam.set({
-                width: 320,
-                height: 240,
-                image_format: 'jpeg',
-                jpeg_quality: 90
-            });
-            Webcam.attach('#webcam');
+            $(function () {
+                Webcam.set({
+                    width: 300,
+                    height: 240,
+                    image_format: 'jpeg',
+                    jpeg_quality: 90
+                });
+                Webcam.attach('#webcam');
 
-            $("#main_btnCapture").click(function (event) {
-                event.preventDefault(); // Prevent default behavior (postback)
+                // Adjust CSS styles
+                $('#webcam').css('margin', 'auto'); // Adjust the value as needed
 
-                Webcam.snap(function (data_uri) {
-                    $("#imgCapture")[0].src = data_uri;
-                    $("#main_btnUpload").prop("disabled", false);
+                $("#main_btnCapture").click(function (event) {
+                    event.preventDefault(); // Prevent default behavior (postback)
+
+                    Webcam.snap(function (data_uri) {
+                        $("#imgCapture")[0].src = data_uri;
+                        $("#main_btnUpload").prop("disabled", false);
+                    });
+                });
+
+                $("#main_btnUpload").click(function (event) {
+                    event.preventDefault(); // Prevent default behavior (postback)
+
+                    $.ajax({
+                        type: "POST",
+                        url: "bookinfo.aspx/SaveCapturedImage", //send to backend
+                        data: "{data: '" + $("#imgCapture")[0].src + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+                            alert("Image uploaded successfully."); // Notify the user on success
+                        },
+                    });
                 });
             });
-
-            $("#main_btnUpload").click(function (event) {
-                event.preventDefault(); // Prevent default behavior (postback)
-
-                $.ajax({
-                    type: "POST",
-                    url: "bookinfo.aspx/SaveCapturedImage", //send to backend
-                    data: "{data: '" + $("#imgCapture")[0].src + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        alert("Image uploaded successfully."); // Notify the user on success
-                    },
-                });
-            });
-        });
-</script>
+        </script>
 
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/intlTelInput.min.js"></script>
 
