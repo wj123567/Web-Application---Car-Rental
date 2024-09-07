@@ -12,6 +12,7 @@
     position: relative;
     display: flex;
     padding: 25px;
+    padding-top:100px;
     width: 65%;
 }
 
@@ -20,7 +21,7 @@
     position: relative;
     display: flex;
     padding: 25px;
-    padding-top:150px;
+    padding-top:50px;
     width: 65%;
 }
 
@@ -70,8 +71,11 @@
         text-transform: uppercase;
     }
 
-    .payment_container .row .col .inputbox_left,
-    .payment_container .row .col .inputbox_right,
+    .payment_container .row .col .inputbox_left{
+        margin:50px 0;
+    }
+
+    
     .driver_container .row .col .inputbox_left,
     .driver_container .row .col .inputbox_right,
     .photo_container .row .col .inputbox_left,
@@ -228,6 +232,11 @@
     vertical-align:top;
 }
 
+.lblNoDriver_style{
+    margin:20px 0px;
+    padding:5px 0px;
+    font-size:18px;
+}
 
 
 .charges_summary {

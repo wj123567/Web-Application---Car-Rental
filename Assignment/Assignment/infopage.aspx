@@ -45,7 +45,8 @@
 </div>
     </section>
 
- 
+    <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+
     <section class="info_banner">
         
             <div class="col_left ">
@@ -255,7 +256,7 @@
                     <tr class="addon_list">
                         <td rowspan="2"><asp:Image ID="imgIcon" runat="server" Width="45px" Height="45px" ImageUrl='<%# Eval("Url") %>' /></td>
                         <td class="addon_list_title"><%# Eval("Name") %></td>
-                        <td class="text_center" data-price='<%# Eval("Price") %>'><%# Eval("Price","{0:F2}") %></td>
+                        <td class="text_center" data-price='<%# Eval("Price") %>'> <asp:Label ID="lblAddOnPrice" runat="server" Text='<%# Eval("Price","{0:F2}") %>'></asp:Label></td>
                         
                         <td rowspan="2" style="text-align:center">
                             <asp:TextBox ID="txtAddOnQuantity" runat="server" TextMode="Number" CssClass="quantity_style quantity_input" min="0" max='<%# Eval("MaxQuantity") %>' value="0"></asp:TextBox>

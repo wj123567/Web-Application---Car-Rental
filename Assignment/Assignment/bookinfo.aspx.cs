@@ -166,6 +166,11 @@ namespace Assignment
 
         }
 
+        protected void btnRegisterDriver_Click(Object sender, EventArgs e)
+        {
+            Response.Redirect("UserProfile/driver.aspx");
+        }
+
         protected void btnNext_Click(object sender, EventArgs e)
         {
             int currentStep = (int)(Session["CurrentStep"] ?? 1);

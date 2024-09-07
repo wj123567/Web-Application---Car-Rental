@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
@@ -36,9 +37,11 @@ namespace Assignment
                 }
 
                 hdnSessionId.Value = Session["Id"] as string ?? string.Empty;
-
+                
                 BindAddOns();
 
+                LoadAddOnSelection();
+                CheckAddOnSelection();
                 //you
                 string sortOption = Request.QueryString["sort"];
                 LoadComments(sortOption);
@@ -46,6 +49,48 @@ namespace Assignment
             
         }
 
+        private void LoadAddOnSelection()
+        {
+            if (Session["SelectedAddOns"] != null)
+            {
+                var selectedAddOns = (Dictionary<int, int>)Session["SelectedAddOns"];
+                
+
+                foreach (RepeaterItem item in rptAddOns.Items)
+                {
+                    // Find the Label control within the RepeaterItem
+                    Label lblTotalAddOn = item.FindControl("lblTotalAddOn") as Label;
+
+                    var txtQuantity = (TextBox)item.FindControl("txtAddOnQuantity");
+                    var hfAddOnID = (HiddenField)item.FindControl("hfAddOnID");
+
+                    int addOnID = int.Parse(hfAddOnID.Value);
+                    if (selectedAddOns.ContainsKey(addOnID))
+                    {
+                        txtQuantity.Text = selectedAddOns[addOnID].ToString();
+                    }
+                    
+                }
+
+
+            }
+        }
+
+        protected void CheckAddOnSelection()
+        {
+            if (Session["SelectedAddOns"] != null)
+            {
+                Dictionary<int, int> selectedAddOns = (Dictionary<int, int>)Session["SelectedAddOns"];
+               
+
+                // Display in a Label for confirmation
+                lblCheck.Text = $" Selected Add-Ons Count: {selectedAddOns.Count}";
+            }
+            else
+            {
+                lblCheck.Text = "No Add-Ons selected.";
+            }
+        }
 
         private void LoadComments(string sortOption)
         {
@@ -186,7 +231,7 @@ namespace Assignment
         {
             // Assuming you have a method GetAddOns() that returns a DataTable or List<AddOn>
             var addOns = GetAddOns();
-
+            
             rptAddOns.DataSource = addOns;
             rptAddOns.DataBind();
         }
@@ -205,15 +250,44 @@ namespace Assignment
             }
         }
 
+        private void SaveAddOnSelection()
+        {
+            Dictionary<int, int> selectedAddOns = new Dictionary<int, int>();
+            
+
+            foreach (RepeaterItem item in rptAddOns.Items)
+            {
+                var txtQuantity = (TextBox)item.FindControl("txtAddOnQuantity");
+                
+                var hfAddOnID = (HiddenField)item.FindControl("hfAddOnID");
+
+                int quantity = int.Parse(txtQuantity.Text);
+                
+                int addOnID = int.Parse(hfAddOnID.Value);
+
+                if (quantity > 0)
+                {
+                    selectedAddOns.Add(addOnID, quantity);
+                    
+                }
+            }
+
+            Session["SelectedAddOns"] = selectedAddOns;
+           
+        }
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
+            SaveAddOnSelection();
+
             int currentStep = (int)(Session["CurrentStep"] ?? 1);
             currentStep = Math.Min(currentStep + 1, 4);
             Session["CurrentStep"] = currentStep;
             UpdateProgressBar(currentStep);
+
             Session["TotalPrice"] = hdnTotalPrice.Value;
             Session["TotalAddOn"] = hdnTotalAddOn.Value;
+            
             Response.Redirect("bookInfo.aspx");
         }
 

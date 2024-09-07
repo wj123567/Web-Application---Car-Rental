@@ -123,6 +123,24 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblTotalPrice;
 
         /// <summary>
+        /// lblNoDriver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoDriver;
+
+        /// <summary>
+        /// btnRegisterDriver control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegisterDriver;
+
+        /// <summary>
         /// chkDriver control.
         /// </summary>
         /// <remarks>
@@ -240,33 +258,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.DropDownList ddlExistingDriver;
 
         /// <summary>
-        /// lblDriverBirth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDriverBirth;
-
-        /// <summary>
-        /// txtDriverBirth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDriverBirth;
-
-        /// <summary>
-        /// rqDriverBirth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqDriverBirth;
-
-        /// <summary>
         /// lblDriverLicenseNum control.
         /// </summary>
         /// <remarks>
@@ -292,6 +283,33 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rqDriverLicenseNum;
+
+        /// <summary>
+        /// lblDriverBirth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDriverBirth;
+
+        /// <summary>
+        /// txtDriverBirth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDriverBirth;
+
+        /// <summary>
+        /// rqDriverBirth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqDriverBirth;
 
         /// <summary>
         /// lblDriverPhoneNum control.

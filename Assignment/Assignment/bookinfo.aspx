@@ -138,7 +138,7 @@
                    
                 </div>
 
-
+ 
             
             <div class="driver_section">
                 <div class="driver_container">
@@ -148,12 +148,14 @@
                        <h3 class="title">Driver Info</h3>
 
                        <div class="check_driver">
+                        <asp:Label ID="lblNoDriver" runat="server" Text="Unfortunately. No driver record is found." cssclass="lblNoDriver_style alert alert-warning" Enabled="false"></asp:Label>
+                        <asp:Button ID="btnRegisterDriver" runat="server" CssClass="btn btn-primary" Text="Register a Driver" OnClick="btnRegisterDriver_Click"/>
+
                        <asp:CheckBox ID="chkDriver" runat="server" cssclass="driver_checkbox_style" />
-                       <asp:Label ID="lblDriver" runat="server" Text="Existing Driver" CSSClass="driver_check_label"></asp:Label>     
+                       <asp:Label ID="lblDriver" runat="server" Text="Driver has already been registered" CSSClass="driver_check_label"></asp:Label>     
                        </div>
 
-                       
-<!--
+
                        <div id="driverFieldsLeft">
                        <div class="inputbox_left">
                             <asp:Label ID="lblDriverName" runat="server" Text="Driver Name :" CssClass="label_left"></asp:Label>
@@ -179,31 +181,35 @@
                         </div> 
                        
                     </div>
--->
+
                    </div>
 
                     <div class="col" >
+                        <!--
                         <asp:Label ID="lblExistingDriver" runat="server" Text="Existing Driver"  CssClass="label_right"></asp:Label>
 
                         <asp:DropDownList ID="ddlExistingDriver" CssClass="input_left existDriver_ddl_style"  runat="server">
                          
                         </asp:DropDownList>
 
-<!--
+                        -->
+                        
+                        
+
                         <div id="driverFieldsRight">
+                             <div class="inputbox_right">
+                               <asp:Label ID="lblDriverLicenseNum" runat="server" Text="Driver License Number" CssClass="label_right"></asp:Label>
+                                   <asp:TextBox ID="txtDriverLicenseNum" runat="server" CssClass="input_right" placeholder="e.g. 543210987654" ReadOnly="true"></asp:TextBox>
+                               <br />
+                               <asp:RequiredFieldValidator ID="rqDriverLicenseNum" runat="server" ErrorMessage="Please Enter [Driver License Num]." CssClass="validate driver_validate" ControlToValidate="txtDriverLicenseNum" Display="Dynamic"  Enabled="false"></asp:RequiredFieldValidator>
+                            </div>   
+
                             <div class="inputbox_right"  >
                                 <asp:Label ID="lblDriverBirth" runat="server" Text="Driver Birth Date"  CssClass="label_right"></asp:Label>
                                 <asp:TextBox ID="txtDriverBirth" runat="server" TextMode="Date" CssClass="input_right" ReadOnly="true"></asp:TextBox>
                                 <br />
                                 <asp:RequiredFieldValidator ID="rqDriverBirth" runat="server" ErrorMessage="Please Select [Driver Birth Date]." CssClass="validate driver_validate" ControlToValidate="txtDriverBirth" Display="Dynamic"  Enabled="false"></asp:RequiredFieldValidator>
-                            </div>    
-                           
-                            <div class="inputbox_right">
-                                <asp:Label ID="lblDriverLicenseNum" runat="server" Text="Driver License Number" CssClass="label_right"></asp:Label>
-                                    <asp:TextBox ID="txtDriverLicenseNum" runat="server" CssClass="input_right" placeholder="e.g. 543210987654" ReadOnly="true"></asp:TextBox>
-                                <br />
-                                <asp:RequiredFieldValidator ID="rqDriverLicenseNum" runat="server" ErrorMessage="Please Enter [Driver License Num]." CssClass="validate driver_validate" ControlToValidate="txtDriverLicenseNum" Display="Dynamic"  Enabled="false"></asp:RequiredFieldValidator>
-                             </div>   
+                            </div>                             
  
                              <div class="inputbox_right">
                                 <asp:Label ID="lblDriverPhoneNum" runat="server" Text="Driver Phone Number :" CssClass="label_left"></asp:Label>
@@ -213,7 +219,7 @@
                                 <asp:CustomValidator ID="validPhoneNum" runat="server" ErrorMessage="Invalid Phone Number" ClientValidationFunction="validatePhone" ControlToValidate="txtDriverPhoneNum"  CssClass="validate" ValidateEmptyText="True" Enabled="false"></asp:CustomValidator>
                             </div>
                         </div>
--->
+
 
                      </div>
                     
@@ -389,21 +395,38 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
+           
             const chkDriver = document.getElementById('<%= chkDriver.ClientID %>');
+            const lblDriver = document.getElementById('<%= lblDriver.ClientID %>');
+
+            const lblNoDriver = document.getElementById('<%= lblNoDriver.ClientID %>');
+            const registerDriver = document.getElementById('<%= btnRegisterDriver.ClientID %>');
+            
             const driverFieldsLeft = document.getElementById('driverFieldsLeft');
             const driverFieldsRight = document.getElementById('driverFieldsRight');
-            const photoFields = document.getElementById('photoField')
+            const photoFields = document.getElementById('photoField');
+
+            const btnNext = document.getElementById('<%= btnNext.ClientID %>');
 
             function toggleDriverFields() {
-                if (chkDriver.checked) {
+
+                if (chkDriver.checked) { 
                     driverFieldsLeft.style.display = 'block';
                     driverFieldsRight.style.display = 'block';
                     photoFields.style.display = 'block';
+                    lblNoDriver.style.display = 'none';
+                    registerDriver.style.display = 'none';
                     enableDriverValidation(true);
                 } else {
                     driverFieldsLeft.style.display = 'none';
                     driverFieldsRight.style.display = 'none';
                     photoFields.style.display = 'none';
+
+                    chkDriver.style.display = 'none';
+                    lblDriver.style.display = 'none';
+                    lblNoDriver.style.display = 'block';
+
+                    btnNext.disabled = true;
                     enableDriverValidation(false);
                 }
             }
