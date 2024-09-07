@@ -149,11 +149,11 @@
 
                        <div class="check_driver">
                        <asp:CheckBox ID="chkDriver" runat="server" cssclass="driver_checkbox_style" />
-                       <asp:Label ID="lblDriver" runat="server" Text="I am making this reservation for a new driver." CSSClass="driver_check_label"></asp:Label>     
+                       <asp:Label ID="lblDriver" runat="server" Text="Existing Driver" CSSClass="driver_check_label"></asp:Label>     
                        </div>
 
                        
-
+<!--
                        <div id="driverFieldsLeft">
                        <div class="inputbox_left">
                             <asp:Label ID="lblDriverName" runat="server" Text="Driver Name :" CssClass="label_left"></asp:Label>
@@ -179,14 +179,17 @@
                         </div> 
                        
                     </div>
+-->
                    </div>
 
                     <div class="col" >
                         <asp:Label ID="lblExistingDriver" runat="server" Text="Existing Driver"  CssClass="label_right"></asp:Label>
 
                         <asp:DropDownList ID="ddlExistingDriver" CssClass="input_left existDriver_ddl_style"  runat="server">
-                            <asp:ListItem Value="M">1234</asp:ListItem>
+                         
                         </asp:DropDownList>
+
+<!--
                         <div id="driverFieldsRight">
                             <div class="inputbox_right"  >
                                 <asp:Label ID="lblDriverBirth" runat="server" Text="Driver Birth Date"  CssClass="label_right"></asp:Label>
@@ -210,6 +213,8 @@
                                 <asp:CustomValidator ID="validPhoneNum" runat="server" ErrorMessage="Invalid Phone Number" ClientValidationFunction="validatePhone" ControlToValidate="txtDriverPhoneNum"  CssClass="validate" ValidateEmptyText="True" Enabled="false"></asp:CustomValidator>
                             </div>
                         </div>
+-->
+
                      </div>
                     
                 </div> <!-- row end-->

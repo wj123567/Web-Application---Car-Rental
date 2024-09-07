@@ -3,9 +3,7 @@
 .payment_section {
     width: 100%;
     position: relative;
-    padding-top: 50px;
     box-sizing: border-box;
-/*    border: 1px solid red;*/
     text-transform: capitalize;
     transition: all .2s linear;
 }
@@ -13,7 +11,6 @@
 .payment_container {
     position: relative;
     display: flex;
-/*    border: 1px solid blue;*/
     padding: 25px;
     width: 65%;
 }
@@ -23,6 +20,7 @@
     position: relative;
     display: flex;
     padding: 25px;
+    padding-top:150px;
     width: 65%;
 }
 
@@ -231,113 +229,7 @@
 }
 
 
-/*input#input_verify:focus:valid {
-    background: rgba(62, 0, 69, 0.9) url(wz_image/tick.png) right/contain no-repeat;
-}
 
-input#diamondInput:focus, input#paymentInput:focus {
-    background: rgba(62, 0, 69, 0.9) url(wz_image/tick.png) right/contain no-repeat;
-}
-
-input#paynum:focus:valid, input#expirydate:focus:valid, input#diamond:focus:valid {
-    background: rgba(62, 0, 69, 0.9) url(wz_image/tick.png) 370px/contain no-repeat;
-}
-
-input#input_verify:focus:invalid {
-    background: rgba(62, 0, 69, 0.7) url(wz_image/warning.png) right/contain no-repeat;
-}
-
-input#paynum:focus:invalid, input#expirydate:focus:invalid, input#diamond:focus:invalid {
-    background: rgba(62, 0, 69, 0.7) url(wz_image/warning.png) 370px/contain no-repeat;
-}
-
-input#submit:focus {
-    background-image: none;
-    background: #8fb1e9;
-}
-*/
-/*@media only screen and (max-width:1000px) {
-    .payment_container  .checkout_btn {
-        padding: 10px;
-        font-size: 20px;
-        margin: 10px 20px;
-    }
-
-    .payment_container  .reset_btn {
-        padding: 10px;
-        margin: 10px 20px;
-    }
-
-    .payment_container img {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width:705px) {
-    .payment_container  .checkout_btn {
-        width: 40%;
-        margin: 10px 20px;
-    }
-
-    .payment_container  .reset_btn {
-        width: 40%;
-        margin: 10px 20px;
-    }
-
-    .payment_container  .row .col .inputbox_select input {
-        margin-right: 10px;
-    }
-}
-
-@media only screen and (max-width:580px) {
-    .payment_container  .checkout_btn {
-        width: 70%;
-        margin: 10px 50px;
-    }
-
-    .payment_container  .reset_btn {
-        width: 70%;
-        margin: 10px 50px;
-    }
-
-    .payment_section {
-        margin: 0;
-        padding-top: 200px;
-        padding-bottom: 200px;
-    }
-
-    .payment_container img {
-        width: 390px;
-        justify-content: center;
-    }
-
-    .payment_container  .row .col .inputbox_select input {
-        margin-right: 80px;
-    }
-}
-
-@media only screen and (max-width:450px) {
-
-    .payment_container img {
-        width: 310px;
-        justify-content: center;
-    }
-
-    .payment_container  .row .col .inputbox_select input {
-        margin-right: 40px;
-    }
-}
-
-@media only screen and (max-width:350px) {
-    .payment_container img {
-        width: 260px;
-        justify-content: center;
-    }
-
-    .payment_container  .row .col .inputbox_select input {
-        margin-right: 20px;
-    }
-}*/
 .charges_summary {
     margin-top: 30px;
 }
@@ -375,8 +267,8 @@ input#submit:focus {
     top: 0px;
     right: 0px;
     padding: 20px;
+    overflow:visible;
     box-sizing: border-box;
-    padding-left: 100px;
 }
 
 

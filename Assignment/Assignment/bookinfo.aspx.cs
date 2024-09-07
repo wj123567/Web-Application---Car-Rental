@@ -13,6 +13,7 @@ using System.Net;
 
 using System.Globalization;
 using System.Drawing.Drawing2D;
+using System.Data;
 
 namespace Assignment
 {
@@ -108,7 +109,7 @@ namespace Assignment
 
                 con.Open();
                 SqlDataReader reader = command.ExecuteReader();
-
+                
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -121,18 +122,25 @@ namespace Assignment
                             ddlDriverGender.SelectedValue = reader["DriverGender"].ToString();
                             txtDriverLicenseNum.Text = reader["DriverLicense"].ToString();
                             txtDriverID.Text = reader["DriverId"].ToString();
-                            
-                        
+                            chkDriver.Checked= true;
+                            chkDriver.Enabled = false;
 
                     };
                        
                         
                 }
+                else
+                {
+                    chkDriver.Checked = false;
+                    chkDriver.Enabled = false;
+                }
 
-                reader.Close();
+                reader.Close();              
                 con.Close();
             }
         }
+
+
 
         [WebMethod]
         public static bool SaveCapturedImage(string data)

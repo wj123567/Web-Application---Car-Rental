@@ -74,8 +74,8 @@
 </div> 
 </div>
     
-            <div id="locationModal" class="modal ">
-             <div class="modal-dialog modal-dialog-centered">
+<div id="locationModal" class="modal ">
+        <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content" id="modal-content">
         <span class="close" id="modal_close">&times;</span>
         <h2>Select Location</h2>
@@ -94,7 +94,7 @@
 
             </div>
         </div>
-        <asp:Button ID="modalOkBtn" runat="server" Text="Ok" cssclass="modalbtn_style"/>
+        <asp:Button ID="modalOkBtn" runat="server" Text="Ok" cssclass="modalbtn_style" Enabled="false"/>
     </div>
     </div>
 </div>
@@ -179,6 +179,10 @@
                     var region = this.getAttribute("data-region");
                     this.classList.add('selected-region'); // Highlight the selected region
                     showPopularPoints(region);
+
+                    // Reset the selected point and disable the button
+                    selectedPoint = "";
+                    disableOkButton();
                 }
             });
         }
@@ -191,8 +195,29 @@
                 clearPointSelection(); // Clear any previous selection
                 selectedPoint = this.textContent;
                 this.classList.add('selected-point'); // Highlight the selected point
+                checkSelections(); // Call to check if both region and point are selected
             }
         });
+
+        // Check if both region and popular point are selected
+        function checkSelections() {
+            if (selectedRegion !== "" && selectedPoint !== "") {
+                enableOkButton();  // Enable OK button if both are selected
+            } else {
+                disableOkButton(); // Disable OK button if either is missing
+            }
+        }
+
+        // Enable the OK button
+        function enableOkButton() {
+            okButton.removeAttribute('disabled');
+        }
+
+        // Disable the OK button
+        function disableOkButton() {
+            okButton.setAttribute('disabled', 'true');
+        }
+
 
         // Handle OK button click
         if (okButton) {
