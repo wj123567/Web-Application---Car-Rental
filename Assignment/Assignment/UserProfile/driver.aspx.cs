@@ -11,6 +11,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Web.Security;
+using System.Web.Services;
 
 namespace Assignment
 {
@@ -75,7 +76,21 @@ namespace Assignment
                 }
             con.Close();
         }
+        /*
+        [WebMethod]
+        public static bool SaveCapturedImage(string data)
+        {
+            string fileName = "Webcam " + DateTime.Now.ToString("yyyy-MM-dd hh-mm-ss");
 
+            //Convert Base64 Encoded string to Byte Array.
+            byte[] imageBytes = Convert.FromBase64String(data.Split(',')[1]);
+
+            //Save the Byte Array as Image File.
+            string filePath = HttpContext.Current.Server.MapPath(string.Format("~/Captures/{0}.jpg", fileName));
+            File.WriteAllBytes(filePath, imageBytes);
+            return true;
+        }
+*/
         protected void btnUpdateDoc_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)

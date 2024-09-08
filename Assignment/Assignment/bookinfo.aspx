@@ -147,7 +147,7 @@
                    <div class="col">
                        <h3 class="title">Driver Info</h3>
 
-                       <div class="check_driver">
+                       <div class="check_driver" style="height:50px;">
                         <asp:Label ID="lblNoDriver" runat="server" Text="Unfortunately. No driver record is found." cssclass="lblNoDriver_style alert alert-warning" Enabled="false"></asp:Label>
                         <asp:Button ID="btnRegisterDriver" runat="server" CssClass="btn btn-primary" Text="Register a Driver" OnClick="btnRegisterDriver_Click"/>
 
@@ -197,7 +197,7 @@
                         
 
                         <div id="driverFieldsRight">
-                             <div class="inputbox_right">
+                             <div class="inputbox_right driver_license" style="padding-top:100px;">
                                <asp:Label ID="lblDriverLicenseNum" runat="server" Text="Driver License Number" CssClass="label_right"></asp:Label>
                                    <asp:TextBox ID="txtDriverLicenseNum" runat="server" CssClass="input_right" placeholder="e.g. 543210987654" ReadOnly="true"></asp:TextBox>
                                <br />
@@ -235,6 +235,10 @@
                     <div class="inputbox_left">
                         <h5>Quick Snap Using WebCam</h5>
                         <asp:Button ID="btnActivate" runat="server" Text="Button" OnClientClick="showWebcam(); return false;"/>
+                         <!-- Alternative button to upload photo if webcam is not available -->
+                        <asp:Button ID="btnUploadFile" runat="server" Text="Upload Photo" CssClass="btn btn-secondary" style="display: none;" OnClientClick="return showFileUpload()" />
+                        <asp:FileUpload ID="fileSelfie" runat="server" style="display:none"/>
+
                          <div class="webcamSection">
                          <div class="webcamContainer" id="webcamContainer" style="display:none">
                              <i class="ri-close-line webcamClose" style="font-size:40px;color:white;background-color:red;" onclick="closeWebcam();"></i>
@@ -263,11 +267,7 @@
                     </div>
                 </div>
                  
-                <div class="col">
-                    <div class="inputbox_right" style="padding-top:40px;">
-                        <h5>Import from File</h5>
-                    </div>
-                </div>
+                
             </div>
         
    
@@ -310,9 +310,16 @@
     
 
         <script type="text/javascript">
+           
+         function showFileUpload() {
+             document.getElementById('<%= fileSelfie.ClientID %>').click();
+             return false;
+         }
+
         function showWebcam() {
             // Display the table
             document.getElementById('webcamContainer').style.display = 'block';
+            return false;
         }
 
         function closeWebcam() {
@@ -326,6 +333,23 @@
         }
 
             $(function () {
+                // Try to access the webcam
+                const btnActivate = document.getElementById('<%= btnActivate.ClientID%>');
+                const btnUpload = document.getElementById('<%= btnUploadFile.ClientID %>');
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function (stream) {
+                        // Webcam is available, display the webcam button
+                        $('#btnActivate').show();
+                        $('#btnUploadFile').hide();  // Hide the upload button if the webcam is available
+                        $('#fileSelfie').hide();  // Hide the FileUpload control
+                    })
+                    .catch(function (err) {
+                        // No webcam available or permission denied, show file upload option instead
+                        btnActivate.style.display = 'none';  // Hide the webcam button
+                        btnUpload.style.display = 'block'  // Show the upload button
+                        $('#fileSelfie').style.display='block';  // Show the FileUpload control
+                    });
+
                 Webcam.set({
                     width: 300,
                     height: 240,

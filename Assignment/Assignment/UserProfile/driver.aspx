@@ -95,6 +95,34 @@
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuSelfie" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewSelfie(event)"/>
                                 <asp:Button ID="btnSelfiePic" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadSelfie()" ValidationGroup="uploadPic"/>
+                                <!-- wz start -->
+                                <asp:Button ID="btnActivate" runat="server" Text="Button" CssClass="btn btn-primary mx-auto" OnClientClick="showWebcam(); return false;"/>   
+                                 <div class="webcamSection">
+                                 <div class="webcamContainer" id="webcamContainer" style="display:none">
+                                     <i class="ri-close-line webcamClose" style="font-size:40px;color:white;background-color:red;" onclick="closeWebcam();"></i>
+                                  <table id="webcamTable" class="webcamTable" border="0" cellpadding="0" cellspacing="0" >
+                                     <tr>
+                                         <th style="text-align:center" class="webcamTitle">Live Camera</th>
+                                         <th style="text-align:center" class="webcamTitle">Captured Picture</th>
+                                     </tr>
+                                     <tr>
+                                         <td class="webcamOutput"><div id="webcam"></div></td>
+                                         <td class="webcamOutput"><img id="imgCapture" /></td>
+                                     </tr>
+                                     <tr>
+                                         <td align="center" class="webcamExecute">
+                                             <asp:Button ID="btnCapture" runat="server"  Text="Capture" Cssclass="btnCapture"/>
+                                             
+                                         </td>
+                                         <td align="center" class="webcamExecute" >
+                                             <asp:Button ID="btnUpload" runat="server"  Text="Upload" Cssclass="btnUpload"/>
+                                            
+                                         </td>
+                                     </tr>
+                                 </table>
+                                 </div>
+                                </div>
+                                 <!-- wz end -->
                             </div>
                             </div>
                         </div>                     
@@ -272,6 +300,77 @@
 
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/intlTelInput.min.js"></script>
     <script>
+        //wz start
+        function showWebcam() {
+            // Display the table
+            document.getElementById('webcamContainer').style.display = 'block';
+            return false;
+        }
+
+        function closeWebcam() {
+            var container = document.getElementById('webcamContainer');
+            // Toggle display between 'none' and 'block'
+            if (container.style.display === 'block') {
+                container.style.display = 'none';
+            } else {
+                container.style.display = 'block';
+            }
+        }
+
+        $(function () {
+            // Try to access the webcam
+            const btnActivate = document.getElementById('<%= btnActivate.ClientID%>');
+            const btnSelfie = document.getElementById('<%= btnSelfiePic.ClientID %>')
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    // Webcam is available, display the webcam button
+                    btnActivate.style.display='block';
+                    btnSelfie.style.display='none';  // Hide the upload button if the webcam is available
+                    
+                })
+                .catch(function (err) {
+                    // No webcam available or permission denied, show file upload option instead
+                    btnActivate.style.display = 'none';  // Hide the webcam button
+                    btnUpload.style.display = 'block'  // Show the upload button
+                   
+                });
+
+            Webcam.set({
+                width: 300,
+                height: 240,
+                image_format: 'jpeg',
+                jpeg_quality: 90
+            });
+            Webcam.attach('#webcam');
+
+            // Adjust CSS styles
+            $('#webcam').css('margin', 'auto'); // Adjust the value as needed
+
+            $("#main_btnCapture").click(function (event) {
+                event.preventDefault(); // Prevent default behavior (postback)
+
+                Webcam.snap(function (data_uri) {
+                    $("#imgCapture")[0].src = data_uri;
+                    $("#main_btnUpload").prop("disabled", false);
+                });
+            });
+
+            $("#main_btnUpload").click(function (event) {
+                event.preventDefault(); // Prevent default behavior (postback)
+
+                $.ajax({
+                    type: "POST",
+                    url: "driver.aspx/SaveCapturedImage", //send to backend
+                    data: "{data: '" + $("#imgCapture")[0].src + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert("Image uploaded successfully."); // Notify the user on success
+                    },
+                });
+            });
+        });
+        //wz end
         const input = document.querySelector("#<%= txtPhoneNum.ClientID %>");
         const iti = window.intlTelInput(input, {
             initialCountry: "auto",

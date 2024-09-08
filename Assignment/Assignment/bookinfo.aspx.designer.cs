@@ -357,6 +357,24 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button btnActivate;
 
         /// <summary>
+        /// btnUploadFile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUploadFile;
+
+        /// <summary>
+        /// fileSelfie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fileSelfie;
+
+        /// <summary>
         /// btnCapture control.
         /// </summary>
         /// <remarks>
