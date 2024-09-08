@@ -2,46 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <asp:HiddenField ID="hdnCountryCode" runat="server" />
     
-    <!-- Modal Structure -->
-<div class="modal fade" id="webcamModal" tabindex="-1" aria-labelledby="webcamModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg"> <!-- Adjust modal size using Bootstrap classes, e.g., modal-lg -->
-    <div class="modal-content">
-      
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h5 class="modal-title" id="webcamModalLabel">Live Camera and Capture</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      
-      <!-- Modal Body -->
-      <div class="modal-body">
-        <div class="webcamSection">
-          <div class="webcamContainer" id="webcamContainer">
-            <table id="webcamTable" class="webcamTable table table-bordered" border="0" cellpadding="0" cellspacing="0">
-              <tr>
-                <th style="text-align:center" class="webcamTitle">Live Camera</th>
-                <th style="text-align:center" class="webcamTitle">Captured Picture</th>
-              </tr>
-              <tr>
-                <td class="webcamOutput"><div id="webcam"></div></td>
-                <td class="webcamOutput"><img id="imgCapture" /></td>
-              </tr>
-              <tr>
-                <td align="center" class="webcamExecute">
-                  <asp:Button ID="btnCapture" runat="server" Text="Capture" CssClass="btnCapture btn btn-primary"/>
-                </td>
-                <td align="center" class="webcamExecute">
-                  <asp:Button ID="btnUpload" runat="server" Text="Upload" CssClass="btnUpload btn btn-success" data-bs-toggle="modal" data-bs-target="#addDriver"/>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</div>
     
   <div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
@@ -134,7 +94,7 @@
                             <div class="image-frame mx-auto">
                                 <asp:Image ID="imgSelfie" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
                              </div>
-                   <asp:CustomValidator ID="validateSelfiePic" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuSelfie" ValidateEmptyText="True" ValidationGroup="uploadDoc" CssClass="validate mx-auto"></asp:CustomValidator>
+                   <asp:CustomValidator ID="validateSelfiePic" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateSelfieFile" ControlToValidate="fuSelfie" ValidateEmptyText="True" ValidationGroup="uploadDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuSelfie" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewSelfie(event)"/>
                                 <asp:Button ID="btnSelfiePic" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadSelfie()" ValidationGroup="uploadPic"/>
@@ -180,6 +140,49 @@
       </div>
     </div>
   </div>   
+</div>
+
+
+        <!-- Modal Structure -->
+<div class="modal fade" id="webcamModal"  tabindex="-1" aria-labelledby="webcamModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg"> <!-- Adjust modal size using Bootstrap classes, e.g., modal-lg -->
+    <div class="modal-content">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="webcamModalLabel">Live Camera and Capture</h5>
+        <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#addDriver" ></button>
+      </div>
+      
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="webcamSection">
+          <div class="webcamContainer" id="webcamContainer">
+            <table id="webcamTable" class="webcamTable table table-bordered" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <th style="text-align:center" class="webcamTitle">Live Camera</th>
+                <th style="text-align:center" class="webcamTitle">Captured Picture</th>
+              </tr>
+              <tr>
+                <td class="webcamOutput"><div id="webcam"></div></td>
+                <td class="webcamOutput"><img id="imgCapture" /></td>
+                <asp:HiddenField ID="hdnCapturedSelfie" runat="server" />
+              </tr>
+              <tr>
+                <td align="center" class="webcamExecute">
+                  <asp:Button ID="btnCapture" runat="server" Text="Capture" CssClass="btnCapture btn btn-primary"/>
+                </td>
+                <td align="center" class="webcamExecute">
+                  <asp:Button ID="btnUpload" runat="server" Text="Upload" CssClass="btnUpload btn btn-success" data-bs-toggle="modal" data-bs-target="#addDriver"/>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 </div>
 
     <div class="container-fluid px-4 mt-4">
@@ -320,6 +323,9 @@
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/intlTelInput.min.js"></script>
     <script>
         //wz start
+    
+
+        let webcamUsed = false; // Flag to track if the webcam was used
         function showWebcamModal() {
             // Display the table
             var webcamModal = new bootstrap.Modal(document.getElementById('webcamModal'));
@@ -327,6 +333,8 @@
         }
 
         $(function () {
+           
+
             // Try to access the webcam
             const btnActivate = document.getElementById('<%= btnActivate.ClientID%>');
             const btnSelfie = document.getElementById('<%= btnSelfiePic.ClientID %>')
@@ -361,6 +369,7 @@
                 event.preventDefault(); // Prevent default behavior (postback)
 
                 Webcam.snap(function (data_uri) {
+                    console.log("Captured Image Data URI: ", data_uri); // Check the format
                     $("#imgCapture")[0].src = data_uri;
                     $("#main_btnUpload").prop("disabled", false);
                 });
@@ -368,37 +377,26 @@
 
             $("#main_btnUpload").click(function (event) {
                 event.preventDefault(); // Prevent default behavior (postback)
+                webcamUsed = true; // Mark that the webcam was used (off the validation)
+                var hdnCapturedSelfie = "<%= hdnCapturedSelfie.ClientID %>";
 
                 // Get the captured image data URI from the modal
                 var capturedImage = $("#imgCapture")[0].src;
 
-                // Create a new Image object
-                var image = new Image();
-                image.src = capturedImage;
-                image.onload = function () {
-                    // Create a canvas element
-                    var canvas = document.createElement("canvas");
-                    var ctx = canvas.getContext("2d");
+                // Simulate the ShowPreviewSelfie behavior by updating the imgSelfie element
+                imgSelfie.src = capturedImage;
 
-                    // Set canvas dimensions to the image dimensions
-                    canvas.width = image.width;
-                    canvas.height = image.height;
+                if (capturedImage) {
+                    $("#"+hdnCapturedSelfie).val(capturedImage); // Populate hidden field
+                    
+                   
+                } else {
+                    alert("No image captured. Please capture a selfie first.");
+                    webcamUsed = false;
+                }
 
-                    // Draw the image on the canvas
-                    ctx.drawImage(image, 0, 0);
-
-                    // Convert the canvas content to a specific format (e.g., JPEG)
-                    var convertedImage = canvas.toDataURL("image/jpeg"); // Force the format to be JPEG
-
-                    // Assign the converted image to imgSelfie
-                    imgSelfie.src = convertedImage;
-
-                    // Notify the user
-                    alert("Image successfully converted to JPEG and preview updated!");
-                };
-
-               
-
+                // Notify the user
+                alert("Image preview updated successfully!");
 
             });
         });
@@ -605,7 +603,35 @@
                 }
 
                 args.IsValid = true;
+        }
+
+        function validateSelfieFile(sender, args) {
+            if (webcamUsed) {
+                // Skip validation if the webcam was used
+                args.IsValid = true;
+                return;
+            } else if (!webcamUsed) {
+                args.IsValid = false;
+                return;
             }
+
+            var fileUpload = document.getElementById(sender.controltovalidate);
+            var fileName = fileUpload.value;
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+            var maxSize = 2097152;
+
+            if (!allowedExtensions.test(fileName)) {
+                args.IsValid = false;
+                return;
+            }
+
+            if (fileUpload.files[0].size > maxSize) {
+                args.IsValid = false;
+                return;
+            }
+
+            args.IsValid = true;
+        }
 
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
