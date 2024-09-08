@@ -32,6 +32,29 @@ small {
     letter-spacing: 1px;
 }
 
+
+.accordion-item {
+    margin-top:25px;
+    border-color: rgb(115, 147, 179) rgb(218,165,32);
+    border-width: 3px;
+    background-color: rgb(229, 228, 226);
+}
+
+.accordion_btn_style {
+    color: #007bff; 
+    font-size: 18px; 
+    font-weight: 800;
+    background-color: #f8f9fa; 
+    padding: 15px 20px; 
+    transition: background-color 0.3s ease; 
+}
+
+    .accordion_btn_style:hover {
+        background-color: #4364c7; /* Change background on hover */
+        color: white; /* Change text color on hover */
+    }
+
+
 .label_style,
 h6 {
     font-size: 14px;
@@ -65,7 +88,7 @@ h6 {
     }
 
     .existingcard_container{
-        margin-top:25px;
+        color:black;
     }
 
 /* modal extra*/
@@ -164,3 +187,56 @@ h6 {
     }
 }
 
+@media (max-width: 720px) {
+    .accordion-body{
+        padding:0;
+
+    }
+
+    .existingcard_container{
+        padding:0 !important;
+    }
+
+    .d-flex {
+        flex-direction: column !important;
+        margin:0px !important;
+      
+    }
+
+    .accordion-button {
+        font-size: 16px; /* Adjust font size for small screens */
+    }
+
+    .existingcard_container {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .data-mdb-input-init table {
+        width: 100%; /* Make sure table adjusts to the container width */
+    }
+}
+
+@media (max-width: 630px) {
+    .d-flex {
+        align-items: flex-start !important;
+    }
+}
+
+@media (max-width: 530px) {
+    .existingcard_container {
+        font-size: 12px;
+    }
+
+    .accordion-button {
+        font-size: 14px !important;
+        padding: 0 0 0 5px !important;
+    }
+
+    .paymentbtn_row {
+        margin: 0 !important;
+    }
+
+    .charge_box_right {
+        padding: 0 !important;
+    }
+}

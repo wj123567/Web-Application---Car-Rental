@@ -80,32 +80,48 @@
              
             <div class="shadow-sm bg-white p-4 my-4">
                 <h4>Payment Info</h4>
-            <div class="existingcard_container">
-                <h5>Existing Card</h5>
 
+           <div class="accordion" id="cardAccordion">
+               <div class="accordion-item">
+                   <h2 class="accordion-header" id="headingExistingCard"> 
+                       <button class="accordion-button accordion_btn_style" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                       View Existing Cards
+                       </button>
+                   </h2>
+                   <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingExistingCard" data-bs-parent="#cardAccordion">
+                       <div class="accordion-body">
+          <div class="existingcard_container">
+                <h5>Existing Card</h5>       
           <asp:Repeater ID="rptCards" runat="server" >
           <ItemTemplate>
             <div class="container-fluid">
           <div class="d-flex flex-row align-items-center mt-3 mb-3 pb-1">
-              <asp:Image ID="imgCard" runat="server" src='<%# getCardsPhoto(Eval("CardType").ToString()) %>'/>
-              
-          <div class="flex-fill mx-3">
+              <div class="col-3 col-md-2">
+              <asp:Image ID="imgCard" runat="server" CssClass="img-fluid" src='<%# getCardsPhoto(Eval("CardType").ToString()) %>'/>
+              </div>
+          <div class="col-6 col-md-7">
             <div class=" data-mdb-input-init form-outline">
                 <table>
+                    <tr>
                     <td><%# FormatCardNumber(Eval("CardNumber").ToString()) %> </td>
+                    </tr>
                 </table>
                 
               <label class="form-label" for="formControlLgXc">Card Number</label>
             </div>
           </div>
-              
-                    <asp:Button ID="btnExistCard" runat="server" Text="Apply"  CssClass="btn btn-dark" CommandArgument='<%# Eval("Id") %>' OnClick="btnExistCard_Click" />
+              <div class="col-3 col-md-3 text-end">
+              <asp:Button ID="btnExistCard" runat="server" Text="Apply"  CssClass="btn btn-dark" CommandArgument='<%# Eval("Id") %>' OnClick="btnExistCard_Click" />
+                  </div>
         </div>
                 </div>
           </ItemTemplate>
          </asp:Repeater>
-         </div>               
-
+         </div>   
+          </div>
+          </div>
+         </div>
+        </div>
         
                 <div class="col-sm-6 mt-5">
                      
@@ -139,7 +155,7 @@
                   <small class="text-secondary">I authorize some insurance company to charge my debit / credit card for the total amount of xxx.xx</small>
                 </div>
                 <div class="mt-5 mb-3">
-                  <div class="row">
+                  <div class="row paymentbtn_row">
                     <div class="col">    
                       <asp:Button ID="btnPaymentPgBack" runat="server" Text="Go Back" CssClass="paymentpg_backbtn prev_btn w-100" OnClick="btnPaymentPgBack_Click"/>
                     </div>
@@ -201,7 +217,7 @@
     
     
 </div>
-<div class="box_right">
+<div class="box_right charge_box_right">
     <h6 class="charge_title">Summary of Charges</h6>
     <div class="charges_summary">
         <div class="charge_item">

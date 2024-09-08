@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookinfo.aspx.cs" Inherits="Assignment.bookinfo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <link href="CSS/stickybar.css" rel="stylesheet" />
-
+    <link href="CSS/bookinfo.css" rel="stylesheet" />
 
              <div class="container-fluid">
 	<div class="row justify-content-center">
