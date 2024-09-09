@@ -149,7 +149,7 @@
 
                        <div class="check_driver" style="height:50px;">
                         <asp:Label ID="lblNoDriver" runat="server" Text="Unfortunately. No driver record is found." cssclass="lblNoDriver_style alert alert-warning" Enabled="false"></asp:Label>
-                        <asp:Button ID="btnRegisterDriver" runat="server" CssClass="btn btn-primary" Text="Register a Driver" OnClick="btnRegisterDriver_Click"/>
+                        <asp:Button ID="btnRegisterDriver" runat="server" CssClass="btn btn-primary btn_register_style" Text="Register a Driver" OnClick="btnRegisterDriver_Click"/>
 
                        <asp:CheckBox ID="chkDriver" runat="server" cssclass="driver_checkbox_style" />
                        <asp:Label ID="lblDriver" runat="server" Text="Driver has already been registered" CSSClass="driver_check_label"></asp:Label>     
@@ -227,53 +227,13 @@
                   </div>
                 </div>
             </div>
-    <div class="container">
-        <div class="photo_container" id="photoField">
-            <div class="row">
-                <div class="col">
-                    <h3>Photo Attachment</h3>
-                    <div class="inputbox_left">
-                        <h5>Quick Snap Using WebCam</h5>
-                        <asp:Button ID="btnActivate" runat="server" Text="Button" OnClientClick="showWebcam(); return false;"/>
-                         <!-- Alternative button to upload photo if webcam is not available -->
-                        <asp:Button ID="btnUploadFile" runat="server" Text="Upload Photo" CssClass="btn btn-secondary" style="display: none;" OnClientClick="return showFileUpload()" />
-                        <asp:FileUpload ID="fileSelfie" runat="server" style="display:none"/>
-
-                         <div class="webcamSection">
-                         <div class="webcamContainer" id="webcamContainer" style="display:none">
-                             <i class="ri-close-line webcamClose" style="font-size:40px;color:white;background-color:red;" onclick="closeWebcam();"></i>
-                          <table id="webcamTable" class="webcamTable" border="0" cellpadding="0" cellspacing="0" >
-                             <tr>
-                                 <th style="text-align:center" class="webcamTitle">Live Camera</th>
-                                 <th style="text-align:center" class="webcamTitle">Captured Picture</th>
-                             </tr>
-                             <tr>
-                                 <td class="webcamOutput"><div id="webcam"></div></td>
-                                 <td class="webcamOutput"><img id="imgCapture" /></td>
-                             </tr>
-                             <tr>
-                                 <td align="center" class="webcamExecute">
-                                     <asp:Button ID="btnCapture" runat="server"  Text="Capture" Cssclass="btnCapture"/>
-                                     
-                                 </td>
-                                 <td align="center" class="webcamExecute" >
-                                     <asp:Button ID="btnUpload" runat="server"  Text="Upload" Cssclass="btnUpload"/>
-                                    
-                                 </td>
-                             </tr>
-                         </table>
-                         </div>
-                        </div>
-                    </div>
-                </div>
-                 
-                
-            </div>
-        
+    
    
-  </div>  <!-- p section-->
-        </div>
 
+
+
+
+    
      <div class="sticky_bar">
     <div class="container-fluid">
         <div class="row align-items-center justify-content-between bar_content">
@@ -308,84 +268,9 @@
     </div>
 </div>
     
+      
 
-        <script type="text/javascript">
-           
-         function showFileUpload() {
-             document.getElementById('<%= fileSelfie.ClientID %>').click();
-             return false;
-         }
-
-        function showWebcam() {
-            // Display the table
-            document.getElementById('webcamContainer').style.display = 'block';
-            return false;
-        }
-
-        function closeWebcam() {
-            var container = document.getElementById('webcamContainer');
-            // Toggle display between 'none' and 'block'
-            if (container.style.display === 'block') {
-                container.style.display = 'none';
-            } else {
-                container.style.display = 'block';
-            }
-        }
-
-            $(function () {
-                // Try to access the webcam
-                const btnActivate = document.getElementById('<%= btnActivate.ClientID%>');
-                const btnUpload = document.getElementById('<%= btnUploadFile.ClientID %>');
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(function (stream) {
-                        // Webcam is available, display the webcam button
-                        $('#btnActivate').show();
-                        $('#btnUploadFile').hide();  // Hide the upload button if the webcam is available
-                        $('#fileSelfie').hide();  // Hide the FileUpload control
-                    })
-                    .catch(function (err) {
-                        // No webcam available or permission denied, show file upload option instead
-                        btnActivate.style.display = 'none';  // Hide the webcam button
-                        btnUpload.style.display = 'block'  // Show the upload button
-                        $('#fileSelfie').style.display='block';  // Show the FileUpload control
-                    });
-
-                Webcam.set({
-                    width: 300,
-                    height: 240,
-                    image_format: 'jpeg',
-                    jpeg_quality: 90
-                });
-                Webcam.attach('#webcam');
-
-                // Adjust CSS styles
-                $('#webcam').css('margin', 'auto'); // Adjust the value as needed
-
-                $("#main_btnCapture").click(function (event) {
-                    event.preventDefault(); // Prevent default behavior (postback)
-
-                    Webcam.snap(function (data_uri) {
-                        $("#imgCapture")[0].src = data_uri;
-                        $("#main_btnUpload").prop("disabled", false);
-                    });
-                });
-
-                $("#main_btnUpload").click(function (event) {
-                    event.preventDefault(); // Prevent default behavior (postback)
-
-                    $.ajax({
-                        type: "POST",
-                        url: "bookinfo.aspx/SaveCapturedImage", //send to backend
-                        data: "{data: '" + $("#imgCapture")[0].src + "'}",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (response) {
-                            alert("Image uploaded successfully."); // Notify the user on success
-                        },
-                    });
-                });
-            });
-        </script>
+       
 
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/intlTelInput.min.js"></script>
 
@@ -428,7 +313,7 @@
             
             const driverFieldsLeft = document.getElementById('driverFieldsLeft');
             const driverFieldsRight = document.getElementById('driverFieldsRight');
-            const photoFields = document.getElementById('photoField');
+            
 
             const btnNext = document.getElementById('<%= btnNext.ClientID %>');
 
@@ -436,20 +321,16 @@
 
                 if (chkDriver.checked) { 
                     driverFieldsLeft.style.display = 'block';
-                    driverFieldsRight.style.display = 'block';
-                    photoFields.style.display = 'block';
+                    driverFieldsRight.style.display = 'block';                
                     lblNoDriver.style.display = 'none';
                     registerDriver.style.display = 'none';
                     enableDriverValidation(true);
                 } else {
                     driverFieldsLeft.style.display = 'none';
                     driverFieldsRight.style.display = 'none';
-                    photoFields.style.display = 'none';
-
                     chkDriver.style.display = 'none';
                     lblDriver.style.display = 'none';
                     lblNoDriver.style.display = 'block';
-
                     btnNext.disabled = true;
                     enableDriverValidation(false);
                 }

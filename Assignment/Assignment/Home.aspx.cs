@@ -108,12 +108,12 @@ namespace Assignment
         {
             // Save departure date to the session state
 
-            Session["Pickup_point"] = hdnDepartureLocation.Value;
-            Session["Pickup_state"] = hdnDepartureState.Value;
-            Session["StartDate"] = txtDepartureDateTime.Text;
+            Session["Pickup_point"]  = hdnDepartureLocation.Value;
+            Session["Pickup_state"]  = hdnDepartureState.Value;
+            Session["StartDate"]     = txtDepartureDateTime.Text;
             Session["Dropoff_point"] = hdnReturnLocation.Value;
             Session["Dropoff_state"] = hdnReturnState.Value;
-            Session["EndDate"] = txtReturnDateTime.Text;
+            Session["EndDate"]       = txtReturnDateTime.Text;
 
            
             Response.Redirect("productListing.aspx");

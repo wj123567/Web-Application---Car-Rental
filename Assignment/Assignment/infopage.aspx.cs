@@ -41,7 +41,7 @@ namespace Assignment
                 BindAddOns();
 
                 LoadAddOnSelection();
-                CheckAddOnSelection();
+                
                 //you
                 string sortOption = Request.QueryString["sort"];
                 LoadComments(sortOption);
@@ -76,21 +76,7 @@ namespace Assignment
             }
         }
 
-        protected void CheckAddOnSelection()
-        {
-            if (Session["SelectedAddOns"] != null)
-            {
-                Dictionary<int, int> selectedAddOns = (Dictionary<int, int>)Session["SelectedAddOns"];
-               
-
-                // Display in a Label for confirmation
-                lblCheck.Text = $" Selected Add-Ons Count: {selectedAddOns.Count}";
-            }
-            else
-            {
-                lblCheck.Text = "No Add-Ons selected.";
-            }
-        }
+      
 
         private void LoadComments(string sortOption)
         {

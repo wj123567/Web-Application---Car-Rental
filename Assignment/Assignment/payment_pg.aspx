@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="payment_pg.aspx.cs" Inherits="Assignment.payment_pg" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <link href="CSS/payment_pg.css" rel="stylesheet" />
+
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" SelectCommand="SELECT * FROM [PaymentCard]"></asp:SqlDataSource>
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnCardType" runat="server" />
@@ -26,26 +28,7 @@
     </div>
 </div>
 
-<div id="confirmBookModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-             <div class="modal-header">
-                
-                <h5 class="modal-title">Booking Done</h5>
-               
-            </div>
-            <div class="modal-body">
-                <div class="congrats congrats_start">Congratulation!</div>
-                 <div class="congrats congrats_end"> 
-                  <span>You have successfully rented your desired car.</span>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <asp:Button ID="modalOkBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" OnClick="modalOkBtn_Click" />
-            </div>
-        </div>
-    </div>
-</div>
+
 
      <div class="container-fluid">
  <div class="row justify-content-center">
@@ -80,6 +63,7 @@
              
             <div class="shadow-sm bg-white p-4 my-4">
                 <h4>Payment Info</h4>
+                <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
 
            <div class="accordion" id="cardAccordion">
                <div class="accordion-item">
@@ -92,6 +76,7 @@
                        <div class="accordion-body">
           <div class="existingcard_container">
                 <h5>Existing Card</h5>       
+
           <asp:Repeater ID="rptCards" runat="server" >
           <ItemTemplate>
             <div class="container-fluid">
@@ -104,6 +89,7 @@
                 <table>
                     <tr>
                     <td><%# FormatCardNumber(Eval("CardNumber").ToString()) %> </td>
+                       
                     </tr>
                 </table>
                 
@@ -117,6 +103,7 @@
                 </div>
           </ItemTemplate>
          </asp:Repeater>
+
          </div>   
           </div>
           </div>
@@ -134,6 +121,9 @@
                     <asp:Label ID="lblVisaCard" runat="server" Text="" CssClass="fab fa-cc-visa fa-lg"></asp:Label>
                     <asp:Label ID="lblMasterCard" runat="server" Text="" CssClass="fab fa-cc-mastercard fa-lg"></asp:Label>
                     <asp:Label ID="lblAmexCard" runat="server" Text="" CssClass="fab fa-cc-amex fa-lg"></asp:Label>
+
+                    <asp:HiddenField ID="hdnUsedCardId" runat="server" />
+
                   <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control my-1" placeholder="0000 0000 0000 0000" MaxLength="19" ValidationGroup="PaymentValidation"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"  ErrorMessage="Card Number is Required." ControlToValidate="txtCardNumber" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                      <asp:CustomValidator ID="validateCard" runat="server" ErrorMessage="Card is Invalid." CssClass="validate" ValidationGroup="PaymentValidation" ClientValidationFunction="validateCard" ControlToValidate="txtCardNumber" ValidateEmptyText="True" Display="Dynamic"></asp:CustomValidator>
