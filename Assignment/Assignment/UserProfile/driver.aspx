@@ -97,10 +97,11 @@
                    <asp:CustomValidator ID="validateSelfiePic" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateSelfieFile" ControlToValidate="fuSelfie" ValidateEmptyText="True" ValidationGroup="uploadDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuSelfie" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewSelfie(event)"/>
+                                <div class="mx-auto">
                                 <asp:Button ID="btnSelfiePic" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadSelfie()" ValidationGroup="uploadPic"/>
                                 <!-- wz start -->
-                                <asp:Button ID="btnActivate" runat="server" Text="Selfie with Webcam" CssClass="btn btn-primary mx-auto"  data-bs-toggle="modal" data-bs-target="#webcamModal" OnClientClick="showWebcamModal(); return false;"/>   
-                                
+                                <asp:Button ID="btnActivate" runat="server" Text="Selfie with Webcam" CssClass="btn btn-primary mx-auto" OnClientClick="showWebcamModal(); return false;"/>   
+                                </div>
                                  <!-- wz end -->
                             </div>
                             </div>
@@ -144,7 +145,7 @@
 
 
         <!-- Modal Structure -->
-<div class="modal fade" id="webcamModal"  tabindex="-1" aria-labelledby="webcamModalLabel" aria-hidden="true">
+<div class="modal fade" id="webcamModal"  tabindex="-1" aria-labelledby="webcamModal" aria-hidden="true">
   <div class="modal-dialog modal-lg"> <!-- Adjust modal size using Bootstrap classes, e.g., modal-lg -->
     <div class="modal-content">
       
@@ -193,7 +194,7 @@
     </div>
     </div>
     <hr class="mt-0 mb-4">
-
+    
     <div class="card-container mb-3">
         <asp:LinkButton ID="btnAddNew" runat="server" Visible="True"  data-bs-toggle="modal" data-bs-target="#addDriver">
                <div class="card-body rounded border border-dark px-0 py-2 mb-3" Style="background-color:#effaf6">
@@ -323,47 +324,35 @@
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/intlTelInput.min.js"></script>
     <script>
         //wz start
-    
 
         let webcamUsed = false; // Flag to track if the webcam was used
+
         function showWebcamModal() {
-            // Display the table
-            var webcamModal = new bootstrap.Modal(document.getElementById('webcamModal'));
-            webcamModal.show();
+            // Try to access the webcam only when the modal is shown
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    // Webcam is available, display the webcam
+                    Webcam.set({
+                        width: 300,
+                        height: 240,
+                        image_format: 'jpeg',
+                        jpeg_quality: 90
+                    });
+                    Webcam.attach('#webcam');
+                    $('#webcam').css('margin', 'auto'); // Adjust CSS styles
+                    $('#addDriver').modal('hide')
+                    $('#webcamModal').modal('show')
+                })
+                .catch(function (err) {
+                    // No webcam available or permission denied, handle accordingly
+                    alert("Webcam access denied or not available. Please use file upload instead.");
+                });
         }
 
         $(function () {
-           
-
-            // Try to access the webcam
-            const btnActivate = document.getElementById('<%= btnActivate.ClientID%>');
-            const btnSelfie = document.getElementById('<%= btnSelfiePic.ClientID %>')
+            const btnSelfie = document.getElementById('<%= btnSelfiePic.ClientID %>');
             const btnUpload = document.getElementById('<%= btnUpload.ClientID %>');
             const imgSelfie = document.getElementById('<%= imgSelfie.ClientID %>');
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function (stream) {
-                    // Webcam is available, display the webcam button
-                    btnActivate.style.display='block';
-                    btnSelfie.style.display='none';  // Hide the upload button if the webcam is available
-                    
-                })
-                .catch(function (err) {
-                    // No webcam available or permission denied, show file upload option instead
-                    btnActivate.style.display = 'none';  // Hide the webcam button
-                    btnUpload.style.display = 'block'  // Show the upload button
-                   
-                });
-
-            Webcam.set({
-                width: 300,
-                height: 240,
-                image_format: 'jpeg',
-                jpeg_quality: 90
-            });
-            Webcam.attach('#webcam');
-
-            // Adjust CSS styles
-            $('#webcam').css('margin', 'auto'); // Adjust the value as needed
 
             $("#main_btnCapture").click(function (event) {
                 event.preventDefault(); // Prevent default behavior (postback)
@@ -377,7 +366,7 @@
 
             $("#main_btnUpload").click(function (event) {
                 event.preventDefault(); // Prevent default behavior (postback)
-                webcamUsed = true; // Mark that the webcam was used (off the validation)
+                webcamUsed = true; // Mark that the webcam was used (for validation)
                 var hdnCapturedSelfie = "<%= hdnCapturedSelfie.ClientID %>";
 
                 // Get the captured image data URI from the modal
@@ -387,9 +376,7 @@
                 imgSelfie.src = capturedImage;
 
                 if (capturedImage) {
-                    $("#"+hdnCapturedSelfie).val(capturedImage); // Populate hidden field
-                    
-                   
+                    $("#" + hdnCapturedSelfie).val(capturedImage); // Populate hidden field
                 } else {
                     alert("No image captured. Please capture a selfie first.");
                     webcamUsed = false;
@@ -397,10 +384,12 @@
 
                 // Notify the user
                 alert("Image preview updated successfully!");
-
             });
         });
-        //wz end
+
+        //WZ End
+
+
         const input = document.querySelector("#<%= txtPhoneNum.ClientID %>");
         const iti = window.intlTelInput(input, {
             initialCountry: "auto",
@@ -609,9 +598,6 @@
             if (webcamUsed) {
                 // Skip validation if the webcam was used
                 args.IsValid = true;
-                return;
-            } else if (!webcamUsed) {
-                args.IsValid = false;
                 return;
             }
 
