@@ -14,7 +14,7 @@
             <div id="verifyInputGroup" class="inputGroup">
             <h1 class="verifyHead">Verify Email</h1>
             <asp:TextBox ID="txtVerifyEmail" runat="server" CssClass="inputField" placeholder="Email" ReadOnly="True" ValidationGroup="checkOtp"></asp:TextBox>
-             <asp:TextBox ID="txtNewVerify" runat="server" CssClass="inputField" placeholder="Verification Code" ValidationGroup="checkOtp"></asp:TextBox>
+             <asp:TextBox ID="txtNewVerify" runat="server" CssClass="inputField" placeholder="Verification Code" ValidationGroup="checkOtp" onkeypress="triggerButtonClick(event)"></asp:TextBox>
              <asp:RequiredFieldValidator ID="reqOtp" runat="server" ErrorMessage="Otp is Require" ValidationGroup="checkOtp" CssClass="validate" Display="Dynamic" ControlToValidate="txtNewVerify"></asp:RequiredFieldValidator>
              <asp:CustomValidator ID="validateVerificationCode" runat="server" ErrorMessage="The Verification Code is Incorrect" OnServerValidate="validateVerificationCode_ServerValidate" ValidationGroup="checkOtp" CssClass="validate" ControlToValidate="txtNewVerify" Display="Dynamic"></asp:CustomValidator>
                 <br />
@@ -39,6 +39,13 @@
                 button.disabled = false;
                 button.value = "Send";
             }
+        }
+
+        function triggerButtonClick(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                document.getElementById('<%= btnNewVerify.ClientID %>').click();
+        }
     }
 
         history.pushState(null, null, location.href);

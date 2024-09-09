@@ -10,8 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <link href="CSS/Master.css" rel="stylesheet" />
     <link href="CSS/Redemption.css" rel="stylesheet" />
-    <link href="CSS/home.css" rel="stylesheet" />
-    
+    <link href="CSS/home.css" rel="stylesheet" />    
     <link href="CSS/infopg.css" rel="stylesheet" />
     <link href="CSS/tracking.css" rel="stylesheet" />
     <link href="CSS/payment.css" rel="stylesheet" />

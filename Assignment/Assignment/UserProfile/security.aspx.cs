@@ -203,6 +203,10 @@ namespace Assignment
             {
                 String id = Session["Id"].ToString();
 
+                string path = Server.MapPath("~/Image/UserProfile/");
+
+                File.Delete(path + id + ".jpg");
+
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
                 String deleteCom = "DELETE FROM ApplicationUser WHERE Id = @id";
@@ -215,7 +219,7 @@ namespace Assignment
                 con.Close();
 
                 Session["Id"] = null;
-                ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='home.aspx';", true);
+                Response.Redirect("~/Home.aspx");
             }
         }
     }

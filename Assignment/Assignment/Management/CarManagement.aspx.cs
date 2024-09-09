@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing.Imaging;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -110,13 +112,13 @@ namespace Assignment
                 {
                     savePath = " ";
                     relPath = " ";
-                    string ext = Path.GetExtension(fuCarPic.FileName);
                     string folderLocation = Server.MapPath("~/Image/CarImage");
                     string relfolderLocation = "~/Image/CarImage";
-                    string fileName = txtCarPlate.Text + ext;
+                    string fileName = txtCarPlate.Text + ".png";
                     savePath = Path.Combine(folderLocation, fileName);
                     relPath = Path.Combine(relfolderLocation, fileName);
-                    fuCarPic.SaveAs(savePath);
+                    Bitmap source = new Bitmap(fuCarPic.FileContent);
+                    source.Save(savePath, ImageFormat.Png);
                 }
                 uploadCar(insertString,relPath);
                 Server.Transfer("CarManagement.aspx");
@@ -134,16 +136,16 @@ namespace Assignment
                 {
                     savePath = " ";
                     relPath = " ";
-                    string ext = Path.GetExtension(fuCarPic.FileName);
                     string folderLocation = Server.MapPath("~/Image/CarImage");
                     string relfolderLocation = "~/Image/CarImage";
-                    string fileName = txtCarPlate.Text + ext;
+                    string fileName = txtCarPlate.Text + ".png";
                     savePath = Path.Combine(folderLocation, fileName);
                     relPath = Path.Combine(relfolderLocation, fileName);
-                    fuCarPic.SaveAs(savePath);
+                    Bitmap source = new Bitmap(fuCarPic.FileContent);
+                    source.Save(savePath, ImageFormat.Png);
                 }
                 uploadCar(updateString,relPath);
-                Server.Transfer("CarManagement.aspx");
+                Response.Redirect("CarManagement.aspx");
             }
         }
 
@@ -342,8 +344,12 @@ namespace Assignment
         }
 
         protected void btnConfirmDelete_Click(object sender, EventArgs e)
-        {
+        {            
             string deleteString = "DELETE FROM Car WHERE CarPlate = @CarPlate";
+
+            string path = Server.MapPath("~/Image/CarImage/");
+            File.Delete(path + txtCarPlate.Text + ".png");
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(deleteString, con);
