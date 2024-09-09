@@ -12,6 +12,8 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Web.Security;
 using System.Web.Services;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace Assignment
 {
@@ -114,39 +116,47 @@ namespace Assignment
                     string ext = Path.GetExtension(fuID2.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverId");
                     string relfolderLocation = "~/Image/DriverId";
-                        string fileName = id + ext;
-                        savePathId = Path.Combine(folderLocation, fileName);
-                        relPathId = Path.Combine(relfolderLocation, fileName);
-                }                
-                
+                    string fileName = id + ".jpg";
+                    savePathId = Path.Combine(folderLocation, fileName);
+                    relPathId = Path.Combine(relfolderLocation, fileName);
+                    Bitmap source = new Bitmap(fuID2.FileContent);
+                    source.Save(savePathId, ImageFormat.Jpeg);
+                }
+
                 if (fuSelfie2.HasFile)
                 {
                     string ext = Path.GetExtension(fuSelfie2.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverSelfie");
                     string relfolderLocation = "~/Image/DriverSelfie";
-                        string fileName = id + ext;
-                        savePathSelfie = Path.Combine(folderLocation, fileName);
-                        relPathSelfie = Path.Combine(relfolderLocation, fileName);
-                }                
-                
+                    string fileName = id + ".jpg";
+                    savePathSelfie = Path.Combine(folderLocation, fileName);
+                    relPathSelfie = Path.Combine(relfolderLocation, fileName);
+                    Bitmap source = new Bitmap(fuSelfie2.FileContent);
+                    source.Save(savePathSelfie, ImageFormat.Jpeg);
+                }
+
                 if (fuLicenseF2.HasFile)
                 {
                     string ext = Path.GetExtension(fuLicenseF2.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverLF");
                     string relfolderLocation = "~/Image/DriverLF";
-                        string fileName = id + ext;
-                        savePathLicenseF = Path.Combine(folderLocation, fileName);
-                        relPathLicenseF = Path.Combine(relfolderLocation, fileName);
+                    string fileName = id + ".jpg";
+                    savePathLicenseF = Path.Combine(folderLocation, fileName);
+                    relPathLicenseF = Path.Combine(relfolderLocation, fileName);
+                    Bitmap source = new Bitmap(fuLicenseF2.FileContent);
+                    source.Save(savePathLicenseF, ImageFormat.Jpeg);
                 }
-                
+
                 if (fuLicenseB2.HasFile)
                 {
                     string ext = Path.GetExtension(fuLicenseB2.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverLB");
                     string relfolderLocation = "~/Image/DriverLB";
-                        string fileName = id + ext;
-                        savePathLicenseB = Path.Combine(folderLocation, fileName);
-                        relPathLicenseB = Path.Combine(relfolderLocation, fileName);
+                    string fileName = id + ".jpg";
+                    savePathLicenseB = Path.Combine(folderLocation, fileName);
+                    relPathLicenseB = Path.Combine(relfolderLocation, fileName);
+                    Bitmap source = new Bitmap(fuLicenseB2.FileContent);
+                    source.Save(savePathLicenseB, ImageFormat.Jpeg);
                 }
 
                 con.Open();
@@ -168,10 +178,6 @@ namespace Assignment
                 com.ExecuteNonQuery();
 
                 con.Close();
-                fuID2.SaveAs(savePathId);
-                fuSelfie2.SaveAs(savePathSelfie);
-                fuLicenseF2.SaveAs(savePathLicenseF);
-                fuLicenseB2.SaveAs(savePathLicenseB);
                 Response.Redirect("driver.aspx");
             }
         }
@@ -199,9 +205,11 @@ namespace Assignment
                     string ext = Path.GetExtension(fuID.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverId");
                     string relfolderLocation = "~/Image/DriverId";
-                    string fileName = guid + ext;
+                    string fileName = guid + ".jpg";
                     savePathId = Path.Combine(folderLocation, fileName);
                     relPathId = Path.Combine(relfolderLocation, fileName);
+                    Bitmap source = new Bitmap(fuID.FileContent);
+                    source.Save(savePathId, ImageFormat.Jpeg);
                 }
 
                 if (fuSelfie.HasFile)
@@ -209,10 +217,11 @@ namespace Assignment
                     string ext = Path.GetExtension(fuSelfie.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverSelfie");
                     string relfolderLocation = "~/Image/DriverSelfie";
-                    string fileName = guid + ext;
+                    string fileName = guid + ".jpg";
                     savePathSelfie = Path.Combine(folderLocation, fileName);
                     relPathSelfie = Path.Combine(relfolderLocation, fileName);
-                    fuSelfie.SaveAs(savePathSelfie);
+                    Bitmap source = new Bitmap(fuSelfie.FileContent);
+                    source.Save(savePathSelfie, ImageFormat.Jpeg);
                 }
                 else if (!string.IsNullOrEmpty(hdnCapturedSelfie.Value))
                 {
@@ -239,9 +248,11 @@ namespace Assignment
                     string ext = Path.GetExtension(fuLicenseF.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverLF");
                     string relfolderLocation = "~/Image/DriverLF";
-                    string fileName = guid + ext;
+                    string fileName = guid + ".jpg";
                     savePathLicenseF = Path.Combine(folderLocation, fileName);
                     relPathLicenseF = Path.Combine(relfolderLocation, fileName);
+                    Bitmap source = new Bitmap(fuLicenseF.FileContent);
+                    source.Save(savePathLicenseF, ImageFormat.Jpeg);
                 }
 
                 if (fuLicenseB.HasFile)
@@ -249,9 +260,11 @@ namespace Assignment
                     string ext = Path.GetExtension(fuLicenseB.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverLB");
                     string relfolderLocation = "~/Image/DriverLB";
-                    string fileName = guid + ext;
+                    string fileName = guid + ".jpg";
                     savePathLicenseB = Path.Combine(folderLocation, fileName);
                     relPathLicenseB = Path.Combine(relfolderLocation, fileName);
+                    Bitmap source = new Bitmap(fuLicenseB.FileContent);
+                    source.Save(savePathLicenseB, ImageFormat.Jpeg);
                 }
 
                 con.Open();
@@ -273,10 +286,6 @@ namespace Assignment
                 com.ExecuteNonQuery();
 
                 con.Close();
-                fuID.SaveAs(savePathId);
-                
-                fuLicenseF.SaveAs(savePathLicenseF);
-                fuLicenseB.SaveAs(savePathLicenseB);
                 Response.Redirect("driver.aspx");
             }
         }       
@@ -290,13 +299,24 @@ namespace Assignment
         {
             string deleteDriver = "DELETE FROM Driver WHERE Id = @id";
 
+
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+
+            string[] path = { MapPath("~/Image/DriverId/") , MapPath("~/Image/DriverLB/") , MapPath("~/Image/DriverLF/") , MapPath("~/Image/DriverSelfie/") };
+            string id = Session["DriverID"].ToString();
+            for(int i = 0; i < path.Length; i++)
+            {
+                File.Delete(path[i] + id + ".jpg");
+            }
+
+            File.Delete(Server.MapPath(imgID2.ImageUrl));
 
             con.Open();
 
             SqlCommand com = new SqlCommand(deleteDriver,con);
 
-            com.Parameters.AddWithValue("@Id", Session["DriverID"].ToString());
+            com.Parameters.AddWithValue("@Id", id);
 
             com.ExecuteNonQuery();
 

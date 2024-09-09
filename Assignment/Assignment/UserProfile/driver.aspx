@@ -98,7 +98,7 @@
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuSelfie" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewSelfie(event)"/>
                                 <div class="mx-auto">
-                                <asp:Button ID="btnSelfiePic" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadSelfie()" ValidationGroup="uploadPic"/>
+                                <asp:Button ID="btnSelfiePic" runat="server" Text="Upload from PC" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadSelfie()" ValidationGroup="uploadPic"/>
                                 <!-- wz start -->
                                 <asp:Button ID="btnActivate" runat="server" Text="Selfie with Webcam" CssClass="btn btn-primary mx-auto" OnClientClick="showWebcamModal(); return false;"/>   
                                 </div>
@@ -326,12 +326,14 @@
         //wz start
 
         let webcamUsed = false; // Flag to track if the webcam was used
+        let webcamStream = null;
 
         function showWebcamModal() {
             // Try to access the webcam only when the modal is shown
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(function (stream) {
                     // Webcam is available, display the webcam
+                    webcamStream = stream;
                     Webcam.set({
                         width: 300,
                         height: 240,
@@ -385,6 +387,20 @@
                 // Notify the user
                 alert("Image preview updated successfully!");
             });
+        });
+
+        function closeWebcam() {
+            if (webcamStream) {
+                let tracks = webcamStream.getTracks(); // Get all the tracks (audio/video)
+                tracks.forEach(track => track.stop());  // Stop each track
+                Webcam.reset(); // Detach the webcam feed from the element
+                webcamStream = null; // Clear the stream
+            }
+        }
+
+        // When the modal is closed, stop the webcam
+        $('#webcamModal').on('hidden.bs.modal', function () {
+            closeWebcam();
         });
 
         //WZ End
