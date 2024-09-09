@@ -3,21 +3,14 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-
-	<!-- Icons -->
-    <link href="../argon-dashboard-master/assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../argon-dashboard-master/assets/css/nucleo-svg.css" rel="stylesheet" />
-
-
-	<!-- CSS Files -->
-    <link href="../argon-dashboard-master/assets/css/argon-dashboard.css" rel="stylesheet" />
 	
 	</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
+					<h1 class="text-dark mt-4"><strong>Analytics</strong> Dashboard</h1>
+					<hr class="mt-0 mb-4"/>
 
 					<div class="row">
 						<div class="col-xl-6 col-xxl-5 d-flex">
@@ -211,11 +204,77 @@
 							</div>
 						</div>
 					</div>
+            <!-- Top Selling -->
+            <div class="col-12" style="width:75%">
+              <div class="card overflow-auto" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius:15px;">
+
+                <div class="filter" style="position: absolute; right: 0px;top: 15px;">
+                  <a class="icon" href="#" data-bs-toggle="dropdown" style="color: #aab7cf; padding-right: 30px; padding-bottom: 5px; transition: 0.3s;font-size: 1.1em;"><i class="fa-solid fa-ellipsis"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow rounded">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body pb-0">
+                  <h5 class="card-title">Top 5 Rental | 
+					  <asp:Label ID="lblFilterTopRange" runat="server" Text="Today" CssClass="text-muted" Font-Size="0.7em"></asp:Label></h5>
+				<hr />
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col">Car Image</th>
+                        <th scope="col">Car Name</th>
+                        <th scope="col">Day Price</th>
+                        <th scope="col">Rent</th>
+                        <th scope="col">Revenue</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <asp:Repeater ID="rptTopRental" runat="server" DataSourceID="TopRental">
+                            <ItemTemplate>
+                                <tr>
+                                    <td scope="col" class="text-center">
+										<asp:Image ID="imgCarTopPic" runat="server" ImageUrl='<%# Eval("Image") %>' Width="120px" CssClass="mx-auto" /></td>
+
+                                    <td scope="col"><asp:Label ID="lblCarName" runat="server" Text='<%# Eval("CarName") %>'/></td>
+
+                                    <td scope="col"><asp:Label ID="lblDayPrice" runat="server" Text='<%# Eval("Price") %>'/></td>
+
+                                    <td scope="col"><asp:Label ID="lblRentalCount" runat="server" Text='<%# Eval("RentalCount") %>'/></td>
+
+                                    <td scope="col"><asp:Label ID="lblTotalRevenue" runat="server" Text='<%# Eval("TotalRevenue") %>'/></td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+					<asp:SqlDataSource 
+						runat="server" 
+						ID="TopRental" 
+						ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' 
+						SelectCommand="SELECT TOP 5 COUNT(B.CarPlate) AS RentalCount, 
+											  C.CarImage AS Image,C.CarDayPrice AS Price,
+											  SUM(B.Price) AS TotalRevenue, 
+											  (C.CarBrand + ' ' + C.CarName) AS CarName 
+									   FROM [Car] C 
+									   JOIN [Booking] B ON C.CarPlate = B.CarPlate 
+									   GROUP BY C.CarBrand, C.CarName, C.CarImage, C.CarDayPrice
+									   ORDER BY COUNT(B.CarPlate) DESC;">
+					</asp:SqlDataSource>
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div>
+<!-- End Top Selling -->
 				</div>
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-	<!-- Core -->
-	<script src="../argon-dashboard-master/assets/js/core/popper.min.js"></script>
-	<script src="../argon-dashboard-master/assets/js/core/bootstrap.min.js"></script>
     
 	<!-- Theme JS -->
 	<script src="../argon-dashboard-master/assets/js/argon-dashboard.min.js"></script>
