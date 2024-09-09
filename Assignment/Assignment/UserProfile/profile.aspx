@@ -143,9 +143,8 @@
         return false;
     }
 
-    function ShowPreview(event) {
-        document.getElementById('<%= userUploadProfile.ClientID %>').disabled = false;
-            //read content of the file
+    function ShowPreview(event) {        
+        //read content of the file
         var ImageDir = new FileReader();
         //when file read update the image element
         ImageDir.onload = function () {
@@ -158,21 +157,25 @@
 
     function validateFile(sender, args) {
         var fileUpload = document.getElementById(sender.controltovalidate);
+        var button = document.getElementById('<%= userUploadProfile.ClientID %>');
         var fileName = fileUpload.value;
         var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
         var maxSize = 2097152; 
 
-        if (!allowedExtensions.test(fileName)) {
+        if (!allowedExtensions.exec(fileName)) {
             args.IsValid = false;
+            button.disabled = true;
             return;
         }
 
         if (fileUpload.files[0].size > maxSize) {
             args.IsValid = false;
+            button.disabled = true;
             return;
         }
 
         args.IsValid = true;
+        button.disabled = false;
     }
 
     function transferText() {

@@ -113,7 +113,6 @@ namespace Assignment
 
                 if (fuID2.HasFile)
                 {
-                    string ext = Path.GetExtension(fuID2.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverId");
                     string relfolderLocation = "~/Image/DriverId";
                     string fileName = id + ".jpg";
@@ -125,7 +124,6 @@ namespace Assignment
 
                 if (fuSelfie2.HasFile)
                 {
-                    string ext = Path.GetExtension(fuSelfie2.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverSelfie");
                     string relfolderLocation = "~/Image/DriverSelfie";
                     string fileName = id + ".jpg";
@@ -137,7 +135,6 @@ namespace Assignment
 
                 if (fuLicenseF2.HasFile)
                 {
-                    string ext = Path.GetExtension(fuLicenseF2.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverLF");
                     string relfolderLocation = "~/Image/DriverLF";
                     string fileName = id + ".jpg";
@@ -149,7 +146,6 @@ namespace Assignment
 
                 if (fuLicenseB2.HasFile)
                 {
-                    string ext = Path.GetExtension(fuLicenseB2.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverLB");
                     string relfolderLocation = "~/Image/DriverLB";
                     string fileName = id + ".jpg";

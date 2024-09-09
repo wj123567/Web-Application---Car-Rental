@@ -10,6 +10,8 @@ using System.Web.UI.WebControls;
 using static System.Net.Mime.MediaTypeNames;
 using System.Web.Security;
 using System.Net.Mail;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 
 namespace Assignment
@@ -133,21 +135,19 @@ namespace Assignment
 
                 if (fuProfile.HasFile)
                 {
-                    int fileSize = fuProfile.PostedFile.ContentLength;
-                    string ext = Path.GetExtension(fuProfile.FileName);
-                        string fileName = id + ext;
-                        string savePath = Path.Combine(folderLocation, fileName);
-                        string relPath = Path.Combine(relfolderLocation, fileName);
-                        fuProfile.SaveAs(savePath);
+                    string fileName = id + ".jpg";
+                    string savePath = Path.Combine(folderLocation, fileName);
+                    string relPath = Path.Combine(relfolderLocation, fileName);
+                    Bitmap source = new Bitmap(fuProfile.FileContent);
+                    source.Save(savePath, ImageFormat.Jpeg);
 
-                        con.Open();
+                    con.Open();
                         SqlCommand com = new SqlCommand(uploadFile, con);
                         com.Parameters.AddWithValue("@ProfilePicture", relPath);
                         com.Parameters.AddWithValue("@id", id);
                         com.ExecuteNonQuery();
                         con.Close();
-                        Server.Transfer("profile.aspx");
-                        lblProfilePic.Text = "Image Uploaded";
+                        Response.Redirect("profile.aspx");
                 }
             }
         }
