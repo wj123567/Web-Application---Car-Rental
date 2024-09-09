@@ -107,7 +107,7 @@ namespace Assignment
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             // Save departure date to the session state
-
+            Session["BookingID"]= saveTripInfo();
             Session["Pickup_point"]  = hdnDepartureLocation.Value;
             Session["Pickup_state"]  = hdnDepartureState.Value;
             Session["StartDate"]     = txtDepartureDateTime.Text;
@@ -120,7 +120,7 @@ namespace Assignment
 
         }
 
-        protected void saveTripInfo()
+        protected String saveTripInfo()
         {
             string bookID = "";
             bool isUnique;
@@ -131,8 +131,8 @@ namespace Assignment
             } while (!isUnique);
 
             //store bookingID
-            Session["BookingID"] = bookID;
-
+           hdnBookingId.Value = bookID;
+            return hdnBookingId.Value;
         }
 
         private String generateRandBookID()

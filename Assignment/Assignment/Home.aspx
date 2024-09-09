@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Assignment.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <asp:HiddenField ID="hdnBookingId" runat="server" />
+
      <div class="bg_cover">
     <header class="section_container header_container">
         <h1 class="section_header">Find and Book Your Car <br/> A Great Experience</h1>

@@ -14,15 +14,16 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Payment Status</h5>
-     
+                <h5 class="modal-title">Booking Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Payment has been made!</p>
+                <p>Are you sure you want to book</p>
             </div>
             <div class="modal-footer">
                
-                <asp:Button ID="modalNextBtn" runat="server" CssClass="btn btn-primary" Text="Next" data-bs-dismiss="modal" OnClientClick="triggerSweetAlert(); return false;" ClientIDMode="Static"/>
+                <asp:Button ID="modalNextBtn" runat="server" CssClass="btn btn-primary" Text="Confirm" data-bs-dismiss="modal"  OnClick="btnBookingConfirm_Click" />
+                 
             </div>
         </div>
     </div>
@@ -150,7 +151,7 @@
                       <asp:Button ID="btnPaymentPgBack" runat="server" Text="Go Back" CssClass="paymentpg_backbtn prev_btn w-100" OnClick="btnPaymentPgBack_Click"/>
                     </div>
                     <div class="col">
-                     <asp:Button ID="btnPaymentPgPay" runat="server" Text="Pay Now" CssClass="paymentpg_paybtn next-btn w-100"   OnClientClick="return validateForm();"/>
+                     <asp:Button ID="btnPaymentPgPay" runat="server" Text="Pay Now" CssClass="paymentpg_paybtn next-btn w-100"  OnClientClick="return validateForm();"/>
                     </div>
                   </div>
                 </div>
@@ -266,7 +267,7 @@
             var isValid = Page_ClientValidate('PaymentValidation');
             
             if (!isValid) {
-                event.preventDefault(); // Prevent the default action (e.g., modal opening)
+               
                 return false; // Prevent showing the modal if the form is not valid
             }
             else {
@@ -275,6 +276,12 @@
                 return false;
             }
             
+        }
+
+        // JavaScript to handle form submission after modal action
+        function submitFormAfterModal() {
+            // Trigger the server-side click event by submitting the form
+            document.getElementById('<%= btnPaymentPgPay.ClientID %>').click();
         }
 
         function updateProgressBar(step) {
@@ -300,7 +307,6 @@
             isMaster = isMasterCard(cardNumber);
             isAmex = isAmexCard(cardNumber);
 
-            console.log(document.getElementById('<%= hdnCardType.ClientID %>').value);
 
             if (isVisa || isMaster || isAmex) {
                 args.IsValid = true;

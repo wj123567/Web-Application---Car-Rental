@@ -114,7 +114,7 @@ namespace Assignment
                 {
                     while (reader.Read())
                     {
-                        
+                            hdnDriverId.Value = reader["Id"].ToString();
                             txtDriverName.Text = reader["DriverName"].ToString();
                             driverBDate = reader.GetDateTime(reader.GetOrdinal("DriverBDate"));
                             txtDriverBirth.Text = driverBDate.ToString("yyyy-MM-dd");
@@ -163,7 +163,7 @@ namespace Assignment
         {
             int currentStep = (int)(Session["CurrentStep"] ?? 1);
             currentStep = Math.Min(currentStep + 1, 4);
-            Session["DriverId"] = txtDriverID.Text;
+            Session["DriverId"] = hdnDriverId.Value;
             Session["Notes"] = txtNote.Text;
             Session["CurrentStep"] = currentStep;
             UpdateProgressBar(currentStep);

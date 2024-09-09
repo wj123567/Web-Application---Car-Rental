@@ -23,6 +23,7 @@ namespace Assignment
             
             if (!Page.IsPostBack)
             {
+                lblCheck.Text = Session["BookingID"].ToString();
                 Session["CurrentStep"] = 2;
                 int currentStep = (int)(Session["CurrentStep"]);
                 UpdateProgressBar(currentStep);

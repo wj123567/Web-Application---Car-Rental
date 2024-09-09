@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -117,13 +120,6 @@ namespace Assignment
 
         protected void btnPaymentPgBack_Click(object sender, EventArgs e)
         {
-            String insertString = @"INSERT INTO Booking (Id,CarPlate,UserId,DriverId,StartDate,EndDate,Pickup_point,Dropoff_point,Status
-                                ,PaymentCardId,Price,Notes) 
-                                VALUES (@Id,@CarPlate,@UserId,@DriverId,@StartDate,@EndDate,@Pickup_point,@Dropoff_point,@Status
-                                ,@PaymentCardId,@Price,@Notes)";
-
-            SaveBookingInfo
-
             int currentStep = (int)(Session["CurrentStep"] ?? 1);
             currentStep = Math.Max(currentStep - 1, 1);
             Session["CurrentStep"] = currentStep;
@@ -131,7 +127,7 @@ namespace Assignment
             Response.Redirect("bookinfo.aspx");
         }
 
-        protected void btnPaymentPgPay_Click(object sender, EventArgs e)
+        protected void btnBookingConfirm_Click(object sender, EventArgs e)
         {
             /*       Session["Pickup_point"]
            Session["Pickup_state"]
@@ -144,28 +140,91 @@ namespace Assignment
                 Session["TotalAddOn"]
                 Session["TotalPrice"]
           */
-            ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "validateForm();", true);
-           
-    
+            String insertString = @"INSERT INTO Booking (Id,CarPlate,UserId,DriverId,StartDate,EndDate,Pickup_point,Dropoff_point,Status
+                                ,PaymentCardId,Price,Notes) 
+                                VALUES (@Id,@CarPlate,@UserId,@DriverId,@StartDate,@EndDate,@Pickup_point,@Dropoff_point,@Status
+                                ,@PaymentCardId,@Price,@Notes)";
+
+            SaveBookingInfo(insertString);
+/*
+            // Trigger the modal to be shown after the record is inserted
+            ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "$('#paymentModal').modal('show');", true);*/
+
+            Response.Redirect("Home.aspx");
         }
 
         private void SaveBookingInfo(string insertString)
         {
+            string bookingID = Session["BookingID"].ToString();
+            string userID = Session["Id"].ToString();
+            string pickupPoint = Session["Pickup_point"].ToString();
+            DateTime startDateTime = DateTime.Parse(Session["StartDate"].ToString());
+            DateTime endDateTime = DateTime.Parse(Session["EndDate"].ToString());
+           /* string startDate = Session["StartDate"].ToString();*/
+            string dropoffPoint = Session["Dropoff_point"].ToString();
+           /* string endDate = Session["EndDate"].ToString();*/
+            string carPlate = Session["CarPlate"].ToString();
+            string totalPrice = Session["TotalPrice"].ToString();
+            string cardID = hdnUsedCardId.Value;
+            
+            string notes = Session["Notes"].ToString();
+            
+            string driverStatus = CheckDriverStatus(Session["DriverId"].ToString());
+            string driverID = Session["DriverId"].ToString();
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(insertString, con);
-            string bookingID = Session["BookingID"].ToString();
-            string pickupPoint = Session["Pickup_point"].ToString();
-            string startDate = Session["StartDate"].ToString();
-            string dropoffPoint = Session["Dropoff_point"].ToString();
-            string endDate = Session["EndDate"].ToString();
-            string carPlate = Session["CarPlate"].ToString();
-            string TotalPrice = Session["TotalPrice"].ToString();
-            string cardID = hdnUsedCardId.ToString();
-            string driverID = Session["DriverId"].ToString();
-            string notes = Session["Notes"].ToString();
+            com.Parameters.AddWithValue("@Id",bookingID);
+            com.Parameters.AddWithValue("@CarPlate",carPlate);
+            com.Parameters.AddWithValue("@UserId",userID);
+            com.Parameters.AddWithValue("@DriverId",driverID);
+            com.Parameters.AddWithValue("@StartDate",startDateTime);
+            com.Parameters.AddWithValue("@EndDate",endDateTime);
+            com.Parameters.AddWithValue("@Pickup_point",pickupPoint);
+            com.Parameters.AddWithValue("@Dropoff_point",dropoffPoint);
+            com.Parameters.AddWithValue("@PaymentCardId",cardID);
+            com.Parameters.AddWithValue("@Price",totalPrice);
+            com.Parameters.AddWithValue("@Notes",notes);
+
+               
+                               
+            if (driverStatus == "A")
+            {
+                com.Parameters.AddWithValue("@Status", "Booked");
+            }
+            else if (driverStatus == "P")
+            {
+                com.Parameters.AddWithValue("@Status", "Pending");
+            }
+            com.ExecuteNonQuery();
+            con.Close();
+
         }
 
+        private string CheckDriverStatus(string driverID)
+        {
+            String selectDriver = "SELECT * FROM Driver WHERE Id = @ID";
+            string status = "";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectDriver, con);
+            com.Parameters.AddWithValue("@ID", driverID);
+            SqlDataReader reader = com.ExecuteReader();
+
+            if (reader.HasRows && reader.Read() )
+            {
+                
+                    status = reader["Approval"].ToString();
+                
+                
+            }
+
+            reader.Close();
+            con.Close();
+            return status;
+
+        }
         private void UpdateProgressBar(int currentStep)
         {
             // Register a script to update the progress bar client-side
@@ -212,6 +271,7 @@ namespace Assignment
                         txtCardNumber.Text = reader["CardNumber"].ToString();
                         txtCardName.Text = reader["CardHolderName"].ToString();
                         hdnUsedCardId.Value = cardId;
+                        
                         DateTime expDate = reader.GetDateTime(reader.GetOrdinal("ExpDate"));
                         txtExpiry.Text = expDate.ToString("yyyy-MM");
                         txtCvv.Text = reader["CVV"].ToString();
