@@ -218,6 +218,7 @@
 .check_driver {
     margin-top: 20px;
     margin-left: 10px;
+    margin-bottom:20px;
 }
 
 .driver_check_label::first-letter {
@@ -322,23 +323,29 @@
 }
 
 @media only screen and (max-width:736px) {
+    .payment_container .row,
+    .driver_container .row {
+        margin-left: 0px;
+    }
+
+    .check_driver {
+        margin-bottom: 100px;
+    }
+
     .driver_license {
         padding-top: 0 !important;
     }
 }
 
 
-@media only screen and (max-width:605px) {
-    .row {
-        margin-left: 30px !important;
-    }
-
+@media only screen and (max-width:610px) {
+    
     .book_right-side {
         width: 40%;
     }
 }
 
-@media only screen and (max-width:515px) {
+@media only screen and (max-width:500px) {
 
     .bar_content {
         padding: 0;
@@ -346,18 +353,20 @@
         margin-right:0 !important;
     }
 
-    .previous_btn_style {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-
-    .next_btn_style {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-
     .book_box_right {
         padding-left: 0 !important;
         padding-right: 0 !important;
+    }
+}
+
+@media only screen and (max-width:437px){
+    .previous_btn_style {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .next_btn_style {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
     }
 }

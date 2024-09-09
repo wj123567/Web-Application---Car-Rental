@@ -117,6 +117,13 @@ namespace Assignment
 
         protected void btnPaymentPgBack_Click(object sender, EventArgs e)
         {
+            String insertString = @"INSERT INTO Booking (Id,CarPlate,UserId,DriverId,StartDate,EndDate,Pickup_point,Dropoff_point,Status
+                                ,PaymentCardId,Price,Notes) 
+                                VALUES (@Id,@CarPlate,@UserId,@DriverId,@StartDate,@EndDate,@Pickup_point,@Dropoff_point,@Status
+                                ,@PaymentCardId,@Price,@Notes)";
+
+            SaveBookingInfo
+
             int currentStep = (int)(Session["CurrentStep"] ?? 1);
             currentStep = Math.Max(currentStep - 1, 1);
             Session["CurrentStep"] = currentStep;
@@ -126,8 +133,37 @@ namespace Assignment
 
         protected void btnPaymentPgPay_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "validateForm();", true);
+            /*       Session["Pickup_point"]
+           Session["Pickup_state"]
+           Session["StartDate"]
+           Session["Dropoff_point"]
+           Session["Dropoff_state"]
+           Session["EndDate"]
 
+           Session["CarPlate"]
+                Session["TotalAddOn"]
+                Session["TotalPrice"]
+          */
+            ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "validateForm();", true);
+           
+    
+        }
+
+        private void SaveBookingInfo(string insertString)
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(insertString, con);
+            string bookingID = Session["BookingID"].ToString();
+            string pickupPoint = Session["Pickup_point"].ToString();
+            string startDate = Session["StartDate"].ToString();
+            string dropoffPoint = Session["Dropoff_point"].ToString();
+            string endDate = Session["EndDate"].ToString();
+            string carPlate = Session["CarPlate"].ToString();
+            string TotalPrice = Session["TotalPrice"].ToString();
+            string cardID = hdnUsedCardId.ToString();
+            string driverID = Session["DriverId"].ToString();
+            string notes = Session["Notes"].ToString();
         }
 
         private void UpdateProgressBar(int currentStep)
@@ -175,15 +211,16 @@ namespace Assignment
                     {
                         txtCardNumber.Text = reader["CardNumber"].ToString();
                         txtCardName.Text = reader["CardHolderName"].ToString();
+                        hdnUsedCardId.Value = cardId;
                         DateTime expDate = reader.GetDateTime(reader.GetOrdinal("ExpDate"));
                         txtExpiry.Text = expDate.ToString("yyyy-MM");
                         txtCvv.Text = reader["CVV"].ToString();
                     }
                 }
 
-
+                con.Close();
             }
-            
+           
         }
 
     }

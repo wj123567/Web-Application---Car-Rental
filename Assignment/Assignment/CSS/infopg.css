@@ -476,8 +476,24 @@ h6.charge_title {
 
 
 @media only screen and (max-width:1000px){
-    .addon_list img{
-        display:none;
+    .addon_icon_header{
+        width:10% !important;
+    }
+
+    .addon_type_header{
+        width:30% !important;
+    }
+
+    .addon_price_header{
+        width:20% !important;
+    }
+
+    .addon_quantity_header{
+        width:40% !important;
+    }
+
+    .addon_list_title{
+        padding-left:20px;
     }
 
     .box_left{
@@ -500,6 +516,63 @@ h6.charge_title {
    
 }
 
+@media only screen and (max-width:600px){
+    .addon_box{
+        padding-left:5px;
+        padding-right:5px;
+    }
+    
+    .addon_icon_header {
+        width: 0% !important;
+    }
+
+    .addon_type_header {
+        width: 30% !important;
+    }
+
+    .addon_price_header {
+        width: 20% !important;
+    }
+
+    .addon_quantity_header {
+        width: 50% !important;
+        
+    }
+
+    .addon_list_title {
+        padding-left: 0px;
+    }
+
+    .addon_list img {
+        display: none;
+    }
+}
+
+@media only screen and (max-width:470px){
+    .quantity_style{
+    }
+
+    .previous_btn_style {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .next_btn_style {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .book_box_right {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .bar_content {
+        padding: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
 /*.left-side .box:nth-child(1) {
     height: 150px;
 }

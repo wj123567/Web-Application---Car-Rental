@@ -45,7 +45,7 @@
 </div>
     </section>
 
-    <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+    
 
     <section class="info_banner">
         
@@ -236,7 +236,7 @@
 
     <section class="info_body_container"> 
         <div class="left-side">
-            <div class="box_left">
+            <div class="box_left addon_box">
                  <div class="addon_header" style="margin-bottom:20px;">
                      <i class="ri-add-circle-line"></i><span>Add On</span>
                     </div> 
@@ -246,10 +246,10 @@
                 <table class="addon_container">
   
                     <tr class="addon_title" >
-                        <th style="width:10%"></th>
-                        <th style="width:50%;padding-left:5%;">Type</th>
-                        <th style=" width:20%; text-align:center; ">Price</th>
-                        <th style=" width:20%; text-align:center; ">Quantity</th>
+                        <th style="width:10%" class="addon_icon_header"></th>
+                        <th style="width:50%;padding-left:5%;" class="addon_type_header">Type</th>
+                        <th style=" width:20%; text-align:center;" class="addon_price_header">Price</th>
+                        <th style=" width:20%; text-align:center; "class="addon_quantity_header">Quantity</th>
                     </tr>
                  </HeaderTemplate>
                   <ItemTemplate>

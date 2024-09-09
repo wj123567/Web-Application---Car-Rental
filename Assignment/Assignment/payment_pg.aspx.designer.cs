@@ -51,15 +51,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button modalNextBtn;
 
         /// <summary>
-        /// modalOkBtn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button modalOkBtn;
-
-        /// <summary>
         /// lblPaymentText control.
         /// </summary>
         /// <remarks>
@@ -67,6 +58,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPaymentText;
+
+        /// <summary>
+        /// lblCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheck;
 
         /// <summary>
         /// rptCards control.
@@ -139,6 +139,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAmexCard;
+
+        /// <summary>
+        /// hdnUsedCardId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnUsedCardId;
 
         /// <summary>
         /// txtCardNumber control.

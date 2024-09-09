@@ -146,7 +146,7 @@
 
         <!-- Modal Structure -->
 <div class="modal fade" id="webcamModal"  tabindex="-1" aria-labelledby="webcamModal" aria-hidden="true">
-  <div class="modal-dialog modal-lg"> <!-- Adjust modal size using Bootstrap classes, e.g., modal-lg -->
+  <div class="modal-dialog modal-lg"> 
     <div class="modal-content">
       
       <!-- Modal Header -->
