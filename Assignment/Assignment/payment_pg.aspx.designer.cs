@@ -42,6 +42,24 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.HiddenField hdnCardType;
 
         /// <summary>
+        /// hdnCardCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCardCheck;
+
+        /// <summary>
+        /// hdnNewCardId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnNewCardId;
+
+        /// <summary>
         /// modalNextBtn control.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button modalNextBtn;
+
+        /// <summary>
+        /// lblCheckAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheckAdd;
 
         /// <summary>
         /// lblPaymentText control.
@@ -67,6 +94,24 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCheck;
+
+        /// <summary>
+        /// chkApplyCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkApplyCard;
+
+        /// <summary>
+        /// lblApplyCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblApplyCard;
 
         /// <summary>
         /// rptCards control.

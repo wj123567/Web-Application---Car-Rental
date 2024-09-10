@@ -57,6 +57,20 @@ namespace Assignment
             rptCards.DataSource = addCards;
             rptCards.DataBind();
 
+            // Toggle visibility of the checkbox and label based on the presence of items in the DataTable
+            if (addCards.Rows.Count > 0)
+            {
+                chkApplyCard.Visible = true;
+                lblApplyCard.Visible = true;
+            }
+            else
+            {
+                hdnCardCheck.Value = "New";
+                lblCheck.Text = hdnCardCheck.Value;
+                chkApplyCard.Visible = false;
+                lblApplyCard.Visible = false;
+            }
+
         }
 
         private DataTable GetCards()
@@ -140,21 +154,33 @@ namespace Assignment
                 Session["TotalAddOn"]
                 Session["TotalPrice"]
           */
+            if (hdnCardCheck.Value == "New" || hdnCardCheck.Value == "NewAdded")
+            {
+                string insertCardString = @"INSERT into PaymentCard (CardNumber, CardHolderName, ExpDate, CVV, UserId, CardType, Id, IsDefault) 
+                                         VALUES (@CardNumber , @CardHolderName, @ExpDate, @CVV, @UserId, @CardType, @Id, @IsDefault)";
+                Guid newGUID = Guid.NewGuid();
+                SaveCardInfo(insertCardString, newGUID.ToString());
+            }
+
             String insertString = @"INSERT INTO Booking (Id,CarPlate,UserId,DriverId,StartDate,EndDate,Pickup_point,Dropoff_point,Status
                                 ,PaymentCardId,Price,Notes) 
                                 VALUES (@Id,@CarPlate,@UserId,@DriverId,@StartDate,@EndDate,@Pickup_point,@Dropoff_point,@Status
                                 ,@PaymentCardId,@Price,@Notes)";
 
             SaveBookingInfo(insertString);
+
+            
 /*
             // Trigger the modal to be shown after the record is inserted
             ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "$('#paymentModal').modal('show');", true);*/
+           
 
             Response.Redirect("Home.aspx");
         }
 
         private void SaveBookingInfo(string insertString)
         {
+            string cardID = "";
             string bookingID = Session["BookingID"].ToString();
             string userID = Session["Id"].ToString();
             string pickupPoint = Session["Pickup_point"].ToString();
@@ -165,9 +191,18 @@ namespace Assignment
            /* string endDate = Session["EndDate"].ToString();*/
             string carPlate = Session["CarPlate"].ToString();
             string totalPrice = Session["TotalPrice"].ToString();
-            string cardID = hdnUsedCardId.Value;
-            
             string notes = Session["Notes"].ToString();
+
+            if(hdnCardCheck.Value=="New" || hdnCardCheck.Value== "NewAdded")
+            {
+                cardID = hdnNewCardId.Value;    //new or newly added
+            }
+            else
+            {
+                cardID = hdnUsedCardId.Value;   //apply existing card
+            }
+           
+
             
             string driverStatus = CheckDriverStatus(Session["DriverId"].ToString());
             string driverID = Session["DriverId"].ToString();
@@ -225,6 +260,41 @@ namespace Assignment
             return status;
 
         }
+
+        protected void SaveCardInfo(string uploadString, string id)
+        {
+            
+            if (Page.IsValid)
+            {
+                hdnNewCardId.Value = id;
+                int defaultCard = 0;
+
+                if (hdnCardCheck.Value == "New")
+                {
+                    defaultCard = 1;
+                }
+                String cardType = hdnCardType.Value;
+
+                DateTime expDate = DateTime.Parse(txtExpiry.Text);
+                String cardNumber = txtCardNumber.Text.Replace(" ", "");
+
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+                con.Open();
+                SqlCommand com = new SqlCommand(uploadString, con);
+                com.Parameters.AddWithValue("@CardNumber", cardNumber);
+                com.Parameters.AddWithValue("@CardHolderName", txtCardName.Text);
+                com.Parameters.AddWithValue("@ExpDate", expDate);
+                com.Parameters.AddWithValue("@CVV", txtCvv.Text);
+                com.Parameters.AddWithValue("@UserId", Session["Id"].ToString());
+                com.Parameters.AddWithValue("@CardType", cardType);
+                com.Parameters.AddWithValue("@Id", id);
+                com.Parameters.AddWithValue("@IsDefault", defaultCard);
+                com.ExecuteNonQuery();
+               
+            }
+
+        }
+
         private void UpdateProgressBar(int currentStep)
         {
             // Register a script to update the progress bar client-side
@@ -251,6 +321,15 @@ namespace Assignment
 
         protected void FillCardInfo(string cardId)
         {
+            Dictionary<int, int> selectedAddOns = Session["SelectedAddOns"] as Dictionary<int, int>;
+
+            foreach (var addOn in selectedAddOns)
+            {
+                int addOnID = addOn.Key;
+                int quantity = addOn.Value;
+                lblCheckAdd.Text += addOnID + " "+ quantity+",";
+            }
+
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
 
             using (SqlConnection con = new SqlConnection(connectionString))

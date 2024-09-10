@@ -5,6 +5,8 @@
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" SelectCommand="SELECT * FROM [PaymentCard]"></asp:SqlDataSource>
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnCardType" runat="server" />
+    <asp:HiddenField ID="hdnCardCheck" runat="server" />
+    <asp:HiddenField ID="hdnNewCardId" runat="server" />
     <!--
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     -->
@@ -50,7 +52,7 @@
  </div>
 </div>
 
-    
+    <asp:Label ID="lblCheckAdd" runat="server" Text="Label"></asp:Label>
 <section class="info_body_container"> 
    
    <div class="left-side">
@@ -64,9 +66,14 @@
              
             <div class="shadow-sm bg-white p-4 my-4">
                 <h4>Payment Info</h4>
-                <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
 
-           <div class="accordion" id="cardAccordion">
+                <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+                <asp:CheckBox ID="chkApplyCard" runat="server" onchange="toggleAccordion()" />
+                <asp:Label ID="lblApplyCard" runat="server" Text="Apply Existing Card"></asp:Label>
+
+               
+
+           <div class="accordion" id="cardAccordion" style="display:none;">
                <div class="accordion-item">
                    <h2 class="accordion-header" id="headingExistingCard"> 
                        <button class="accordion-button accordion_btn_style" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -110,7 +117,7 @@
           </div>
          </div>
         </div>
-        
+            
                 <div class="col-sm-6 mt-5">
                      
                   <asp:Label ID="lblCardName" runat="server" Text="Cardholder Name" CssClass="label_style"></asp:Label>
@@ -157,13 +164,13 @@
                 </div>
     
                 
-    
-    
             </div>
           </div>
             </div>
                </div>
           </div>
+
+       
    </div>
     <div class="right-side">
         <div class="box_right">
@@ -261,6 +268,38 @@
             });
         };
 
+        function toggleAccordion() {
+            var checkbox = document.getElementById("<%= chkApplyCard.ClientID %>");
+            const txtCardName = document.getElementById("<%= txtCardName.ClientID %>");
+            const txtCardNumber = document.getElementById("<%= txtCardNumber.ClientID %>");
+            const txtExpiry = document.getElementById("<%= txtExpiry.ClientID %>");
+            const txtCvv = document.getElementById("<%= txtCvv.ClientID %>");
+            const hdnCardCheck = document.getElementById("<%= hdnCardCheck.ClientID %>");
+            const lblCheck = document.getElementById("<%= lblCheck.ClientID %>");
+            var accordion = document.getElementById('cardAccordion');
+            if (checkbox.checked) {
+                accordion.style.display = 'block';  // Show accordion
+                txtCardName.disabled   = true;
+                txtCardNumber.disabled = true;
+                txtExpiry.disabled     = true;
+                txtCvv.disabled = true;
+                hdnCardCheck.value = "";
+                lblCheck.innerText = hdnCardCheck.value;
+                
+            } else {
+                accordion.style.display = 'none';   // Hide accordion
+                txtCardName.disabled = false;
+                txtCardName.value = "";
+                txtCardNumber.disabled = false;
+                txtCardNumber.value = "";
+                txtExpiry.disabled = false;
+                txtExpiry.value = "";
+                txtCvv.disabled = false;
+                txtCvv.value = "";
+                hdnCardCheck.value = "NewAdded";
+                lblCheck.innerText = hdnCardCheck.value;
+            }
+        }
 
         function validateForm(event) {
             // Trigger ASP.NET validation
@@ -348,7 +387,7 @@
             }
         }
 
-function isAmexCard(cardNumber) {
+    function isAmexCard(cardNumber) {
     var cardno = /^(?:3[47][0-9]{13})$/;
     if (cardno.test(cardNumber)) {
         var card = document.getElementById('<%= lblAmexCard.ClientID %>');
@@ -377,5 +416,11 @@ function isAmexCard(cardNumber) {
                 }
             });
         }
+
+        window.onload = function () {
+            var checkbox = document.getElementById("<%= chkApplyCard.ClientID %>");
+            console.log("Page loaded, checkbox checked:", checkbox.checked); // Debugging
+             toggleAccordion(checkbox);
+         };
     </script>
 </asp:Content>
