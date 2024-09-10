@@ -114,8 +114,9 @@ namespace Assignment
             Session["Dropoff_point"] = hdnReturnLocation.Value;
             Session["Dropoff_state"] = hdnReturnState.Value;
             Session["EndDate"]       = txtReturnDateTime.Text;
+            Session["BookingDate"] = DateTime.Now;
 
-           
+
             Response.Redirect("productListing.aspx");
 
         }

@@ -164,9 +164,9 @@ namespace Assignment
             }
 
             String insertString = @"INSERT INTO Booking (Id,CarPlate,UserId,DriverId,StartDate,EndDate,Pickup_point,Dropoff_point,Status
-                                ,PaymentCardId,Price,Notes) 
+                                ,PaymentCardId,Price,Notes,BookingDate) 
                                 VALUES (@Id,@CarPlate,@UserId,@DriverId,@StartDate,@EndDate,@Pickup_point,@Dropoff_point,@Status
-                                ,@PaymentCardId,@Price,@Notes)";
+                                ,@PaymentCardId,@Price,@Notes,@BookingDate)";
 
             SaveBookingInfo(insertString);
 
@@ -204,6 +204,7 @@ namespace Assignment
             string carPlate = Session["CarPlate"].ToString();
             string totalPrice = Session["TotalPrice"].ToString();
             string notes = Session["Notes"].ToString();
+            DateTime bookingDateTime = DateTime.Parse(Session["BookingDate"].ToString());
 
             if(hdnCardCheck.Value=="New" || hdnCardCheck.Value== "NewAdded")
             {
@@ -233,7 +234,7 @@ namespace Assignment
             com.Parameters.AddWithValue("@PaymentCardId",cardID);
             com.Parameters.AddWithValue("@Price",totalPrice);
             com.Parameters.AddWithValue("@Notes",notes);
-
+            com.Parameters.AddWithValue("@BookingDate", bookingDateTime);
                
                                
             if (driverStatus == "A")
