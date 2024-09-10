@@ -250,3 +250,5 @@ D:\weijia\Onedrive\OneDrive - MSFT\School Doc\Uni\Y2S1\Assignment\Web-Applicatio
 D:\weijia\Onedrive\OneDrive - MSFT\School Doc\Uni\Y2S1\Assignment\Web-Application---Car-Rental\Assignment\Assignment\bin\EntityFramework.SqlServer.dll
 D:\weijia\Onedrive\OneDrive - MSFT\School Doc\Uni\Y2S1\Assignment\Web-Application---Car-Rental\Assignment\Assignment\bin\EntityFramework.xml
 D:\weijia\Onedrive\OneDrive - MSFT\School Doc\Uni\Y2S1\Assignment\Web-Application---Car-Rental\Assignment\Assignment\bin\EntityFramework.SqlServer.xml
+D:\weijia\Onedrive\OneDrive - MSFT\School Doc\Uni\Y2S1\Assignment\Web-Application---Car-Rental\Assignment\Assignment\bin\Newtonsoft.Json.dll
+D:\weijia\Onedrive\OneDrive - MSFT\School Doc\Uni\Y2S1\Assignment\Web-Application---Car-Rental\Assignment\Assignment\bin\Newtonsoft.Json.xml

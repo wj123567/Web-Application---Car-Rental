@@ -15,6 +15,15 @@ namespace Assignment.Management
     {
 
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
+        /// <summary>
         /// hdnTopRentalStart control.
         /// </summary>
         /// <remarks>
@@ -42,6 +51,15 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Button btnTopDateFilter;
 
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
         /// rptTopRental control.
         /// </summary>
         /// <remarks>
@@ -51,12 +69,21 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Repeater rptTopRental;
 
         /// <summary>
-        /// TopRental control.
+        /// noCarPlaceholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource TopRental;
+        protected global::System.Web.UI.WebControls.PlaceHolder noCarPlaceholder;
+
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
     }
 }
