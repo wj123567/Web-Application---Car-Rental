@@ -124,7 +124,120 @@
                 </div>
             </div>
         </div>
+        <!-- WZ Demo 1 Start-->
+        <div class="row">
 
+         <div class="card flex-fill w-100">
+         <div class="card-header">
+    
+             <h5 class="card-title mb-0">Booking</h5>
+         </div>
+        
+         <div class="card mb-3">
+             <div class="card-body p-3">
+                 <div class="chart">
+                     
+                         <table>
+                             <tr>
+                                 <td>
+                                     <asp:GridView ID="gvBooking" runat="server"></asp:GridView>
+                                 </td>
+                                 <td>
+                                     <div id="bookNumChart1"></div>
+                                 </td>
+                             </tr>
+                         </table>
+                    
+                 </div>
+             </div>
+         </div>
+     </div>
+        </div>
+        <!-- WZ Demo 1 End-->
+           <!-- WZ Demo 2 Start-->
+   <div class="row">
+    <div class="card flex-fill w-100">
+    <div class="card-header">
+    
+        <h5 class="card-title mb-0">Revenue </h5>
+    </div>
+   
+    <div class="card mb-3">
+        <div class="card-body p-3">
+            <div class="chart">
+                
+                    <table>
+                        <tr>
+                            <td>
+                                <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+                            </td>
+                            <td>
+                                <div id="bookNumChart2"></div>
+                            </td>
+                        </tr>
+                    </table>
+               
+            </div>
+        </div>
+    </div>
+</div>
+   </div>
+   <!-- WZ Demo 2 End-->
+
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script>
+           
+        $('#bookNumChart1').highcharts({
+                chart: {
+                type : 'spline'
+                },
+                title: {
+                    text: "Summary of Booking Record"
+                },
+                xAxis: {
+                    title: {
+                    text : "Month"
+                    },
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] // Placeholder
+                },
+                yAxis: {
+                    title: {
+                    text : "Count"
+                    }
+                },
+                series: [{
+                    type: 'spline',
+                    name: "Summary of Booking Record",
+                    data: <%=lineData%> ,//fetch from database using code-behind
+                }]
+        });
+
+            $('#bookNumChart2').highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: "Summary of Booking Record"
+                },
+                xAxis: {
+                    title: {
+                        text: "Month"
+                    },
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] // Placeholder
+                },
+                yAxis: {
+                    title: {
+                        text: "Count"
+                    }
+                },
+                series: [{
+                    type: 'spline',
+                    name: "Summary of Booking Record",
+                    data: <%=lineData%> ,//fetch from database using code-behind
+             }]
+         });
+        </script>
+        
         <div class="row" style="margin-bottom: 20px">
             <div class="col-sm-6 col-md-8 col-xl-6 d-flex order-2">
                 <div class="card flex-fill w-100">

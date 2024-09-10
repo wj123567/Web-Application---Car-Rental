@@ -204,7 +204,7 @@ namespace Assignment
             string carPlate = Session["CarPlate"].ToString();
             string totalPrice = Session["TotalPrice"].ToString();
             string notes = Session["Notes"].ToString();
-            DateTime bookingDateTime = DateTime.Parse(Session["BookingDate"].ToString());
+            
 
             if(hdnCardCheck.Value=="New" || hdnCardCheck.Value== "NewAdded")
             {
@@ -234,7 +234,7 @@ namespace Assignment
             com.Parameters.AddWithValue("@PaymentCardId",cardID);
             com.Parameters.AddWithValue("@Price",totalPrice);
             com.Parameters.AddWithValue("@Notes",notes);
-            com.Parameters.AddWithValue("@BookingDate", bookingDateTime);
+            com.Parameters.AddWithValue("@BookingDate", DateTime.Now);
                
                                
             if (driverStatus == "A")

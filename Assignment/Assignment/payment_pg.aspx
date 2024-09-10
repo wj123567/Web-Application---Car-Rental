@@ -68,9 +68,10 @@
                 <h4>Payment Info</h4>
 
                 <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
-                <asp:CheckBox ID="chkApplyCard" runat="server" onchange="toggleAccordion()" />
+                <div class="chkApplyCard">
+                <asp:CheckBox ID="chkApplyCard" runat="server" onchange="toggleAccordion()"  CssClass="chkboxApply"/>
                 <asp:Label ID="lblApplyCard" runat="server" Text="Apply Existing Card"></asp:Label>
-
+                </div>
                
 
            <div class="accordion" id="cardAccordion" style="display:none;">

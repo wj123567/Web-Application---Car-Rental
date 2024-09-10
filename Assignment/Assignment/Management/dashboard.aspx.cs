@@ -14,10 +14,12 @@ namespace Assignment.Management
 {
     public partial class dashboard : System.Web.UI.Page
     {
+        public string lineData;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
+                loadDataofLineChart();
                 loadTopRental();
             }
         }
@@ -109,6 +111,34 @@ namespace Assignment.Management
                 noCarPlaceholder.Visible = true;
             }
             
+        }
+
+        public void loadDataofLineChart()
+        {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+
+            string query = @"SELECT YEAR(BookingDate) AS Year, MONTH(BookingDate) AS Month, COUNT(*) AS BookingCount 
+                            FROM Booking WHERE BookingDate IS NOT NULL  
+                            GROUP BY YEAR(BookingDate), MONTH(BookingDate) 
+                            ORDER BY YEAR(BookingDate), MONTH(BookingDate)";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+            DataTable dt = new DataTable();
+            dt.Load(cmd.ExecuteReader());
+            
+            gvBooking.DataSource = dt;
+            gvBooking.DataBind();
+
+            //start population to the line graph(data format in [ [x1,y1],[x2,y2],...]
+            lineData = "[";
+            foreach (DataRow dr in dt.Rows)
+            {
+                lineData += "[" + dr["Month"] + "," + dr["BookingCount"] + "],"; 
+            }
+            lineData= lineData.Remove(lineData.Length - 1)+ "]";
+
+            con.Close();
         }
     }
 }
