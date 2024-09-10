@@ -24,7 +24,7 @@ namespace Assignment.Management
 
         private void loadTopRental()
         {
-            string select = @"SELECT TOP 5 COUNT(B.CarPlate) AS RentalCount, MAX(C.CarImage) AS Image, SUM(C.CarDayPrice) AS Price, SUM(B.Price) AS TotalRevenue, (C.CarBrand + ' ' + C.CarName) AS CarName FROM [Car] C JOIN [Booking] B ON C.CarPlate = B.CarPlate WHERE (B.StartDate BETWEEN CONVERT (date, GETDATE()) AND CONVERT (date, GETDATE())) AND B.Status NOT IN ('Cancelled') GROUP BY C.CarBrand, C.CarName ORDER BY COUNT(B.CarPlate) DESC";
+            string select = @"SELECT TOP 5 COUNT(B.CarPlate) AS RentalCount, MAX(C.CarImage) AS Image, SUM(C.CarDayPrice) AS Price, SUM(B.Price) AS TotalRevenue, (C.CarBrand + ' ' + C.CarName) AS CarName FROM [Car] C JOIN [Booking] B ON C.CarPlate = B.CarPlate WHERE B.Status NOT IN ('Cancelled') GROUP BY C.CarBrand, C.CarName ORDER BY COUNT(B.CarPlate) DESC";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(select, con);
             con.Open();
@@ -48,11 +48,30 @@ namespace Assignment.Management
         [WebMethod] //Declare this for the ajax call
         public static string getCarCategory()
         {
-            string select = @"SELECT C.CType as CarType, count(B.CarPlate) as CarCount FROM Car C JOIN Booking B ON C.CarPlate = B.CarPlate GROUP BY C.CType";
+            string select = @"SELECT C.CType as CarType, count(B.CarPlate) as CarCount FROM Car C JOIN Booking B ON C.CarPlate = B.CarPlate WHERE B.Status NOT IN ('Cancelled') GROUP BY C.CType";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             DataTable dt = new DataTable();
             SqlCommand com = new SqlCommand(select, con);
             con.Open();
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            da.Fill(dt);
+
+            string jsonData = JsonConvert.SerializeObject(dt);
+            return jsonData;
+        }
+
+        [WebMethod] //Declare this for the ajax call
+        public static string filterCategory(string start, string end)
+        {
+            DateTime startDate = DateTime.Parse(start);
+            DateTime endDate = DateTime.Parse(end);
+            string select = @"SELECT C.CType as CarType, count(B.CarPlate) as CarCount FROM Car C JOIN Booking B ON C.CarPlate = B.CarPlate WHERE (B.StartDate BETWEEN @StartDate AND @EndDate) AND B.Status NOT IN ('Cancelled') GROUP BY C.CType";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            DataTable dt = new DataTable();
+            SqlCommand com = new SqlCommand(select, con);
+            con.Open();
+            com.Parameters.AddWithValue("@StartDate", startDate);
+            com.Parameters.AddWithValue("@EndDate", endDate);
             SqlDataAdapter da = new SqlDataAdapter(com);
             da.Fill(dt);
 

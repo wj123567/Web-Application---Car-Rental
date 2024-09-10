@@ -174,7 +174,7 @@
                             <h5 class="card-title">Top 5 Rental</h5>
 
                             <div class="filter">
-                                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px">
+                                <div id="topRentalRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px">
                                     <i class="fa fa-calendar"></i>&nbsp;
 								<span></span><i class="fa fa-caret-down"></i>
                                 </div>
@@ -242,8 +242,16 @@
                 <div class="card" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
 
                     <div class="card-body pb-0">
+                        <div class="d-flex justify-content-between align-items-center">
                         <h5 class="card-title">Rent Car Type</h5>
-
+                        <div id="carCategoryRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50px">
+                                    <i class="fa fa-calendar"></i>&nbsp;
+								<span></span><i class="fa fa-caret-down"></i>
+                        </div>
+                            <asp:HiddenField ID="hdnCarCategoryStart" runat="server" />
+                            <asp:HiddenField ID="hdnCarCategoryEnd" runat="server" />
+                        </div>
+                        <hr />
                         <div id="rentTypeChart" style="min-height: 400px;" class="echart"></div>
                         <script src="
 				https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js
@@ -295,6 +303,12 @@
                                                 labelLine: {
                                                     show: false
                                                 },
+                                                color: [
+                                                    '#90e0ef',
+                                                    '#48cae4',
+                                                    '#00b4d8',
+                                                    '#0077b6',
+                                                ],
                                                 data: chartdata 
                                             }]
                                         });
@@ -304,6 +318,70 @@
                                     }
                                 });
                             });
+
+                            function filterCarCategory() {
+                                var hdnCarCategoryStart = document.getElementById('<%= hdnCarCategoryStart.ClientID %>').value;
+                                var hdnCarCategoryEnd = document.getElementById('<%= hdnCarCategoryEnd.ClientID %>').value;
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "dashboard.aspx/filterCategory", // Ensure this URL points to the correct server method
+                                        data: JSON.stringify({ start: hdnCarCategoryStart, end: hdnCarCategoryEnd }), // Pass the hidden field value as parameter
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        success: function (response) {
+                                            // Parse the response to get the car type and count data
+                                            var data = JSON.parse(response.d);
+
+                                            var chartdata = [];
+                                            for (var i = 0; i < data.length; i++) {
+                                                chartdata.push({
+                                                    value: data[i].CarCount,
+                                                    name: data[i].CarType
+                                                });
+                                            }
+
+                                            echarts.init(document.querySelector("#rentTypeChart")).setOption({
+                                                tooltip: {
+                                                    trigger: 'item'
+                                                },
+                                                legend: {
+                                                    top: '5%',
+                                                    left: 'center'
+                                                },
+                                                series: [{
+                                                    name: 'Car Type',
+                                                    type: 'pie',
+                                                    radius: ['40%', '70%'],
+                                                    avoidLabelOverlap: false,
+                                                    label: {
+                                                        show: false,
+                                                        position: 'center'
+                                                    },
+                                                    emphasis: {
+                                                        label: {
+                                                            show: true,
+                                                            fontSize: '18',
+                                                            fontWeight: 'bold'
+                                                        }
+                                                    },
+                                                    labelLine: {
+                                                        show: false
+                                                    },
+                                                    color: [
+                                                        '#90e0ef',
+                                                        '#48cae4',
+                                                        '#00b4d8',
+                                                        '#0077b6',
+                                                    ],
+                                                    data: chartdata
+                                                }]
+                                            });
+                                        },
+                                        error: function (error) {
+                                            console.log(error);
+                                        }
+                                    });
+                                };
                         </script>
 
 
@@ -324,7 +402,7 @@
             var end = moment();
 
             function cb(start, end, triggerclick) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                $('#topRentalRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 
                 document.getElementById('<%=hdnTopRentalStart.ClientID %>').value = start.format('YYYY-MM-DD');
                 document.getElementById('<%=hdnTopRentalEnd.ClientID %>').value = end.format('YYYY-MM-DD');
@@ -334,7 +412,40 @@
                 }
             }
 
-            $('#reportrange').daterangepicker({
+            $('#topRentalRange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, function (start, end) {
+                cb(start, end, true);
+            });
+
+            cb(start, end, false);
+
+        });
+
+        $(function () {
+
+            var start = moment();
+            var end = moment();
+
+            function cb(start, end, triggerclick) {
+                document.getElementById('<%=hdnCarCategoryStart.ClientID %>').value = start.format('YYYY-MM-DD');
+                document.getElementById('<%=hdnCarCategoryEnd.ClientID %>').value = end.format('YYYY-MM-DD');
+
+                if (triggerclick) {
+                    filterCarCategory();
+                }
+            }
+
+            $('#carCategoryRange').daterangepicker({
                 startDate: start,
                 endDate: end,
                 ranges: {
