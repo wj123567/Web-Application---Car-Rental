@@ -172,6 +172,7 @@ namespace Assignment
             // Trigger the modal to be shown after the record is inserted
             ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "$('#paymentModal').modal('show');", true);*/
            
+
             Response.Redirect("Home.aspx");
         }
 
