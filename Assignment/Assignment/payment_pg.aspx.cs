@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Web;
@@ -169,11 +170,22 @@ namespace Assignment
 
             SaveBookingInfo(insertString);
 
-            
+            string insertBookingAddOnString = @"INSERT INTO BookingAddOn (BookingId,AddOnId, Quantity)
+                                                VALUES (@BookedID,@AddOnID, @Quantity)";
+
+            Dictionary<int, int> selectedAddOns = Session["SelectedAddOns"] as Dictionary<int, int>;
+
+            if (selectedAddOns != null || selectedAddOns.Count != 0)
+            {
+                SaveBookingAddOnInfo(insertBookingAddOnString, selectedAddOns);
+            }
+
+                
+
 /*
             // Trigger the modal to be shown after the record is inserted
             ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "$('#paymentModal').modal('show');", true);*/
-           
+
 
             Response.Redirect("Home.aspx");
         }
@@ -291,10 +303,31 @@ namespace Assignment
                 com.Parameters.AddWithValue("@IsDefault", defaultCard);
                 com.ExecuteNonQuery();
                
+                con.Close();
             }
 
         }
 
+        private void SaveBookingAddOnInfo(string insertBookingAddOn, Dictionary<int, int> selectedAddOns)
+        {
+           
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(insertBookingAddOn, con);
+            foreach (var addOn in selectedAddOns)
+            {
+                int addOnID = addOn.Key;
+                int quantity = addOn.Value;
+                // Set parameters for the current iteration
+                com.Parameters.Clear();
+                com.Parameters.AddWithValue("@BookedID", Session["BookingID"].ToString());
+                com.Parameters.AddWithValue("@AddOnID",addOnID);
+                com.Parameters.AddWithValue("@Quantity",quantity);
+                com.ExecuteNonQuery();
+            }
+            con.Close ();
+        }
         private void UpdateProgressBar(int currentStep)
         {
             // Register a script to update the progress bar client-side
