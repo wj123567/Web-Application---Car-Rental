@@ -196,6 +196,7 @@
     <Content Include="Image\Dashboard\booking.png" />
     <Content Include="Image\Dashboard\chart.png" />
     <Content Include="Management\AdminReview.aspx" />
+    <Content Include="testDate.aspx" />
     <Content Include="UserProfile\bookingRecordUpdate.aspx" />
     <Content Include="CarRentalSystemModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -309,6 +310,13 @@
     </Compile>
     <Compile Include="Management\AdminReview.aspx.designer.cs">
       <DependentUpon>AdminReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="testDate.aspx.cs">
+      <DependentUpon>testDate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testDate.aspx.designer.cs">
+      <DependentUpon>testDate.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserProfile\bookingRecordUpdate.aspx.cs">
       <DependentUpon>bookingRecordUpdate.aspx</DependentUpon>

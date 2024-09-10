@@ -15,13 +15,31 @@ namespace Assignment.Management
     {
 
         /// <summary>
-        /// lblFilterTopRange control.
+        /// hdnTopRentalStart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFilterTopRange;
+        protected global::System.Web.UI.WebControls.HiddenField hdnTopRentalStart;
+
+        /// <summary>
+        /// hdnTopRentalEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnTopRentalEnd;
+
+        /// <summary>
+        /// btnTopDateFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTopDateFilter;
 
         /// <summary>
         /// rptTopRental control.

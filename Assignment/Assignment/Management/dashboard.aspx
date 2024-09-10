@@ -3,7 +3,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-	
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link href="~/CSS/dashboard.css" rel="stylesheet" />
 	</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
@@ -208,24 +209,23 @@
             <div class="col-12" style="width:75%">
               <div class="card overflow-auto" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius:15px;">
 
-                <div class="filter" style="position: absolute; right: 0px;top: 15px;">
-                  <a class="icon" href="#" data-bs-toggle="dropdown" style="color: #aab7cf; padding-right: 30px; padding-bottom: 5px; transition: 0.3s;font-size: 1.1em;"><i class="fa-solid fa-ellipsis"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow rounded">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
                 <div class="card-body pb-0">
-                  <h5 class="card-title">Top 5 Rental | 
-					  <asp:Label ID="lblFilterTopRange" runat="server" Text="Today" CssClass="text-muted" Font-Size="0.7em"></asp:Label></h5>
+
+				  <div>
+                  <h5 class="card-title">Top 5 Rental</h5>
+
+					<div class="filter">
+							<div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px">
+								<i class="fa fa-calendar"></i>&nbsp;
+								<span></span> <i class="fa fa-caret-down"></i>
+							</div>
+						<asp:HiddenField ID="hdnTopRentalStart" runat="server" />
+						<asp:HiddenField ID="hdnTopRentalEnd" runat="server" />
+						<asp:Button ID="btnTopDateFilter" runat="server" Text="Button" style="display:none" OnClick="btnTopDateFilter_Click"/>
+					</div>
+					</div>
 				<hr />
-                  <table class="table table-borderless">
+                  <table class="table table-border table-responsive table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Car Image</th>
@@ -239,8 +239,11 @@
                         <asp:Repeater ID="rptTopRental" runat="server" DataSourceID="TopRental">
                             <ItemTemplate>
                                 <tr>
-                                    <td scope="col" class="text-center">
-										<asp:Image ID="imgCarTopPic" runat="server" ImageUrl='<%# Eval("Image") %>' Width="120px" CssClass="mx-auto" /></td>
+                                    <td scope="col" class="text-center" style="width:250px;">
+										<div class="topRentalImageFrame">
+										<asp:Image ID="imgCarTopPic" runat="server" ImageUrl='<%# Eval("Image") %>' Width="120px" CssClass="mx-auto" />
+										</div>
+										</td>
 
                                     <td scope="col"><asp:Label ID="lblCarName" runat="server" Text='<%# Eval("CarName") %>'/></td>
 
@@ -252,19 +255,20 @@
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>
-					<asp:SqlDataSource 
-						runat="server" 
-						ID="TopRental" 
-						ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' 
-						SelectCommand="SELECT TOP 5 COUNT(B.CarPlate) AS RentalCount, 
-											  C.CarImage AS Image,C.CarDayPrice AS Price,
-											  SUM(B.Price) AS TotalRevenue, 
-											  (C.CarBrand + ' ' + C.CarName) AS CarName 
-									   FROM [Car] C 
-									   JOIN [Booking] B ON C.CarPlate = B.CarPlate 
-									   GROUP BY C.CarBrand, C.CarName, C.CarImage, C.CarDayPrice
-									   ORDER BY COUNT(B.CarPlate) DESC;">
-					</asp:SqlDataSource>
+                        <asp:SqlDataSource
+                            runat="server"
+                            ID="TopRental"
+                            ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>'
+                            SelectCommand="SELECT TOP 5 
+									COUNT(B.CarPlate) AS RentalCount, 
+									MAX(C.CarImage) AS Image,
+									AVG(C.CarDayPrice) AS Price,
+									SUM(B.Price) AS TotalRevenue, 
+									(C.CarBrand + ' ' + C.CarName) AS CarName 
+								FROM [Car] C 
+								JOIN [Booking] B ON C.CarPlate = B.CarPlate 
+								GROUP BY C.CarBrand, C.CarName 
+								ORDER BY COUNT(B.CarPlate) DESC;"></asp:SqlDataSource>
                     </tbody>
                   </table>
 
@@ -272,10 +276,50 @@
 
               </div>
             </div>
-<!-- End Top Selling -->
+	<!-- End Top Selling -->
 				</div>
-	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
+	<!--Start Date Picker -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+
+			var start = moment();
+			var end = moment();
+
+			function cb(start, end, triggerclick) {
+				$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+
+				document.getElementById('<%=hdnTopRentalStart.ClientID %>').value = start.format('YYYY-MM-DD');
+				document.getElementById('<%=hdnTopRentalEnd.ClientID %>').value = end.format('YYYY-MM-DD');
+
+				if (triggerclick) {
+					document.getElementById('<%=btnTopDateFilter.ClientID %>').click();
+				}
+			}
+
+			$('#reportrange').daterangepicker({
+				startDate: start,
+				endDate: end,
+				ranges: {
+					'Today': [moment(), moment()],
+					'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+					'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+					'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+					'This Month': [moment().startOf('month'), moment().endOf('month')],
+					'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+				}
+			}, function (start, end) {
+                cb(start, end, true);
+			});
+
+			cb(start, end, false);
+
+		});
+    </script>
+	<!-- End Date Picker -->
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>    
 	<!-- Theme JS -->
 	<script src="../argon-dashboard-master/assets/js/argon-dashboard.min.js"></script>
     <script src="../argon-dashboard-master/assets/js/plugins/chartjs.min.js"></script>

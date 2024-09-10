@@ -13,5 +13,11 @@ namespace Assignment.Management
         {
 
         }
+
+        protected void btnTopDateFilter_Click(object sender, EventArgs e)
+        {
+            string startDate = hdnTopRentalStart.Value;
+            string endDate = hdnTopRentalEnd.Value;
+        }
     }
 }
