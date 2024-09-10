@@ -52,7 +52,7 @@
  </div>
 </div>
 
-    
+    <asp:Label ID="lblCheckAdd" runat="server" Text="Label"></asp:Label>
 <section class="info_body_container"> 
    
    <div class="left-side">

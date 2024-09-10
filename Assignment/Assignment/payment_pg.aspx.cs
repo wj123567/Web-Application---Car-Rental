@@ -168,6 +168,8 @@ namespace Assignment
                                 ,@PaymentCardId,@Price,@Notes)";
 
             SaveBookingInfo(insertString);
+
+            
 /*
             // Trigger the modal to be shown after the record is inserted
             ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "$('#paymentModal').modal('show');", true);*/
@@ -319,6 +321,15 @@ namespace Assignment
 
         protected void FillCardInfo(string cardId)
         {
+            Dictionary<int, int> selectedAddOns = Session["SelectedAddOns"] as Dictionary<int, int>;
+
+            foreach (var addOn in selectedAddOns)
+            {
+                int addOnID = addOn.Key;
+                int quantity = addOn.Value;
+                lblCheckAdd.Text += addOnID + " "+ quantity+",";
+            }
+
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
 
             using (SqlConnection con = new SqlConnection(connectionString))
