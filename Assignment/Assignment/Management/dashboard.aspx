@@ -140,7 +140,7 @@
     <div class="col col-md-4">
       <div class="form-group">
          <label for="timeFilter">Select Time Range</label>
-        <asp:DropDownList ID="ddlTimeFilter" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlTimeFilter_SelectedIndexChanged" AutoPostBack="true">
+        <asp:DropDownList ID="ddlTimeFilter" runat="server" CssClass="form-control" >
             <asp:ListItem Value="Day" Text="Day"></asp:ListItem>
             <asp:ListItem Value="Week" Text="Week"></asp:ListItem>
             <asp:ListItem Value="Month" Text="Month"></asp:ListItem>
@@ -150,6 +150,7 @@
         </asp:DropDownList>
           <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
         <asp:HiddenField ID="hdnTimeFilter" runat="server" />
+
           <!-- Custom Date Pickers (Initially Hidden) -->
     <div id="customDateFilter" style="display: none;">
         <label for="startDate">Start Date</label>
@@ -161,6 +162,9 @@
     </div>
     </div>
          </div>
+      <div class="col col-md-4">
+          <asp:Button ID="btnProcess" runat="server" Text="Button"  OnClick="btnBookRecord_Click"/>
+          </div>
     
   </div>
 </div>
@@ -719,6 +723,7 @@
         <script>
             function renderChart(lineData,xAxisTitle,categories) {
                 console.log("Line data: ", lineData);
+                console.log("Category: ",categories);
                 $('#bookNumChart').highcharts({
                     chart: {
                         type: 'spline'
