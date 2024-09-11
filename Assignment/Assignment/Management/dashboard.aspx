@@ -135,6 +135,35 @@
         
          <div class="card mb-3">
              <div class="card-body p-3">
+                 <div class="container">
+  <div class="row">
+    <div class="col col-md-4">
+      <div class="form-group">
+         <label for="timeFilter">Select Time Range</label>
+        <asp:DropDownList ID="ddlTimeFilter" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlTimeFilter_SelectedIndexChanged" AutoPostBack="true">
+            <asp:ListItem Value="Day" Text="Day"></asp:ListItem>
+            <asp:ListItem Value="Week" Text="Week"></asp:ListItem>
+            <asp:ListItem Value="Month" Text="Month"></asp:ListItem>
+            <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
+            <asp:ListItem Value="Year" Text="Year"></asp:ListItem>
+            <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
+        </asp:DropDownList>
+          <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+        <asp:HiddenField ID="hdnTimeFilter" runat="server" />
+          <!-- Custom Date Pickers (Initially Hidden) -->
+    <div id="customDateFilter" style="display: none;">
+        <label for="startDate">Start Date</label>
+        
+        <asp:TextBox ID="txtStartDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+        <label for="endDate">End Date</label>
+        
+        <asp:TextBox ID="txtEndDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+    </div>
+    </div>
+         </div>
+    
+  </div>
+</div>
                  <div class="chart">
                      
                          <table>
@@ -143,7 +172,7 @@
                                      <asp:GridView ID="gvBooking" runat="server"></asp:GridView>
                                  </td>
                                  <td>
-                                     <div id="bookNumChart1"></div>
+                                     <div id="bookNumChart"></div>
                                  </td>
                              </tr>
                          </table>
@@ -183,60 +212,7 @@
 </div>
    </div>
    <!-- WZ Demo 2 End-->
-
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script>
-           
-        $('#bookNumChart1').highcharts({
-                chart: {
-                type : 'spline'
-                },
-                title: {
-                    text: "Summary of Booking Record"
-                },
-                xAxis: {
-                    title: {
-                    text : "Month"
-                    },
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] // Placeholder
-                },
-                yAxis: {
-                    title: {
-                    text : "Count"
-                    }
-                },
-                series: [{
-                    type: 'spline',
-                    name: "Summary of Booking Record",
-                    data: <%=lineData%> ,//fetch from database using code-behind
-                }]
-        });
-
-            $('#bookNumChart2').highcharts({
-                chart: {
-                    type: 'spline'
-                },
-                title: {
-                    text: "Summary of Booking Record"
-                },
-                xAxis: {
-                    title: {
-                        text: "Month"
-                    },
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] // Placeholder
-                },
-                yAxis: {
-                    title: {
-                        text: "Count"
-                    }
-                },
-                series: [{
-                    type: 'spline',
-                    name: "Summary of Booking Record",
-                    data: <%=lineData%> ,//fetch from database using code-behind
-             }]
-         });
-        </script>
+       
         
         <div class="row" style="margin-bottom: 20px">
             <div class="col-sm-6 col-md-8 col-xl-6 d-flex order-2">
@@ -736,4 +712,54 @@
             altInput: false // Do not show an alternative input
         });
     </script>
+     
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script>
+            function renderChart(lineData,xAxisTitle,categories) {
+                console.log("Line data: ", lineData);
+                $('#bookNumChart').highcharts({
+                    chart: {
+                        type: 'spline'
+                    },
+                    title: {
+                        text: "Summary of Booking Record"
+                    },
+                    xAxis: {
+                        title: {
+                            text: xAxisTitle
+                        },
+                        categories: categories // Placeholder
+                    },
+                    yAxis: {
+                        title: {
+                            text: "Count"
+                        }
+                    },
+                    series: [{
+                        type: 'spline',
+                        name: "Summary of Booking Record",
+                        data: lineData // Converts the lineData string to a JavaScript array
+                    }]
+                });
+            }
+            console.log("Chart rendered");
+            $(document).ready(function () {
+
+                // When dropdown value changes
+                $('#<%= ddlTimeFilter.ClientID %>').change(function () {
+         var selectedValue = $(this).val();
+         $('#<%= hdnTimeFilter.ClientID %>').val(selectedValue);
+
+         // If "Custom Date" is selected, show the date pickers
+         if (selectedValue === 'Custom') {
+             $('#customDateFilter').show();
+         } else {
+             $('#customDateFilter').hide();
+         }
+     });
+
+            });
+        </script>
 </asp:Content>
