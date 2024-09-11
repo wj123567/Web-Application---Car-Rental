@@ -284,16 +284,17 @@
                     <div class="card-body pb-0">
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title">Top 5 Rental</h5>
+                            <h5 class="card-title">Top 5 Rental <span id="topRentalDay" class="text-muted" style="font-size:0.7em">| All Time</span></h5>
 
                             <div class="filter">
                                 <div id="topRentalRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px">
                                     <i class="fa fa-calendar"></i>&nbsp;
-								<span></span><i class="fa fa-caret-down"></i>
+								<span></span><i class="fa fa-caret-down float-end"></i>
                                 </div>
                                 <asp:HiddenField ID="hdnTopRentalStart" runat="server" />
                                 <asp:HiddenField ID="hdnTopRentalEnd" runat="server" />
                                 <asp:Button ID="btnTopDateFilter" runat="server" Text="Button" Style="display: none" OnClick="btnTopDateFilter_Click" />
+                                <asp:Button ID="btnAllTopRental" runat="server" Text="Button" Style="display: none" OnClick="btnAllTopRental_Click"/>
                             </div>
                         </div>
                         <hr />
@@ -323,13 +324,13 @@
                                                         <asp:Label ID="lblCarName" runat="server" Text='<%# Eval("CarName") %>' /></td>
 
                                                     <td scope="col">
-                                                        <asp:Label ID="lblDayPrice" runat="server" Text='<%# Eval("Price") %>' /></td>
+                                                        <asp:Label ID="lblDayPrice" runat="server" Text='<%# Eval("Price","{0:F2}") %>' /></td>
 
                                                     <td scope="col">
                                                         <asp:Label ID="lblRentalCount" runat="server" Text='<%# Eval("RentalCount") %>' /></td>
 
                                                     <td scope="col">
-                                                        <asp:Label ID="lblTotalRevenue" runat="server" Text='<%# Eval("TotalRevenue") %>' /></td>
+                                                        <asp:Label ID="lblTotalRevenue" runat="server" Text='<%# Eval("TotalRevenue","{0:F2}") %>' /></td>
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>  
@@ -343,6 +344,7 @@
                             </ContentTemplate>
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="btnTopDateFilter" EventName="Click" />
+                                <asp:AsyncPostBackTrigger ControlID="btnAllTopRental" EventName="Click" />
                             </Triggers>
                         </asp:UpdatePanel>
                     </div>
@@ -356,7 +358,7 @@
 
                     <div class="card-body pb-0">
                         <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title">Rent Car Type</h5>
+                        <h5 class="card-title">Rent Car Type <span id="carTypeDay" class="text-muted" style="font-size:0.6em">| All Time</span></h5>
                         <div id="carCategoryRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50px">
                                     <i class="fa fa-calendar"></i>&nbsp;
 								<span></span><i class="fa fa-caret-down"></i>
@@ -365,13 +367,12 @@
                             <asp:HiddenField ID="hdnCarCategoryEnd" runat="server" />
                         </div>
                         <hr />
-                        <div id="rentTypeChart" style="min-height: 400px;" class="echart"></div>
+                        <div id="rentTypeChart" style="min-height: 465px;" class="echart"></div>
                         <script src="
 				https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js
 				"></script>
                         <script>
-                            document.addEventListener("DOMContentLoaded", () => {
-
+                            function filterAllCategory() {
                                 $.ajax({
                                     type: "POST",
                                     url: "dashboard.aspx/getCarCategory", // Ensure this URL points to the correct server method
@@ -422,7 +423,7 @@
                                                     '#00b4d8',
                                                     '#0077b6',
                                                 ],
-                                                data: chartdata 
+                                                data: chartdata
                                             }]
                                         });
                                     },
@@ -430,7 +431,7 @@
                                         console.log(error);
                                     }
                                 });
-                            });
+                            };
 
                             function filterCarCategory() {
                                 var hdnCarCategoryStart = document.getElementById('<%= hdnCarCategoryStart.ClientID %>').value;
@@ -511,16 +512,19 @@
     <script type="text/javascript">
         $(function () {
 
-            var start = moment();
-            var end = moment();
+            var start = moment().subtract(2, 'days');
+            var end = moment().subtract(2, 'days');
 
-            function cb(start, end, triggerclick) {
-                $('#topRentalRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            function cb(start, end, isAll) {
 
-                document.getElementById('<%=hdnTopRentalStart.ClientID %>').value = start.format('YYYY-MM-DD');
-                document.getElementById('<%=hdnTopRentalEnd.ClientID %>').value = end.format('YYYY-MM-DD');
+                if (isAll) {
+                    $('#topRentalRange span').html("All Time" + '   ');
+                    document.getElementById('<%=btnAllTopRental.ClientID %>').click();
+                } else {
+                    $('#topRentalRange span').html(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY') + '  ');
 
-                if (triggerclick) {
+                    document.getElementById('<%=hdnTopRentalStart.ClientID %>').value = start.format('YYYY-MM-DD');
+                    document.getElementById('<%=hdnTopRentalEnd.ClientID %>').value = end.format('YYYY-MM-DD');
                     document.getElementById('<%=btnTopDateFilter.ClientID %>').click();
                 }
             }
@@ -528,7 +532,10 @@
             $('#topRentalRange').daterangepicker({
                 startDate: start,
                 endDate: end,
+                autoApply: true,
+                opens: "left",
                 ranges: {
+                    'All Time': [moment().subtract(2, 'days'), moment().subtract(2, 'days')],
                     'Today': [moment(), moment()],
                     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
                     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
@@ -536,24 +543,30 @@
                     'This Month': [moment().startOf('month'), moment().endOf('month')],
                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                 }
-            }, function (start, end) {
-                cb(start, end, true);
+            }, function (start, end, label) {
+                if (label == 'All Time') {
+                    cb(start, end, true);
+                } else {
+                    cb(start, end, false);
+                }
+                document.getElementById('topRentalDay').textContent = "| "+ label;
             });
 
-            cb(start, end, false);
+            cb(start, end, true);
 
         });
 
         $(function () {
+            var start = moment().subtract(2, 'days');
+            var end = moment().subtract(2, 'days');
 
-            var start = moment();
-            var end = moment();
+            function cb(start, end, isAll) {
 
-            function cb(start, end, triggerclick) {
+                if (isAll) {
+                    filterAllCategory();
+                } else {
                 document.getElementById('<%=hdnCarCategoryStart.ClientID %>').value = start.format('YYYY-MM-DD');
-                document.getElementById('<%=hdnCarCategoryEnd.ClientID %>').value = end.format('YYYY-MM-DD');
-
-                if (triggerclick) {
+                    document.getElementById('<%=hdnCarCategoryEnd.ClientID %>').value = end.format('YYYY-MM-DD');
                     filterCarCategory();
                 }
             }
@@ -561,19 +574,28 @@
             $('#carCategoryRange').daterangepicker({
                 startDate: start,
                 endDate: end,
+                autoApply: true,
+                opens: "left",
                 ranges: {
+                    'All Time': [moment().subtract(2, 'days'), moment().subtract(2, 'days')],
                     'Today': [moment(), moment()],
                     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
                     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
                     'This Month': [moment().startOf('month'), moment().endOf('month')],
                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+            }, function (start, end, label) {
+                if (label == 'All Time') {
+                    cb(start, end, true);
+                } else {
+                    cb(start, end, false);
                 }
-            }, function (start, end) {
-                cb(start, end, true);
+                document.getElementById('carTypeDay').textContent = "| " + label;
+                
             });
 
-            cb(start, end, false);
+            cb(start, end, true);
 
         });
     </script>

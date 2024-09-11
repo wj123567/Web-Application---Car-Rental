@@ -20,7 +20,6 @@ namespace Assignment.Management
             if (!Page.IsPostBack)
             {
                 loadDataofLineChart();
-                loadTopRental();
             }
         }
 
@@ -39,12 +38,53 @@ namespace Assignment.Management
                 noCarPlaceholder.Visible = false;
                 rptTopRental.DataSource = ds.Tables["TopData"];
                 rptTopRental.DataBind();
+                UpdatePanel1.Update();
             }
             else
             {
+                rptTopRental.DataSource = ds.Tables["TopData"];
+                rptTopRental.DataBind();
+                UpdatePanel1.Update();
                 noCarPlaceholder.Visible = true;
             }
             
+        }
+
+        protected void btnAllTopRental_Click(object sender, EventArgs e)
+        {
+            loadTopRental();
+        }
+
+        protected void btnTopDateFilter_Click(object sender, EventArgs e)
+        {
+            DateTime startDate = DateTime.Parse(hdnTopRentalStart.Value);
+            DateTime endDate = DateTime.Parse(hdnTopRentalEnd.Value);
+            string select = @"SELECT TOP 5 COUNT(B.CarPlate) AS RentalCount, MAX(C.CarImage) AS Image, AVG(C.CarDayPrice) AS Price, SUM(B.Price) AS TotalRevenue, (C.CarBrand + ' ' + C.CarName) AS CarName FROM [Car] C  JOIN [Booking] B ON C.CarPlate = B.CarPlate WHERE (B.StartDate BETWEEN @StartDate AND @EndDate) AND B.Status NOT IN ('Cancelled') GROUP BY C.CarBrand, C.CarName ORDER BY COUNT(B.CarPlate) DESC";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(select, con);
+            con.Open();
+            com.Parameters.AddWithValue("@StartDate", startDate);
+            com.Parameters.AddWithValue("@EndDate", endDate);
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "TopData");
+            con.Close();
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                noCarPlaceholder.Visible = false;
+                rptTopRental.DataSource = ds.Tables["TopData"];
+                rptTopRental.DataBind();
+                UpdatePanel1.Update();
+            }
+            else
+            {
+                rptTopRental.DataSource = ds.Tables["TopData"];
+                rptTopRental.DataBind();
+                UpdatePanel1.Update();
+                noCarPlaceholder.Visible = true;
+            }
+
         }
 
         [WebMethod] //Declare this for the ajax call
@@ -79,38 +119,6 @@ namespace Assignment.Management
 
             string jsonData = JsonConvert.SerializeObject(dt);
             return jsonData;
-        }
-
-        protected void btnTopDateFilter_Click(object sender, EventArgs e)
-        {
-            DateTime startDate = DateTime.Parse(hdnTopRentalStart.Value);
-            DateTime endDate = DateTime.Parse(hdnTopRentalEnd.Value);
-            string select = @"SELECT TOP 5 COUNT(B.CarPlate) AS RentalCount, MAX(C.CarImage) AS Image, AVG(C.CarDayPrice) AS Price, SUM(B.Price) AS TotalRevenue, (C.CarBrand + ' ' + C.CarName) AS CarName FROM [Car] C  JOIN [Booking] B ON C.CarPlate = B.CarPlate WHERE (B.StartDate BETWEEN @StartDate AND @EndDate) AND B.Status NOT IN ('Cancelled') GROUP BY C.CarBrand, C.CarName ORDER BY COUNT(B.CarPlate) DESC";
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            SqlCommand com = new SqlCommand(select, con);
-            con.Open();
-            com.Parameters.AddWithValue("@StartDate", startDate);
-            com.Parameters.AddWithValue("@EndDate", endDate);
-            SqlDataAdapter da = new SqlDataAdapter(com);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "TopData");
-            con.Close();
-
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                noCarPlaceholder.Visible = false;
-                rptTopRental.DataSource = ds.Tables["TopData"];
-                rptTopRental.DataBind();
-                UpdatePanel1.Update();
-            }
-            else
-            {
-                rptTopRental.DataSource = ds.Tables["TopData"];
-                rptTopRental.DataBind();
-                UpdatePanel1.Update();
-                noCarPlaceholder.Visible = true;
-            }
-            
         }
 
         public void loadDataofLineChart()
