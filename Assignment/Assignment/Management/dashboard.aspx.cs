@@ -19,7 +19,7 @@ namespace Assignment.Management
         {
             if (!Page.IsPostBack)
             {
-                loadDataofLineChart();
+                /*loadDataofLineChart();*/
                 loadTopRental();
             }
         }
@@ -113,31 +113,115 @@ namespace Assignment.Management
             
         }
 
-        public void loadDataofLineChart()
+        protected void ddlTimeFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string dateFrom = txtStartDate.Text;
+            string dateTo = txtEndDate.Text;
+            string timeFilter = ddlTimeFilter.SelectedValue;
+
+            loadDataofLineChart(dateFrom, dateTo, timeFilter);
+        }
+
+        public void loadDataofLineChart(string dateFrom, string dateTo, string timeFilter)
+        {
+            lblCheck.Text = hdnTimeFilter.Value;
+
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
+            string query = "";
+            string xAxisTitle = "";
+            string categories = "";
+            List<string> categoryList = new List<string>();
+            switch (timeFilter)
+            {
+                case "Day":
+                    query = @"SELECT DATEPART(HOUR, BookingDate) AS Hour , COUNT(*) AS BookingCount
+                      FROM Booking 
+                      WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, GETDATE())  -- Filter by current date
+                      GROUP BY DATEPART(HOUR, BookingDate)
+                      ORDER BY DATEPART(HOUR, BookingDate)";
+                      xAxisTitle = "Hours in 24-hour system";
+                    break;
+                case "Week":
+                    query = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
+                              DECLARE @StartOfWeek DATE = DATEADD(DAY, -DATEPART(WEEKDAY, @CurrentDate) + 1, @CurrentDate) -- Sunday
+                              DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) -- Saturday
 
-            string query = @"SELECT YEAR(BookingDate) AS Year, MONTH(BookingDate) AS Month, COUNT(*) AS BookingCount 
+                              SELECT CONVERT(VARCHAR, BookingDate, 101) AS DatePerWeek, COUNT(*) AS BookingCount 
+                              FROM Booking 
+                              WHERE BookingDate >= @StartOfWeek AND BookingDate < DATEADD(DAY, 1, @EndOfWeek)
+                              GROUP BY CONVERT(VARCHAR, BookingDate, 101)  -- Group by day
+                              ORDER BY CONVERT(VARCHAR, BookingDate, 101)  -- Sort by formatted date";
+                    xAxisTitle = "Week";
+                    break;
+                case "Month":
+
+                    break;
+                case "Quarter":
+                    query = @"SELECT YEAR(BookingDate) AS Year, DATEPART(QUARTER, BookingDate) AS Quarter, COUNT(*) AS BookingCount 
+                      FROM Booking 
+                      GROUP BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)
+                      ORDER BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)";
+                    break;
+                case "Year":
+                    query = @"SELECT YEAR(BookingDate) AS Year, MONTH(BookingDate) AS Month, COUNT(*) AS BookingCount 
                             FROM Booking WHERE BookingDate IS NOT NULL  
                             GROUP BY YEAR(BookingDate), MONTH(BookingDate) 
                             ORDER BY YEAR(BookingDate), MONTH(BookingDate)";
+                    xAxisTitle = "Month";
+                    break;
+
+            }
+
 
             SqlCommand cmd = new SqlCommand(query, con);
+
             DataTable dt = new DataTable();
             dt.Load(cmd.ExecuteReader());
-            
+
             gvBooking.DataSource = dt;
             gvBooking.DataBind();
+
 
             //start population to the line graph(data format in [ [x1,y1],[x2,y2],...]
             lineData = "[";
             foreach (DataRow dr in dt.Rows)
             {
-                lineData += "[" + dr["Month"] + "," + dr["BookingCount"] + "],"; 
-            }
-            lineData= lineData.Remove(lineData.Length - 1)+ "]";
+               
+                switch (timeFilter)
+                {
+                    case "Day":
+                        lineData += "[" + dr["Hour"] + "," + dr["BookingCount"] + "],";
 
+                        break;
+                    case "Week":
+                        string date = dr["DatePerWeek"].ToString();
+                        lineData += "[" + date + "," + dr["BookingCount"] + "],";
+                        categoryList.Add(dr["DatePerWeek"].ToString());
+                        break;
+                    case "Month":
+
+                        break;
+                    case "Quarter":
+
+                        break;
+                    case "Year":
+                        lineData += "[" + dr["Month"] + "," + dr["BookingCount"] + "],";
+                        
+                        break;
+
+                }
+
+            }
+            lineData = lineData.Remove(lineData.Length - 1) + "]";
+            categories = string.Join(",", categoryList.Select(c => $"'{c}'"));
+           
+
+            // Inject the lineData and JavaScript into the page
+            string script = $"renderChart({lineData},'{xAxisTitle}',[{categories}]);"; // Pass the data to JavaScript function
+
+            ClientScript.RegisterStartupScript(this.GetType(), "renderChartScript", script, true);
             con.Close();
         }
     }
