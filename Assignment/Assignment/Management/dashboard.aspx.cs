@@ -19,7 +19,7 @@ namespace Assignment.Management
         {
             if (!Page.IsPostBack)
             {
-
+                /*loadDataofLineChart();*/
             }
         }
 
