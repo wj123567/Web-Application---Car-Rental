@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Services.Description;
 
 namespace Assignment
 {
@@ -47,7 +48,8 @@ namespace Assignment
             repeaterCarTable.DataSource = ds.Tables["CarTable"];
             repeaterCarTable.DataBind();
             con.Close();
-            UpdatePageInfo(false, getTotalRow());            
+            UpdatePageInfo(false, getTotalRow());
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addCarPlate()", true);
         }
 
         protected void UpdatePageInfo(bool isSearching, int row)
@@ -121,7 +123,7 @@ namespace Assignment
                     source.Save(savePath, ImageFormat.Png);
                 }
                 uploadCar(insertString,relPath);
-                Server.Transfer("CarManagement.aspx");
+                Response.Redirect("CarManagement.aspx");
             }
         }
 
@@ -280,6 +282,7 @@ namespace Assignment
             LinkButton button = (LinkButton)sender;
             string name = button.CommandName;
             string sort = button.CommandArgument;
+
             if (sort == "DESC")
             {
                 button.CommandArgument = "ASC";
@@ -296,6 +299,7 @@ namespace Assignment
             repeaterCarTable.DataSource = sortedData;
             repeaterCarTable.DataBind();
             UpdatePanel1.Update();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", $"showSortDirection('{button.ClientID}', '{sort}');", true);
         }
 
         protected void validateCarPlate_ServerValidate(object source, ServerValidateEventArgs args)
@@ -564,7 +568,7 @@ namespace Assignment
         }
         protected void hiddenBtn_Click(object sender, EventArgs e)
         {
-            string findCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR CarPlate LIKE @searchString";
+            string findCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR CarPlate LIKE @searchString ORDER BY C.CarPlate";
             string search = searchBar.Text.Replace(" ","");
             if (search == "")
             {
@@ -587,6 +591,7 @@ namespace Assignment
                 con.Close();
                 UpdatePageInfo(true, row);
                 UpdatePanel1.Update();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addCarPlate()", true);
             }
         }
 
@@ -598,7 +603,7 @@ namespace Assignment
         protected void ddlTableLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             string loc = ddlTableLocation.SelectedValue;
-            string selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE C.LocationId = @LocationId";
+            string selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE C.LocationId = @LocationId ORDER BY C.CarPlate";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(selectCar, con);
             if (loc == "0")
@@ -620,6 +625,7 @@ namespace Assignment
                 con.Close();
                 UpdatePageInfo(true, row);
                 UpdatePanel1.Update();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addCarPlate()", true);
             }
         }
     }

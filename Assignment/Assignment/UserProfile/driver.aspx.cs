@@ -28,6 +28,8 @@ namespace Assignment
                     loadUserInfo(Session["Id"].ToString());
                     txtBirthdate.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
                     txtBirthdate.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
+                    txtBirthdate2.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
+                    txtBirthdate2.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
                 }
                 else
                 {

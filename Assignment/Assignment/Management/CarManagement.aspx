@@ -269,24 +269,24 @@
             <thead>
                 <tr style="text-align: center;">
                     <th scope="col">
-                        <asp:LinkButton ID="btnSortCarPlate" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark">Car Plate</asp:LinkButton>
+                        <asp:LinkButton ID="btnSortCarPlate" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="DESC" CommandName="CarPlate" CssClass="text-dark sortcar-btn">Car Plate</asp:LinkButton>
                      </th>
                     <th scope="col">                        
-                        <asp:LinkButton ID="btnSortCarBrand" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarBrand" CssClass="text-dark">Car Brand</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortCarBrand" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarBrand" CssClass="text-dark sortcar-btn">Car Brand</asp:LinkButton></th>
                     <th scope="col">                        
-                        <asp:LinkButton ID="btnSortCarName" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarName" CssClass="text-dark">Car Name</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortCarName" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarName" CssClass="text-dark sortcar-btn">Car Name</asp:LinkButton></th>
                     <th scope="col">                        
-                        <asp:LinkButton ID="btnSortCarType" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CType" CssClass="text-dark">Car Type</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortCarType" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CType" CssClass="text-dark sortcar-btn">Car Type</asp:LinkButton></th>
                     <th scope="col">                        
-                        <asp:LinkButton ID="btnSortCarDayPrice" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarDayPrice" CssClass="text-dark">Car Day Price</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortCarDayPrice" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarDayPrice" CssClass="text-dark sortcar-btn">Car Day Price</asp:LinkButton></th>
                     <th scope="col">                        
-                        <asp:LinkButton ID="btnSortCarTransmission" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarTransmission" CssClass="text-dark">Car Transmission</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortCarTransmission" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarTransmission" CssClass="text-dark sortcar-btn">Car Transmission</asp:LinkButton></th>
                     <th scope="col">                        
                         <asp:LinkButton ID="btnSortCarEnergy" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarEnergy" CssClass="text-dark">Car Energy</asp:LinkButton></th>
                     <th scope="col">                        
-                        <asp:LinkButton ID="btnSortCarLocation" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="LocationName" CssClass="text-dark">Location Name</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortCarLocation" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="LocationName" CssClass="text-dark sortcar-btn">Location Name</asp:LinkButton></th>
                      <th scope="col">
-                        <asp:LinkButton ID="btnSortCarState" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="IsDelisted" CssClass="text-dark">Car Stated</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortCarState" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="IsDelisted" CssClass="text-dark sortcar-btn">Car Stated</asp:LinkButton></th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -329,6 +329,23 @@
     </asp:UpdatePanel>
     </div>
     <script>
+
+        function showSortDirection(buttonID, sort) {
+
+            var button = document.getElementById(buttonID);
+
+            if (sort == "ASC") {
+                button.innerHTML = button.innerHTML + " ▲";
+            } else {
+                button.innerHTML = button.innerHTML + " ▼";
+            }
+        }
+
+        function addCarPlate() {
+
+            document.getElementById('<%= btnSortCarPlate.ClientID %>').innerHTML = document.getElementById('<%= btnSortCarPlate.ClientID %>').innerHTML + " ▲";
+        }
+
         function fileUpload() {
             document.getElementById('<%= validateCarPic.ClientID %>').enabled = true;
             document.getElementById('<%= fuCarPic.ClientID %>').click();
