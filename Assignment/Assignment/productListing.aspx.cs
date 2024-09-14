@@ -147,10 +147,11 @@ namespace Assignment
             DateTime startDate = DateTime.Parse(txtStartTime.Text);
             DateTime endDate = DateTime.Parse(txtEndTime.Text);
 
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
-            {
-                using (SqlCommand com = new SqlCommand(carInfo, con))
-                {
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+
+
+             SqlCommand com = new SqlCommand(carInfo, con);
+
                     com.Parameters.AddWithValue("@startDate", startDate);
                     com.Parameters.AddWithValue("@endDate", endDate);
                     com.Parameters.AddRange(parameters.ToArray());
@@ -178,8 +179,7 @@ namespace Assignment
                     Session["EndDate"] = txtEndTime.Text;
                     Session["Dropoff_state"] = ddlDFState.SelectedValue;
                     Session["Pickup_state"] = ddlPUState.SelectedValue;
-                }
-            }
+            con.Close();
         }
         protected void btnProductRent_Click(object sender, EventArgs e)
         {
