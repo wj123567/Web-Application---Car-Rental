@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/UserProfile/profile.Master" AutoEventWireup="true" CodeBehind="profile.aspx.cs" Inherits="Assignment.profile" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" integrity="sha512-JyCZjCOZoyeQZSd5+YEAcFgz2fowJ1F1hyJOXgtKu4llIa0KneLcidn5bwfutiehUTiOuK87A986BZJMko0eWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.css" integrity="sha512-087vysR/jM0N5cp13Vlp+ZF9wx6tKbvJLwPO8Iit6J7R+n7uIMMjg37dEgexOshDmDITHYY5useeSmfD1MYiQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT * FROM [ApplicationUser]"></asp:SqlDataSource>
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnEmail" runat="server" />
@@ -8,6 +10,27 @@
         <asp:Timer ID="verifyTimer" runat="server" Interval="1000" OnTick="verifyTimer_Tick"></asp:Timer>
         </ContentTemplate>
     </asp:UpdatePanel>
+<div class="modal fade" id="cropModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cropModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">Crop Profile Picture</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="cropped-container">
+              <asp:Image ID="imgCropImage" runat="server" Width="100%" />
+              <asp:HiddenField ID="hdnProfilePicture" runat="server" />
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <asp:Button ID="btnUpload" runat="server" Text="Change Profile Picture" CssClass="btn btn-primary" OnClick="btnUpload_Click"/>
+      </div>
+    </div>
+  </div>   
+</div>
+        
  <div class="modal fade" id="changeEmail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="changeEmail" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
@@ -90,10 +113,8 @@
                      <span class="upload-text">Upload</span>
                     <asp:Image ID="userProfilePic" runat="server" CssClass="img-account-profile rounded-circle" Width="100px"/>
                     </asp:LinkButton>
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 2 MB</div>
-                    <asp:Button ID="userUploadProfile" runat="server" Text="Upload new image" CssClass="btn btn-primary" OnClick="userUploadProfile_Click" ValidationGroup="uploadProfilePic" Enabled="False" />
-                    <asp:FileUpload ID="fuProfile" runat="server" CssClass="uploadPicture" onchange="ShowPreview(event)"/>
-                    <br />
+                    <div class="small font-italic text-muted mb-2">JPG or PNG no larger than 2 MB</div>
+                    <asp:FileUpload ID="fuProfile" runat="server" CssClass="uploadPicture" onchange="ShowCropModal(event)"/>
                     <asp:CustomValidator ID="validateProfilePic" runat="server" ControlToValidate="fuProfile" CssClass="validate" ValidationGroup="uploadProfilePic" ValidateEmptyText="True" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile"></asp:CustomValidator>
                     <asp:Label ID="lblProfilePic" runat="server" Text="" CssClass="d-block mt-2 validate"></asp:Label>
                 </div>
@@ -135,7 +156,89 @@
 </div>
 </div>
 
-<script>
+    <script>
+        var isPass = false;
+        function ShowCropModal(event) {
+            if (isPass) {
+                //read content of the file
+                var ImageDir = new FileReader();
+                //when file read update the image element
+                ImageDir.onload = function () {
+                    var image = document.getElementById('<%= imgCropImage.ClientID %>');
+                    image.src = ImageDir.result;
+                    $('#cropModal').modal('show');
+                };
+                //get file and convert to data url to use in img src = ""
+                ImageDir.readAsDataURL(event.target.files[0]);
+            }
+        }
+
+        let cropper;
+        const imageInput = document.getElementById('<%= fuProfile.ClientID %>');
+        const imageElement = document.getElementById('<%= imgCropImage.ClientID %>');
+        const uploadButton = document.getElementById('<%= btnUpload.ClientID %>');
+        const result = document.getElementById('<%= hdnProfilePicture.ClientID %>');
+
+
+        // Initialize cropper when the modal is shown
+        $('#cropModal').on('shown.bs.modal', function () {
+            cropper = new Cropper(imageElement, {
+                aspectRatio: 1,  // Adjust based on your needs
+                viewMode: 3,
+                movable: true,
+                guides: false,
+                cropBoxResizable: true,
+                modal: true,
+                zoomable: true,
+                rotatable: true,
+                scalable: true,
+                width: 100,
+                height: 100,
+            });
+
+            uploadButton.onclick = function () {
+                var croppedCanvas;
+                var roundedCanvas;
+                var roundedImage;
+                // Crop
+                croppedCanvas = cropper.getCroppedCanvas();
+                // Round
+                roundedCanvas = getRoundedCanvas(croppedCanvas);
+                // Convert the rounded image to Base64 image string
+                base64Image = roundedCanvas.toDataURL('image/jpg');
+                // pass value to hidden field to access at backend
+                result.value = base64Image;
+                console.log(result.value);
+            };
+
+        }).on('hidden.bs.modal', function () {
+            // Destroy the cropper instance when the modal is closed
+            cropper.destroy();
+            cropper = null;
+        });
+
+
+        function getRoundedCanvas(sourceCanvas) {
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            var width = sourceCanvas.width;
+            var height = sourceCanvas.height;
+
+            canvas.width = width;
+            canvas.height = height;
+
+            // for better quality
+            context.imageSmoothingEnabled = true;
+            // Draw the cropped image onto the new canvas
+            context.drawImage(sourceCanvas, 0, 0, width, height);
+            // Clip the image into a circular shape
+            context.globalCompositeOperation = 'destination-in';
+            context.beginPath();
+            context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, 2 * Math.PI, true);
+            context.fill();
+
+            return canvas;
+        }
 
     function fileUpload() {
         document.getElementById('<%= fuProfile.ClientID %>').click();
@@ -143,39 +246,26 @@
         return false;
     }
 
-    function ShowPreview(event) {        
-        //read content of the file
-        var ImageDir = new FileReader();
-        //when file read update the image element
-        ImageDir.onload = function () {
-            var image = document.getElementById('<%= userProfilePic.ClientID %>');
-            image.src = ImageDir.result;
-        };
-        //get file and convert to data url to use in img src = ""
-        ImageDir.readAsDataURL(event.target.files[0]);
-    } 
-
     function validateFile(sender, args) {
         var fileUpload = document.getElementById(sender.controltovalidate);
-        var button = document.getElementById('<%= userUploadProfile.ClientID %>');
         var fileName = fileUpload.value;
         var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
         var maxSize = 2097152; 
 
         if (!allowedExtensions.exec(fileName)) {
             args.IsValid = false;
-            button.disabled = true;
+            isPass = false;
             return;
         }
 
         if (fileUpload.files[0].size > maxSize) {
             args.IsValid = false;
-            button.disabled = true;
+            isPass = false;
             return;
         }
 
         args.IsValid = true;
-        button.disabled = false;
+        isPass = true;
     }
 
     function transferText() {
@@ -186,7 +276,6 @@
 
     function modal2() {
         addEventListener("DOMContentLoaded", (event) => {
-            console.log("I'm in")
             $('#changeEmail2').modal('toggle');
             showhideButton();
             return false;
@@ -195,7 +284,6 @@
 
     function modal() {
         addEventListener("DOMContentLoaded", (event) => {
-            console.log("I'm in")
             $('#changeEmail').modal('toggle');
             showhideButton();
             return false;
@@ -227,8 +315,6 @@
                 button2.value = "Send";
             }
         }
-
-
 
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);

@@ -123,7 +123,7 @@ namespace Assignment
             }
         }
 
-        protected void userUploadProfile_Click(object sender, EventArgs e)
+        protected void btnUpload_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
@@ -131,23 +131,27 @@ namespace Assignment
                 string folderLocation = Server.MapPath("~/Image/UserProfile");
                 string relfolderLocation = "~/Image/UserProfile";
                 string uploadFile = "UPDATE ApplicationUser SET ProfilePicture = @ProfilePicture WHERE Id = @id";
+                string fileName = "";
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
-                if (fuProfile.HasFile)
+                if (!string.IsNullOrEmpty(hdnProfilePicture.Value))
                 {
-                    string fileName = id + ".jpg";
+                    // Decode the Base64 string and save it as an image file
+                    string base64String = hdnProfilePicture.Value.Split(',')[1]; // Remove the data URI scheme part
+                    byte[] imageBytes = Convert.FromBase64String(base64String);
+                    fileName = id + ".jpg"; // Assuming JPEG format
                     string savePath = Path.Combine(folderLocation, fileName);
                     string relPath = Path.Combine(relfolderLocation, fileName);
-                    Bitmap source = new Bitmap(fuProfile.FileContent);
-                    source.Save(savePath, ImageFormat.Jpeg);
+
+                    File.WriteAllBytes(savePath, imageBytes); // Save the file
 
                     con.Open();
-                        SqlCommand com = new SqlCommand(uploadFile, con);
-                        com.Parameters.AddWithValue("@ProfilePicture", relPath);
-                        com.Parameters.AddWithValue("@id", id);
-                        com.ExecuteNonQuery();
-                        con.Close();
-                        Response.Redirect("profile.aspx");
+                    SqlCommand com = new SqlCommand(uploadFile, con);
+                    com.Parameters.AddWithValue("@ProfilePicture", relPath);
+                    com.Parameters.AddWithValue("@id", id);
+                    com.ExecuteNonQuery();
+                    con.Close();
+                    Response.Redirect("profile.aspx");
                 }
             }
         }
