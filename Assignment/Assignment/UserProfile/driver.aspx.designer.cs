@@ -528,13 +528,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.ImageButton imgID2;
 
         /// <summary>
-        /// CustomValidator2 control.
+        /// validateIDpic2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator2;
+        protected global::System.Web.UI.WebControls.CustomValidator validateIDpic2;
 
         /// <summary>
         /// Label1 control.
@@ -573,13 +573,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.ImageButton imgSelfie2;
 
         /// <summary>
-        /// CustomValidator3 control.
+        /// validateSelfiePic2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator3;
+        protected global::System.Web.UI.WebControls.CustomValidator validateSelfiePic2;
 
         /// <summary>
         /// fuSelfie2 control.
@@ -609,13 +609,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.ImageButton imgLicenseF2;
 
         /// <summary>
-        /// CustomValidator4 control.
+        /// validateLicenseF2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator4;
+        protected global::System.Web.UI.WebControls.CustomValidator validateLicenseF2;
 
         /// <summary>
         /// fuLicenseF2 control.
@@ -645,13 +645,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.ImageButton imgLicenseB2;
 
         /// <summary>
-        /// CustomValidator5 control.
+        /// validateLicenseB2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator5;
+        protected global::System.Web.UI.WebControls.CustomValidator validateLicenseB2;
 
         /// <summary>
         /// fuLicenseB2 control.

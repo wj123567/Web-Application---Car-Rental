@@ -99,8 +99,9 @@ namespace Assignment
         {
             if (Page.IsValid)
             {
-                string updateString = "UPDATE Driver SET DriverName = @DriverName, DriverId = @DriverId, DriverLicense = @DriverLicense, DriverPno = @DriverPno, DriverBdate = @DriverBdate, DriverGender = @DriverGender, IDpic = @IDpic, SelfiePic = @SelfiePic, LicenseFpic = @LicenseFpic, LicenseBpic = @LicenseBpic, Approval = @Approval, UserId = @UserId, DateApply = @dateApply WHERE Id = @Id";
+                string updateString = "UPDATE Driver SET DriverName = @DriverName, DriverId = @DriverId, DriverLicense = @DriverLicense, DriverPno = @DriverPno, DriverBdate = @DriverBdate, DriverGender = @DriverGender,";
 
+                List<SqlParameter> parameters = new List<SqlParameter>();
                 string id = Session["DriverID"].ToString();
                 string savePathId = " "; 
                 string relPathId = " ";                
@@ -115,6 +116,7 @@ namespace Assignment
 
                 if (fuID2.HasFile)
                 {
+                    updateString += "IDpic = @IDpic,";
                     string folderLocation = Server.MapPath("~/Image/DriverId");
                     string relfolderLocation = "~/Image/DriverId";
                     string fileName = id + ".jpg";
@@ -122,10 +124,12 @@ namespace Assignment
                     relPathId = Path.Combine(relfolderLocation, fileName);
                     Bitmap source = new Bitmap(fuID2.FileContent);
                     source.Save(savePathId, ImageFormat.Jpeg);
+                    parameters.Add(new SqlParameter("@IDpic", relPathId));
                 }
 
                 if (fuSelfie2.HasFile)
                 {
+                    updateString += "SelfiePic = @SelfiePic,";
                     string folderLocation = Server.MapPath("~/Image/DriverSelfie");
                     string relfolderLocation = "~/Image/DriverSelfie";
                     string fileName = id + ".jpg";
@@ -133,10 +137,12 @@ namespace Assignment
                     relPathSelfie = Path.Combine(relfolderLocation, fileName);
                     Bitmap source = new Bitmap(fuSelfie2.FileContent);
                     source.Save(savePathSelfie, ImageFormat.Jpeg);
+                    parameters.Add(new SqlParameter("@SelfiePic", relPathSelfie));
                 }
 
                 if (fuLicenseF2.HasFile)
                 {
+                    updateString += "LicenseFpic = @LicenseFpic,";
                     string folderLocation = Server.MapPath("~/Image/DriverLF");
                     string relfolderLocation = "~/Image/DriverLF";
                     string fileName = id + ".jpg";
@@ -144,10 +150,12 @@ namespace Assignment
                     relPathLicenseF = Path.Combine(relfolderLocation, fileName);
                     Bitmap source = new Bitmap(fuLicenseF2.FileContent);
                     source.Save(savePathLicenseF, ImageFormat.Jpeg);
+                    parameters.Add(new SqlParameter("@LicenseFpic", relPathLicenseF));
                 }
 
                 if (fuLicenseB2.HasFile)
                 {
+                    updateString += "LicenseBpic = @LicenseBpic,";
                     string folderLocation = Server.MapPath("~/Image/DriverLB");
                     string relfolderLocation = "~/Image/DriverLB";
                     string fileName = id + ".jpg";
@@ -155,7 +163,10 @@ namespace Assignment
                     relPathLicenseB = Path.Combine(relfolderLocation, fileName);
                     Bitmap source = new Bitmap(fuLicenseB2.FileContent);
                     source.Save(savePathLicenseB, ImageFormat.Jpeg);
+                    parameters.Add(new SqlParameter("@LicenseBpic", relPathLicenseB));
                 }
+
+                updateString += @"Approval = @Approval, DateApply = @dateApply WHERE Id = @Id";
 
                 con.Open();
                 SqlCommand com = new SqlCommand(updateString, con);
@@ -166,13 +177,9 @@ namespace Assignment
                 com.Parameters.AddWithValue("@DriverPno", countryCode +" "+txtPhoneNum2.Text);
                 com.Parameters.AddWithValue("@DriverBdate", txtBirthdate2.Text);
                 com.Parameters.AddWithValue("@DriverGender", ddlGender2.SelectedValue);
-                com.Parameters.AddWithValue("@IDpic", relPathId);
-                com.Parameters.AddWithValue("@SelfiePic", relPathSelfie);
-                com.Parameters.AddWithValue("@LicenseFpic", relPathLicenseF);
-                com.Parameters.AddWithValue("@LicenseBpic", relPathLicenseB);
+                com.Parameters.AddRange(parameters.ToArray());
                 com.Parameters.AddWithValue("@Approval", "P");
                 com.Parameters.AddWithValue("@dateApply", DateTime.Today.ToString("yyyy-MM-dd"));
-                com.Parameters.AddWithValue("@UserId", Session["Id"].ToString());
                 com.ExecuteNonQuery();
 
                 con.Close();
@@ -290,7 +297,11 @@ namespace Assignment
         protected void btnEdit_Click(object sender, EventArgs e)
         {
             ShowControls(editPanel);
-            btnEditDriver.Visible = false;            
+            btnEditDriver.Visible = false; 
+            validateLicenseB2.Enabled = false;
+            validateLicenseF2.Enabled = false;
+            validateSelfiePic2.Enabled = false;
+            validateIDpic2.Enabled = false;
         }
 
         protected void btnConfirmDelete_Click(object sender, EventArgs e)

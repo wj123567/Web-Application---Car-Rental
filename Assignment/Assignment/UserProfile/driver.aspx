@@ -274,7 +274,7 @@
                             <div class="image-frame mx-auto">
                                 <asp:ImageButton ID="imgID2" runat="server" CssClass="img mb-2 mx-auto" Width="200px" ImageUrl="~/Image/no-img.jpg" OnClientClick="return ShowImageModal(this)"/>
                              </div>
-                   <asp:CustomValidator ID="CustomValidator2" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuID2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
+                   <asp:CustomValidator ID="validateIDpic2" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuID2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <asp:Label ID="Label1" runat="server" CssClass="validate mx-auto"></asp:Label>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuID2" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewID2(event)"/>
@@ -287,7 +287,7 @@
                             <div class="image-frame mx-auto">
                                 <asp:ImageButton ID="imgSelfie2" runat="server" CssClass="img mb-2 mx-auto" Width="200px" ImageUrl="~/Image/no-img.jpg" OnClientClick="return ShowImageModal(this)"/>
                              </div>
-                   <asp:CustomValidator ID="CustomValidator3" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuSelfie2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
+                   <asp:CustomValidator ID="validateSelfiePic2" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuSelfie2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuSelfie2" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewSelfie2(event)"/>
                                 <asp:Button ID="btnUploadSelfie" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadSelfie2()" ValidationGroup="uploadPic"/>
@@ -301,7 +301,7 @@
                             <div class="image-frame mx-auto">
                                 <asp:ImageButton ID="imgLicenseF2" runat="server" CssClass="img mb-2 mx-auto" Width="200px" ImageUrl="~/Image/no-img.jpg" OnClientClick="return ShowImageModal(this)"/>
                              </div>
-                                <asp:CustomValidator ID="CustomValidator4" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuLicenseF2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
+                                <asp:CustomValidator ID="validateLicenseF2" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuLicenseF2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuLicenseF2" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewLicenseF2(event)"/>
                                 <asp:Button ID="btnUploadLicenseF" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadLicenseF2()" ValidationGroup="uploadPic"/>
@@ -313,7 +313,7 @@
                             <div class="image-frame mx-auto">
                                 <asp:ImageButton ID="imgLicenseB2" runat="server" CssClass="img mb-2 mx-auto" Width="200px" ImageUrl="~/Image/no-img.jpg" OnClientClick="return ShowImageModal(this)"/>
                              </div>
-                    <asp:CustomValidator ID="CustomValidator5" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuLicenseB2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
+                    <asp:CustomValidator ID="validateLicenseB2" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuLicenseB2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuLicenseB2" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewLicenseB2(event)"/>
                                 <asp:Button ID="btnUploadLicenseB" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadLicenseB2()" ValidationGroup="uploadPic"/>
@@ -481,24 +481,28 @@
         }
 
         function fileUploadID2() {
+        document.getElementById('<%= validateIDpic2.ClientID %>').enabled = true;
         document.getElementById('<%= fuID2.ClientID %>').click();
 
         return false;
         }
 
         function fileUploadSelfie2() {
+        document.getElementById('<%= validateSelfiePic2.ClientID %>').enabled = true;
         document.getElementById('<%= fuSelfie2.ClientID %>').click();
 
         return false;
         }
 
         function fileUploadLicenseF2() {
+        document.getElementById('<%= validateLicenseF2.ClientID %>').enabled = true;
         document.getElementById('<%= fuLicenseF2.ClientID %>').click();
 
         return false;
         }
 
         function fileUploadLicenseB2() {
+        document.getElementById('<%= validateLicenseB2.ClientID %>').enabled = true;
         document.getElementById('<%= fuLicenseB2.ClientID %>').click();
 
         return false;

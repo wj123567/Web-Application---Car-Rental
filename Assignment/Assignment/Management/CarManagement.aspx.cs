@@ -181,7 +181,6 @@ namespace Assignment
         protected void btnEditCar_Click(object sender, EventArgs e)
         {
             ShowControls(carPanel);
-            validateCarPic.Enabled = false;
             btnUploadCar.Visible = false;
             btnUpdateCar.Visible = true;
             btnDelete.Visible = true;
@@ -367,7 +366,7 @@ namespace Assignment
             com.Parameters.AddWithValue("@CarPlate", txtCarPlate.Text);
             com.ExecuteNonQuery();
             con.Close();
-            Server.Transfer("CarManagement.aspx");
+            Response.Redirect("CarManagement.aspx");
         }
 
         protected void ddlChooseLocation_SelectedIndexChanged(object sender, EventArgs e)
