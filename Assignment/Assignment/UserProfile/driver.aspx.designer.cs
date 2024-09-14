@@ -24,6 +24,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.HiddenField hdnCountryCode;
 
         /// <summary>
+        /// largeImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image largeImage;
+
+        /// <summary>
         /// btnConfirmDelete control.
         /// </summary>
         /// <remarks>
@@ -516,7 +525,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgID2;
+        protected global::System.Web.UI.WebControls.ImageButton imgID2;
 
         /// <summary>
         /// CustomValidator2 control.
@@ -561,7 +570,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgSelfie2;
+        protected global::System.Web.UI.WebControls.ImageButton imgSelfie2;
 
         /// <summary>
         /// CustomValidator3 control.
@@ -597,7 +606,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLicenseF2;
+        protected global::System.Web.UI.WebControls.ImageButton imgLicenseF2;
 
         /// <summary>
         /// CustomValidator4 control.
@@ -633,7 +642,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLicenseB2;
+        protected global::System.Web.UI.WebControls.ImageButton imgLicenseB2;
 
         /// <summary>
         /// CustomValidator5 control.

@@ -1,9 +1,19 @@
 ﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/UserProfile/profile.Master" AutoEventWireup="true" CodeBehind="driver.aspx.cs" Inherits="Assignment.driver" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <asp:HiddenField ID="hdnCountryCode" runat="server" />
-    
-    
-  <div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
+
+    <div class="modal modal-lg fade" id="imageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="imageModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="btn-close float-end my-2 btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <asp:Image ID="largeImage" runat="server" Width="100%"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
       <div class="modal-header">
@@ -262,7 +272,7 @@
                                 <label class="small mb-1">Driver ID/Passport Picture</label>
                             <div class="d-flex flex-column align-items-centers">
                             <div class="image-frame mx-auto">
-                                <asp:Image ID="imgID2" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
+                                <asp:ImageButton ID="imgID2" runat="server" CssClass="img mb-2 mx-auto" Width="200px" ImageUrl="~/Image/no-img.jpg" OnClientClick="return ShowImageModal(this)"/>
                              </div>
                    <asp:CustomValidator ID="CustomValidator2" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuID2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <asp:Label ID="Label1" runat="server" CssClass="validate mx-auto"></asp:Label>
@@ -275,7 +285,7 @@
                                 <label class="small mb-1">Driver Selfie</label>
                             <div class="d-flex flex-column align-items-centers">
                             <div class="image-frame mx-auto">
-                                <asp:Image ID="imgSelfie2" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
+                                <asp:ImageButton ID="imgSelfie2" runat="server" CssClass="img mb-2 mx-auto" Width="200px" ImageUrl="~/Image/no-img.jpg" OnClientClick="return ShowImageModal(this)"/>
                              </div>
                    <asp:CustomValidator ID="CustomValidator3" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuSelfie2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
@@ -289,7 +299,7 @@
                                 <label class="small mb-1">Driver License (Front)</label>
                             <div class="d-flex flex-column align-items-centers">
                             <div class="image-frame mx-auto">
-                                <asp:Image ID="imgLicenseF2" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
+                                <asp:ImageButton ID="imgLicenseF2" runat="server" CssClass="img mb-2 mx-auto" Width="200px" ImageUrl="~/Image/no-img.jpg" OnClientClick="return ShowImageModal(this)"/>
                              </div>
                                 <asp:CustomValidator ID="CustomValidator4" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuLicenseF2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
@@ -301,7 +311,7 @@
                                 <label class="small mb-1">Driver License (Back)</label>
                             <div class="d-flex flex-column align-items-centers">
                             <div class="image-frame mx-auto">
-                                <asp:Image ID="imgLicenseB2" runat="server" CssClass="mb-2 mx-auto" Width="150px" ImageUrl="~/Image/no-img.jpg" />
+                                <asp:ImageButton ID="imgLicenseB2" runat="server" CssClass="img mb-2 mx-auto" Width="200px" ImageUrl="~/Image/no-img.jpg" OnClientClick="return ShowImageModal(this)"/>
                              </div>
                     <asp:CustomValidator ID="CustomValidator5" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuLicenseB2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
@@ -633,6 +643,13 @@
             }
 
             args.IsValid = true;
+        }
+
+        function ShowImageModal(image) {
+            document.getElementById('<%= largeImage.ClientID %>').src = image.src;
+            $('#imageModal').modal('show');
+            console.log("Im in");
+            return false;
         }
 
         if (window.history.replaceState) {

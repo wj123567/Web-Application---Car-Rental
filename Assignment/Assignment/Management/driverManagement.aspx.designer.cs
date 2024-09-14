@@ -24,6 +24,15 @@ namespace Assignment
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// largeImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image largeImage;
+
+        /// <summary>
         /// updateReason control.
         /// </summary>
         /// <remarks>
@@ -147,7 +156,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgID;
+        protected global::System.Web.UI.WebControls.ImageButton imgID;
 
         /// <summary>
         /// lblIdPic control.
@@ -165,7 +174,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgSelfie;
+        protected global::System.Web.UI.WebControls.ImageButton imgSelfie;
 
         /// <summary>
         /// imgLicenseF control.
@@ -174,7 +183,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLicenseF;
+        protected global::System.Web.UI.WebControls.ImageButton imgLicenseF;
 
         /// <summary>
         /// imgLicenseB control.
@@ -183,7 +192,7 @@ namespace Assignment
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgLicenseB;
+        protected global::System.Web.UI.WebControls.ImageButton imgLicenseB;
 
         /// <summary>
         /// btnApprove control.

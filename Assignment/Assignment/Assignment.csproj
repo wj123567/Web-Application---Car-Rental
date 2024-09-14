@@ -612,7 +612,6 @@
     <Content Include="CarRentalSystemModel.edmx.diagram">
       <DependentUpon>CarRentalSystemModel.edmx</DependentUpon>
     </Content>
-    <Content Include="argon-dashboard-master.zip" />
     <Content Include="argon-dashboard-master\.DS_Store" />
     <Content Include="argon-dashboard-master\.github\workflows\main.yml" />
     <Content Include="argon-dashboard-master\assets\css\argon-dashboard.css.map" />
