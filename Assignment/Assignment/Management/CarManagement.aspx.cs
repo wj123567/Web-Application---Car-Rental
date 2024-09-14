@@ -110,17 +110,20 @@ namespace Assignment
                 string savePath = " ";
                 string relPath = " ";
                 string insertString = "INSERT into Car (CarPlate, CarBrand, CarName, CType, CarDesc, CarDayPrice, CarSeat, CarTransmission, CarEnergy, LocationId, IsDelisted,CarImage) VALUES (@CarPlate, @CarBrand, @CarName, @CType, @CarDesc, @CarDayPrice, @CarSeat, @CarTransmission, @CarEnergy, @LocationId, @IsDelisted ,@CarImage)";
-                if (fuCarPic.HasFile)
+                if (!string.IsNullOrEmpty(hdnCarPicture.Value))
                 {
                     savePath = " ";
                     relPath = " ";
                     string folderLocation = Server.MapPath("~/Image/CarImage");
                     string relfolderLocation = "~/Image/CarImage";
+                    // Decode the Base64 string and save it as an image file
+                    string base64String = hdnCarPicture.Value.Split(',')[1]; // Remove the data URI scheme part
+                    byte[] imageBytes = Convert.FromBase64String(base64String);
                     string fileName = txtCarPlate.Text + ".png";
                     savePath = Path.Combine(folderLocation, fileName);
                     relPath = Path.Combine(relfolderLocation, fileName);
-                    Bitmap source = new Bitmap(fuCarPic.FileContent);
-                    source.Save(savePath, ImageFormat.Png);
+
+                    File.WriteAllBytes(savePath, imageBytes); // Save the file
                 }
                 uploadCar(insertString,relPath);
                 Response.Redirect("CarManagement.aspx");
@@ -134,17 +137,20 @@ namespace Assignment
                 string savePath = " ";
                 string relPath = imgCarPic.ImageUrl;
                 string updateString = "UPDATE Car SET CarPlate=@CarPlate, CarBrand=@CarBrand, CarName=@CarName, CType=@CType, CarDesc=@CarDesc, CarDayPrice=@CarDayPrice, CarSeat=@CarSeat, CarTransmission=@CarTransmission, CarEnergy=@CarEnergy, LocationId=@LocationId, IsDelisted=@IsDelisted ,CarImage=@CarImage WHERE CarPlate = @CarPlate";
-                if (fuCarPic.HasFile)
+                if (!string.IsNullOrEmpty(hdnCarPicture.Value))
                 {
                     savePath = " ";
                     relPath = " ";
                     string folderLocation = Server.MapPath("~/Image/CarImage");
                     string relfolderLocation = "~/Image/CarImage";
-                    string fileName = txtCarPlate.Text + ".png";
+                    // Decode the Base64 string and save it as an image file
+                    string base64String = hdnCarPicture.Value.Split(',')[1]; // Remove the data URI scheme part
+                    byte[] imageBytes = Convert.FromBase64String(base64String);
+                    string fileName = txtCarPlate.Text + ".png"; 
                     savePath = Path.Combine(folderLocation, fileName);
                     relPath = Path.Combine(relfolderLocation, fileName);
-                    Bitmap source = new Bitmap(fuCarPic.FileContent);
-                    source.Save(savePath, ImageFormat.Png);
+
+                    File.WriteAllBytes(savePath, imageBytes); // Save the file
                 }
                 uploadCar(updateString,relPath);
                 Response.Redirect("CarManagement.aspx");
@@ -155,7 +161,8 @@ namespace Assignment
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
-            SqlCommand com = new SqlCommand(uploadString,con);            com.Parameters.AddWithValue("@CarPlate",txtCarPlate.Text);
+            SqlCommand com = new SqlCommand(uploadString,con);            
+            com.Parameters.AddWithValue("@CarPlate",txtCarPlate.Text);
             com.Parameters.AddWithValue("@CarBrand", ddlCarBrand.SelectedValue);
             com.Parameters.AddWithValue("@CarName", txtCarName.Text);
             com.Parameters.AddWithValue("@CType", ddlCarType.SelectedValue);
@@ -628,5 +635,6 @@ namespace Assignment
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addCarPlate()", true);
             }
         }
+
     }
 }

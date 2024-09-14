@@ -48,6 +48,7 @@ namespace Assignment
             DriverReapeter.DataBind();
             con.Close();
             UpdatePageInfo(false, getTotalRow());
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addDateApply()", true);
         }
 
         protected void UpdatePageInfo(bool isSearching, int row)
@@ -97,13 +98,16 @@ namespace Assignment
         {
             Label lblApproval = (Label)e.Item.FindControl("lblApproval");
             Label lblBdate = (Label)e.Item.FindControl("lblBdate");
+            Label lblDateApply = (Label)e.Item.FindControl("lblDateApply");
             Label lblReject = (Label)e.Item.FindControl("lblReject");
             Button btnView = (Button)e.Item.FindControl("btnView");
             string approvalStatus = DataBinder.Eval(e.Item.DataItem,"Approval").ToString();
             DateTime bDate = (DateTime)DataBinder.Eval(e.Item.DataItem,"DriverBdate");
+            DateTime dateApply = (DateTime)DataBinder.Eval(e.Item.DataItem,"DateApply");
             string rejectReason = DataBinder.Eval(e.Item.DataItem,"rejectReason").ToString();
 
             lblBdate.Text = bDate.ToString("dd/MM/yyyy");
+            lblDateApply.Text = dateApply.ToString("dd/MM/yyyy");
 
             switch (approvalStatus)
             {
@@ -238,6 +242,7 @@ namespace Assignment
             DriverReapeter.DataSource = sortedData;
             DriverReapeter.DataBind();
             updateDriverTable.Update();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", $"showSortDirection('{button.ClientID}', '{sort}');", true);
         }
 
         protected void DriverReapeter_ItemCreated(object sender, RepeaterItemEventArgs e)
@@ -274,6 +279,7 @@ namespace Assignment
                 DriverReapeter.DataBind();
                 con.Close();
                 UpdatePageInfo(true, row);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addDateApply()", true);
             }
         }
 
@@ -316,6 +322,7 @@ namespace Assignment
             DriverReapeter.DataBind();
             con.Close();
             UpdatePageInfo(true, row);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addDateApply()", true);
         }
     }
 }

@@ -275,7 +275,7 @@
             <thead>
                 <tr style="text-align: center;">                  
                     <th scope="col">
-                        <asp:LinkButton ID="btnSortUsername" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Username" CssClass="text-dark">Username</asp:LinkButton>
+                        <asp:LinkButton ID="btnSortUsername" runat="server" OnClick="btnSort_Click" CommandArgument="DESC" CommandName="Username" CssClass="text-dark">Username</asp:LinkButton>
                      </th>
                     <th scope="col">                        
                         <asp:LinkButton ID="btnSortEmail" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Email" CssClass="text-dark">Email</asp:LinkButton></th>
@@ -349,6 +349,22 @@
             document.getElementById('<%= fuAddProfile.ClientID %>').click();
 
             return false;
+        }
+
+        function showSortDirection(buttonID, sort) {
+
+            var button = document.getElementById(buttonID);
+
+            if (sort == "ASC") {
+                button.innerHTML = button.innerHTML + " ▲";
+            } else {
+                button.innerHTML = button.innerHTML + " ▼";
+            }
+        }
+
+        function addUsername() {
+
+            document.getElementById('<%= btnSortUsername.ClientID %>').innerHTML = document.getElementById('<%= btnSortUsername.ClientID %>').innerHTML + " ▲";
         }
 
         function ShowPreview(event) {          

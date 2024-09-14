@@ -166,7 +166,7 @@
                     <th scope="col">                        
                         <asp:LinkButton ID="btnSortDriverBdate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverBdate" CssClass="text-dark">Birth Date</asp:LinkButton></th>
                     <th scope="col">                        
-                        <asp:LinkButton ID="btnSortDriverGender" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverGender" CssClass="text-dark">Gender</asp:LinkButton></th>
+                        <asp:LinkButton ID="btnSortDateApply" runat="server" OnClick="btnSort_Click" CommandArgument="DESC" CommandName="DateApply" CssClass="text-dark">Date Apply</asp:LinkButton></th>
                     <th scope="col">                        
                         <asp:LinkButton ID="LinkButton1" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverPno" CssClass="text-dark">Phone no</asp:LinkButton></th>
                     <th scope="col">                        
@@ -188,7 +188,9 @@
                     <td scope="col">
                         <asp:Label ID="lblBdate" runat="server"></asp:Label>
                     </td>
-                    <td scope="col"><%# Eval("DriverGender") %></td>
+                    <td scope="col">
+                        <asp:Label ID="lblDateApply" runat="server"></asp:Label>
+                    </td>
                     <td scope="col"><%# Eval("DriverPno") %></td>
                     <td scope="col"><%# Eval("DriverLicense") %></td>
                     <td scope="col"><%# Eval("DriverId") %></td>
@@ -261,6 +263,22 @@
 
             button.style.backgroundColor = "#3490dc";
             button.style.color = "#fff";
+        }
+
+        function showSortDirection(buttonID, sort) {
+
+            var button = document.getElementById(buttonID);
+
+            if (sort == "ASC") {
+                button.innerHTML = button.innerHTML + " ▲";
+            } else {
+                button.innerHTML = button.innerHTML + " ▼";
+            }
+        }
+
+        function addDateApply() {
+
+            document.getElementById('<%= btnSortDateApply.ClientID %>').innerHTML = document.getElementById('<%= btnSortDateApply.ClientID %>').innerHTML + " ▲";
         }
 
 

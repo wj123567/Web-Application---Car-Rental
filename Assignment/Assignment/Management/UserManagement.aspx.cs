@@ -63,6 +63,7 @@ namespace Assignment
             UserReapeter.DataBind();
             con.Close();
             UpdatePageInfo(false, getTotalRow());
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addUsername()", true);
         }
 
         protected void UpdatePageInfo(bool isSearching, int row)
@@ -129,11 +130,12 @@ namespace Assignment
             UserReapeter.DataSource = sortedData;
             UserReapeter.DataBind();
             updateUserTable.Update();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", $"showSortDirection('{button.ClientID}', '{sort}');", true);
         }
 
         protected void hiddenBtn_Click(object sender, EventArgs e)
         {
-            string selectUser = "SELECT * FROM ApplicationUser WHERE Username Like @search OR Email Like @search";
+            string selectUser = "SELECT * FROM ApplicationUser WHERE Username Like @search OR Email Like @search ORDER BY Username";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             string search = searchBar.Text.Replace(" ","");
             if (search == "")
@@ -157,6 +159,7 @@ namespace Assignment
                 con.Close();
                 UpdatePageInfo(true, row);
             }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addUsername()", true);
         }
 
 
