@@ -15,7 +15,7 @@ namespace Assignment.Management
 {
     public partial class dashboard : System.Web.UI.Page
     {
-        public string lineData;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -148,13 +148,16 @@ namespace Assignment.Management
             string query = "";
             string xAxisTitle = "";
             string categories = "";
+            string lineRecordData = "";
+            string lineAmtData = "";
             List<string> categoryList = new List<string>();
             StringBuilder lineBuilder = new StringBuilder("[");
+            StringBuilder lineAmtBuilder = new StringBuilder("[");
 
             switch (timeFilter)
             {
                 case "Day":
-                    query = @"SELECT DATEPART(HOUR, BookingDate) AS Hour , COUNT(*) AS BookingCount
+                    query = @"SELECT DATEPART(HOUR, BookingDate) AS Hour , COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
                       FROM Booking 
                       WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, GETDATE())  -- Filter by current date
                       GROUP BY DATEPART(HOUR, BookingDate)
@@ -162,31 +165,37 @@ namespace Assignment.Management
                     xAxisTitle = "Hours in 24-hour system";
                     break;
                 case "Week":
-                    query = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
-                              DECLARE @StartOfWeek DATE = DATEADD(DAY, -DATEPART(WEEKDAY, @CurrentDate) + 1, @CurrentDate) -- Sunday
-                              DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) -- Saturday
+                    string weekFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
+                              DECLARE @StartOfWeek DATE = DATEADD(DAY, -DATEPART(WEEKDAY, @CurrentDate) + 1, @CurrentDate) 
+                              DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";//start - Sunday , end-Saturday 
 
-                              SELECT CONVERT(VARCHAR, BookingDate, 101) AS DatePerWeek, COUNT(*) AS BookingCount 
+                            query = weekFilter
+                              + @"SELECT CONVERT(VARCHAR, BookingDate, 101) AS DatePerWeek, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
                               FROM Booking 
                               WHERE BookingDate >= @StartOfWeek AND BookingDate < DATEADD(DAY, 1, @EndOfWeek)
                               GROUP BY CONVERT(VARCHAR, BookingDate, 101)  -- Group by day
                               ORDER BY CONVERT(VARCHAR, BookingDate, 101)  -- Sort by formatted date";
+
                     xAxisTitle = "Date of The Week";
                     break;
                 case "Month":
-                    query = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE());
-                            DECLARE @StartOfMonth DATE = DATEADD(DAY, -DAY(@CurrentDate) + 1, @CurrentDate); -- First day of the current month
-                            DECLARE @EndOfMonth DATE = EOMONTH(@CurrentDate); -- Last day of the current month
-                            
-                            SELECT CONVERT(VARCHAR, BookingDate, 103) AS BookingDate, COUNT(*) AS BookingCount
+                    string monthFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
+                                           DECLARE @StartOfMonth DATE = DATEADD(DAY, -DAY(@CurrentDate) + 1, @CurrentDate)
+                                           DECLARE @EndOfMonth DATE = EOMONTH(@CurrentDate)";
+
+                    query = monthFilter 
+                            + @"SELECT CONVERT(VARCHAR, BookingDate, 103) AS BookingDate, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
                             FROM Booking
                             WHERE BookingDate BETWEEN @StartOfMonth AND @EndOfMonth
                             GROUP BY CONVERT(VARCHAR, BookingDate, 103)
                             ORDER BY BookingDate";
+
+
+
                     xAxisTitle = "Day of The Month";
                     break;
                 case "Quarter":
-                    query = @"SELECT YEAR(BookingDate) AS Year, DATEPART(QUARTER, BookingDate) AS Quarter, COUNT(*) AS BookingCount 
+                    query = @"SELECT YEAR(BookingDate) AS Year, DATEPART(QUARTER, BookingDate) AS Quarter, COUNT(*) AS BookingCount ,SUM(Price) AS BookingAmount
                             FROM Booking 
                             WHERE BookingDate IS NOT NULL  
                             GROUP BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)
@@ -194,7 +203,7 @@ namespace Assignment.Management
                     xAxisTitle = "Quarter";
                     break;
                 case "Year":
-                    query = @"SELECT YEAR(BookingDate) AS Year, FORMAT(BookingDate,'MMM') AS Month, COUNT(*) AS BookingCount 
+                    query = @"SELECT YEAR(BookingDate) AS Year, FORMAT(BookingDate,'MMM') AS Month, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
                             FROM Booking 
                             WHERE BookingDate IS NOT NULL  
                             GROUP BY YEAR(BookingDate), FORMAT(BookingDate, 'MMM')
@@ -209,14 +218,15 @@ namespace Assignment.Management
                                     YEAR(BookingDate) AS Year,
                                     MONTH(BookingDate) AS Month,
                                     DAY(BookingDate) AS Day,
-                                    FORMAT(BookingDate, 'MMM') AS MonthABC
+                                    FORMAT(BookingDate, 'MMM') AS MonthABC,
+                                    Price
                                 FROM 
                                     Booking
                                 WHERE  
                                     BookingDate >= @StartDate 
                                     AND BookingDate <= @EndDate
                             )
-                            SELECT Year, Month, MonthABC,COUNT(*) AS BookingCount
+                            SELECT Year, Month, MonthABC,COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
                              FROM BookingCTE
                              GROUP BY Year, Month, MonthABC 
                              ORDER BY Year, Month ";
@@ -227,6 +237,7 @@ namespace Assignment.Management
 
 
             SqlCommand cmd = new SqlCommand(query, con);
+            
 
             if (timeFilter == "Custom")
             {
@@ -234,17 +245,16 @@ namespace Assignment.Management
                 cmd.Parameters.AddWithValue("@EndDate", dateTo);
             }
 
+   
+            DataTable dtBooking = new DataTable();
+            dtBooking.Load(cmd.ExecuteReader());
 
-            DataTable dt = new DataTable();
-            dt.Load(cmd.ExecuteReader());
-
-            gvBooking.DataSource = dt;
+            gvBooking.DataSource = dtBooking;
             gvBooking.DataBind();
-
 
             //start population to the line graph(data format in [ [x1,y1],[x2,y2],...]
            
-            foreach (DataRow dr in dt.Rows)
+            foreach (DataRow dr in dtBooking.Rows)
             {
 
                 switch (timeFilter)
@@ -252,20 +262,24 @@ namespace Assignment.Management
                     case "Day":
                         lineBuilder.Append($"[\"{dr["Hour"]}\",{dr["BookingCount"]}],");
                         string hourFormat = dr["Hour"].ToString() + ":00";
+                        lineAmtBuilder.Append($"[\"{dr["Hour"]}\",{dr["BookingAmount"]}],");
                         categoryList.Add(hourFormat);
                         break;
                     case "Week":
                         /*string date = dr["DatePerWeek"].ToString();*/
                         lineBuilder.Append($"[\"{dr["DatePerWeek"]}\",{dr["BookingCount"]}],");
                         categoryList.Add(dr["DatePerWeek"].ToString());
+                        lineAmtBuilder.Append($"[\"{dr["DatePerWeek"]}\",{dr["BookingAmount"]}],");
                         break;
                     case "Month":
                         lineBuilder.Append($"[\"{dr["BookingDate"]}\",{dr["BookingCount"]}],");
                         categoryList.Add(dr["BookingDate"].ToString());
+                        lineAmtBuilder.Append($"[\"{dr["BookingDate"]}\",{dr["BookingAmount"]}],");
                         break;
                     case "Quarter":
                         lineBuilder.Append($"[\"{dr["Quarter"]}\",{dr["BookingCount"]}],");
                         string quarterFormat = dr["Quarter"].ToString();
+                        lineAmtBuilder.Append($"[\"{dr["Quarter"]}\",{dr["BookingAmount"]}],");
                         switch (quarterFormat)
                         {
                             case "1":
@@ -287,31 +301,41 @@ namespace Assignment.Management
                         break;
                     case "Year":
                         lineBuilder.Append($"[\"{dr["Month"]}\",{dr["BookingCount"]}],");
+                        lineAmtBuilder.Append($"[\"{dr["Month"]}\",{dr["BookingAmount"]}],");
                         categoryList.Add(dr["Month"].ToString());
                         break;
 
                     case "Custom":
                         lineBuilder.Append($"[\"{dr["MonthABC"]}\",{dr["BookingCount"]}],");
+                        lineAmtBuilder.Append($"[\"{dr["MonthABC"]}\",{dr["BookingAmount"]}],");
                         categoryList.Add(dr["MonthABC"].ToString());
                         break;
                 }
 
             }
 
+           
+
             // Remove the last comma and close the JSON array
             if (lineBuilder.Length > 1)
                 lineBuilder.Length--; // Remove trailing comma
+            if(lineAmtBuilder.Length > 1)
+                lineAmtBuilder.Length--;
+
             lineBuilder.Append("]");
+            lineAmtBuilder.Append("]");
 
-            lineData = lineBuilder.ToString();
-
+            lineRecordData = lineBuilder.ToString();
+            lineAmtData = lineAmtBuilder.ToString();
             categories = string.Join(",", categoryList.Select(c => $"'{c}'"));
 
 
             // Inject the lineData and JavaScript into the page
-            string script = $"renderChart({lineData},'{xAxisTitle}',[{categories}]);"; // Pass the data to JavaScript function
+            string script = $"renderBookingRecordChart({lineRecordData},'{xAxisTitle}',[{categories}]);"; // Pass the data to JavaScript function
+            string script2 = $"renderBookingAmtChart({lineAmtData},'{xAxisTitle}',[{categories}]);"; // Pass the data to JavaScript function
 
-            ClientScript.RegisterStartupScript(this.GetType(), "renderChartScript", script, true);
+            ClientScript.RegisterStartupScript(this.GetType(), "renderBookingRecordScript", script, true);
+            ClientScript.RegisterStartupScript(this.GetType(), "renderBookingAmtScript", script2, true);
             con.Close();
         }
     }

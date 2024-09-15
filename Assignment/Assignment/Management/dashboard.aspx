@@ -175,8 +175,13 @@
                                  <td>
                                      <asp:GridView ID="gvBooking" runat="server"></asp:GridView>
                                  </td>
+                                
                                  <td>
                                      <div id="bookNumChart"></div>
+                                 </td>
+
+                                 <td>
+                                     <div id="bookAmtChart"></div>
                                  </td>
                              </tr>
                          </table>
@@ -721,12 +726,12 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
         <script>
-            function renderChart(lineData,xAxisTitle,categories) {
+            function renderBookingRecordChart(lineData,xAxisTitle,categories) {
                 console.log("Line data: ", lineData);
                 console.log("Category: ",categories);
                 $('#bookNumChart').highcharts({
                     chart: {
-                        type: 'spline'
+                       type:'spline'
                     },
                     title: {
                         text: "Summary of Booking Record"
@@ -742,9 +747,51 @@
                             text: "Count"
                         }
                     },
+                    plotOptions:{
+                        spline:{
+                            dataLabels:{
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
                     series: [{
                         type: 'spline',
                         name: "Summary of Booking Record",
+                        data: lineData // Converts the lineData string to a JavaScript array
+                    }]
+                });
+            }
+            function renderBookingAmtChart(lineData, xAxisTitle, categories) {
+                $('#bookAmtChart').highcharts({
+                    chart: {
+                        type:'column'
+                    },
+                    title: {
+                        text: "Summary of Booking Amount"
+                    },
+                    xAxis: {
+                        title: {
+                            text: xAxisTitle
+                        },
+                        categories: categories // Placeholder
+                    },
+                    yAxis: {
+                        title: {
+                            text: "Amount Made"
+                        }
+                    },
+                    plotOptions: {
+                        spline: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    series: [{
+                        type: 'column',
+                        name: "Amount Made",
                         data: lineData // Converts the lineData string to a JavaScript array
                     }]
                 });
