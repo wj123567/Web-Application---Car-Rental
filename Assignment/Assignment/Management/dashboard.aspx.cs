@@ -122,6 +122,140 @@ namespace Assignment.Management
             return jsonData;
         }
 
+        protected void btnCustRecord_Click(object sender, EventArgs e)
+        {
+            DateTime dateFrom = new DateTime();
+            DateTime dateTo = new DateTime();
+            if (hdnTimeFilter_cust.Value == "Custom")
+            {
+                dateFrom = DateTime.Parse(txtStartDate_cust.Text);
+                dateTo = DateTime.Parse(txtEndDate_cust.Text);
+            }
+            string timeFilter = ddlTimeFilter_cust.SelectedValue;
+
+            loadTopCust(dateFrom,dateTo,timeFilter);
+        }
+
+        private void loadTopCust(DateTime dateFrom,DateTime dateTo,string timeFilter)
+        {
+            string query = "";
+            /*string sql = @"SELECT TOP 1 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                         FROM ApplicationUser a JOIN Booking b
+                         ON a.Id = b.UserId
+                         GROUP BY a.ProfilePicture,a.Username,a.Email";*/
+                         
+            switch (timeFilter)
+            {
+                case "Day":
+                    query = @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                              FROM ApplicationUser a JOIN Booking b
+                              ON a.Id = b.UserId
+                              WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, GETDATE())  -- Filter by current date
+                              GROUP BY a.ProfilePicture,a.Username,a.Email 
+                              ORDER BY TotalPrice DESC";     
+                    break;
+                case "Week":
+                    string weekFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
+                              DECLARE @StartOfWeek DATE = DATEADD(DAY, -DATEPART(WEEKDAY, @CurrentDate) + 1, @CurrentDate) 
+                              DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";//start - Sunday , end-Saturday 
+
+                    query = weekFilter
+                      + @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                              FROM ApplicationUser a JOIN Booking b
+                              ON a.Id = b.UserId
+                              WHERE BookingDate >= @StartOfWeek AND BookingDate < DATEADD(DAY, 1, @EndOfWeek)
+                              GROUP BY a.ProfilePicture,a.Username,a.Email
+                              ORDER BY TotalPrice DESC";
+
+                    
+                    break;
+                case "Month":
+                    string monthFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
+                                           DECLARE @StartOfMonth DATE = DATEADD(DAY, -DAY(@CurrentDate) + 1, @CurrentDate)
+                                           DECLARE @EndOfMonth DATE = EOMONTH(@CurrentDate)";
+
+                    query = monthFilter
+                            + @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                            FROM ApplicationUser a JOIN Booking b
+                            ON a.Id = b.UserId
+                            WHERE BookingDate BETWEEN @StartOfMonth AND @EndOfMonth
+                            GROUP BY a.ProfilePicture,a.Username,a.Email 
+                            ORDER BY TotalPrice DESC";
+
+
+
+                    
+                    break;
+                case "Quarter":
+                    query = @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                            FROM ApplicationUser a JOIN Booking b
+                            ON a.Id = b.UserId
+                            WHERE YEAR(BookingDate) = YEAR(CONVERT(DATE, GETDATE()))
+                            AND DATEPART(QUARTER,b.BookingDate) = DATEPART(QUARTER,(CONVERT(DATE, GETDATE())))
+                            GROUP BY a.ProfilePicture, a.Username, a.Email
+                            ORDER BY TotalPrice DESC";
+                   
+                    break;
+                case "Year":
+                    query = @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                            FROM ApplicationUser a JOIN Booking b
+                            ON a.Id = b.UserId
+                            WHERE BookingDate IS NOT NULL  
+                            AND YEAR(BookingDate) = YEAR(CONVERT(DATE, GETDATE()))
+                            GROUP BY a.ProfilePicture, a.Username, a.Email
+                            ORDER BY TotalPrice DESC";
+                    
+                    break;
+
+                case "Custom":
+
+                    query = @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                             FROM ApplicationUser a JOIN Booking b
+                             ON a.Id = b.UserId
+                             WHERE BookingDate IS NOT NULL
+                             AND BookingDate BETWEEN @StartDate AND @EndDate
+                             GROUP BY a.ProfilePicture, a.Username, a.Email
+                             ORDER BY TotalPrice DESC ";
+                   
+                    break;
+            }
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            if (timeFilter == "Custom")
+            {
+                cmd.Parameters.AddWithValue("@StartDate", dateFrom);
+                cmd.Parameters.AddWithValue("@EndDate", dateTo);
+            }
+            
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "TopData");
+            con.Close();
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                rptTopCustRental.DataSource = ds.Tables["TopData"];
+                rptTopCustRental.DataBind();
+                updateTopCust.Update();
+
+                noCarPlaceholder.Visible = false;
+                lblTopUser.Visible = true;
+                txtTopUser.Visible=true;
+            }
+            else
+            {
+                rptTopRental.DataSource = ds.Tables["TopData"];
+                rptTopRental.DataBind();         
+                updateTopCust.Update();
+
+                noCarPlaceholder.Visible = true;
+               
+            }
+            
+            con.Close();
+        }
+
         protected void btnBookRecord_Click(object sender, EventArgs e)
         {
             DateTime dateFrom = new DateTime();
@@ -336,6 +470,7 @@ namespace Assignment.Management
 
             ClientScript.RegisterStartupScript(this.GetType(), "renderBookingRecordScript", script, true);
             ClientScript.RegisterStartupScript(this.GetType(), "renderBookingAmtScript", script2, true);
+
             con.Close();
         }
     }

@@ -136,40 +136,39 @@
          <div class="card mb-3">
              <div class="card-body p-3">
                  <div class="container">
-  <div class="row">
-    <div class="col col-md-4">
-      <div class="form-group">
-         <label for="timeFilter">Select Time Range</label>
-        <asp:DropDownList ID="ddlTimeFilter" runat="server" CssClass="form-control" >
-            <asp:ListItem Value="Day" Text="Day"></asp:ListItem>
-            <asp:ListItem Value="Week" Text="Week"></asp:ListItem>
-            <asp:ListItem Value="Month" Text="Month"></asp:ListItem>
-            <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
-            <asp:ListItem Value="Year" Text="Year"></asp:ListItem>
-            <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
-        </asp:DropDownList>
-          <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
-        <asp:HiddenField ID="hdnTimeFilter" runat="server" />
-
-          <!-- Custom Date Pickers (Initially Hidden) -->
-    <div id="customDateFilter" style="display: none;">
-        <label for="startDate">Start Date</label>
-        
-        <asp:TextBox ID="txtStartDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
-        <label for="endDate">End Date</label>
-        
-        <asp:TextBox ID="txtEndDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
-    </div>
-    </div>
-         </div>
-      <div class="col col-md-4">
-          <asp:Button ID="btnProcess" runat="server" Text="Button"  OnClick="btnBookRecord_Click"/>
-          </div>
-    
-  </div>
-</div>
-                 <div class="chart">
-                     
+                  <div class="row">
+                    <div class="col col-md-4">
+                      <div class="form-group">
+                         <label for="timeFilter">Select Report Time Range</label>
+                        <asp:DropDownList ID="ddlTimeFilter" runat="server" CssClass="form-control" >
+                            <asp:ListItem Value="Day" Text="Day"></asp:ListItem>
+                            <asp:ListItem Value="Week" Text="Week"></asp:ListItem>
+                            <asp:ListItem Value="Month" Text="Month"></asp:ListItem>
+                            <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
+                            <asp:ListItem Value="Year" Text="Year"></asp:ListItem>
+                            <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
+                        </asp:DropDownList>
+                          <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+                        <asp:HiddenField ID="hdnTimeFilter" runat="server" />
+                
+                          <!-- Custom Date Pickers (Initially Hidden) -->
+                    <div id="customDateFilter" style="display: none;">
+                        <label for="startDate">Start Date</label>
+                        
+                        <asp:TextBox ID="txtStartDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                        <label for="endDate">End Date</label>
+                        
+                        <asp:TextBox ID="txtEndDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                    </div>
+                    </div>
+                         </div>
+                      <div class="col col-md-4">
+                          <asp:Button ID="btnProcess" runat="server" Text="Button"  OnClick="btnBookRecord_Click"/>
+                          </div>
+                    
+                  </div>
+                </div>
+                 <div class="chart">                  
                          <table>
                              <tr>
                                  <td>
@@ -185,7 +184,6 @@
                                  </td>
                              </tr>
                          </table>
-                    
                  </div>
              </div>
          </div>
@@ -197,24 +195,96 @@
     <div class="card flex-fill w-100">
     <div class="card-header">
     
-        <h5 class="card-title mb-0">Revenue </h5>
+        <h5 class="card-title mb-0">Top-N Customer on Car Rental Amount Made </h5>
     </div>
    
     <div class="card mb-3">
         <div class="card-body p-3">
-            <div class="chart">
+             <div class="container">
+              <div class="row">
+                  <div class="col col-md-4">
+                      
+                      <asp:Label ID="lblTopUser" runat="server" Text="Top N:" Visible="false"></asp:Label>
+                      <asp:TextBox ID="txtTopUser" runat="server" TextMode="Number" CssClass="form-control" min="1"  Visible="false"></asp:TextBox>
+                      
+                  </div>
+                <div class="col col-md-4">
+                  <div class="form-group">
+                     <label for="timeFilter">Select Report Time Range</label>
+                    <asp:DropDownList ID="ddlTimeFilter_cust" runat="server" CssClass="form-control" >
+                        <asp:ListItem Value="Day" Text="Day"></asp:ListItem>
+                        <asp:ListItem Value="Week" Text="Week"></asp:ListItem>
+                        <asp:ListItem Value="Month" Text="Month"></asp:ListItem>
+                        <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
+                        <asp:ListItem Value="Year" Text="Year"></asp:ListItem>
+                        <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
+                    </asp:DropDownList>
+                      <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+
+                      <asp:HiddenField ID="hdnTimeFilter_cust" runat="server" />
+                      <!-- Custom Date Pickers (Initially Hidden) -->
+                <div id="customDateFilter_cust" style="display: none;">
+                    <label for="startDate">Start Date</label>
+                    
+                    <asp:TextBox ID="txtStartDate_cust" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                    <label for="endDate">End Date</label>
+                    
+                    <asp:TextBox ID="txtEndDate_cust" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                </div>
+                </div>
+                     </div>
+                  <div class="col col-md-4">
+                      <asp:Button ID="btnCustRecord" runat="server" Text="Generate" OnClick="btnCustRecord_Click" />
+                      </div>
                 
-                    <table>
-                        <tr>
-                            <td>
-                                <asp:GridView ID="GridView1" runat="server"></asp:GridView>
-                            </td>
-                            <td>
-                                <div id="bookNumChart2"></div>
-                            </td>
-                        </tr>
-                    </table>
-               
+              </div>
+            </div>
+            <div class="chart">
+                <asp:UpdatePanel ID="updateTopCust" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+                    <ContentTemplate>
+                       <table class="table table-border table-responsive table-hover">
+                           <thead>
+                               <tr>
+                                   <th scope="col">User Profile</th>
+                                   <th scope="col">User Name</th>
+                                   <th scope="col">Email</th>
+                                   <th scope="col">Total Rent Booking Made(MYR)</th>                  
+                               </tr>
+                           </thead>
+                           <tbody>
+                               <asp:Repeater ID="rptTopCustRental" runat="server">
+                                   <ItemTemplate>
+                                       <tr>
+                                           <td scope="col">
+                                               <div class="img-fluid">
+                                               <asp:Image ID="imgUserProfile" runat="server" ImageUrl ='<%# Eval("ProfilePicture") %>' Width="100px"/>
+                                               </div>
+                                           </td>
+
+                                           <td scope="col">
+                                               <asp:Label ID="lblUserName" runat="server" Text='<%# Eval("Username") %>' />
+                                           </td>
+
+                                           <td scope="col">
+                                               <asp:Label ID="lblUserEmail" runat="server" Text='<%# Eval("Email") %>' />
+                                           </td>
+
+                                           <td scope="col">
+                                               <asp:Label ID="lblRentAmount" runat="server" Text='<%# Eval("TotalPrice","{0:F2}") %>' />
+                                           </td>
+
+                                       </tr>
+                                   </ItemTemplate>
+                               </asp:Repeater>  
+                               <asp:PlaceHolder ID="phNoCustRecord" runat="server" Visible="false">
+                               <tr class="text-center" >
+                                   <th colspan="5"><asp:Label ID="lblNoCust" runat="server" Text="No Customer Record :<" Font-Size="1.3em"></asp:Label></th>
+                               </tr>
+                               </asp:PlaceHolder>
+                           </tbody>
+                       </table>
+                   </ContentTemplate>
+               </asp:UpdatePanel>
             </div>
         </div>
     </div>
@@ -801,17 +871,29 @@
 
                 // When dropdown value changes
                 $('#<%= ddlTimeFilter.ClientID %>').change(function () {
-         var selectedValue = $(this).val();
-         $('#<%= hdnTimeFilter.ClientID %>').val(selectedValue);
+                    var selectedValue = $(this).val();
+                    $('#<%= hdnTimeFilter.ClientID %>').val(selectedValue);
 
-         // If "Custom Date" is selected, show the date pickers
-         if (selectedValue === 'Custom') {
-             $('#customDateFilter').show();
-         } else {
-             $('#customDateFilter').hide();
-         }
-     });
+                    // If "Custom Date" is selected, show the date pickers
+                    if (selectedValue === 'Custom') {
+                        $('#customDateFilter').show();
+                    } else {
+                        $('#customDateFilter').hide();
+                    }
+                });
 
+                $('#<%= ddlTimeFilter_cust.ClientID %>').change(function (){
+                    var selectedValue = $(this).val();
+                    $('#<%= hdnTimeFilter_cust.ClientID%>').val(selectedValue);
+
+                    if (selectedValue === 'Custom') {
+                        $('#customDateFilter_cust').show();
+                    } else {
+                        $('#customDateFilter_cust').hide();
+                    }
+
+
+                });
             });
         </script>
 </asp:Content>
