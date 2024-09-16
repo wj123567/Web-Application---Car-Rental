@@ -123,13 +123,13 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.DropDownList ddlTimeFilter_cust;
 
         /// <summary>
-        /// Label2 control.
+        /// lblChecking control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label lblChecking;
 
         /// <summary>
         /// hdnTimeFilter_cust control.
@@ -141,6 +141,15 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.HiddenField hdnTimeFilter_cust;
 
         /// <summary>
+        /// lblStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStartDate;
+
+        /// <summary>
         /// txtStartDate_cust control.
         /// </summary>
         /// <remarks>
@@ -150,6 +159,15 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.TextBox txtStartDate_cust;
 
         /// <summary>
+        /// lblEndDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEndDate;
+
+        /// <summary>
         /// txtEndDate_cust control.
         /// </summary>
         /// <remarks>
@@ -157,6 +175,42 @@ namespace Assignment.Management
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEndDate_cust;
+
+        /// <summary>
+        /// lblQuarter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblQuarter;
+
+        /// <summary>
+        /// ddlQuarterFilter_cust control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlQuarterFilter_cust;
+
+        /// <summary>
+        /// hdnQuarterFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnQuarterFilter;
+
+        /// <summary>
+        /// rqQuarterFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqQuarterFilter;
 
         /// <summary>
         /// btnCustRecord control.
@@ -177,6 +231,15 @@ namespace Assignment.Management
         protected global::System.Web.UI.UpdatePanel updateTopCust;
 
         /// <summary>
+        /// lblTopCust control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTopCust;
+
+        /// <summary>
         /// rptTopCustRental control.
         /// </summary>
         /// <remarks>
@@ -184,6 +247,24 @@ namespace Assignment.Management
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptTopCustRental;
+
+        /// <summary>
+        /// phLackCustRecord control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phLackCustRecord;
+
+        /// <summary>
+        /// lblLackCustRecord control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLackCustRecord;
 
         /// <summary>
         /// phNoCustRecord control.

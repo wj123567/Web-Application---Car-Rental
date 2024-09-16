@@ -130,7 +130,7 @@
          <div class="card flex-fill w-100">
          <div class="card-header">
     
-             <h5 class="card-title mb-0">Booking</h5>
+             <h5 class="card-title mb-0">Summary Report On Car Booking(Rented)</h5>
          </div>
         
          <div class="card mb-3">
@@ -141,11 +141,11 @@
                       <div class="form-group">
                          <label for="timeFilter">Select Report Time Range</label>
                         <asp:DropDownList ID="ddlTimeFilter" runat="server" CssClass="form-control" >
-                            <asp:ListItem Value="Day" Text="Day"></asp:ListItem>
-                            <asp:ListItem Value="Week" Text="Week"></asp:ListItem>
-                            <asp:ListItem Value="Month" Text="Month"></asp:ListItem>
+                            <asp:ListItem Value="Today" Text="Today"></asp:ListItem>
+                            <asp:ListItem Value="This Week" Text="This Week"></asp:ListItem>
+                            <asp:ListItem Value="This Month" Text="This Month"></asp:ListItem>
                             <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
-                            <asp:ListItem Value="Year" Text="Year"></asp:ListItem>
+                            <asp:ListItem Value="This Year" Text="This Year"></asp:ListItem>
                             <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
                         </asp:DropDownList>
                           <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
@@ -163,7 +163,7 @@
                     </div>
                          </div>
                       <div class="col col-md-4">
-                          <asp:Button ID="btnProcessBookRecord" runat="server" Text="Button"  OnClick="btnBookRecord_Click" CssClass="btn btn-primary "/>
+                          <asp:Button ID="btnProcessBookRecord" runat="server" Text="Generate"  OnClick="btnBookRecord_Click" CssClass="btn btn-primary "/>
                           </div>
                     
                   </div>
@@ -173,7 +173,16 @@
                  <div class="chart container-fluid">                  
                       <div class="row">
                         <div class="col-12">
-                            <asp:GridView ID="gvBooking" runat="server"></asp:GridView>
+                            <asp:GridView ID="gvBooking" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
+                                <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                                <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                                <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                                <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                                <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                                <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                                <SortedDescendingHeaderStyle BackColor="#242121" />
+                            </asp:GridView>
                             <asp:PlaceHolder ID="phNoBooking" runat="server" Visible="false">
                                 <tr class="text-center" >
                                     <th colspan="5">
@@ -209,8 +218,9 @@
    <div class="row">
     <div class="card flex-fill w-100">
     <div class="card-header">
-    
-        <h5 class="card-title mb-0">Top-N Customer on Car Rental Amount Made </h5>
+        
+        <h5 class="card-title mb-0">Exception Report on Car Rental Amount Made by Customers</h5>
+        
     </div>
    
     <div class="card mb-3">
@@ -222,29 +232,42 @@
                   <div class="form-group">
                      <label for="timeFilter">Select Report Time Range</label>
                     <asp:DropDownList ID="ddlTimeFilter_cust" runat="server" CssClass="form-control" >
-                        <asp:ListItem Value="Day" Text="Day"></asp:ListItem>
-                        <asp:ListItem Value="Week" Text="Week"></asp:ListItem>
-                        <asp:ListItem Value="Month" Text="Month"></asp:ListItem>
+                        <asp:ListItem Value="Today" Text="Today"></asp:ListItem>
+                        <asp:ListItem Value="This Week" Text="This Week"></asp:ListItem>
+                        <asp:ListItem Value="This Month" Text="This Month"></asp:ListItem>
                         <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
-                        <asp:ListItem Value="Year" Text="Year"></asp:ListItem>
+                        <asp:ListItem Value="This Year" Text="This Year"></asp:ListItem>
+                        <asp:ListItem Value="All Time" Text="All Time"></asp:ListItem>
                         <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
                     </asp:DropDownList>
-                      <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+                      <asp:Label ID="lblChecking" runat="server" Text="Label"></asp:Label>
 
                       <asp:HiddenField ID="hdnTimeFilter_cust" runat="server" />
                       <!-- Custom Date Pickers (Initially Hidden) -->
                 <div id="customDateFilter_cust" style="display: none;">
-                    <label for="startDate">Start Date</label>
-                    
+                    <asp:Label ID="lblStartDate" runat="server" Text="Start Date"></asp:Label>
                     <asp:TextBox ID="txtStartDate_cust" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
-                    <label for="endDate">End Date</label>
                     
+                    <asp:Label ID="lblEndDate" runat="server" Text="End Date"></asp:Label>
                     <asp:TextBox ID="txtEndDate_cust" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
                 </div>
+                      <!-- Custom Quarter Pickers (Initially Hidden) -->
+                      <div id="customQuarterFilter_cust" style="display:none">
+                          <asp:Label ID="lblQuarter" runat="server" Text="Choose Quarter"></asp:Label>
+                          <asp:DropDownList ID="ddlQuarterFilter_cust" runat="server" CssClass="form-control" >
+                              <asp:ListItem Value="default"  Text="Please pick specific quarter"></asp:ListItem>
+                              <asp:ListItem Value="Quarter1"  Text="Quarter 1"></asp:ListItem>
+                              <asp:ListItem Value="Quarter2"  Text="Quarter 2"></asp:ListItem>
+                              <asp:ListItem Value="Quarter3"  Text="Quarter 3"></asp:ListItem>
+                              <asp:ListItem Value="Quarter4"  Text="Quarter 4"></asp:ListItem>
+                          </asp:DropDownList>
+                          <asp:HiddenField ID="hdnQuarterFilter" runat="server" />
+                          <asp:RequiredFieldValidator ID="rqQuarterFilter" runat="server"  ControlToValidate="ddlQuarterFilter_cust" ErrorMessage="Please choose Quarter Filter Option" Enabled="false" InitialValue="default" ForeColor="Red" ValidationGroup="custQuarter" Display="Dynamic"></asp:RequiredFieldValidator>
+                      </div>
                 </div>
                      </div>
                   <div class="col col-md-4">
-                      <asp:Button ID="btnCustRecord" runat="server" Text="Generate" OnClick="btnCustRecord_Click"  CssClass="btn btn-primary"/>
+                      <asp:Button ID="btnCustRecord" runat="server" Text="Generate" OnClick="btnCustRecord_Click"  CssClass="btn btn-primary" ValidationGroup="custQuarter"/>
                       </div>
                 
               </div>
@@ -252,9 +275,14 @@
             <div class="chart">
                 <asp:UpdatePanel ID="updateTopCust" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                     <ContentTemplate>
-                       <table class="table table-border table-responsive table-hover">
+                       <table class="table table-border table-responsive table-hover table-striped">
                            <thead>
-                               <tr>
+                               <tr >
+                                   <th style="text-align:center" colspan="4">
+                                       <asp:Label ID="lblTopCust" CssClass="lblTopCust_style" runat="server" ></asp:Label>
+                                   </th>
+                               </tr>
+                               <tr style="font-size:16px;">
                                    <th scope="col">User Profile</th>
                                    <th scope="col">User Name</th>
                                    <th scope="col">Email</th>
@@ -267,10 +295,10 @@
                                        <tr>
                                            <td scope="col">
                                                <div class="img-fluid">
-                                               <asp:Image ID="imgUserProfile" runat="server" ImageUrl ='<%# Eval("ProfilePicture") %>' Width="100px"/>
+                                               <asp:Image ID="imgUserProfile" runat="server" ImageUrl ='<%# Eval("ProfilePicture") %>' Width="50px"/>
                                                </div>
                                            </td>
-
+                                          
                                            <td scope="col">
                                                <asp:Label ID="lblUserName" runat="server" Text='<%# Eval("Username") %>' />
                                            </td>
@@ -286,9 +314,16 @@
                                        </tr>
                                    </ItemTemplate>
                                </asp:Repeater>  
+                                <asp:PlaceHolder ID="phLackCustRecord" runat="server" Visible="false">
+                                <tr class="text-center" >
+                                    <th colspan="5" style="background-color:rgb(210, 180, 140);">
+                                        <asp:Label ID="lblLackCustRecord" runat="server"  Font-Size="1.3em"></asp:Label>
+                                    </th>
+                                </tr>
+                                </asp:PlaceHolder>
                                <asp:PlaceHolder ID="phNoCustRecord" runat="server" Visible="false">
                                <tr class="text-center" >
-                                   <th colspan="5">
+                                   <th colspan="5" style="background-color:rgb(233, 116, 81);">
                                        <asp:Label ID="lblNoCust" runat="server" Text="No Customer Record 😕" Font-Size="1.3em"></asp:Label>
                                    </th>
                                </tr>
@@ -821,7 +856,7 @@
                        type:'spline'
                     },
                     title: {
-                        text: "Summary of Booking Record " + title
+                        text: "Summary of Booking Record Made " + title
                     },
                     xAxis: {
                         title: {
@@ -855,7 +890,7 @@
                         type:'column'
                     },
                     title: {
-                        text: "Summary of Booking Amount "+title
+                        text: "Summary of Booking Amount Made "+title
                     },
                     xAxis: {
                         title: {
@@ -905,10 +940,26 @@
 
                     if (selectedValue === 'Custom') {
                         $('#customDateFilter_cust').show();
-                    } else {
+                        $('#customQuarterFilter_cust').hide();
+                        ValidatorEnable(document.getElementById('<%= rqQuarterFilter.ClientID %>'), false);
+                    } else if (selectedValue === 'Quarter') {
                         $('#customDateFilter_cust').hide();
+                        $('#customQuarterFilter_cust').show();
+                        ValidatorEnable(document.getElementById('<%= rqQuarterFilter.ClientID %>'), true);
+                    }
+                    else {
+                        $('#customDateFilter_cust').hide();
+                        $('#customQuarterFilter_cust').hide();
+                        ValidatorEnable(document.getElementById('<%= rqQuarterFilter.ClientID %>'), false);
                     }
 
+
+
+                });
+
+                $('#<%= ddlQuarterFilter_cust.ClientID %>').change(function () {
+                    var selectedQuarter = $(this).val;
+                    $('#<%=hdnQuarterFilter.ClientID %>').val(selectedQuarter);
 
                 });
             });

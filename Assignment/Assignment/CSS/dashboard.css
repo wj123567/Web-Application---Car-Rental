@@ -32,3 +32,20 @@
     border-color: transparent !important;
     color: #fff !important;
 }
+
+/* WZ*/
+.gvBooking_style{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.custRentalReportTitle {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.lblTopCust_style {
+   
+    font-size: 20px;
+    font-weight: 600;
+}

@@ -132,13 +132,17 @@ namespace Assignment.Management
                 dateTo = DateTime.Parse(txtEndDate_cust.Text);
             }
             string timeFilter = ddlTimeFilter_cust.SelectedValue;
-
-            loadTopCust(dateFrom,dateTo,timeFilter);
+            string quarterFilter = ddlQuarterFilter_cust.SelectedValue;
+            loadTopCust(dateFrom,dateTo,timeFilter,quarterFilter);
         }
 
-        private void loadTopCust(DateTime dateFrom,DateTime dateTo,string timeFilter)
+        private void loadTopCust(DateTime dateFrom,DateTime dateTo,string timeFilter,string quarterFilter)
         {
             string query = "";
+            string lackTimeString = ""; //to show when the record is nt enuf for top 5
+            string quarterCondition = ""; // to add in the report title depending on which quarter is picked
+            DateTime today = DateTime.Now;
+
             /*string sql = @"SELECT TOP 1 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
                          FROM ApplicationUser a JOIN Booking b
                          ON a.Id = b.UserId
@@ -146,74 +150,122 @@ namespace Assignment.Management
                          
             switch (timeFilter)
             {
-                case "Day":
-                    query = @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                case "Today":
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
                               FROM ApplicationUser a JOIN Booking b
                               ON a.Id = b.UserId
                               WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, GETDATE())  -- Filter by current date
                               GROUP BY a.ProfilePicture,a.Username,a.Email 
-                              ORDER BY TotalPrice DESC";     
+                              ORDER BY TotalPrice DESC";
+                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made on " + today.ToString("dd-MMM-yyyy");
+                    lackTimeString = " today";
                     break;
-                case "Week":
+                case "This Week":
+                    int daysToSOW = (int)today.DayOfWeek;
+                    DateTime startofWeek = today.AddDays(-daysToSOW);
+
+                    int daysToEOW = 6 - (int)today.DayOfWeek;
+                    DateTime endOfWeek = today.AddDays(daysToEOW);
+
                     string weekFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
                               DECLARE @StartOfWeek DATE = DATEADD(DAY, -DATEPART(WEEKDAY, @CurrentDate) + 1, @CurrentDate) 
                               DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";//start - Sunday , end-Saturday 
 
                     query = weekFilter
-                      + @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                      + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
                               FROM ApplicationUser a JOIN Booking b
                               ON a.Id = b.UserId
                               WHERE BookingDate >= @StartOfWeek AND BookingDate < DATEADD(DAY, 1, @EndOfWeek)
                               GROUP BY a.ProfilePicture,a.Username,a.Email
                               ORDER BY TotalPrice DESC";
 
-                    
+                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made from " + startofWeek.ToString("dd-MMM-yyyy")+ " to "+endOfWeek.ToString("dd-MMM-yyyy");
+                    lackTimeString = " from " + startofWeek.ToString("dd-MMM-yyyy") + " to " + endOfWeek.ToString("dd-MMM-yyyy");
                     break;
-                case "Month":
+                case "This Month":
                     string monthFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
                                            DECLARE @StartOfMonth DATE = DATEADD(DAY, -DAY(@CurrentDate) + 1, @CurrentDate)
                                            DECLARE @EndOfMonth DATE = EOMONTH(@CurrentDate)";
 
                     query = monthFilter
-                            + @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                            + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
                             FROM ApplicationUser a JOIN Booking b
                             ON a.Id = b.UserId
                             WHERE BookingDate BETWEEN @StartOfMonth AND @EndOfMonth
                             GROUP BY a.ProfilePicture,a.Username,a.Email 
                             ORDER BY TotalPrice DESC";
-                    
+                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made in " + today.ToString("MMMM");
+                    lackTimeString = " in "+ today.ToString("MMMM");
                     break;
                 case "Quarter":
-                    query = @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                   
+                    switch (quarterFilter)
+                    {
+                        case "Quarter1":
+                            quarterCondition = "AND DATEPART(QUARTER, b.BookingDate) = 1";
+                            lblTopCust.Text = "Top 5 Customers on Rental Amount Made in 1st Quarter of Year " + today.ToString("yyyy");
+                            lackTimeString = " in 1st Quarter of Year " + today.ToString("yyyy");
+                            break;
+                        case "Quarter2":
+                            quarterCondition = "AND DATEPART(QUARTER, b.BookingDate) = 2";
+                            lblTopCust.Text = "Top 5 Customers on Rental Amount Made in 2nd Quarter of Year " + today.ToString("yyyy");
+                            lackTimeString = " in 2nd Quarter of Year " + today.ToString("yyyy");
+                            break;
+                        case "Quarter3":
+                            quarterCondition = "AND DATEPART(QUARTER, b.BookingDate) = 3";
+                            lblTopCust.Text = "Top 5 Customers on Rental Amount Made in 3rd Quarter of Year " + today.ToString("yyyy");
+                            lackTimeString = " in 3rd Quarter of Year " + today.ToString("yyyy");
+                            break;
+                        case "Quarter4":
+                            quarterCondition = "AND DATEPART(QUARTER, b.BookingDate) = 4";
+                            lblTopCust.Text = "Top 5 Customers on Rental Amount Made in 4th Quarter of Year " + today.ToString("yyyy");
+                            lackTimeString = " in 4th Quarter of Year " + today.ToString("yyyy");
+                            break;
+                    }
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
                             FROM ApplicationUser a JOIN Booking b
                             ON a.Id = b.UserId
                             WHERE YEAR(BookingDate) = YEAR(CONVERT(DATE, GETDATE()))
-                            AND DATEPART(QUARTER,b.BookingDate) = DATEPART(QUARTER,(CONVERT(DATE, GETDATE())))
+                            "+ quarterCondition +
+                            @"
                             GROUP BY a.ProfilePicture, a.Username, a.Email
                             ORDER BY TotalPrice DESC";
-                   
+
+                    
                     break;
-                case "Year":
-                    query = @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                case "This Year":
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
                             FROM ApplicationUser a JOIN Booking b
                             ON a.Id = b.UserId
                             WHERE BookingDate IS NOT NULL  
                             AND YEAR(BookingDate) = YEAR(CONVERT(DATE, GETDATE()))
                             GROUP BY a.ProfilePicture, a.Username, a.Email
                             ORDER BY TotalPrice DESC";
-                    
+                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made in Year " + today.ToString("yyyy");
+                    lackTimeString = " in " + today.ToString("yyyy");
                     break;
-
+                case "All Time":
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                            FROM ApplicationUser a JOIN Booking b
+                            ON a.Id = b.UserId
+                            WHERE BookingDate IS NOT NULL  
+                            GROUP BY a.ProfilePicture, a.Username, a.Email
+                            ORDER BY TotalPrice DESC";
+                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made of All Time";
+                    lackTimeString = " of All Time";
+                    break;
                 case "Custom":
-
-                    query = @"SELECT a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
                              FROM ApplicationUser a JOIN Booking b
                              ON a.Id = b.UserId
                              WHERE BookingDate IS NOT NULL
                              AND BookingDate BETWEEN @StartDate AND @EndDate
                              GROUP BY a.ProfilePicture, a.Username, a.Email
                              ORDER BY TotalPrice DESC ";
-                   
+
+                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made "+"from " + dateFrom.ToString("dd-MM-yyyy") + " to " + dateTo.ToString("dd-MM-yyyy");
+                    lackTimeString = " from " + dateFrom.ToString("dd-MM-yyyy") + " to " + dateTo.ToString("dd-MM-yyyy"); 
+                    
                     break;
             }
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
@@ -230,13 +282,24 @@ namespace Assignment.Management
             DataSet ds = new DataSet();
             da.Fill(ds, "TopData");
             con.Close();
-            if (ds.Tables[0].Rows.Count > 0)
+            if (ds.Tables[0].Rows.Count == 5)
             {
                 rptTopCustRental.DataSource = ds.Tables["TopData"];
                 rptTopCustRental.DataBind();
                 updateTopCust.Update();
                 phNoCustRecord.Visible = false;
+                phLackCustRecord.Visible = false;
 ;
+            }
+            else if (ds.Tables[0].Rows.Count>0 &&ds.Tables[0].Rows.Count<5)
+            {
+                rptTopCustRental.DataSource = ds.Tables["TopData"];
+                rptTopCustRental.DataBind();
+                updateTopCust.Update();
+                phNoCustRecord.Visible = false;
+                phLackCustRecord.Visible = true;
+                lblLackCustRecord.Text = "Existing Customer Rental Record(s)"+ lackTimeString +": " + ds.Tables[0].Rows.Count+ "😦";
+
             }
             else
             {
@@ -246,8 +309,7 @@ namespace Assignment.Management
                 updateTopCust.Update();
 
                 phNoCustRecord.Visible = true;
-
-               
+                phLackCustRecord.Visible = false;
             }
             
             con.Close();
@@ -288,7 +350,7 @@ namespace Assignment.Management
 
             switch (timeFilter)
             {
-                case "Day":
+                case "Today":
                     query = @"SELECT DATEPART(HOUR, BookingDate) AS Hour , COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
                       FROM Booking 
                       WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, GETDATE())  -- Filter by current date
@@ -297,7 +359,7 @@ namespace Assignment.Management
                     xAxisTitle = "Hours in 24-hour system";
                     title = "on "+ today.Date.ToString("dd-MMM-yyyy");
                     break;
-                case "Week":
+                case "This Week":
                     int daysToSOW = (int)today.DayOfWeek;
                     DateTime startofWeek = today.AddDays(-daysToSOW);
 
@@ -317,7 +379,7 @@ namespace Assignment.Management
                     title = "from " + startofWeek.ToString("dd-MMM-yyyy") + " to " + endOfWeek.ToString("dd-MMM-yyyy");
                     xAxisTitle = "Date of The Week";
                     break;
-                case "Month":
+                case "This Month":
                     string monthFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
                                            DECLARE @StartOfMonth DATE = DATEADD(DAY, -DAY(@CurrentDate) + 1, @CurrentDate)
                                            DECLARE @EndOfMonth DATE = EOMONTH(@CurrentDate)";
@@ -329,7 +391,7 @@ namespace Assignment.Management
                             GROUP BY CONVERT(VARCHAR, BookingDate, 103)
                             ORDER BY BookingDate";
 
-                    title = "in " + today.ToString("MMM");
+                    title = "in " + today.ToString("MMMM");
 
                     xAxisTitle = "Day of The Month";
                     break;
@@ -342,13 +404,13 @@ namespace Assignment.Management
                     title = "for Quarters of "+ today.ToString("yyyy");
                     xAxisTitle = "Quarter";
                     break;
-                case "Year":
+                case "This Year":
                     query = @"SELECT YEAR(BookingDate) AS Year, FORMAT(BookingDate,'MMM') AS Month, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
                             FROM Booking 
                             WHERE BookingDate IS NOT NULL  
                             GROUP BY YEAR(BookingDate), FORMAT(BookingDate, 'MMM')
                             ORDER BY YEAR(BookingDate), FORMAT(BookingDate, 'MMM')";
-                    title = "for year "+today.ToString("yyyy");
+                    title = "for Year "+today.ToString("yyyy");
                     xAxisTitle = "Month of The Year";
                     break;
 
@@ -400,19 +462,19 @@ namespace Assignment.Management
 
                 switch (timeFilter)
                 {
-                    case "Day":
+                    case "Today":
                         lineBuilder.Append($"[\"{dr["Hour"]}\",{dr["BookingCount"]}],");
                         string hourFormat = dr["Hour"].ToString() + ":00";
                         lineAmtBuilder.Append($"[\"{dr["Hour"]}\",{dr["BookingAmount"]}],");
                         categoryList.Add(hourFormat);
                         break;
-                    case "Week":
+                    case "This Week":
                         /*string date = dr["DatePerWeek"].ToString();*/
                         lineBuilder.Append($"[\"{dr["DatePerWeek"]}\",{dr["BookingCount"]}],");
                         categoryList.Add(dr["DatePerWeek"].ToString());
                         lineAmtBuilder.Append($"[\"{dr["DatePerWeek"]}\",{dr["BookingAmount"]}],");
                         break;
-                    case "Month":
+                    case "This Month":
                         lineBuilder.Append($"[\"{dr["BookingDate"]}\",{dr["BookingCount"]}],");
                         categoryList.Add(dr["BookingDate"].ToString());
                         lineAmtBuilder.Append($"[\"{dr["BookingDate"]}\",{dr["BookingAmount"]}],");
@@ -440,7 +502,7 @@ namespace Assignment.Management
                                 break;
                         }
                         break;
-                    case "Year":
+                    case "This Year":
                         lineBuilder.Append($"[\"{dr["Month"]}\",{dr["BookingCount"]}],");
                         lineAmtBuilder.Append($"[\"{dr["Month"]}\",{dr["BookingAmount"]}],");
                         categoryList.Add(dr["Month"].ToString());
