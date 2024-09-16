@@ -342,9 +342,10 @@
                             <h5 class="card-title">Top 5 Rental <span id="topRentalDay" class="text-muted" style="font-size:0.7em">| All Time</span></h5>
 
                             <div class="filter">
-                                <div id="topRentalRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px">
-                                    <i class="fa fa-calendar"></i>&nbsp;
-								<span></span><i class="fa fa-caret-down float-end"></i>
+                                <div id="topRentalRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;">
+                                    <i class="fa fa-calendar" style="vertical-align:middle;"></i>&nbsp;
+								<span style="vertical-align:middle;"></span>
+                                    <i class="fa fa-caret-down float-end" style="vertical-align:middle;"></i>
                                 </div>
                                 <asp:HiddenField ID="hdnTopRentalStart" runat="server" />
                                 <asp:HiddenField ID="hdnTopRentalEnd" runat="server" />

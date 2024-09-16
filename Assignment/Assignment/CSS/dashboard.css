@@ -21,3 +21,14 @@
     height: 100%;
     object-fit: cover;
 }
+
+.daterangepicker .ranges li.active {
+    background-color: #3490dc !important;
+    color: #fff !important;
+}
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: #3490dc !important;
+    border-color: transparent !important;
+    color: #fff !important;
+}
