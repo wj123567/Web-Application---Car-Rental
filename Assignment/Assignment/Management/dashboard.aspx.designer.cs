@@ -69,13 +69,22 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.TextBox txtEndDate;
 
         /// <summary>
-        /// btnProcess control.
+        /// btnProcessBookRecord control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnProcess;
+        protected global::System.Web.UI.WebControls.Button btnProcessBookRecord;
+
+        /// <summary>
+        /// UpdatePanel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
         /// gvBooking control.
@@ -87,22 +96,22 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.GridView gvBooking;
 
         /// <summary>
-        /// lblTopUser control.
+        /// phNoBooking control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTopUser;
+        protected global::System.Web.UI.WebControls.PlaceHolder phNoBooking;
 
         /// <summary>
-        /// txtTopUser control.
+        /// Label3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTopUser;
+        protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
         /// ddlTimeFilter_cust control.

@@ -163,28 +163,43 @@
                     </div>
                          </div>
                       <div class="col col-md-4">
-                          <asp:Button ID="btnProcess" runat="server" Text="Button"  OnClick="btnBookRecord_Click"/>
+                          <asp:Button ID="btnProcessBookRecord" runat="server" Text="Button"  OnClick="btnBookRecord_Click" CssClass="btn btn-primary "/>
                           </div>
                     
                   </div>
                 </div>
-                 <div class="chart">                  
-                         <table>
-                             <tr>
-                                 <td>
-                                     <asp:GridView ID="gvBooking" runat="server"></asp:GridView>
-                                 </td>
-                                
-                                 <td>
-                                     <div id="bookNumChart"></div>
-                                 </td>
-
-                                 <td>
-                                     <div id="bookAmtChart"></div>
-                                 </td>
-                             </tr>
-                         </table>
+                 <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                     <ContentTemplate>
+                 <div class="chart container-fluid">                  
+                      <div class="row">
+                        <div class="col-12">
+                            <asp:GridView ID="gvBooking" runat="server"></asp:GridView>
+                            <asp:PlaceHolder ID="phNoBooking" runat="server" Visible="false">
+                                <tr class="text-center" >
+                                    <th colspan="5">
+                                        <asp:Label ID="Label3" runat="server" Text="No Booking Record Found 😕" Font-Size="1.3em"></asp:Label>
+                                    </th>
+                                </tr>
+                            </asp:PlaceHolder>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="bookNumChart"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="bookAmtChart"></div>
+                        </div>
+                    </div>
+                                             
                  </div>
+                    </ContentTemplate>
+                     <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnProcessBookRecord" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
              </div>
          </div>
      </div>
@@ -202,12 +217,7 @@
         <div class="card-body p-3">
              <div class="container">
               <div class="row">
-                  <div class="col col-md-4">
-                      
-                      <asp:Label ID="lblTopUser" runat="server" Text="Top N:" Visible="false"></asp:Label>
-                      <asp:TextBox ID="txtTopUser" runat="server" TextMode="Number" CssClass="form-control" min="1"  Visible="false"></asp:TextBox>
-                      
-                  </div>
+                  
                 <div class="col col-md-4">
                   <div class="form-group">
                      <label for="timeFilter">Select Report Time Range</label>
@@ -234,7 +244,7 @@
                 </div>
                      </div>
                   <div class="col col-md-4">
-                      <asp:Button ID="btnCustRecord" runat="server" Text="Generate" OnClick="btnCustRecord_Click" />
+                      <asp:Button ID="btnCustRecord" runat="server" Text="Generate" OnClick="btnCustRecord_Click"  CssClass="btn btn-primary"/>
                       </div>
                 
               </div>
@@ -248,7 +258,7 @@
                                    <th scope="col">User Profile</th>
                                    <th scope="col">User Name</th>
                                    <th scope="col">Email</th>
-                                   <th scope="col">Total Rent Booking Made(MYR)</th>                  
+                                   <th scope="col">Total Rent Made(MYR)</th>                  
                                </tr>
                            </thead>
                            <tbody>
@@ -278,12 +288,18 @@
                                </asp:Repeater>  
                                <asp:PlaceHolder ID="phNoCustRecord" runat="server" Visible="false">
                                <tr class="text-center" >
-                                   <th colspan="5"><asp:Label ID="lblNoCust" runat="server" Text="No Customer Record :<" Font-Size="1.3em"></asp:Label></th>
+                                   <th colspan="5">
+                                       <asp:Label ID="lblNoCust" runat="server" Text="No Customer Record 😕" Font-Size="1.3em"></asp:Label>
+                                   </th>
                                </tr>
                                </asp:PlaceHolder>
                            </tbody>
                        </table>
                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="btnCustRecord" EventName="Click" />
+    
+                    </Triggers>
                </asp:UpdatePanel>
             </div>
         </div>
@@ -797,7 +813,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
         <script>
-            function renderBookingRecordChart(lineData,xAxisTitle,categories) {
+            function renderBookingRecordChart(lineData,xAxisTitle,categories,title) {
                 console.log("Line data: ", lineData);
                 console.log("Category: ",categories);
                 $('#bookNumChart').highcharts({
@@ -805,7 +821,7 @@
                        type:'spline'
                     },
                     title: {
-                        text: "Summary of Booking Record"
+                        text: "Summary of Booking Record " + title
                     },
                     xAxis: {
                         title: {
@@ -833,13 +849,13 @@
                     }]
                 });
             }
-            function renderBookingAmtChart(lineData, xAxisTitle, categories) {
+            function renderBookingAmtChart(lineData, xAxisTitle, categories, title) {
                 $('#bookAmtChart').highcharts({
                     chart: {
                         type:'column'
                     },
                     title: {
-                        text: "Summary of Booking Amount"
+                        text: "Summary of Booking Amount "+title
                     },
                     xAxis: {
                         title: {

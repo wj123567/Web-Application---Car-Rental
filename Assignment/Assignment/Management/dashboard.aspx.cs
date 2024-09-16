@@ -181,9 +181,6 @@ namespace Assignment.Management
                             WHERE BookingDate BETWEEN @StartOfMonth AND @EndOfMonth
                             GROUP BY a.ProfilePicture,a.Username,a.Email 
                             ORDER BY TotalPrice DESC";
-
-
-
                     
                     break;
                 case "Quarter":
@@ -238,18 +235,18 @@ namespace Assignment.Management
                 rptTopCustRental.DataSource = ds.Tables["TopData"];
                 rptTopCustRental.DataBind();
                 updateTopCust.Update();
-
-                noCarPlaceholder.Visible = false;
-                lblTopUser.Visible = true;
-                txtTopUser.Visible=true;
+                phNoCustRecord.Visible = false;
+;
             }
             else
             {
-                rptTopRental.DataSource = ds.Tables["TopData"];
-                rptTopRental.DataBind();         
+                /*rptTopRental.DataSource = ds.Tables["TopData"];*/
+                rptTopCustRental.DataSource = null; //no record found, clear rpt and show placeholder txt
+                rptTopCustRental.DataBind();         
                 updateTopCust.Update();
 
-                noCarPlaceholder.Visible = true;
+                phNoCustRecord.Visible = true;
+
                
             }
             
@@ -276,10 +273,11 @@ namespace Assignment.Management
             lblCheck.Text = hdnTimeFilter.Value;
             string dateFromTitleFormat = dateFrom.ToString("dd/MM/yyyy");
             string dateToTitleFormat = dateTo.ToString("dd/MM/yyyy");
-
+            DateTime today = DateTime.Today;
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             string query = "";
+            string title = "";
             string xAxisTitle = "";
             string categories = "";
             string lineRecordData = "";
@@ -297,8 +295,15 @@ namespace Assignment.Management
                       GROUP BY DATEPART(HOUR, BookingDate)
                       ORDER BY DATEPART(HOUR, BookingDate)";
                     xAxisTitle = "Hours in 24-hour system";
+                    title = "on "+ today.Date.ToString("dd-MMM-yyyy");
                     break;
                 case "Week":
+                    int daysToSOW = (int)today.DayOfWeek;
+                    DateTime startofWeek = today.AddDays(-daysToSOW);
+
+                    int daysToEOW = 6- (int)today.DayOfWeek;
+                    DateTime endOfWeek = today.AddDays(daysToEOW);
+
                     string weekFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
                               DECLARE @StartOfWeek DATE = DATEADD(DAY, -DATEPART(WEEKDAY, @CurrentDate) + 1, @CurrentDate) 
                               DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";//start - Sunday , end-Saturday 
@@ -309,7 +314,7 @@ namespace Assignment.Management
                               WHERE BookingDate >= @StartOfWeek AND BookingDate < DATEADD(DAY, 1, @EndOfWeek)
                               GROUP BY CONVERT(VARCHAR, BookingDate, 101)  -- Group by day
                               ORDER BY CONVERT(VARCHAR, BookingDate, 101)  -- Sort by formatted date";
-
+                    title = "from " + startofWeek.ToString("dd-MMM-yyyy") + " to " + endOfWeek.ToString("dd-MMM-yyyy");
                     xAxisTitle = "Date of The Week";
                     break;
                 case "Month":
@@ -324,7 +329,7 @@ namespace Assignment.Management
                             GROUP BY CONVERT(VARCHAR, BookingDate, 103)
                             ORDER BY BookingDate";
 
-
+                    title = "in " + today.ToString("MMM");
 
                     xAxisTitle = "Day of The Month";
                     break;
@@ -334,6 +339,7 @@ namespace Assignment.Management
                             WHERE BookingDate IS NOT NULL  
                             GROUP BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)
                             ORDER BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)";
+                    title = "for Quarters of "+ today.ToString("yyyy");
                     xAxisTitle = "Quarter";
                     break;
                 case "Year":
@@ -342,6 +348,7 @@ namespace Assignment.Management
                             WHERE BookingDate IS NOT NULL  
                             GROUP BY YEAR(BookingDate), FORMAT(BookingDate, 'MMM')
                             ORDER BY YEAR(BookingDate), FORMAT(BookingDate, 'MMM')";
+                    title = "for year "+today.ToString("yyyy");
                     xAxisTitle = "Month of The Year";
                     break;
 
@@ -364,7 +371,7 @@ namespace Assignment.Management
                              FROM BookingCTE
                              GROUP BY Year, Month, MonthABC 
                              ORDER BY Year, Month ";
-
+                    title = "from " + dateFromTitleFormat + " to " + dateToTitleFormat;
                     xAxisTitle = "Custom Date Range From " + dateFromTitleFormat + " to "+ dateToTitleFormat;
                     break;
             }
@@ -465,11 +472,11 @@ namespace Assignment.Management
 
 
             // Inject the lineData and JavaScript into the page
-            string script = $"renderBookingRecordChart({lineRecordData},'{xAxisTitle}',[{categories}]);"; // Pass the data to JavaScript function
-            string script2 = $"renderBookingAmtChart({lineAmtData},'{xAxisTitle}',[{categories}]);"; // Pass the data to JavaScript function
+            string script = $"renderBookingRecordChart({lineRecordData},'{xAxisTitle}',[{categories}],'{title}');"; // Pass the data to JavaScript function
+            string script2 = $"renderBookingAmtChart({lineAmtData},'{xAxisTitle}',[{categories}],'{title}');"; // Pass the data to JavaScript function
 
-            ClientScript.RegisterStartupScript(this.GetType(), "renderBookingRecordScript", script, true);
-            ClientScript.RegisterStartupScript(this.GetType(), "renderBookingAmtScript", script2, true);
+            ScriptManager.RegisterStartupScript(this,this.GetType(), "renderBookingRecordScript", script, true);
+            ScriptManager.RegisterStartupScript(this,this.GetType(), "renderBookingAmtScript", script2, true);
 
             con.Close();
         }
