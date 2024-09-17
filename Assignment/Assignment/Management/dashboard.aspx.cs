@@ -147,7 +147,9 @@ namespace Assignment.Management
                          FROM ApplicationUser a JOIN Booking b
                          ON a.Id = b.UserId
                          GROUP BY a.ProfilePicture,a.Username,a.Email";*/
-                         
+            int daysToSOW = (int)today.DayOfWeek;
+            int daysToEOW = 6 - (int)today.DayOfWeek;
+            string weekFilter = "";
             switch (timeFilter)
             {
                 case "Today":
@@ -171,13 +173,11 @@ namespace Assignment.Management
                     lackTimeString = " yesterday";
                     break;
                 case "This Week":
-                    int daysToSOW = (int)today.DayOfWeek;
-                    DateTime startofWeek = today.AddDays(-daysToSOW);
-
-                    int daysToEOW = 6 - (int)today.DayOfWeek;
+                    
+                    DateTime startofWeek = today.AddDays(-daysToSOW); 
                     DateTime endOfWeek = today.AddDays(daysToEOW);
 
-                    string weekFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
+                    weekFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
                               DECLARE @StartOfWeek DATE = DATEADD(DAY, -DATEPART(WEEKDAY, @CurrentDate) + 1, @CurrentDate) 
                               DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";//start - Sunday , end-Saturday 
 
@@ -192,6 +192,25 @@ namespace Assignment.Management
                     lblTopCust.Text = "Top 5 Customers on Rental Amount Made from " + startofWeek.ToString("dd-MMM-yyyy")+ " to "+endOfWeek.ToString("dd-MMM-yyyy");
                     lackTimeString = " from " + startofWeek.ToString("dd-MMM-yyyy") + " to " + endOfWeek.ToString("dd-MMM-yyyy");
                     break;
+                case "Last Week":
+                    DateTime startofLastWeek = today.AddDays(-daysToSOW - 7);
+                    DateTime endofLastWeek = today.AddDays(-daysToSOW - 1);//take note 
+
+                    weekFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
+                              DECLARE @StartOfLastWeek DATE = DATEADD(DAY, -DATEPART(WEEKDAY, @CurrentDate) - 7, @CurrentDate) 
+                              DECLARE @EndOfLastWeek DATE = DATEADD(DAY, - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";
+
+                    query = weekFilter
+                             + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                              FROM ApplicationUser a JOIN Booking b
+                              ON a.Id = b.UserId 
+                              WHERE BookingDate >= @StartOfLastWeek AND BookingDate < DATEADD(DAY, 1, @EndOfLastWeek)
+                              GROUP BY a.ProfilePicture,a.Username,a.Email
+                              ORDER BY TotalPrice DESC";
+                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made from " + startofLastWeek.ToString("dd-MMM-yyyy") + " to " + endofLastWeek.ToString("dd-MMM-yyyy");
+                    lackTimeString = " from " + startofLastWeek.ToString("dd-MMM-yyyy") + " to " + endofLastWeek.ToString("dd-MMM-yyyy");
+                    break;
+
                 case "This Month":
                     string monthFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
                                            DECLARE @StartOfMonth DATE = DATEADD(DAY, -DAY(@CurrentDate) + 1, @CurrentDate)
@@ -206,6 +225,21 @@ namespace Assignment.Management
                             ORDER BY TotalPrice DESC";
                     lblTopCust.Text = "Top 5 Customers on Rental Amount Made in " + today.ToString("MMMM");
                     lackTimeString = " in "+ today.ToString("MMMM");
+                    break;
+                case "Last Month":
+                    //description at below part
+                    string lastMonthFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())                               
+                                               DECLARE @StartOfPrevMonth DATE = DATEADD(MONTH, -1, DATEADD(DAY, -DAY(@CurrentDate) + 1, @CurrentDate)) 
+                                               DECLARE @EndOfPrevMonth DATE = EOMONTH(@CurrentDate, -1)";
+                    query = lastMonthFilter
+                            + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                            FROM ApplicationUser a JOIN Booking b
+                            ON a.Id = b.UserId
+                            WHERE BookingDate BETWEEN @StartOfPrevMonth AND DATEADD(DAY ,1, @EndOfPrevMonth)
+                            GROUP BY a.ProfilePicture,a.Username,a.Email 
+                            ORDER BY TotalPrice DESC";
+                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made in " + today.AddMonths(-1).ToString("MMMM");
+                    lackTimeString= " in " + today.AddMonths(-1).ToString("MMMM");
                     break;
                 case "Quarter":
                    
@@ -239,9 +273,7 @@ namespace Assignment.Management
                             "+ quarterCondition +
                             @"
                             GROUP BY a.ProfilePicture, a.Username, a.Email
-                            ORDER BY TotalPrice DESC";
-
-                    
+                            ORDER BY TotalPrice DESC";               
                     break;
                 case "This Year":
                     query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
@@ -358,8 +390,12 @@ namespace Assignment.Management
             StringBuilder lineBuilder = new StringBuilder("[");
             StringBuilder lineAmtBuilder = new StringBuilder("[");
 
+            int daysToSOW = (int)today.DayOfWeek;
+            int daysToEOW = 6 - (int)today.DayOfWeek; // 0,1,2,3,4,5,6
+            string weekFilter = " ";
             switch (timeFilter)
             {
+
                 case "Today":
                     query = @"SELECT DATEPART(HOUR, BookingDate) AS Hour , COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
                       FROM Booking 
@@ -375,17 +411,16 @@ namespace Assignment.Management
                       WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, DATEADD(DAY,-1,GETDATE()))  -- Filter by current date
                       GROUP BY DATEPART(HOUR, BookingDate)
                       ORDER BY DATEPART(HOUR, BookingDate)";
+                    title = "on " + today.AddDays(-1).ToString("dd-MMM-yyyy");
                     break;
+                    
                 case "This Week":
-                    int daysToSOW = (int)today.DayOfWeek;
                     DateTime startofWeek = today.AddDays(-daysToSOW);
-
-                    int daysToEOW = 6- (int)today.DayOfWeek;
                     DateTime endOfWeek = today.AddDays(daysToEOW);
 
-                    string weekFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
+                    weekFilter= @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
                               DECLARE @StartOfWeek DATE = DATEADD(DAY, -DATEPART(WEEKDAY, @CurrentDate) + 1, @CurrentDate) 
-                              DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";//start - Sunday , end-Saturday 
+                              DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";//(WEEKDAY) = Sunday-1...Saturday-7 ,start - Sunday , end-Saturday 
 
                             query = weekFilter
                               + @"SELECT CONVERT(VARCHAR, BookingDate, 101) AS DatePerWeek, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
@@ -395,6 +430,22 @@ namespace Assignment.Management
                               ORDER BY CONVERT(VARCHAR, BookingDate, 101)  -- Sort by formatted date";
                     title = "from " + startofWeek.ToString("dd-MMM-yyyy") + " to " + endOfWeek.ToString("dd-MMM-yyyy");
                     xAxisTitle = "Date of The Week";
+                    break;
+                case "Last Week":
+                    DateTime startofLastWeek = today.AddDays(-daysToSOW-7);
+                    DateTime endofLastWeek = today.AddDays(-daysToSOW-1);//take note 
+
+                    weekFilter= @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
+                              DECLARE @StartOfLastWeek DATE = DATEADD(DAY, -DATEPART(WEEKDAY, @CurrentDate) - 7, @CurrentDate) 
+                              DECLARE @EndOfLastWeek DATE = DATEADD(DAY, - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";
+
+                    query = weekFilter
+                              + @"SELECT CONVERT(VARCHAR, BookingDate, 101) AS DatePerWeek, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                              FROM Booking 
+                              WHERE BookingDate >= @StartOfLastWeek AND BookingDate < DATEADD(DAY, 1, @EndOfLastWeek)
+                              GROUP BY CONVERT(VARCHAR, BookingDate, 101)  -- Group by day
+                              ORDER BY CONVERT(VARCHAR, BookingDate, 101)  -- Sort by formatted date";
+                    title = "from " + startofLastWeek.ToString("dd-MMM-yyyy") + " to " + endofLastWeek.ToString("dd-MMM-yyyy"); 
                     break;
                 case "This Month":
                     string monthFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())
@@ -410,7 +461,23 @@ namespace Assignment.Management
 
                     title = "in " + today.ToString("MMMM");
 
-                    xAxisTitle = "Day of The Month";
+                    
+                    break;
+                case "Last Month":
+                    //DAY(return the day of the date, eg 17/9/2024 -> 17 (+1 and become first day of month)
+                    //EOMONTH -1 = last day of prev month
+                    string lastMonthFilter = @"DECLARE @CurrentDate DATE = CONVERT(DATE, GETDATE())                               
+                                               DECLARE @StartOfPrevMonth DATE = DATEADD(MONTH, -1, DATEADD(DAY, -DAY(@CurrentDate) + 1, @CurrentDate)) 
+                                               DECLARE @EndOfPrevMonth DATE = EOMONTH(@CurrentDate, -1)"; 
+
+                    query = lastMonthFilter
+                            + @"SELECT CONVERT(VARCHAR, BookingDate, 103) AS BookingDate, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                            FROM Booking
+                            WHERE BookingDate BETWEEN @StartOfPrevMonth AND DATEADD(DAY ,1, @EndOfPrevMonth)
+                            GROUP BY CONVERT(VARCHAR, BookingDate, 103)
+                            ORDER BY BookingDate"; // need plus 1 on the EOM because time issue, if no add last day will nt include
+
+                    title = "in " + today.AddMonths(-1).ToString("MMMM");
                     break;
                 case "Quarter":
                     query = @"SELECT YEAR(BookingDate) AS Year, DATEPART(QUARTER, BookingDate) AS Quarter, COUNT(*) AS BookingCount ,SUM(Price) AS BookingAmount
@@ -420,7 +487,7 @@ namespace Assignment.Management
                             GROUP BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)
                             ORDER BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)";
                     title = "for Quarters of "+ today.ToString("yyyy");
-                    xAxisTitle = "Quarter";
+                    
                     break;
                 case "This Year":
                     query = @"SELECT YEAR(BookingDate) AS Year, FORMAT(BookingDate,'MMM') AS Month, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
@@ -505,7 +572,17 @@ namespace Assignment.Management
                         categoryList.Add(dr["DatePerWeek"].ToString());
                         lineAmtBuilder.Append($"[\"{dr["DatePerWeek"]}\",{dr["BookingAmount"]}],");
                         break;
+                    case "Last Week":
+                        lineBuilder.Append($"[\"{dr["DatePerWeek"]}\",{dr["BookingCount"]}],");
+                        categoryList.Add(dr["DatePerWeek"].ToString());
+                        lineAmtBuilder.Append($"[\"{dr["DatePerWeek"]}\",{dr["BookingAmount"]}],");
+                        break;
                     case "This Month":
+                        lineBuilder.Append($"[\"{dr["BookingDate"]}\",{dr["BookingCount"]}],");
+                        categoryList.Add(dr["BookingDate"].ToString());
+                        lineAmtBuilder.Append($"[\"{dr["BookingDate"]}\",{dr["BookingAmount"]}],");
+                        break;
+                    case "Last Month":
                         lineBuilder.Append($"[\"{dr["BookingDate"]}\",{dr["BookingCount"]}],");
                         categoryList.Add(dr["BookingDate"].ToString());
                         lineAmtBuilder.Append($"[\"{dr["BookingDate"]}\",{dr["BookingAmount"]}],");
@@ -517,19 +594,19 @@ namespace Assignment.Management
                         switch (quarterFormat)
                         {
                             case "1":
-                                categoryList.Add("Q1");
+                                categoryList.Add("Quarter 1");
                                 break;
 
                             case "2":
-                                categoryList.Add("Q2");
+                                categoryList.Add("Quarter 2");
                                 break;
 
                             case "3":
-                                categoryList.Add("Q3");
+                                categoryList.Add("Quarter 3");
                                 break;
 
                             case "4":
-                                categoryList.Add("Q4");
+                                categoryList.Add("Quarter 4");
                                 break;
                         }
                         break;

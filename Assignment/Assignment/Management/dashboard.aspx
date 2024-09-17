@@ -144,10 +144,12 @@
                             <asp:ListItem Value="Today" Text="Today"></asp:ListItem>
                             <asp:ListItem Value="Yesterday" Text="Yesterday"></asp:ListItem>
                             <asp:ListItem Value="This Week" Text="This Week"></asp:ListItem>
+                            <asp:ListItem Value="Last Week" Text="Last Week"></asp:ListItem>
                             <asp:ListItem Value="This Month" Text="This Month"></asp:ListItem>
+                            <asp:ListItem Value="Last Month" Text="Last Month"></asp:ListItem>
                             <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
                             <asp:ListItem Value="This Year" Text="This Year"></asp:ListItem>
-                            <asp:ListItem Value="3 Year" Text="Latest Three Year"></asp:ListItem>
+                            <asp:ListItem Value="3 Year" Text="Recent Three Years"></asp:ListItem>
                             <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
                         </asp:DropDownList>
                           <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
@@ -237,8 +239,9 @@
                         <asp:ListItem Value="Today" Text="Today"></asp:ListItem>
                         <asp:ListItem Value="Yesterday" Text="Yesterday"></asp:ListItem>
                         <asp:ListItem Value="This Week" Text="This Week"></asp:ListItem>
-
+                        <asp:ListItem Value="Last Week" Text="Last Week"></asp:ListItem>
                         <asp:ListItem Value="This Month" Text="This Month"></asp:ListItem>
+                        <asp:ListItem Value="Last Month" Text="Last Month"></asp:ListItem>
                         <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
                         <asp:ListItem Value="This Year" Text="This Year"></asp:ListItem>
                         <asp:ListItem Value="All Time" Text="All Time"></asp:ListItem>
