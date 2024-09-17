@@ -142,10 +142,12 @@
                          <label for="timeFilter">Select Report Time Range</label>
                         <asp:DropDownList ID="ddlTimeFilter" runat="server" CssClass="form-control" >
                             <asp:ListItem Value="Today" Text="Today"></asp:ListItem>
+                            <asp:ListItem Value="Yesterday" Text="Yesterday"></asp:ListItem>
                             <asp:ListItem Value="This Week" Text="This Week"></asp:ListItem>
                             <asp:ListItem Value="This Month" Text="This Month"></asp:ListItem>
                             <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
                             <asp:ListItem Value="This Year" Text="This Year"></asp:ListItem>
+                            <asp:ListItem Value="3 Year" Text="Latest Three Year"></asp:ListItem>
                             <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
                         </asp:DropDownList>
                           <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
@@ -233,7 +235,9 @@
                      <label for="timeFilter">Select Report Time Range</label>
                     <asp:DropDownList ID="ddlTimeFilter_cust" runat="server" CssClass="form-control" >
                         <asp:ListItem Value="Today" Text="Today"></asp:ListItem>
+                        <asp:ListItem Value="Yesterday" Text="Yesterday"></asp:ListItem>
                         <asp:ListItem Value="This Week" Text="This Week"></asp:ListItem>
+
                         <asp:ListItem Value="This Month" Text="This Month"></asp:ListItem>
                         <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
                         <asp:ListItem Value="This Year" Text="This Year"></asp:ListItem>
@@ -324,7 +328,7 @@
                                <asp:PlaceHolder ID="phNoCustRecord" runat="server" Visible="false">
                                <tr class="text-center" >
                                    <th colspan="5" style="background-color:rgb(233, 116, 81);">
-                                       <asp:Label ID="lblNoCust" runat="server" Text="No Customer Record 😕" Font-Size="1.3em"></asp:Label>
+                                       <asp:Label ID="lblNoCust" runat="server" Text="No Customer Rental Record 😕" Font-Size="1.3em"></asp:Label>
                                    </th>
                                </tr>
                                </asp:PlaceHolder>
@@ -874,12 +878,12 @@
                             dataLabels:{
                                 enabled: true
                             },
-                            enableMouseTracking: false
+                            enableMouseTracking: true
                         }
                     },
                     series: [{
                         type: 'spline',
-                        name: "Summary of Booking Record",
+                        name: "Booking Record Count",
                         data: lineData // Converts the lineData string to a JavaScript array
                     }]
                 });
@@ -900,20 +904,20 @@
                     },
                     yAxis: {
                         title: {
-                            text: "Amount Made"
+                            text: "Amount Made(MYR)"
                         }
                     },
                     plotOptions: {
-                        spline: {
+                        column: {
                             dataLabels: {
                                 enabled: true
                             },
-                            enableMouseTracking: false
+                            enableMouseTracking: true
                         }
                     },
                     series: [{
                         type: 'column',
-                        name: "Amount Made",
+                        name: "Amount Made(MYR)",
                         data: lineData // Converts the lineData string to a JavaScript array
                     }]
                 });

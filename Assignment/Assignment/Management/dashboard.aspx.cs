@@ -160,6 +160,16 @@ namespace Assignment.Management
                     lblTopCust.Text = "Top 5 Customers on Rental Amount Made on " + today.ToString("dd-MMM-yyyy");
                     lackTimeString = " today";
                     break;
+                case "Yesterday":
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                              FROM ApplicationUser a JOIN Booking b
+                              ON a.Id = b.UserId
+                              WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, DATEADD(DAY,-1,GETDATE()))  -- Filter by current date
+                              GROUP BY a.ProfilePicture,a.Username,a.Email 
+                              ORDER BY TotalPrice DESC";
+                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made on " + today.AddDays(-1).ToString("dd-MMM-yyyy");
+                    lackTimeString = " yesterday";
+                    break;
                 case "This Week":
                     int daysToSOW = (int)today.DayOfWeek;
                     DateTime startofWeek = today.AddDays(-daysToSOW);
@@ -359,6 +369,13 @@ namespace Assignment.Management
                     xAxisTitle = "Hours in 24-hour system";
                     title = "on "+ today.Date.ToString("dd-MMM-yyyy");
                     break;
+                case "Yesterday":
+                    query = @"SELECT DATEPART(HOUR, BookingDate) AS Hour , COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                      FROM Booking 
+                      WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, DATEADD(DAY,-1,GETDATE()))  -- Filter by current date
+                      GROUP BY DATEPART(HOUR, BookingDate)
+                      ORDER BY DATEPART(HOUR, BookingDate)";
+                    break;
                 case "This Week":
                     int daysToSOW = (int)today.DayOfWeek;
                     DateTime startofWeek = today.AddDays(-daysToSOW);
@@ -399,6 +416,7 @@ namespace Assignment.Management
                     query = @"SELECT YEAR(BookingDate) AS Year, DATEPART(QUARTER, BookingDate) AS Quarter, COUNT(*) AS BookingCount ,SUM(Price) AS BookingAmount
                             FROM Booking 
                             WHERE BookingDate IS NOT NULL  
+                            AND YEAR(BookingDate) = YEAR(CONVERT(DATE,GETDATE()))
                             GROUP BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)
                             ORDER BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)";
                     title = "for Quarters of "+ today.ToString("yyyy");
@@ -407,13 +425,21 @@ namespace Assignment.Management
                 case "This Year":
                     query = @"SELECT YEAR(BookingDate) AS Year, FORMAT(BookingDate,'MMM') AS Month, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
                             FROM Booking 
-                            WHERE BookingDate IS NOT NULL  
+                            WHERE BookingDate IS NOT NULL 
+                            AND YEAR(BookingDate) = YEAR(CONVERT(DATE,GETDATE()))
                             GROUP BY YEAR(BookingDate), FORMAT(BookingDate, 'MMM')
                             ORDER BY YEAR(BookingDate), FORMAT(BookingDate, 'MMM')";
                     title = "for Year "+today.ToString("yyyy");
                     xAxisTitle = "Month of The Year";
                     break;
-
+                case "3 Year":
+                    query = @"SELECT YEAR(BookingDate) AS Year, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                            FROM Booking 
+                            WHERE YEAR(BookingDate) BETWEEN YEAR(CONVERT(DATE,GETDATE()))-2 AND YEAR(CONVERT(DATE,GETDATE()))
+                            GROUP BY YEAR(BookingDate)
+                            ORDER BY YEAR(BookingDate)";
+                    title = "from Year " + today.AddYears(-2).ToString("yyyy") +" to Year " + today.ToString("yyyy");
+                    break;
                 case "Custom":
 
                     query = @"WITH BookingCTE AS (
@@ -468,6 +494,11 @@ namespace Assignment.Management
                         lineAmtBuilder.Append($"[\"{dr["Hour"]}\",{dr["BookingAmount"]}],");
                         categoryList.Add(hourFormat);
                         break;
+                    case "Yesterday":
+                        lineBuilder.Append($"[\"{dr["Hour"]}\",{dr["BookingCount"]}],");
+                        lineAmtBuilder.Append($"[\"{dr["Hour"]}\",{dr["BookingAmount"]}],");
+                        categoryList.Add(dr["Hour"].ToString()+ ":00");
+                        break;
                     case "This Week":
                         /*string date = dr["DatePerWeek"].ToString();*/
                         lineBuilder.Append($"[\"{dr["DatePerWeek"]}\",{dr["BookingCount"]}],");
@@ -507,11 +538,15 @@ namespace Assignment.Management
                         lineAmtBuilder.Append($"[\"{dr["Month"]}\",{dr["BookingAmount"]}],");
                         categoryList.Add(dr["Month"].ToString());
                         break;
-
+                    case "3 Year":
+                        lineBuilder.Append($"[\"{dr["Year"]}\",{dr["BookingCount"]}],");
+                        lineAmtBuilder.Append($"[\"{dr["Year"]}\",{dr["BookingAmount"]}],");
+                        categoryList.Add(dr["Year"].ToString());
+                        break;
                     case "Custom":
                         lineBuilder.Append($"[\"{dr["MonthABC"]}\",{dr["BookingCount"]}],");
                         lineAmtBuilder.Append($"[\"{dr["MonthABC"]}\",{dr["BookingAmount"]}],");
-                        categoryList.Add(dr["MonthABC"].ToString());
+                        categoryList.Add(dr["MonthABC"].ToString() +"/" + dr["Year"].ToString());
                         break;
                 }
 
