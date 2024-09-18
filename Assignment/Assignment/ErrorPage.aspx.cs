@@ -11,16 +11,31 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Exception lastError = (Exception)Application["LastError"];
             if (Request.QueryString["ErrorCode"] != null)
             {
                 string errorCode = Request.QueryString["ErrorCode"].ToString();
                 lblError.Text = lblError.Attributes["data-error-msg"] = errorCode;
-                lblErrorMsg.Text = Server.GetLastError().Message;
+                if (lastError != null)
+                {
+                    lblErrorMsg.Text = lastError.Message;
+                }
+                else
+                {
+                    lblErrorMsg.Text = "Oops, unexpected error occur ˙◠˙";
+                }
             }
             else
             {
                 lblError.Text = lblError.Attributes["data-error-msg"] = "˙◠˙";
-                lblErrorMsg.Text = Server.GetLastError().Message;
+                if (lastError != null)
+                {
+                    lblErrorMsg.Text = lastError.Message;
+                }
+                else
+                {
+                    lblErrorMsg.Text = "Oops, unexpected error occur ˙◠˙";
+                }
             }
             
         }
