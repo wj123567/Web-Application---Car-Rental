@@ -32,7 +32,7 @@ namespace Assignment
 
         protected void Application_Error(object sender, EventArgs e)
         {
-
+            HttpContext.Current.Cache["LastError"] = Server.GetLastError();
         }
 
         protected void Session_End(object sender, EventArgs e)

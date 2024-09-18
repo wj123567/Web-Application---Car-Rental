@@ -11,30 +11,33 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Exception lastError = (Exception)Application["LastError"];
-            if (Request.QueryString["ErrorCode"] != null)
+            if (!Page.IsPostBack)
             {
-                string errorCode = Request.QueryString["ErrorCode"].ToString();
-                lblError.Text = lblError.Attributes["data-error-msg"] = errorCode;
-                if (lastError != null)
+                Exception lastError = (Exception)HttpContext.Current.Cache["LastError"];
+                if (Request.QueryString["ErrorCode"] != null)
                 {
-                    lblErrorMsg.Text = lastError.Message;
+                    string errorCode = Request.QueryString["ErrorCode"].ToString();
+                    lblError.Text = lblError.Attributes["data-error-msg"] = errorCode;
+                    if (lastError != null)
+                    {
+                        lblErrorMsg.Text = lastError.InnerException.Message;
+                    }
+                    else
+                    {
+                        lblErrorMsg.Text = "Oops, unexpected error occur ˙◠˙";
+                    }
                 }
                 else
                 {
-                    lblErrorMsg.Text = "Oops, unexpected error occur ˙◠˙";
-                }
-            }
-            else
-            {
-                lblError.Text = lblError.Attributes["data-error-msg"] = "˙◠˙";
-                if (lastError != null)
-                {
-                    lblErrorMsg.Text = lastError.Message;
-                }
-                else
-                {
-                    lblErrorMsg.Text = "Oops, unexpected error occur ˙◠˙";
+                    lblError.Text = lblError.Attributes["data-error-msg"] = "˙◠˙";
+                    if (lastError != null)
+                    {
+                        lblErrorMsg.Text = lastError.InnerException.Message;
+                    }
+                    else
+                    {
+                        lblErrorMsg.Text = "Oops, unexpected error occur ˙◠˙";
+                    }
                 }
             }
             
