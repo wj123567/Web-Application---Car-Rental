@@ -195,6 +195,47 @@
     </div>
   </div>
 </div>
+    
+ <div class="modal fade" id="webcamModal2"  tabindex="-1" aria-labelledby="webcamModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg"> 
+    <div class="modal-content">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="webcamModalLabel2">Live Camera and Capture</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="webcamSection">
+          <div class="webcamContainer" id="webcamContainer2">
+            <table id="webcamTable2" class="webcamTable table table-bordered" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <th style="text-align:center" class="webcamTitle">Live Camera</th>
+                <th style="text-align:center" class="webcamTitle">Captured Picture</th>
+              </tr>
+              <tr>
+                <td class="webcamOutput"><div id="webcam2"></div></td>
+                <td class="webcamOutput"><img id="imgCapture2" /></td>
+                <asp:HiddenField ID="hdnCapturedSelfie2" runat="server" />
+              </tr>
+              <tr>
+                <td align="center" class="webcamExecute">
+                  <asp:Button ID="btnCapture2" runat="server" Text="Capture" CssClass="btnCapture btn btn-primary"/>
+                </td>
+                <td align="center" class="webcamExecute">
+                  <asp:Button ID="btnUpload2" runat="server" Text="Upload" CssClass="btnUpload btn btn-success" data-bs-dismiss="modal"/>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
     <div class="container-fluid px-4 mt-4">
     <div class="mb-1">
@@ -287,10 +328,15 @@
                             <div class="image-frame mx-auto">
                                 <asp:ImageButton ID="imgSelfie2" runat="server" CssClass="img mb-2 mx-auto" Width="200px" ImageUrl="~/Image/no-img.jpg" OnClientClick="return ShowImageModal(this)"/>
                              </div>
-                   <asp:CustomValidator ID="validateSelfiePic2" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile" ControlToValidate="fuSelfie2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
+                   <asp:CustomValidator ID="validateSelfiePic2" runat="server" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateSelfieFile" ControlToValidate="fuSelfie2" ValidateEmptyText="True" ValidationGroup="updateDoc" CssClass="validate mx-auto"></asp:CustomValidator>
                                 <span class="small text-muted mb-2 mx-auto">JPG or PNG no larger than 2 MB</span>
                                 <asp:FileUpload ID="fuSelfie2" runat="server" CssClass="uploadPicture mx-auto" onchange="ShowPreviewSelfie2(event)"/>
+                                <div class="mx-auto">
                                 <asp:Button ID="btnUploadSelfie" runat="server" Text="Upload new image" CssClass="btn btn-primary mx-auto" OnClientClick="return fileUploadSelfie2()" ValidationGroup="uploadPic"/>
+                                <!-- wz start -->
+                                <asp:Button ID="btnUserSelfie2" runat="server" Text="Selfie with Webcam" CssClass="btn btn-primary mx-auto" OnClientClick="showWebcamModal2(); return false;"/>   
+                                </div>
+                                 <!-- wz end -->
                             </div>
                             </div>
                         </div>                     
@@ -362,7 +408,6 @@
         }
 
         $(function () {
-            const btnSelfie = document.getElementById('<%= btnSelfiePic.ClientID %>');
             const btnUpload = document.getElementById('<%= btnUpload.ClientID %>');
             const imgSelfie = document.getElementById('<%= imgSelfie.ClientID %>');
 
@@ -399,6 +444,69 @@
             });
         });
 
+        //second modal
+
+        function showWebcamModal2() {
+            webcamUsed = false; // Reset the flag
+            document.getElementById('<%= validateSelfiePic2.ClientID %>').enabled = true;
+            // Try to access the webcam only when the modal is shown
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    // Webcam is available, display the webcam
+                    webcamStream = stream;
+                    Webcam.set({
+                        width: 300,
+                        height: 240,
+                        image_format: 'jpeg',
+                        jpeg_quality: 90
+                    });
+                    Webcam.attach('#webcam2');
+                    $('#webcam2').css('margin', 'auto'); // Adjust CSS styles
+                    $('#webcamModal2').modal('show')
+                })
+                .catch(function (err) {
+                    // No webcam available or permission denied, handle accordingly
+                    alert("Webcam access denied or not available. Please use file upload instead.");
+                });
+        }
+
+        $(function () {
+            const btnUpload = document.getElementById('<%= btnUpload2.ClientID %>');
+            const imgSelfie = document.getElementById('<%= imgSelfie2.ClientID %>');
+
+            $("#main_btnCapture2").click(function (event) {
+                event.preventDefault(); // Prevent default behavior (postback)
+
+                Webcam.snap(function (data_uri) {
+                    console.log("Captured Image Data URI: ", data_uri); // Check the format
+                    $("#imgCapture2")[0].src = data_uri;
+                    $("#main_btnUpload2").prop("disabled", false);
+                });
+            });
+
+            $("#main_btnUpload2").click(function (event) {
+                event.preventDefault(); // Prevent default behavior (postback)
+                webcamUsed = true; // Mark that the webcam was used (for validation)
+                var hdnCapturedSelfie = "<%= hdnCapturedSelfie2.ClientID %>";
+
+                // Get the captured image data URI from the modal
+                var capturedImage = $("#imgCapture2")[0].src;
+
+                // Simulate the ShowPreviewSelfie behavior by updating the imgSelfie element
+                imgSelfie.src = capturedImage;
+
+                if (capturedImage) {
+                    $("#" + hdnCapturedSelfie).val(capturedImage); // Populate hidden field
+                } else {
+                    alert("No image captured. Please capture a selfie first.");
+                    webcamUsed = false;
+                }
+
+                // Notify the user
+                alert("Image preview updated successfully!");
+            });
+        });
+
         function closeWebcam() {
             if (webcamStream) {
                 let tracks = webcamStream.getTracks(); // Get all the tracks (audio/video)
@@ -410,6 +518,11 @@
 
         // When the modal is closed, stop the webcam
         $('#webcamModal').on('hidden.bs.modal', function () {
+            closeWebcam();
+        });
+
+        // When the modal is closed, stop the webcam
+        $('#webcamModal2').on('hidden.bs.modal', function () {
             closeWebcam();
         });
 

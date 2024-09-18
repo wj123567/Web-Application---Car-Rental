@@ -139,6 +139,26 @@ namespace Assignment
                     source.Save(savePathSelfie, ImageFormat.Jpeg);
                     parameters.Add(new SqlParameter("@SelfiePic", relPathSelfie));
                 }
+                else if (!string.IsNullOrEmpty(hdnCapturedSelfie2.Value))
+                {
+                    // Decode the Base64 string and save it as an image file
+                    string base64String = hdnCapturedSelfie2.Value.Split(',')[1]; // Remove the data URI scheme part
+                    byte[] imageBytes = Convert.FromBase64String(base64String);
+
+                    string folderLocation = Server.MapPath("~/Image/DriverSelfie");
+                    string relfolderLocation = "~/Image/DriverSelfie";
+                    string fileName = id + ".jpg"; // Assuming JPEG format
+                    savePathSelfie = Path.Combine(folderLocation, fileName);
+                    relPathSelfie = Path.Combine(relfolderLocation, fileName);
+                    // Log before saving the file
+                    System.Diagnostics.Debug.WriteLine("Saving captured selfie to: " + savePathSelfie);
+
+                    File.WriteAllBytes(savePathSelfie, imageBytes); // Save the file
+
+                    // Log success
+                    System.Diagnostics.Debug.WriteLine("Selfie saved successfully!");
+                    parameters.Add(new SqlParameter("@SelfiePic", relPathSelfie));
+                }
 
                 if (fuLicenseF2.HasFile)
                 {

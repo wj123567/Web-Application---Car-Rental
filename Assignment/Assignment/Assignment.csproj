@@ -197,7 +197,6 @@
     <Content Include="CSS\AdminReview.css" />
     <Content Include="CSS\dashboard.css" />
     <Content Include="CSS\errorPage.css" />
-    <Content Include="error.aspx" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="Image\Dashboard\booking.png" />
     <Content Include="Image\Dashboard\chart.png" />
@@ -309,13 +308,6 @@
     </Compile>
     <Compile Include="BookingAddOn.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="error.aspx.cs">
-      <DependentUpon>error.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="error.aspx.designer.cs">
-      <DependentUpon>error.aspx</DependentUpon>
     </Compile>
     <Compile Include="ErrorPage.aspx.cs">
       <DependentUpon>ErrorPage.aspx</DependentUpon>

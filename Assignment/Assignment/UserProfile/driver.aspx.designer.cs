@@ -366,6 +366,33 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button btnUpload;
 
         /// <summary>
+        /// hdnCapturedSelfie2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCapturedSelfie2;
+
+        /// <summary>
+        /// btnCapture2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCapture2;
+
+        /// <summary>
+        /// btnUpload2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpload2;
+
+        /// <summary>
         /// btnEditDriver control.
         /// </summary>
         /// <remarks>
@@ -598,6 +625,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUploadSelfie;
+
+        /// <summary>
+        /// btnUserSelfie2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUserSelfie2;
 
         /// <summary>
         /// imgLicenseF2 control.
