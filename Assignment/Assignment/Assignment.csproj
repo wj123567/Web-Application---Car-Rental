@@ -196,6 +196,8 @@
     <Content Include="argon-dashboard-master\pages\virtual-reality.html" />
     <Content Include="CSS\AdminReview.css" />
     <Content Include="CSS\dashboard.css" />
+    <Content Include="CSS\errorPage.css" />
+    <Content Include="ErrorPage.aspx" />
     <Content Include="Image\Dashboard\booking.png" />
     <Content Include="Image\Dashboard\chart.png" />
     <Content Include="Management\AdminReview.aspx" />
@@ -306,6 +308,13 @@
     </Compile>
     <Compile Include="BookingAddOn.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Management\AdminReview.aspx.cs">
       <DependentUpon>AdminReview.aspx</DependentUpon>

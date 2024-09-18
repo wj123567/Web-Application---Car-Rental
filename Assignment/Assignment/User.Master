@@ -41,9 +41,9 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <asp:placeholder id="general" runat="server">
                 <asp:Menu ID="Menu1" runat="server" DataSourceID="UserSiteMap" Orientation="Horizontal" StaticDisplayLevels="2" StaticMenuItemStyle-CssClass="nav-link mx-2" CssClass="nav-item" StaticSelectedStyle-ForeColor="#3d5cb8"></asp:Menu>
-                </asp:placeholder>
+                </asp:placeholder>          
       </ul>
-
+        <a href="hihi.aspx">&larr; Back to Home</a>
 
 
 
