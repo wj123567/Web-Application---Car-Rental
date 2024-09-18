@@ -23,6 +23,14 @@ namespace Assignment
             
             if (!Page.IsPostBack)
             {
+                string prevCar = Request.QueryString["prevCar"];
+                string currentCar = (string)Session["CarPlate"]; 
+                if (Request.QueryString["prevCar"] != null){
+                    if (prevCar != currentCar)
+                    {
+                        Session["SelectedAddOns"] = null;
+                    }
+                }
                 lblCheck.Text = Session["BookingID"].ToString();
                 Session["CurrentStep"] = 2;
                 int currentStep = (int)(Session["CurrentStep"]);
@@ -160,7 +168,7 @@ namespace Assignment
                         {   
                             headerCarModel.Text = reader["CarBrand"].ToString() + " " + reader["CarName"].ToString();
                             lblstickyCarModel.Text = reader["CarBrand"].ToString() + " " + reader["CarName"].ToString();
-                            ltrCarPlate.Text="Plate Number: "+reader["CarPlate"].ToString();
+                            ltrCarPlate.Text =reader["CarPlate"].ToString();
                             specType.Text = reader["CType"].ToString();
                             specSeat.Text = reader["CarSeat"].ToString() +" People";
                             carImage.ImageUrl = reader["CarImage"].ToString();
@@ -280,8 +288,8 @@ namespace Assignment
 
         protected void previous_btn_Click(object sender, EventArgs e)
         {
-           
-            Response.Redirect("productListing.aspx");
+            
+            Response.Redirect("productListing.aspx?prevCar="+ltrCarPlate.Text);
         }
 
         private void UpdateProgressBar(int currentStep)

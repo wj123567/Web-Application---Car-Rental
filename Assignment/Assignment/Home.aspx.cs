@@ -18,7 +18,10 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
-
+                if (Session["SelectedAddOns"] != null)
+                {
+                    Session["SelectedAddOns"] = "";
+                }
                 txtDepartureDateTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
                 txtDepartureDateTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-ddTHH:mm");
 

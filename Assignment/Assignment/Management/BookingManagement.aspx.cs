@@ -316,9 +316,15 @@ namespace Assignment.Management
 
                 DateTime pickup_time = reader.GetDateTime(reader.GetOrdinal("StartDate"));
                 DateTime dropoff_time = reader.GetDateTime(reader.GetOrdinal("EndDate"));
+                DateTime custBook_time = reader.GetDateTime(reader.GetOrdinal("BookingDate"));
+                TimeSpan pickup_custBook_diff = pickup_time - custBook_time;
+               
+
                 txtPickUpTime.Text = pickup_time.ToString("yyyy-MM-dd hh:mm:ss");
                 txtDropOffTime.Text = dropoff_time.ToString("yyyy-MM-dd hh:mm:ss");
+                txtCustBookDate.Text = custBook_time.ToString("dd/MM/yyyy");
 
+                
                 if (reader["Notes"].ToString() != null)
                 {
                     txtAdditionalNotes.Text = reader["Notes"].ToString();

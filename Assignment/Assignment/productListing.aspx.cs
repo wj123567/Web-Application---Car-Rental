@@ -15,14 +15,15 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+          
             if (!Page.IsPostBack)
-            {               
+            {
+                
                 txtStartTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
                 txtStartTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-ddTHH:mm");                
                 txtEndTime.Attributes["min"] = DateTime.Now.AddDays(2).ToString("yyyy-MM-ddTHH:mm");
                 txtEndTime.Attributes["max"] = DateTime.Now.AddMonths(4).ToString("yyyy-MM-ddTHH:mm");
-
+                
                     try
                     {
                     retrievedAllData();
@@ -187,7 +188,7 @@ namespace Assignment
             String carPlate = button.CommandArgument.ToString();
 
             Session["CarPlate"] = carPlate;
-            Response.Redirect("infopage.aspx");
+            Response.Redirect("infopage.aspx?prevCar=" + Request.QueryString["prevCar"]);
         }
 
         protected void btnA2Z_Click(object sender, EventArgs e)

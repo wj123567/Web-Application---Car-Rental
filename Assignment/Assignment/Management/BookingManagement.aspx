@@ -5,7 +5,7 @@
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnBookingId" runat="server" />
-    
+    <asp:HiddenField ID="hdnCancelDateCheck" runat="server" />
 
 <div class="modal fade" id="rejectReason" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -54,7 +54,7 @@
      <h5 class="text-dark">Booking Info</h5>
      <hr class="mt-0 mb-4">
      <div class="mb-3">
-         <h6 class="text-dark mb-1">Pick Up</h6>
+         <h6 class="text-dark mb-1 fw-bold">Pick Up</h6>
      </div>
      <div class="row gx-3 mb-3">
          <div class="col-md-6">
@@ -67,7 +67,7 @@
          </div>
      </div>
      <div class="mb-3">
-     <h6 class="text-dark mb-1">Drop Off</h6>
+     <h6 class="text-dark mb-1 fw-bold">Drop Off</h6>
      </div>
      <div class="row gx-3 mb-5">
          <div class="col-md-6">
@@ -79,6 +79,14 @@
              <asp:TextBox ID="txtDropOffTime" runat="server" CssClass="form-control" TextMode="DateTimeLocal" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
          </div>
      </div>
+     <div class="row gx-3 mb-5">
+     <div class="col-md-12">
+         <label class="small mb-1">Customer Booking Date</label>
+             <asp:TextBox ID="txtCustBookDate" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+             
+      </div>
+    
+ </div>
      <div class="mb-3">
      <h6 class="text-dark mb-1">Additional Info</h6>
      </div>
@@ -281,7 +289,7 @@
             </th>
              <th class="booking_cancel">
                 <asp:LinkButton ID="btnCancelReason" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CancelReason" CssClass="text-dark sort-button">
-                Cancel Reason<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                Update Reason<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>
              <th class="booking_reject">
@@ -334,7 +342,7 @@
               <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
         </td>
         <td>
-            <p class="text-muted mb-0"><%# Eval("CancelReason") %></p>
+            <p class="text-muted mb-0"><%# Eval("UpdateReason") %></p>
         </td>
          <td>
              <p class="text-muted mb-0"><%# Eval("RejectReason") %>

@@ -33,15 +33,15 @@ namespace Assignment
 
         private void GetBookingDetails(string bookingId)
         {
-
-            
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             decimal addonTotal = calcAddOnTotal(bookingId);
+            
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
 
                 string query = "SELECT * FROM Booking b JOIN Car c ON b.CarPlate=c.CarPlate WHERE b.Id = @BookingId";
+                
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@BookingId", bookingId);
 
@@ -58,9 +58,25 @@ namespace Assignment
                         lblDropOffLocation.Text = reader["Dropoff_point"].ToString();
                         lblDropOffTime.Text = Convert.ToDateTime(reader["EndDate"]).ToString("dd-MM-yyyy HH:mm:ss tt");
                         string status = reader["Status"].ToString();
-                        
+
+                        //status part(hide edit and cancel)
+                        if (reader["Status"].ToString().Equals("Completed"))
+                        {
+                            btnEdit.Visible = false;
+                            btnDelete.Visible= false;
+                        }
+
+                        //price part
+                        DateTime startDate = Convert.ToDateTime(reader["StartDate"]);
+                        DateTime endDate = Convert.ToDateTime(reader["EndDate"]);
+                        double carDayPrice = Convert.ToDouble(reader["CarDayPrice"]);
+
+                        TimeSpan timeDiff = endDate - startDate;
+                        double totalRental = carDayPrice * Math.Ceiling(timeDiff.TotalDays);
+                        lblRental.Text = totalRental.ToString("F2"); //TotalDays returns fractional number of days, use ceiling to meet our business rule
                         lblAddOnPrice.Text= addonTotal.ToString("F2");
 
+                        //status part
                         lblBookStatus.Text = status;
                         lblBookStatus.CssClass = $"badge {GetBadgeClass(status)}";
                     }

@@ -62,7 +62,7 @@
                         <asp:Literal ID="headerCarModel" runat="server"></asp:Literal> </th>
                     </tr>
                     <tr class="carPlate_style" >
-                        <td colspan="4"><asp:Literal ID="ltrCarPlate" runat="server"></asp:Literal></td>
+                        <td colspan="4">Plate Number: <asp:Literal ID="ltrCarPlate" runat="server" Text=""></asp:Literal></td>
                     </tr>
 
                     <tr class="spec_title">
@@ -259,7 +259,7 @@
                         <td class="text_center" data-price='<%# Eval("Price") %>'> <asp:Label ID="lblAddOnPrice" runat="server" Text='<%# Eval("Price","{0:F2}") %>'></asp:Label></td>
                         
                         <td rowspan="2" style="text-align:center">
-                            <asp:TextBox ID="txtAddOnQuantity" runat="server" TextMode="Number" CssClass="quantity_style quantity_input" min="0" max='<%# Eval("MaxQuantity") %>' value="0"></asp:TextBox>
+                            <asp:TextBox ID="txtAddOnQuantity" runat="server" TextMode="Number" CssClass="quantity_style quantity_input" min="0" max='<%# Eval("MaxQuantity") %>' value="0" ></asp:TextBox>
                              <asp:HiddenField ID="hfAddOnID" runat="server" Value='<%# Eval("Id") %>' />
                         </td>
                     </tr>
