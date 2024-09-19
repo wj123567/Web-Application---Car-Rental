@@ -5,6 +5,7 @@
 <html>
 <head runat="server">
     <title>OnlyCar Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
@@ -13,13 +14,6 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js"></script>
     <link href="../CSS/profile.css" rel="stylesheet" />
-    <!-- jQuery -->
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    <!-- DataTables JS -->
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    <link href="../CSS/bookingprocess" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">

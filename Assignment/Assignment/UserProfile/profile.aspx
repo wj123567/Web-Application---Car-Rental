@@ -46,8 +46,10 @@
                             <asp:TextBox ID="txtIniMail" runat="server" CssClass="form-control" ValidationGroup="verifyMail" Enabled="False"></asp:TextBox>
                             <div class="mt-2">
                                 <span>Verification Code:</span>
-                                <asp:TextBox ID="txtIniCode" runat="server" CssClass="form-control d-inline" ValidationGroup="verifyMail" Width="73%" Placeholder="Verification Code"></asp:TextBox>
-                                <asp:Button ID="btnSendIniCode" runat="server" Text="Send" CssClass="btn btn-primary d-inline" Width="25%" Style="margin-left: 3px;" OnClick="btnSendIniCode_Click" OnClientClick="getEmail()" />
+                                <div class="d-flex">
+                                <asp:TextBox ID="txtIniCode" runat="server" CssClass="form-control d-inline flex-grow-3" ValidationGroup="verifyMail" Placeholder="Verification Code"></asp:TextBox>
+                                <asp:Button ID="btnSendIniCode" runat="server" Text="Send" CssClass="btn btn-primary d-inline flex-shrink-0" Style="margin-left: 3px;" OnClick="btnSendIniCode_Click" OnClientClick="getEmail()" />
+                                </div>
                                 <asp:CustomValidator ID="cvIniCode" runat="server" ErrorMessage="Invalid Otp" CssClass="validate" ControlToValidate="txtIniCode" ValidationGroup="verifyMail" Display="Dynamic" OnServerValidate="validateVerificationCode_ServerValidate"></asp:CustomValidator>
                                 <asp:RequiredFieldValidator ID="reqIniCode" runat="server" ErrorMessage="Otp is Require" ValidationGroup="verifyMail" ControlToValidate="txtIniCode" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
                                 <br />
@@ -134,8 +136,10 @@
                             <div class="row gx-3 mb-3">
                                 <div class="mb-3">
                                     <label class="small mb-1 d-block">Email address</label>
-                                    <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control d-inline" ReadOnly="True" Enabled="False" Width="82%"></asp:TextBox>
-                                    <asp:Button ID="btnChangeEmail" runat="server" Text="Change Email" CssClass="btn d-inline btn-primary" data-bs-toggle="modal" data-bs-target="#changeEmail" OnClientClick="return transferText()" Width="16%" Style="margin-left: 2px;" />
+                                    <div class="d-flex">
+                                    <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control d-inline flex-grow-3" ReadOnly="True" Enabled="False"></asp:TextBox>
+                                    <asp:Button ID="btnChangeEmail" runat="server" Text="Change Email" CssClass="mx-2 btn d-inline btn-primary flex-shrink-0" data-bs-toggle="modal" data-bs-target="#changeEmail" OnClientClick="return transferText()"/>
+                                    </div>
                                 </div>
                                 <div class="row gx-3 mb-3">
                                     <div class="col-md-6">
