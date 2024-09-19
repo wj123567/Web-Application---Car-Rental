@@ -271,7 +271,8 @@
     <div>
                 <asp:UpdatePanel ID="updateUserTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                 <ContentTemplate>
-            <table id="userTable" class="table table-striped table-bordered table-hover table-responsive mb-2">
+            <div class="table-responsive">
+            <table id="userTable" class="table table-striped table-bordered table-hover mb-2">
             <thead>
                 <tr style="text-align: center;">                  
                     <th scope="col">
@@ -321,6 +322,7 @@
                 </asp:Repeater>
             </tbody>
         </table>
+</div>
 
         <div>
         <div class="float-start">

@@ -259,6 +259,7 @@ namespace Assignment
                 labelValidateSend2.Visible = false;
                 txtIniMail2.Enabled = true;
                 verifyTimer.Enabled = false;
+                btnSendIniCode2.Enabled = true;
                 Session.Remove("OTPCountdown");
                 ScriptManager.RegisterStartupScript(this, GetType(), "UpdateCountdown", $"startCountdown({0});", true);                
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modal2()", true);

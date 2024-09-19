@@ -24,10 +24,23 @@
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">
 
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light fixed-top custom-nav show">
+            <div class="container-fluid">
+                <button class="toggle-btn" type="button" onclick="openSideBar()">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a href="../home.aspx">
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Image/logo.png" ImageAlign="Middle" CssClass="d-inline align-top" Style="width: 100px" />
+                    </a>
+                </div>
+            </div>
+        </nav>
+
 <div class="header wrapper">
         <aside id="sidebar">
             <div class="d-flex">
-                <button class="toggle-btn" type="button">
+                <button class="toggle-btn" type="button" onclick="openSideBarLarge()">
                     <i class="lni lni-grid-alt"></i>
                 </button>
                 <div class="sidebar-logo">
@@ -116,11 +129,19 @@
 
     </form>
     <script>
-        const hamBurger = document.querySelector(".toggle-btn");
-
-        hamBurger.addEventListener("click", function () {
+        function openSideBarLarge() {
             document.querySelector("#sidebar").classList.toggle("expand");
-        });
+            document.querySelector("#navbar").classList.toggle("hide");
+            document.querySelector("#navbar").classList.toggle("show");
+            document.querySelector(".content").classList.toggle('overflow-hidden');
+        }
+
+        function openSideBar() {
+            document.querySelector("#sidebar").classList.toggle("expand");
+            document.querySelector("#navbar").classList.toggle("show");
+            document.querySelector("#navbar").classList.toggle("hide");
+            document.querySelector(".content").classList.toggle('overflow-hidden');
+        }
     </script>    
 </body>
 </html>

@@ -94,4 +94,22 @@ body {
         object-fit: cover;
     }
 
+@media only screen and (max-width: 991px){
+
+    #navbarSupportedContent {
+        margin-top: 10px;
+    }
+
+    .custom-menu{
+        display:inline-block;
+    }
+
+    #userControl{
+        float:right;
+        margin:0 !important;
+    }
+
+
+}
+
 

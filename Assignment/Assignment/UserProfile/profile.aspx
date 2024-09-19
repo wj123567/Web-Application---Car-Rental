@@ -48,7 +48,7 @@
                                 <span>Verification Code:</span>
                                 <div class="d-flex">
                                 <asp:TextBox ID="txtIniCode" runat="server" CssClass="form-control d-inline flex-grow-3" ValidationGroup="verifyMail" Placeholder="Verification Code"></asp:TextBox>
-                                <asp:Button ID="btnSendIniCode" runat="server" Text="Send" CssClass="btn btn-primary d-inline flex-shrink-0" Style="margin-left: 3px;" OnClick="btnSendIniCode_Click" OnClientClick="getEmail()" />
+                                <asp:Button ID="btnSendIniCode" runat="server" Text="Send" CssClass="btn btn-primary d-inline flex-shrink-0 mx-2" OnClick="btnSendIniCode_Click" OnClientClick="getEmail()" />
                                 </div>
                                 <asp:CustomValidator ID="cvIniCode" runat="server" ErrorMessage="Invalid Otp" CssClass="validate" ControlToValidate="txtIniCode" ValidationGroup="verifyMail" Display="Dynamic" OnServerValidate="validateVerificationCode_ServerValidate"></asp:CustomValidator>
                                 <asp:RequiredFieldValidator ID="reqIniCode" runat="server" ErrorMessage="Otp is Require" ValidationGroup="verifyMail" ControlToValidate="txtIniCode" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -86,8 +86,10 @@
                             <asp:CustomValidator ID="emailExist" runat="server" ErrorMessage="Email Already Exist" ControlToValidate="txtIniMail2" CssClass="validate" OnServerValidate="emailExist_ServerValidate" Display="Dynamic" ValidationGroup="verifyMail2"></asp:CustomValidator>
                             <div class="mt-2">
                                 <span>Verification Code:</span>
-                                <asp:TextBox ID="txtIniCode2" runat="server" CssClass="form-control d-inline" ValidationGroup="verifyMailCode" Width="73%" Placeholder="Verification Code"></asp:TextBox>
-                                <asp:Button ID="btnSendIniCode2" runat="server" Text="Send" CssClass="btn btn-primary d-inline" Width="25%" Style="margin-left: 3px;" OnClick="btnSendIniCode_Click" ValidationGroup="verifyMail2" OnClientClick="getEmail2()" />
+                                <div class="d-flex">
+                                <asp:TextBox ID="txtIniCode2" runat="server" CssClass="form-control d-inline flex-grow-3" ValidationGroup="verifyMailCode" Placeholder="Verification Code"></asp:TextBox>
+                                <asp:Button ID="btnSendIniCode2" runat="server" Text="Send" CssClass="btn btn-primary d-inline flex-shrink-0 mx-2" OnClick="btnSendIniCode_Click" ValidationGroup="verifyMail2" OnClientClick="getEmail2()" />
+                                </div>
                                 <asp:CustomValidator ID="cvIniCode2" runat="server" ErrorMessage="Invalid Otp" CssClass="validate" ControlToValidate="txtIniCode2" ValidationGroup="verifyMailCode" Display="Dynamic" OnServerValidate="validateVerificationCode_ServerValidate"></asp:CustomValidator>
                                 <asp:RequiredFieldValidator ID="reqIniCode2" runat="server" ErrorMessage="Otp is Require" ValidationGroup="verifyMailCode" ControlToValidate="txtIniCode2" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
                                 <br />
@@ -282,7 +284,6 @@
         function modal2() {
             addEventListener("DOMContentLoaded", (event) => {
                 $('#changeEmail2').modal('toggle');
-                showhideButton();
                 return false;
             });
         };
@@ -290,7 +291,6 @@
         function modal() {
             addEventListener("DOMContentLoaded", (event) => {
                 $('#changeEmail').modal('toggle');
-                showhideButton();
                 return false;
             });
         };

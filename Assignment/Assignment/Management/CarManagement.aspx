@@ -149,7 +149,7 @@
 
         <asp:Panel ID="carPanel" runat="server">
             <div class="row">
-                <div class="col-xl-4">
+                <div class="col-xl-4 mb-3">
                     <div class="card mb-0 mb-xl-0">
                         <div class="card-header">Car Picture</div>
                         <div class="card-body text-center">
@@ -281,7 +281,7 @@
         <hr class="mt-0 mb-4">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
             <ContentTemplate>
-                <div>
+                <div class="table-responsive">
                     <div class="w-auto d-inline float-start mb-2">
                         <span class="w-auto d-inline">Location: </span>
                         <asp:DropDownList ID="ddlTableLocation" runat="server" DataSourceID="carLocation" DataTextField="LocationName" DataValueField="Id" CssClass="form-select form-select-sm d-inline w-auto border-dark" OnDataBound="ddlTableLocation_DataBound" AutoPostBack="True" OnSelectedIndexChanged="ddlTableLocation_SelectedIndexChanged"></asp:DropDownList>
@@ -290,7 +290,7 @@
                         <asp:TextBox ID="searchBar" runat="server" CssClass="form-control form-control-sm rounded border-dark" placeholder="car plate/brand/name/type" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
                         <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" Style="display: none;" />
                     </div>
-                    <table id="carTable" class="table table-striped table-bordered table-hover table-responsive mb-2 mt-4">
+                    <table id="carTable" class="table table-striped table-bordered table-hover mb-2 mt-4">
                         <thead>
                             <tr style="text-align: center;">
                                 <th scope="col">
@@ -338,8 +338,6 @@
                             </asp:Repeater>
                         </tbody>
                     </table>
-                    <div>
-                    </div>
                 </div>
                 <div>
                     <div class="float-start">

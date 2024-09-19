@@ -127,230 +127,230 @@
         <!-- WZ Demo 1 Start-->
         <div class="row">
 
-         <div class="card flex-fill w-100">
-         <div class="card-header">
-    
-             <h5 class="card-title mb-0">Summary Report On Car Booking(Rented)</h5>
-         </div>
-        
-         <div class="card mb-3">
-             <div class="card-body p-3">
-                 <div class="container">
-                  <div class="row">
-                    <div class="col col-md-4">
-                      <div class="form-group">
-                         <label for="timeFilter">Select Report Time Range</label>
-                        <asp:DropDownList ID="ddlTimeFilter" runat="server" CssClass="form-control" >
-                            <asp:ListItem Value="Today" Text="Today"></asp:ListItem>
-                            <asp:ListItem Value="Yesterday" Text="Yesterday"></asp:ListItem>
-                            <asp:ListItem Value="This Week" Text="This Week"></asp:ListItem>
-                            <asp:ListItem Value="Last Week" Text="Last Week"></asp:ListItem>
-                            <asp:ListItem Value="This Month" Text="This Month"></asp:ListItem>
-                            <asp:ListItem Value="Last Month" Text="Last Month"></asp:ListItem>
-                            <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
-                            <asp:ListItem Value="This Year" Text="This Year"></asp:ListItem>
-                            <asp:ListItem Value="3 Year" Text="Recent Three Years"></asp:ListItem>
-                            <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
-                        </asp:DropDownList>
-                          <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
-                        <asp:HiddenField ID="hdnTimeFilter" runat="server" />
-                
-                          <!-- Custom Date Pickers (Initially Hidden) -->
-                    <div id="customDateFilter" style="display: none;">
-                        <label for="startDate">Start Date</label>
-                        
-                        <asp:TextBox ID="txtStartDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
-                        <label for="endDate">End Date</label>
-                        
-                        <asp:TextBox ID="txtEndDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
-                    </div>
-                    </div>
-                         </div>
-                      <div class="col col-md-4">
-                          <asp:Button ID="btnProcessBookRecord" runat="server" Text="Generate"  OnClick="btnBookRecord_Click" CssClass="btn btn-primary "/>
-                          </div>
-                    
-                  </div>
+            <div class="card flex-fill w-100">
+                <div class="card-header">
+
+                    <h5 class="card-title mb-0">Summary Report On Car Booking(Rented)</h5>
                 </div>
-                 <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
-                     <ContentTemplate>
-                 <div class="chart container-fluid">                  
-                      <div class="row">
-                        <div class="col-12">
-                            <asp:GridView ID="gvBooking" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
-                                <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
-                                <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
-                                <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
-                                <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
-                                <SortedAscendingCellStyle BackColor="#F7F7F7" />
-                                <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
-                                <SortedDescendingCellStyle BackColor="#E5E5E5" />
-                                <SortedDescendingHeaderStyle BackColor="#242121" />
-                            </asp:GridView>
-                            <asp:PlaceHolder ID="phNoBooking" runat="server" Visible="false">
-                                <tr class="text-center" >
-                                    <th colspan="5">
-                                        <asp:Label ID="Label3" runat="server" Text="No Booking Record Found 😕" Font-Size="1.3em"></asp:Label>
-                                    </th>
-                                </tr>
-                            </asp:PlaceHolder>
+
+                <div class="card mb-3">
+                    <div class="card-body p-3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col col-md-4">
+                                    <div class="form-group">
+                                        <label for="timeFilter">Select Report Time Range</label>
+                                        <asp:DropDownList ID="ddlTimeFilter" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="Today" Text="Today"></asp:ListItem>
+                                            <asp:ListItem Value="Yesterday" Text="Yesterday"></asp:ListItem>
+                                            <asp:ListItem Value="This Week" Text="This Week"></asp:ListItem>
+                                            <asp:ListItem Value="Last Week" Text="Last Week"></asp:ListItem>
+                                            <asp:ListItem Value="This Month" Text="This Month"></asp:ListItem>
+                                            <asp:ListItem Value="Last Month" Text="Last Month"></asp:ListItem>
+                                            <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
+                                            <asp:ListItem Value="This Year" Text="This Year"></asp:ListItem>
+                                            <asp:ListItem Value="3 Year" Text="Recent Three Years"></asp:ListItem>
+                                            <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+                                        <asp:HiddenField ID="hdnTimeFilter" runat="server" />
+
+                                        <!-- Custom Date Pickers (Initially Hidden) -->
+                                        <div id="customDateFilter" style="display: none;">
+                                            <label for="startDate">Start Date</label>
+
+                                            <asp:TextBox ID="txtStartDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                                            <label for="endDate">End Date</label>
+
+                                            <asp:TextBox ID="txtEndDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-md-4">
+                                    <asp:Button ID="btnProcessBookRecord" runat="server" Text="Generate" OnClick="btnBookRecord_Click" CssClass="btn btn-primary " />
+                                </div>
+
+                            </div>
                         </div>
+                        <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <div class="chart container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <asp:GridView ID="gvBooking" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
+                                                <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                                                <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                                                <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                                                <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                                                <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                                                <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                                                <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                                                <SortedDescendingHeaderStyle BackColor="#242121" />
+                                            </asp:GridView>
+                                            <asp:PlaceHolder ID="phNoBooking" runat="server" Visible="false">
+                                                <tr class="text-center">
+                                                    <th colspan="5">
+                                                        <asp:Label ID="Label3" runat="server" Text="No Booking Record Found 😕" Font-Size="1.3em"></asp:Label>
+                                                    </th>
+                                                </tr>
+                                            </asp:PlaceHolder>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div id="bookNumChart"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div id="bookAmtChart"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="btnProcessBookRecord" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div id="bookNumChart"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div id="bookAmtChart"></div>
-                        </div>
-                    </div>
-                                             
-                 </div>
-                    </ContentTemplate>
-                     <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnProcessBookRecord" EventName="Click" />
-                    </Triggers>
-                </asp:UpdatePanel>
-             </div>
-         </div>
-     </div>
+                </div>
+            </div>
         </div>
         <!-- WZ Demo 1 End-->
-           <!-- WZ Demo 2 Start-->
-   <div class="row">
-    <div class="card flex-fill w-100">
-    <div class="card-header">
-        
-        <h5 class="card-title mb-0">Exception Report on Car Rental Amount Made by Customers</h5>
-        
-    </div>
-   
-    <div class="card mb-3">
-        <div class="card-body p-3">
-             <div class="container">
-              <div class="row">
-                  
-                <div class="col col-md-4">
-                  <div class="form-group">
-                     <label for="timeFilter">Select Report Time Range</label>
-                    <asp:DropDownList ID="ddlTimeFilter_cust" runat="server" CssClass="form-control" >
-                        <asp:ListItem Value="Today" Text="Today"></asp:ListItem>
-                        <asp:ListItem Value="Yesterday" Text="Yesterday"></asp:ListItem>
-                        <asp:ListItem Value="This Week" Text="This Week"></asp:ListItem>
-                        <asp:ListItem Value="Last Week" Text="Last Week"></asp:ListItem>
-                        <asp:ListItem Value="This Month" Text="This Month"></asp:ListItem>
-                        <asp:ListItem Value="Last Month" Text="Last Month"></asp:ListItem>
-                        <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
-                        <asp:ListItem Value="This Year" Text="This Year"></asp:ListItem>
-                        <asp:ListItem Value="All Time" Text="All Time"></asp:ListItem>
-                        <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
-                    </asp:DropDownList>
-                      <asp:Label ID="lblChecking" runat="server" Text="Label"></asp:Label>
+        <!-- WZ Demo 2 Start-->
+        <div class="row">
+            <div class="card flex-fill w-100">
+                <div class="card-header">
 
-                      <asp:HiddenField ID="hdnTimeFilter_cust" runat="server" />
-                      <!-- Custom Date Pickers (Initially Hidden) -->
-                <div id="customDateFilter_cust" style="display: none;">
-                    <asp:Label ID="lblStartDate" runat="server" Text="Start Date"></asp:Label>
-                    <asp:TextBox ID="txtStartDate_cust" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
-                    
-                    <asp:Label ID="lblEndDate" runat="server" Text="End Date"></asp:Label>
-                    <asp:TextBox ID="txtEndDate_cust" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                    <h5 class="card-title mb-0">Exception Report on Car Rental Amount Made by Customers</h5>
+
                 </div>
-                      <!-- Custom Quarter Pickers (Initially Hidden) -->
-                      <div id="customQuarterFilter_cust" style="display:none">
-                          <asp:Label ID="lblQuarter" runat="server" Text="Choose Quarter"></asp:Label>
-                          <asp:DropDownList ID="ddlQuarterFilter_cust" runat="server" CssClass="form-control" >
-                              <asp:ListItem Value="default"  Text="Please pick specific quarter"></asp:ListItem>
-                              <asp:ListItem Value="Quarter1"  Text="Quarter 1"></asp:ListItem>
-                              <asp:ListItem Value="Quarter2"  Text="Quarter 2"></asp:ListItem>
-                              <asp:ListItem Value="Quarter3"  Text="Quarter 3"></asp:ListItem>
-                              <asp:ListItem Value="Quarter4"  Text="Quarter 4"></asp:ListItem>
-                          </asp:DropDownList>
-                          <asp:HiddenField ID="hdnQuarterFilter" runat="server" />
-                          <asp:RequiredFieldValidator ID="rqQuarterFilter" runat="server"  ControlToValidate="ddlQuarterFilter_cust" ErrorMessage="Please choose Quarter Filter Option" Enabled="false" InitialValue="default" ForeColor="Red" ValidationGroup="custQuarter" Display="Dynamic"></asp:RequiredFieldValidator>
-                      </div>
+
+                <div class="card mb-3">
+                    <div class="card-body p-3">
+                        <div class="container">
+                            <div class="row">
+
+                                <div class="col col-md-4">
+                                    <div class="form-group">
+                                        <label for="timeFilter">Select Report Time Range</label>
+                                        <asp:DropDownList ID="ddlTimeFilter_cust" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="Today" Text="Today"></asp:ListItem>
+                                            <asp:ListItem Value="Yesterday" Text="Yesterday"></asp:ListItem>
+                                            <asp:ListItem Value="This Week" Text="This Week"></asp:ListItem>
+                                            <asp:ListItem Value="Last Week" Text="Last Week"></asp:ListItem>
+                                            <asp:ListItem Value="This Month" Text="This Month"></asp:ListItem>
+                                            <asp:ListItem Value="Last Month" Text="Last Month"></asp:ListItem>
+                                            <asp:ListItem Value="Quarter" Text="Quarter"></asp:ListItem>
+                                            <asp:ListItem Value="This Year" Text="This Year"></asp:ListItem>
+                                            <asp:ListItem Value="All Time" Text="All Time"></asp:ListItem>
+                                            <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        <asp:Label ID="lblChecking" runat="server" Text="Label"></asp:Label>
+
+                                        <asp:HiddenField ID="hdnTimeFilter_cust" runat="server" />
+                                        <!-- Custom Date Pickers (Initially Hidden) -->
+                                        <div id="customDateFilter_cust" style="display: none;">
+                                            <asp:Label ID="lblStartDate" runat="server" Text="Start Date"></asp:Label>
+                                            <asp:TextBox ID="txtStartDate_cust" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+
+                                            <asp:Label ID="lblEndDate" runat="server" Text="End Date"></asp:Label>
+                                            <asp:TextBox ID="txtEndDate_cust" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                                        </div>
+                                        <!-- Custom Quarter Pickers (Initially Hidden) -->
+                                        <div id="customQuarterFilter_cust" style="display: none">
+                                            <asp:Label ID="lblQuarter" runat="server" Text="Choose Quarter"></asp:Label>
+                                            <asp:DropDownList ID="ddlQuarterFilter_cust" runat="server" CssClass="form-control">
+                                                <asp:ListItem Value="default" Text="Please pick specific quarter"></asp:ListItem>
+                                                <asp:ListItem Value="Quarter1" Text="Quarter 1"></asp:ListItem>
+                                                <asp:ListItem Value="Quarter2" Text="Quarter 2"></asp:ListItem>
+                                                <asp:ListItem Value="Quarter3" Text="Quarter 3"></asp:ListItem>
+                                                <asp:ListItem Value="Quarter4" Text="Quarter 4"></asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:HiddenField ID="hdnQuarterFilter" runat="server" />
+                                            <asp:RequiredFieldValidator ID="rqQuarterFilter" runat="server" ControlToValidate="ddlQuarterFilter_cust" ErrorMessage="Please choose Quarter Filter Option" Enabled="false" InitialValue="default" ForeColor="Red" ValidationGroup="custQuarter" Display="Dynamic"></asp:RequiredFieldValidator>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-md-4">
+                                    <asp:Button ID="btnCustRecord" runat="server" Text="Generate" OnClick="btnCustRecord_Click" CssClass="btn btn-primary" ValidationGroup="custQuarter" />
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="chart">
+                            <asp:UpdatePanel ID="updateTopCust" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <table class="table table-border table-responsive table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: center" colspan="4">
+                                                    <asp:Label ID="lblTopCust" CssClass="lblTopCust_style" runat="server"></asp:Label>
+                                                </th>
+                                            </tr>
+                                            <tr style="font-size: 16px;">
+                                                <th scope="col">User Profile</th>
+                                                <th scope="col">User Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Total Rent Made(MYR)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <asp:Repeater ID="rptTopCustRental" runat="server">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td scope="col">
+                                                            <div class="img-fluid">
+                                                                <asp:Image ID="imgUserProfile" runat="server" ImageUrl='<%# Eval("ProfilePicture") %>' Width="50px" />
+                                                            </div>
+                                                        </td>
+
+                                                        <td scope="col">
+                                                            <asp:Label ID="lblUserName" runat="server" Text='<%# Eval("Username") %>' />
+                                                        </td>
+
+                                                        <td scope="col">
+                                                            <asp:Label ID="lblUserEmail" runat="server" Text='<%# Eval("Email") %>' />
+                                                        </td>
+
+                                                        <td scope="col">
+                                                            <asp:Label ID="lblRentAmount" runat="server" Text='<%# Eval("TotalPrice","{0:F2}") %>' />
+                                                        </td>
+
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                            <asp:PlaceHolder ID="phLackCustRecord" runat="server" Visible="false">
+                                                <tr class="text-center">
+                                                    <th colspan="5" style="background-color: rgb(210, 180, 140);">
+                                                        <asp:Label ID="lblLackCustRecord" runat="server" Font-Size="1.3em"></asp:Label>
+                                                    </th>
+                                                </tr>
+                                            </asp:PlaceHolder>
+                                            <asp:PlaceHolder ID="phNoCustRecord" runat="server" Visible="false">
+                                                <tr class="text-center">
+                                                    <th colspan="5" style="background-color: rgb(233, 116, 81);">
+                                                        <asp:Label ID="lblNoCust" runat="server" Text="No Customer Rental Record 😕" Font-Size="1.3em"></asp:Label>
+                                                    </th>
+                                                </tr>
+                                            </asp:PlaceHolder>
+                                        </tbody>
+                                    </table>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="btnCustRecord" EventName="Click" />
+
+                                </Triggers>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
                 </div>
-                     </div>
-                  <div class="col col-md-4">
-                      <asp:Button ID="btnCustRecord" runat="server" Text="Generate" OnClick="btnCustRecord_Click"  CssClass="btn btn-primary" ValidationGroup="custQuarter"/>
-                      </div>
-                
-              </div>
-            </div>
-            <div class="chart">
-                <asp:UpdatePanel ID="updateTopCust" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-                    <ContentTemplate>
-                       <table class="table table-border table-responsive table-hover table-striped">
-                           <thead>
-                               <tr >
-                                   <th style="text-align:center" colspan="4">
-                                       <asp:Label ID="lblTopCust" CssClass="lblTopCust_style" runat="server" ></asp:Label>
-                                   </th>
-                               </tr>
-                               <tr style="font-size:16px;">
-                                   <th scope="col">User Profile</th>
-                                   <th scope="col">User Name</th>
-                                   <th scope="col">Email</th>
-                                   <th scope="col">Total Rent Made(MYR)</th>                  
-                               </tr>
-                           </thead>
-                           <tbody>
-                               <asp:Repeater ID="rptTopCustRental" runat="server">
-                                   <ItemTemplate>
-                                       <tr>
-                                           <td scope="col">
-                                               <div class="img-fluid">
-                                               <asp:Image ID="imgUserProfile" runat="server" ImageUrl ='<%# Eval("ProfilePicture") %>' Width="50px"/>
-                                               </div>
-                                           </td>
-                                          
-                                           <td scope="col">
-                                               <asp:Label ID="lblUserName" runat="server" Text='<%# Eval("Username") %>' />
-                                           </td>
-
-                                           <td scope="col">
-                                               <asp:Label ID="lblUserEmail" runat="server" Text='<%# Eval("Email") %>' />
-                                           </td>
-
-                                           <td scope="col">
-                                               <asp:Label ID="lblRentAmount" runat="server" Text='<%# Eval("TotalPrice","{0:F2}") %>' />
-                                           </td>
-
-                                       </tr>
-                                   </ItemTemplate>
-                               </asp:Repeater>  
-                                <asp:PlaceHolder ID="phLackCustRecord" runat="server" Visible="false">
-                                <tr class="text-center" >
-                                    <th colspan="5" style="background-color:rgb(210, 180, 140);">
-                                        <asp:Label ID="lblLackCustRecord" runat="server"  Font-Size="1.3em"></asp:Label>
-                                    </th>
-                                </tr>
-                                </asp:PlaceHolder>
-                               <asp:PlaceHolder ID="phNoCustRecord" runat="server" Visible="false">
-                               <tr class="text-center" >
-                                   <th colspan="5" style="background-color:rgb(233, 116, 81);">
-                                       <asp:Label ID="lblNoCust" runat="server" Text="No Customer Rental Record 😕" Font-Size="1.3em"></asp:Label>
-                                   </th>
-                               </tr>
-                               </asp:PlaceHolder>
-                           </tbody>
-                       </table>
-                   </ContentTemplate>
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="btnCustRecord" EventName="Click" />
-    
-                    </Triggers>
-               </asp:UpdatePanel>
             </div>
         </div>
-    </div>
-</div>
-   </div>
-   <!-- WZ Demo 2 End-->
-       
-        
+        <!-- WZ Demo 2 End-->
+
+
         <div class="row" style="margin-bottom: 20px">
             <div class="col-sm-6 col-md-8 col-xl-6 d-flex order-2">
                 <div class="card flex-fill w-100">
@@ -391,70 +391,73 @@
 
         <div class="row">
             <!-- Top Renting -->
-            <div class="col-12" style="width: 75%">
+            <div class="col-12 col-lg-9 mb-2">
                 <div class="card overflow-auto" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
 
                     <div class="card-body pb-0">
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title">Top 5 Rental <span id="topRentalDay" class="text-muted" style="font-size:0.7em">| All Time</span></h5>
+                            <h5 class="card-title flex-grow-3">Top 5 Rental <span id="topRentalDay" class="text-muted" style="font-size: 0.7em">| All Time</span></h5>
 
-                            <div class="filter">
-                                <div id="topRentalRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;">
-                                    <i class="fa fa-calendar" style="vertical-align:middle;"></i>&nbsp;
-								<span style="vertical-align:middle;"></span>
-                                    <i class="fa fa-caret-down float-end" style="vertical-align:middle;"></i>
+                            <div class="filter flex-shrink-0 mx-2">
+                                <div id="topRentalRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;" >
+                                    <i class="fa fa-calendar" style="vertical-align: middle;"></i>&nbsp;
+								<span style="vertical-align: middle;"></span>
+                                    <i class="fa fa-caret-down float-end" style="vertical-align: middle;"></i>
                                 </div>
                                 <asp:HiddenField ID="hdnTopRentalStart" runat="server" />
                                 <asp:HiddenField ID="hdnTopRentalEnd" runat="server" />
                                 <asp:Button ID="btnTopDateFilter" runat="server" Text="Button" Style="display: none" OnClick="btnTopDateFilter_Click" />
-                                <asp:Button ID="btnAllTopRental" runat="server" Text="Button" Style="display: none" OnClick="btnAllTopRental_Click"/>
+                                <asp:Button ID="btnAllTopRental" runat="server" Text="Button" Style="display: none" OnClick="btnAllTopRental_Click" />
                             </div>
                         </div>
                         <hr />
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <table class="table table-border table-responsive table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Car Image</th>
-                                            <th scope="col">Car Name</th>
-                                            <th scope="col">Day Price</th>
-                                            <th scope="col">Rent</th>
-                                            <th scope="col">Revenue</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <asp:Repeater ID="rptTopRental" runat="server">
-                                            <ItemTemplate>
-                                                <tr>
-                                                    <td scope="col" class="text-center" style="width: 250px;">
-                                                        <div class="topRentalImageFrame">
-                                                            <asp:Image ID="imgCarTopPic" runat="server" ImageUrl='<%# Eval("Image") %>' Width="120px" CssClass="mx-auto" />
-                                                        </div>
-                                                    </td>
+                                <div class="table-responsive">
+                                    <table class="table table-border table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Car Image</th>
+                                                <th scope="col">Car Name</th>
+                                                <th scope="col">Day Price</th>
+                                                <th scope="col">Rent</th>
+                                                <th scope="col">Revenue</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <asp:Repeater ID="rptTopRental" runat="server">
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td scope="col" class="text-center" style="width: 250px;">
+                                                            <div class="topRentalImageFrame">
+                                                                <asp:Image ID="imgCarTopPic" runat="server" ImageUrl='<%# Eval("Image") %>' Width="120px" CssClass="mx-auto" />
+                                                            </div>
+                                                        </td>
 
-                                                    <td scope="col">
-                                                        <asp:Label ID="lblCarName" runat="server" Text='<%# Eval("CarName") %>' /></td>
+                                                        <td scope="col">
+                                                            <asp:Label ID="lblCarName" runat="server" Text='<%# Eval("CarName") %>' /></td>
 
-                                                    <td scope="col">
-                                                        <asp:Label ID="lblDayPrice" runat="server" Text='<%# Eval("Price","{0:F2}") %>' /></td>
+                                                        <td scope="col">
+                                                            <asp:Label ID="lblDayPrice" runat="server" Text='<%# Eval("Price","{0:F2}") %>' /></td>
 
-                                                    <td scope="col">
-                                                        <asp:Label ID="lblRentalCount" runat="server" Text='<%# Eval("RentalCount") %>' /></td>
+                                                        <td scope="col">
+                                                            <asp:Label ID="lblRentalCount" runat="server" Text='<%# Eval("RentalCount") %>' /></td>
 
-                                                    <td scope="col">
-                                                        <asp:Label ID="lblTotalRevenue" runat="server" Text='<%# Eval("TotalRevenue","{0:F2}") %>' /></td>
+                                                        <td scope="col">
+                                                            <asp:Label ID="lblTotalRevenue" runat="server" Text='<%# Eval("TotalRevenue","{0:F2}") %>' /></td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                            <asp:PlaceHolder ID="noCarPlaceholder" runat="server" Visible="false">
+                                                <tr class="text-center">
+                                                    <th colspan="5">
+                                                        <asp:Label ID="Label1" runat="server" Text="No Car Rented :<" Font-Size="1.3em"></asp:Label></th>
                                                 </tr>
-                                            </ItemTemplate>
-                                        </asp:Repeater>  
-                                        <asp:PlaceHolder ID="noCarPlaceholder" runat="server" Visible="false">
-                                        <tr class="text-center" >
-                                            <th colspan="5"><asp:Label ID="Label1" runat="server" Text="No Car Rented :<" Font-Size="1.3em"></asp:Label></th>
-                                        </tr>
-                                        </asp:PlaceHolder>
-                                    </tbody>
-                                </table>
+                                            </asp:PlaceHolder>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </ContentTemplate>
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="btnTopDateFilter" EventName="Click" />
@@ -466,17 +469,17 @@
                 </div>
             </div>
             <!-- Top Renting -->
-            <div class="col-12" style="width:25%">
+            <div class="col-12 col-lg-3 mb-2">
                 <!-- Rent Car Type -->
                 <div class="card" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
 
                     <div class="card-body pb-0">
                         <div class="d-flex justify-content-between align-items-center">
-                        <h5 class="card-title">Rent Car Type <span id="carTypeDay" class="text-muted" style="font-size:0.6em">| All Time</span></h5>
-                        <div id="carCategoryRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50px">
-                                    <i class="fa fa-calendar"></i>&nbsp;
+                            <h5 class="card-title flex-shrink-0">Rent Car Type <span id="carTypeDay" class="text-muted" style="font-size: 0.6em">| All Time</span></h5>
+                            <div id="carCategoryRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50px" class="flex-grow-3">
+                                <i class="fa fa-calendar"></i>&nbsp;
 								<span></span><i class="fa fa-caret-down"></i>
-                        </div>
+                            </div>
                             <asp:HiddenField ID="hdnCarCategoryStart" runat="server" />
                             <asp:HiddenField ID="hdnCarCategoryEnd" runat="server" />
                         </div>
@@ -540,6 +543,7 @@
                                                 data: chartdata
                                             }]
                                         });
+                                        window.addEventListener('resize', function () { chart.resize(); });
                                     },
                                     error: function (error) {
                                         console.log(error);
@@ -550,66 +554,67 @@
                             function filterCarCategory() {
                                 var hdnCarCategoryStart = document.getElementById('<%= hdnCarCategoryStart.ClientID %>').value;
                                 var hdnCarCategoryEnd = document.getElementById('<%= hdnCarCategoryEnd.ClientID %>').value;
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "dashboard.aspx/filterCategory", // Ensure this URL points to the correct server method
-                                        data: JSON.stringify({ start: hdnCarCategoryStart, end: hdnCarCategoryEnd }), // Pass the hidden field value as parameter
-                                        contentType: "application/json; charset=utf-8",
-                                        dataType: "json",
-                                        success: function (response) {
-                                            // Parse the response to get the car type and count data
-                                            var data = JSON.parse(response.d);
+                                $.ajax({
+                                    type: "POST",
+                                    url: "dashboard.aspx/filterCategory", // Ensure this URL points to the correct server method
+                                    data: JSON.stringify({ start: hdnCarCategoryStart, end: hdnCarCategoryEnd }), // Pass the hidden field value as parameter
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    success: function (response) {
+                                        // Parse the response to get the car type and count data
+                                        var data = JSON.parse(response.d);
 
-                                            var chartdata = [];
-                                            for (var i = 0; i < data.length; i++) {
-                                                chartdata.push({
-                                                    value: data[i].CarCount,
-                                                    name: data[i].CarType
-                                                });
-                                            }
-
-                                            echarts.init(document.querySelector("#rentTypeChart")).setOption({
-                                                tooltip: {
-                                                    trigger: 'item'
-                                                },
-                                                legend: {
-                                                    top: '5%',
-                                                    left: 'center'
-                                                },
-                                                series: [{
-                                                    name: 'Car Type',
-                                                    type: 'pie',
-                                                    radius: ['40%', '70%'],
-                                                    avoidLabelOverlap: false,
-                                                    label: {
-                                                        show: false,
-                                                        position: 'center'
-                                                    },
-                                                    emphasis: {
-                                                        label: {
-                                                            show: true,
-                                                            fontSize: '18',
-                                                            fontWeight: 'bold'
-                                                        }
-                                                    },
-                                                    labelLine: {
-                                                        show: false
-                                                    },
-                                                    color: [
-                                                        '#90e0ef',
-                                                        '#48cae4',
-                                                        '#00b4d8',
-                                                        '#0077b6',
-                                                    ],
-                                                    data: chartdata
-                                                }]
+                                        var chartdata = [];
+                                        for (var i = 0; i < data.length; i++) {
+                                            chartdata.push({
+                                                value: data[i].CarCount,
+                                                name: data[i].CarType
                                             });
-                                        },
-                                        error: function (error) {
-                                            console.log(error);
                                         }
-                                    });
-                                };
+
+                                        echarts.init(document.querySelector("#rentTypeChart")).setOption({
+                                            tooltip: {
+                                                trigger: 'item'
+                                            },
+                                            legend: {
+                                                top: '5%',
+                                                left: 'center'
+                                            },
+                                            series: [{
+                                                name: 'Car Type',
+                                                type: 'pie',
+                                                radius: ['40%', '70%'],
+                                                avoidLabelOverlap: false,
+                                                label: {
+                                                    show: false,
+                                                    position: 'center'
+                                                },
+                                                emphasis: {
+                                                    label: {
+                                                        show: true,
+                                                        fontSize: '18',
+                                                        fontWeight: 'bold'
+                                                    }
+                                                },
+                                                labelLine: {
+                                                    show: false
+                                                },
+                                                color: [
+                                                    '#90e0ef',
+                                                    '#48cae4',
+                                                    '#00b4d8',
+                                                    '#0077b6',
+                                                ],
+                                                data: chartdata
+                                            }]
+                                        });
+                                        window.addEventListener('resize', function () { chart.resize(); });
+                                    },
+                                    error: function (error) {
+                                        console.log(error);
+                                    }
+                                });
+                            };
                         </script>
 
 
@@ -663,7 +668,7 @@
                 } else {
                     cb(start, end, false);
                 }
-                document.getElementById('topRentalDay').textContent = "| "+ label;
+                document.getElementById('topRentalDay').textContent = "| " + label;
             });
 
             cb(start, end, true);
@@ -679,7 +684,7 @@
                 if (isAll) {
                     filterAllCategory();
                 } else {
-                document.getElementById('<%=hdnCarCategoryStart.ClientID %>').value = start.format('YYYY-MM-DD');
+                    document.getElementById('<%=hdnCarCategoryStart.ClientID %>').value = start.format('YYYY-MM-DD');
                     document.getElementById('<%=hdnCarCategoryEnd.ClientID %>').value = end.format('YYYY-MM-DD');
                     filterCarCategory();
                 }
@@ -706,7 +711,7 @@
                     cb(start, end, false);
                 }
                 document.getElementById('carTypeDay').textContent = "| " + label;
-                
+
             });
 
             cb(start, end, true);
@@ -850,86 +855,86 @@
             altInput: false // Do not show an alternative input
         });
     </script>
-     
+
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script>
-            function renderBookingRecordChart(lineData,xAxisTitle,categories,title) {
-                console.log("Line data: ", lineData);
-                console.log("Category: ",categories);
-                $('#bookNumChart').highcharts({
-                    chart: {
-                       type:'spline'
-                    },
+    <script>
+        function renderBookingRecordChart(lineData, xAxisTitle, categories, title) {
+            console.log("Line data: ", lineData);
+            console.log("Category: ", categories);
+            $('#bookNumChart').highcharts({
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: "Summary of Booking Record Made " + title
+                },
+                xAxis: {
                     title: {
-                        text: "Summary of Booking Record Made " + title
+                        text: xAxisTitle
                     },
-                    xAxis: {
-                        title: {
-                            text: xAxisTitle
-                        },
-                        categories: categories // Placeholder
-                    },
-                    yAxis: {
-                        title: {
-                            text: "Count"
-                        }
-                    },
-                    plotOptions:{
-                        spline:{
-                            dataLabels:{
-                                enabled: true
-                            },
-                            enableMouseTracking: true
-                        }
-                    },
-                    series: [{
-                        type: 'spline',
-                        name: "Booking Record Count",
-                        data: lineData // Converts the lineData string to a JavaScript array
-                    }]
-                });
-            }
-            function renderBookingAmtChart(lineData, xAxisTitle, categories, title) {
-                $('#bookAmtChart').highcharts({
-                    chart: {
-                        type:'column'
-                    },
+                    categories: categories // Placeholder
+                },
+                yAxis: {
                     title: {
-                        text: "Summary of Booking Amount Made "+title
-                    },
-                    xAxis: {
-                        title: {
-                            text: xAxisTitle
+                        text: "Count"
+                    }
+                },
+                plotOptions: {
+                    spline: {
+                        dataLabels: {
+                            enabled: true
                         },
-                        categories: categories // Placeholder
+                        enableMouseTracking: true
+                    }
+                },
+                series: [{
+                    type: 'spline',
+                    name: "Booking Record Count",
+                    data: lineData // Converts the lineData string to a JavaScript array
+                }]
+            });
+        }
+        function renderBookingAmtChart(lineData, xAxisTitle, categories, title) {
+            $('#bookAmtChart').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: "Summary of Booking Amount Made " + title
+                },
+                xAxis: {
+                    title: {
+                        text: xAxisTitle
                     },
-                    yAxis: {
-                        title: {
-                            text: "Amount Made(MYR)"
-                        }
-                    },
-                    plotOptions: {
-                        column: {
-                            dataLabels: {
-                                enabled: true
-                            },
-                            enableMouseTracking: true
-                        }
-                    },
-                    series: [{
-                        type: 'column',
-                        name: "Amount Made(MYR)",
-                        data: lineData // Converts the lineData string to a JavaScript array
-                    }]
-                });
-            }
-            console.log("Chart rendered");
-            $(document).ready(function () {
+                    categories: categories // Placeholder
+                },
+                yAxis: {
+                    title: {
+                        text: "Amount Made(MYR)"
+                    }
+                },
+                plotOptions: {
+                    column: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: true
+                    }
+                },
+                series: [{
+                    type: 'column',
+                    name: "Amount Made(MYR)",
+                    data: lineData // Converts the lineData string to a JavaScript array
+                }]
+            });
+        }
+        console.log("Chart rendered");
+        $(document).ready(function () {
 
-                // When dropdown value changes
-                $('#<%= ddlTimeFilter.ClientID %>').change(function () {
+            // When dropdown value changes
+            $('#<%= ddlTimeFilter.ClientID %>').change(function () {
                     var selectedValue = $(this).val();
                     $('#<%= hdnTimeFilter.ClientID %>').val(selectedValue);
 
@@ -941,7 +946,7 @@
                     }
                 });
 
-                $('#<%= ddlTimeFilter_cust.ClientID %>').change(function (){
+                $('#<%= ddlTimeFilter_cust.ClientID %>').change(function () {
                     var selectedValue = $(this).val();
                     $('#<%= hdnTimeFilter_cust.ClientID%>').val(selectedValue);
 
@@ -970,5 +975,5 @@
 
                 });
             });
-        </script>
+    </script>
 </asp:Content>
