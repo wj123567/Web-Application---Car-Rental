@@ -37,7 +37,7 @@
         </div>
     </div>
 </div>
-
+    <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
        <!-- Page Content -->
     <main id="page-content" >
       
@@ -46,13 +46,16 @@
         
         <!-- row -->
         <div class="row justify-content-center" >
-          <div class="col-lg-8 col-12" style="border:1px solid gray; ">
-            <!-- card -->
+          <div class="col-lg-8 col-12" style="border:1px solid gray; ">           
             <div class="card">
-              <!-- card body -->
               <div class="card-body">
               <div class="row">
-                <div class="col-8">
+                  <div class="col-1">
+                      <div>
+                          <asp:LinkButton ID="lkbtnBack" runat="server" CssClass="btn btn-lg text-center back_btn" OnClick="lkbtnBack_Click"><i class="fa fa-arrow-left fa-2x"></i></asp:LinkButton>                        
+                      </div>
+                  </div>
+                <div class="col-7">                   
                   <!-- heading -->
                   <h3 class="mb-0">Booking ID: <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label></h3>
                     </div>
@@ -171,6 +174,7 @@
                                   </td>
                                   <td colspan="2" style="border-right:none; border-bottom: 2px solid gray">
                                       <asp:Label ID="lblAddOnPrice" runat="server" Text="Label"></asp:Label>
+                                      <asp:HiddenField ID="hdnOriAddOnPrice" runat="server" />
                                   </td>
                               </tr>
                               
@@ -186,8 +190,8 @@
                     <!-- list -->
                     <ul class="list-unstyled mb-0">
                       <li class="d-flex justify-content-between mb-2">
-                        <span>Subtotal</span>
-                        <span class="text-dark fw-medium">128.00</span>
+                        <asp:Label ID="lblAddOnAmtUpdateTitle" runat="server" Text="" Visible="false"></asp:Label>
+                        <asp:Label ID="lblAddOnAmtUpdate" runat="server" Text="0.00" Visible="false"></asp:Label>
                       </li>
                       <li class="d-flex justify-content-between mb-2">
                         <span>Shipping</span>

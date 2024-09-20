@@ -2,6 +2,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 
      <link href="../CSS/bookingrecordupdate.css" rel="stylesheet" />
+    
 
 <div id="confirmModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -26,13 +27,15 @@
       <!-- Container fluid -->
       <section class="container-fluid p-4" style="margin-bottom:20px;">
         
-        <!-- row -->
         <div class="row justify-content-center" >
           <div class="col-lg-8 col-12" style="border:1px solid gray; ">
-            <!-- card -->
             <div class="card">
-              <!-- card body -->
               <div class="card-body">
+                  <div class="col-1">
+                       <div>
+                           <asp:LinkButton ID="lkbtnBack" runat="server" CssClass="btn btn-lg text-center back_btn" OnClick="lkbtnBack_Click"><i class="fa fa-arrow-left fa-2x"></i></asp:LinkButton>                        
+                       </div>
+                  </div>
                 <div class="mb-6">
                   <!-- heading -->
                   <h2 class="mb-0">Update for Booking ID: <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label></h2>
@@ -65,8 +68,7 @@
                                </tr>
                                <tr class="booking_car_table_info">
                                    <th style="width:30%">Pick Up Time</th>
-                                   <td style="width:70%">
-                                       <asp:TextBox ID="txtPickUpTime" TextMode="DateTime" runat="server"></asp:TextBox>
+                                   <td style="width:70%">    
                                        <asp:Label ID="lblPickUpTime" runat="server" Text="Label"></asp:Label>
                                    </td>
                                </tr>
@@ -78,8 +80,7 @@
                                </tr>
                                <tr class="booking_car_table_info">
                                    <th style="width:30%">Drop Off Time</th>
-                                   <td style="width:70%">
-                                       <asp:TextBox ID="txtDropOffTime" TextMode="DateTime" runat="server"></asp:TextBox>
+                                   <td style="width:70%">                         
                                        <asp:Label ID="lblDropOffTime" runat="server" Text="Label"></asp:Label>
                                    </td>
                                </tr>
@@ -91,10 +92,11 @@
                               </tr>
                               
                           </table>
-                         
+                      <asp:Label ID="lblCheck1" runat="server" Text="Label"></asp:Label>
+                      <asp:Label ID="lblCheck2" runat="server" Text="Label"></asp:Label>
                           <table class="booking_price_table">
                               <tr class="booking_price_table_header">
-                                  <th colspan="4">ADD on</th>
+                                  <th colspan="4">ADD ON</th>
                               </tr>
 
                             <tr class="booking_price_table_title" >

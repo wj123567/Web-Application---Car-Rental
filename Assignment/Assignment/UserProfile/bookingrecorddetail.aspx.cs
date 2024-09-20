@@ -16,15 +16,43 @@ namespace Assignment
 
             if (!Page.IsPostBack)
             {
+                
+                //handle add on price update
+                string addOnUpdate= Request.QueryString["addOnUpdate"];
+                if(addOnUpdate != null)
+                {
+                    lblAddOnAmtUpdateTitle.Visible = true;
+                    lblAddOnAmtUpdate.Visible = true;
+                    //current amt before update
+                    double currentLabelAddOnAmt = Convert.ToDouble(lblAddOnAmtUpdate.Text);
+                    //get the actual price in double
+                    double addOnDiff = Convert.ToDouble(addOnUpdate);
+                    double newAmt = currentLabelAddOnAmt + addOnDiff;
+                    if (newAmt > 0)
+                    {
+                        lblAddOnAmtUpdateTitle.Text = "Surplus from Add On Update";                                          
+                        lblAddOnAmtUpdate.Text = newAmt.ToString("F2");
+                    }
+                    else if(newAmt == 0)
+                    {
+                        lblAddOnAmtUpdateTitle.Visible=false;
+                        lblAddOnAmtUpdate.Visible=false;
+                    }
+                    else
+                    {
+                        lblAddOnAmtUpdateTitle.Text = "Deficit from Add On Update";  
+                        lblAddOnAmtUpdate.Text = newAmt.ToString("F2");
+                    }
+                }
                 // Retrieve BookingId from session
                 string bookingId = Session["bookingrecordID"] as string;
 
                 if (!string.IsNullOrEmpty(bookingId))
-                {
+                {      
                     // Fetch booking details from the database
-                    GetBookingDetails(bookingId);
-                    
+                    GetBookingDetails(bookingId);       
                 }
+                lblCheck.Text = hdnOriAddOnPrice.Value;
 
                 txtComment.Attributes.Add("placeholder", "Write Your Comment Here!");
             }
@@ -36,6 +64,7 @@ namespace Assignment
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             decimal addonTotal = calcAddOnTotal(bookingId);
             
+
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
@@ -77,7 +106,10 @@ namespace Assignment
                         double totalRental = carDayPrice * Math.Ceiling(timeDiff.TotalDays);
                         lblRental.Text = totalRental.ToString("F2"); //TotalDays returns fractional number of days, use ceiling to meet our business rule
                         lblAddOnPrice.Text= addonTotal.ToString("F2");
-
+                        if (hdnOriAddOnPrice.Value == "")
+                        {
+                            hdnOriAddOnPrice.Value = addonTotal.ToString("F2");
+                        }
                         //status part
                         lblBookStatus.Text = status;
                         lblBookStatus.CssClass = $"badge {GetBadgeClass(status)}";
@@ -133,6 +165,12 @@ namespace Assignment
                     return "bg-default"; // Or any default class
             }
         }
+
+        protected void lkbtnBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("bookingrecord.aspx");
+        }
+
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, GetType(), "showModal", " modal();", true);
@@ -140,8 +178,8 @@ namespace Assignment
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-             
-            Response.Redirect("bookingRecordUpdate.aspx?notes="+ lblNotes.Text);
+
+            Response.Redirect("bookingRecordUpdate.aspx?notes=" + lblNotes.Text + "&rental=" + lblRental.Text + "&oriAddOnPrice=" + hdnOriAddOnPrice.Value);
         }
 
 

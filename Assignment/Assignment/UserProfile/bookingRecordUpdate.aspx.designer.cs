@@ -24,6 +24,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button modalYesBtn;
 
         /// <summary>
+        /// lkbtnBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lkbtnBack;
+
+        /// <summary>
         /// lblBookingNumber control.
         /// </summary>
         /// <remarks>
@@ -51,15 +60,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblPickUpLocation;
 
         /// <summary>
-        /// txtPickUpTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPickUpTime;
-
-        /// <summary>
         /// lblPickUpTime control.
         /// </summary>
         /// <remarks>
@@ -78,15 +78,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblDropOffLocation;
 
         /// <summary>
-        /// txtDropOffTime control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDropOffTime;
-
-        /// <summary>
         /// lblDropOffTime control.
         /// </summary>
         /// <remarks>
@@ -103,6 +94,24 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNotes;
+
+        /// <summary>
+        /// lblCheck1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheck1;
+
+        /// <summary>
+        /// lblCheck2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheck2;
 
         /// <summary>
         /// rptAddOnList control.

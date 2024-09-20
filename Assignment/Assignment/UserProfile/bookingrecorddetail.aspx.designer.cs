@@ -78,6 +78,24 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button modalYesBtn;
 
         /// <summary>
+        /// lblCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheck;
+
+        /// <summary>
+        /// lkbtnBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lkbtnBack;
+
+        /// <summary>
         /// lblBookingNumber control.
         /// </summary>
         /// <remarks>
@@ -256,6 +274,33 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblAddOnPrice;
+
+        /// <summary>
+        /// hdnOriAddOnPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnOriAddOnPrice;
+
+        /// <summary>
+        /// lblAddOnAmtUpdateTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAddOnAmtUpdateTitle;
+
+        /// <summary>
+        /// lblAddOnAmtUpdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAddOnAmtUpdate;
 
         /// <summary>
         /// lblCardNumberEnd control.
