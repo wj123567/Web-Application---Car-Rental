@@ -152,15 +152,15 @@
     <div class="container-xl px-4 mt-4">
         <h1 class="text-dark">Driver Management</h1>
         <hr class="mt-0 mb-4">
-        <div class="row">
-            <div class="col">
+        <div class="d-flex justify-content-between">
+            <div>
                 <asp:Button ID="btnAll" runat="server" Text="All" CssClass="btn border border-dark sort-button-group" CommandArgument="All" OnClick="sortCategory" OnClientClick="colorButton(this)" BackColor="#3490DC" ForeColor="White" />
                 <asp:Button ID="btnPending" runat="server" Text="Pending" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="P" OnClientClick="colorButton(this)" />
                 <asp:Button ID="btnRejected" runat="server" Text="Rejected" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="R" OnClientClick="colorButton(this)" />
                 <asp:Button ID="btnApproved" runat="server" Text="Approved" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="A" OnClientClick="colorButton(this)" />
             </div>
-            <div class="col">
-                <div class="float-end" style="width: 250px;">
+            <div>
+                <div>
                     <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Name/Phone/Id/Passport/LicenseNo" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
                     <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" Style="display: none;" />
                 </div>
@@ -228,7 +228,7 @@
                             <asp:Label ID="lblPageInfo" runat="server" Text="" CssClass="text-dark mx-2"></asp:Label>
                             <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="btnNext_Click" CssClass="btn btn-primary btn-sm" />
                         </div>
-                        <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
+                        <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted span-totalRecord"></asp:Label>
                     </div>
                 </ContentTemplate>
                 <Triggers>

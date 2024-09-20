@@ -259,15 +259,15 @@
     <div class="container-xl px-4 mt-4">
     <h1 class="text-dark">User Management</h1>
     <hr class="mt-0 mb-4">
-     <div class="row">
-         <div class="col">
+     <div class="d-flex justify-content-between">
+         <div class="me-2">
              <asp:Button ID="btnAddNewUser" runat="server" Text="Add New User" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewUser" OnClientClick="return false"/>
          </div>
-         <div class="float-end" style="width: 250px;">             
+         <div class="me-2 flex-shrink-3">             
             <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Email/Username " ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
             <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" style="display:none;"/>
          </div>
-         </div>
+      </div>
     <div>
                 <asp:UpdatePanel ID="updateUserTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                 <ContentTemplate>
@@ -330,7 +330,7 @@
         <asp:Label ID="lblPageInfo" runat="server" Text="" CssClass="text-dark mx-2"></asp:Label>
         <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="btnNext_Click" CssClass="btn btn-primary btn-sm" />
         </div>  
-        <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
+        <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted span-totalRecord"></asp:Label>
         </div>
                 </ContentTemplate>
                     <Triggers>

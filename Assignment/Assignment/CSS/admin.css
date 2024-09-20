@@ -215,3 +215,9 @@ a.sidebar-link:hover {
         height: 100%;
         object-fit: cover;
     }
+
+@media only screen and (max-width: 500px) {
+    .span-location, .span-totalRecord {
+        display: none;
+    }
+}
