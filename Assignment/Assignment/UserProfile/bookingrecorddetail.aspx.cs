@@ -57,6 +57,8 @@ namespace Assignment
                         lblPickUpTime.Text = Convert.ToDateTime(reader["StartDate"]).ToString("dd/MM/yyyy HH:mm:ss tt");
                         lblDropOffLocation.Text = reader["Dropoff_point"].ToString();
                         lblDropOffTime.Text = Convert.ToDateTime(reader["EndDate"]).ToString("dd-MM-yyyy HH:mm:ss tt");
+                        lblNotes.Text = reader["Notes"].ToString();
+
                         string status = reader["Status"].ToString();
 
                         //status part(hide edit and cancel)
@@ -138,7 +140,8 @@ namespace Assignment
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-            Response.Redirect("bookingRecordUpdate.aspx");
+             
+            Response.Redirect("bookingRecordUpdate.aspx?notes="+ lblNotes.Text);
         }
 
 

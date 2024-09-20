@@ -83,6 +83,12 @@
                                        <asp:Label ID="lblDropOffTime" runat="server" Text="Label"></asp:Label>
                                    </td>
                                </tr>
+                              <tr class="booking_car_table_info">
+                                  <th>Notes</th>
+                                  <td>
+                                      <asp:TextBox ID="txtNotes" TextMode="MultiLine" runat="server" Rows="5" Columns="50"></asp:TextBox>
+                                  </td>
+                              </tr>
                               
                           </table>
                          
@@ -94,22 +100,28 @@
                             <tr class="booking_price_table_title" >
                                 <th colspan="2" style="width:60%">Type</th>
                                 <th  style="width:20%">Initial Quantity</th>
-                                <th  style="width:20%">New Quantity</th>
+                                <th  style="width:20%">Edit Quantity</th>
+                                <th></th>
                             </tr>
 
                        <asp:Repeater ID="rptAddOnList" runat="server" OnItemDataBound="rptAddOnList_ItemDataBound">
                        <ItemTemplate>
                               <tr class="booking_price_table_info">
                                   <td colspan="2">
-                                     <%# Eval("Name").ToString() == "No Record Found" ? "No Record Found" : Eval("Name") %>
+                                      <asp:HiddenField ID="hdnAddOnId" runat="server"  Value='<%# Eval("AddOnId").ToString() %>'/>
+                                      <asp:Label ID="lblAddOnName" runat="server" Text=' <%# Eval("Name").ToString() == "No Record Found" ? "No Record Found" : Eval("Name") %>'>
+                                      </asp:Label>                                  
                                   </td>  
                                   <td >
-                                      <%# Eval("Name").ToString() == "No Record Found" ? "" : Eval("Quantity") %>
+                                      <asp:Label ID="lblAddOnQuantity" runat="server" Text=' <%# Eval("Name").ToString() == "No Record Found" ? "" : Eval("Quantity") %>'>
+                                      </asp:Label>                                    
                                   </td>
                                   <td>
                                       <asp:DropDownList ID="ddlNewQuantity" CssClass="btn btn-light ddlQuantity_style" runat="server" Visible='<%# Eval("Name").ToString() != "No Record Found" %>'>
-
-                                      </asp:DropDownList>
+                                      </asp:DropDownList>    
+                                  </td>
+                                  <td>
+                                      <asp:Button ID="btnAddOnClear" runat="server" Text="Remove"  CssClass="btn btn-danger" CommandArgument='<%# Eval("AddOnId").ToString() %>' />
                                   </td>
                               </tr>
 
@@ -124,7 +136,7 @@
                     <div class="container">
                     <div class="row justify-content-end">
                         <div class="col-auto">
-                    <asp:Button ID="btnConfirm" runat="server" CssClass="confirm_btn_style" Text="Confirm" OnClick="btnConfirm_Click" />
+                    <asp:Button ID="btnConfirm" runat="server" CssClass="confirm_btn_style" Text="Confirm Edit" OnClick="btnConfirm_Click" />
                         </div>
                     </div>
                   </div>

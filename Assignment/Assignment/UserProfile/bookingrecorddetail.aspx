@@ -135,7 +135,14 @@
                                        <asp:Label ID="lblDropOffTime" runat="server" Text="Label"></asp:Label>
                                    </td>
                                </tr>
-                              
+                              <tr class="booking_car_table_info">
+                                  <th>
+                                      Notes
+                                  </th>
+                                  <td>
+                                      <asp:Label ID="lblNotes" runat="server" Text="Label"></asp:Label>
+                                  </td>
+                              </tr>
                           </table>
                          
                           <table class="booking_price_table">
@@ -169,6 +176,8 @@
                               
 
                           </table>
+
+                      
 
                   </div>
                   
