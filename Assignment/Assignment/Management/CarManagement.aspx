@@ -155,7 +155,7 @@
                         <div class="card-body text-center">
                             <asp:LinkButton ID="btnUploadPic" runat="server" CssClass="car-pic-wrapper image-frame mx-auto" OnClientClick="return fileUpload()">
                                 <span class="upload-text">Upload</span>
-                                <asp:Image ID="imgCarPic" runat="server" CssClass="img-car-pic mb-2" Width="300px" ImageUrl="~/Image/no-img -long.png" />
+                                <asp:Image ID="imgCarPic" runat="server" CssClass="img-car-pic mb-2" Width="100%" ImageUrl="~/Image/no-img -long.png" />
                             </asp:LinkButton>
                             <div id="img-warning-text" class="small font-italic text-muted">JPG or PNG no larger than 2 MB</div>
                             <asp:CustomValidator ID="validateCarPic" runat="server" ControlToValidate="fuCarPic" CssClass="validate" ValidationGroup="uploadCar" ValidateEmptyText="True" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile"></asp:CustomValidator>
@@ -279,17 +279,20 @@
         <h1 class="text-dark d-inline">Car Detail</h1>
         <asp:Button ID="btnAddNewCar" runat="server" Text="Add New Car" CssClass="btn btn-primary btn-sm mx-2 mb-2" OnClick="btnAddNewCar_Click" />
         <hr class="mt-0 mb-4">
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-            <ContentTemplate>
-                <div class="table-responsive">
-                    <div class="w-auto d-inline float-start mb-2">
-                        <span class="w-auto d-inline">Location: </span>
+        <div class="d-flex justify-content-between">
+                    <div class="mb-2">
+                        <span class="w-auto d-inline d-xs-none">Location: </span>
                         <asp:DropDownList ID="ddlTableLocation" runat="server" DataSourceID="carLocation" DataTextField="LocationName" DataValueField="Id" CssClass="form-select form-select-sm d-inline w-auto border-dark" OnDataBound="ddlTableLocation_DataBound" AutoPostBack="True" OnSelectedIndexChanged="ddlTableLocation_SelectedIndexChanged"></asp:DropDownList>
                     </div>
-                    <div class="float-end mb-2">
+                    <div class="mb-2">
                         <asp:TextBox ID="searchBar" runat="server" CssClass="form-control form-control-sm rounded border-dark" placeholder="car plate/brand/name/type" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
                         <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" Style="display: none;" />
                     </div>
+        </div>
+        <div>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="table-responsive">
                     <table id="carTable" class="table table-striped table-bordered table-hover mb-2 mt-4">
                         <thead>
                             <tr style="text-align: center;">
@@ -350,6 +353,7 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
+        </div>
     </div>
 <script>
     var isPass = false;

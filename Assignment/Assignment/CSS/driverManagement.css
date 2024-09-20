@@ -1,5 +1,5 @@
 ﻿.image-frame-driver {
-    width: 200px;
+    max-width: 100%;
     height: 150px;
     border: 1px solid gray;
     overflow: hidden;

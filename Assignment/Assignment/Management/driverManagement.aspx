@@ -59,7 +59,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="card-body row">
-                        <div class="col">
+                        <div class="col-12 col-lg-6">
                             <h5 class="text-dark">Driver Info</h5>
                             <hr class="mt-0 mb-4">
                             <div class="mb-3">
@@ -97,11 +97,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-12 col-lg-6">
                             <h5 class="text-dark">Driver Document</h5>
                             <hr class="mt-0 mb-4">
                             <div class="row gx-3 mb-3">
-                                <div class="col-md-6">
+                                <div class="col-12 col-md-6">
                                     <label class="small mb-1">Driver ID/Passport Picture</label>
                                     <div class="d-flex flex-column align-items-centers">
                                         <div class="image-frame-driver mx-auto">
@@ -110,7 +110,7 @@
                                         <asp:Label ID="lblIdPic" runat="server" CssClass="validate mx-auto"></asp:Label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12 col-md-6">
                                     <label class="small mb-1">Driver Selfie</label>
                                     <div class="d-flex flex-column align-items-centers">
                                         <div class="image-frame-driver mx-auto">

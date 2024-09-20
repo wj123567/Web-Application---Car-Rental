@@ -174,7 +174,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-            <div class="col">
+            <div class="col-12 col-md-6">
             <div class="text-center">
                      <asp:LinkButton ID="btnAddNewProfile" runat="server" CssClass="profile-pic-wrapper Userprofile-image-frame mx-auto" OnClientClick="return fileUpload()">
                      <span class="upload-text mx-auto">Upload</span>
@@ -217,7 +217,7 @@
                         </div>
                     </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-6">
              <div class="mb-3">
                   <label class="small mb-1">Password</label>
                    <asp:TextBox ID="txtAddPassword" runat="server" CssClass="form-control mb-2" TextMode="Password" ValidationGroup="addUser" onkeyup="validatePassword()"></asp:TextBox>
