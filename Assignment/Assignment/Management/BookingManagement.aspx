@@ -62,8 +62,8 @@
              <asp:TextBox ID="txtPickUpLocation" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
          </div>
          <div class="col-md-6">
-             <label class="small mb-1">Pick Up Time</label>
-             <asp:TextBox ID="txtPickUpTime" runat="server" CssClass="form-control" TextMode="DateTimeLocal" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+             <label class="small mb-1">Pick Up Time (dd/MM/yyyy)</label>
+             <asp:TextBox ID="txtPickUpTime" runat="server" CssClass="form-control" TextMode="DateTime" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
          </div>
      </div>
      <div class="mb-3">
@@ -75,14 +75,14 @@
                  <asp:TextBox ID="txtDropOffLocation" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
           </div>
          <div class="col-md-6">
-             <label class="small mb-1" for="inputBirthday">Drop off Time</label>
-             <asp:TextBox ID="txtDropOffTime" runat="server" CssClass="form-control" TextMode="DateTimeLocal" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+             <label class="small mb-1" for="inputBirthday">Drop off Time (dd/MM/yyyy)</label>
+             <asp:TextBox ID="txtDropOffTime" runat="server" CssClass="form-control" TextMode="DateTime" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
          </div>
      </div>
      <div class="row gx-3 mb-5">
      <div class="col-md-12">
-         <label class="small mb-1">Customer Booking Date</label>
-             <asp:TextBox ID="txtCustBookDate" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+         <label class="small mb-1">Customer Booking Date (dd/MM/yyyy)</label>
+             <asp:TextBox ID="txtCustBookDate" runat="server" CssClass="form-control"  TextMode="DateTime" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
              
       </div>
     
@@ -349,7 +349,7 @@
          </td>
         <td>
              <asp:Button ID="btnView" runat="server" CSSclass="btn btn-sm text-primary" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
-             <asp:Button ID="btnUpdate" runat="server" CSSclass="btn btn-sm text-primary" Text="Done" OnClick="btnUpdate_Click" CommandArgument='<%# Eval("Id") %>'/>
+             <asp:Button ID="btnUpdate" runat="server" CSSclass="btn btn-sm text-primary" Text="Mark as Done" OnClick="btnUpdate_Click" CommandArgument='<%# Eval("Id") %>'/>
             
         </td>
       </tr>

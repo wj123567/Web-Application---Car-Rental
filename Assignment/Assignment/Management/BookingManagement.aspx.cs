@@ -151,7 +151,7 @@ namespace Assignment.Management
             String BookingId = btnView.CommandArgument;
             Session["BookingId"] = BookingId;
 
-            if (status == "Completed")
+            if (status == "Completed"||status =="Booked")
             {
                 btnOk.Visible = true;
                 btnApprove.Visible = false;
@@ -317,12 +317,12 @@ namespace Assignment.Management
                 DateTime pickup_time = reader.GetDateTime(reader.GetOrdinal("StartDate"));
                 DateTime dropoff_time = reader.GetDateTime(reader.GetOrdinal("EndDate"));
                 DateTime custBook_time = reader.GetDateTime(reader.GetOrdinal("BookingDate"));
-                TimeSpan pickup_custBook_diff = pickup_time - custBook_time;
+                
                
 
-                txtPickUpTime.Text = pickup_time.ToString("yyyy-MM-dd hh:mm:ss");
-                txtDropOffTime.Text = dropoff_time.ToString("yyyy-MM-dd hh:mm:ss");
-                txtCustBookDate.Text = custBook_time.ToString("dd/MM/yyyy");
+                txtPickUpTime.Text = pickup_time.ToString("dd/MM/yyyy hh:mm:ss");
+                txtDropOffTime.Text = dropoff_time.ToString("dd/MM/yyyy hh:mm:ss");
+                txtCustBookDate.Text = custBook_time.ToString("dd/MM/yyyy hh:mm:ss");
 
                 
                 if (reader["Notes"].ToString() != null)

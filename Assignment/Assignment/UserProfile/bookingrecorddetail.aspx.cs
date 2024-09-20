@@ -89,7 +89,7 @@ namespace Assignment
         {
             decimal addonTotal=0;
             lblAddOnDesc.Text = "";
-            // Replace with your actual database connection string
+            
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
             {

@@ -24,7 +24,7 @@
     <main id="page-content" >
       
       <!-- Container fluid -->
-      <section class="container-fluid p-4">
+      <section class="container-fluid p-4" style="margin-bottom:20px;">
         
         <!-- row -->
         <div class="row justify-content-center" >
@@ -66,7 +66,8 @@
                                <tr class="booking_car_table_info">
                                    <th style="width:30%">Pick Up Time</th>
                                    <td style="width:70%">
-                                       <asp:TextBox ID="txtPickUpTime" TextMode="DateTimeLocal" runat="server"></asp:TextBox>
+                                       <asp:TextBox ID="txtPickUpTime" TextMode="DateTime" runat="server"></asp:TextBox>
+                                       <asp:Label ID="lblPickUpTime" runat="server" Text="Label"></asp:Label>
                                    </td>
                                </tr>
                                <tr class="booking_car_table_info">
@@ -78,7 +79,8 @@
                                <tr class="booking_car_table_info">
                                    <th style="width:30%">Drop Off Time</th>
                                    <td style="width:70%">
-                                       <asp:TextBox ID="txtDropOffTime" TextMode="DateTimeLocal" runat="server"></asp:TextBox>
+                                       <asp:TextBox ID="txtDropOffTime" TextMode="DateTime" runat="server"></asp:TextBox>
+                                       <asp:Label ID="lblDropOffTime" runat="server" Text="Label"></asp:Label>
                                    </td>
                                </tr>
                               
@@ -155,13 +157,8 @@
                   </div>
                 </div>
               </div>
-                 <!-- card -->
- <div class="card mt-4">
-   <!-- card body -->
-   <div class="card-body">
-    
- </div>
- </div>
+              
+
                 
           </div>
              
