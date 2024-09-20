@@ -158,6 +158,11 @@ a.sidebar-link:hover {
 }
 
 @media only screen and (max-width: 600px) {
+    .custom-justified-between {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     .content {
         padding-top: 60px;

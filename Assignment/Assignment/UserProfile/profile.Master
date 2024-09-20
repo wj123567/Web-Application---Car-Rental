@@ -24,23 +24,19 @@
                     <i class="lni lni-grid-alt"></i>
                 </button>
                 <div class="sidebar-logo">
-                    <a href="../home.aspx">
-                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Image/logo.png" ImageAlign="Middle" CssClass="d-inline align-top" Style="width: 100px" />
-                    </a>
+                    <asp:ImageButton ID="btnLogo" runat="server" ImageUrl="~/Image/logo.png" PostBackUrl="~/Home.aspx" CssClass="d-inline align-top" Style="width: 100px"/>
                 </div>
             </div>
         </nav>
 
         <div class="header wrapper">
             <aside id="sidebar">
-                <div class="d-flex">
+                <div class="d-flex custom-justified-between">
                     <button class="toggle-btn" type="button" onclick="openSideBarLarge()">
                         <i class="lni lni-grid-alt"></i>
                     </button>
-                    <div class="sidebar-logo">
-                        <a href="../home.aspx">
-                            <asp:Image ID="logo" runat="server" ImageUrl="~/Image/logo.png" ImageAlign="Middle" CssClass="d-inline align-top" Style="width: 100px" />
-                        </a>
+                    <div class="sidebar-logo me-3">
+                    <asp:ImageButton ID="btnLogo2" runat="server" ImageUrl="~/Image/logo.png" PostBackUrl="~/Home.aspx" CssClass="d-inline align-top" Style="width: 100px"/>
                     </div>
                 </div>
                 <hr />
