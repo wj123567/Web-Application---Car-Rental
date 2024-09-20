@@ -1,6 +1,7 @@
 ﻿body {
     background-color: #effaf6;
 }
+
 ::after,
 ::before {
     box-sizing: border-box;
@@ -72,7 +73,6 @@ body {
 #sidebar:not(.expand) .sidebar-logo,
 #sidebar:not(.expand) a.sidebar-link span {
     display: none;
-
 }
 
 .sidebar-nav {
@@ -139,8 +139,8 @@ a.sidebar-link:hover {
     transition: all .2s ease-out;
 }
 
-.custom-nav{
-    display:none;
+.custom-nav {
+    display: none;
 }
 
 @media only screen and (max-width: 600px) {
@@ -150,7 +150,7 @@ a.sidebar-link:hover {
     }
 
     #sidebar {
-        display:none;
+        display: none;
     }
 
     .custom-nav.show {
@@ -158,9 +158,9 @@ a.sidebar-link:hover {
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
 
-    .custom-nav.hide{
+    .custom-nav.hide {
         display: none;
-     }
+    }
 
     #sidebar.expand {
         display: block;
@@ -178,6 +178,12 @@ a.sidebar-link:hover {
         left: 0;
         right: 0;
     }
+
+    .custom-justified-between {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 .validate {
@@ -185,7 +191,7 @@ a.sidebar-link:hover {
     color: red;
 }
 
-.uploadPicture{
+.uploadPicture {
     display: none;
 }
 
@@ -231,11 +237,11 @@ a.sidebar-link:hover {
     border-radius: 10px;
 }
 
-.image-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    .image-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
 .iti {
     width: 100%;
@@ -244,7 +250,7 @@ a.sidebar-link:hover {
 .profile-image-frame {
     width: 100px;
     height: 100px;
-    border-radius:100%;
+    border-radius: 100%;
     border: 3px solid black;
     overflow: hidden;
     display: flex;
@@ -252,7 +258,7 @@ a.sidebar-link:hover {
     justify-content: center;
 }
 
-.profile-image-frame img {
+    .profile-image-frame img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -268,7 +274,7 @@ a.sidebar-link:hover {
     justify-content: center;
 }
 
-.Masterprofile-image-frame img {
+    .Masterprofile-image-frame img {
         width: 100%;
         height: 100%;
         object-fit: cover;

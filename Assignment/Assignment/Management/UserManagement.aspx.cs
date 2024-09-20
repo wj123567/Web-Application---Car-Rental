@@ -364,7 +364,9 @@ namespace Assignment
             com.Parameters.AddWithValue("@id", Session["UserTableID"].ToString());
             com.ExecuteNonQuery();
             con.Close();
-            Server.Transfer("UserManagement.aspx");
+            string path = Server.MapPath("~/Image/UserProfile/");
+            File.Delete(path + Session["UserTableID"].ToString() + ".jpg");
+            Response.Redirect("UserManagement.aspx");
         }
 
         protected void emailExist_ServerValidate(object source, ServerValidateEventArgs args)
@@ -393,14 +395,15 @@ namespace Assignment
                 string relfolderLocation = "~/Image/UserProfile";
                 string relPath = "";
                 Guid guid = Guid.NewGuid();
-                if (fuAddProfile.HasFile)
+                if (!string.IsNullOrEmpty(hdnProfilePicture.Value))
                 {
-                    int fileSize = fuAddProfile.PostedFile.ContentLength;
-                    string ext = Path.GetExtension(fuAddProfile.FileName);
-                    string fileName = guid + ext;
-                    string savePath = Path.Combine(folderLocation, fileName);
+                    // Decode the Base64 string and save it as an image file
+                    string base64String = hdnProfilePicture.Value.Split(',')[1]; // Remove the data URI scheme part
+                    byte[] imageBytes = Convert.FromBase64String(base64String);
+                    string fileName = guid + ".jpg";
                     relPath = Path.Combine(relfolderLocation, fileName);
-                    fuAddProfile.SaveAs(savePath);
+                    string savePath = Path.Combine(folderLocation, fileName);
+                    File.WriteAllBytes(savePath, imageBytes); // Save the file
                 }
                 else
                 {
@@ -427,13 +430,13 @@ namespace Assignment
                 db.ApplicationUsers.Add(user);
                 db.SaveChanges();
 
-                Server.Transfer("UserManagement.aspx");
+                Response.Redirect("UserManagement.aspx");
             }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Server.Transfer("UserManagement.aspx");
+            Response.Redirect("UserManagement.aspx");
         }
     }
 }
