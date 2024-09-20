@@ -15,8 +15,8 @@ namespace Assignment
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            /* string bookingId = Session["BookingRecordId"] as string;*/
-            string bookingId = "BID075864";
+            string bookingId = Session["BookingRecordId"] as string;
+            
             if (!Page.IsPostBack)
             {
                 BindAddOns();
@@ -55,6 +55,10 @@ namespace Assignment
                         lblPickUpLocation.Text = reader["Pickup_point"].ToString();
                         lblDropOffLocation.Text = reader["Dropoff_point"].ToString();
 
+                        DateTime startDate = reader.GetDateTime(reader.GetOrdinal("StartDate"));
+                        DateTime endDate = reader.GetDateTime(reader.GetOrdinal("EndDate"));
+                        lblPickUpTime.Text =startDate.ToString("dd/MM/yyyy hh:mm:ss");
+                        lblDropOffTime.Text = endDate.ToString("dd/MM/yyyy hh:mm:ss");
 
                     }
 
@@ -81,7 +85,7 @@ namespace Assignment
         }
         private DataTable GetAddOns()
         {
-            string bookingId= "BID075864";
+            string bookingId= Session["BookingRecordId"].ToString();
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
             {
