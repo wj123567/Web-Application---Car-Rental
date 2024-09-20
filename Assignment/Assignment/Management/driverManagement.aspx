@@ -152,12 +152,12 @@
     <div class="container-xl px-4 mt-4">
         <h1 class="text-dark">Driver Management</h1>
         <hr class="mt-0 mb-4">
-        <div class="d-flex justify-content-between">
-            <div>
-                <asp:Button ID="btnAll" runat="server" Text="All" CssClass="btn border border-dark sort-button-group" CommandArgument="All" OnClick="sortCategory" OnClientClick="colorButton(this)" BackColor="#3490DC" ForeColor="White" />
-                <asp:Button ID="btnPending" runat="server" Text="Pending" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="P" OnClientClick="colorButton(this)" />
-                <asp:Button ID="btnRejected" runat="server" Text="Rejected" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="R" OnClientClick="colorButton(this)" />
-                <asp:Button ID="btnApproved" runat="server" Text="Approved" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="A" OnClientClick="colorButton(this)" />
+        <div class="d-md-flex justify-content-between">
+            <div class="mb-2">
+                <asp:Button ID="btnAll" runat="server" Text="All" CssClass="btn border border-dark sort-button-group btn-sm" CommandArgument="All" OnClick="sortCategory" OnClientClick="colorButton(this)" BackColor="#3490DC" ForeColor="White" />
+                <asp:Button ID="btnPending" runat="server" Text="Pending" CssClass="btn border border-dark sort-button-group btn-sm" OnClick="sortCategory" CommandArgument="P" OnClientClick="colorButton(this)" />
+                <asp:Button ID="btnRejected" runat="server" Text="Rejected" CssClass="btn border border-dark sort-button-group btn-sm" OnClick="sortCategory" CommandArgument="R" OnClientClick="colorButton(this)" />
+                <asp:Button ID="btnApproved" runat="server" Text="Approved" CssClass="btn border border-dark sort-button-group btn-sm" OnClick="sortCategory" CommandArgument="A" OnClientClick="colorButton(this)" />
             </div>
             <div>
                 <div>
