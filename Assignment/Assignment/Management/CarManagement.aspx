@@ -23,7 +23,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <asp:Button ID="btnUpload" runat="server" Text="Upload Car Picture" CssClass="btn btn-primary"/>
+                    <asp:Button ID="btnUpload" runat="server" Text="Upload Car Picture" CssClass="btn btn-primary" />
                 </div>
             </div>
         </div>
@@ -279,19 +279,18 @@
         <h1 class="text-dark d-inline">Car Detail</h1>
         <asp:Button ID="btnAddNewCar" runat="server" Text="Add New Car" CssClass="btn btn-primary btn-sm mx-2 mb-2" OnClick="btnAddNewCar_Click" />
         <hr class="mt-0 mb-4">
-        <div class="d-flex justify-content-between">
-                    <div class="mb-2">
-                        <span class="w-auto d-inline d-xs-none">Location: </span>
-                        <asp:DropDownList ID="ddlTableLocation" runat="server" DataSourceID="carLocation" DataTextField="LocationName" DataValueField="Id" CssClass="form-select form-select-sm d-inline w-auto border-dark" OnDataBound="ddlTableLocation_DataBound" AutoPostBack="True" OnSelectedIndexChanged="ddlTableLocation_SelectedIndexChanged"></asp:DropDownList>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex align-items-center me-2">
+                        <span class="me-2 span-location">Location: </span>
+                        <asp:DropDownList ID="ddlTableLocation" runat="server" DataSourceID="carLocation" DataTextField="LocationName" DataValueField="Id" CssClass="form-select form-select-sm border-dark" OnDataBound="ddlTableLocation_DataBound" AutoPostBack="True" OnSelectedIndexChanged="ddlTableLocation_SelectedIndexChanged"></asp:DropDownList>
                     </div>
-                    <div class="mb-2">
+                    <div class="flex-shrink-3">
                         <asp:TextBox ID="searchBar" runat="server" CssClass="form-control form-control-sm rounded border-dark" placeholder="car plate/brand/name/type" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
                         <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" Style="display: none;" />
                     </div>
-        </div>
-        <div>
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-            <ContentTemplate>
+                </div>
                 <div class="table-responsive">
                     <table id="carTable" class="table table-striped table-bordered table-hover mb-2 mt-4">
                         <thead>
@@ -348,72 +347,71 @@
                         <asp:Label ID="lblPageInfo" runat="server" Text="" CssClass="text-dark mx-2"></asp:Label>
                         <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="btnNext_Click" CssClass="btn btn-primary btn-sm" />
                     </div>
-                    <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
+                    <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted span-totalRecord"></asp:Label>
                 </div>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-        </div>
     </div>
-<script>
-    var isPass = false;
-    function ShowCropModal(event) {
-        if (isPass) {
-            //read content of the file
-            var ImageDir = new FileReader();
-            //when file read update the image element
-            ImageDir.onload = function () {
-                var image = document.getElementById('<%= imgCropImage.ClientID %>');
-                image.src = ImageDir.result;
-                $('#cropModal').modal('show');
-            };
-            //get file and convert to data url to use in img src = ""
-            ImageDir.readAsDataURL(event.target.files[0]);
+    <script>
+        var isPass = false;
+        function ShowCropModal(event) {
+            if (isPass) {
+                //read content of the file
+                var ImageDir = new FileReader();
+                //when file read update the image element
+                ImageDir.onload = function () {
+                    var image = document.getElementById('<%= imgCropImage.ClientID %>');
+                    image.src = ImageDir.result;
+                    $('#cropModal').modal('show');
+                };
+                //get file and convert to data url to use in img src = ""
+                ImageDir.readAsDataURL(event.target.files[0]);
+            }
         }
-    }
 
-    let cropper;
-    const imageInput = document.getElementById('<%= fuCarPic.ClientID %>');
-    const imageElement = document.getElementById('<%= imgCropImage.ClientID %>');
-    const uploadButton = document.getElementById('<%= btnUpload.ClientID %>');
-    const result = document.getElementById('<%= hdnCarPicture.ClientID %>');
-    const preview = document.getElementById('<%= imgCarPic.ClientID %>');
+        let cropper;
+        const imageInput = document.getElementById('<%= fuCarPic.ClientID %>');
+        const imageElement = document.getElementById('<%= imgCropImage.ClientID %>');
+        const uploadButton = document.getElementById('<%= btnUpload.ClientID %>');
+        const result = document.getElementById('<%= hdnCarPicture.ClientID %>');
+        const preview = document.getElementById('<%= imgCarPic.ClientID %>');
 
 
-    // Initialize cropper when the modal is shown
-    $('#cropModal').on('shown.bs.modal', function () {
-        cropper = new Cropper(imageElement, {
-            aspectRatio: 2,  // Adjust based on your needs
-            viewMode: 3,
-            movable: true,
-            guides: false,
-            cropBoxResizable: true,
-            modal: true,
-            zoomable: true,
-            rotatable: true,
-            scalable: true,
-            width: 100,
-            height: 100,
+        // Initialize cropper when the modal is shown
+        $('#cropModal').on('shown.bs.modal', function () {
+            cropper = new Cropper(imageElement, {
+                aspectRatio: 2,  // Adjust based on your needs
+                viewMode: 3,
+                movable: true,
+                guides: false,
+                cropBoxResizable: true,
+                modal: true,
+                zoomable: true,
+                rotatable: true,
+                scalable: true,
+                width: 100,
+                height: 100,
+            });
+
+            uploadButton.onclick = function () {
+
+                base64Image = cropper.getCroppedCanvas().toDataURL('image/png');
+                preview.src = base64Image;
+
+                result.value = base64Image;
+                console.log(result.value);
+                $('#cropModal').modal('hide');
+                return false;
+
+            };
+
+        }).on('hidden.bs.modal', function () {
+            // Destroy the cropper instance when the modal is closed
+            cropper.destroy();
+            cropper = null;
         });
-
-        uploadButton.onclick = function () {
-
-            base64Image = cropper.getCroppedCanvas().toDataURL('image/png');
-            preview.src = base64Image;
-
-            result.value = base64Image;
-            console.log(result.value);
-            $('#cropModal').modal('hide');
-            return false;
-            
-        };
-
-    }).on('hidden.bs.modal', function () {
-        // Destroy the cropper instance when the modal is closed
-        cropper.destroy();
-        cropper = null;
-    });
-</script>
+    </script>
 
     <script>
 
