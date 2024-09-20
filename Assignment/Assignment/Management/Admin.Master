@@ -110,7 +110,7 @@
                 </div>
                   <asp:Label ID="lblUsername" runat="server" Text="Username" CssClass="mx-2"></asp:Label>
               </a>
-              <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
+              <ul class="dropdown-menu text-small shadow mx-2" aria-labelledby="dropdownUser3">
                 <li><a class="dropdown-item" href="../Home.aspx">Home</a></li>
                 <li><a class="dropdown-item" href="../UserProfile/profile.aspx">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>

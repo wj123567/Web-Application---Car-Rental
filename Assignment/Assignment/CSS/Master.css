@@ -104,9 +104,13 @@ body {
         display:inline-block;
     }
 
-    #userControl{
-        float:right;
-        margin:0 !important;
+    #userControl {
+        float: right;
+        margin: 0 !important;
+    }
+
+    .custom-dropdown{
+        position: absolute!important;
     }
 
 
