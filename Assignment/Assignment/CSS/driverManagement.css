@@ -24,4 +24,18 @@
     border: 0px !important
 }
 
+@media only screen and (max-width: 500px){
+    .sort-button-group {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        border-radius: 0.25rem;
+    }
+
+    .custom-flex{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
 
