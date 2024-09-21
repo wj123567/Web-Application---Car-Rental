@@ -9,8 +9,11 @@
     </header>
 
          <div class="container">
+          
     <section class="section_container booking_container">
-        
+    <div class="d-flex justify-content-center mb-3">
+        <asp:Label ID="lblerrortext" runat="server" Text="Please Select Location and Time" CssClass="validate" Visible="False"></asp:Label>
+    </div>
         <div class="content_container">
 <!--
         <div class="booking_nav">
@@ -19,14 +22,13 @@
             <span>Car 3</span>
         </div>
 -->
-        <div class="form_container">
+        <div class="form_container">            
             
-            
-        <div class="form_group">
+        <div class="form_group">            
             <h5 class="home_pickup">Pick Up</h5>
             <span class="home_icon" style="margin-left:20px;"><i class="ri-map-pin-2-line"></i></span>
             <div class="input_content">
-                <div class="input_group">
+                <div class="input_group">                    
                    <asp:Label ID="lblLocation" runat="server" Text="Location" CssClass="home_label_style"></asp:Label>
                     <asp:TextBox ID="txtDepartureLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Pick-up Location"></asp:TextBox>
                     <!-- handle viewstate prob bcs location assign thru client-side -->

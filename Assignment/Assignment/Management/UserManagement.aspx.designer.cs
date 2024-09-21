@@ -285,13 +285,49 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblDriverText;
 
         /// <summary>
-        /// UserDriverReapeter control.
+        /// phUserDriver control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater UserDriverReapeter;
+        protected global::System.Web.UI.WebControls.PlaceHolder phUserDriver;
+
+        /// <summary>
+        /// lblDriverName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDriverName;
+
+        /// <summary>
+        /// lblDriverId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDriverId;
+
+        /// <summary>
+        /// lblReject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblReject;
+
+        /// <summary>
+        /// lblApproval control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblApproval;
 
         /// <summary>
         /// btnDel2 control.

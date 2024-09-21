@@ -33,6 +33,15 @@ namespace Assignment
                 {
                     UpdateRewardPoints(Session["Id"].ToString());
                 }
+
+                if (Request.QueryString["Error"] != null)
+                {
+                    lblerrortext.Visible = true;
+                }
+                else
+                {
+                    lblerrortext.Visible = false;
+                }
                 
             }
         }

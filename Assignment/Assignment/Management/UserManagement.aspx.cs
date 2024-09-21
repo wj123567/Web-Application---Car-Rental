@@ -220,8 +220,6 @@ namespace Assignment
         {
             Button btnView = (Button)sender;
             String id = btnView.CommandArgument;
-            UserDriverReapeter.DataSource = null;
-            UserDriverReapeter.DataBind();
             loadAvailableUser(id);
             loadDriverInfo(id);
             loadBookingInfo(id);
@@ -271,20 +269,44 @@ namespace Assignment
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
             com.Parameters.AddWithValue("@id", id);
-            SqlDataAdapter da = new SqlDataAdapter(com);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "DriverData");
-            if (ds.Tables["DriverData"].Rows.Count == 0)
+            SqlDataReader reader = com.ExecuteReader();
+            if (reader.HasRows)
             {
-                lblDriverText.Text = "No Driver Available";
+                phUserDriver.Visible = true;
+                lblDriverText.Text = "";
+                if (reader.Read())
+                {
+                    lblDriverName.Text = reader["DriverName"].ToString();
+                    lblDriverId.Text = "Driver ID: "+reader["DriverId"].ToString();
+                    string approvalStatus = reader["Approval"].ToString();
+                    switch (approvalStatus)
+                    {
+                        case "P":
+                            lblApproval.Text = "Pending";
+                            lblApproval.CssClass = "badge bg-warning text-dark";
+                            break;
+                        case "A":
+                            lblApproval.Text = "Approved";
+                            lblApproval.CssClass = "badge bg-success text-light";
+                            break;
+                        case "R":
+                            lblApproval.Text = "Rejected";
+                            lblApproval.CssClass = "badge bg-danger text-light";
+                            lblReject.Text = "Reject Reason:" + reader["RejectReason"].ToString();
+                            break;
+                        default:
+                            lblApproval.Text = "Unknown";
+                            break;
+                    }
+                }
             }
             else
             {
-                lblDriverText.Text = " ";
-                UserDriverReapeter.DataSource = ds.Tables["DriverData"];
-                UserDriverReapeter.DataBind();
+                phUserDriver.Visible = false;
+                lblDriverText.Text = "No Driver Available";
             }
             con.Close();
+            reader.Close();
         }
         protected void loadBookingInfo(String id)
         {
@@ -299,43 +321,17 @@ namespace Assignment
             da.Fill(ds, "BookingData");
             if (ds.Tables["BookingData"].Rows.Count == 0)
             {
+                rptBookingRec.DataSource = ds.Tables["BookingData"];
+                rptBookingRec.DataBind();
                 lblNoBooking.Text = "No Booking Record";
             }
             else
             {
-                lblDriverText.Text = " ";
+                lblNoBooking.Text = "";
                 rptBookingRec.DataSource = ds.Tables["BookingData"];
                 rptBookingRec.DataBind();
             }
             con.Close();
-        }
-
-        protected void UserDriverReapeter_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            Label lblApproval = (Label)e.Item.FindControl("lblApproval");
-            Label lblReject = (Label)e.Item.FindControl("lblReject");
-            string approvalStatus = DataBinder.Eval(e.Item.DataItem, "Approval").ToString();
-            string rejectReason = DataBinder.Eval(e.Item.DataItem, "rejectReason").ToString();
-
-            switch (approvalStatus)
-            {
-                case "P":
-                    lblApproval.Text = "Pending";
-                    lblApproval.CssClass = "badge bg-warning text-dark";
-                    break;
-                case "A":
-                    lblApproval.Text = "Approved";
-                    lblApproval.CssClass = "badge bg-success text-light";
-                    break;
-                case "R":
-                    lblApproval.Text = "Rejected";
-                    lblApproval.CssClass = "badge bg-danger text-light";
-                    lblReject.Text = "Reject Reason:" + rejectReason;
-                    break;
-                default:
-                    lblApproval.Text = "Unknown";
-                    break;
-            }
         }
 
         protected void btnBan_Click(object sender, EventArgs e)

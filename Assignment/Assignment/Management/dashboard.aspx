@@ -397,7 +397,7 @@
                     <div class="card-body pb-0">
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title flex-grow-3">Top 5 Rental <span id="topRentalDay" class="text-muted" style="font-size: 0.7em">| All Time</span></h5>
+                            <h5 class="card-title flex-grow-3">Top 5 Rented <span id="topRentalDay" class="text-muted" style="font-size: 0.7em">| All Time</span></h5>
 
                             <div class="filter flex-shrink-0 mx-2">
                                 <div id="topRentalRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;" >
@@ -475,7 +475,7 @@
 
                     <div class="card-body pb-0">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title flex-shrink-0">Rent Car Type <span id="carTypeDay" class="text-muted" style="font-size: 0.6em">| All Time</span></h5>
+                            <h5 class="card-title flex-shrink-0">Rented Car Type <span id="carTypeDay" class="text-muted" style="font-size: 0.6em">| All Time</span></h5>
                             <div id="carCategoryRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50px" class="flex-grow-3">
                                 <i class="fa fa-calendar"></i>&nbsp;
 								<span></span><i class="fa fa-caret-down"></i>
@@ -543,7 +543,6 @@
                                                 data: chartdata
                                             }]
                                         });
-                                        window.addEventListener('resize', function () { chart.resize(); });
                                     },
                                     error: function (error) {
                                         console.log(error);
@@ -608,7 +607,6 @@
                                                 data: chartdata
                                             }]
                                         });
-                                        window.addEventListener('resize', function () { chart.resize(); });
                                     },
                                     error: function (error) {
                                         console.log(error);
