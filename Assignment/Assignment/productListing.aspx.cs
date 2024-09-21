@@ -28,9 +28,9 @@ namespace Assignment
                     {
                     retrievedAllData();
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-                        Response.Redirect("Home.aspx");
+                        Response.Redirect("Home.aspx?Error=1");
                     }
             }
         }

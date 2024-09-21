@@ -35,7 +35,7 @@
       aria-label="Toggle navigation" style="background-color: transparent;cursor: pointer;border: 0;padding: 1rem 1.5rem;">
         <i class="lni lni-grid-alt text-dark"></i>
     </button>
-    <asp:ImageButton ID="logo" runat="server" PostBackUrl="~/Home.aspx" ImageUrl="~/Image/logo.png" CssClass="d-inline align-top me-2" ValidationGroup="none" />
+    <asp:ImageButton ID="logo" runat="server" PostBackUrl="~/home.aspx" ImageUrl="~/Image/logo.png" CssClass="d-inline align-top me-2" ValidationGroup="none" />
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 custom-menu">
                 <asp:placeholder id="general" runat="server">
@@ -86,11 +86,13 @@
 <div class="container-footer">
   <footer class="py-1 my-1" style="background-color:#effaf6;">
     <ul class="nav justify-content-center border-bottom pb-1 mb-2">
-      <li class="nav-item"><a href="#" class="custom-nav-link nav-link px-2">Home</a></li>
-      <li class="nav-item"><a href="#" class="custom-nav-link nav-link px-2">Car</a></li>
-      <li class="nav-item"><a href="#" class="custom-nav-link nav-link px-2">Contact</a></li>
-      <li class="nav-item"><a href="#" class="custom-nav-link nav-link px-2">FAQs</a></li>
-      <li class="nav-item" ><a href="#" class="custom-nav-link nav-link px-2">About</a></li>
+      <li class="nav-item">
+          <asp:HyperLink ID="HyperLink1" runat="server" CssClass="custom-nav-link nav-link px-2" NavigateUrl="~/Home.aspx">Home</asp:HyperLink></li>
+      <li class="nav-item">
+          <asp:HyperLink ID="HyperLink2" runat="server" CssClass="custom-nav-link nav-link px-2" NavigateUrl="~/productListing.aspx">Car</asp:HyperLink></li>
+      <li class="nav-item"><a href="contact.aspx" class="custom-nav-link nav-link px-2">Contact</a></li>
+      <li class="nav-item"><a href="faq.aspx" class="custom-nav-link nav-link px-2">FAQs</a></li>
+      <li class="nav-item" ><a href="about.aspx" class="custom-nav-link nav-link px-2">About</a></li>
     </ul>
     <p class="text-center text-body-secondary">&copy; <%:@DateTime.Now.Year%> Company, Inc</p>
   </footer>
