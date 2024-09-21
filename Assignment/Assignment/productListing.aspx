@@ -116,8 +116,6 @@
         <asp:Button ID="btnFilter" runat="server" Text="Filter" CssClass="btn btn-block float-end mx-3 text-white" style="background-color:#3d5cb8;" OnClick="btnFilter_Click" ValidationGroup="filter"/>
     </div>
 </div>
-    <asp:Label ID="LabelCheck1" runat="server" Text="Label"></asp:Label>
-    <asp:Label ID="LabelCheck2" runat="server" Text="Label"></asp:Label>
 
 <div class="container-fluid d-flex justify-content-center pt-5 mx-auto" style="width:100%">
     <div class="row">

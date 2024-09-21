@@ -7,7 +7,6 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
 using System.Xml.Linq;
-using System.Drawing;
 using System.Configuration;
 using System.Web.Security;
 
@@ -77,7 +76,7 @@ namespace Assignment
         {
             Label lblCardNumber = (Label)e.Item.FindControl("lblCardNumber");
             Label lblExp = (Label)e.Item.FindControl("lblExp");
-            Label lblCardType = (Label)e.Item.FindControl("lblCardType");
+            Image imgCardType = (Image)e.Item.FindControl("imgCardType");
             string isDefault = DataBinder.Eval(e.Item.DataItem, "IsDefault").ToString();
             string cardType = DataBinder.Eval(e.Item.DataItem, "CardType").ToString();
             Button btnDefault = (Button)e.Item.FindControl("btnDefault");
@@ -92,13 +91,13 @@ namespace Assignment
             switch (cardType)
             {
                 case "Visa":
-                    lblCardType.CssClass = "fab fa-cc-visa fa-2x";
+                    imgCardType.ImageUrl = "~/Image/WZ/mastercard.png";
                     break;
                 case "Master":
-                    lblCardType.CssClass = "fab fa-cc-mastercard fa-2x";
+                    imgCardType.ImageUrl = "~/Image/WZ/visa.png";
                     break;
                 case "Amex":
-                    lblCardType.CssClass = "fab fa-cc-amex fa-2x";
+                    imgCardType.ImageUrl = "~/Image/WZ/amex.png";
                     break;
             }
 

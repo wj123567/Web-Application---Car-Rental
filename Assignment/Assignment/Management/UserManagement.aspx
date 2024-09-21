@@ -174,7 +174,8 @@
                                 <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
                                     <div class="d-flex align-items-center justify-content-between px-4">
                                         <div class="d-flex align-items-center">
-                                            <asp:Image ID="carImage" runat="server" ImageUrl='<%# "~/Image/CarImage/" + Eval("CarPlate") +".png"%>' Width="100px" CssClass="img-fluid" />
+                                            <div class="user-car-frame">
+                                            <asp:Image ID="carImage" runat="server" ImageUrl='<%# "~/Image/CarImage/" + Eval("CarPlate") +".png"%>' Width="100px" CssClass="img-fluid" /></div>
                                             <div class="mx-4">
                                                 <asp:Label ID="lblBookingId" runat="server" Text='<%# Eval("Id") +" (" + Eval("CarPlate") +")"%>' CssClass="d-block" />
                                                 <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Pick Up Point: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-inline" />
@@ -226,15 +227,14 @@
                     </ul>
                     <div class="card-body row">
                         <asp:Label ID="lblDriverText" runat="server" CssClass="text-dark"></asp:Label>
-                        <asp:Repeater ID="UserDriverReapeter" runat="server" OnItemDataBound="UserDriverReapeter_ItemDataBound">
-                            <ItemTemplate>
+                        <asp:PlaceHolder ID="phUserDriver" runat="server">
                                 <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
                                     <div class="d-flex align-items-center justify-content-between px-4">
                                         <div class="d-flex align-items-center">
                                             <i class="fa-regular fa-id-card" style="font-size: 1.5em;"></i>
                                             <div class="mx-4">
-                                                <asp:Label ID="lblDriverName" runat="server" Text='<%# Eval("DriverName") %>' CssClass="small d-block" />
-                                                <asp:Label ID="lblDriverBdate" runat="server" Text='<%# "Driver Id: " + Eval("DriverID") %>' CssClass="text-xs text-muted d-inline" />
+                                                <asp:Label ID="lblDriverName" runat="server" Text="" CssClass="small d-block" />
+                                                <asp:Label ID="lblDriverId" runat="server" Text="" CssClass="text-xs text-muted d-inline" />
                                                 <br />
                                                 <asp:Label ID="lblReject" runat="server" CssClass="text-danger small"></asp:Label>
                                             </div>
@@ -244,8 +244,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
+                            </asp:PlaceHolder>
                     </div>
                 </div>
                 <div class="modal-footer">
