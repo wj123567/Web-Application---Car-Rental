@@ -75,7 +75,8 @@ namespace Assignment
                 // Add a row manually with "No Record Found"
                 DataRow noRecordRow = addOns.NewRow();
                 noRecordRow["Name"] = "No Record Found";
-                
+                //used to check whether update should be done when update btn is clicked
+                hdnAddOnUpdateChk.Value = "No Record Found";
                 addOns.Rows.Add(noRecordRow);
             }
 
@@ -107,12 +108,20 @@ namespace Assignment
             //header,footer,separator exclude
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
+                int maxQuantity = 0;
+                int currentQuantity = 0;
+
                 // Find the DropDownList control within the current Repeater item
                 DropDownList ddlNewQuantity = (DropDownList)e.Item.FindControl("ddlNewQuantity");
                 Button btnAddOnClear = (Button)e.Item.FindControl("btnAddOnClear");
 
-                // Retrieve the maxQuantity value for this particular item
-                int maxQuantity = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "maxQuantity"));
+                object maxQuantityValue = DataBinder.Eval(e.Item.DataItem, "maxQuantity");
+
+                if (maxQuantityValue != DBNull.Value)
+                {
+                    maxQuantity = Convert.ToInt32(maxQuantityValue);
+                }
+
 
                 // Populate the DropDownList with items from 1 to maxQuantity
                 for (int i = 1; i <= maxQuantity; i++)
@@ -120,9 +129,13 @@ namespace Assignment
                     ddlNewQuantity.Items.Add(new ListItem(i.ToString(), i.ToString()));
                 }
 
-                // Optionally, set the selected value based on existing quantity
-                int currentQuantity = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "Quantity"));
-               
+                object currentQuantityValue = DataBinder.Eval(e.Item.DataItem, "Quantity");
+
+                if(currentQuantityValue != DBNull.Value)
+                {
+                    currentQuantity = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "Quantity"));
+                }
+                    
                     ddlNewQuantity.SelectedValue = currentQuantity.ToString();
                 
             }
@@ -138,39 +151,50 @@ namespace Assignment
             ScriptManager.RegisterStartupScript(this, GetType(), "showModal", " modal();", true);
         }
 
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            string bookingId = Session["BookingRecordId"].ToString();
+            Button btn = (Button)sender;
+            string addOnId = btn.CommandArgument;
+            
+            double totalRemovedAmt = removeAddOn(bookingId,addOnId);
+            lblCheck1.Text= totalRemovedAmt.ToString();
+        }
+
         protected void modalYesBtn_Click(object sender, EventArgs e)
         {
             string rentalQuery="";
             double rental = 0.00; ;
             string oriAddOnPriceQuery="";
             double oriAddOnPrice=0.00;
-
+            double addOnPriceDiff = 0.00;
             // Retrieve BookingId from session
             string bookingID = Session["BookingRecordId"].ToString();
             
             //retrieve url query string
            
-                 rentalQuery = Request.QueryString["rental"];
-                 rental = Convert.ToDouble(rentalQuery);
-           
-                oriAddOnPriceQuery = Request.QueryString["oriAddOnPrice"];
-                
-                //ori add on price
-                oriAddOnPrice = Convert.ToDouble(oriAddOnPriceQuery);
+            rentalQuery = Request.QueryString["rental"];
+            rental = Convert.ToDouble(rentalQuery);
+
+            oriAddOnPriceQuery = Request.QueryString["oriAddOnPrice"];
+
+             //ori add on price
+    
+            oriAddOnPrice = Convert.ToDouble(Session["oriAddOnPrice"].ToString());
                
-
             Dictionary<int, int> updatedAddOns = new Dictionary<int, int>();
-      
-            updatedAddOns = saveBookingAddOnRecord();
-            updateBookingAddOnRecord(updatedAddOns, bookingID);
-            //new add on price
-            double newAddOnTotal = calculateNewAddOnAmt(bookingID);
-            //difference between them, and pass back to the bookingrecorddetail
-            double addOnPriceDiff = newAddOnTotal - oriAddOnPrice;
-           
-            //update new total in Booking table
-            updateBookingRecord(bookingID,rental,newAddOnTotal);
+            if (hdnAddOnUpdateChk.Value != "No Record Found")
+            {
+                updatedAddOns = saveBookingAddOnRecord();
+                updateBookingAddOnRecord(updatedAddOns, bookingID);
+                //new add on price
+                double newAddOnTotal = calculateNewAddOnAmt(bookingID);
+                //difference between them, and pass back to the bookingrecorddetail
+                addOnPriceDiff = newAddOnTotal - oriAddOnPrice;
 
+                //update new total in Booking table
+                updateBookingRecord(bookingID, rental, newAddOnTotal);
+            }
             Response.Redirect("bookingrecorddetail.aspx?addOnUpdate="+addOnPriceDiff.ToString());
         }
 
@@ -256,6 +280,45 @@ namespace Assignment
             }
             con.Close();
             return newRental;
+        }
+
+        private double removeAddOn(string bookingId,string addOnId)
+        {
+
+            double totalRemovedPrice = calculateRemoveAmt(bookingId,addOnId);
+           /* string deletesql = @"DELETE FROM BookingAddOn
+                          WHERE BookingId = @BookingID
+                          AND AddOnId=@AddOnID";
+*/
+            return totalRemovedPrice;
+        }
+
+        private double calculateRemoveAmt(string bookingId, string addOnId)
+        {
+            double totalPrice = 0.00;
+            string sql = @"SELECT Price,Quantity
+                           FROM AddOn a JOIN BookingAddOn b
+                           ON a.Id = b.AddOnId
+                           WHERE BookingId = @BookingID
+                           AND AddOnId = @AddOnID";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@BookingID", bookingId);
+            cmd.Parameters.AddWithValue("@AddOnID", addOnId);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    double price = Convert.ToDouble(reader["Price"].ToString());
+                    int quantity = Convert.ToInt16(reader["Quantity"].ToString());
+                    totalPrice = price * quantity;
+                }
+
+            }
+            con.Close();
+            return totalPrice;
         }
     }
 }
