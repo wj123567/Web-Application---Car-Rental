@@ -321,11 +321,13 @@ namespace Assignment
             da.Fill(ds, "BookingData");
             if (ds.Tables["BookingData"].Rows.Count == 0)
             {
+                rptBookingRec.DataSource = ds.Tables["BookingData"];
+                rptBookingRec.DataBind();
                 lblNoBooking.Text = "No Booking Record";
             }
             else
             {
-                lblDriverText.Text = " ";
+                lblNoBooking.Text = "";
                 rptBookingRec.DataSource = ds.Tables["BookingData"];
                 rptBookingRec.DataBind();
             }
