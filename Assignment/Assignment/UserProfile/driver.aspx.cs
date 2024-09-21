@@ -387,7 +387,7 @@ namespace Assignment
             {
                 case "P":
                     lblApproval.Text = "Pending";
-                    lblApproval.CssClass = "badge bg-warning text-light";
+                    lblApproval.CssClass = "badge bg-warning text-dark";
                     break;
                 case "A":
                     lblApproval.Text = "Approved";
