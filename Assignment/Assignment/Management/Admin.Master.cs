@@ -52,7 +52,7 @@ namespace Assignment
 
         protected void LoadUserData(string userId)
         {
-            string getUser = "SELECT Username, ProfilePicture, Roles FROM ApplicationUser WHERE Id = @Id";
+            string getUser = "SELECT Username, ProfilePicture, Roles, IsBan FROM ApplicationUser WHERE Id = @Id";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(getUser, con);
             com.Parameters.AddWithValue("@Id", userId);
@@ -62,7 +62,8 @@ namespace Assignment
             {            
             if (reader.Read())
             {
-                if (!Thread.CurrentPrincipal.IsInRole(reader["Roles"].ToString()))
+                int isBan = (int)reader["IsBan"];
+                if (!Thread.CurrentPrincipal.IsInRole(reader["Roles"].ToString()) || isBan == 1)
                 {
                     Session["Id"] = null;
                     FormsAuthentication.SignOut();

@@ -54,10 +54,11 @@ namespace Assignment
             string Username = " ";
             string profilePicture = " ";
             string role = " ";
+            int isBan = 0;
 
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);            
 
-            string getUserData = "Select Username, ProfilePicture,Roles from ApplicationUser where Id = @id";
+            string getUserData = "Select Username, ProfilePicture,Roles, IsBan from ApplicationUser where Id = @id";
 
             conn.Open();
 
@@ -74,11 +75,12 @@ namespace Assignment
                     Username = reader["Username"].ToString();
                     profilePicture = reader["ProfilePicture"].ToString();
                     role = reader["Roles"].ToString();
+                    isBan = (int)reader["IsBan"];
                 }
 
                 conn.Close();
 
-                if (!Thread.CurrentPrincipal.IsInRole(role))
+                if (!Thread.CurrentPrincipal.IsInRole(role) || isBan == 1)
                 {
                     Session["Id"] = null;
                     FormsAuthentication.SignOut();

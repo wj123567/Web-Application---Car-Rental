@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing.Printing;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Assignment.Management
 {
@@ -103,20 +104,23 @@ namespace Assignment.Management
                 string savePath = " ";
                 string relPath = " ";
                 string insertString = "INSERT into AddOn(Name,Description,Price,Url,maxQuantity) VALUES (@Name,@Description,@Price,@Url,@maxQuantity)";
-                 if (fuAddOnPic.HasFile)
-                  {
-                      savePath = " ";
-                      relPath = " ";
-                      string ext = Path.GetExtension(fuAddOnPic.FileName);
-                      string folderLocation = Server.MapPath("~/Image/AddOnImg");
-                      string relfolderLocation = "~/Image/AddOnImg";
-                      string fileInputName = txtAddonName.Text.Trim();
-                      fileInputName = fileInputName.Replace(" ", "");
-                      string fileName = fileInputName + ext;
-                      savePath = Path.Combine(folderLocation, fileName);
-                      relPath = Path.Combine(relfolderLocation, fileName);
-                      fuAddOnPic.SaveAs(savePath);
-                  }
+                if (!string.IsNullOrEmpty(hdnCarPicture.Value))
+                {
+                    savePath = " ";
+                    relPath = " ";
+                    string folderLocation = Server.MapPath("~/Image/AddOnImg");
+                    string relfolderLocation = "~/Image/AddOnImg";
+                    // Decode the Base64 string and save it as an image file
+                    string base64String = hdnCarPicture.Value.Split(',')[1]; // Remove the data URI scheme part
+                    byte[] imageBytes = Convert.FromBase64String(base64String);
+                    string fileInputName = txtAddonName.Text.Trim();
+                    fileInputName = fileInputName.Replace(" ", "");
+                    string fileName = fileInputName + ".png";
+                    savePath = Path.Combine(folderLocation, fileName);
+                    relPath = Path.Combine(relfolderLocation, fileName);
+
+                    File.WriteAllBytes(savePath, imageBytes); // Save the file
+                }
                 uploadAddOn(insertString, relPath);
                 Server.Transfer("AddOnManagement.aspx");
             }
@@ -144,22 +148,25 @@ namespace Assignment.Management
              {
                  string savePath = " ";
                  string relPath = imgAddOnPic.ImageUrl;
-                 string updateString = "UPDATE AddOn SET Name=@Name, Description=@Description, Price=@Price, maxQuantity=@maxQuantity WHERE Id = @Id";
-                 if (fuAddOnPic.HasFile)
-                 {
-                     savePath = " ";
-                     relPath = " ";
-                     string ext = Path.GetExtension(fuAddOnPic.FileName);
-                     string folderLocation = Server.MapPath("~/Image/AddOnImg");
-                     string relfolderLocation = "~/Image/AddOnImg";
-                     string fileInputName = txtAddonName.Text.Trim();
-                     fileInputName = fileInputName.Replace(" ", "");
-                    string fileName = fileInputName + ext;
-                     savePath = Path.Combine(folderLocation, fileName);
-                     relPath = Path.Combine(relfolderLocation, fileName);
-                     fuAddOnPic.SaveAs(savePath);
-                 }
-                 uploadAddOn(updateString, relPath);
+                 string updateString = "UPDATE AddOn SET Name=@Name, Description=@Description, Price=@Price, maxQuantity=@maxQuantity, Url=@Url WHERE Id = @Id";
+                if (!string.IsNullOrEmpty(hdnCarPicture.Value))
+                {
+                    savePath = " ";
+                    relPath = " ";
+                    string folderLocation = Server.MapPath("~/Image/AddOnImg");
+                    string relfolderLocation = "~/Image/AddOnImg";
+                    // Decode the Base64 string and save it as an image file
+                    string base64String = hdnCarPicture.Value.Split(',')[1]; // Remove the data URI scheme part
+                    byte[] imageBytes = Convert.FromBase64String(base64String);
+                    string fileInputName = txtAddonName.Text.Trim();
+                    fileInputName = fileInputName.Replace(" ", "");
+                    string fileName = fileInputName + ".png";
+                    savePath = Path.Combine(folderLocation, fileName);
+                    relPath = Path.Combine(relfolderLocation, fileName);
+
+                    File.WriteAllBytes(savePath, imageBytes); // Save the file
+                }
+                uploadAddOn(updateString, relPath);
                  Server.Transfer("AddOnManagement.aspx");
              }
         }
@@ -320,6 +327,9 @@ namespace Assignment.Management
         protected void btnConfirmDelete_Click(object sender, EventArgs e)
         {
             string deleteString = "DELETE FROM AddOn WHERE Id = @Id";
+
+            string path = Server.MapPath("~/Image/AddOnImg/");
+            File.Delete(path + txtAddonName.Text + ".png");
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(deleteString, con);
