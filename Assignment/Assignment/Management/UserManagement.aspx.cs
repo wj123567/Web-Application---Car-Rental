@@ -177,14 +177,11 @@ namespace Assignment
         protected void UserReapeter_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             Label lblRegDate = (Label)e.Item.FindControl("lblRegDate");
-            Label lblBdate = (Label)e.Item.FindControl("lblBdate");
             Label lblUserStatus = (Label)e.Item.FindControl("lblUserStatus");
             DropDownList ddlRoles = (DropDownList)e.Item.FindControl("ddlRoles");
-            DateTime bDate = (DateTime)DataBinder.Eval(e.Item.DataItem, "DOB");
             DateTime regDate = (DateTime)DataBinder.Eval(e.Item.DataItem, "RegistrationDate");
             string isBan = DataBinder.Eval(e.Item.DataItem, "IsBan").ToString();
 
-            lblBdate.Text = bDate.ToString("dd/MM/yyyy");
             lblRegDate.Text = regDate.ToString("dd/MM/yyyy");
 
             ddlRoles.Items.Add(new ListItem("Admin", "Admin"));
@@ -225,12 +222,13 @@ namespace Assignment
             String id = btnView.CommandArgument;
             UserDriverReapeter.DataSource = null;
             UserDriverReapeter.DataBind();
-            LoadAvailableUser(id);
+            loadAvailableUser(id);
             loadDriverInfo(id);
+            loadBookingInfo(id);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "modal()", true);
         }
 
-        protected void LoadAvailableUser(String id)
+        protected void loadAvailableUser(String id)
         {
             String selectDriver = "SELECT * FROM ApplicationUser WHERE Id = @id";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
@@ -248,7 +246,8 @@ namespace Assignment
                 txtRoles.Text = reader["Roles"].ToString();
                 DateTime driverBdate = reader.GetDateTime(reader.GetOrdinal("DOB"));
                 DateTime regDate = reader.GetDateTime(reader.GetOrdinal("RegistrationDate"));
-                txtBirthday.Text = driverBdate.ToString("yyyy-MM-dd");               
+                txtBirthday.Text = driverBdate.ToString("yyyy-MM-dd"); 
+                txtRewardPoint.Text = reader["RewardPoints"].ToString();
                 txtMemberSince.Text = regDate.ToString("yyyy-MM-dd");               
                 userProfilePic.ImageUrl = reader["ProfilePicture"].ToString();
                 string isBan = reader["IsBan"].ToString();
@@ -287,6 +286,29 @@ namespace Assignment
             }
             con.Close();
         }
+        protected void loadBookingInfo(String id)
+        {
+            String selectDriver = "SELECT * FROM Booking WHERE UserId = @id";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectDriver, con);
+            com.Parameters.AddWithValue("@Id", id);
+
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "BookingData");
+            if (ds.Tables["BookingData"].Rows.Count == 0)
+            {
+                lblNoBooking.Text = "No Booking Record";
+            }
+            else
+            {
+                lblDriverText.Text = " ";
+                rptBookingRec.DataSource = ds.Tables["BookingData"];
+                rptBookingRec.DataBind();
+            }
+            con.Close();
+        }
 
         protected void UserDriverReapeter_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -299,7 +321,7 @@ namespace Assignment
             {
                 case "P":
                     lblApproval.Text = "Pending";
-                    lblApproval.CssClass = "badge bg-warning text-light";
+                    lblApproval.CssClass = "badge bg-warning text-dark";
                     break;
                 case "A":
                     lblApproval.Text = "Approved";
@@ -437,6 +459,43 @@ namespace Assignment
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("UserManagement.aspx");
+        }
+
+        protected void rptBookingRec_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Label lblBookUpdate = (Label)e.Item.FindControl("lblBookUpdate");
+            Label lblBookReject = (Label)e.Item.FindControl("lblBookReject");
+            Label lblStatus = (Label)e.Item.FindControl("lblstatus");
+            string Status = DataBinder.Eval(e.Item.DataItem, "Status").ToString();
+            string updateReason = DataBinder.Eval(e.Item.DataItem, "UpdateReason").ToString();
+            string rejectReason = DataBinder.Eval(e.Item.DataItem, "RejectReason").ToString();
+
+            lblStatus.Text = Status;
+
+            switch (Status)
+            {
+                case "Completed":
+                    lblStatus.CssClass = "badge bg-primary text-light";
+                    break;
+                case "Cancelled":
+                    lblStatus.CssClass = "badge bg-danger text-light";
+                    lblBookUpdate.Text = "Cancelled Reason: " + updateReason;
+                    break;
+                case "Booked":
+                    lblStatus.CssClass = "badge bg-success text-light";
+                    if(!String.IsNullOrEmpty(updateReason))
+                    {
+                        lblBookReject.Text = "Reject Reason: " + rejectReason;
+                    }
+                    break;
+                case "Pending":
+                    lblStatus.CssClass = "badge bg-warning text-dark";
+                    lblBookUpdate.Text = "Cancelled Reason: " + updateReason;
+                    break;
+                default:
+                    lblStatus.CssClass = "badge bg-default text-light";
+                    break;
+            }
         }
     }
 }

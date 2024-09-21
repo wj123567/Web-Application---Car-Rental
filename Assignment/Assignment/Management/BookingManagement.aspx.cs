@@ -82,13 +82,13 @@ namespace Assignment.Management
             switch (status)
             {
                 case "Pending":
-                    return "bg-primary";
+                    return "bg-warning";
                 case "Booked":
                     return "bg-success";
                 case "Cancelled":
                     return "bg-danger";
                 case "Completed":
-                    return "bg-warning";
+                    return "bg-primary";
                 default:
                     return "bg-default"; // Or any default class
             }
