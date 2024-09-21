@@ -138,6 +138,10 @@
             document.querySelector("#navbar").classList.toggle("hide");
             document.querySelector(".content").classList.toggle('overflow-hidden');
         }
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
     </script>    
 </body>
 </html>

@@ -259,10 +259,6 @@
             utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.7.3/build/js/utils.js",
         });
 
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-
         function loadModal() {
             document.addEventListener("DOMContentLoaded", modal);
         }

@@ -167,6 +167,7 @@
                         </li>
                     </ul>
                     <div class="card-body row">
+                        
                         <asp:Label ID="lblNoBooking" runat="server" CssClass="text-dark"></asp:Label>
                         <asp:Repeater ID="rptBookingRec" runat="server" OnItemDataBound="rptBookingRec_ItemDataBound">
                             <ItemTemplate>
@@ -433,10 +434,6 @@
         </div>
     </div>
     <script>
-
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
 
         var isPass = false;
         function ShowCropModal(event) {
