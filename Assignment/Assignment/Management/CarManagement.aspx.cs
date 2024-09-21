@@ -151,6 +151,12 @@ namespace Assignment
                     relPath = Path.Combine(relfolderLocation, fileName);
 
                     File.WriteAllBytes(savePath, imageBytes); // Save the file
+
+                    if (!txtCarPlate.Text.Equals(hdnCarPlate.Value))
+                    {
+                        string path = Server.MapPath("~/Image/CarImage/");
+                        File.Delete(path + hdnCarPlate.Value + ".png");
+                    }
                 }else if(!txtCarPlate.Text.Equals(hdnCarPlate.Value)){
                     string absPath = Server.MapPath(relPath);
                     if (File.Exists(absPath))
@@ -326,20 +332,28 @@ namespace Assignment
 
         protected void validateCarPlate_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            String selectCar = "SELECT COUNT(*) FROM Car WHERE CarPlate = @CarPlate";
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            con.Open();
-            SqlCommand com = new SqlCommand(selectCar, con);
-            com.Parameters.AddWithValue("@CarPlate",txtCarPlate.Text);
-            int temp = Convert.ToInt32(com.ExecuteScalar().ToString());
-            if (temp == 0)
+            if (!hdnCarPlate.Value.Equals(txtCarPlate.Text))
+            {
+                String selectCar = "SELECT COUNT(*) FROM Car WHERE CarPlate = @CarPlate";
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+                con.Open();
+                SqlCommand com = new SqlCommand(selectCar, con);
+                com.Parameters.AddWithValue("@CarPlate", txtCarPlate.Text);
+                int temp = Convert.ToInt32(com.ExecuteScalar().ToString());
+                if (temp == 0)
+                {
+                    args.IsValid = true;
+                }
+                else
+                {
+                    args.IsValid = false;
+                }
+            }
+            else
             {
                 args.IsValid = true;
             }
-            else 
-            { 
-                args.IsValid = false;
-            }
+
         }
 
         protected void repeaterCarTable_ItemCreated(object sender, RepeaterItemEventArgs e)

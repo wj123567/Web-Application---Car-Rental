@@ -414,7 +414,6 @@
     </script>
 
     <script>
-
         function showSortDirection(buttonID, sort) {
 
             var button = document.getElementById(buttonID);
