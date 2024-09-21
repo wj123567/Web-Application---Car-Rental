@@ -82,6 +82,11 @@
         border-right: none;
     }
 
+.note_multilineText{
+    resize: none;
+    overflow:hidden;
+}
+
 .booking_price_table {
     width: 100%;
     margin-left: auto;
@@ -229,12 +234,51 @@
     width: 100%;
 }
 
-@media only screen and (max-width:600px){
-    .col-8{
-        width:50%;
+@media only screen and (max-width:1320px) {
+    .note_multilineText {
+        width: 500px;
     }
-    .col-2{
-        width:25%;
+}
+
+@media only screen and (max-width:770px) {
+    .payment_block {
+        margin-bottom: 10px;
+    }
+
+   
+} 
+
+@media only screen and (max-width:600px) {
+    .col-8 {
+        width: 50%;
+    }
+
+    .col-2 {
+        width: 25%;
+    }
+    .booking_car_table_info th{
+        padding-left:0;
+    }
+
+    .booking_Id_title_container{
+        text-align:center;
+    }
+}
+
+@media only screen and (max-width:520px){
+    .entire_container{
+        padding-left:0;
+    }
+
+    .note_multilineText{
+        width:250px;
+    }
+}
+
+@media only screen and (max-width:440px) {
+
+    .note_multilineText {
+        width: 150px;
     }
 }
 
@@ -246,4 +290,31 @@
     .col-2 {
         width: 30%;
     }
+    .booking_Id_title_container{
+        padding-right:0;
+    }
+}
+
+@media print {
+
+    .back_btn,
+    .booking_edit_btn_container,
+    .booking_delete_btn_container,
+    .rating-container,
+    .invoice_btn,
+    .payment_booking_summary,
+    .container-footer{
+        display: none !important;
+    }
+
+    .img_rating_flex_container{
+        margin-left:300px;
+    }
+
+    .booking_Id_title_container {
+        margin-left: 250px;
+    }
+
+   
+   
 }

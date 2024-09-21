@@ -27,7 +27,7 @@ namespace Assignment
                     string notes = Request.QueryString["notes"];
                     // Fetch booking details from the database
                     GetRentalDetails(bookingId,notes);
-
+                   
                 }
             }
         }
@@ -164,17 +164,18 @@ namespace Assignment
         {
 
             string bookingId = Session["BookingRecordId"].ToString();
-
             string addOnId = hdnDeletingAddOnId.Value;
 
+            string rentalQuery = Request.QueryString["rental"];
+            double rental = Convert.ToDouble(rentalQuery);
+            //return the total value of the add on going to be removed
+            double removeAmt = calculateNewAddOnAmt(bookingId, addOnId);
+            //perform the remove of that add on from database
             removeAddOn(bookingId, addOnId);
-
+            //update the booking table(remove as last parameter to distinguish with normal update invocation)
+            double newAddOnAmt = calculateNewAddOnAmt(bookingId);
+            updateBookingRecord(bookingId, rental, newAddOnAmt);
             BindAddOns();
-            string oriAddOnPriceQuery = Request.QueryString["oriAddOnPrice"];
-
-            //ori add on price
-            double oriAddOnPrice = Convert.ToDouble(oriAddOnPriceQuery);
-
 
         }
 
@@ -207,14 +208,9 @@ namespace Assignment
                 if(oriAddOnPrice!= 0.00)
                 {
                     //new add on price
-                    newAddOnTotal = calculateNewAddOnAmt(bookingID);
-
-                    //difference between them, and pass back to the bookingrecorddetail
-                    addOnPriceDiff = oriAddOnPrice - newAddOnTotal;
+                    newAddOnTotal = calculateNewAddOnAmt(bookingID);      
                 }
                 
-                
-
                 //update new total in Booking table
                 updateBookingRecord(bookingID, rental, newAddOnTotal);
             }
@@ -268,14 +264,9 @@ namespace Assignment
         private void updateBookingRecord(string bookingID, double rental, double newAddOnPrice)
         {
             double totalPrice = 0.00;
-            if (newAddOnPrice > 0.00)
-            {
-                totalPrice = rental + newAddOnPrice;
-            }
-            else
-            {
-                totalPrice = rental;
-            }
+            
+            totalPrice = rental + newAddOnPrice;    
+           
              
             string sql = @"UPDATE Booking
                            SET FinalPrice =@FinalPrice,
@@ -290,6 +281,8 @@ namespace Assignment
             cmd.ExecuteNonQuery();
             con.Close();
         }
+
+        
 
         private double calculateNewAddOnAmt(string bookingID)
         {
@@ -308,6 +301,33 @@ namespace Assignment
                 while (reader.Read())
                 {
                     double price =Convert.ToDouble(reader["Price"].ToString());
+                    int quantity = Convert.ToInt16(reader["Quantity"].ToString());
+                    newAddOn += price * quantity;
+                }
+            }
+            con.Close();
+            return newAddOn;
+        }
+
+        private double calculateNewAddOnAmt(string bookingID, string addOnID)
+        {
+            double newAddOn = 0.0;
+            string sql = @"SELECT Price,Quantity
+                          FROM AddOn a JOIN BookingAddOn b
+                          ON a.Id = b.AddOnId
+                          WHERE BookingId = @BookingID
+                          AND AddOnId = @AddOnID";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@BookingID", bookingID);
+            cmd.Parameters.AddWithValue("@AddOnID", addOnID);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    double price = Convert.ToDouble(reader["Price"].ToString());
                     int quantity = Convert.ToInt16(reader["Quantity"].ToString());
                     newAddOn += price * quantity;
                 }

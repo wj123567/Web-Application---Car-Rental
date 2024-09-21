@@ -85,7 +85,8 @@ namespace Assignment
                 if (!string.IsNullOrEmpty(bookingId))
                 {      
                     // Fetch booking details from the database
-                    GetBookingDetails(bookingId);       
+                    GetBookingDetails(bookingId);   
+                    GetPaymentDetails(bookingId);
                 }
                               
 
@@ -121,8 +122,7 @@ namespace Assignment
                         lblPickUpTime.Text = Convert.ToDateTime(reader["StartDate"]).ToString("dd/MM/yyyy HH:mm:ss tt");
                         lblDropOffLocation.Text = reader["Dropoff_point"].ToString();
                         lblDropOffTime.Text = Convert.ToDateTime(reader["EndDate"]).ToString("dd-MM-yyyy HH:mm:ss tt");
-                        lblNotes.Text = reader["Notes"].ToString();
-
+                        txtNotes.Text = reader["Notes"].ToString();
                         string status = reader["Status"].ToString();
 
                         //status part(hide edit and cancel)
@@ -154,6 +154,34 @@ namespace Assignment
                 }
             }
         }
+
+        private void GetPaymentDetails(string bookingId)
+        {
+            string searchPaymentSql = @"SELECT CardNumber, CardHolderName, FORMAT(ExpDate,'MMM') AS ExpMonth, YEAR(ExpDate) AS ExpYear
+                                        FROM PaymentCard p JOIN Booking b
+                                        ON p.Id = b.PaymentCardId
+                                        WHERE b.Id = @BookingId";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(searchPaymentSql, con);
+            cmd.Parameters.AddWithValue("@BookingId", bookingId);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    lblCardHolderName.Text = reader["CardHolderName"].ToString();
+                    lblCardExpire.Text = reader["ExpMonth"].ToString() + "/" + reader["ExpYear"].ToString();
+                    string cardNumber = reader["CardNumber"].ToString();
+                    string maskedPart = new string('*', cardNumber.Length - 3);
+                    string lastThreeDigits = cardNumber.Substring(cardNumber.Length - 3);
+                    lblCardNumberEnd.Text = maskedPart + lastThreeDigits;
+                }
+                
+            }
+            con.Close();
+        }
+
 
         private decimal calcAddOnTotal(string bookingId)
         {
@@ -217,7 +245,7 @@ namespace Assignment
         protected void btnEdit_Click(object sender, EventArgs e)
         {
 
-            Response.Redirect("bookingRecordUpdate.aspx?notes=" + lblNotes.Text + "&rental=" + lblRental.Text + "&oriAddOnPrice=" + lblAddOnPrice.Text);
+            Response.Redirect("bookingRecordUpdate.aspx?notes=" + txtNotes.Text + "&rental=" + lblRental.Text + "&oriAddOnPrice=" + lblAddOnPrice.Text);
             hdnOriAddOnPrice.Value = "";
         }
 

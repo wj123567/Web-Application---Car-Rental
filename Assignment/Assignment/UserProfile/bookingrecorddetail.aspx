@@ -37,7 +37,7 @@
         </div>
     </div>
 </div>
-    <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+    
        <!-- Page Content -->
     <main id="page-content" >
       
@@ -46,23 +46,23 @@
         
         <!-- row -->
         <div class="row justify-content-center" >
-          <div class="col-lg-8 col-12" style="border:1px solid gray; ">           
+          <div class="col-lg-8 col-12 entire_container" style="border:1px solid gray;" >           
             <div class="card">
               <div class="card-body">
               <div class="row">
                   <div class="col-1">
                       <div>
-                          <asp:LinkButton ID="lkbtnBack" runat="server" CssClass="btn btn-lg text-center back_btn" OnClick="lkbtnBack_Click"><i class="fa fa-arrow-left fa-2x"></i></asp:LinkButton>                        
+                          <asp:LinkButton ID="lkbtnBack" runat="server" CssClass="btn btn-lg text-center back_btn " OnClick="lkbtnBack_Click"><i class="fa fa-arrow-left fa-2x"></i></asp:LinkButton>                        
                       </div>
                   </div>
-                <div class="col-7">                   
+                <div class="col-5 booking_Id_title_container">                   
                   <!-- heading -->
                   <h3 class="mb-0">Booking ID: <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label></h3>
                     </div>
-                   <div class=" col-2 ">
+                   <div class=" col-3 booking_edit_btn_container" >
                          <asp:Button ID="btnEdit" CssClass="booking_edit_btn" runat="server" Text="Edit" OnClick="btnEdit_Click" />
                    </div>
-                    <div class="col-2">
+                    <div class="col-3 booking_delete_btn_container">
                          <asp:Button ID="btnDelete" CssClass="booking_delete_btn" runat="server" Text="Cancel" OnClick="btnDelete_Click"/>
                     </div>
             </div>          
@@ -72,8 +72,8 @@
                   
                   <!-- row -->
                   <div class="row justify-content-between booking_record">
-                      <div class="d-flex flex-row flex-wrap">
-                          <div style="flex:1;"><asp:Image ID="img_car" runat="server" /></div>
+                      <div class="d-flex flex-row flex-wrap img_rating_flex_container">
+                          <div style="flex:1;" class="img_container"><asp:Image ID="img_car" runat="server" /></div>
                           <div style="flex:3;">
                               <div class="rating-container" style="border:1px solid lightgray;">
                                   <div class="rate-first-row">
@@ -97,7 +97,6 @@
                               </div>
                           </div>
                       </div>
-
 
                           <table class="booking_car_table">
 
@@ -138,14 +137,16 @@
                                        <asp:Label ID="lblDropOffTime" runat="server" Text="Label"></asp:Label>
                                    </td>
                                </tr>
-                              <tr class="booking_car_table_info">
-                                  <th>
+                              <tr class="booking_car_table_info" >
+                                  <th rowspan="2" style="width:30%">
                                       Notes
                                   </th>
-                                  <td>
-                                      <asp:Label ID="lblNotes" runat="server" Text="Label"></asp:Label>
+                                  <td rowspan="2" style="width:70%">
+                                      
+                                      <asp:TextBox ID="txtNotes" runat="server" TextMode="MultiLine"  Rows="3"  Columns="100" ReadOnly="true" CssClass="note_multilineText" ></asp:TextBox>
                                   </td>
                               </tr>
+                              
                           </table>
                          
                           <table class="booking_price_table">
@@ -216,24 +217,31 @@
 
             </div>
                  <!-- card -->
- <div class="card mt-4">
+ <div class="card mt-4 payment_booking_summary">
    <!-- card body -->
    <div class="card-body">
     
      <div class="row">
-       <div class="col-md-6 col-12">
+       <div class="col-md-6 col-12 payment_block">
          <!-- address -->
          <h4>Payment Status</h4>
          <p>
            <span class=" badge bg-success">Paid</span>
          </p>
+           <p class="mb-0 text-dark">
+              Cardholder:
+                <asp:Label ID="lblCardHolderName" runat="server" Text="Label"></asp:Label>
+            </p>
          <p class="mb-0 text-dark">
-           Ending with <asp:Label ID="lblCardNumberEnd" runat="server" Text="Label"></asp:Label>
+           Ending with 
+             <asp:Label ID="lblCardNumberEnd" runat="server" Text="Label"></asp:Label>
          </p>
-         <p class="mb-0">Expires 21/23</p>
+         <p class="mb-0">
+             Expires in <asp:Label ID="lblCardExpire" runat="server" Text="Label"></asp:Label>
+         </p>
          
        </div>
-       <div class="col-md-6 col-12">
+       <div class="col-md-6 col-12 booking_block">
          <!-- text -->
          <h4 class="mb-3">Booking Status</h4> 
           <p>
@@ -243,14 +251,13 @@
         
    </div>
  </div>
-
-
-
  </div>
+              
 <div class="mt-4 text_center invoice_container">
-<asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-info invoice_style">
-    <i class="ri-file-download-line"> Download Invoice</i>
+<asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-info invoice_style invoice_btn" OnClientClick="return printInvoice(event)" UseSubmitBehaviour="false">
+    <i class="ri-file-download-line">Download Invoice </i>
 </asp:LinkButton>
+
 </div>
                 
           </div>
@@ -284,7 +291,6 @@
        
 
 <script>
-
     function loadModal() {
     document.addEventListener("DOMContentLoaded", modal);
    
@@ -297,5 +303,17 @@
     });
     };
 
+    function printInvoice(event) {
+
+        event.preventDefault();
+
+     
+        // Trigger print dialog
+        window.print();
+
+      
+
+        return false;
+    }
 </script>
 </asp:Content>

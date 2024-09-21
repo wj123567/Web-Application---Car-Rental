@@ -7,7 +7,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:SqlDataSource ID="carBrand" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [BrandName] FROM [CarBrand] ORDER BY [BrandName]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="carLocation" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [Id], [LocationName] FROM [Location]"></asp:SqlDataSource>
-
+    <asp:HiddenField ID="hdnCarPlate" runat="server" />
     <div class="modal fade" id="cropModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cropModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -325,7 +325,7 @@
                                         <td scope="col"><%# Eval("CarBrand") %></td>
                                         <td scope="col"><%# Eval("CarName") %></td>
                                         <td scope="col"><%# Eval("CType") %></td>
-                                        <td scope="col"><%# Eval("CarDayPrice") %></td>
+                                        <td scope="col"><%# Eval("CarDayPrice", "{0:F2}") %></td>
                                         <td scope="col"><%# Eval("CarTransmission") %></td>
                                         <td scope="col"><%# Eval("CarEnergy") %></td>
                                         <td scope="col"><%# Eval("LocationName") %></td>
@@ -414,7 +414,6 @@
     </script>
 
     <script>
-
         function showSortDirection(buttonID, sort) {
 
             var button = document.getElementById(buttonID);

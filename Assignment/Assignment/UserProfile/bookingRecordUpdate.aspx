@@ -50,17 +50,19 @@
           <div class="col-lg-8 col-12" style="border:1px solid gray; ">
             <div class="card">
               <div class="card-body">
-                  <div class="col-1">
-                       <div>
-                           <asp:LinkButton ID="lkbtnBack" runat="server" CssClass="btn btn-lg text-center back_btn" OnClick="lkbtnBack_Click"><i class="fa fa-arrow-left fa-2x"></i></asp:LinkButton>                        
-                       </div>
+                  <div class ="row">
+                      <div class="col-1">
+     <div>
+         <asp:LinkButton ID="lkbtnBack" runat="server" CssClass="btn btn-lg text-center back_btn" OnClick="lkbtnBack_Click"><i class="fa fa-arrow-left fa-2x"></i></asp:LinkButton>                        
+     </div>
+</div>
+                      <div class="col-11 mb-6">
+                           <h2 class="mb-0">Update for Booking ID: <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label></h2>
+                      </div>
                   </div>
-                <div class="mb-6">
-                  <!-- heading -->
-                  <h2 class="mb-0">Update for Booking ID: <asp:Label ID="lblBookingNumber" runat="server" Text=""></asp:Label></h2>
-                </div>
-                <div>
-              </div>    
+                  
+               
+                
                   <!-- row -->
                   <div class="row justify-content-between booking_record">
                       
@@ -106,7 +108,7 @@
                               <tr class="booking_car_table_info">
                                   <th>Notes</th>
                                   <td>
-                                      <asp:TextBox ID="txtNotes" TextMode="MultiLine" runat="server" Rows="5" Columns="50"></asp:TextBox>
+                                      <asp:TextBox ID="txtNotes" TextMode="MultiLine" runat="server" Rows="5" Columns="100"></asp:TextBox>
                                   </td>
                               </tr>
                               

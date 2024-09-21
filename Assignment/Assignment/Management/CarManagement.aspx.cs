@@ -136,7 +136,7 @@ namespace Assignment
             {
                 string savePath = " ";
                 string relPath = imgCarPic.ImageUrl;
-                string updateString = "UPDATE Car SET CarPlate=@CarPlate, CarBrand=@CarBrand, CarName=@CarName, CType=@CType, CarDesc=@CarDesc, CarDayPrice=@CarDayPrice, CarSeat=@CarSeat, CarTransmission=@CarTransmission, CarEnergy=@CarEnergy, LocationId=@LocationId, IsDelisted=@IsDelisted ,CarImage=@CarImage WHERE CarPlate = @CarPlate";
+                string updateString = "UPDATE Car SET CarPlate=@CarPlate, CarBrand=@CarBrand, CarName=@CarName, CType=@CType, CarDesc=@CarDesc, CarDayPrice=@CarDayPrice, CarSeat=@CarSeat, CarTransmission=@CarTransmission, CarEnergy=@CarEnergy, LocationId=@LocationId, IsDelisted=@IsDelisted ,CarImage=@CarImage WHERE CarPlate = @NewCarPlate";
                 if (!string.IsNullOrEmpty(hdnCarPicture.Value))
                 {
                     savePath = " ";
@@ -151,6 +151,28 @@ namespace Assignment
                     relPath = Path.Combine(relfolderLocation, fileName);
 
                     File.WriteAllBytes(savePath, imageBytes); // Save the file
+
+                    if (!txtCarPlate.Text.Equals(hdnCarPlate.Value))
+                    {
+                        string path = Server.MapPath("~/Image/CarImage/");
+                        File.Delete(path + hdnCarPlate.Value + ".png");
+                    }
+                }else if(!txtCarPlate.Text.Equals(hdnCarPlate.Value)){
+                    string absPath = Server.MapPath(relPath);
+                    if (File.Exists(absPath))
+                    {
+                        string folderLocation = Server.MapPath("~/Image/CarImage");
+                        string relfolderLocation = "~/Image/CarImage";
+                        using (System.Drawing.Image img = System.Drawing.Image.FromFile(absPath))
+                        {
+                            string fileName = txtCarPlate.Text + ".png";
+                            savePath = Path.Combine(folderLocation, fileName);
+                            relPath = Path.Combine(relfolderLocation, fileName);
+                            img.Save(savePath);
+                        }
+                        string path = Server.MapPath("~/Image/CarImage/");
+                        File.Delete(path + hdnCarPlate.Value + ".png");
+                    }
                 }
                 uploadCar(updateString,relPath);
                 Response.Redirect("CarManagement.aspx");
@@ -174,6 +196,7 @@ namespace Assignment
             com.Parameters.AddWithValue("@LocationId", ddlCarLocation.SelectedValue);
             com.Parameters.AddWithValue("@IsDelisted", int.Parse(ddlCarState.SelectedValue));
             com.Parameters.AddWithValue("@CarImage", imgPath);
+            com.Parameters.AddWithValue("@NewCarPlate", hdnCarPlate.Value);
             com.ExecuteNonQuery();
             con.Close();
         }
@@ -184,8 +207,6 @@ namespace Assignment
             btnUploadCar.Visible = false;
             btnUpdateCar.Visible = true;
             btnDelete.Visible = true;
-            txtCarPlate.ReadOnly = true;
-            validateCarPlate.Enabled = false;
             validateCarPic.Enabled = false;
             Button btnEdit = (Button)sender;
             String carPlate = btnEdit.CommandArgument;
@@ -204,6 +225,7 @@ namespace Assignment
 
         protected void loadCarData(String carPlate)
         {
+            hdnCarPlate.Value = carPlate;
             String selectCar = "SELECT * FROM Car WHERE CarPlate = @CarPlate";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
@@ -310,20 +332,28 @@ namespace Assignment
 
         protected void validateCarPlate_ServerValidate(object source, ServerValidateEventArgs args)
         {
-            String selectCar = "SELECT COUNT(*) FROM Car WHERE CarPlate = @CarPlate";
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            con.Open();
-            SqlCommand com = new SqlCommand(selectCar, con);
-            com.Parameters.AddWithValue("@CarPlate",txtCarPlate.Text);
-            int temp = Convert.ToInt32(com.ExecuteScalar().ToString());
-            if (temp == 0)
+            if (!hdnCarPlate.Value.Equals(txtCarPlate.Text))
+            {
+                String selectCar = "SELECT COUNT(*) FROM Car WHERE CarPlate = @CarPlate";
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+                con.Open();
+                SqlCommand com = new SqlCommand(selectCar, con);
+                com.Parameters.AddWithValue("@CarPlate", txtCarPlate.Text);
+                int temp = Convert.ToInt32(com.ExecuteScalar().ToString());
+                if (temp == 0)
+                {
+                    args.IsValid = true;
+                }
+                else
+                {
+                    args.IsValid = false;
+                }
+            }
+            else
             {
                 args.IsValid = true;
             }
-            else 
-            { 
-                args.IsValid = false;
-            }
+
         }
 
         protected void repeaterCarTable_ItemCreated(object sender, RepeaterItemEventArgs e)

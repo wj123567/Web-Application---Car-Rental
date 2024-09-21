@@ -78,15 +78,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button modalYesBtn;
 
         /// <summary>
-        /// lblCheck control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCheck;
-
-        /// <summary>
         /// lkbtnBack control.
         /// </summary>
         /// <remarks>
@@ -240,13 +231,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblDropOffTime;
 
         /// <summary>
-        /// lblNotes control.
+        /// txtNotes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNotes;
+        protected global::System.Web.UI.WebControls.TextBox txtNotes;
 
         /// <summary>
         /// lblRental control.
@@ -303,6 +294,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblAddOnAmtUpdate;
 
         /// <summary>
+        /// lblCardHolderName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCardHolderName;
+
+        /// <summary>
         /// lblCardNumberEnd control.
         /// </summary>
         /// <remarks>
@@ -310,6 +310,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCardNumberEnd;
+
+        /// <summary>
+        /// lblCardExpire control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCardExpire;
 
         /// <summary>
         /// lblBookStatus control.
