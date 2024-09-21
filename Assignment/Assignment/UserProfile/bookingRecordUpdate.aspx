@@ -2,7 +2,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 
      <link href="../CSS/bookingrecordupdate.css" rel="stylesheet" />
-    
+    <asp:HiddenField ID="hdnAddOnUpdateChk" runat="server"  />
 
 <div id="confirmModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -108,6 +108,7 @@
 
                        <asp:Repeater ID="rptAddOnList" runat="server" OnItemDataBound="rptAddOnList_ItemDataBound">
                        <ItemTemplate>
+                           
                               <tr class="booking_price_table_info">
                                   <td colspan="2">
                                       <asp:HiddenField ID="hdnAddOnId" runat="server"  Value='<%# Eval("AddOnId").ToString() %>'/>
@@ -123,8 +124,9 @@
                                       </asp:DropDownList>    
                                   </td>
                                   <td>
-                                      <asp:Button ID="btnAddOnClear" runat="server" Text="Remove"  CssClass="btn btn-danger" CommandArgument='<%# Eval("AddOnId").ToString() %>' />
+                                      <asp:Button ID="btnAddOnClear" runat="server" Text="Remove"  CssClass="btn btn-danger" CommandArgument='<%# Eval("AddOnId").ToString() %>' Visible='<%# Eval("Name").ToString() != "No Record Found" %>' OnClick="btnClear_Click" />
                                   </td>
+                                  
                               </tr>
 
                          </ItemTemplate>

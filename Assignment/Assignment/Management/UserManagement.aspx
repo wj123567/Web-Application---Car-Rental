@@ -73,7 +73,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <div class="modal-footer">
-                    <asp:Button ID="btnCancelBan" runat="server" Text="Review Again" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false" />
+                    <asp:Button ID="btnCancelBan" runat="server" Text="Review Again" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userInfoModal" OnClientClick="return false" />
                     <asp:Button ID="btnConfirmBan" runat="server" Text="Confirm Ban" CssClass="btn btn-danger" ValidationGroup="banGroup" OnClick="btnBan_Click" />
                 </div>
             </div>
@@ -90,6 +90,9 @@
                 <div class="modal-body">
                     <ul class="nav nav-tabs mb-2 justify-content-center" id="userModalTab">
                         <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="userBookingRec" data-bs-toggle="modal" data-bs-target="#userBookingModal" type="button">Booking Record</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="userInfoTab" data-bs-toggle="modal" data-bs-target="#userInfoModal" type="button">User Info</button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -102,14 +105,20 @@
                         </div>
 
                         <div>
-                            <div class="mb-3">
+                            <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
                                 <label class="small mb-1">Username</label>
                                 <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
                             </div>
-                            <div class="row gx-3 mb-3">
-                                <div class="col-md-6">
+                            <div class="col-md-6">
                                     <label class="small mb-1">Email address</label>
                                     <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                            </div>
+                            </div>
+                            <div class="row gx-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="small mb-1">Reward Point</label>
+                                    <asp:TextBox ID="txtRewardPoint" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="small mb-1">Roles</label>
@@ -137,6 +146,64 @@
             </div>
         </div>
     </div>
+
+    <div class="modal modal-lg animate__animated animate__slideInLeft animate__faster" id="userBookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userBookingModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-dark" id="staticBookingLabel">Booking Record</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs mb-2 justify-content-center" id="bookingModalTab">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="userBookingRec3" data-bs-toggle="modal" data-bs-target="#userBookingModal" type="button">Booking Record</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="userInfoTab3" data-bs-toggle="modal" data-bs-target="#userInfoModal" type="button">User Info</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="driverInfoTab3" data-bs-toggle="modal" data-bs-target="#userDriverModal" type="button">Driver Info</button>
+                        </li>
+                    </ul>
+                    <div class="card-body row">
+                        <asp:Label ID="lblNoBooking" runat="server" CssClass="text-dark"></asp:Label>
+                        <asp:Repeater ID="rptBookingRec" runat="server" OnItemDataBound="rptBookingRec_ItemDataBound">
+                            <ItemTemplate>
+                                <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
+                                    <div class="d-flex align-items-center justify-content-between px-4">
+                                        <div class="d-flex align-items-center">
+                                            <asp:Image ID="carImage" runat="server" ImageUrl='<%# "~/Image/CarImage/" + Eval("CarPlate") +".png"%>' Width="100px" CssClass="img-fluid" />
+                                            <div class="mx-4">
+                                                <asp:Label ID="lblBookingId" runat="server" Text='<%# Eval("Id") +" (" + Eval("CarPlate") +")"%>' CssClass="d-block" />
+                                                <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Pick Up Point: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-inline" />
+                                                <asp:Label ID="lblPickupTime" runat="server" Text='<%# "(" + Eval("StartDate") +")"%>' CssClass="text-xs text-muted d-inline" />
+                                                <br />
+                                                <asp:Label ID="lblDriverBdate" runat="server" Text='<%# "Drop Off Point: " + Eval("Dropoff_point") %>' CssClass="text-xs text-muted d-inline" />
+                                                <asp:Label ID="lblEndTime" runat="server" Text='<%# "(" + Eval("EndDate") +")"%>' CssClass="text-xs text-muted d-inline" />
+                                                <br />
+                                                <asp:Label ID="lblBookUpdate" runat="server" CssClass="text-danger small"></asp:Label>
+                                                <asp:Label ID="lblBookReject" runat="server" CssClass="text-danger small"></asp:Label>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center ms-4">
+                                            <asp:Label ID="lblstatus" runat="server"></asp:Label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:Button ID="Button1" runat="server" Text="Delete" CssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" />
+                    <asp:Button ID="Button2" runat="server" Text="Ban User" CssClass="btn btn-warning btn-ban btn-both" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#banReasonModal" OnClientClick="return false" />
+                    <asp:Button ID="Button3" runat="server" Text="Unban User" CssClass="btn btn-primary btn-unban btn-both" ValidationGroup="reviewGroup" OnClick="btnUnban_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal animate__animated animate__slideInRight animate__faster" id="userDriverModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userDriverModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -146,6 +213,9 @@
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs mb-2 justify-content-center" id="driverModalTab">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="userBookingRec2" data-bs-toggle="modal" data-bs-target="#userBookingModal" type="button">Booking Record</button>
+                        </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="userInfoTab2" data-bs-toggle="modal" data-bs-target="#userInfoModal" type="button">User Info</button>
                         </li>
@@ -304,7 +374,7 @@
                                     <th scope="col">
                                         <asp:LinkButton ID="btnSortEmail" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Email" CssClass="text-dark">Email</asp:LinkButton></th>
                                     <th scope="col">
-                                        <asp:LinkButton ID="btnSortDOB" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DOB" CssClass="text-dark">Date of Birth</asp:LinkButton></th>
+                                        <asp:LinkButton ID="btnSortDOB" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RewardPoints" CssClass="text-dark">Reward Point</asp:LinkButton></th>
                                     <th scope="col">
                                         <asp:LinkButton ID="btnSortRegDate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RegistrationDate" CssClass="text-dark">Registration Date</asp:LinkButton></th>
                                     <th scope="col">
@@ -322,9 +392,7 @@
                                         <tr style="text-align: center;">
                                             <td scope="col"><%# Eval("UserName") %></td>
                                             <td scope="col"><%# Eval("Email") %></td>
-                                            <td scope="col">
-                                                <asp:Label ID="lblBdate" runat="server"></asp:Label>
-                                            </td>
+                                            <td scope="col"><%# Eval("RewardPoints") %></td>
                                             <td scope="col">
                                                 <asp:Label ID="lblRegdate" runat="server"></asp:Label>
                                             </td>

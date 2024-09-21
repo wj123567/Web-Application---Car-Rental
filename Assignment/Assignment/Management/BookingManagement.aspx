@@ -168,7 +168,7 @@
   </div>  
 
     <div class="modal animate__animated animate__slideInRight animate__faster" id="userDriverModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userDriverModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered"">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel3">Available Driver</h1>
