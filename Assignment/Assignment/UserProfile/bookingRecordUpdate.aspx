@@ -3,8 +3,9 @@
 
      <link href="../CSS/bookingrecordupdate.css" rel="stylesheet" />
     <asp:HiddenField ID="hdnAddOnUpdateChk" runat="server"  />
+    <asp:HiddenField ID="hdnDeletingAddOnId" runat="server" />
 
-<div id="confirmModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1"aria-labelledby="paymentModalLabel" aria-hidden="true">
+<div id="confirmModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,6 +18,24 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <asp:Button ID="modalYesBtn" runat="server" CssClass="btn btn-primary" Text="Ok" data-bs-dismiss="modal" OnClick="modalYesBtn_Click" />
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div id="clearAddOnModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="deleteAddOnModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Add On</h5>
+     
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this add on selection?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <asp:Button ID="btnClear" runat="server" CssClass="btn btn-primary" Text="Ok"   OnClick="modalAddOnClearBtn_Click" />
             </div>
         </div>
     </div>
@@ -92,7 +111,7 @@
                               </tr>
                               
                           </table>
-                      <asp:Label ID="lblCheck1" runat="server" Text="Label"></asp:Label>
+                      <asp:Label ID="lblDeleteAddOnAmt" runat="server" Text="0.00"></asp:Label>
                       <asp:Label ID="lblCheck2" runat="server" Text="Label"></asp:Label>
                           <table class="booking_price_table">
                               <tr class="booking_price_table_header">
@@ -124,7 +143,7 @@
                                       </asp:DropDownList>    
                                   </td>
                                   <td>
-                                      <asp:Button ID="btnAddOnClear" runat="server" Text="Remove"  CssClass="btn btn-danger" CommandArgument='<%# Eval("AddOnId").ToString() %>' Visible='<%# Eval("Name").ToString() != "No Record Found" %>' OnClick="btnClear_Click" />
+                                      <asp:Button ID="btnAddOnClear" runat="server" Text="Remove" CssClass="btn btn-danger" Visible='<%# Eval("Name").ToString() != "No Record Found" %>' CommandArgument='<%# Eval("AddOnId").ToString() %>' OnClick="btnClear_Click" />
                                   </td>
                                   
                               </tr>
@@ -194,6 +213,13 @@
         $('#confirmModal').modal('toggle');
         return false;
     });
+    };
+
+    function addOnmodal() {
+        addEventListener("DOMContentLoaded", (event) => {
+            $('#clearAddOnModal').modal('toggle');
+            return false;
+        });
     };
 
 </script>

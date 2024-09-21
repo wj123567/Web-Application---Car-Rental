@@ -153,12 +153,29 @@ namespace Assignment
 
         protected void btnClear_Click(object sender, EventArgs e)
         {
-            string bookingId = Session["BookingRecordId"].ToString();
             Button btn = (Button)sender;
             string addOnId = btn.CommandArgument;
-            
-            double totalRemovedAmt = removeAddOn(bookingId,addOnId);
-            lblCheck1.Text= totalRemovedAmt.ToString();
+            hdnDeletingAddOnId.Value = addOnId;
+            ScriptManager.RegisterStartupScript(this, GetType(), "addOnModal", "addOnmodal();", true);
+
+        }
+
+        protected void modalAddOnClearBtn_Click(object sender, EventArgs e)
+        {
+
+            string bookingId = Session["BookingRecordId"].ToString();
+
+            string addOnId = hdnDeletingAddOnId.Value;
+
+            removeAddOn(bookingId, addOnId);
+
+            BindAddOns();
+            string oriAddOnPriceQuery = Request.QueryString["oriAddOnPrice"];
+
+            //ori add on price
+            double oriAddOnPrice = Convert.ToDouble(oriAddOnPriceQuery);
+
+
         }
 
         protected void modalYesBtn_Click(object sender, EventArgs e)
@@ -168,34 +185,40 @@ namespace Assignment
             string oriAddOnPriceQuery="";
             double oriAddOnPrice=0.00;
             double addOnPriceDiff = 0.00;
+            double newAddOnTotal = 0.00;
             // Retrieve BookingId from session
             string bookingID = Session["BookingRecordId"].ToString();
             
-            //retrieve url query string
-           
+            //retrieve url query string     
             rentalQuery = Request.QueryString["rental"];
             rental = Convert.ToDouble(rentalQuery);
 
             oriAddOnPriceQuery = Request.QueryString["oriAddOnPrice"];
 
              //ori add on price
-    
-            oriAddOnPrice = Convert.ToDouble(Session["oriAddOnPrice"].ToString());
+            oriAddOnPrice = Convert.ToDouble(oriAddOnPriceQuery);
                
             Dictionary<int, int> updatedAddOns = new Dictionary<int, int>();
             if (hdnAddOnUpdateChk.Value != "No Record Found")
             {
                 updatedAddOns = saveBookingAddOnRecord();
                 updateBookingAddOnRecord(updatedAddOns, bookingID);
-                //new add on price
-                double newAddOnTotal = calculateNewAddOnAmt(bookingID);
-                //difference between them, and pass back to the bookingrecorddetail
-                addOnPriceDiff = newAddOnTotal - oriAddOnPrice;
+                
+                if(oriAddOnPrice!= 0.00)
+                {
+                    //new add on price
+                    newAddOnTotal = calculateNewAddOnAmt(bookingID);
+
+                    //difference between them, and pass back to the bookingrecorddetail
+                    addOnPriceDiff = oriAddOnPrice - newAddOnTotal;
+                }
+                
+                
 
                 //update new total in Booking table
                 updateBookingRecord(bookingID, rental, newAddOnTotal);
             }
-            Response.Redirect("bookingrecorddetail.aspx?addOnUpdate="+addOnPriceDiff.ToString());
+            Response.Redirect("bookingrecorddetail.aspx?addOnUpdate="+addOnPriceDiff.ToString()+"&addOnDeleteAmt="+lblDeleteAddOnAmt.Text);
         }
 
         private Dictionary<int,int> saveBookingAddOnRecord()
@@ -236,7 +259,7 @@ namespace Assignment
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@ExistingAddOnID", addOnId);
                 cmd.Parameters.AddWithValue("@Quantity",addOnQuantity);
-                cmd.Parameters.AddWithValue("@BookingID", bookingID);
+                cmd.Parameters.AddWithValue("@BookingID", bookingID);      
                 cmd.ExecuteNonQuery();
             }
             con.Close();
@@ -244,22 +267,33 @@ namespace Assignment
 
         private void updateBookingRecord(string bookingID, double rental, double newAddOnPrice)
         {
-            double totalPrice = rental+newAddOnPrice;
+            double totalPrice = 0.00;
+            if (newAddOnPrice > 0.00)
+            {
+                totalPrice = rental + newAddOnPrice;
+            }
+            else
+            {
+                totalPrice = rental;
+            }
+             
             string sql = @"UPDATE Booking
-                           SET Price =@Price
+                           SET FinalPrice =@FinalPrice,
+                           Notes = @Notes
                            WHERE Id = @BookingID";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand cmd = new SqlCommand (sql, con);
-            cmd.Parameters.AddWithValue("@Price", totalPrice);
+            cmd.Parameters.AddWithValue("@FinalPrice", totalPrice);
             cmd.Parameters.AddWithValue("@BookingID", bookingID);
+            cmd.Parameters.AddWithValue("@Notes", txtNotes.Text);
             cmd.ExecuteNonQuery();
             con.Close();
         }
 
         private double calculateNewAddOnAmt(string bookingID)
         {
-            double newRental = 0.0;
+            double newAddOn = 0.0;
             string sql = @"SELECT Price,Quantity
                           FROM AddOn a JOIN BookingAddOn b
                           ON a.Id = b.AddOnId
@@ -275,25 +309,29 @@ namespace Assignment
                 {
                     double price =Convert.ToDouble(reader["Price"].ToString());
                     int quantity = Convert.ToInt16(reader["Quantity"].ToString());
-                    newRental += price * quantity;
+                    newAddOn += price * quantity;
                 }
             }
             con.Close();
-            return newRental;
+            return newAddOn;
         }
 
-        private double removeAddOn(string bookingId,string addOnId)
+        private void removeAddOn(string bookingId,string addOnId)
         {
-
-            double totalRemovedPrice = calculateRemoveAmt(bookingId,addOnId);
-           /* string deletesql = @"DELETE FROM BookingAddOn
+         string deletesql = @"DELETE FROM BookingAddOn
                           WHERE BookingId = @BookingID
                           AND AddOnId=@AddOnID";
-*/
-            return totalRemovedPrice;
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(deletesql,con);
+            cmd.Parameters.AddWithValue("@BookingID", bookingId);
+            cmd.Parameters.AddWithValue("@AddOnID", addOnId);
+            cmd.ExecuteNonQuery();
+            con.Close();
+           
         }
 
-        private double calculateRemoveAmt(string bookingId, string addOnId)
+      /*  private double calculateRemoveAmt(string bookingId, string addOnId)
         {
             double totalPrice = 0.00;
             string sql = @"SELECT Price,Quantity
@@ -319,6 +357,6 @@ namespace Assignment
             }
             con.Close();
             return totalPrice;
-        }
+        }*/
     }
 }

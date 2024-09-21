@@ -24,6 +24,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.HiddenField hdnAddOnUpdateChk;
 
         /// <summary>
+        /// hdnDeletingAddOnId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnDeletingAddOnId;
+
+        /// <summary>
         /// modalYesBtn control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button modalYesBtn;
+
+        /// <summary>
+        /// btnClear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClear;
 
         /// <summary>
         /// lkbtnBack control.
@@ -105,13 +123,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtNotes;
 
         /// <summary>
-        /// lblCheck1 control.
+        /// lblDeleteAddOnAmt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCheck1;
+        protected global::System.Web.UI.WebControls.Label lblDeleteAddOnAmt;
 
         /// <summary>
         /// lblCheck2 control.

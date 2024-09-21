@@ -16,15 +16,16 @@ namespace Assignment
 
             if (!Page.IsPostBack)
             {
-                Session["oriAddOnPrice"] = null;
-
-                
+               /* lblCheck.Text = lblAddOnAmtUpdate.Text;
                 //handle add on price update
                 string addOnUpdate= Request.QueryString["addOnUpdate"];
+                //handle add on delete price update
+                string addOnDeleteUpdate = Request.QueryString["addOnDeleteAmt"];
+
                 if(addOnUpdate != null)
                 {
-                    lblAddOnAmtUpdateTitle.Visible = true;
                     lblAddOnAmtUpdate.Visible = true;
+                    lblAddOnAmtUpdateTitle.Visible = true;
                     //current amt before update
                     double currentLabelAddOnAmt = Convert.ToDouble(lblAddOnAmtUpdate.Text);
                     //get the actual price in double
@@ -32,7 +33,7 @@ namespace Assignment
                     double newAmt = currentLabelAddOnAmt + addOnDiff;
                     if (newAmt > 0)
                     {
-                       
+                        
                         lblAddOnAmtUpdateTitle.Text = "Money Rebate from Add On Update";                                          
                         lblAddOnAmtUpdate.Text = newAmt.ToString("F2");
                         lblAddOnAmtUpdateTitle.CssClass = "text-success fw-bold";
@@ -51,6 +52,33 @@ namespace Assignment
                         lblAddOnAmtUpdate.CssClass = "text-warning";
                     }
                 }
+                if (addOnDeleteUpdate != null)
+                {
+                 
+                    double currentLabelAddOnAmt = Convert.ToDouble(lblAddOnAmtUpdate.Text);
+                    double deleteAmt = Convert.ToDouble(addOnDeleteUpdate);
+                    double newAddOnAmt = currentLabelAddOnAmt + deleteAmt;
+                    if (newAddOnAmt > 0)
+                    {
+                        lblAddOnAmtUpdateTitle.Text = "Money Rebate from Add On Update";
+                        lblAddOnAmtUpdate.Text = newAddOnAmt.ToString("F2");
+                        lblAddOnAmtUpdateTitle.CssClass = "text-success fw-bold";
+                        lblAddOnAmtUpdate.CssClass = "text-success";
+                    }
+                    else if (newAddOnAmt == 0)
+                    {
+                        lblAddOnAmtUpdateTitle.Visible = false;
+                        lblAddOnAmtUpdate.Visible = false;
+                    }
+                    else
+                    {
+                        lblAddOnAmtUpdateTitle.Text = "Extra Charges from Add On Update";
+                        lblAddOnAmtUpdate.Text = newAddOnAmt.ToString("F2");
+                        lblAddOnAmtUpdateTitle.CssClass = "text-warning fw-bold";
+                        lblAddOnAmtUpdate.CssClass = "text-warning";
+                    }
+                }*/
+
                 // Retrieve BookingId from session
                 string bookingId = Session["bookingrecordID"] as string;
 
@@ -59,7 +87,7 @@ namespace Assignment
                     // Fetch booking details from the database
                     GetBookingDetails(bookingId);       
                 }
-                
+                              
 
                 txtComment.Attributes.Add("placeholder", "Write Your Comment Here!");
             }
@@ -113,10 +141,10 @@ namespace Assignment
                         double totalRental = carDayPrice * Math.Ceiling(timeDiff.TotalDays);
                         lblRental.Text = totalRental.ToString("F2"); //TotalDays returns fractional number of days, use ceiling to meet our business rule
                         lblAddOnPrice.Text= addonTotal.ToString("F2");
-                        if (Session["oriAddOnPrice"] == null)
+                       /* if (Session["oriAddOnPrice"] == null)
                         {
                             Session["oriAddOnPrice"] = addonTotal.ToString("F2");
-                        }
+                        }*/
                        
                         //status part
                         lblBookStatus.Text = status;
@@ -176,6 +204,8 @@ namespace Assignment
 
         protected void lkbtnBack_Click(object sender, EventArgs e)
         {
+            //go bck to all record, clear the session first
+            Session["oriAddOnPrice"] = null;
             Response.Redirect("bookingrecord.aspx");
         }
 
@@ -187,7 +217,7 @@ namespace Assignment
         protected void btnEdit_Click(object sender, EventArgs e)
         {
 
-            Response.Redirect("bookingRecordUpdate.aspx?notes=" + lblNotes.Text + "&rental=" + lblRental.Text + "&oriAddOnPrice=" + Session["oriAddOnPrice"].ToString());
+            Response.Redirect("bookingRecordUpdate.aspx?notes=" + lblNotes.Text + "&rental=" + lblRental.Text + "&oriAddOnPrice=" + lblAddOnPrice.Text);
             hdnOriAddOnPrice.Value = "";
         }
 

@@ -235,7 +235,6 @@
     <Content Include="Management\dashboard.aspx" />
     <Content Include="Management\test.aspx" />
     <Content Include="Management\testModel.aspx" />
-    <Content Include="UserProfile\bookingprocess.aspx" />
     <Content Include="UserProfile\bookingrecord.aspx" />
     <Content Include="UserProfile\bookingrecorddetail.aspx" />
     <Content Include="Management\CarManagement.aspx" />
@@ -438,13 +437,6 @@
     </Compile>
     <Compile Include="TestTrip.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserProfile\bookingprocess.aspx.cs">
-      <DependentUpon>bookingprocess.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserProfile\bookingprocess.aspx.designer.cs">
-      <DependentUpon>bookingprocess.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserProfile\bookingrecord.aspx.cs">
       <DependentUpon>bookingrecord.aspx</DependentUpon>

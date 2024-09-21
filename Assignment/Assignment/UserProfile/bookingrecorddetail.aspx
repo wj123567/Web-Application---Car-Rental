@@ -190,8 +190,8 @@
                     <!-- list -->
                     <ul class="list-unstyled mb-0">
                       <li class="d-flex justify-content-between mb-2">
-                        <asp:Label ID="lblAddOnAmtUpdateTitle" runat="server" Text="" Visible="false"></asp:Label>
-                        <asp:Label ID="lblAddOnAmtUpdate" runat="server" Text="0.00" Visible="false"></asp:Label>
+                        <asp:Label ID="lblAddOnAmtUpdateTitle" runat="server" Text=""  Visible="false"></asp:Label>
+                        <asp:Label ID="lblAddOnAmtUpdate" runat="server" Text="0.00" Visible="false" ></asp:Label>
                       </li>
                       <li class="d-flex justify-content-between mb-2">
                         <span>Shipping</span>
