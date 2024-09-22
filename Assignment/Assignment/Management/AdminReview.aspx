@@ -33,16 +33,19 @@
         </div>
 
         
-        <asp:ListView ID="lvReview" runat="server">
+        <asp:ListView ID="lvReview" runat="server" OnSorting="lvReview_Sorting">
             <LayoutTemplate>
                 <table class="table table-striped table-bordered table-responsive">
                     <thead>
                         <tr class="">
-                            <th>Review ID</th>
-                            <th>Booking ID</th>
-                            <th>Review Text</th>
-                            <th>Rating</th>
-                            <th>Review Date</th>
+                            <th><asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewId">
+                                Review ID
+                                <asp:Literal ID="litReviewIdIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton></th>
+                            <th><asp:LinkButton runat="server" CommandName="Sort" CommandArgument="BookingId">Booking ID</asp:LinkButton></th>
+                            <th><asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewText">Review Text</asp:LinkButton></th>
+                            <th><asp:LinkButton runat="server" CommandName="Sort" CommandArgument="Rating">Rating</asp:LinkButton></th>
+                            <th><asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewDate">Review Date</asp:LinkButton></th>
                             <th>Action</th>
                         </tr>
                     </thead>

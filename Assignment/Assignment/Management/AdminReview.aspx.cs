@@ -75,5 +75,18 @@ namespace Assignment.Management
                 }
             }
         }
+
+        protected void lvReview_Sorting(object sender, ListViewSortEventArgs e)
+        {
+
+        }
+
+        private List<Review> GetReviews()
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                return db.Reviews.Include("Booking").ToList();
+            }
+        }
     }
 }
