@@ -175,7 +175,7 @@
                                     <div class="d-flex align-items-center justify-content-between px-4">
                                         <div class="d-flex align-items-center">
                                             <div class="user-car-frame">
-                                            <asp:Image ID="carImage" runat="server" ImageUrl='<%# "~/Image/CarImage/" + Eval("CarPlate") +".png"%>' Width="100px" CssClass="img-fluid" /></div>
+                                            <asp:Image ID="carImage" runat="server" ImageUrl='<%# Eval("CarImage")%>' Width="100px" CssClass="img-fluid" /></div>
                                             <div class="mx-4">
                                                 <asp:Label ID="lblBookingId" runat="server" Text='<%# Eval("Id") +" (" + Eval("CarPlate") +")"%>' CssClass="d-block" />
                                                 <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Pick Up Point: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-inline" />

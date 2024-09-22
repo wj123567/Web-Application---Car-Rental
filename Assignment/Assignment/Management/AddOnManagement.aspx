@@ -35,13 +35,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-dark" id="cropModalLabel">Crop Car Picture</h1>
+                    <h1 class="modal-title fs-5 text-dark" id="cropModalLabel">Crop Add On Picture</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="cropped-container">
                         <asp:Image ID="imgCropImage" runat="server" Width="100%" />
-                        <asp:HiddenField ID="hdnCarPicture" runat="server" />
+                        <asp:HiddenField ID="hdnAddOnPicture" runat="server" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -347,7 +347,7 @@
             const imageInput = document.getElementById('<%= fuAddOnPic.ClientID %>');
             const imageElement = document.getElementById('<%= imgCropImage.ClientID %>');
             const uploadButton = document.getElementById('<%= btnUpload.ClientID %>');
-            const result = document.getElementById('<%= hdnCarPicture.ClientID %>');
+            const result = document.getElementById('<%= hdnAddOnPicture.ClientID %>');
             const preview = document.getElementById('<%= imgAddOnPic.ClientID %>');
 
 

@@ -51,13 +51,13 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Image imgCropImage;
 
         /// <summary>
-        /// hdnCarPicture control.
+        /// hdnAddOnPicture control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnCarPicture;
+        protected global::System.Web.UI.WebControls.HiddenField hdnAddOnPicture;
 
         /// <summary>
         /// btnUpload control.

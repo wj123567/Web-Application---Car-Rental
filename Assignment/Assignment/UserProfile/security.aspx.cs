@@ -203,19 +203,44 @@ namespace Assignment
             {
                 String id = Session["Id"].ToString();
 
-                string path = Server.MapPath("~/Image/UserProfile/");
+                string path = MapPath("~/Image/UserProfile/");
 
                 File.Delete(path + id + ".jpg");
 
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
-                String deleteCom = "DELETE FROM ApplicationUser WHERE Id = @id";
+                string selectDriver = "SELECT Id FROM Driver WHERE UserId = @id";
+
+                string deleteCom = "DELETE FROM PaymentCard WHERE UserId = @id; DELETE FROM Driver WHERE UserId = @id; DELETE FROM ApplicationUser WHERE Id = @id";
 
                 con.Open();
-                SqlCommand comDelete = new SqlCommand(deleteCom, con);
+                SqlCommand com = new SqlCommand(selectDriver, con);
 
-                comDelete.Parameters.AddWithValue("@id", id);
-                comDelete.ExecuteNonQuery();
+                com.Parameters.AddWithValue("@id", id);
+                SqlDataReader reader = com.ExecuteReader();
+                string DriverId = "";
+                if (reader.HasRows)
+                {
+                    if (reader.Read())
+                    {
+                        DriverId = reader["Id"].ToString();
+                    }                    
+
+                    string[] driverPath = { MapPath("~/Image/DriverId/"), MapPath("~/Image/DriverLB/"), MapPath("~/Image/DriverLF/"), MapPath("~/Image/DriverSelfie/") };
+
+                    for (int i = 0; i < driverPath.Length; i++)
+                    {
+                        File.Delete(driverPath[i] + DriverId + ".jpg");
+                    }
+                }
+                reader.Close();
+
+                com = new SqlCommand(deleteCom, con);
+
+                com.Parameters.AddWithValue("@id", id);
+
+                com.ExecuteNonQuery();
+
                 con.Close();
 
                 Session["Id"] = null;

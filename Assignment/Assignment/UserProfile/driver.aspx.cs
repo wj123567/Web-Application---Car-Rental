@@ -339,8 +339,6 @@ namespace Assignment
                 File.Delete(path[i] + id + ".jpg");
             }
 
-            File.Delete(Server.MapPath(imgID2.ImageUrl));
-
             con.Open();
 
             SqlCommand com = new SqlCommand(deleteDriver,con);

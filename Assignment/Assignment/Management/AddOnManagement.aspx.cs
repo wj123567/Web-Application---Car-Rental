@@ -104,14 +104,14 @@ namespace Assignment.Management
                 string savePath = " ";
                 string relPath = " ";
                 string insertString = "INSERT into AddOn(Name,Description,Price,Url,maxQuantity) VALUES (@Name,@Description,@Price,@Url,@maxQuantity)";
-                if (!string.IsNullOrEmpty(hdnCarPicture.Value))
+                if (!string.IsNullOrEmpty(hdnAddOnPicture.Value))
                 {
                     savePath = " ";
                     relPath = " ";
                     string folderLocation = Server.MapPath("~/Image/AddOnImg");
                     string relfolderLocation = "~/Image/AddOnImg";
                     // Decode the Base64 string and save it as an image file
-                    string base64String = hdnCarPicture.Value.Split(',')[1]; // Remove the data URI scheme part
+                    string base64String = hdnAddOnPicture.Value.Split(',')[1]; // Remove the data URI scheme part
                     byte[] imageBytes = Convert.FromBase64String(base64String);
                     string fileInputName = txtAddonName.Text.Trim();
                     fileInputName = fileInputName.Replace(" ", "");
@@ -149,14 +149,14 @@ namespace Assignment.Management
                  string savePath = " ";
                  string relPath = imgAddOnPic.ImageUrl;
                  string updateString = "UPDATE AddOn SET Name=@Name, Description=@Description, Price=@Price, maxQuantity=@maxQuantity, Url=@Url WHERE Id = @Id";
-                if (!string.IsNullOrEmpty(hdnCarPicture.Value))
+                if (!string.IsNullOrEmpty(hdnAddOnPicture.Value))
                 {
                     savePath = " ";
                     relPath = " ";
                     string folderLocation = Server.MapPath("~/Image/AddOnImg");
                     string relfolderLocation = "~/Image/AddOnImg";
                     // Decode the Base64 string and save it as an image file
-                    string base64String = hdnCarPicture.Value.Split(',')[1]; // Remove the data URI scheme part
+                    string base64String = hdnAddOnPicture.Value.Split(',')[1]; // Remove the data URI scheme part
                     byte[] imageBytes = Convert.FromBase64String(base64String);
                     string fileInputName = txtAddonName.Text.Trim();
                     fileInputName = fileInputName.Replace(" ", "");

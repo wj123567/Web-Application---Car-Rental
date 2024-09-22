@@ -310,7 +310,7 @@ namespace Assignment
         }
         protected void loadBookingInfo(String id)
         {
-            String selectDriver = "SELECT * FROM Booking WHERE UserId = @id";
+            String selectDriver = "SELECT B.*, C.CarImage FROM Booking B JOIN Car C ON B.CarPlate = C.CarPlate WHERE UserId = @id";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
@@ -375,14 +375,36 @@ namespace Assignment
 
         protected void btnConfirmDelete_Click(object sender, EventArgs e)
         {
-            string delString = "DELETE FROM ApplicationUser WHERE Id = @id";
+            string selectDriver = "SELECT Id FROM Driver WHERE UserId = @id";
+
+            string deleteCom = "DELETE FROM PaymentCard WHERE UserId = @id; DELETE FROM Driver WHERE UserId = @id; DELETE FROM ApplicationUser WHERE Id = @id";
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            SqlCommand com = new SqlCommand(delString, con);
+            SqlCommand com = new SqlCommand(selectDriver, con);
             con.Open();
+            com.Parameters.AddWithValue("@id", Session["UserTableID"].ToString());
+            SqlDataReader reader = com.ExecuteReader();
+            string DriverId = "";
+            if (reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    DriverId = reader["Id"].ToString();
+                }
+
+                string[] driverPath = { MapPath("~/Image/DriverId/"), MapPath("~/Image/DriverLB/"), MapPath("~/Image/DriverLF/"), MapPath("~/Image/DriverSelfie/") };
+
+                for (int i = 0; i < driverPath.Length; i++)
+                {
+                    File.Delete(driverPath[i] + DriverId + ".jpg");
+                }
+            }
+            reader.Close();
+            com = new SqlCommand(deleteCom, con);
             com.Parameters.AddWithValue("@id", Session["UserTableID"].ToString());
             com.ExecuteNonQuery();
             con.Close();
-            string path = Server.MapPath("~/Image/UserProfile/");
+            string path = MapPath("~/Image/UserProfile/");
             File.Delete(path + Session["UserTableID"].ToString() + ".jpg");
             Response.Redirect("UserManagement.aspx");
         }
