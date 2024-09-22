@@ -31,6 +31,7 @@ namespace Assignment.Management
 
         protected void btnEditReview_Click(object sender, EventArgs e)
         {
+            
             var button = (LinkButton)sender;
             int reviewId = int.Parse(button.CommandArgument);
 
@@ -50,6 +51,27 @@ namespace Assignment.Management
 
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$(document).ready(function() { $('#staticBackdrop').modal('show'); });", true);
 
+                }
+            }
+        }
+
+        protected void DeleteButton_Click(object sender, EventArgs e)
+        {
+            var button = (LinkButton)sender;
+
+            int reviewId = int.Parse(button.CommandArgument);
+
+            using (var db = new SystemDatabaseEntities())
+            {
+                var review = db.Reviews.FirstOrDefault(r => r.ReviewId == reviewId);
+
+                if (review != null)
+                {
+                    db.Reviews.Remove(review);
+
+                    db.SaveChanges();
+
+                    BindListView();
                 }
             }
         }

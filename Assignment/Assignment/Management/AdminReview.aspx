@@ -12,6 +12,9 @@
                 </div>
                 <div class="modal-body">
                     <div>Booking ID: <asp:Label ID="lblBookingId" runat="server"></asp:Label></div>
+                    <div></div>
+                    <hr />
+                    
                     <div>Review Text: <asp:Label ID="lblReviewText" runat="server"></asp:Label></div>
                     <div>Rating: <asp:Label ID="lblRating" runat="server"></asp:Label></div>
                     <div>Review Date: <asp:Label ID="lblReviewDate" runat="server"></asp:Label></div>
@@ -64,7 +67,7 @@
                             <i class="fas fa-edit" style="color: #ffbb00;"></i>
                         </asp:LinkButton>
 
-                        <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("ReviewId") %>'>
+                        <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("ReviewId") %>' OnClick="DeleteButton_Click" OnClientClick="return confirm('Are you sure you want to delete this review?');">
                             <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
                         </asp:LinkButton>
                     </td>
