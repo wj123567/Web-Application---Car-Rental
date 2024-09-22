@@ -549,7 +549,7 @@ namespace Assignment
             {
                 string insertString = "INSERT INTO CarBrand (BrandName) VALUES (@bn)";
                 uploadBrand(insertString, "NULL");
-                ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='CarManagement.aspx';", true);
+                Response.Redirect("CarManagement.aspx");
             }
         }
 
@@ -560,7 +560,7 @@ namespace Assignment
                 string updateString = "UPDATE CarBrand SET BrandName = @bn WHERE BrandName = @ibn";
                 string ibn = ddlCarNewCarbrand.SelectedValue;
                 uploadBrand(updateString, ibn);
-                ScriptManager.RegisterStartupScript(this, GetType(), "redirect", "window.location.href='CarManagement.aspx';", true);
+                Response.Redirect("CarManagement.aspx");
             }
         }
 
