@@ -150,7 +150,7 @@ namespace Assignment
 
             if (reader.Read())
             {
-                Session["DriverID"] = reader["id"].ToString();
+                hdnDriverId.Value = reader["id"].ToString();
                 txtName.Text = reader["DriverName"].ToString();
                 txtDriverID.Text = reader["DriverId"].ToString();
                 txtDriverLicense.Text = reader["DriverLicense"].ToString();
@@ -199,7 +199,7 @@ namespace Assignment
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(sql, con);
             con.Open();
-            com.Parameters.AddWithValue("@Id", Session["DriverID"].ToString());
+            com.Parameters.AddWithValue("@Id", hdnDriverId.Value);
             com.Parameters.AddWithValue("@RejectReason", reject);
             com.ExecuteNonQuery();
             con.Close();
