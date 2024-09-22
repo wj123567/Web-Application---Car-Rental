@@ -307,7 +307,7 @@
         function ShowImageModal(image) {
             document.getElementById('<%= largeImage.ClientID %>').src = image.src;
             $('#reviewDriver').modal('hide');
-            $('#imageModal').modal('show');            
+            $('#imageModal').modal('show');
             console.log("Im in");
             return false;
         }

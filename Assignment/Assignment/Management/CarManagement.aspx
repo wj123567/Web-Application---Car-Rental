@@ -7,6 +7,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:SqlDataSource ID="carBrand" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [BrandName] FROM [CarBrand] ORDER BY [BrandName]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="carLocation" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT [Id], [LocationName] FROM [Location]"></asp:SqlDataSource>
+    <asp:HiddenField ID="hdnSQLQuery" runat="server" />
     <asp:HiddenField ID="hdnCarPlate" runat="server" />
     <div class="modal fade" id="cropModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cropModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

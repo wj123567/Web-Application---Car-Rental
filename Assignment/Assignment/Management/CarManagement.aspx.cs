@@ -26,6 +26,7 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
+                ViewState["SQLQuery"] = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id ORDER BY C.CarPlate";
                 loadCarData();
             }
 
@@ -34,13 +35,15 @@ namespace Assignment
 
         protected void loadCarData()
         {
-            string selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id ORDER BY C.CarPlate OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
+            string selectCar = ViewState["SQLQuery"].ToString() + " OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectCar, con);
             com.Parameters.AddWithValue("@PageSize", PageSize);
             com.Parameters.AddWithValue("@PageNumber", PageNumber);
+            com.Parameters.AddWithValue("@searchString", "%" + searchBar.Text.Replace(" ", "") + "%");
+            com.Parameters.AddWithValue("@LocationId", ddlTableLocation.SelectedValue);
             SqlDataAdapter da = new SqlDataAdapter(com);      
             DataSet ds = new DataSet();
             da.Fill(ds, "CarTable");
@@ -88,9 +91,29 @@ namespace Assignment
 
         protected int getTotalRow()
         {
-            string selectAll = "SELECT COUNT(*) FROM Car";
+            string selectAll = "SELECT COUNT(*) FROM Car C JOIN Location L ON C.LocationId = L.Id ";
+            string test = ViewState["SQLQuery"].ToString();
+            int whereIndex = ViewState["SQLQuery"].ToString().IndexOf("WHERE", StringComparison.OrdinalIgnoreCase);
+
+            if (whereIndex != -1)
+            {
+                int orderByIndex = ViewState["SQLQuery"].ToString().IndexOf("ORDER BY", StringComparison.OrdinalIgnoreCase);
+                if(orderByIndex != -1)
+                {
+                    string betweenWhereOrder = ViewState["SQLQuery"].ToString().Substring(whereIndex,orderByIndex-whereIndex).Trim();
+                    selectAll += betweenWhereOrder;
+                }
+                else
+                {
+                    string afterWhere = ViewState["SQLQuery"].ToString().Substring(whereIndex).Trim();
+                    selectAll += afterWhere;
+                }
+            }
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(selectAll, con);
+            com.Parameters.AddWithValue("@searchString", "%" + searchBar.Text.Replace(" ", "") + "%");
+            com.Parameters.AddWithValue("@LocationId", ddlTableLocation.SelectedValue);
             con.Open();
             return (int)com.ExecuteScalar();
         }
@@ -600,35 +623,14 @@ namespace Assignment
 
         protected void btnAddNewCar_Click(object sender, EventArgs e)
         {
-            Server.Transfer("CarManagement.aspx");
+            Response.Redirect("CarManagement.aspx");
         }
         protected void hiddenBtn_Click(object sender, EventArgs e)
         {
             string findCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR CarPlate LIKE @searchString ORDER BY C.CarPlate";
-            string search = searchBar.Text.Replace(" ","");
-            if (search == "")
-            {
-                loadCarData();
-                UpdatePanel1.Update();
-            }
-            else
-            {
-                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-                SqlCommand com = new SqlCommand(findCar, con);
-                con.Open();
-                com.Parameters.AddWithValue("@searchString", "%" + search + "%");
-                SqlDataAdapter da = new SqlDataAdapter(com);
-                DataSet ds = new DataSet();
-                da.Fill(ds, "CarTable");
-                int row = ds.Tables["CarTable"].Rows.Count;
-                ViewState["CarTable"] = ds.Tables["CarTable"];
-                repeaterCarTable.DataSource = ds.Tables["CarTable"];
-                repeaterCarTable.DataBind();
-                con.Close();
-                UpdatePageInfo(true, row);
-                UpdatePanel1.Update();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addCarPlate()", true);
-            }
+            ViewState["SQLQuery"] = findCar;
+            loadCarData();
+            UpdatePanel1.Update();
         }
 
         protected void ddlTableLocation_DataBound(object sender, EventArgs e)
@@ -640,29 +642,9 @@ namespace Assignment
         {
             string loc = ddlTableLocation.SelectedValue;
             string selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE C.LocationId = @LocationId ORDER BY C.CarPlate";
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            SqlCommand com = new SqlCommand(selectCar, con);
-            if (loc == "0")
-            {
-                loadCarData();
-                UpdatePanel1.Update();
-            }
-            else
-            {
-                con.Open();
-                com.Parameters.AddWithValue("@LocationId", loc);
-                SqlDataAdapter da = new SqlDataAdapter(com);
-                DataSet ds = new DataSet();
-                da.Fill(ds, "CarTable");
-                int row = ds.Tables["CarTable"].Rows.Count;
-                ViewState["CarTable"] = ds.Tables["CarTable"];
-                repeaterCarTable.DataSource = ds.Tables["CarTable"];
-                repeaterCarTable.DataBind();
-                con.Close();
-                UpdatePageInfo(true, row);
-                UpdatePanel1.Update();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addCarPlate()", true);
-            }
+            ViewState["SQLQuery"] = selectCar;
+            loadCarData();
+            UpdatePanel1.Update();
         }
 
     }

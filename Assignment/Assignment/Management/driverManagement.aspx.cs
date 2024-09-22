@@ -101,10 +101,10 @@ namespace Assignment
             Label lblDateApply = (Label)e.Item.FindControl("lblDateApply");
             Label lblReject = (Label)e.Item.FindControl("lblReject");
             Button btnView = (Button)e.Item.FindControl("btnView");
-            string approvalStatus = DataBinder.Eval(e.Item.DataItem,"Approval").ToString();
-            DateTime bDate = (DateTime)DataBinder.Eval(e.Item.DataItem,"DriverBdate");
-            DateTime dateApply = (DateTime)DataBinder.Eval(e.Item.DataItem,"DateApply");
-            string rejectReason = DataBinder.Eval(e.Item.DataItem,"rejectReason").ToString();
+            string approvalStatus = DataBinder.Eval(e.Item.DataItem, "Approval").ToString();
+            DateTime bDate = (DateTime)DataBinder.Eval(e.Item.DataItem, "DriverBdate");
+            DateTime dateApply = (DateTime)DataBinder.Eval(e.Item.DataItem, "DateApply");
+            string rejectReason = DataBinder.Eval(e.Item.DataItem, "rejectReason").ToString();
 
             lblBdate.Text = bDate.ToString("dd/MM/yyyy");
             lblDateApply.Text = dateApply.ToString("dd/MM/yyyy");
@@ -136,7 +136,7 @@ namespace Assignment
             String id = btnView.CommandArgument;
             LoadAvailableDriver(id);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "loadModal()", true);
-        }        
+        }
 
         protected void LoadAvailableDriver(String id)
         {
@@ -144,7 +144,7 @@ namespace Assignment
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
-            com.Parameters.AddWithValue("@Id",id);
+            com.Parameters.AddWithValue("@Id", id);
 
             SqlDataReader reader = com.ExecuteReader();
 
@@ -158,7 +158,7 @@ namespace Assignment
                 DateTime driverBdate = reader.GetDateTime(reader.GetOrdinal("DriverBdate"));
                 txtBirthdate.Text = driverBdate.ToString("yyyy-MM-dd");
                 ddlGender.SelectedValue = reader["driverGender"].ToString();
-                imgID.ImageUrl = reader["IDpic"].ToString();;
+                imgID.ImageUrl = reader["IDpic"].ToString(); ;
                 imgSelfie.ImageUrl = reader["Selfiepic"].ToString();
                 imgLicenseF.ImageUrl = reader["LicenseFpic"].ToString();
                 imgLicenseB.ImageUrl = reader["LicenseBpic"].ToString();
@@ -207,7 +207,7 @@ namespace Assignment
 
         protected void ddlRejectReason_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ddlRejectReason.SelectedValue == "Other")
+            if (ddlRejectReason.SelectedValue == "Other")
             {
                 txtOtherReason.Visible = true;
                 requireOtherReason.Enabled = true;
@@ -291,13 +291,13 @@ namespace Assignment
 
 
 
-            if(sort == "All")
+            if (sort == "All")
             {
                 loadDriverInfo();
                 updateDriverTable.Update();
                 return;
             }
-            else if(sort == "P")
+            else if (sort == "P")
             {
                 selectDriver = "SELECT * FROM Driver WHERE Approval = @Approval ORDER BY DateApply";
             }
@@ -309,7 +309,7 @@ namespace Assignment
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
-            if(sort != "All")
+            if (sort != "All")
             {
                 com.Parameters.AddWithValue("@Approval", sort);
             }
