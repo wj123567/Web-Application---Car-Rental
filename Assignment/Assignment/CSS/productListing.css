@@ -1,5 +1,15 @@
 ﻿#img-holder {
-    width: 1500px; /* The maximum width is 1500px */
+    width: 1500px;
+}
+
+.hourselect option:nth-child(-n+8), .hourselect option:nth-child(n+22) {
+    display: none;
+}
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: #3d5cb8 !important;
+    border-color: transparent !important;
+    color: #fff !important;
 }
 
 @media screen and (max-width: 1200px) {

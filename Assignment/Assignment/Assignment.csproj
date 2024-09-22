@@ -201,6 +201,7 @@
     <Content Include="Image\Dashboard\booking.png" />
     <Content Include="Image\Dashboard\chart.png" />
     <Content Include="Management\AdminReview.aspx" />
+    <Content Include="testDate.aspx" />
     <Content Include="UserProfile\bookingRecordUpdate.aspx" />
     <Content Include="CarRentalSystemModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -293,6 +294,7 @@
     <Content Include="validateEmail.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
+    <Content Include="wztest.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddOn.cs">
@@ -320,6 +322,13 @@
     </Compile>
     <Compile Include="Management\AdminReview.aspx.designer.cs">
       <DependentUpon>AdminReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="testDate.aspx.cs">
+      <DependentUpon>testDate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testDate.aspx.designer.cs">
+      <DependentUpon>testDate.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserProfile\bookingRecordUpdate.aspx.cs">
       <DependentUpon>bookingRecordUpdate.aspx</DependentUpon>
@@ -594,6 +603,13 @@
     </Compile>
     <Compile Include="validateEmail.aspx.designer.cs">
       <DependentUpon>validateEmail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wztest.aspx.cs">
+      <DependentUpon>wztest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wztest.aspx.designer.cs">
+      <DependentUpon>wztest.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

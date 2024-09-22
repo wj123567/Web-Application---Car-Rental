@@ -18,12 +18,6 @@ namespace Assignment
           
             if (!Page.IsPostBack)
             {
-                
-                txtStartTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
-                txtStartTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-ddTHH:mm");                
-                txtEndTime.Attributes["min"] = DateTime.Now.AddDays(2).ToString("yyyy-MM-ddTHH:mm");
-                txtEndTime.Attributes["max"] = DateTime.Now.AddMonths(4).ToString("yyyy-MM-ddTHH:mm");
-                
                     try
                     {
                     retrievedAllData();
@@ -45,8 +39,8 @@ namespace Assignment
             ddlDFLocation.SelectedValue = Session["Dropoff_point"].ToString();
             ddlPUState.SelectedValue = Session["Pickup_state"].ToString();
             ddlDFState.SelectedValue = Session["Dropoff_state"].ToString();
-            txtStartTime.Text = startDate.ToString("yyyy-MM-ddTHH:mm");
-            txtEndTime.Text = endDate.ToString("yyyy-MM-ddTHH:mm");
+            hdnStart.Text = startDate.ToString("dd-MM-yyyy HH:mm");
+            hdnEnd.Text = endDate.ToString("dd-MM-yyyy HH:mm");
             string findCar = "SELECT C.* FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE IsDelisted = 0 AND L.LocationName = @Pickup_point AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL)";
 
             //initial one
@@ -79,7 +73,7 @@ namespace Assignment
         {
             List<ListItem> brandSelected = new List<ListItem>();
             List<ListItem> typeSelected = new List<ListItem>();
-            TimeSpan delta = DateTime.Parse(txtEndTime.Text) - DateTime.Parse(txtStartTime.Text);
+            TimeSpan delta = DateTime.Parse(Request.Form[hdnEnd.UniqueID]) - DateTime.Parse(Request.Form[hdnStart.UniqueID]);
             int days = (int)Math.Ceiling((double)delta.TotalHours / 24.0);
 
             foreach (ListItem item in cblCarBrand.Items)
@@ -110,7 +104,7 @@ namespace Assignment
                 {
                     string paramName = "@Brand" + i;
                     carInfo += (i > 0 ? ", " : "") + paramName;
-                    parameters.Add(new SqlParameter(paramName, brandSelected[i].Value));
+                    parameters.Add(new SqlParameter(paramName, brandSelected[i].Text));
                 }
                 carInfo += ")";
             }
@@ -122,7 +116,7 @@ namespace Assignment
                 {
                     string paramName = "@Type" + i;
                     carInfo += (i > 0 ? ", " : "") + paramName;
-                    parameters.Add(new SqlParameter(paramName, typeSelected[i].Value));
+                    parameters.Add(new SqlParameter(paramName, typeSelected[i].Text));
                 }
                 carInfo += ")";
             }
@@ -145,8 +139,8 @@ namespace Assignment
                 parameters.Add(new SqlParameter("@searchString", searchBar.Text.Replace(" ","")));
             }
 
-            DateTime startDate = DateTime.Parse(txtStartTime.Text);
-            DateTime endDate = DateTime.Parse(txtEndTime.Text);
+            DateTime startDate = DateTime.Parse(hdnStart.Text);
+            DateTime endDate = DateTime.Parse(hdnEnd.Text);
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
@@ -176,8 +170,8 @@ namespace Assignment
                     productRepeater.DataBind();
                     Session["Pickup_point"] = ddlPULocation.SelectedValue;
                     Session["Dropoff_point"] = ddlDFLocation.SelectedValue;
-                    Session["StartDate"] = txtStartTime.Text;
-                    Session["EndDate"] = txtEndTime.Text;
+                    Session["StartDate"] = hdnStart.Text;
+                    Session["EndDate"] = hdnEnd.Text;
                     Session["Dropoff_state"] = ddlDFState.SelectedValue;
                     Session["Pickup_state"] = ddlPUState.SelectedValue;
             con.Close();
@@ -243,7 +237,7 @@ namespace Assignment
             Label lblDay = (Label)e.Item.FindControl("lblDay");
             string carDayPrice = DataBinder.Eval(e.Item.DataItem, "CarDayPrice").ToString();
 
-            TimeSpan delta = DateTime.Parse(txtEndTime.Text)- DateTime.Parse(txtStartTime.Text);
+            TimeSpan delta = DateTime.Parse(hdnEnd.Text)- DateTime.Parse(hdnStart.Text);
             int days = (int)Math.Ceiling((double)delta.TotalHours / 24.0);
             double totalPrice = days * int.Parse(carDayPrice);
 

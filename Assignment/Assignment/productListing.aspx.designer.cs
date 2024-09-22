@@ -159,49 +159,31 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator requireDFLocation;
 
         /// <summary>
-        /// txtStartTime control.
+        /// hdnStart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStartTime;
+        protected global::System.Web.UI.WebControls.TextBox hdnStart;
 
         /// <summary>
-        /// requireStart control.
+        /// hdnEnd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireStart;
+        protected global::System.Web.UI.WebControls.TextBox hdnEnd;
 
         /// <summary>
-        /// txtEndTime control.
+        /// validateRange control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEndTime;
-
-        /// <summary>
-        /// requireEnd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireEnd;
-
-        /// <summary>
-        /// compareStartEnd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator compareStartEnd;
+        protected global::System.Web.UI.WebControls.CustomValidator validateRange;
 
         /// <summary>
         /// cblCarBrand control.
