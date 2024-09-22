@@ -400,10 +400,12 @@
                             <h5 class="card-title flex-grow-3">Top 5 Rented <span id="topRentalDay" class="text-muted" style="font-size: 0.7em">| All Time</span></h5>
 
                             <div class="filter flex-shrink-0 mx-2">
-                                <div id="topRentalRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;" >
-                                    <i class="fa fa-calendar" style="vertical-align: middle;"></i>&nbsp;
-								<span style="vertical-align: middle;"></span>
-                                    <i class="fa fa-caret-down float-end" style="vertical-align: middle;"></i>
+                                <div id="topRentalRange" class="d-flex align-items-center justify-content-between" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;" >
+                                    <div>
+                                    <i class="fa fa-calendar me-2"></i>
+								<span></span>
+                                    </div>
+                                    <i class="fa fa-caret-down"></i>
                                 </div>
                                 <asp:HiddenField ID="hdnTopRentalStart" runat="server" />
                                 <asp:HiddenField ID="hdnTopRentalEnd" runat="server" />
@@ -475,10 +477,13 @@
 
                     <div class="card-body pb-0">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title flex-shrink-0">Rented Car Type <span id="carTypeDay" class="text-muted" style="font-size: 0.6em">| All Time</span></h5>
-                            <div id="carCategoryRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 50px" class="flex-grow-3">
-                                <i class="fa fa-calendar"></i>&nbsp;
-								<span></span><i class="fa fa-caret-down"></i>
+                            <h5 class="card-title flex-grow-3">Rented Car Type <span id="carTypeDay" class="text-muted" style="font-size: 0.6em">| All Time</span></h5>
+                            <div id="carCategoryRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc;" class="flex-shrink-0 d-flex align-content-center justify-content-between custom-type-range">
+                                <div>
+                                <i class="fa fa-calendar"></i>
+								<span class="custom-type-span">HIHI</span>
+                                </div>
+                                <i class="fa fa-caret-down"></i>
                             </div>
                             <asp:HiddenField ID="hdnCarCategoryStart" runat="server" />
                             <asp:HiddenField ID="hdnCarCategoryEnd" runat="server" />
@@ -635,7 +640,7 @@
             function cb(start, end, isAll) {
 
                 if (isAll) {
-                    $('#topRentalRange span').html("All Time" + '   ');
+                    $('#topRentalRange span').html("All Time");
                     document.getElementById('<%=btnAllTopRental.ClientID %>').click();
                 } else {
                     $('#topRentalRange span').html(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY') + '  ');
@@ -680,8 +685,10 @@
             function cb(start, end, isAll) {
 
                 if (isAll) {
+                    $('#carCategoryRange span').html("All Time");
                     filterAllCategory();
                 } else {
+                    $('#carCategoryRange span').html(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY') + '  ');
                     document.getElementById('<%=hdnCarCategoryStart.ClientID %>').value = start.format('YYYY-MM-DD');
                     document.getElementById('<%=hdnCarCategoryEnd.ClientID %>').value = end.format('YYYY-MM-DD');
                     filterCarCategory();

@@ -55,16 +55,20 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link text-black">
                                 <span class="text-muted d-block">Pick Up Location:</span>
-                                <asp:DropDownList ID="ddlPUState" runat="server" CssClass="form-select d-inline" DataSourceID="LocationState" DataTextField="LocationState" DataValueField="LocationState" Width="100px" ValidationGroup="filter" AutoPostBack="True" OnSelectedIndexChanged="ddlPUState_SelectedIndexChanged"></asp:DropDownList>
-                                <asp:DropDownList ID="ddlPULocation" runat="server" CssClass="form-select d-inline" Width="200px" ValidationGroup="filter" OnDataBound="ddlPULocation_DataBound"></asp:DropDownList>
+                                <div class="d-flex justify-content-between">
+                                <asp:DropDownList ID="ddlPUState" runat="server" CssClass="form-select me-2" DataSourceID="LocationState" DataTextField="LocationState" DataValueField="LocationState" Width="100px" ValidationGroup="filter" AutoPostBack="True" OnSelectedIndexChanged="ddlPUState_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlPULocation" runat="server" CssClass="form-select" Width="200px" ValidationGroup="filter" OnDataBound="ddlPULocation_DataBound"></asp:DropDownList>
+                                </div>
                                 <asp:RequiredFieldValidator ID="requirePULocation" runat="server" ErrorMessage="Location is Required" ControlToValidate="ddlPULocation" CssClass="validate" InitialValue="0" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link text-black">
                                 <span class="text-muted d-block">Drop Off Location:</span>
-                                <asp:DropDownList ID="ddlDFState" runat="server" CssClass="form-select d-inline" DataSourceID="LocationState" DataTextField="LocationState" DataValueField="LocationState" Width="100px" ValidationGroup="filter" OnSelectedIndexChanged="ddlDFState_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                <asp:DropDownList ID="ddlDFLocation" runat="server" CssClass="form-select d-inline" Width="200px" ValidationGroup="filter" OnDataBound="ddlDFLocation_DataBound"></asp:DropDownList>
+                                <div class="d-flex justify-content-between">
+                                <asp:DropDownList ID="ddlDFState" runat="server" CssClass="form-select me-2" DataSourceID="LocationState" DataTextField="LocationState" DataValueField="LocationState" ValidationGroup="filter" OnSelectedIndexChanged="ddlDFState_SelectedIndexChanged" AutoPostBack="True" style="width:100px;"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlDFLocation" runat="server" CssClass="form-select" ValidationGroup="filter" OnDataBound="ddlDFLocation_DataBound" style="width:200px;"></asp:DropDownList>
+                                </div>
                                 <asp:RequiredFieldValidator ID="requireDFLocation" runat="server" ErrorMessage="Location is Required" ControlToValidate="ddlDFLocation" CssClass="validate" InitialValue="0" ValidationGroup="filter" Display="Dynamic"></asp:RequiredFieldValidator>
                             </a>
                         </li>
@@ -73,8 +77,8 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link text-black">
                         <span class="text-muted d-block">Booking Date Range:</span>
-                        <div id="bookingRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc;" class="d-flex rounded">
-                            <i class="fa fa-calendar"></i>&nbsp;
+                        <div id="bookingRange" style="background: #fff; cursor: pointer; padding: .375rem .75rem .375rem .75rem; border: 1px solid #dee2e6;" class="d-flex rounded justify-content-between align-items-center">
+                            <i class="fa fa-calendar"></i>
 		                <span class="mx-2"></span><i class="fa fa-caret-down"></i>
                         </div>
                     </a>
