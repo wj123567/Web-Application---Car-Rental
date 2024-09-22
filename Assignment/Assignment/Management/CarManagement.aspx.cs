@@ -388,12 +388,12 @@ namespace Assignment
             string deleteString = "DELETE FROM Car WHERE CarPlate = @CarPlate";
 
             string path = Server.MapPath("~/Image/CarImage/");
-            File.Delete(path + txtCarPlate.Text + ".png");
+            File.Delete(path + hdnCarPlate.Value + ".png");
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(deleteString, con);
-            com.Parameters.AddWithValue("@CarPlate", txtCarPlate.Text);
+            com.Parameters.AddWithValue("@CarPlate", hdnCarPlate.Value);
             com.ExecuteNonQuery();
             con.Close();
             Response.Redirect("CarManagement.aspx");

@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <link href="../CSS/driverManagement.css" rel="stylesheet" />
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
+    <asp:HiddenField ID="hdnDriverId" runat="server" />
     <div class="modal modal-lg fade" id="imageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="imageModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

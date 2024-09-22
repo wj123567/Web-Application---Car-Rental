@@ -238,7 +238,7 @@ namespace Assignment
 
             if (reader.Read())
             {
-                Session["UserTableID"] = reader["id"].ToString();
+                hdnUserId.Value = reader["id"].ToString();
                 txtUsername.Text = reader["Username"].ToString();
                 txtEmailAddress.Text = reader["Email"].ToString();
                 txtRoles.Text = reader["Roles"].ToString();
@@ -353,7 +353,7 @@ namespace Assignment
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(sql, con);
             con.Open();
-            com.Parameters.AddWithValue("@id", Session["UserTableID"].ToString());
+            com.Parameters.AddWithValue("@id", hdnUserId.Value);
             if (isBan)
             {
                 if(ddlBanReason.SelectedValue != "Other")
@@ -375,37 +375,16 @@ namespace Assignment
 
         protected void btnConfirmDelete_Click(object sender, EventArgs e)
         {
-            string selectDriver = "SELECT Id FROM Driver WHERE UserId = @id";
-
-            string deleteCom = "DELETE FROM PaymentCard WHERE UserId = @id; DELETE FROM Driver WHERE UserId = @id; DELETE FROM ApplicationUser WHERE Id = @id";
+            string deleteCom = "DELETE FROM PaymentCard WHERE UserId = @id;DELETE FROM ApplicationUser WHERE Id = @id";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            SqlCommand com = new SqlCommand(selectDriver, con);
+            SqlCommand com = new SqlCommand(deleteCom, con);
             con.Open();
-            com.Parameters.AddWithValue("@id", Session["UserTableID"].ToString());
-            SqlDataReader reader = com.ExecuteReader();
-            string DriverId = "";
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    DriverId = reader["Id"].ToString();
-                }
-
-                string[] driverPath = { MapPath("~/Image/DriverId/"), MapPath("~/Image/DriverLB/"), MapPath("~/Image/DriverLF/"), MapPath("~/Image/DriverSelfie/") };
-
-                for (int i = 0; i < driverPath.Length; i++)
-                {
-                    File.Delete(driverPath[i] + DriverId + ".jpg");
-                }
-            }
-            reader.Close();
-            com = new SqlCommand(deleteCom, con);
-            com.Parameters.AddWithValue("@id", Session["UserTableID"].ToString());
+            com.Parameters.AddWithValue("@id", hdnUserId.Value);
             com.ExecuteNonQuery();
             con.Close();
             string path = MapPath("~/Image/UserProfile/");
-            File.Delete(path + Session["UserTableID"].ToString() + ".jpg");
+            File.Delete(path + hdnUserId.Value + ".jpg");
             Response.Redirect("UserManagement.aspx");
         }
 
