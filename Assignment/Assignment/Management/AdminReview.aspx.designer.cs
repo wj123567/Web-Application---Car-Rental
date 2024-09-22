@@ -15,40 +15,49 @@ namespace Assignment.Management
     {
 
         /// <summary>
-        /// asd control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton asd;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// asds control.
+        /// lblBookingId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton asds;
+        protected global::System.Web.UI.WebControls.Label lblBookingId;
 
         /// <summary>
-        /// asdf control.
+        /// lblReviewText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton asdf;
+        protected global::System.Web.UI.WebControls.Label lblReviewText;
 
         /// <summary>
-        /// asf control.
+        /// lblRating control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton asf;
+        protected global::System.Web.UI.WebControls.Label lblRating;
+
+        /// <summary>
+        /// lblReviewDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblReviewDate;
 
         /// <summary>
         /// lvReview control.

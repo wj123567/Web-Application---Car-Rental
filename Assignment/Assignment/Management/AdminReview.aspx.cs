@@ -21,10 +21,36 @@ namespace Assignment.Management
         {
             using (var db = new SystemDatabaseEntities())
             {
-                //var query = 
+                var reviews = db.Reviews.ToList();
 
-                //lvReview.DataSource = reviewData;
-                //lvReview.DataBind();
+                lvReview.DataSource = reviews;
+                lvReview.DataBind();
+            }
+        }
+
+
+        protected void btnEditReview_Click(object sender, EventArgs e)
+        {
+            var button = (LinkButton)sender;
+            int reviewId = int.Parse(button.CommandArgument);
+
+            using (var db = new SystemDatabaseEntities())
+            {
+                var review = db.Reviews
+                    .Include("Booking.Car")
+                    .FirstOrDefault(r => r.ReviewId == reviewId);
+
+                if (review != null)
+                {
+                    lblBookingId.Text = review.Booking.Id.ToString();
+                    lblReviewText.Text = review.ReviewText;
+                    lblRating.Text = review.Rating.ToString();
+                    lblReviewDate.Text = review.ReviewDate.ToString();
+
+
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$(document).ready(function() { $('#staticBackdrop').modal('show'); });", true);
+
+                }
             }
         }
     }
