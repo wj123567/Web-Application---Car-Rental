@@ -294,6 +294,7 @@
     <Content Include="validateEmail.aspx" />
     <Content Include="Web.config" />
     <Content Include="Home.aspx" />
+    <Content Include="wztest.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddOn.cs">
@@ -602,6 +603,13 @@
     </Compile>
     <Compile Include="validateEmail.aspx.designer.cs">
       <DependentUpon>validateEmail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wztest.aspx.cs">
+      <DependentUpon>wztest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wztest.aspx.designer.cs">
+      <DependentUpon>wztest.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

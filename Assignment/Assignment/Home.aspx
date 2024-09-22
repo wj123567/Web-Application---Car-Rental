@@ -38,7 +38,7 @@
                     <br />
                  <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>                    
                 <asp:TextBox ID="txtDepartureDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style" OnTextChanged="txtDepartureDateTime_TextChanged" ></asp:TextBox>
-                 <asp:TextBox ID="txtDpTime" runat="server"  CssClass="control_style"  ></asp:TextBox>
+                 <asp:TextBox ID="txtDpTime" runat="server" CssClass="control_style" ReadOnly="true"  ></asp:TextBox>
                 <asp:RequiredFieldValidator ID="requireDepartDateTime" runat="server" ErrorMessage="Pick Up Date&Time is Required" ControlToValidate="txtDepartureDateTime" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     
                 </div>
@@ -61,8 +61,8 @@
                 
                 <asp:Label ID="lblReturnDateTime" runat="server" Text="Date & Time" CssClass="home_label_style" ></asp:Label>   
                 <asp:TextBox ID="txtReturnDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style"></asp:TextBox>
+                <asp:TextBox ID="txtRtnTime" runat="server" CssClass="control_style"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="requireReturnDateTime" runat="server" ErrorMessage="Drop Off Date&Time is Required" ControlToValidate="txtReturnDateTime"  CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
-       
                  <asp:CompareValidator ID="compareStartEnd" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtDepartureDateTime" ControlToValidate="txtReturnDateTime" CssClass="validate" Operator="GreaterThan" ValidationGroup="filter" Display="Dynamic"></asp:CompareValidator>
             </div>
         
@@ -133,21 +133,51 @@
      </div>
  </div>
 </section>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            //A- 12 hr format
+       
+
+
+            // Get today's date
+            var today = new Date();
+
+            // Define minimum and maximum dates for departure and return
+            var minDateDpt = new Date();
+            minDateDpt.setDate(today.getDate() + 1);
+            var maxDateDpt = new Date();
+            maxDateDpt.setMonth(today.getMonth() + 3);
+
+            var minDateRtn = new Date();
+            minDateRtn.setDate(today.getDate() + 2);
+            var maxDateRtn = new Date();
+            maxDateRtn.setMonth(today.getMonth() + 4);
+
+            // Initialize datetimepicker with 12-hour format
             $('#<%= txtDpTime.ClientID %>').datetimepicker({
-                format: 'd/m/Y h:i A',
-                minTime: '08:00 ',
-                maxTime: '21:00 ',
-                step: 15,
-               
+                format: 'd/m/Y h:i A',  // Display format
+                minTime: '08:00',  // Earliest time allowed
+                maxTime: '21:00',  // Latest time allowed
+                step: 15,  // Time increments in minutes
+                minDate: minDateDpt,
+                maxDate: maxDateDpt,
+                startDate: minDateDpt,
+
             });
+        
+        $('#<%= txtRtnTime.ClientID %>').datetimepicker({
+            format: 'd/m/Y h:i A',  // Display format
+            minTime: '08:00',  // Earliest time allowed
+            maxTime: '21:00',  // Latest time allowed
+            step: 15,  // Time increments in minutes
+            minDate: minDateRtn,
+            maxDate: maxDateRtn,
+            startDate: minDateRtn,
+
         });
+       
 
     document.addEventListener("DOMContentLoaded", function () {
         // Get the modal
