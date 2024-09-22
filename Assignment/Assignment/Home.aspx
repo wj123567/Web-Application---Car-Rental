@@ -38,6 +38,7 @@
                     <br />
                  <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>                    
                 <asp:TextBox ID="txtDepartureDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style" OnTextChanged="txtDepartureDateTime_TextChanged" ></asp:TextBox>
+                 <asp:TextBox ID="txtDpTime" runat="server"  CssClass="control_style"  ></asp:TextBox>
                 <asp:RequiredFieldValidator ID="requireDepartDateTime" runat="server" ErrorMessage="Pick Up Date&Time is Required" ControlToValidate="txtDepartureDateTime" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     
                 </div>
@@ -133,7 +134,21 @@
  </div>
 </section>
 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
+        $(document).ready(function () {
+            //A- 12 hr format
+            $('#<%= txtDpTime.ClientID %>').datetimepicker({
+                format: 'd/m/Y h:i A',
+                minTime: '08:00 ',
+                maxTime: '21:00 ',
+                step: 15,
+               
+            });
+        });
+
     document.addEventListener("DOMContentLoaded", function () {
         // Get the modal
         var modal = document.getElementById("locationModal");

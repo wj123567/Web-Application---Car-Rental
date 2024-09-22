@@ -52,7 +52,7 @@
  </div>
 </div>
 
-    <asp:Label ID="lblCheckAdd" runat="server" Text="Label"></asp:Label>
+    
 <section class="info_body_container"> 
    
    <div class="left-side">
@@ -67,7 +67,7 @@
             <div class="shadow-sm bg-white p-4 my-4">
                 <h4>Payment Info</h4>
 
-                <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+            
                 <div class="chkApplyCard">
                 <asp:CheckBox ID="chkApplyCard" runat="server" onchange="toggleAccordion()"  CssClass="chkboxApply"/>
                 <asp:Label ID="lblApplyCard" runat="server" Text="Apply Existing Card"></asp:Label>
@@ -276,7 +276,7 @@
             const txtExpiry = document.getElementById("<%= txtExpiry.ClientID %>");
             const txtCvv = document.getElementById("<%= txtCvv.ClientID %>");
             const hdnCardCheck = document.getElementById("<%= hdnCardCheck.ClientID %>");
-            const lblCheck = document.getElementById("<%= lblCheck.ClientID %>");
+            
             var accordion = document.getElementById('cardAccordion');
             if (checkbox.checked) {
                 accordion.style.display = 'block';  // Show accordion

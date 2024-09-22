@@ -66,8 +66,7 @@ namespace Assignment
             }
             else
             {
-                hdnCardCheck.Value = "New";
-                lblCheck.Text = hdnCardCheck.Value;
+                hdnCardCheck.Value = "New"; 
                 chkApplyCard.Visible = false;
                 lblApplyCard.Visible = false;
             }
@@ -164,9 +163,9 @@ namespace Assignment
             }
 
             String insertString = @"INSERT INTO Booking (Id,CarPlate,UserId,DriverId,StartDate,EndDate,Pickup_point,Dropoff_point,Status
-                                ,PaymentCardId,Price,Notes,BookingDate) 
+                                ,PaymentCardId,Price,Notes,BookingDate,FinalPrice) 
                                 VALUES (@Id,@CarPlate,@UserId,@DriverId,@StartDate,@EndDate,@Pickup_point,@Dropoff_point,@Status
-                                ,@PaymentCardId,@Price,@Notes,@BookingDate)";
+                                ,@PaymentCardId,@Price,@Notes,@BookingDate,@FinalPrice)";
 
             SaveBookingInfo(insertString);
 
@@ -235,6 +234,7 @@ namespace Assignment
             com.Parameters.AddWithValue("@Price",totalPrice);
             com.Parameters.AddWithValue("@Notes",notes);
             com.Parameters.AddWithValue("@BookingDate", DateTime.Now);
+            com.Parameters.AddWithValue("@FinalPrice", totalPrice);
                
                                
             if (driverStatus == "A")
@@ -357,12 +357,12 @@ namespace Assignment
         {
             Dictionary<int, int> selectedAddOns = Session["SelectedAddOns"] as Dictionary<int, int>;
 
-            foreach (var addOn in selectedAddOns)
+            /*foreach (var addOn in selectedAddOns)
             {
                 int addOnID = addOn.Key;
                 int quantity = addOn.Value;
                 lblCheckAdd.Text += addOnID + " "+ quantity+",";
-            }
+            }*/
 
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
 

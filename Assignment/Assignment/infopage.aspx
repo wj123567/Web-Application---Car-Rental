@@ -45,7 +45,7 @@
 </div>
     </section>
 
-    <asp:Label ID="lblCheck" runat="server" ></asp:Label>
+    
 
     <section class="info_banner">
         

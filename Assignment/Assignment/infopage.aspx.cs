@@ -31,7 +31,7 @@ namespace Assignment
                         Session["SelectedAddOns"] = null;
                     }
                 }
-                lblCheck.Text = Session["BookingID"].ToString();
+                
                 Session["CurrentStep"] = 2;
                 int currentStep = (int)(Session["CurrentStep"]);
                 UpdateProgressBar(currentStep);
