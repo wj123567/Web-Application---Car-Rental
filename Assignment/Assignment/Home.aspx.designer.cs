@@ -78,6 +78,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator requireDepartureLocation;
 
         /// <summary>
+        /// lblCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheck;
+
+        /// <summary>
         /// lblDepartureDateTime control.
         /// </summary>
         /// <remarks>
@@ -96,13 +105,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtDepartureDateTime;
 
         /// <summary>
-        /// txtDpTime control.
+        /// txtDpDateTimePicker control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDpTime;
+        protected global::System.Web.UI.WebControls.TextBox txtDpDateTimePicker;
 
         /// <summary>
         /// requireDepartDateTime control.

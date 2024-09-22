@@ -106,7 +106,7 @@ namespace Assignment
             ScriptManager.RegisterStartupScript(this, GetType(), "initializeEventListeners", "initializeEventListeners();", true);
         }
 
-        protected void txtDepartureDateTime_TextChanged(object sender, EventArgs e)
+/*        protected void txtDepartureDateTime_TextChanged(object sender, EventArgs e)
         {
             DateTime departureDate;
             if (DateTime.TryParse(txtDepartureDateTime.Text, out departureDate))
@@ -114,7 +114,7 @@ namespace Assignment
                 DateTime minReturnDate = departureDate.AddDays(1);
                 txtReturnDateTime.Attributes["min"] = minReturnDate.ToString("yyyy-MM-ddTHH:mm");
             }
-        }
+        }*/
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {

@@ -36,9 +36,20 @@
                     <asp:HiddenField ID="hdnDepartureState" runat="server" />
                     <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Pick Up Location is Required" ControlToValidate="txtDepartureLocation"  CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     <br />
-                 <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>                    
-                <asp:TextBox ID="txtDepartureDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style" OnTextChanged="txtDepartureDateTime_TextChanged" ></asp:TextBox>
-                 <asp:TextBox ID="txtDpTime" runat="server" CssClass="control_style" ReadOnly="true"  ></asp:TextBox>
+                                    <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+
+                 <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>     
+                    <div class="row">
+                    <div class="col-10" style="padding:0px;">
+                        <!--OnTextChanged="txtDepartureDateTime_TextChanged" -->
+                         <asp:TextBox ID="txtDepartureDateTime" runat="server"  CssClass="control_style"  ></asp:TextBox>
+                    
+                    </div>
+                    <div class="col-2" style="padding:0px;"> 
+                        <asp:TextBox ID="txtDpDateTimePicker" runat="server" CssClass="control_style" Text="📅" ReadOnly="true"  ></asp:TextBox>
+                    </div>
+                    </div>
+                   
                 <asp:RequiredFieldValidator ID="requireDepartDateTime" runat="server" ErrorMessage="Pick Up Date&Time is Required" ControlToValidate="txtDepartureDateTime" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     
                 </div>
@@ -47,6 +58,7 @@
         </div>
         
         <!-- -->
+            
         <div class="form_group">
             <h5 class="home_dropoff" >Drop Off</h5>
         <span class="home_icon"  style="margin-left:20px;"><i class="ri-map-pin-2-line"></i></span>
@@ -58,7 +70,7 @@
                         <asp:HiddenField ID="hdnReturnState" runat="server" />
                 <asp:RequiredFieldValidator ID="requireReturnLocation" runat="server" ErrorMessage="Return Location is Required" ControlToValidate="txtReturnLocation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                 <br />
-                
+              
                 <asp:Label ID="lblReturnDateTime" runat="server" Text="Date & Time" CssClass="home_label_style" ></asp:Label>   
                 <asp:TextBox ID="txtReturnDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style"></asp:TextBox>
                 <asp:TextBox ID="txtRtnTime" runat="server" CssClass="control_style"></asp:TextBox>
@@ -138,46 +150,45 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
-       
+        $(document).ready(function () {
+            var lastSelectedValue = "";  // To store the last selected datetime value
+
+            // Initialize datetimepicker
+            $('#<%= txtDpDateTimePicker.ClientID %>').datetimepicker({
+                format: 'd/m/Y h:i A',
+                minTime: '08:00',
+                maxTime: '21:00',
+                onSelectDate: function (dp, $input) {  // Trigger only on manual selection
+                    var currentValue = $input.val();
+
+                    // Only proceed if the value actually changed
+                    if (currentValue !== lastSelectedValue) {
+                        lastSelectedValue = currentValue;  // Update the last selected value
+
+                        console.log("Selected Time (Before Adjustment):", currentValue);
+
+                        var parsedDate = dp instanceof Date ? dp : new Date(dp);
 
 
-            // Get today's date
-            var today = new Date();
-
-            // Define minimum and maximum dates for departure and return
-            var minDateDpt = new Date();
-            minDateDpt.setDate(today.getDate() + 1);
-            var maxDateDpt = new Date();
-            maxDateDpt.setMonth(today.getMonth() + 3);
-
-            var minDateRtn = new Date();
-            minDateRtn.setDate(today.getDate() + 2);
-            var maxDateRtn = new Date();
-            maxDateRtn.setMonth(today.getMonth() + 4);
-
-            // Initialize datetimepicker with 12-hour format
-            $('#<%= txtDpTime.ClientID %>').datetimepicker({
-                format: 'd/m/Y h:i A',  // Display format
-                minTime: '08:00',  // Earliest time allowed
-                maxTime: '21:00',  // Latest time allowed
-                step: 15,  // Time increments in minutes
-                minDate: minDateDpt,
-                maxDate: maxDateDpt,
-                startDate: minDateDpt,
-
-            });
+                        console.log("Time:", parsedDate.getHours() + ":" + parsedDate.getMinutes());
+                    }
+                },
+                onClose: function (current_time, $input) {  // Trigger only when the picker closes
+                    console.log("Picker Closed. Current Time:", $input.val());
+                    if ($input.val() != "") {
+                        $('#<%= lblCheck.ClientID %>').text($input.val());
+                        $('#<%= txtDepartureDateTime.ClientID %>').val($input.val());
         
-        $('#<%= txtRtnTime.ClientID %>').datetimepicker({
-            format: 'd/m/Y h:i A',  // Display format
-            minTime: '08:00',  // Earliest time allowed
-            maxTime: '21:00',  // Latest time allowed
-            step: 15,  // Time increments in minutes
-            minDate: minDateRtn,
-            maxDate: maxDateRtn,
-            startDate: minDateRtn,
+        
+    } 
 
+    // Ensure the displayed value remains consistent and is not altered
+    $input.val(lastSelectedValue);  // Reset the value if changed unexpectedly
+}
+     });
         });
-       
+        
+      
 
     document.addEventListener("DOMContentLoaded", function () {
         // Get the modal

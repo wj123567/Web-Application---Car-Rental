@@ -2,55 +2,56 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 
-    <asp:TextBox ID="txtDpTime" runat="server" CssClass="control_style" ReadOnly="true"  ></asp:TextBox>
+    <asp:TextBox ID="txtDpTime" runat="server" CssClass="control_style"  ReadOnly="true"   ></asp:TextBox>
+    <asp:TextBox ID="txtTest" runat="server"></asp:TextBox>
+    <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-         <link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ >
-<script src="/jquery.js"></script>
-<script src="/build/jquery.datetimepicker.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
+            var lastSelectedValue = "";  // To store the last selected datetime value
 
-            // Get today's date
-            var today = new Date();
-
-            // Timezone offset in minutes
-            var offset = new Date().getTimezoneOffset();
-
-            // Adjusted today's date to avoid timezone issues
-            var adjustedToday = new Date(today.getTime() - offset * 60000);
-
-
-            // Define minimum and maximum dates for departure and return
-            var minDateDpt = new Date();
-            minDateDpt.setDate(today.getDate() + 1);
-            var maxDateDpt = new Date();
-            maxDateDpt.setMonth(today.getMonth() + 3);
-
-            var minDateRtn = new Date();
-            minDateRtn.setDate(today.getDate() + 2);
-            var maxDateRtn = new Date();
-            maxDateRtn.setMonth(today.getMonth() + 4);
-
-            // Initialize datetimepicker with 12-hour format
+            // Initialize datetimepicker
             $('#<%= txtDpTime.ClientID %>').datetimepicker({
-                format: 'd/m/Y h:i A',  // Display format
-                minTime: '08:00',  // Earliest time allowed
-                maxTime: '21:00',  // Latest time allowed
-                
-                minDate: minDateDpt,
-                maxDate: maxDateDpt,
-                startDate: minDateDpt,
-                useStrict: true,
-                onSelectTime: function (ct) {
-                    // Adjust selected time based on the timezone offset
-                    var adjustedTime = new Date(ct.getTime() - (offset * 60000));
-                    this.setOptions({
-                        value: adjustedTime
-                    });
+                format: 'd/m/Y h:i A',
+                minTime: '08:00',
+                maxTime: '21:00',
+                onSelectDate: function (dp, $input) {  // Trigger only on manual selection
+                    var currentValue = $input.val();
+
+                    // Only proceed if the value actually changed
+                    if (currentValue !== lastSelectedValue) {
+                        lastSelectedValue = currentValue;  // Update the last selected value
+
+                        console.log("Selected Time (Before Adjustment):", currentValue);
+
+                        var parsedDate = dp instanceof Date ? dp : new Date(dp);
+
+
+                        console.log("Time:", parsedDate.getHours() + ":" + parsedDate.getMinutes());
+                    }
+                },
+                onClose: function (current_time, $input) {  // Trigger only when the picker closes
+                    console.log("Picker Closed. Current Time:", $input.val());
+                    if ($input.val() != "") {
+                        $('#<%= lblCheck.ClientID %>').text($input.val());
+                        $('#<%= txtTest.ClientID %>').val($input.val());
+                        
+                        console.log("Textbox Value After Setting:", $('#<%= txtDpTime.ClientID %>').val());
+                    } else {
+                        $input.val($('#<%= lblCheck.ClientID %>').text());
+                    }
+
+                    // Ensure the displayed value remains consistent and is not altered
+                    $input.val(lastSelectedValue);  // Reset the value if changed unexpectedly
                 }
             });
         });
-    </script>
+</script>
+
+
 </asp:Content>
     
