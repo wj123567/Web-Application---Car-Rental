@@ -91,27 +91,40 @@ namespace Assignment
                 }
 
                 //You
-                string userId = Session["Id"] as string;
 
                 using (var db = new SystemDatabaseEntities())
                 {
-                    var existingReview = db.Reviews
-                        .FirstOrDefault(r => r.BookingId == bookingId);
 
-                    if (existingReview != null)
+                    var booking = db.Bookings.FirstOrDefault(b => b.Id == bookingId);
+
+                    if (booking != null && booking.Status == "Completed")
                     {
-                        txtComment.Text = existingReview.ReviewText;
-                        hfRating.Value = existingReview.Rating.ToString();
-                        lblFeedback.Text = "You can modify your existing comment.";
-                        lblFeedback.Visible = true;
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "updateStarDisplay",
-                    $"setRating({existingReview.Rating});", true);
+                        var existingReview = db.Reviews.FirstOrDefault(r => r.BookingId == bookingId);
+
+                        if (existingReview != null)
+                        {
+                            txtComment.Text = existingReview.ReviewText;
+                            hfRating.Value = existingReview.Rating.ToString();
+                            lblFeedback.Text = "You can modify your existing comment.";
+                            lblFeedback.Visible = true;
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "updateStarDisplay",
+                        $"setRating({existingReview.Rating});", true);
+                        }
+                        else
+                        {
+
+                            txtComment.Attributes.Add("placeholder", "Write Your Comment Here!");
+                        }
                     }
                     else
                     {
-
-                        txtComment.Attributes.Add("placeholder", "Write Your Comment Here!");
+                        lblFeedback.Text = "You cannot leave a comment until your booking is completed.";
+                        lblFeedback.Visible = true;
+                        txtComment.Visible = false;
+                        hfRating.Visible = false;
+                        submit.Visible = false;
                     }
+                    
                 }
 
                 
