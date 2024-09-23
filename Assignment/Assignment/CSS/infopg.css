@@ -161,6 +161,18 @@
     }
 
 /*you*/
+
+
+.checked {
+    color: orange !important;
+}
+
+.half-checked:before {
+    content: "\f123"; /* Example FontAwesome class for half-star if available */
+    color: orange;
+}
+
+
 .review-container {
     margin: 3% 4%;
     margin-bottom: 10px;
@@ -195,13 +207,10 @@
     background-color: #f2fdff;
 }
 
-.rating-block .checked, .rating-line .checked, .comment-stars .checked {
+.rating-block .checked, .rating-line .checked{
 
     color: orange;
 }
-    .rating-block .unchecked {
-        color: lightgray;
-    }
 
 .rating-line .rateline {
     margin: 10px 0;

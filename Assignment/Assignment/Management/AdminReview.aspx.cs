@@ -45,7 +45,7 @@ namespace Assignment.Management
                 if (review != null)
                 {
                     lblBookingId.Text = review.Booking.Id.ToString();
-                    lblCarName.Text = review.Booking.Car.CType.ToString() + " " + review.Booking.Car.CarName.ToString();
+                    lblCarName.Text = review.Booking.Car.CarBrand.ToString() + " " + review.Booking.Car.CarName.ToString();
                     lblUserId.Text = review.Booking.ApplicationUser.Username.ToString();
                     lblReviewText.Text = review.ReviewText;
                     lblRating.Text = review.Rating.ToString();
