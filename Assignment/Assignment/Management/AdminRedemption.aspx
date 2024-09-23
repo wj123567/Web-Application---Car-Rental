@@ -42,8 +42,10 @@
                         <asp:LinkButton ID="EditButton" runat="server" CommandName="Edit">
                             <i class="fas fa-edit" style="color: #ffbb00;"></i>
                         </asp:LinkButton>
-
-                        </td>
+                        <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("RedeemItemId") %>' OnClick="DeleteButton_Click" OnClientClick="return confirm('Are you sure you want to delete this Redeem Item?');">
+                            <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
+                        </asp:LinkButton>
+                    </td>
                 </tr>
             </ItemTemplate>
             <EditItemTemplate>

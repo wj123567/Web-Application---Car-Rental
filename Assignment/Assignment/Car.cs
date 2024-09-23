@@ -18,7 +18,6 @@ namespace Assignment
         public Car()
         {
             this.Bookings = new HashSet<Booking>();
-            this.TestTrips = new HashSet<TestTrip>();
         }
     
         public string CarPlate { get; set; }
@@ -38,7 +37,5 @@ namespace Assignment
         public virtual ICollection<Booking> Bookings { get; set; }
         public virtual CarBrand CarBrand1 { get; set; }
         public virtual Location Location { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TestTrip> TestTrips { get; set; }
     }
 }

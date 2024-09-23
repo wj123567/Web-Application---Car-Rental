@@ -17,8 +17,8 @@ namespace Assignment
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Booking()
         {
-            this.BookingAddOns = new HashSet<BookingAddOn>();
             this.Reviews = new HashSet<Review>();
+            this.BookingAddOns = new HashSet<BookingAddOn>();
         }
     
         public string Id { get; set; }
@@ -35,14 +35,19 @@ namespace Assignment
         public Nullable<System.DateTime> EarnDate { get; set; }
         public Nullable<int> PointsRemaining { get; set; }
         public string PointsStatus { get; set; }
+        public string UpdateReason { get; set; }
+        public string RejectReason { get; set; }
+        public string Notes { get; set; }
+        public Nullable<System.DateTime> BookingDate { get; set; }
+        public Nullable<double> FinalPrice { get; set; }
     
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Car Car { get; set; }
         public virtual Driver Driver { get; set; }
         public virtual PaymentCard PaymentCard { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BookingAddOn> BookingAddOns { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Reviews { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BookingAddOn> BookingAddOns { get; set; }
     }
 }

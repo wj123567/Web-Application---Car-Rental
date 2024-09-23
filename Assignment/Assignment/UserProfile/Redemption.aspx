@@ -1,12 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="Redemption.aspx.cs" Inherits="Assignment.Redemption" %>
-<%--<asp:Content ID="RedemptionHead" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"   
- crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"   
- integrity="sha384-ogbw9D3nTbior7kPJkRoyDqiy58zaSyEyXuVxPoVgwmTJMKEu1exv0j4ovwIwEM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</asp:Content>--%>
 
 <asp:Content ID="Redemption" ContentPlaceHolderID="main" runat="server">
     
@@ -63,15 +55,5 @@
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const btnRedeem = document.getElementById("btnRedeem");
-        const confirmRedeem = document.getElementById("confirmRedeem");
-        const redeemModal = new bootstrap.Modal(document.getElementById("Redeem"));
-
-        confirmRedeem.addEventListener("click", function () {
-            btnRedeem.textContent = "Redeemed";
-            btnRedeem.disabled = true;
-        });
-    </script>
+    
 </asp:Content>
