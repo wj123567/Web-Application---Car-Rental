@@ -11,17 +11,11 @@
          <div class="container">
           
     <section class="section_container booking_container">
-    <div class="d-flex justify-content-center mb-3">
-        <asp:Label ID="lblerrortext" runat="server" Text="Please Select Location and Time" CssClass="validate" Visible="False"></asp:Label>
-    </div>
+   <div class="d-flex justify-content-center mb-3">
+    <asp:Label ID="lblerrortext" runat="server" Text="Please Select Location and Time" CssClass="validate" Visible="False"></asp:Label>
+</div>
         <div class="content_container">
-<!--
-        <div class="booking_nav">
-            <span>Car 1</span>
-            <span>Car 2</span>
-            <span>Car 3</span>
-        </div>
--->
+
         <div class="form_container">            
             
         <div class="form_group">            
@@ -36,22 +30,25 @@
                     <asp:HiddenField ID="hdnDepartureState" runat="server" />
                     <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Pick Up Location is Required" ControlToValidate="txtDepartureLocation"  CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     <br />
-                                    <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+
+                    <asp:Label ID="lblCheck1" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="lblCheck2" runat="server" Text="Label"></asp:Label>
 
                  <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>     
                     <div class="row">
-                    <div class="col-10" style="padding:0px;">
+                    <div class="col-8" >
                         <!--OnTextChanged="txtDepartureDateTime_TextChanged" -->
-                         <asp:TextBox ID="txtDepartureDateTime" runat="server"  CssClass="control_style"  ></asp:TextBox>
-                    
+
+                         <asp:TextBox ID="txtDepartureDate" runat="server"  CssClass="control_style" ReadOnly="false" ></asp:TextBox>
+                        <asp:Label ID="lblCalIcon" runat="server" Text="📅"></asp:Label>
                     </div>
-                    <div class="col-2" style="padding:0px;"> 
-                        <asp:TextBox ID="txtDpDateTimePicker" runat="server" CssClass="control_style" Text="📅" ReadOnly="true"  ></asp:TextBox>
+                    <div class="col-4" style="padding-left:0px;" > 
+                        <asp:TextBox ID="txtDepartureTime" runat="server" CssClass="control_style"  ReadOnly="false" ></asp:TextBox>
+                        <asp:Label ID="Label2" runat="server" Text="🕐"></asp:Label>
                     </div>
                     </div>
-                   
-                <asp:RequiredFieldValidator ID="requireDepartDateTime" runat="server" ErrorMessage="Pick Up Date&Time is Required" ControlToValidate="txtDepartureDateTime" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
-                    
+
+                <asp:RequiredFieldValidator ID="requireDepartDate" runat="server" ErrorMessage="Pick Up Date is Required" ControlToValidate="txtDepartureDate" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                 </div>
                
             </div>
@@ -72,10 +69,19 @@
                 <br />
               
                 <asp:Label ID="lblReturnDateTime" runat="server" Text="Date & Time" CssClass="home_label_style" ></asp:Label>   
-                <asp:TextBox ID="txtReturnDateTime" runat="server" TextMode="DateTimeLocal" CssClass="control_style"></asp:TextBox>
-                <asp:TextBox ID="txtRtnTime" runat="server" CssClass="control_style"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="requireReturnDateTime" runat="server" ErrorMessage="Drop Off Date&Time is Required" ControlToValidate="txtReturnDateTime"  CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
-                 <asp:CompareValidator ID="compareStartEnd" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtDepartureDateTime" ControlToValidate="txtReturnDateTime" CssClass="validate" Operator="GreaterThan" ValidationGroup="filter" Display="Dynamic"></asp:CompareValidator>
+                 <div class="row">
+                    <div class="col-8" >
+                         <asp:TextBox ID="txtReturnDate" runat="server"  CssClass="control_style"   ReadOnly="false"></asp:TextBox>
+                        <asp:Label ID="Label3" runat="server" Text="📅"></asp:Label>
+                    </div>
+                    <div class="col-4" style="padding-left:0px;" > 
+                        <asp:TextBox ID="txtReturnTime" runat="server" CssClass="control_style"    ReadOnly="false" ></asp:TextBox>
+                        <asp:Label ID="Label4" runat="server" Text="🕐"></asp:Label>
+                    </div>
+                </div>
+
+                <asp:RequiredFieldValidator ID="requireReturnDate" runat="server" ErrorMessage="Drop Off Date is Required" ControlToValidate="txtReturnDate"  CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+                 <asp:CompareValidator ID="compareStartEnd" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtDepartureDate" ControlToValidate="txtReturnDate" CssClass="validate" Operator="GreaterThan" ValidationGroup="filter" Display="Dynamic"></asp:CompareValidator>
             </div>
         
          </div>
@@ -145,49 +151,75 @@
      </div>
  </div>
 </section>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            var lastSelectedValue = "";  // To store the last selected datetime value
+        var today = new Date();
 
-            // Initialize datetimepicker
-            $('#<%= txtDpDateTimePicker.ClientID %>').datetimepicker({
-                format: 'd/m/Y h:i A',
-                minTime: '08:00',
-                maxTime: '21:00',
-                onSelectDate: function (dp, $input) {  // Trigger only on manual selection
-                    var currentValue = $input.val();
+        // Define minimum and maximum dates for departure
+        var minDateDpt = new Date();
+        minDateDpt.setDate(today.getDate() + 1);
+        var maxDateDpt = new Date();
+        maxDateDpt.setMonth(today.getMonth() + 3);
 
-                    // Only proceed if the value actually changed
-                    if (currentValue !== lastSelectedValue) {
-                        lastSelectedValue = currentValue;  // Update the last selected value
+        var minDateRtn = new Date();
+        minDateRtn.setDate(minDateDpt.getDate() + 1);
+        var maxDateRtn = new Date()
+        maxDateRtn.setMonth(today.setMonth() + 4);
 
-                        console.log("Selected Time (Before Adjustment):", currentValue);
+        // Flatpickr configuration with default time set to 08:00 AM, but not pre-filled in the textbox
+        var dptDateConfig = {
 
-                        var parsedDate = dp instanceof Date ? dp : new Date(dp);
+            altInput: true,
+            altFormat: "d/m/Y ",
+            
+            minuteIncrement: 15,
+            minDate: minDateDpt,
+            maxDate: maxDateDpt,
+        };
 
+        var dptTimeConfig = {
+            enableTime: true,
+            noCalendar: true,
+            altInput: true,
+            altFormat: "h:i K",
+            
+            minuteIncrement: 15,
+            minDate: minDateDpt,
+            maxDate: maxDateDpt,
+            minTime: "08:00",
+            maxTime: "22:00",   
+            defaultDate: minDateDpt.setHours(8, 0, 0)
+        };
 
-                        console.log("Time:", parsedDate.getHours() + ":" + parsedDate.getMinutes());
-                    }
-                },
-                onClose: function (current_time, $input) {  // Trigger only when the picker closes
-                    console.log("Picker Closed. Current Time:", $input.val());
-                    if ($input.val() != "") {
-                        $('#<%= lblCheck.ClientID %>').text($input.val());
-                        $('#<%= txtDepartureDateTime.ClientID %>').val($input.val());
-        
-        
-    } 
+        var rtnDateConfig = {
 
-    // Ensure the displayed value remains consistent and is not altered
-    $input.val(lastSelectedValue);  // Reset the value if changed unexpectedly
-}
-     });
-        });
-        
+            altInput: true,
+            altFormat: "d/m/Y ",
+            
+            minuteIncrement: 15,
+            minDate: minDateRtn,
+            maxDate: maxDateRtn,
+        };
+
+        var rtnTimeConfig = {
+            enableTime: true,
+            noCalendar: true,
+            altInput: true,
+            altFormat: "h:i K",
+           
+            minuteIncrement: 15,
+            minDate: minDateDpt,
+            maxDate: maxDateDpt,
+            minTime: "08:00",
+            maxTime: "22:00",      
+            defaultDate: minDateDpt.setHours(8, 0, 0)
+        };
+        // Initialize flatpickr on the input field
+        flatpickr("#<%= txtDepartureDate.ClientID %>", dptDateConfig);
+        flatpickr("#<%= txtDepartureTime.ClientID %>", dptTimeConfig);
+        flatpickr("#<%= txtReturnDate.ClientID %>", rtnDateConfig);
+        flatpickr("#<%= txtReturnTime.ClientID %>", rtnTimeConfig);
       
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -359,21 +391,7 @@
         });
 
         
-        //-------DateTime----------
-        function updateReturnDateTimeMin() {
-            var departureDate = document.getElementById('<%= txtDepartureDateTime.ClientID %>').value;
-            var returnDate = document.getElementById('<%= txtReturnDateTime.ClientID %>');
-
-        if (departureDate) {
-            var departureDateObj = new Date(departureDate);
-            departureDateObj.setDate(departureDateObj.getDate() + 1); // Add one day
-            var minDate = departureDateObj.toISOString().slice(0, 16); // Format as yyyy-MM-ddTHH:mm
-
-            returnDate.min = minDate;
-        }
-    }
-
-        document.getElementById('<%= txtDepartureDateTime.ClientID %>').addEventListener('change', updateReturnDateTimeMin);
+        
 
     });
     </script>

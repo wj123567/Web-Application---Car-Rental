@@ -5,53 +5,51 @@
     <asp:TextBox ID="txtDpTime" runat="server" CssClass="control_style"  ReadOnly="true"   ></asp:TextBox>
     <asp:TextBox ID="txtTest" runat="server"></asp:TextBox>
     <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            var lastSelectedValue = "";  // To store the last selected datetime value
+        var today = new Date();
 
-            // Initialize datetimepicker
-            $('#<%= txtDpTime.ClientID %>').datetimepicker({
-                format: 'd/m/Y h:i A',
-                minTime: '08:00',
-                maxTime: '21:00',
-                onSelectDate: function (dp, $input) {  // Trigger only on manual selection
-                    var currentValue = $input.val();
+        // Define minimum and maximum dates for departure
+        var minDateDpt = new Date();
+        minDateDpt.setDate(today.getDate() + 1);
+        var maxDateDpt = new Date();
+        maxDateDpt.setMonth(today.getMonth() + 3);
 
-                    // Only proceed if the value actually changed
-                    if (currentValue !== lastSelectedValue) {
-                        lastSelectedValue = currentValue;  // Update the last selected value
+        // Flatpickr configuration with default time set to 08:00 AM, but not pre-filled in the textbox
+        var config1 = {
+            
+            altInput: true,
+            altFormat: "d/m/Y ",
+            allowInput: false,
+            minuteIncrement: 15,
+            minDate: minDateDpt,
+            maxDate: maxDateDpt,        
+        };
 
-                        console.log("Selected Time (Before Adjustment):", currentValue);
+        var config2 = {
+            enableTime: true,
+            noCalendar: true,
+            altInput: true,
+            altFormat: "h:i K",
+            allowInput: false,
+            minuteIncrement: 15,
+            minDate: minDateDpt,
+            maxDate: maxDateDpt,
+            minTime: "08:00",
+            maxTime: "22:00",
+            defaultHour: 8,     // Set default hour to 08:00 AM
+            defaultMinute: 0,   // Set default minute to 00
+            defaultDate: minDateDpt.setHours(8, 0, 0)
+        };
 
-                        var parsedDate = dp instanceof Date ? dp : new Date(dp);
-
-
-                        console.log("Time:", parsedDate.getHours() + ":" + parsedDate.getMinutes());
-                    }
-                },
-                onClose: function (current_time, $input) {  // Trigger only when the picker closes
-                    console.log("Picker Closed. Current Time:", $input.val());
-                    if ($input.val() != "") {
-                        $('#<%= lblCheck.ClientID %>').text($input.val());
-                        $('#<%= txtTest.ClientID %>').val($input.val());
-                        
-                        console.log("Textbox Value After Setting:", $('#<%= txtDpTime.ClientID %>').val());
-                    } else {
-                        $input.val($('#<%= lblCheck.ClientID %>').text());
-                    }
-
-                    // Ensure the displayed value remains consistent and is not altered
-                    $input.val(lastSelectedValue);  // Reset the value if changed unexpectedly
-                }
-            });
-        });
+        // Initialize flatpickr on the input field
+        flatpickr("#<%= txtDpTime.ClientID %>", config1);
+        flatpickr("#<%= txtTest.ClientID %>", config2);
+        
 </script>
 
-
+    
 </asp:Content>
     

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -16,16 +17,23 @@ namespace Assignment
         
         protected void Page_Load(object sender, EventArgs e)
         {
+           
             if (!Page.IsPostBack)
             {
+                string returnDate = txtReturnDate.Text; // This will contain the selected date.
+                DateTime parsedDate;
+                if (DateTime.TryParse(returnDate, out parsedDate))
+                {
+                    lblCheck1.Text = parsedDate.ToString();
+                }
                 if (Session["SelectedAddOns"] != null)
                 {
                     Session["SelectedAddOns"] = "";
                 }
-                txtDepartureDateTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
-                txtDepartureDateTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-ddTHH:mm");
+             /*   txtDepartureDateTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
+                txtDepartureDateTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-ddTHH:mm");*/
                 
-                txtReturnDateTime.Attributes["max"] = DateTime.Now.AddMonths(4).ToString("yyyy-MM-ddTHH:mm");
+             /*   txtReturnDateTime.Attributes["max"] = DateTime.Now.AddMonths(4).ToString("yyyy-MM-ddTHH:mm");*/
                 PopulateRegionsAndPoints();
 
                 //You - update reward points
@@ -42,7 +50,7 @@ namespace Assignment
                 {
                     lblerrortext.Visible = false;
                 }
-                
+
             }
         }
 
@@ -118,18 +126,22 @@ namespace Assignment
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+    /*        string txtDepartureDateTime = txtDepartureDate.Text + txtDepartureTime.Text;
+            string txtReturnDateTime = txtReturnDate.Text + txtReturnTime.Text;
+            lblCheck1.Text = txtDepartureDateTime;
+            lblCheck2.Text = txtDepartureDateTime;*/
             // Save departure date to the session state
             Session["BookingID"]= saveTripInfo();
             Session["Pickup_point"]  = hdnDepartureLocation.Value;
             Session["Pickup_state"]  = hdnDepartureState.Value;
-            Session["StartDate"]     = txtDepartureDateTime.Text;
+          /*  Session["StartDate"]     = txtDepartureDateTime;*/
             Session["Dropoff_point"] = hdnReturnLocation.Value;
             Session["Dropoff_state"] = hdnReturnState.Value;
-            Session["EndDate"]       = txtReturnDateTime.Text;
+         /*   Session["EndDate"]       = txtReturnDateTime;*/
             
 
 
-            Response.Redirect("productListing.aspx");
+        /*    Response.Redirect("productListing.aspx");*/
 
         }
 
