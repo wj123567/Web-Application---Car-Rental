@@ -7,10 +7,17 @@
         border-bottom: 1px solid lightgray;
     }
 
-    .Redemption .Add {
+    .Redemption .RedeemItemAdd {
         margin: 2% auto;
     }
 
     .redeemTable td{
         padding:12px;
     }
+
+.txtItemDescription {
+    padding: 10px;
+    resize: none;
+    overflow-y: auto;
+    width: 100%;
+}
