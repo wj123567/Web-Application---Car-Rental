@@ -26,7 +26,7 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
-                ViewState["SQLQuery"] = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id ORDER BY C.CarPlate";
+                ViewState["SQLQuery"] = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id";
                 loadCarData();
             }
 
@@ -35,7 +35,7 @@ namespace Assignment
 
         protected void loadCarData()
         {
-            string selectCar = ViewState["SQLQuery"].ToString() + " OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
+            string selectCar = ViewState["SQLQuery"].ToString() + " ORDER BY C.CarPlate OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
@@ -51,27 +51,17 @@ namespace Assignment
             repeaterCarTable.DataSource = ds.Tables["CarTable"];
             repeaterCarTable.DataBind();
             con.Close();
-            UpdatePageInfo(false, getTotalRow());
+            UpdatePageInfo(getTotalRow());
             ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addCarPlate()", true);
         }
 
-        protected void UpdatePageInfo(bool isSearching, int row)
+        protected void UpdatePageInfo(int row)
         {
-            if (!isSearching)
-            {
                 int totalPage = (int)Math.Ceiling((double)row / (double)PageSize);
                 lblPageInfo.Text = "Page " + PageNumber + " of " + totalPage;
                 lblTotalRecord.Text = "Total Record: " + row;
                 btnPrevious.Enabled = PageNumber > 1;
                 btnNext.Enabled = PageNumber < totalPage;
-            }
-            else if (isSearching)
-            {
-                lblPageInfo.Text = "Page " + 1 + " of " + 1;
-                lblTotalRecord.Text = "Total Record: " + row;
-                btnPrevious.Enabled = false;
-                btnNext.Enabled = false;
-            }
 
         }
 
@@ -92,22 +82,12 @@ namespace Assignment
         protected int getTotalRow()
         {
             string selectAll = "SELECT COUNT(*) FROM Car C JOIN Location L ON C.LocationId = L.Id ";
-            string test = ViewState["SQLQuery"].ToString();
             int whereIndex = ViewState["SQLQuery"].ToString().IndexOf("WHERE", StringComparison.OrdinalIgnoreCase);
 
             if (whereIndex != -1)
             {
-                int orderByIndex = ViewState["SQLQuery"].ToString().IndexOf("ORDER BY", StringComparison.OrdinalIgnoreCase);
-                if(orderByIndex != -1)
-                {
-                    string betweenWhereOrder = ViewState["SQLQuery"].ToString().Substring(whereIndex,orderByIndex-whereIndex).Trim();
-                    selectAll += betweenWhereOrder;
-                }
-                else
-                {
-                    string afterWhere = ViewState["SQLQuery"].ToString().Substring(whereIndex).Trim();
-                    selectAll += afterWhere;
-                }
+                string afterWhere = ViewState["SQLQuery"].ToString().Substring(whereIndex).Trim();
+                selectAll += afterWhere;
             }
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
@@ -627,7 +607,7 @@ namespace Assignment
         }
         protected void hiddenBtn_Click(object sender, EventArgs e)
         {
-            string findCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR CarPlate LIKE @searchString ORDER BY C.CarPlate";
+            string findCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR CarPlate LIKE @searchString";
             ViewState["SQLQuery"] = findCar;
             loadCarData();
             UpdatePanel1.Update();
@@ -641,7 +621,16 @@ namespace Assignment
         protected void ddlTableLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             string loc = ddlTableLocation.SelectedValue;
-            string selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE C.LocationId = @LocationId ORDER BY C.CarPlate";
+            string selectCar = " ";
+            if (loc != "0")
+            {
+                selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE C.LocationId = @LocationId";
+            }
+            else
+            {
+                selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id";
+            }
+
             ViewState["SQLQuery"] = selectCar;
             loadCarData();
             UpdatePanel1.Update();
