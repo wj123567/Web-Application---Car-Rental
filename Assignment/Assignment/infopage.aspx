@@ -196,50 +196,56 @@
 	                    </div>
                     </div>
 
-                    <div class="comment-sort d-flex flex-row justify-content-between align-items-center">
-                        <div class="comment-sort1"><b>Product Reviews</b></div>
-                        <div class="dropdown comment-sort2">
-                            <%--<button id="sortButton" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Sort: Recent
-                            </button>--%>
-                        </div>
-                    </div>
-
-                    <asp:ListView ID="lvComments" runat="server">
-                        <ItemTemplate>
-                            <div class="comment-user d-flex flex-row">
-                                <div class="card text-center comment-user-left" style="flex: 1;">
-                                    <img src='<%# Eval("profilePicture") %>' alt="Profile Picture" class="profilePic"/>
-                                    <p style="font-size: clamp(12px, 3vh, 18px); font-weight:bold; margin-top:20px; "><%# Eval("ReviewDate", "{0:dd/MM/yyyy HH:mm}") %></p>
+                    <asp:UpdatePanel ID="UpdatePanelComments" runat="server">
+                        <ContentTemplate>
+                            <div class="comment-sort d-flex flex-row justify-content-between align-items-center">
+                                <div class="comment-sort1"><b>Product Reviews</b></div>
+                                <div class="dropdown comment-sort2">
+                                    <asp:DropDownList ID="ddlFilterStar" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlFilterStar_SelectedIndexChanged" CssClass="filterComments">
+                                        <asp:ListItem Value="Recent" Text="Most Recent" />
+                                        <asp:ListItem Value="HighToLow" Text="Highest Rating" />
+                                        <asp:ListItem Value="LowToHigh" Text="Lowest Rating" />
+                                    </asp:DropDownList>
                                 </div>
+                            </div>
 
-                                <div class="d-flex flex-column vh-80" style="margin-left: 15px; flex:3">
-                                    <div class="d-flex flex-row justify-content-between mb-3"  style="margin-bottom: 20px">
-                                        <div class=""><a href="#" style="font-size: 20px;"><strong><%# Eval("Username") %></strong></a>
+                            <asp:ListView ID="lvComments" runat="server">
+                                <ItemTemplate>
+                                    <div class="comment-user d-flex flex-row">
+                                        <div class="card text-center comment-user-left" style="flex: 1;">
+                                            <img src='<%# Eval("profilePicture") %>' alt="Profile Picture" class="profilePic"/>
+                                            <p style="font-size: clamp(12px, 3vh, 18px); font-weight:bold; margin-top:20px; "><%# Eval("ReviewDate", "{0:dd/MM/yyyy HH:mm}") %></p>
                                         </div>
-                                        <div>
-                                            <span class="rating">
-                                                <%# GetStarRating((int)Eval("Rating")) %> 
-                                            </span>
-                                        </div>                          
-                                    </div>
-                                    <div class="review-text mb-3">
-                                        <p><%# Eval("ReviewText") %></p>
-                                    </div>
-                                    <div class="align-self-end mt-auto">
-                                        <a class="btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-                                    </div>
-                                </div>
-                            </div>
 
-                        </ItemTemplate>
+                                        <div class="d-flex flex-column vh-80" style="margin-left: 15px; flex:3">
+                                            <div class="d-flex flex-row justify-content-between mb-3"  style="margin-bottom: 20px">
+                                                <div class=""><a href="#" style="font-size: 20px;"><strong><%# Eval("Username") %></strong></a>
+                                                </div>
+                                                <div>
+                                                    <span class="rating">
+                                                        <%# GetStarRating((int)Eval("Rating")) %> 
+                                                    </span>
+                                                </div>                          
+                                            </div>
+                                            <div class="review-text mb-3">
+                                                <p><%# Eval("ReviewText") %></p>
+                                            </div>
+                                            <div class="align-self-end mt-auto">
+                                                <a class="btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                        <LayoutTemplate>
-                            <%-- customer comment section --%>
-                            <div class="container-md" id="itemPlaceHolder" runat="server">
-                            </div>
-                        </LayoutTemplate>
-                    </asp:ListView>
+                                </ItemTemplate>
+
+                                <LayoutTemplate>
+                                    <%-- customer comment section --%>
+                                    <div class="container-md" id="itemPlaceHolder" runat="server">
+                                    </div>
+                                </LayoutTemplate>
+                            </asp:ListView>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
 
                  </div>
             </div>
