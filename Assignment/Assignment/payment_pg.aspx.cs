@@ -338,7 +338,7 @@ namespace Assignment
 
         protected void modalOkBtn_Click(object sender, EventArgs e)
         {
-            // Redirect to bookingrecord.aspx after the modal "OK" button is clicked
+            
             Response.Redirect("Home.aspx");
         }
 

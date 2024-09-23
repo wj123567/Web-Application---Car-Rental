@@ -30,6 +30,7 @@
                 <div class="row">
     
                     <div class="col">
+                        <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
                         <h3 class="title">CUSTOMER DETAIL</h3>
     
     

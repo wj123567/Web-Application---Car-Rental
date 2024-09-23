@@ -31,9 +31,6 @@
                     <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Pick Up Location is Required" ControlToValidate="txtDepartureLocation"  CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     <br />
 
-                    <asp:Label ID="lblCheck1" runat="server" Text="Label"></asp:Label>
-                    <asp:Label ID="lblCheck2" runat="server" Text="Label"></asp:Label>
-
                  <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>     
                     <div class="row">
                     <div class="col-8" >
@@ -47,7 +44,7 @@
                         <asp:Label ID="Label2" runat="server" Text="🕐"></asp:Label>
                     </div>
                     </div>
-
+                    
                 <asp:RequiredFieldValidator ID="requireDepartDate" runat="server" ErrorMessage="Pick Up Date is Required" ControlToValidate="txtDepartureDate" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                 </div>
                
@@ -71,6 +68,7 @@
                 <asp:Label ID="lblReturnDateTime" runat="server" Text="Date & Time" CssClass="home_label_style" ></asp:Label>   
                  <div class="row">
                     <div class="col-8" >
+                        <asp:HiddenField ID="hdnReturnDate" runat="server" />
                          <asp:TextBox ID="txtReturnDate" runat="server"  CssClass="control_style"   ReadOnly="false"></asp:TextBox>
                         <asp:Label ID="Label3" runat="server" Text="📅"></asp:Label>
                     </div>
@@ -81,7 +79,7 @@
                 </div>
 
                 <asp:RequiredFieldValidator ID="requireReturnDate" runat="server" ErrorMessage="Drop Off Date is Required" ControlToValidate="txtReturnDate"  CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
-                 <asp:CompareValidator ID="compareStartEnd" runat="server" ErrorMessage="End Time Must After Start Time" ControlToCompare="txtDepartureDate" ControlToValidate="txtReturnDate" CssClass="validate" Operator="GreaterThan" ValidationGroup="filter" Display="Dynamic"></asp:CompareValidator>
+                 <asp:CustomValidator ID="customDateValidator" runat="server" ErrorMessage="End Time Must After Start Time"  ControlToValidate="txtReturnDate" CssClass="validate" Display="Dynamic" ClientValidationFunction="validateDateTime"></asp:CustomValidator>
             </div>
         
          </div>
@@ -90,7 +88,7 @@
         </div>
 
             </div>
-             <asp:Button ID="btnSearch" runat="server" Text="🔍Search" CssClass="search_btn_style" OnClick="btnSearch_Click" UseSubmitBehavior="False" />
+             <asp:Button ID="btnSearch" runat="server" Text="🔍Search" CssClass="search_btn_style" OnClick="btnSearch_Click" UseSubmitBehavior="True" />
     </section>
 </div> 
 </div>
@@ -187,8 +185,8 @@
             minuteIncrement: 15,
             minDate: minDateDpt,
             maxDate: maxDateDpt,
-            minTime: "08:00",
-            maxTime: "22:00",   
+            minTime: "08:00 ",
+            maxTime: "22:00 ",   
             defaultDate: minDateDpt.setHours(8, 0, 0)
         };
 
@@ -221,6 +219,45 @@
         flatpickr("#<%= txtReturnDate.ClientID %>", rtnDateConfig);
         flatpickr("#<%= txtReturnTime.ClientID %>", rtnTimeConfig);
       
+
+        var hiddenInputValue = $('#<%= txtReturnDate.ClientID %>').val(); // This gets the value from the hidden input
+        console.log(hiddenInputValue);
+
+        function validateDateTime(source, args) {
+            var txtDepartureDate = document.getElementById('<%= txtDepartureDate.ClientID %>').value;
+            var txtDepartureTime = document.getElementById('<%= txtDepartureTime.ClientID %>').value;
+
+            var txtReturnDate = document.getElementById('<%= txtReturnDate.ClientID %>').value;
+            var txtReturnTime = document.getElementById('<%= txtReturnTime.ClientID %>').value;
+
+            // Combine date and time for departure and return
+            var departureDate= new Date(txtDepartureDate);
+            var returnDate = new Date(txtReturnDate);
+
+            
+
+            // Check if return datetime is on or after departure datetime
+            if (returnDate > departureDate) {
+                args.IsValid = true;
+                
+            } else if (returnDate.getTime() === departureDate.getTime()) {
+                // If dates are equal, compare times
+                var departureTime = new Date("1970-01-01T" + txtDepartureTime); // Create time-only Date object
+                var returnTime = new Date("1970-01-01T" + txtReturnTime);       // Time-only Date object
+
+                if (returnTime > departureTime) {
+                    // If return time is greater, it's valid
+                    args.IsValid = true;
+                } else {
+                    // If return time is not greater, it's invalid
+                    args.IsValid = false;
+                }
+            } else {
+                args.IsValid = false;
+            }
+            console.log(departureTime);
+            console.log(returnTime);
+        }
 
     document.addEventListener("DOMContentLoaded", function () {
         // Get the modal
@@ -391,8 +428,6 @@
         });
 
         
-        
-
     });
     </script>
 </asp:Content>

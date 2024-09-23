@@ -20,12 +20,7 @@ namespace Assignment
            
             if (!Page.IsPostBack)
             {
-                string returnDate = txtReturnDate.Text; // This will contain the selected date.
-                DateTime parsedDate;
-                if (DateTime.TryParse(returnDate, out parsedDate))
-                {
-                    lblCheck1.Text = parsedDate.ToString();
-                }
+               
                 if (Session["SelectedAddOns"] != null)
                 {
                     Session["SelectedAddOns"] = "";
@@ -126,10 +121,11 @@ namespace Assignment
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-    /*        string txtDepartureDateTime = txtDepartureDate.Text + txtDepartureTime.Text;
-            string txtReturnDateTime = txtReturnDate.Text + txtReturnTime.Text;
-            lblCheck1.Text = txtDepartureDateTime;
-            lblCheck2.Text = txtDepartureDateTime;*/
+            string formattedDepartureDateTime= "";
+            string formattedReturnDateTime = "";
+
+            string txtDepartureDateTime = txtDepartureDate.Text +"T"+ txtDepartureTime.Text;
+            string txtReturnDateTime = txtReturnDate.Text +"T" + txtReturnTime.Text;
             // Save departure date to the session state
             Session["BookingID"]= saveTripInfo();
             Session["Pickup_point"]  = hdnDepartureLocation.Value;
@@ -137,11 +133,31 @@ namespace Assignment
           /*  Session["StartDate"]     = txtDepartureDateTime;*/
             Session["Dropoff_point"] = hdnReturnLocation.Value;
             Session["Dropoff_state"] = hdnReturnState.Value;
-         /*   Session["EndDate"]       = txtReturnDateTime;*/
-            
+            /*   Session["EndDate"]       = txtReturnDateTime;*/
+
+            string returnDate = txtReturnDate.Text; // This still works
+            DateTime parsedTime;
+            if (DateTime.TryParse(txtDepartureDateTime, out parsedTime))
+            {
+                // Format it to 12-hour format with AM/PM
+                formattedDepartureDateTime = parsedTime.ToString("dd/MM/yyyy h:mm tt");
+
+                
+            }
+
+            if (DateTime.TryParse(txtReturnDateTime, out parsedTime))
+            {
+                // Format it to 12-hour format with AM/PM
+                formattedReturnDateTime = parsedTime.ToString("dd/MM/yyyy h:mm tt");
+
+            }
+    
+            Session["StartDate"] = formattedDepartureDateTime;
+            Session["EndDate"] = formattedReturnDateTime;
 
 
-        /*    Response.Redirect("productListing.aspx");*/
+
+            Response.Redirect("productListing.aspx");
 
         }
 

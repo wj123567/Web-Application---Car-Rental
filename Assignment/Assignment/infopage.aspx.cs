@@ -25,7 +25,7 @@ namespace Assignment
             {
                 string prevCar = Request.QueryString["prevCar"];
                 string currentCar = (string)Session["CarPlate"];
-                if (Request.QueryString["prevCar"] != null)
+                if (Request.QueryString["prevCar"] != null )
                 {
                     if (prevCar != currentCar)
                     {
@@ -50,22 +50,23 @@ namespace Assignment
 
                 BindAddOns();
 
-                LoadAddOnSelection();
+            /*    LoadAddOnSelection();*/
 
                 //you
 
                 LoadReviewData(currentCar);
 
-                LoadComments(currentCar);
+                LoadComments(currentCar);      
+                   
             }
 
-            DataBind();
+        /*    DataBind();*/
 
         }
 
 
 
-        private void LoadAddOnSelection()
+      /*  private void LoadAddOnSelection()
         {
             if (Session["SelectedAddOns"] != null)
             {
@@ -90,7 +91,7 @@ namespace Assignment
 
 
             }
-        }
+        }*/
 
         public void GetCarDetailsByCarPlate(string carPlate)
         {
@@ -138,8 +139,9 @@ namespace Assignment
 
                             // Calculate the difference in days
                             TimeSpan dateDifference = endDate - startDate;
-                            int dayDifference = dateDifference.Days; // This will be 3
-
+                            
+                            int dayDifference = dateDifference.Days; 
+                            dayDifference = dayDifference + 1; //add one, first day also considered
                             //the total car rental
                             lblTotalDayRent.Text = dayDifference.ToString() + " Days";
                             Session["TotalDayRent"] = lblTotalDayRent.Text;
@@ -174,6 +176,8 @@ namespace Assignment
             // Assuming you have a method GetAddOns() that returns a DataTable or List<AddOn>
             var addOns = GetAddOns();
 
+         
+
             rptAddOns.DataSource = addOns;
             rptAddOns.DataBind();
         }
@@ -200,11 +204,10 @@ namespace Assignment
             foreach (RepeaterItem item in rptAddOns.Items)
             {
                 var txtQuantity = (TextBox)item.FindControl("txtAddOnQuantity");
-
                 var hfAddOnID = (HiddenField)item.FindControl("hfAddOnID");
 
+               
                 int quantity = int.Parse(txtQuantity.Text);
-
                 int addOnID = int.Parse(hfAddOnID.Value);
 
                 if (quantity > 0)
@@ -230,10 +233,14 @@ namespace Assignment
             Session["TotalPrice"] = hdnTotalPrice.Value;
             Session["TotalAddOn"] = hdnTotalAddOn.Value;
 
-            Response.Redirect("bookInfo.aspx");
+            Dictionary<int, int> selectedAddOns = Session["SelectedAddOns"] as Dictionary<int, int>;
+            
+                Response.Redirect("bookInfo.aspx");
         }
+       
+        
 
-        protected void previous_btn_Click(object sender, EventArgs e)
+    protected void previous_btn_Click(object sender, EventArgs e)
         {
 
             Response.Redirect("productListing.aspx?prevCar=" + ltrCarPlate.Text);

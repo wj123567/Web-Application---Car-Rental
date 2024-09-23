@@ -23,8 +23,10 @@
     </div>
 </div>
 
+    
+
         <section class="info_head_container">
-  
+ 
          <div class="container-fluid">
 	<div class="row justify-content-center">
 		<div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
@@ -46,7 +48,7 @@
     </section>
 
     
-
+    
     <section class="info_banner">
         
             <div class="col_left ">
@@ -250,6 +252,8 @@
                  </div>
             </div>
     </section>
+
+
 
     <section class="info_body_container"> 
         <div class="left-side">
