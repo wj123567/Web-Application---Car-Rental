@@ -25,21 +25,18 @@ namespace Assignment
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AddOn> AddOns { get; set; }
         public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public virtual DbSet<Booking> Bookings { get; set; }
-        public virtual DbSet<BookingAddOn> BookingAddOns { get; set; }
         public virtual DbSet<Car> Cars { get; set; }
         public virtual DbSet<CarBrand> CarBrands { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<PaymentCard> PaymentCards { get; set; }
-        public virtual DbSet<RedeemItem> RedeemItems { get; set; }
-        public virtual DbSet<Redemption> Redemptions { get; set; }
-        public virtual DbSet<TestBook> TestBooks { get; set; }
-        public virtual DbSet<TestTrip> TestTrips { get; set; }
-        public virtual DbSet<UserRegistration> UserRegistrations { get; set; }
         public virtual DbSet<UserRewardPointsView> UserRewardPointsViews { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<RedeemItem> RedeemItems { get; set; }
+        public virtual DbSet<Redemption> Redemptions { get; set; }
+        public virtual DbSet<AddOn> AddOns { get; set; }
+        public virtual DbSet<BookingAddOn> BookingAddOns { get; set; }
     }
 }
