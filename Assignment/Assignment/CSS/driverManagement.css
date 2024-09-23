@@ -30,15 +30,13 @@
 }
 
 .sort-up::after {
-    content: ' \25B2'; /* Unicode for the up arrow ▲ */
+    content: ' \25B2';
     font-size: 12px;
-    margin-left: 5px; /* Adjust spacing between text and arrow */
 }
 
 .sort-down::after {
-    content: ' \25BC'; /* Unicode for the up arrow ▲ */
+    content: ' \25BC'; 
     font-size: 12px;
-    margin-left: 5px; /* Adjust spacing between text and arrow */
 }
 
 

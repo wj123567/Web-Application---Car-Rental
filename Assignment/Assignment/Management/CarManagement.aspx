@@ -415,22 +415,6 @@
     </script>
 
     <script>
-        function showSortDirection(buttonID, sort) {
-
-            var button = document.getElementById(buttonID);
-
-            if (sort == "ASC") {
-                button.innerHTML = button.innerHTML + " ▲";
-            } else {
-                button.innerHTML = button.innerHTML + " ▼";
-            }
-        }
-
-        function addCarPlate() {
-
-            document.getElementById('<%= btnSortCarPlate.ClientID %>').innerHTML = document.getElementById('<%= btnSortCarPlate.ClientID %>').innerHTML + " ▲";
-        }
-
         function fileUpload() {
             document.getElementById('<%= validateCarPic.ClientID %>').enabled = true;
             document.getElementById('<%= fuCarPic.ClientID %>').click();

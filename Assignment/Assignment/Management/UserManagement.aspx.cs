@@ -27,7 +27,8 @@ namespace Assignment
             {
                 ViewState["SQLQuery"] = "SELECT * FROM ApplicationUser";
                 loadUserInfo();
-                txtAddBdate.Attributes["max"] = DateTime.Now.AddYears(-18).ToString("yyyy-MM-dd");
+                loadState();
+                txtAddBdate.Attributes["max"] = DateTime.Now.AddYears(-18).ToString("yyyy-MM-dd");     
             }
         }
 
@@ -46,6 +47,31 @@ namespace Assignment
                 banReasonUpdate.Update();
             }
         }
+
+        protected void loadState()
+        {
+            string selectValidate = @"SELECT (SUM(CASE WHEN EmailVerification = 1 THEN 1 ELSE 0 END)) AS TotalValidated, COUNT(*) AS TotalUser, (SUM(CASE WHEN TwoStepVerification = 1 THEN 1 ELSE 0 END)) AS TotalTFA FROM ApplicationUser";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(selectValidate, con);
+            con.Open();
+            SqlDataReader reader = com.ExecuteReader();
+            int totalUser = 0;
+            int totalValidated = 0;
+            int totalTFA = 0;
+            if (reader.Read())
+            {
+                totalUser = int.Parse(reader["TotalUser"].ToString());
+                totalValidated = int.Parse(reader["TotalValidated"].ToString());
+                totalTFA = int.Parse(reader["TotalTFA"].ToString());
+            }
+            reader.Close();
+            con.Close();
+            lblValidatedUser.Text = ((double)totalValidated / totalUser * 100).ToString("F2") + "%";
+            lblNumValidatedUser.Text = totalValidated + "/" + totalUser + " Users";
+            lbltfa.Text = ((double)totalTFA / totalUser * 100).ToString("F2") + "%";
+            lbltfanum.Text = totalTFA + "/" + totalUser + " Users";
+        }
+
         protected void loadUserInfo()
         {
             string selectUser = ViewState["SQLQuery"].ToString() + " ORDER BY Username OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
@@ -64,7 +90,8 @@ namespace Assignment
             UserReapeter.DataBind();
             con.Close();
             UpdatePageInfo(getTotalRow());
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addUsername()", true);
+            removeSort();
+            btnSortUsername.CssClass = "text-dark sort-up";
         }
 
         protected void UpdatePageInfo(int row)
@@ -113,13 +140,16 @@ namespace Assignment
             LinkButton button = (LinkButton)sender;
             string name = button.CommandName;
             string sort = button.CommandArgument;
+            removeSort();
             if (sort == "DESC")
             {
                 button.CommandArgument = "ASC";
+                button.CssClass = "text-dark sort-down";
             }
             else
             {
                 button.CommandArgument = "DESC";
+                button.CssClass = "text-dark sort-up";
             }
             DataTable carData = (DataTable)ViewState["UserTable"];
             DataView dataView = carData.DefaultView;
@@ -130,6 +160,17 @@ namespace Assignment
             UserReapeter.DataBind();
             updateUserTable.Update();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", $"showSortDirection('{button.ClientID}', '{sort}');", true);
+        }
+
+        protected void removeSort()
+        {
+            btnSortUsername.CssClass = "text-dark";
+            btnSortEmail.CssClass = "text-dark";
+            btnSortRP.CssClass = "text-dark";
+            btnSortRegDate.CssClass = "text-dark";
+            btnSortRoles.CssClass = "text-dark";
+            btnSortBan.CssClass = "text-dark";
+            btnBanReason.CssClass = "text-dark";
         }
 
         protected void hiddenBtn_Click(object sender, EventArgs e)

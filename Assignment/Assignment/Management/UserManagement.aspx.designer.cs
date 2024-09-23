@@ -600,6 +600,42 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button btnAddUser;
 
         /// <summary>
+        /// lblValidatedUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblValidatedUser;
+
+        /// <summary>
+        /// lblNumValidatedUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNumValidatedUser;
+
+        /// <summary>
+        /// lbltfa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbltfa;
+
+        /// <summary>
+        /// lbltfanum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbltfanum;
+
+        /// <summary>
         /// btnAddNewUser control.
         /// </summary>
         /// <remarks>
@@ -654,13 +690,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.LinkButton btnSortEmail;
 
         /// <summary>
-        /// btnSortDOB control.
+        /// btnSortRP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortDOB;
+        protected global::System.Web.UI.WebControls.LinkButton btnSortRP;
 
         /// <summary>
         /// btnSortRegDate control.

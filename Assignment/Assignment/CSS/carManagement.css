@@ -77,5 +77,15 @@ th, td {
     vertical-align:text-top;
 }
 
+.sort-up::after {
+    content: ' \25B2';
+    font-size: 12px;
+}
+
+.sort-down::after {
+    content: ' \25BC';
+    font-size: 12px;
+}
+
 
 

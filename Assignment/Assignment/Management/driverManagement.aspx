@@ -289,17 +289,6 @@
             document.addEventListener("DOMContentLoaded", modal);
         }
 
-        function showSortDirection(buttonID, sort) {
-
-            var button = document.getElementById(buttonID);
-
-            if (sort == "ASC") {
-                button.innerHTML = button.innerHTML + " ▲";
-            } else {
-                button.innerHTML = button.innerHTML + " ▼";
-            }
-        }
-
         function addDateApply() {
 
             document.getElementById('<%= btnSortDateApply.ClientID %>').innerHTML = document.getElementById('<%= btnSortDateApply.ClientID %>').innerHTML + " ▲";
