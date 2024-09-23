@@ -15,22 +15,22 @@
                         <label for="txtItemName" class="fs-6"><b>Item Name</b></label>
                         <asp:TextBox ID="txtItemName" runat="server" CssClass="form-control mb-2" placeholder="Enter Item Name"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvItemName" runat="server" ControlToValidate="txtItemName" 
-        ErrorMessage="Item Name is required." CssClass="text-warning" Display="Dynamic" />
+        ErrorMessage="Item Name is required." CssClass="text-warning" Display="Dynamic" ValidationGroup="AddItem" />
                     </div>
                     <div class="form-group">
                         <label for="txtItemPoints" class="fs-6"><b>Item Points</b></label>
                         <asp:TextBox ID="txtItemPoints" runat="server" CssClass="form-control mb-2" placeholder="Enter Item Points"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvItemPoints" runat="server" ControlToValidate="txtItemPoints" 
-        ErrorMessage="Item Points are required." CssClass="text-warning" Display="Dynamic" />
+        ErrorMessage="Item Points are required." CssClass="text-warning" Display="Dynamic" ValidationGroup="AddItem" />
                         <asp:RegularExpressionValidator ID="revItemPoints" runat="server" ControlToValidate="txtItemPoints" 
                             ErrorMessage="Item Points must be a number." CssClass="text-warning" 
-                            ValidationExpression="^\d+$" Display="Dynamic" />
+                            ValidationExpression="^\d+$" Display="Dynamic" ValidationGroup="AddItem" />
                     </div>
                     <div class="form-group">
                         <label for="txtItemDescription" class="fs-6"><b>Item Description</b></label>
                         <asp:TextBox ID="txtItemDescription" runat="server" CssClass="mb-2 form-control txtItemDescription " TextMode="MultiLine" Rows="3" Columns="100" placeholder="Enter Item Description"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvItemDescription" runat="server" ControlToValidate="txtItemDescription" 
-        ErrorMessage="Item Description is required." CssClass="text-warning" Display="Dynamic" />
+        ErrorMessage="Item Description is required." CssClass="text-warning" Display="Dynamic" ValidationGroup="AddItem" />
                     </div>
                     <div class="form-group">
                         <label for="ddlStatus" class="fs-6"><b>Status</b></label>
@@ -46,14 +46,14 @@
                             ErrorMessage="Only .jpg, .jpeg, or .png files are allowed." 
                             CssClass="text-warning" 
                             ClientValidationFunction="validateFileUpload" 
-                            Display="Dynamic" />
+                            Display="Dynamic" ValidationGroup="AddItem" />
                         <asp:Label ID="lblMessage" runat="server" Text="" Visible="false" CssClass="text-success"></asp:Label>
                     </div>
                     
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <asp:Button ID="btnSaveItem" runat="server" CssClass="btn btn-primary" Text="Save" OnClick="btnSaveItem_Click" />
+                    <asp:Button ID="btnSaveItem" runat="server" CssClass="btn btn-primary" Text="Save" OnClick="btnSaveItem_Click" OnClientClick="return validateForm();" CausesValidation="true" ValidationGroup="AddItem" />
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
         <asp:LinkButton ID="btnAddReviewItem" 
                         runat="server"
                         CssClass="btn btn-primary"
-                        OnClientClick="$('#staticBackdrop').modal('show'); return false;">
+                        OnClientClick="openModal(); return false;">
             Add New Redeem Item
         </asp:LinkButton>
     </div>
@@ -99,9 +99,9 @@
                     <td><%# Eval("ItemDescription") %></td>
                     <td><%# Eval("Status") %></td>
                     <td>
-                        <img src='<%# ResolveUrl("~/Image/RedeemItem/" + Eval("ItemImage")) %>' alt="<%# Eval("ItemName") %>" style="width: 100px; height: auto;" />
+                        <img src='<%# ResolveUrl("~/Image/RedeemItem/" + Eval("ItemImage")) %>' alt="<%# Eval("ItemName") %>" style="width: 100px; height: auto;" class="" />
                     </td>
-                    <td>
+                    <td >
 
                         <asp:LinkButton ID="btnEditRedeemItem" 
                                         runat="server" 
@@ -129,6 +129,26 @@
                 args.IsValid = true; // No file selected is valid
             }
         }
+
+        function openModal() {
+            $('#staticBackdrop').modal('show');
+        }
+
+        function validateForm() {
+            let isValid = true;
+
+            // Check for required fields
+            $('#staticBackdrop .form-control').each(function () {
+                if ($(this).val().trim() === '') {
+                    isValid = false;
+                    alert($(this).attr('placeholder') + ' is required.');
+                }
+            });
+
+            return isValid; // If all required fields are filled, return true
+        }
+
+
     </script>
 
 

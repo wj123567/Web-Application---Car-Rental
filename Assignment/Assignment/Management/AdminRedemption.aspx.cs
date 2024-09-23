@@ -28,27 +28,51 @@ namespace Assignment.Management
                 lvRedeemItems.DataBind();
             }
         }
+            
 
         protected void DeleteButton_Click(object sender, EventArgs e)
         {
             var button = (LinkButton)sender;
 
-            int RedeemItemId = int.Parse(button.CommandArgument);
-
+            int redeemItemId = int.Parse(button.CommandArgument);
             using (var db = new SystemDatabaseEntities())
             {
-                var redeemItems = db.RedeemItems.FirstOrDefault(r => r.RedeemItemId == RedeemItemId);
+                var redeemItem = db.RedeemItems.FirstOrDefault(r => r.RedeemItemId == redeemItemId);
 
-                if (redeemItems != null)
+                if (redeemItem != null)
                 {
-                    db.RedeemItems.Remove(redeemItems);
+                    string imagePath = Server.MapPath("~/Image/RedeemItem/") + redeemItem.ItemImage;
 
-                    db.SaveChanges();
+                    try
+                    {
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
 
-                    BindListView();
+                        db.RedeemItems.Remove(redeemItem);
+                        db.SaveChanges();
+
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showSuccessMessage", "alert('Redeem item and associated image deleted successfully!');", true);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showErrorMessage", "alert('An unexpected error occurred. Please try again later.');", true);
+                    }
+
+                    
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showErrorMessage", "alert('Error: Redeem item not found.');", true);
                 }
             }
+
+            BindListView();
         }
+        
+            
 
 
         protected void btnSaveItem_Click(object sender, EventArgs e)
@@ -113,10 +137,9 @@ namespace Assignment.Management
                 db.RedeemItems.Add(newItem);
                 db.SaveChanges();
 
-                lblMessage.CssClass = "text-success";
-                lblMessage.Text = "Redeem item added successfully!";
-                lblMessage.Visible = true;
                 ClearFormFields();
+                ScriptManager.RegisterStartupScript(this, GetType(), "showSuccessMessage", "alert('Redeem item added successfully!'); setTimeout(function() { window.location = 'AdminRedemption.aspx'; }, 2000);", true);
+
             }
         }
 
@@ -131,7 +154,23 @@ namespace Assignment.Management
 
         protected void btnEditRedeemItem_Click(object sender, EventArgs e)
         {
+            LinkButton btnEdit = (LinkButton)sender;
+            int redeemItemId = Convert.ToInt32(btnEdit.CommandArgument);
 
+            using (var db = new SystemDatabaseEntities())
+            {
+                var item = db.RedeemItems.FirstOrDefault(i => i.RedeemItemId == redeemItemId);
+                if (item != null)
+                {
+                    txtItemName.Text = item.ItemName;
+                    txtItemPoints.Text = item.ItemPoints.ToString();
+                    txtItemDescription.Text = item.ItemDescription;
+                    ddlStatus.SelectedValue = item.Status;
+
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$(document).ready(function() { $('#staticBackdrop').modal('show'); });", true);
+                }
+            }
         }
+
     }
 }
