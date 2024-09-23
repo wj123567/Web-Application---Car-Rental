@@ -15,6 +15,24 @@
         </div>
     </div>
 
+    <div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-dark" id="staticDelete">Driver Info</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-dark">Are you sure you want to delete?</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <asp:Button ID="btnConfirmDelete" runat="server" Text="Confirm Delete" CssClass="btn btn-danger" ValidationGroup="deleteGroup" OnClick="btnConfirmDelete_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="rejectReason" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -141,6 +159,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-danger" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" />
                     <asp:Button ID="btnApprove" runat="server" Text="Approve" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnApprove_Click" />
                     <asp:Button ID="btnReject" runat="server" Text="Reject" CssClass="btn btn-danger" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#rejectReason" OnClientClick="return false" />
                 </div>
@@ -152,75 +171,80 @@
     <div class="container-xl px-4 mt-4">
         <h1 class="text-dark">Driver Management</h1>
         <hr class="mt-0 mb-4">
-        <div class="justify-content-between custom-flex-big">
-            <div class="custom-flex mb-2">
-                <asp:Button ID="btnAll" runat="server" Text="All" CssClass="btn border border-dark sort-button-group" CommandArgument="All" OnClick="sortCategory" OnClientClick="colorButton(this)" BackColor="#3490DC" ForeColor="White" />
-                <asp:Button ID="btnPending" runat="server" Text="Pending" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="P" OnClientClick="colorButton(this)" />
-                <asp:Button ID="btnRejected" runat="server" Text="Rejected" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="R" OnClientClick="colorButton(this)" />
-                <asp:Button ID="btnApproved" runat="server" Text="Approved" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="A" OnClientClick="colorButton(this)" />
-            </div>
-            <div>
-                <div>
-                    <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Name/Phone/Id/Passport/LicenseNo" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
-                    <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" Style="display: none;" />
+        <asp:UpdatePanel ID="updateDriverTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="justify-content-between custom-flex-big">
+                    <div class="custom-flex mb-2">
+                        <asp:Button ID="btnAll" runat="server" Text="All" CssClass="btn border border-dark sort-button-group" CommandArgument="All" OnClick="sortCategory" />
+                        <asp:Button ID="btnPending" runat="server" Text="Pending" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="P" />
+                        <asp:Button ID="btnRejected" runat="server" Text="Rejected" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="R" />
+                        <asp:Button ID="btnApproved" runat="server" Text="Approved" CssClass="btn border border-dark sort-button-group" OnClick="sortCategory" CommandArgument="A" />
+                    </div>
+                    <div>
+                        <div>
+                            <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Name/Phone/Id/Passport/LicenseNo" ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
+                            <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" Style="display: none;" />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div>
-            <asp:UpdatePanel ID="updateDriverTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-                <ContentTemplate>
+                <div>
                     <div class="table-responsive">
-                    <table id="driverTable" class="table table-striped table-bordered table-hover mb-2">
-                        <thead>
-                            <tr style="text-align: center;">
-                                <th scope="col">
-                                    <asp:LinkButton ID="btnSortDriverName" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverName" CssClass="text-dark">Name</asp:LinkButton>
-                                </th>
-                                <th scope="col">
-                                    <asp:LinkButton ID="btnSortDriverBdate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverBdate" CssClass="text-dark">Birth Date</asp:LinkButton></th>
-                                <th scope="col">
-                                    <asp:LinkButton ID="btnSortDateApply" runat="server" OnClick="btnSort_Click" CommandArgument="DESC" CommandName="DateApply" CssClass="text-dark">Date Apply</asp:LinkButton></th>
-                                <th scope="col">
-                                    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverPno" CssClass="text-dark">Phone no</asp:LinkButton></th>
-                                <th scope="col">
-                                    <asp:LinkButton ID="btnSortDriverLicense" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverLicense" CssClass="text-dark">License No</asp:LinkButton></th>
-                                <th scope="col">
-                                    <asp:LinkButton ID="btnSortDriverId" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverId" CssClass="text-dark">Id/Passport No</asp:LinkButton></th>
-                                <th scope="col">
-                                    <asp:LinkButton ID="btnSortApproval" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Approval" CssClass="text-dark">Approval</asp:LinkButton></th>
-                                <th scope="col">
-                                    <asp:LinkButton ID="btnSortRejectReason" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RejectReason" CssClass="text-dark">Reject Reason</asp:LinkButton></th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <asp:Repeater ID="DriverReapeter" runat="server" OnItemDataBound="DriverReapeter_ItemDataBound" OnItemCreated="DriverReapeter_ItemCreated">
-                                <ItemTemplate>
-                                    <tr style="text-align: center;">
-                                        <td scope="col"><%# Eval("DriverName") %></td>
-                                        <td scope="col">
-                                            <asp:Label ID="lblBdate" runat="server"></asp:Label>
-                                        </td>
-                                        <td scope="col">
-                                            <asp:Label ID="lblDateApply" runat="server"></asp:Label>
-                                        </td>
-                                        <td scope="col"><%# Eval("DriverPno") %></td>
-                                        <td scope="col"><%# Eval("DriverLicense") %></td>
-                                        <td scope="col"><%# Eval("DriverId") %></td>
-                                        <td scope="col">
-                                            <asp:Label ID="lblApproval" runat="server"></asp:Label>
-                                        </td>
-                                        <td scope="col">
-                                            <asp:Label ID="lblReject" runat="server"></asp:Label>
-                                        </td>
-                                        <td scope="col">
-                                            <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" CommandArgument='<%# Eval("Id") %>' OnClick="btnView_Click" />
-                                        </td>
-                                    </tr>
-                                </ItemTemplate>
-                            </asp:Repeater>
-                        </tbody>
-                    </table>
+                        <table id="driverTable" class="table table-striped table-bordered table-hover mb-2">
+                            <thead>
+                                <tr style="text-align: center;">
+                                    <th scope="col">
+                                        <asp:LinkButton ID="btnSortAccountAvailable" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="UserId" CssClass="text-dark">Account</asp:LinkButton>
+                                    </th>
+                                    <th scope="col">
+                                        <asp:LinkButton ID="btnSortDriverName" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverName" CssClass="text-dark">Name</asp:LinkButton>
+                                    </th>
+                                    <th scope="col">
+                                        <asp:LinkButton ID="btnSortDriverBdate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverBdate" CssClass="text-dark">Birth Date</asp:LinkButton></th>
+                                    <th scope="col">
+                                        <asp:LinkButton ID="btnSortDateApply" runat="server" OnClick="btnSort_Click" CommandArgument="DESC" CommandName="DateApply" CssClass="text-dark">Date Apply</asp:LinkButton></th>
+                                    <th scope="col">
+                                        <asp:LinkButton ID="btnSortPno" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverPno" CssClass="text-dark">Phone no</asp:LinkButton></th>
+                                    <th scope="col">
+                                        <asp:LinkButton ID="btnSortDriverLicense" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverLicense" CssClass="text-dark">License No</asp:LinkButton></th>
+                                    <th scope="col">
+                                        <asp:LinkButton ID="btnSortDriverId" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="DriverId" CssClass="text-dark">Id/Passport No</asp:LinkButton></th>
+                                    <th scope="col">
+                                        <asp:LinkButton ID="btnSortApproval" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Approval" CssClass="text-dark">Approval</asp:LinkButton></th>
+                                    <th scope="col">
+                                        <asp:LinkButton ID="btnSortRejectReason" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RejectReason" CssClass="text-dark">Reject Reason</asp:LinkButton></th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <asp:Repeater ID="DriverReapeter" runat="server" OnItemDataBound="DriverReapeter_ItemDataBound" OnItemCreated="DriverReapeter_ItemCreated">
+                                    <ItemTemplate>
+                                        <tr style="text-align: center;">
+                                            <td scope="col">
+                                                <asp:Label ID="lblUserAvailable" runat="server"></asp:Label></td>
+                                            <td scope="col"><%# Eval("DriverName") %></td>
+                                            <td scope="col">
+                                                <asp:Label ID="lblBdate" runat="server"></asp:Label>
+                                            </td>
+                                            <td scope="col">
+                                                <asp:Label ID="lblDateApply" runat="server"></asp:Label>
+                                            </td>
+                                            <td scope="col"><%# Eval("DriverPno") %></td>
+                                            <td scope="col"><%# Eval("DriverLicense") %></td>
+                                            <td scope="col"><%# Eval("DriverId") %></td>
+                                            <td scope="col">
+                                                <asp:Label ID="lblApproval" runat="server"></asp:Label>
+                                            </td>
+                                            <td scope="col">
+                                                <asp:Label ID="lblReject" runat="server"></asp:Label>
+                                            </td>
+                                            <td scope="col">
+                                                <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" CommandArgument='<%# Eval("Id") %>' OnClick="btnView_Click" />
+                                            </td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </tbody>
+                        </table>
                     </div>
                     <div>
                         <div class="float-start">
@@ -230,17 +254,19 @@
                         </div>
                         <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted span-totalRecord"></asp:Label>
                     </div>
-                </ContentTemplate>
-                <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="btnAll" EventName="Click" />
-                    <asp:AsyncPostBackTrigger ControlID="btnApproved" EventName="Click" />
-                    <asp:AsyncPostBackTrigger ControlID="btnPending" EventName="Click" />
-                    <asp:AsyncPostBackTrigger ControlID="btnRejected" EventName="Click" />
-                    <asp:AsyncPostBackTrigger ControlID="hiddenBtn" EventName="Click" />
-                </Triggers>
-            </asp:UpdatePanel>
 
-        </div>
+
+                </div>
+
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btnAll" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnApproved" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnPending" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="btnRejected" EventName="Click" />
+                <asp:AsyncPostBackTrigger ControlID="hiddenBtn" EventName="Click" />
+            </Triggers>
+        </asp:UpdatePanel>
     </div>
 
 
@@ -261,18 +287,6 @@
 
         function loadModal() {
             document.addEventListener("DOMContentLoaded", modal);
-        }
-
-        function colorButton(button) {
-            var buttonGroup = document.querySelectorAll(".sort-button-group");
-
-            buttonGroup.forEach(function (btn) {
-                btn.style.backgroundColor = "";
-                btn.style.color = "";
-            });
-
-            button.style.backgroundColor = "#3490dc";
-            button.style.color = "#fff";
         }
 
         function showSortDirection(buttonID, sort) {

@@ -42,6 +42,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Image largeImage;
 
         /// <summary>
+        /// btnConfirmDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConfirmDelete;
+
+        /// <summary>
         /// updateReason control.
         /// </summary>
         /// <remarks>
@@ -204,6 +213,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.ImageButton imgLicenseB;
 
         /// <summary>
+        /// btnDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDelete;
+
+        /// <summary>
         /// btnApprove control.
         /// </summary>
         /// <remarks>
@@ -220,6 +238,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReject;
+
+        /// <summary>
+        /// updateDriverTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updateDriverTable;
 
         /// <summary>
         /// btnAll control.
@@ -276,13 +303,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Button hiddenBtn;
 
         /// <summary>
-        /// updateDriverTable control.
+        /// btnSortAccountAvailable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateDriverTable;
+        protected global::System.Web.UI.WebControls.LinkButton btnSortAccountAvailable;
 
         /// <summary>
         /// btnSortDriverName control.
@@ -312,13 +339,13 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.LinkButton btnSortDateApply;
 
         /// <summary>
-        /// LinkButton1 control.
+        /// btnSortPno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.LinkButton btnSortPno;
 
         /// <summary>
         /// btnSortDriverLicense control.

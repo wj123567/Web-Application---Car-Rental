@@ -25,6 +25,7 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
+                ViewState["SQLQuery"] = "SELECT * FROM ApplicationUser";
                 loadUserInfo();
                 txtAddBdate.Attributes["max"] = DateTime.Now.AddYears(-18).ToString("yyyy-MM-dd");
             }
@@ -47,12 +48,12 @@ namespace Assignment
         }
         protected void loadUserInfo()
         {
-            
-            string selectUser = "SELECT * FROM ApplicationUser ORDER BY Username OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
+            string selectUser = ViewState["SQLQuery"].ToString() + " ORDER BY Username OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(selectUser, con);            
             com.Parameters.AddWithValue("@Pagesize", PageSize);
             com.Parameters.AddWithValue("@PageNumber", PageNumber);
+            com.Parameters.AddWithValue("@search", "%" + searchBar.Text.Replace(" ", "") + "%");
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();
@@ -62,28 +63,17 @@ namespace Assignment
             UserReapeter.DataSource = ds.Tables["UserTable"];
             UserReapeter.DataBind();
             con.Close();
-            UpdatePageInfo(false, getTotalRow());
+            UpdatePageInfo(getTotalRow());
             ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addUsername()", true);
         }
 
-        protected void UpdatePageInfo(bool isSearching, int row)
+        protected void UpdatePageInfo(int row)
         {
-            if (!isSearching)
-            {
             int totalPage = (int)Math.Ceiling((double)row / (double)PageSize);
             lblPageInfo.Text = "Page " + PageNumber + " of " + totalPage;
             lblTotalRecord.Text = "Total Record: "+ row;
             btnPrevious.Enabled = PageNumber > 1;
             btnNext.Enabled = PageNumber < totalPage;
-            }
-            else if (isSearching)
-            {
-                lblPageInfo.Text = "Page " + 1 + " of " + 1;
-                lblTotalRecord.Text = "Total Record: " + row;
-                btnPrevious.Enabled = false;
-                btnNext.Enabled = false;
-            }
-
         }
 
         protected void btnPrevious_Click(object sender, EventArgs e)
@@ -102,9 +92,18 @@ namespace Assignment
 
         protected int getTotalRow()
         {
-           String selectAll = "SELECT COUNT(*) FROM ApplicationUser";       
+           String selectAll = "SELECT COUNT(*) FROM ApplicationUser ";
+            int whereIndex = ViewState["SQLQuery"].ToString().IndexOf("WHERE", StringComparison.OrdinalIgnoreCase);
+
+            if (whereIndex != -1)
+            {
+                string afterWhere = ViewState["SQLQuery"].ToString().Substring(whereIndex).Trim();
+                selectAll += afterWhere;
+            }
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(selectAll, con);
+            com.Parameters.AddWithValue("@search", "%" + searchBar.Text.Replace(" ", "") + "%");
             con.Open();
             return (int)com.ExecuteScalar();
         }
@@ -135,31 +134,10 @@ namespace Assignment
 
         protected void hiddenBtn_Click(object sender, EventArgs e)
         {
-            string selectUser = "SELECT * FROM ApplicationUser WHERE Username Like @search OR Email Like @search ORDER BY Username";
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            string search = searchBar.Text.Replace(" ","");
-            if (search == "")
-            {
-                loadUserInfo();
-                updateUserTable.Update();
-                return;
-            }
-            else
-            {
-                con.Open();
-                SqlCommand com = new SqlCommand(selectUser, con);
-                com.Parameters.AddWithValue("@search", "%" + searchBar.Text + "%");
-                SqlDataAdapter da = new SqlDataAdapter(com);
-                DataSet ds = new DataSet();
-                da.Fill(ds, "UserTable");
-                int row = ds.Tables["UserTable"].Rows.Count;
-                ViewState["UserTable"] = ds.Tables["UserTable"];
-                UserReapeter.DataSource = ds.Tables["UserTable"];
-                UserReapeter.DataBind();
-                con.Close();
-                UpdatePageInfo(true, row);
-            }
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addUsername()", true);
+            string selectUser = "SELECT * FROM ApplicationUser WHERE Username Like @search OR Email Like @search";
+            ViewState["SQLQuery"] = selectUser;
+            loadUserInfo();
+            updateUserTable.Update();
         }
 
 

@@ -24,6 +24,22 @@
     border: 0px !important
 }
 
+.sort-button-group.active-btn {
+    background-color: #3490dc !important;
+    color: #fff !important;
+}
+
+.sort-up::after {
+    content: ' \25B2'; /* Unicode for the up arrow ▲ */
+    font-size: 12px;
+    margin-left: 5px; /* Adjust spacing between text and arrow */
+}
+
+.sort-down::after {
+    content: ' \25BC'; /* Unicode for the up arrow ▲ */
+    font-size: 12px;
+    margin-left: 5px; /* Adjust spacing between text and arrow */
+}
 
 
 @media only screen and (min-width: 699px){

@@ -26,16 +26,16 @@ namespace Assignment
                 if (Session["Id"] != null)
                 {
                     loadUserInfo(Session["Id"].ToString());
-                    txtBirthdate.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
-                    txtBirthdate.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
-                    txtBirthdate2.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
-                    txtBirthdate2.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
                 }
                 else
                 {
                     Session["Id"] = getCookies();
                     loadUserInfo(Session["Id"].ToString());
                 }
+                txtBirthdate.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
+                txtBirthdate.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
+                txtBirthdate2.Attributes["max"] = DateTime.Now.AddYears(-23).ToString("yyyy-MM-dd");
+                txtBirthdate2.Attributes["min"] = DateTime.Now.AddYears(-65).ToString("yyyy-MM-dd");
             }
         }
 
@@ -326,18 +326,11 @@ namespace Assignment
 
         protected void btnConfirmDelete_Click(object sender, EventArgs e)
         {
-            string deleteDriver = "DELETE FROM Driver WHERE Id = @id";
-
-
+            string deleteDriver = "UPDATE Driver SET UserID = NULL WHERE Id = @id";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-
-            string[] path = { MapPath("~/Image/DriverId/") , MapPath("~/Image/DriverLB/") , MapPath("~/Image/DriverLF/") , MapPath("~/Image/DriverSelfie/") };
+            
             string id = Session["DriverID"].ToString();
-            for(int i = 0; i < path.Length; i++)
-            {
-                File.Delete(path[i] + id + ".jpg");
-            }
 
             con.Open();
 
@@ -347,7 +340,7 @@ namespace Assignment
 
             com.ExecuteNonQuery();
 
-            Server.Transfer("driver.aspx");
+            Response.Redirect("driver.aspx");
         }
 
         protected void LoadAvailableDriver(String id)

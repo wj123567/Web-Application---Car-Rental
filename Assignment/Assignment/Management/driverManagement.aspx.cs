@@ -17,7 +17,7 @@ namespace Assignment
 {
     public partial class driverManagement : System.Web.UI.Page
     {
-        private int PageSize = 1;
+        private int PageSize = 10;
         private int PageNumber
         {
             get { return ViewState["PageNumber"] != null ? (int)ViewState["PageNumber"] : 1; }
@@ -28,14 +28,16 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
-                ViewState["SQLQuery"] = "SELECT * FROM Driver";
-                loadDriverInfo("");
+                ViewState["SortSelection"] = "P";
+                ViewState["SQLQuery"] = "SELECT * FROM Driver WHERE Approval = 'P'";
+                loadDriverInfo();
             }
         }
 
 
-        protected void loadDriverInfo(string sort)
+        protected void loadDriverInfo()
         {
+            string sort = ViewState["SortSelection"].ToString();
             string selectDriver = ViewState["SQLQuery"].ToString() + " ORDER BY DateApply OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
@@ -55,6 +57,7 @@ namespace Assignment
             DriverReapeter.DataBind();
             con.Close();
             UpdatePageInfo(getTotalRow(sort));
+            btnSelectStyle(sort);
             ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addDateApply()", true);
         }
 
@@ -70,14 +73,14 @@ namespace Assignment
         protected void btnPrevious_Click(object sender, EventArgs e)
         {
             PageNumber--;
-            loadDriverInfo("");
+            loadDriverInfo();
             updateDriverTable.Update();
         }
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
             PageNumber++;
-            loadDriverInfo("");
+            loadDriverInfo();
             updateDriverTable.Update();
         }
 
@@ -109,14 +112,25 @@ namespace Assignment
             Label lblBdate = (Label)e.Item.FindControl("lblBdate");
             Label lblDateApply = (Label)e.Item.FindControl("lblDateApply");
             Label lblReject = (Label)e.Item.FindControl("lblReject");
+            Label lblUserAvailable = (Label)e.Item.FindControl("lblUserAvailable");
             Button btnView = (Button)e.Item.FindControl("btnView");
             string approvalStatus = DataBinder.Eval(e.Item.DataItem, "Approval").ToString();
             DateTime bDate = (DateTime)DataBinder.Eval(e.Item.DataItem, "DriverBdate");
             DateTime dateApply = (DateTime)DataBinder.Eval(e.Item.DataItem, "DateApply");
             string rejectReason = DataBinder.Eval(e.Item.DataItem, "rejectReason").ToString();
+            string userID = DataBinder.Eval(e.Item.DataItem, "UserId").ToString();
 
             lblBdate.Text = bDate.ToString("dd/MM/yyyy");
             lblDateApply.Text = dateApply.ToString("dd/MM/yyyy");
+
+            if (String.IsNullOrEmpty(userID))
+            {
+                lblUserAvailable.Text = "N/A";
+            }
+            else
+            {
+                lblUserAvailable.Text = "Available";
+            }
 
             switch (approvalStatus)
             {
@@ -149,7 +163,8 @@ namespace Assignment
 
         protected void LoadAvailableDriver(String id)
         {
-            String selectDriver = "SELECT * FROM Driver WHERE Id = @id";
+            string selectDriver = "SELECT * FROM Driver WHERE Id = @id";
+            string userId = "";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
@@ -171,9 +186,23 @@ namespace Assignment
                 imgSelfie.ImageUrl = reader["Selfiepic"].ToString();
                 imgLicenseF.ImageUrl = reader["LicenseFpic"].ToString();
                 imgLicenseB.ImageUrl = reader["LicenseBpic"].ToString();
+                userId = reader["UserId"].ToString();
             }
             con.Close();
             reader.Close();
+
+            if (String.IsNullOrEmpty(userId))
+            {
+                btnApprove.Visible = false;
+                btnReject.Visible = false;
+                btnDelete.Visible = true;
+            }
+            else
+            {
+                btnApprove.Visible = true;
+                btnReject.Visible = true;
+                btnDelete.Visible = false;
+            }
         }
 
         protected void btnApprove_Click(object sender, EventArgs e)
@@ -181,7 +210,6 @@ namespace Assignment
             string approve = "UPDATE Driver SET Approval = 'A', RejectReason = @RejectReason WHERE Id = @Id";
             string rejectReason = " ";
             updateApproval(approve, rejectReason);
-            Server.Transfer("driverManagement.aspx");
         }
 
         protected void btnReject2_Click(object sender, EventArgs e)
@@ -199,7 +227,6 @@ namespace Assignment
                     rejectReason = ddlRejectReason.SelectedValue;
                 }
                 updateApproval(reject, rejectReason);
-                Server.Transfer("driverManagement.aspx");
             }
         }
 
@@ -212,6 +239,7 @@ namespace Assignment
             com.Parameters.AddWithValue("@RejectReason", reject);
             com.ExecuteNonQuery();
             con.Close();
+            reload();
         }
 
         protected void ddlRejectReason_SelectedIndexChanged(object sender, EventArgs e)
@@ -268,7 +296,7 @@ namespace Assignment
         {
             string selectDriver = "SELECT * FROM Driver WHERE DriverName Like @search OR DriverId Like @search OR DriverPno Like @search OR DriverLicense LIKE @search";
             ViewState["SQLQuery"] = selectDriver;
-            loadDriverInfo("");
+            loadDriverInfo();
             updateDriverTable.Update();
         }
 
@@ -287,10 +315,73 @@ namespace Assignment
                 selectDriver = "SELECT * FROM Driver";
             }
 
+            ViewState["SortSelection"] = sort;
             ViewState["SQLQuery"] = selectDriver;
-            loadDriverInfo(sort);
+            loadDriverInfo();
             updateDriverTable.Update();
 
+        }
+
+        protected void reload()
+        {
+            if (ViewState["SortSelection"] != null)
+            {
+                string sort = ViewState["SortSelection"].ToString();
+                if (sort != "All")
+                {
+                    ViewState["SQLQuery"] = "SELECT * FROM Driver WHERE Approval = @Approval";
+                }
+                else
+                {
+                    ViewState["SQLQuery"] = "SELECT * FROM Driver";
+                }
+                loadDriverInfo();
+                updateDriverTable.Update();
+            }
+        }
+
+        protected void btnSelectStyle(string sort)
+        {
+            Button[] btnGroup = { btnAll, btnPending, btnApproved, btnRejected };
+
+            for(int i = 0; i < btnGroup.Length; i++)
+            {
+                btnGroup[i].CssClass = "btn border border-dark sort-button-group";
+            }
+
+            Boolean found = false;
+            for (int i = 0; i < btnGroup.Length && !found; i++)
+            {
+                if (btnGroup[i].CommandArgument == sort)
+                {
+                    btnGroup[i].CssClass = "btn border border-dark sort-button-group active-btn";
+                    found = true;
+                }
+            }
+        }
+
+        protected void btnConfirmDelete_Click(object sender, EventArgs e)
+        {
+            string deleteDriver = "DELETE FROM Driver WHERE Id = @id";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+
+            string[] path = { MapPath("~/Image/DriverId/"), MapPath("~/Image/DriverLB/"), MapPath("~/Image/DriverLF/"), MapPath("~/Image/DriverSelfie/") };
+            string id = hdnDriverId.Value;
+            for (int i = 0; i < path.Length; i++)
+            {
+                File.Delete(path[i] + id + ".jpg");
+            }
+
+            con.Open();
+
+            SqlCommand com = new SqlCommand(deleteDriver, con);
+
+            com.Parameters.AddWithValue("@Id", id);
+
+            com.ExecuteNonQuery();
+
+            reload();
         }
     }
 }
