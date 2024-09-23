@@ -12,6 +12,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Web.Services.Description;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Assignment
 {
@@ -58,7 +59,8 @@ namespace Assignment
             con.Close();
             UpdatePageInfo(getTotalRow(sort));
             btnSelectStyle(sort);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addDateApply()", true);
+            removeSort();
+            btnSortDateApply.CssClass = "text-dark sort-up";
         }
 
         protected void UpdatePageInfo(int row)
@@ -263,13 +265,16 @@ namespace Assignment
             LinkButton button = (LinkButton)sender;
             string name = button.CommandName;
             string sort = button.CommandArgument;
+            removeSort();
             if (sort == "DESC")
             {
                 button.CommandArgument = "ASC";
+                button.CssClass = "text-dark sort-down";
             }
             else
             {
                 button.CommandArgument = "DESC";
+                button.CssClass = "text-dark sort-up";
             }
             DataTable carData = (DataTable)ViewState["DriverTable"];
             DataView dataView = carData.DefaultView;
@@ -279,7 +284,20 @@ namespace Assignment
             DriverReapeter.DataSource = sortedData;
             DriverReapeter.DataBind();
             updateDriverTable.Update();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", $"showSortDirection('{button.ClientID}', '{sort}');", true);
+        }
+
+        protected void removeSort()
+        {
+            btnSortAccountAvailable.CssClass = "text-dark";
+            btnSortDriverName.CssClass = "text-dark";
+            btnSortDriverBdate.CssClass = "text-dark";
+            btnSortPno.CssClass = "text-dark";
+            btnSortDateApply.CssClass = "text-dark";
+            btnSortApproval.CssClass = "text-dark";
+            btnSortDriverId.CssClass = "text-dark";
+            btnSortDriverLicense.CssClass = "text-dark";
+            btnSortRejectReason.CssClass = "text-dark";
+
         }
 
         protected void DriverReapeter_ItemCreated(object sender, RepeaterItemEventArgs e)

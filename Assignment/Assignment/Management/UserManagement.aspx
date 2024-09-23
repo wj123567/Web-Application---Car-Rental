@@ -22,7 +22,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <asp:Button ID="btnUpload" runat="server" Text="Change Profile Picture" CssClass="btn btn-primary"/>
+                    <asp:Button ID="btnUpload" runat="server" Text="Change Profile Picture" CssClass="btn btn-primary" />
                 </div>
             </div>
         </div>
@@ -106,14 +106,14 @@
 
                         <div>
                             <div class="row gx-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="small mb-1">Username</label>
-                                <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
-                            </div>
-                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <label class="small mb-1">Username</label>
+                                    <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                                </div>
+                                <div class="col-md-6">
                                     <label class="small mb-1">Email address</label>
                                     <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
-                            </div>
+                                </div>
                             </div>
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
@@ -167,7 +167,7 @@
                         </li>
                     </ul>
                     <div class="card-body row">
-                        
+
                         <asp:Label ID="lblNoBooking" runat="server" CssClass="text-dark"></asp:Label>
                         <asp:Repeater ID="rptBookingRec" runat="server" OnItemDataBound="rptBookingRec_ItemDataBound">
                             <ItemTemplate>
@@ -175,7 +175,8 @@
                                     <div class="d-flex align-items-center justify-content-between px-4">
                                         <div class="d-flex align-items-center">
                                             <div class="user-car-frame">
-                                            <asp:Image ID="carImage" runat="server" ImageUrl='<%# Eval("CarImage")%>' Width="100px" CssClass="img-fluid" /></div>
+                                                <asp:Image ID="carImage" runat="server" ImageUrl='<%# Eval("CarImage")%>' Width="100px" CssClass="img-fluid" />
+                                            </div>
                                             <div class="mx-4">
                                                 <asp:Label ID="lblBookingId" runat="server" Text='<%# Eval("Id") +" (" + Eval("CarPlate") +")"%>' CssClass="d-block" />
                                                 <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Pick Up Point: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-inline" />
@@ -228,23 +229,23 @@
                     <div class="card-body row">
                         <asp:Label ID="lblDriverText" runat="server" CssClass="text-dark"></asp:Label>
                         <asp:PlaceHolder ID="phUserDriver" runat="server">
-                                <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
-                                    <div class="d-flex align-items-center justify-content-between px-4">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fa-regular fa-id-card" style="font-size: 1.5em;"></i>
-                                            <div class="mx-4">
-                                                <asp:Label ID="lblDriverName" runat="server" Text="" CssClass="small d-block" />
-                                                <asp:Label ID="lblDriverId" runat="server" Text="" CssClass="text-xs text-muted d-inline" />
-                                                <br />
-                                                <asp:Label ID="lblReject" runat="server" CssClass="text-danger small"></asp:Label>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center ms-4 small">
-                                            <asp:Label ID="lblApproval" runat="server"></asp:Label>
+                            <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
+                                <div class="d-flex align-items-center justify-content-between px-4">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fa-regular fa-id-card" style="font-size: 1.5em;"></i>
+                                        <div class="mx-4">
+                                            <asp:Label ID="lblDriverName" runat="server" Text="" CssClass="small d-block" />
+                                            <asp:Label ID="lblDriverId" runat="server" Text="" CssClass="text-xs text-muted d-inline" />
+                                            <br />
+                                            <asp:Label ID="lblReject" runat="server" CssClass="text-danger small"></asp:Label>
                                         </div>
                                     </div>
+                                    <div class="d-flex align-items-center ms-4 small">
+                                        <asp:Label ID="lblApproval" runat="server"></asp:Label>
+                                    </div>
                                 </div>
-                            </asp:PlaceHolder>
+                            </div>
+                        </asp:PlaceHolder>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -348,89 +349,133 @@
             </div>
         </div>
     </div>
-
-    <div class="container-xl px-4 mt-4">
-        <h1 class="text-dark">User Management</h1>
-        <hr class="mt-0 mb-4">
-        <div class="d-flex justify-content-between">
-            <div class="me-2">
-                <asp:Button ID="btnAddNewUser" runat="server" Text="Add New User" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewUser" OnClientClick="return false" />
-            </div>
-            <div class="me-2 flex-shrink-3">
-                <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Email/Username " ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
-                <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" Style="display: none;" />
-            </div>
-        </div>
-        <div>
-            <asp:UpdatePanel ID="updateUserTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-                <ContentTemplate>
-                    <div class="table-responsive">
-                        <table id="userTable" class="table table-striped table-bordered table-hover mb-2">
-                            <thead>
-                                <tr style="text-align: center;">
-                                    <th scope="col">
-                                        <asp:LinkButton ID="btnSortUsername" runat="server" OnClick="btnSort_Click" CommandArgument="DESC" CommandName="Username" CssClass="text-dark">Username</asp:LinkButton>
-                                    </th>
-                                    <th scope="col">
-                                        <asp:LinkButton ID="btnSortEmail" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Email" CssClass="text-dark">Email</asp:LinkButton></th>
-                                    <th scope="col">
-                                        <asp:LinkButton ID="btnSortDOB" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RewardPoints" CssClass="text-dark">Reward Point</asp:LinkButton></th>
-                                    <th scope="col">
-                                        <asp:LinkButton ID="btnSortRegDate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RegistrationDate" CssClass="text-dark">Registration Date</asp:LinkButton></th>
-                                    <th scope="col">
-                                        <asp:LinkButton ID="btnSortRoles" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Roles" CssClass="text-dark">Roles</asp:LinkButton></th>
-                                    <th scope="col">
-                                        <asp:LinkButton ID="btnSortBan" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="IsBan" CssClass="text-dark">User Status</asp:LinkButton></th>
-                                    <th scope="col">
-                                        <asp:LinkButton ID="btnBanReason" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="BanReason" CssClass="text-dark">Ban Reason</asp:LinkButton></th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <asp:Repeater ID="UserReapeter" runat="server" OnItemDataBound="UserReapeter_ItemDataBound" OnItemCreated="UserReapeter_ItemCreated">
-                                    <ItemTemplate>
-                                        <tr style="text-align: center;">
-                                            <td scope="col"><%# Eval("UserName") %></td>
-                                            <td scope="col"><%# Eval("Email") %></td>
-                                            <td scope="col"><%# Eval("RewardPoints") %></td>
-                                            <td scope="col">
-                                                <asp:Label ID="lblRegdate" runat="server"></asp:Label>
-                                            </td>
-                                            <td scope="col">
-                                                <asp:DropDownList ID="ddlRoles" runat="server" CssClass="form-select form-select-sm" AutoPostBack="True" OnSelectedIndexChanged="ddlRolesSelect">
-                                                </asp:DropDownList>
-                                                <asp:HiddenField ID="hdnIdField" runat="server" Value='<%# Eval("Id") %>' />
-                                            </td>
-                                            <td scope="col">
-                                                <asp:Label ID="lblUserStatus" runat="server"></asp:Label>
-                                            </td>
-                                            <td scope="col"><%# Eval("BanReason") %></td>
-                                            <td scope="col">
-                                                <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>' />
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div>
-                        <div class="float-start">
-                            <asp:Button ID="btnPrevious" runat="server" Text="Previous" OnClick="btnPrevious_Click" Enabled="False" CssClass="btn btn-primary btn-sm" />
-                            <asp:Label ID="lblPageInfo" runat="server" Text="" CssClass="text-dark mx-2"></asp:Label>
-                            <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="btnNext_Click" CssClass="btn btn-primary btn-sm" />
+    <div class="px-4">
+        <div class="container-xl mt-4">
+            <h1 class="text-dark">User Management</h1>
+            <hr class="mt-0 mb-4">
+            <div class="col-12 d-flex">
+                <div class="w-100">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card" style="margin-bottom: 20px">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col mt-0">
+                                            <h5 class="card-title">Validated Users</h5>
+                                        </div>
+                                    </div>
+                                    <h1 class="mt-1 mb-3">
+                                        <asp:Label ID="lblValidatedUser" runat="server" Text="Label"></asp:Label></h1>
+                                    <div class="mb-0">
+                                        <asp:Label ID="lblNumValidatedUser" runat="server" Text="Label" CssClass="text-muted"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted span-totalRecord"></asp:Label>
+                        <div class="col-md-6">
+                            <div class="card" style="margin-bottom: 20px">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col mt-0">
+                                            <h5 class="card-title">Two-Factor Authentication Users</h5>
+                                        </div>
+                                    </div>
+                                    <h1 class="mt-1 mb-3"><asp:Label ID="lbltfa" runat="server" Text="Label"></asp:Label></h1>
+                                    <div class="mb-0">
+                                        <asp:Label ID="lbltfanum" runat="server" Text="Label" CssClass="text-muted"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </ContentTemplate>
-                <Triggers>
-                    <asp:AsyncPostBackTrigger ControlID="hiddenBtn" EventName="Click" />
-                </Triggers>
-            </asp:UpdatePanel>
-
-
+                </div>
+            </div>
         </div>
+
+        <div class="container-xl mt-4">
+            <h1 class="text-dark">User Management</h1>
+            <hr class="mt-0 mb-4">
+            <div class="d-flex justify-content-between">
+                <div class="me-2">
+                    <asp:Button ID="btnAddNewUser" runat="server" Text="Add New User" CssClass="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewUser" OnClientClick="return false" />
+                </div>
+                <div class="me-2 flex-shrink-3">
+                    <asp:TextBox ID="searchBar" runat="server" CssClass="form-control rounded border-dark" placeholder="Email/Username " ValidationGroup="searchBar" onkeypress="triggerButtonClick(event)"></asp:TextBox>
+                    <asp:Button ID="hiddenBtn" runat="server" Text="Button" OnClick="hiddenBtn_Click" ValidationGroup="searchBar" Style="display: none;" />
+                </div>
+            </div>
+            <div>
+                <asp:UpdatePanel ID="updateUserTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="table-responsive">
+                            <table id="userTable" class="table table-striped table-bordered table-hover mb-2">
+                                <thead>
+                                    <tr style="text-align: center;">
+                                        <th scope="col">
+                                            <asp:LinkButton ID="btnSortUsername" runat="server" OnClick="btnSort_Click" CommandArgument="DESC" CommandName="Username" CssClass="text-dark">Username</asp:LinkButton>
+                                        </th>
+                                        <th scope="col">
+                                            <asp:LinkButton ID="btnSortEmail" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Email" CssClass="text-dark">Email</asp:LinkButton></th>
+                                        <th scope="col">
+                                            <asp:LinkButton ID="btnSortRP" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RewardPoints" CssClass="text-dark">Reward Point</asp:LinkButton></th>
+                                        <th scope="col">
+                                            <asp:LinkButton ID="btnSortRegDate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RegistrationDate" CssClass="text-dark">Registration Date</asp:LinkButton></th>
+                                        <th scope="col">
+                                            <asp:LinkButton ID="btnSortRoles" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Roles" CssClass="text-dark">Roles</asp:LinkButton></th>
+                                        <th scope="col">
+                                            <asp:LinkButton ID="btnSortBan" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="IsBan" CssClass="text-dark">User Status</asp:LinkButton></th>
+                                        <th scope="col">
+                                            <asp:LinkButton ID="btnBanReason" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="BanReason" CssClass="text-dark">Ban Reason</asp:LinkButton></th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <asp:Repeater ID="UserReapeter" runat="server" OnItemDataBound="UserReapeter_ItemDataBound" OnItemCreated="UserReapeter_ItemCreated">
+                                        <ItemTemplate>
+                                            <tr style="text-align: center;">
+                                                <td scope="col"><%# Eval("UserName") %></td>
+                                                <td scope="col"><%# Eval("Email") %></td>
+                                                <td scope="col"><%# Eval("RewardPoints") %></td>
+                                                <td scope="col">
+                                                    <asp:Label ID="lblRegdate" runat="server"></asp:Label>
+                                                </td>
+                                                <td scope="col">
+                                                    <asp:DropDownList ID="ddlRoles" runat="server" CssClass="form-select form-select-sm" AutoPostBack="True" OnSelectedIndexChanged="ddlRolesSelect">
+                                                    </asp:DropDownList>
+                                                    <asp:HiddenField ID="hdnIdField" runat="server" Value='<%# Eval("Id") %>' />
+                                                </td>
+                                                <td scope="col">
+                                                    <asp:Label ID="lblUserStatus" runat="server"></asp:Label>
+                                                </td>
+                                                <td scope="col"><%# Eval("BanReason") %></td>
+                                                <td scope="col">
+                                                    <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>' />
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div>
+                            <div class="float-start">
+                                <asp:Button ID="btnPrevious" runat="server" Text="Previous" OnClick="btnPrevious_Click" Enabled="False" CssClass="btn btn-primary btn-sm" />
+                                <asp:Label ID="lblPageInfo" runat="server" Text="" CssClass="text-dark mx-2"></asp:Label>
+                                <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="btnNext_Click" CssClass="btn btn-primary btn-sm" />
+                            </div>
+                            <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted span-totalRecord"></asp:Label>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="hiddenBtn" EventName="Click" />
+                    </Triggers>
+                </asp:UpdatePanel>
+
+
+            </div>
+        </div>
+
     </div>
     <script>
 
@@ -528,22 +573,6 @@
             return false;
         }
 
-        function showSortDirection(buttonID, sort) {
-
-            var button = document.getElementById(buttonID);
-
-            if (sort == "ASC") {
-                button.innerHTML = button.innerHTML + " ▲";
-            } else {
-                button.innerHTML = button.innerHTML + " ▼";
-            }
-        }
-
-        function addUsername() {
-
-            document.getElementById('<%= btnSortUsername.ClientID %>').innerHTML = document.getElementById('<%= btnSortUsername.ClientID %>').innerHTML + " ▲";
-        }
-
         function ShowPreview(event) {
             //read content of the file
             var ImageDir = new FileReader();
@@ -564,7 +593,7 @@
 
             if (!allowedExtensions.test(fileName)) {
                 args.IsValid = false;
-                isPass= false;
+                isPass = false;
                 return;
             }
 

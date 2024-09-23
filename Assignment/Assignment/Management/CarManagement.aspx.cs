@@ -52,7 +52,8 @@ namespace Assignment
             repeaterCarTable.DataBind();
             con.Close();
             UpdatePageInfo(getTotalRow());
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addCarPlate()", true);
+            removeSort();
+            btnSortCarPlate.CssClass = "text-dark sort-up";
         }
 
         protected void UpdatePageInfo(int row)
@@ -313,14 +314,17 @@ namespace Assignment
             LinkButton button = (LinkButton)sender;
             string name = button.CommandName;
             string sort = button.CommandArgument;
+            removeSort();
 
             if (sort == "DESC")
             {
                 button.CommandArgument = "ASC";
+                button.CssClass = "text-dark sort-down";
             }
             else
             {
                 button.CommandArgument = "DESC";
+                button.CssClass = "text-dark sort-up";
             }
             DataTable carData = ViewState["CarTable"] as DataTable;
             DataView dataView = carData.DefaultView;
@@ -330,8 +334,21 @@ namespace Assignment
             repeaterCarTable.DataSource = sortedData;
             repeaterCarTable.DataBind();
             UpdatePanel1.Update();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", $"showSortDirection('{button.ClientID}', '{sort}');", true);
         }
+
+        protected void removeSort()
+        {
+            btnSortCarPlate.CssClass = "text-dark";
+            btnSortCarBrand.CssClass = "text-dark";
+            btnSortCarName.CssClass = "text-dark";
+            btnSortCarType.CssClass = "text-dark";
+            btnSortCarDayPrice.CssClass = "text-dark";
+            btnSortCarTransmission.CssClass = "text-dark";
+            btnSortCarEnergy.CssClass = "text-dark";
+            btnSortCarLocation.CssClass = "text-dark";
+            btnSortCarState.CssClass = "text-dark";
+        }
+        
 
         protected void validateCarPlate_ServerValidate(object source, ServerValidateEventArgs args)
         {
