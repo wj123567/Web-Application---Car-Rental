@@ -85,17 +85,23 @@
 
                 <%-- you --%>
                 <div class="review-container d-flex flex-column">
-                    <h1 style="font-weight: 800;">Review &nbsp;<span style="font-size:20px; vertical-align:middle;">(1,485 total)</span></h1>
+                    <h1 style="font-weight: 800;">Review &nbsp;
+                        <span style="font-size:20px; vertical-align:middle;">
+                            <asp:Label ID="lblTotalReview" runat="server" Text=""></asp:Label>
+                        </span>
+                    </h1>
                     <div class="reviewrow-1  d-flex flex-row">
 				        <div class="rating-block">
                             <h2>Average user rating</h2>
-                            <h3 class="bold padding-bottom-7">4.3 <small>/ 5</small></h3>
-                            <div>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star unchecked"></span>
+                            <h3 class="bold padding-bottom-7">
+                                <asp:Label ID="lblAverageRating" runat="server" Text="Label"></asp:Label> <small>/ 5</small>
+                            </h3>
+                            <div id="star-container">
+                                <span class="fa fa-star star"></span>
+                                <span class="fa fa-star star"></span>
+                                <span class="fa fa-star star"></span>
+                                <span class="fa fa-star star"></span>
+                                <span class="fa fa-star star"></span>
                             </div>
                         </div>
 
@@ -109,11 +115,13 @@
                                     </div>
                                 </div>
                                 <div class="progress" style="width:50%; height: 10px; margin:10px 5px;">
-                                      <div class="progress-bar bg-dark" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                      </div>
+                                    <div class="progress-bar bg-dark" role="progressbar" 
+                                         style='<%= "width: " + (ViewState["FiveStarPercentage"] != null ? ViewState["FiveStarPercentage"] + "%" : "0%") %>;'
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
                                 </div>
                                 <div class="right-progress">
-                                    <p style="line-height:1; margin:5px 5px;">1</p>
+                                    <p style="line-height:1; margin:5px 5px;"><%= ViewState["FiveStarCount"] ?? 0 %></p>
                                 </div>
                             </div>
                             <%-- 4 --%>
@@ -124,11 +132,13 @@
                                     </div>
                                 </div>
                                 <div class="progress" style="width:50%; height: 10px; margin:10px 5px;">
-                                      <div class="progress-bar bg-dark" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                      </div>
+                                    <div class="progress-bar bg-dark" role="progressbar" 
+                                         style='<%= "width: " + (ViewState["FourStarPercentage"] != null ? ViewState["FourStarPercentage"] + "%" : "0%") %>;'
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
                                 </div>
                                 <div class="right-progress">
-                                    <p style="line-height:1; margin:5px 5px;">1</p>
+                                    <p style="line-height:1; margin:5px 5px;"><%= ViewState["FourStarCount"] ?? 0 %></p>
                                 </div>
                             </div>
                             <%-- 3 --%>
@@ -139,11 +149,13 @@
                                     </div>
                                 </div>
                                 <div class="progress" style="width:50%; height: 10px; margin:10px 5px;">
-                                      <div class="progress-bar bg-dark" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                      </div>
+                                    <div class="progress-bar bg-dark" role="progressbar" 
+                                         style='<%= "width: " + (ViewState["ThreeStarPercentage"] != null ? ViewState["ThreeStarPercentage"] + "%" : "0%") %>;'
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
                                 </div>
                                 <div class="right-progress">
-                                    <p style="line-height:1; margin:5px 5px;">1</p>
+                                    <p style="line-height:1; margin:5px 5px;"><%= ViewState["ThreeStarCount"] ?? 0 %></p>
                                 </div>
                             </div>
                             <%-- 2 --%>
@@ -154,11 +166,13 @@
                                     </div>
                                 </div>
                                 <div class="progress" style="width:50%; height: 10px; margin:10px 5px;">
-                                      <div class="progress-bar bg-dark" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                      </div>
+                                    <div class="progress-bar bg-dark" role="progressbar" 
+                                         style='<%= "width: " + (ViewState["TwoStarPercentage"] != null ? ViewState["TwoStarPercentage"] + "%" : "0%") %>;'
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
                                 </div>
                                 <div class="right-progress">
-                                    <p style="line-height:1; margin:5px 5px;">0</p>
+                                    <p style="line-height:1; margin:5px 5px;"><%= ViewState["TwoStarCount"] ?? 0 %></p>
                                 </div>
                             </div>
                             <%-- 1 --%>
@@ -169,11 +183,13 @@
                                     </div>
                                 </div>
                                 <div class="progress" style="width:50%; height: 10px; margin:10px 5px;">
-                                      <div class="progress-bar bg-dark" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                      </div>
+                                    <div class="progress-bar bg-dark" role="progressbar" 
+                                         style='<%= "width: " + (ViewState["OneStarPercentage"] != null ? ViewState["OneStarPercentage"] + "%" : "0%") %>;'
+                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
                                 </div>
                                 <div class="right-progress">
-                                    <p style="line-height:1; margin:5px 5px;">0</p>
+                                    <p style="line-height:1; margin:5px 5px;"><%= ViewState["OneStarCount"] ?? 0 %></p>
                                 </div>
                             </div>
 
@@ -183,23 +199,18 @@
                     <div class="comment-sort d-flex flex-row justify-content-between align-items-center">
                         <div class="comment-sort1"><b>Product Reviews</b></div>
                         <div class="dropdown comment-sort2">
-                            <button id="sortButton" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%--<button id="sortButton" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Sort: Recent
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="infopage.aspx?sort=recent" onclick="updateSortText('Recent')">Recent</a></li>
-                                <li><a class="dropdown-item" href="infopage.aspx?sort=ratingHigh" onclick="updateSortText('Rating: High to Low')">Rating: High to Low</a></li>
-                                <li><a class="dropdown-item" href="infopage.aspx?sort=ratingLow" onclick="updateSortText('Rating: Low to High')">Rating: Low to High</a></li>
-                            </ul>
+                            </button>--%>
                         </div>
                     </div>
 
-                    <asp:ListView ID="CommentsListView" runat="server">
+                    <asp:ListView ID="lvComments" runat="server">
                         <ItemTemplate>
                             <div class="comment-user d-flex flex-row">
                                 <div class="card text-center comment-user-left" style="flex: 1;">
                                     <img src='<%# Eval("profilePicture") %>' alt="Profile Picture" class="profilePic"/>
-                                    <p style="font-size: clamp(12px, 3vh, 18px); font-weight:bold; margin-top:20px; "><%# Eval("CommentTime", "{0:dd/MM/yyyy HH:mm}") %></p>
+                                    <p style="font-size: clamp(12px, 3vh, 18px); font-weight:bold; margin-top:20px; "><%# Eval("ReviewDate", "{0:dd/MM/yyyy HH:mm}") %></p>
                                 </div>
 
                                 <div class="d-flex flex-column vh-80" style="margin-left: 15px; flex:3">
@@ -208,7 +219,7 @@
                                         </div>
                                         <div>
                                             <span class="rating">
-                                                <%# GetStarRating((int)Eval("userRating")) %> 
+                                                <%# GetStarRating((int)Eval("Rating")) %> 
                                             </span>
                                         </div>                          
                                     </div>
@@ -528,25 +539,17 @@
         }
 
         //you
-        //function updateSortText(sortOption) {
-        //    document.getElementById("sortButton").innerText = 'Sort: ' + sortOption;
-        //}
-
-        window.onload = function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const sortOption = urlParams.get('sort');
-            const sortButton = document.getElementById('sortButton');
-            switch (sortOption) {
-                case 'ratingHigh':
-                    sortButton.innerText = "Sort: Rating: High to Low";
-                    break;
-                case 'ratingLow':
-                    sortButton.innerText = "Sort: Rating: Low to High";
-                    break;
-                default:
-                    sortButton.innerText = "Sort: Recent";
-                    break;
-            }
+        function updateStarDisplay(averageRating) {
+            const stars = document.querySelectorAll('#star-container .star');
+            stars.forEach((star, index) => {
+                if (index < Math.floor(averageRating)) {
+                    star.classList.add('checked'); // Fully filled star
+                } else if (index < Math.ceil(averageRating) && averageRating % 1 !== 0) {
+                    star.classList.add('half-checked'); // half-filled star
+                } else {
+                    star.classList.remove('checked'); // Empty star
+                }
+            });
         }
 
     </script>

@@ -50,13 +50,19 @@ namespace Assignment
                 BindAddOns();
 
                 LoadAddOnSelection();
-                
+
                 //you
-                string sortOption = Request.QueryString["sort"];
-                LoadComments(sortOption);
+
+                LoadReviewData(currentCar);
+
+                LoadComments(currentCar);
             }
+
+            DataBind();
             
         }
+
+        
 
         private void LoadAddOnSelection()
         {
@@ -84,66 +90,6 @@ namespace Assignment
 
             }
         }
-
-      
-
-        private void LoadComments(string sortOption)
-        {
-            using (var db = new SystemDatabaseEntities())
-            {
-                var query = from Review in db.Reviews
-                            join Booking in db.Bookings on Review.BookingId equals Booking.Id
-                            join ApplicationUser in db.ApplicationUsers on Booking.UserId equals ApplicationUser.Id
-                            select new
-                            {
-                                profilePicture = ApplicationUser.ProfilePicture,
-                                commentTime = Review.ReviewDate,
-                                username = ApplicationUser.Username,
-                                reviewText = Review.ReviewText,
-                                userRating = Review.Rating
-                            };
-
-
-                switch (sortOption)
-                {
-                    case "ratingHigh":
-                        query = query.OrderByDescending(c => c.userRating);
-                        break;
-                    case "ratingLow":
-                        query = query.OrderBy(c => c.userRating);
-                        break;
-                    default:
-
-                        query = query.OrderByDescending((c) => c.commentTime);
-                        break;
-                }
-
-                var comments = query.ToList();
-                CommentsListView.DataSource = comments;
-                CommentsListView.DataBind();
-
-            }
-        }
-
-        public string GetStarRating(int rating)
-        {
-
-            // Create the star rating HTML
-            StringBuilder sb = new StringBuilder();
-            for (int i = 1; i <= 5; i++)
-            {
-                if (i <= rating)
-                {
-                    sb.Append("<span class='fa fa-star' style='color: orange;'></span>"); // Filled star
-                }
-                else
-                {
-                    sb.Append("<span class='fa fa-star' style='color: lightgray;'></span>"); // Empty star
-                }
-            }
-            return sb.ToString();
-        }
-
 
         public void GetCarDetailsByCarPlate(string carPlate)
         {
@@ -298,5 +244,89 @@ namespace Assignment
             string script = $"updateProgressBar({currentStep});";
             ScriptManager.RegisterStartupScript(this, GetType(), "UpdateProgressBar", script, true);
         }
+
+
+
+        //You
+        private void LoadReviewData(string currentCar)
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                var reviews = db.Reviews.Where(r => r.Booking.Car.CarPlate == currentCar).ToList();
+
+                int totalReviews = reviews.Count;
+
+                double averageRating = reviews.Any() ? (double)reviews.Average(r => r.Rating) : 0;
+
+                int fiveStar = reviews.Count(r => r.Rating == 5);
+                int fourStar = reviews.Count(r => r.Rating == 4);
+                int threeStar = reviews.Count(r => r.Rating == 3);
+                int twoStar = reviews.Count(r => r.Rating == 2);
+                int oneStar = reviews.Count(r => r.Rating == 1);
+
+                double fiveStarPercentage = totalReviews > 0 ? (fiveStar * 100.0) / totalReviews : 0;
+                double fourStarPercentage = totalReviews > 0 ? (fourStar * 100.0) / totalReviews : 0;
+                double threeStarPercentage = totalReviews > 0 ? (threeStar * 100.0) / totalReviews : 0;
+                double twoStarPercentage = totalReviews > 0 ? (twoStar * 100.0) / totalReviews : 0;
+                double oneStarPercentage = totalReviews > 0 ? (oneStar * 100.0) / totalReviews : 0;
+
+                ViewState["TotalReviews"] = totalReviews;
+                ViewState["FiveStarPercentage"] = fiveStarPercentage;
+                ViewState["FourStarPercentage"] = fourStarPercentage;
+                ViewState["ThreeStarPercentage"] = threeStarPercentage;
+                ViewState["TwoStarPercentage"] = twoStarPercentage;
+                ViewState["OneStarPercentage"] = oneStarPercentage;
+                ViewState["FiveStarCount"] = fiveStar;
+                ViewState["FourStarCount"] = fourStar;
+                ViewState["ThreeStarCount"] = threeStar;
+                ViewState["TwoStarCount"] = twoStar;
+                ViewState["OneStarCount"] = oneStar;
+
+                lblTotalReview.Text = $"({totalReviews} total)";
+
+                lblAverageRating.Text = averageRating.ToString("F1");
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "updateStars", $"updateStarDisplay({averageRating});", true);
+            }
+        }
+        private void LoadComments(string currentCar)
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                var comments = db.Reviews
+                                .Where(r => r.Booking.Car.CarPlate == currentCar)
+                                .Select(r => new
+                                {
+                                    Username = r.Booking.ApplicationUser.Username,
+                                    ProfilePicture = r.Booking.ApplicationUser.ProfilePicture,
+                                    r.ReviewText,
+                                    r.ReviewDate,
+                                    r.Rating
+                                })
+                                .ToList();
+                lvComments.DataSource = comments;
+                lvComments.DataBind();
+            }
+        }
+
+        protected string GetStarRating(int rating)
+        {
+            string stars = "";
+
+            for (int i = 1; i <= 5; i++)
+            {
+                if (i <= rating)
+                {
+                    stars += "<span class='fa fa-star checked'></span>";
+                }
+                else
+                {
+                    stars += "<span class='fa fa-star'></span>";
+                }
+            }
+
+            return stars;
+        }
+
     }
 }
