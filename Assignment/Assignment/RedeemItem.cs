@@ -14,14 +14,20 @@ namespace Assignment
     
     public partial class RedeemItem
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public RedeemItem()
+        {
+            this.Redemptions = new HashSet<Redemption>();
+        }
+    
         public int RedeemItemId { get; set; }
         public string ItemName { get; set; }
         public Nullable<int> ItemPoints { get; set; }
         public string ItemDescription { get; set; }
         public string Status { get; set; }
         public string ItemImage { get; set; }
-        public Nullable<int> RedemptionID { get; set; }
     
-        public virtual Redemption Redemption { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Redemption> Redemptions { get; set; }
     }
 }

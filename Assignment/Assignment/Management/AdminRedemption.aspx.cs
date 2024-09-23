@@ -76,5 +76,26 @@ namespace Assignment.Management
             lvRedeemItems.EditIndex = -1;
             BindListView();
         }
+
+        protected void DeleteButton_Click(object sender, EventArgs e)
+        {
+            var button = (LinkButton)sender;
+
+            int RedeemItemId = int.Parse(button.CommandArgument);
+
+            using (var db = new SystemDatabaseEntities())
+            {
+                var redeemItems = db.RedeemItems.FirstOrDefault(r => r.RedeemItemId == RedeemItemId);
+
+                if (redeemItems != null)
+                {
+                    db.RedeemItems.Remove(redeemItems);
+
+                    db.SaveChanges();
+
+                    BindListView();
+                }
+            }
+        }
     }
 }

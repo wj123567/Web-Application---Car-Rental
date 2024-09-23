@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="SystemDatabaseModelStoreContainer" CdmEntityContainer="SystemDatabaseEntities">
-    <EntitySetMapping Name="AddOns">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.AddOn">
-        <MappingFragment StoreEntitySet="AddOn">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="maxQuantity" ColumnName="maxQuantity" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ApplicationUsers">
       <EntityTypeMapping TypeName="SystemDatabaseModel.ApplicationUser">
         <MappingFragment StoreEntitySet="ApplicationUser">
@@ -37,6 +25,11 @@
     <EntitySetMapping Name="Bookings">
       <EntityTypeMapping TypeName="SystemDatabaseModel.Booking">
         <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+          <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
+          <ScalarProperty Name="UpdateReason" ColumnName="UpdateReason" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CarPlate" ColumnName="CarPlate" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -51,16 +44,6 @@
           <ScalarProperty Name="EarnDate" ColumnName="EarnDate" />
           <ScalarProperty Name="PointsRemaining" ColumnName="PointsRemaining" />
           <ScalarProperty Name="PointsStatus" ColumnName="PointsStatus" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BookingAddOns">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.BookingAddOn">
-        <MappingFragment StoreEntitySet="BookingAddOn">
-          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
-          <ScalarProperty Name="AddOnId" ColumnName="AddOnId" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -135,81 +118,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RedeemItems">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.RedeemItem">
-        <MappingFragment StoreEntitySet="RedeemItem">
-          <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
-          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-          <ScalarProperty Name="ItemPoints" ColumnName="ItemPoints" />
-          <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
-          <ScalarProperty Name="RedemptionID" ColumnName="RedemptionID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Redemptions">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
-        <MappingFragment StoreEntitySet="Redemption">
-          <ScalarProperty Name="RedemptionID" ColumnName="RedemptionID" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestBooks">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.TestBook">
-        <MappingFragment StoreEntitySet="TestBook">
-          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
-          <ScalarProperty Name="Destination" ColumnName="Destination" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
-          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
-          <ScalarProperty Name="DriverGender" ColumnName="DriverGender" />
-          <ScalarProperty Name="DriverID" ColumnName="DriverID" />
-          <ScalarProperty Name="DriverPhone" ColumnName="DriverPhone" />
-          <ScalarProperty Name="DriverAge" ColumnName="DriverAge" />
-          <ScalarProperty Name="DriverRace" ColumnName="DriverRace" />
-          <ScalarProperty Name="DriverLicense" ColumnName="DriverLicense" />
-          <ScalarProperty Name="RentalPurpose" ColumnName="RentalPurpose" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestTrips">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.TestTrip">
-        <MappingFragment StoreEntitySet="TestTrip">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Pickup_point" ColumnName="Pickup_point" />
-          <ScalarProperty Name="Pickup_state" ColumnName="Pickup_state" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="Dropoff_point" ColumnName="Dropoff_point" />
-          <ScalarProperty Name="Dropoff_state" ColumnName="Dropoff_state" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="CarPlateNo" ColumnName="CarPlateNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserRegistrations">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.UserRegistration">
-        <MappingFragment StoreEntitySet="UserRegistration">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
-          <ScalarProperty Name="EncryptionKey" ColumnName="EncryptionKey" />
-          <ScalarProperty Name="IVkey" ColumnName="IVkey" />
-          <ScalarProperty Name="Roles" ColumnName="Roles" />
-          <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
-          <ScalarProperty Name="TwoStepVerification" ColumnName="TwoStepVerification" />
-          <ScalarProperty Name="EmailVerification" ColumnName="EmailVerification" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="UserRewardPointsViews">
       <EntityTypeMapping TypeName="SystemDatabaseModel.UserRewardPointsView">
         <MappingFragment StoreEntitySet="UserRewardPointsView">
@@ -228,6 +136,48 @@
           <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
           <ScalarProperty Name="BookingId" ColumnName="BookingId" />
           <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RedeemItems">
+      <EntityTypeMapping TypeName="SystemDatabaseModel.RedeemItem">
+        <MappingFragment StoreEntitySet="RedeemItem">
+          <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+          <ScalarProperty Name="ItemPoints" ColumnName="ItemPoints" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Redemptions">
+      <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
+        <MappingFragment StoreEntitySet="Redemption">
+          <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddOns">
+      <EntityTypeMapping TypeName="SystemDatabaseModel.AddOn">
+        <MappingFragment StoreEntitySet="AddOn">
+          <ScalarProperty Name="maxQuantity" ColumnName="maxQuantity" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingAddOns">
+      <EntityTypeMapping TypeName="SystemDatabaseModel.BookingAddOn">
+        <MappingFragment StoreEntitySet="BookingAddOn">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="AddOnId" ColumnName="AddOnId" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

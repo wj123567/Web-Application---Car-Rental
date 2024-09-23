@@ -11,12 +11,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Web.Services.Description;
 
 namespace Assignment
 {
     public partial class driverManagement : System.Web.UI.Page
     {
-        private int PageSize = 10;
+        private int PageSize = 1;
         private int PageNumber
         {
             get { return ViewState["PageNumber"] != null ? (int)ViewState["PageNumber"] : 1; }
@@ -27,19 +28,25 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
-                loadDriverInfo();
+                ViewState["SQLQuery"] = "SELECT * FROM Driver";
+                loadDriverInfo("");
             }
         }
 
 
-        protected void loadDriverInfo()
+        protected void loadDriverInfo(string sort)
         {
-            string selectDriver = "SELECT * FROM Driver ORDER BY DateApply OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
+            string selectDriver = ViewState["SQLQuery"].ToString() + " ORDER BY DateApply OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
             com.Parameters.AddWithValue("@Pagesize", PageSize);
             com.Parameters.AddWithValue("@PageNumber", PageNumber);
+            com.Parameters.AddWithValue("@search", "%" + searchBar.Text.Replace(" ", "") + "%");
+            if(sort != "" && sort != "All")
+            {
+                com.Parameters.AddWithValue("@Approval", sort);
+            }
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();
             da.Fill(ds, "DriverTable");
@@ -47,49 +54,51 @@ namespace Assignment
             DriverReapeter.DataSource = ds.Tables["DriverTable"];
             DriverReapeter.DataBind();
             con.Close();
-            UpdatePageInfo(false, getTotalRow());
+            UpdatePageInfo(getTotalRow(sort));
             ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addDateApply()", true);
         }
 
-        protected void UpdatePageInfo(bool isSearching, int row)
+        protected void UpdatePageInfo(int row)
         {
-            if (!isSearching)
-            {
                 int totalPage = (int)Math.Ceiling((double)row / (double)PageSize);
                 lblPageInfo.Text = "Page " + PageNumber + " of " + totalPage;
                 lblTotalRecord.Text = "Total Record: " + row;
                 btnPrevious.Enabled = PageNumber > 1;
                 btnNext.Enabled = PageNumber < totalPage;
-            }
-            else if (isSearching)
-            {
-                lblPageInfo.Text = "Page " + 1 + " of " + 1;
-                lblTotalRecord.Text = "Total Record: " + row;
-                btnPrevious.Enabled = false;
-                btnNext.Enabled = false;
-            }
-
         }
 
         protected void btnPrevious_Click(object sender, EventArgs e)
         {
             PageNumber--;
-            loadDriverInfo();
+            loadDriverInfo("");
             updateDriverTable.Update();
         }
 
         protected void btnNext_Click(object sender, EventArgs e)
         {
             PageNumber++;
-            loadDriverInfo();
+            loadDriverInfo("");
             updateDriverTable.Update();
         }
 
-        protected int getTotalRow()
+        protected int getTotalRow(string sort)
         {
-            String selectAll = "SELECT COUNT(*) FROM Driver";
+            String selectAll = "SELECT COUNT(*) FROM Driver ";
+            int whereIndex = ViewState["SQLQuery"].ToString().IndexOf("WHERE", StringComparison.OrdinalIgnoreCase);
+
+            if (whereIndex != -1)
+            {
+                string afterWhere = ViewState["SQLQuery"].ToString().Substring(whereIndex).Trim();
+                selectAll += afterWhere;
+            }
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(selectAll, con);
+            com.Parameters.AddWithValue("@search", "%" + searchBar.Text.Replace(" ", "") + "%");
+            if (sort != "" && sort != "All")
+            {
+                com.Parameters.AddWithValue("@Approval", sort);
+            }
             con.Open();
             return (int)com.ExecuteScalar();
         }
@@ -258,29 +267,9 @@ namespace Assignment
         protected void hiddenBtn_Click(object sender, EventArgs e)
         {
             string selectDriver = "SELECT * FROM Driver WHERE DriverName Like @search OR DriverId Like @search OR DriverPno Like @search OR DriverLicense LIKE @search";
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            string search = searchBar.Text.Replace(" ", "");
-            if (search == "")
-            {
-                loadDriverInfo();
-                updateDriverTable.Update();
-            }
-            else
-            {
-                con.Open();
-                SqlCommand com = new SqlCommand(selectDriver, con);
-                com.Parameters.AddWithValue("@search", "%" + searchBar.Text + "%");
-                SqlDataAdapter da = new SqlDataAdapter(com);
-                DataSet ds = new DataSet();
-                da.Fill(ds, "DriverTable");
-                int row = ds.Tables["DriverTable"].Rows.Count;
-                ViewState["DriverTable"] = ds.Tables["DriverTable"];
-                DriverReapeter.DataSource = ds.Tables["DriverTable"];
-                DriverReapeter.DataBind();
-                con.Close();
-                UpdatePageInfo(true, row);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addDateApply()", true);
-            }
+            ViewState["SQLQuery"] = selectDriver;
+            loadDriverInfo("");
+            updateDriverTable.Update();
         }
 
         protected void sortCategory(object sender, EventArgs e)
@@ -289,40 +278,19 @@ namespace Assignment
             string sort = button.CommandArgument;
             string selectDriver = " ";
 
-
-
-            if (sort == "All")
-            {
-                loadDriverInfo();
-                updateDriverTable.Update();
-                return;
-            }
-            else if (sort == "P")
-            {
-                selectDriver = "SELECT * FROM Driver WHERE Approval = @Approval ORDER BY DateApply";
-            }
-            else
+            if (sort != "All")
             {
                 selectDriver = "SELECT * FROM Driver WHERE Approval = @Approval";
             }
-
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            con.Open();
-            SqlCommand com = new SqlCommand(selectDriver, con);
-            if (sort != "All")
+            else
             {
-                com.Parameters.AddWithValue("@Approval", sort);
+                selectDriver = "SELECT * FROM Driver";
             }
-            SqlDataAdapter da = new SqlDataAdapter(com);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "DriverTable");
-            int row = ds.Tables["DriverTable"].Rows.Count;
-            ViewState["DriverTable"] = ds.Tables["DriverTable"];
-            DriverReapeter.DataSource = ds.Tables["DriverTable"];
-            DriverReapeter.DataBind();
-            con.Close();
-            UpdatePageInfo(true, row);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "UpdateSorting", "addDateApply()", true);
+
+            ViewState["SQLQuery"] = selectDriver;
+            loadDriverInfo(sort);
+            updateDriverTable.Update();
+
         }
     }
 }

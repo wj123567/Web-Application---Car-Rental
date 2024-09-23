@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar(max)" />
           <Property Name="Price" Type="float" />
@@ -54,6 +54,11 @@
           <Property Name="EarnDate" Type="datetime" />
           <Property Name="PointsRemaining" Type="int" />
           <Property Name="PointsStatus" Type="varchar" MaxLength="20" />
+          <Property Name="UpdateReason" Type="varchar(max)" />
+          <Property Name="RejectReason" Type="varchar(max)" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="BookingDate" Type="datetime" />
+          <Property Name="FinalPrice" Type="float" />
         </EntityType>
         <EntityType Name="BookingAddOn">
           <Key>
@@ -61,9 +66,8 @@
             <PropertyRef Name="AddOnId" />
           </Key>
           <Property Name="BookingId" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="AddOnId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AddOnId" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="Price" Type="float" />
         </EntityType>
         <EntityType Name="Car">
           <Key>
@@ -141,14 +145,14 @@
           <Property Name="ItemDescription" Type="varchar(max)" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
           <Property Name="ItemImage" Type="varchar(max)" />
-          <Property Name="RedemptionID" Type="int" />
         </EntityType>
         <EntityType Name="Redemption">
           <Key>
-            <PropertyRef Name="RedemptionID" />
+            <PropertyRef Name="RedeemItemId" />
+            <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="RedemptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="varchar" MaxLength="50" />
+          <Property Name="RedeemItemId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RedeemDate" Type="datetime" />
         </EntityType>
         <EntityType Name="Reviews">
@@ -160,56 +164,6 @@
           <Property Name="ReviewText" Type="nvarchar(max)" />
           <Property Name="Rating" Type="int" />
           <Property Name="ReviewDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="TestBook">
-          <Key>
-            <PropertyRef Name="CustomerName" />
-          </Key>
-          <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
-          <Property Name="Address" Type="varchar" MaxLength="50" />
-          <Property Name="Country" Type="varchar" MaxLength="50" />
-          <Property Name="CustomerPhone" Type="varchar" MaxLength="20" />
-          <Property Name="Destination" Type="varchar" MaxLength="50" />
-          <Property Name="Note" Type="varchar" MaxLength="50" />
-          <Property Name="DriverName" Type="varchar" MaxLength="50" />
-          <Property Name="DriverGender" Type="char" MaxLength="4" />
-          <Property Name="DriverID" Type="varchar" MaxLength="20" />
-          <Property Name="DriverPhone" Type="varchar" MaxLength="20" />
-          <Property Name="DriverAge" Type="int" />
-          <Property Name="DriverRace" Type="varchar" MaxLength="10" />
-          <Property Name="DriverLicense" Type="varchar" MaxLength="20" />
-          <Property Name="RentalPurpose" Type="varchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="TestTrip">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="char" MaxLength="9" Nullable="false" />
-          <Property Name="Pickup_point" Type="varchar" MaxLength="50" />
-          <Property Name="Pickup_state" Type="varchar" MaxLength="50" />
-          <Property Name="StartDate" Type="datetime" />
-          <Property Name="Dropoff_point" Type="varchar" MaxLength="50" />
-          <Property Name="Dropoff_state" Type="varchar" MaxLength="50" />
-          <Property Name="EndDate" Type="datetime" />
-          <Property Name="CarPlateNo" Type="varchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="UserRegistration">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="256" />
-          <Property Name="DOB" Type="date" />
-          <Property Name="RegistrationDate" Type="date" />
-          <Property Name="EncryptionKey" Type="varchar" MaxLength="256" />
-          <Property Name="IVkey" Type="varchar" MaxLength="256" />
-          <Property Name="Roles" Type="char" MaxLength="10" />
-          <Property Name="ProfilePicture" Type="varchar(max)" />
-          <Property Name="TwoStepVerification" Type="int" />
-          <Property Name="EmailVerification" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\WEB-APPLICATION- - -CAR-RENTAL\ASSIGNMENT\ASSIGNMENT\APP_DATA\SYSTEMDATABASE.MDF.dbo.UserRewardPointsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -333,9 +287,7 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PaymentCard_ToApplicationUser">
-          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
           <End Role="PaymentCard" Type="Self.PaymentCard" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ApplicationUser">
@@ -346,20 +298,8 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RedeemItem_Redemption">
-          <End Role="Redemption" Type="Self.Redemption" Multiplicity="0..1" />
-          <End Role="RedeemItem" Type="Self.RedeemItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Redemption">
-              <PropertyRef Name="RedemptionID" />
-            </Principal>
-            <Dependent Role="RedeemItem">
-              <PropertyRef Name="RedemptionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Redemption_ApplicationUser">
-          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
+          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="1" />
           <End Role="Redemption" Type="Self.Redemption" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ApplicationUser">
@@ -367,6 +307,18 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             </Principal>
             <Dependent Role="Redemption">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Redemption_RedeemItem">
+          <End Role="RedeemItem" Type="Self.RedeemItem" Multiplicity="1" />
+          <End Role="Redemption" Type="Self.Redemption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RedeemItem">
+              <PropertyRef Name="RedeemItemId" />
+            </Principal>
+            <Dependent Role="Redemption">
+              <PropertyRef Name="RedeemItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -379,18 +331,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             </Principal>
             <Dependent Role="Reviews">
               <PropertyRef Name="BookingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TestTrip_ToCar">
-          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
-          <End Role="TestTrip" Type="Self.TestTrip" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Car">
-              <PropertyRef Name="CarPlate" />
-            </Principal>
-            <Dependent Role="TestTrip">
-              <PropertyRef Name="CarPlateNo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -407,9 +347,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
           <EntitySet Name="RedeemItem" EntityType="Self.RedeemItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Redemption" EntityType="Self.Redemption" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TestBook" EntityType="Self.TestBook" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TestTrip" EntityType="Self.TestTrip" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRewardPointsView" EntityType="Self.UserRewardPointsView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [UserRewardPointsView].[Username] AS [Username], 
@@ -458,39 +395,23 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             <End Role="ApplicationUser" EntitySet="ApplicationUser" />
             <End Role="PaymentCard" EntitySet="PaymentCard" />
           </AssociationSet>
-          <AssociationSet Name="FK_RedeemItem_Redemption" Association="Self.FK_RedeemItem_Redemption">
-            <End Role="Redemption" EntitySet="Redemption" />
-            <End Role="RedeemItem" EntitySet="RedeemItem" />
-          </AssociationSet>
           <AssociationSet Name="FK_Redemption_ApplicationUser" Association="Self.FK_Redemption_ApplicationUser">
             <End Role="ApplicationUser" EntitySet="ApplicationUser" />
+            <End Role="Redemption" EntitySet="Redemption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Redemption_RedeemItem" Association="Self.FK_Redemption_RedeemItem">
+            <End Role="RedeemItem" EntitySet="RedeemItem" />
             <End Role="Redemption" EntitySet="Redemption" />
           </AssociationSet>
           <AssociationSet Name="FK_Reviews_Booking" Association="Self.FK_Reviews_Booking">
             <End Role="Booking" EntitySet="Booking" />
             <End Role="Reviews" EntitySet="Reviews" />
           </AssociationSet>
-          <AssociationSet Name="FK_TestTrip_ToCar" Association="Self.FK_TestTrip_ToCar">
-            <End Role="Car" EntitySet="Car" />
-            <End Role="TestTrip" EntitySet="TestTrip" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SystemDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="AddOn">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Price" Type="Double" />
-          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="maxQuantity" Type="Int32" />
-          <NavigationProperty Name="BookingAddOns" Relationship="Self.FK_BookingAddOn_ToAddOn" FromRole="AddOn" ToRole="BookingAddOn" />
-        </EntityType>
         <EntityType Name="ApplicationUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -513,7 +434,7 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_ToApplicationUser" FromRole="ApplicationUser" ToRole="Booking" />
           <NavigationProperty Name="Drivers" Relationship="Self.FK_Driver_ToApplicationUser" FromRole="ApplicationUser" ToRole="Driver" />
           <NavigationProperty Name="PaymentCards" Relationship="Self.FK_PaymentCard_ToApplicationUser" FromRole="ApplicationUser" ToRole="PaymentCard" />
-          <NavigationProperty Name="Redemptions" Relationship="Self.FK_Redemption_ApplicationUser" FromRole="ApplicationUser" ToRole="Redemption" />
+          <NavigationProperty Name="Redemptions" Relationship="SystemDatabaseModel.FK_Redemption_ApplicationUser" FromRole="ApplicationUser" ToRole="Redemption" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -537,20 +458,13 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
           <NavigationProperty Name="Car" Relationship="Self.FK_Booking_ToCar" FromRole="Booking" ToRole="Car" />
           <NavigationProperty Name="Driver" Relationship="Self.FK_Booking_ToDriver" FromRole="Booking" ToRole="Driver" />
           <NavigationProperty Name="PaymentCard" Relationship="Self.FK_Booking_ToPaymentCard" FromRole="Booking" ToRole="PaymentCard" />
-          <NavigationProperty Name="BookingAddOns" Relationship="Self.FK_BookingAddOn_ToBooking" FromRole="Booking" ToRole="BookingAddOn" />
           <NavigationProperty Name="Reviews" Relationship="SystemDatabaseModel.FK_Reviews_Booking" FromRole="Booking" ToRole="Review" />
-        </EntityType>
-        <EntityType Name="BookingAddOn">
-          <Key>
-            <PropertyRef Name="BookingId" />
-            <PropertyRef Name="AddOnId" />
-          </Key>
-          <Property Name="BookingId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="AddOnId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="Price" Type="Double" />
-          <NavigationProperty Name="AddOn" Relationship="Self.FK_BookingAddOn_ToAddOn" FromRole="BookingAddOn" ToRole="AddOn" />
-          <NavigationProperty Name="Booking" Relationship="Self.FK_BookingAddOn_ToBooking" FromRole="BookingAddOn" ToRole="Booking" />
+          <Property Name="UpdateReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RejectReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BookingDate" Type="DateTime" Precision="3" />
+          <Property Name="FinalPrice" Type="Double" />
+          <NavigationProperty Name="BookingAddOns" Relationship="SystemDatabaseModel.FK_BookingAddOn_ToBooking" FromRole="Booking" ToRole="BookingAddOn" />
         </EntityType>
         <EntityType Name="Car">
           <Key>
@@ -571,7 +485,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_ToCar" FromRole="Car" ToRole="Booking" />
           <NavigationProperty Name="CarBrand1" Relationship="Self.FK_Car_ToCarBrand" FromRole="Car" ToRole="CarBrand" />
           <NavigationProperty Name="Location" Relationship="Self.FK_Car_ToLocation" FromRole="Car" ToRole="Location" />
-          <NavigationProperty Name="TestTrips" Relationship="Self.FK_TestTrip_ToCar" FromRole="Car" ToRole="TestTrip" />
         </EntityType>
         <EntityType Name="CarBrand">
           <Key>
@@ -628,92 +541,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
           <NavigationProperty Name="ApplicationUser" Relationship="Self.FK_PaymentCard_ToApplicationUser" FromRole="PaymentCard" ToRole="ApplicationUser" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_ToPaymentCard" FromRole="PaymentCard" ToRole="Booking" />
         </EntityType>
-        <EntityType Name="RedeemItem">
-          <Key>
-            <PropertyRef Name="RedeemItemId" />
-          </Key>
-          <Property Name="RedeemItemId" Type="Int32" Nullable="false" />
-          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ItemPoints" Type="Int32" />
-          <Property Name="ItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ItemImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="RedemptionID" Type="Int32" />
-          <NavigationProperty Name="Redemption" Relationship="Self.FK_RedeemItem_Redemption" FromRole="RedeemItem" ToRole="Redemption" />
-        </EntityType>
-        <EntityType Name="Redemption">
-          <Key>
-            <PropertyRef Name="RedemptionID" />
-          </Key>
-          <Property Name="RedemptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RedeemDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicationUser" Relationship="Self.FK_Redemption_ApplicationUser" FromRole="Redemption" ToRole="ApplicationUser" />
-          <NavigationProperty Name="RedeemItems" Relationship="Self.FK_RedeemItem_Redemption" FromRole="Redemption" ToRole="RedeemItem" />
-        </EntityType>
-        <EntityType Name="TestBook">
-          <Key>
-            <PropertyRef Name="CustomerName" />
-          </Key>
-          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Note" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DriverName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DriverGender" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Name="DriverID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DriverPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DriverAge" Type="Int32" />
-          <Property Name="DriverRace" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="DriverLicense" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="RentalPurpose" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="TestTrip">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Pickup_point" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Pickup_state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" />
-          <Property Name="Dropoff_point" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Dropoff_state" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="CarPlateNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Car" Relationship="Self.FK_TestTrip_ToCar" FromRole="TestTrip" ToRole="Car" />
-        </EntityType>
-        <EntityType Name="UserRegistration">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="DOB" Type="DateTime" Precision="0" />
-          <Property Name="RegistrationDate" Type="DateTime" Precision="0" />
-          <Property Name="EncryptionKey" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="IVkey" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="Roles" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="ProfilePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TwoStepVerification" Type="Int32" />
-          <Property Name="EmailVerification" Type="Int32" />
-        </EntityType>
-        <Association Name="FK_BookingAddOn_ToAddOn">
-          <End Role="AddOn" Type="Self.AddOn" Multiplicity="1" />
-          <End Role="BookingAddOn" Type="Self.BookingAddOn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AddOn">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BookingAddOn">
-              <PropertyRef Name="AddOnId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Booking_ToApplicationUser">
           <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
@@ -748,18 +575,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="PaymentCard">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Redemption_ApplicationUser">
-          <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
-          <End Role="Redemption" Type="Self.Redemption" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicationUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Redemption">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -800,18 +615,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BookingAddOn_ToBooking">
-          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
-          <End Role="BookingAddOn" Type="Self.BookingAddOn" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Booking">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="BookingAddOn">
-              <PropertyRef Name="BookingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Car_ToCarBrand">
           <End Role="CarBrand" Type="Self.CarBrand" Multiplicity="0..1" />
           <End Role="Car" Type="Self.Car" Multiplicity="*" />
@@ -836,49 +639,14 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TestTrip_ToCar">
-          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
-          <End Role="TestTrip" Type="Self.TestTrip" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Car">
-              <PropertyRef Name="CarPlate" />
-            </Principal>
-            <Dependent Role="TestTrip">
-              <PropertyRef Name="CarPlateNo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RedeemItem_Redemption">
-          <End Role="Redemption" Type="Self.Redemption" Multiplicity="0..1" />
-          <End Role="RedeemItem" Type="Self.RedeemItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Redemption">
-              <PropertyRef Name="RedemptionID" />
-            </Principal>
-            <Dependent Role="RedeemItem">
-              <PropertyRef Name="RedemptionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SystemDatabaseEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AddOns" EntityType="Self.AddOn" />
           <EntitySet Name="ApplicationUsers" EntityType="Self.ApplicationUser" />
           <EntitySet Name="Bookings" EntityType="Self.Booking" />
-          <EntitySet Name="BookingAddOns" EntityType="Self.BookingAddOn" />
           <EntitySet Name="Cars" EntityType="Self.Car" />
           <EntitySet Name="CarBrands" EntityType="Self.CarBrand" />
           <EntitySet Name="Drivers" EntityType="Self.Driver" />
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="PaymentCards" EntityType="Self.PaymentCard" />
-          <EntitySet Name="RedeemItems" EntityType="Self.RedeemItem" />
-          <EntitySet Name="Redemptions" EntityType="Self.Redemption" />
-          <EntitySet Name="TestBooks" EntityType="Self.TestBook" />
-          <EntitySet Name="TestTrips" EntityType="Self.TestTrip" />
-          <EntitySet Name="UserRegistrations" EntityType="Self.UserRegistration" />
-          <AssociationSet Name="FK_BookingAddOn_ToAddOn" Association="Self.FK_BookingAddOn_ToAddOn">
-            <End Role="AddOn" EntitySet="AddOns" />
-            <End Role="BookingAddOn" EntitySet="BookingAddOns" />
-          </AssociationSet>
           <AssociationSet Name="FK_Booking_ToApplicationUser" Association="Self.FK_Booking_ToApplicationUser">
             <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
             <End Role="Booking" EntitySet="Bookings" />
@@ -890,10 +658,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
           <AssociationSet Name="FK_PaymentCard_ToApplicationUser" Association="Self.FK_PaymentCard_ToApplicationUser">
             <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
             <End Role="PaymentCard" EntitySet="PaymentCards" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Redemption_ApplicationUser" Association="Self.FK_Redemption_ApplicationUser">
-            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
-            <End Role="Redemption" EntitySet="Redemptions" />
           </AssociationSet>
           <AssociationSet Name="FK_Booking_ToCar" Association="Self.FK_Booking_ToCar">
             <End Role="Car" EntitySet="Cars" />
@@ -907,10 +671,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             <End Role="PaymentCard" EntitySet="PaymentCards" />
             <End Role="Booking" EntitySet="Bookings" />
           </AssociationSet>
-          <AssociationSet Name="FK_BookingAddOn_ToBooking" Association="Self.FK_BookingAddOn_ToBooking">
-            <End Role="Booking" EntitySet="Bookings" />
-            <End Role="BookingAddOn" EntitySet="BookingAddOns" />
-          </AssociationSet>
           <AssociationSet Name="FK_Car_ToCarBrand" Association="Self.FK_Car_ToCarBrand">
             <End Role="CarBrand" EntitySet="CarBrands" />
             <End Role="Car" EntitySet="Cars" />
@@ -919,19 +679,31 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             <End Role="Location" EntitySet="Locations" />
             <End Role="Car" EntitySet="Cars" />
           </AssociationSet>
-          <AssociationSet Name="FK_TestTrip_ToCar" Association="Self.FK_TestTrip_ToCar">
-            <End Role="Car" EntitySet="Cars" />
-            <End Role="TestTrip" EntitySet="TestTrips" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RedeemItem_Redemption" Association="Self.FK_RedeemItem_Redemption">
-            <End Role="Redemption" EntitySet="Redemptions" />
-            <End Role="RedeemItem" EntitySet="RedeemItems" />
-          </AssociationSet>
           <EntitySet Name="UserRewardPointsViews" EntityType="SystemDatabaseModel.UserRewardPointsView" />
           <EntitySet Name="Reviews" EntityType="SystemDatabaseModel.Review" />
           <AssociationSet Name="FK_Reviews_Booking" Association="SystemDatabaseModel.FK_Reviews_Booking">
             <End Role="Booking" EntitySet="Bookings" />
             <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <EntitySet Name="RedeemItems" EntityType="SystemDatabaseModel.RedeemItem" />
+          <EntitySet Name="Redemptions" EntityType="SystemDatabaseModel.Redemption" />
+          <AssociationSet Name="FK_Redemption_ApplicationUser" Association="SystemDatabaseModel.FK_Redemption_ApplicationUser">
+            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+            <End Role="Redemption" EntitySet="Redemptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Redemption_RedeemItem" Association="SystemDatabaseModel.FK_Redemption_RedeemItem">
+            <End Role="RedeemItem" EntitySet="RedeemItems" />
+            <End Role="Redemption" EntitySet="Redemptions" />
+          </AssociationSet>
+          <EntitySet Name="AddOns" EntityType="SystemDatabaseModel.AddOn" />
+          <EntitySet Name="BookingAddOns" EntityType="SystemDatabaseModel.BookingAddOn" />
+          <AssociationSet Name="FK_BookingAddOn_ToAddOn" Association="SystemDatabaseModel.FK_BookingAddOn_ToAddOn">
+            <End Role="AddOn" EntitySet="AddOns" />
+            <End Role="BookingAddOn" EntitySet="BookingAddOns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingAddOn_ToBooking" Association="SystemDatabaseModel.FK_BookingAddOn_ToBooking">
+            <End Role="Booking" EntitySet="Bookings" />
+            <End Role="BookingAddOn" EntitySet="BookingAddOns" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="UserRewardPointsView">
@@ -966,24 +738,108 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RedeemItem">
+          <Key>
+            <PropertyRef Name="RedeemItemId" />
+          </Key>
+          <Property Name="RedeemItemId" Type="Int32" Nullable="false" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemPoints" Type="Int32" />
+          <Property Name="ItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Redemptions" Relationship="SystemDatabaseModel.FK_Redemption_RedeemItem" FromRole="RedeemItem" ToRole="Redemption" />
+        </EntityType>
+        <EntityType Name="Redemption">
+          <Key>
+            <PropertyRef Name="RedeemItemId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="RedeemItemId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RedeemDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ApplicationUser" Relationship="SystemDatabaseModel.FK_Redemption_ApplicationUser" FromRole="Redemption" ToRole="ApplicationUser" />
+          <NavigationProperty Name="RedeemItem" Relationship="SystemDatabaseModel.FK_Redemption_RedeemItem" FromRole="Redemption" ToRole="RedeemItem" />
+        </EntityType>
+        <Association Name="FK_Redemption_ApplicationUser">
+          <End Type="SystemDatabaseModel.ApplicationUser" Role="ApplicationUser" Multiplicity="1" />
+          <End Type="SystemDatabaseModel.Redemption" Role="Redemption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Redemption">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Redemption_RedeemItem">
+          <End Type="SystemDatabaseModel.RedeemItem" Role="RedeemItem" Multiplicity="1" />
+          <End Type="SystemDatabaseModel.Redemption" Role="Redemption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RedeemItem">
+              <PropertyRef Name="RedeemItemId" />
+            </Principal>
+            <Dependent Role="Redemption">
+              <PropertyRef Name="RedeemItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AddOn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="maxQuantity" Type="Int32" />
+          <NavigationProperty Name="BookingAddOns" Relationship="SystemDatabaseModel.FK_BookingAddOn_ToAddOn" FromRole="AddOn" ToRole="BookingAddOn" />
+        </EntityType>
+        <EntityType Name="BookingAddOn">
+          <Key>
+            <PropertyRef Name="BookingId" />
+            <PropertyRef Name="AddOnId" />
+          </Key>
+          <Property Name="BookingId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AddOnId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="AddOn" Relationship="SystemDatabaseModel.FK_BookingAddOn_ToAddOn" FromRole="BookingAddOn" ToRole="AddOn" />
+          <NavigationProperty Name="Booking" Relationship="SystemDatabaseModel.FK_BookingAddOn_ToBooking" FromRole="BookingAddOn" ToRole="Booking" />
+        </EntityType>
+        <Association Name="FK_BookingAddOn_ToAddOn">
+          <End Type="SystemDatabaseModel.AddOn" Role="AddOn" Multiplicity="1" />
+          <End Type="SystemDatabaseModel.BookingAddOn" Role="BookingAddOn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddOn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingAddOn">
+              <PropertyRef Name="AddOnId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingAddOn_ToBooking">
+          <End Type="SystemDatabaseModel.Booking" Role="Booking" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SystemDatabaseModel.BookingAddOn" Role="BookingAddOn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingAddOn">
+              <PropertyRef Name="BookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SystemDatabaseModelStoreContainer" CdmEntityContainer="SystemDatabaseEntities">
-          <EntitySetMapping Name="AddOns">
-            <EntityTypeMapping TypeName="SystemDatabaseModel.AddOn">
-              <MappingFragment StoreEntitySet="AddOn">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="maxQuantity" ColumnName="maxQuantity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ApplicationUsers">
             <EntityTypeMapping TypeName="SystemDatabaseModel.ApplicationUser">
               <MappingFragment StoreEntitySet="ApplicationUser">
@@ -1008,6 +864,11 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
           <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="SystemDatabaseModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
+                <ScalarProperty Name="UpdateReason" ColumnName="UpdateReason" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CarPlate" ColumnName="CarPlate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1022,16 +883,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
                 <ScalarProperty Name="EarnDate" ColumnName="EarnDate" />
                 <ScalarProperty Name="PointsRemaining" ColumnName="PointsRemaining" />
                 <ScalarProperty Name="PointsStatus" ColumnName="PointsStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BookingAddOns">
-            <EntityTypeMapping TypeName="SystemDatabaseModel.BookingAddOn">
-              <MappingFragment StoreEntitySet="BookingAddOn">
-                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
-                <ScalarProperty Name="AddOnId" ColumnName="AddOnId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1106,81 +957,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RedeemItems">
-            <EntityTypeMapping TypeName="SystemDatabaseModel.RedeemItem">
-              <MappingFragment StoreEntitySet="RedeemItem">
-                <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
-                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-                <ScalarProperty Name="ItemPoints" ColumnName="ItemPoints" />
-                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
-                <ScalarProperty Name="RedemptionID" ColumnName="RedemptionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Redemptions">
-            <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
-              <MappingFragment StoreEntitySet="Redemption">
-                <ScalarProperty Name="RedemptionID" ColumnName="RedemptionID" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TestBooks">
-            <EntityTypeMapping TypeName="SystemDatabaseModel.TestBook">
-              <MappingFragment StoreEntitySet="TestBook">
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
-                <ScalarProperty Name="Destination" ColumnName="Destination" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
-                <ScalarProperty Name="DriverGender" ColumnName="DriverGender" />
-                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
-                <ScalarProperty Name="DriverPhone" ColumnName="DriverPhone" />
-                <ScalarProperty Name="DriverAge" ColumnName="DriverAge" />
-                <ScalarProperty Name="DriverRace" ColumnName="DriverRace" />
-                <ScalarProperty Name="DriverLicense" ColumnName="DriverLicense" />
-                <ScalarProperty Name="RentalPurpose" ColumnName="RentalPurpose" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TestTrips">
-            <EntityTypeMapping TypeName="SystemDatabaseModel.TestTrip">
-              <MappingFragment StoreEntitySet="TestTrip">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Pickup_point" ColumnName="Pickup_point" />
-                <ScalarProperty Name="Pickup_state" ColumnName="Pickup_state" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="Dropoff_point" ColumnName="Dropoff_point" />
-                <ScalarProperty Name="Dropoff_state" ColumnName="Dropoff_state" />
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="CarPlateNo" ColumnName="CarPlateNo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserRegistrations">
-            <EntityTypeMapping TypeName="SystemDatabaseModel.UserRegistration">
-              <MappingFragment StoreEntitySet="UserRegistration">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
-                <ScalarProperty Name="EncryptionKey" ColumnName="EncryptionKey" />
-                <ScalarProperty Name="IVkey" ColumnName="IVkey" />
-                <ScalarProperty Name="Roles" ColumnName="Roles" />
-                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
-                <ScalarProperty Name="TwoStepVerification" ColumnName="TwoStepVerification" />
-                <ScalarProperty Name="EmailVerification" ColumnName="EmailVerification" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserRewardPointsViews">
             <EntityTypeMapping TypeName="SystemDatabaseModel.UserRewardPointsView">
               <MappingFragment StoreEntitySet="UserRewardPointsView">
@@ -1199,6 +975,48 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
                 <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
                 <ScalarProperty Name="BookingId" ColumnName="BookingId" />
                 <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RedeemItems">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.RedeemItem">
+              <MappingFragment StoreEntitySet="RedeemItem">
+                <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="ItemPoints" ColumnName="ItemPoints" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Redemptions">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
+              <MappingFragment StoreEntitySet="Redemption">
+                <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddOns">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.AddOn">
+              <MappingFragment StoreEntitySet="AddOn">
+                <ScalarProperty Name="maxQuantity" ColumnName="maxQuantity" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingAddOns">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.BookingAddOn">
+              <MappingFragment StoreEntitySet="BookingAddOn">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="AddOnId" ColumnName="AddOnId" />
+                <ScalarProperty Name="BookingId" ColumnName="BookingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="Description" Type="varchar(max)" />
     <Property Name="Price" Type="float" />
@@ -49,6 +49,11 @@
     <Property Name="EarnDate" Type="datetime" />
     <Property Name="PointsRemaining" Type="int" />
     <Property Name="PointsStatus" Type="varchar" MaxLength="20" />
+    <Property Name="UpdateReason" Type="varchar(max)" />
+    <Property Name="RejectReason" Type="varchar(max)" />
+    <Property Name="Notes" Type="varchar(max)" />
+    <Property Name="BookingDate" Type="datetime" />
+    <Property Name="FinalPrice" Type="float" />
   </EntityType>
   <EntityType Name="BookingAddOn">
     <Key>
@@ -56,9 +61,8 @@
       <PropertyRef Name="AddOnId" />
     </Key>
     <Property Name="BookingId" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="AddOnId" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="AddOnId" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="int" />
-    <Property Name="Price" Type="float" />
   </EntityType>
   <EntityType Name="Car">
     <Key>
@@ -136,14 +140,14 @@
     <Property Name="ItemDescription" Type="varchar(max)" />
     <Property Name="Status" Type="varchar" MaxLength="50" />
     <Property Name="ItemImage" Type="varchar(max)" />
-    <Property Name="RedemptionID" Type="int" />
   </EntityType>
   <EntityType Name="Redemption">
     <Key>
-      <PropertyRef Name="RedemptionID" />
+      <PropertyRef Name="RedeemItemId" />
+      <PropertyRef Name="UserId" />
     </Key>
-    <Property Name="RedemptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="varchar" MaxLength="50" />
+    <Property Name="RedeemItemId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RedeemDate" Type="datetime" />
   </EntityType>
   <EntityType Name="Reviews">
@@ -155,56 +159,6 @@
     <Property Name="ReviewText" Type="nvarchar(max)" />
     <Property Name="Rating" Type="int" />
     <Property Name="ReviewDate" Type="datetime" />
-  </EntityType>
-  <EntityType Name="TestBook">
-    <Key>
-      <PropertyRef Name="CustomerName" />
-    </Key>
-    <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Email" Type="varchar" MaxLength="50" />
-    <Property Name="Address" Type="varchar" MaxLength="50" />
-    <Property Name="Country" Type="varchar" MaxLength="50" />
-    <Property Name="CustomerPhone" Type="varchar" MaxLength="20" />
-    <Property Name="Destination" Type="varchar" MaxLength="50" />
-    <Property Name="Note" Type="varchar" MaxLength="50" />
-    <Property Name="DriverName" Type="varchar" MaxLength="50" />
-    <Property Name="DriverGender" Type="char" MaxLength="4" />
-    <Property Name="DriverID" Type="varchar" MaxLength="20" />
-    <Property Name="DriverPhone" Type="varchar" MaxLength="20" />
-    <Property Name="DriverAge" Type="int" />
-    <Property Name="DriverRace" Type="varchar" MaxLength="10" />
-    <Property Name="DriverLicense" Type="varchar" MaxLength="20" />
-    <Property Name="RentalPurpose" Type="varchar" MaxLength="10" />
-  </EntityType>
-  <EntityType Name="TestTrip">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="char" MaxLength="9" Nullable="false" />
-    <Property Name="Pickup_point" Type="varchar" MaxLength="50" />
-    <Property Name="Pickup_state" Type="varchar" MaxLength="50" />
-    <Property Name="StartDate" Type="datetime" />
-    <Property Name="Dropoff_point" Type="varchar" MaxLength="50" />
-    <Property Name="Dropoff_state" Type="varchar" MaxLength="50" />
-    <Property Name="EndDate" Type="datetime" />
-    <Property Name="CarPlateNo" Type="varchar" MaxLength="10" />
-  </EntityType>
-  <EntityType Name="UserRegistration">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Email" Type="varchar" MaxLength="50" />
-    <Property Name="Password" Type="varchar" MaxLength="256" />
-    <Property Name="DOB" Type="date" />
-    <Property Name="RegistrationDate" Type="date" />
-    <Property Name="EncryptionKey" Type="varchar" MaxLength="256" />
-    <Property Name="IVkey" Type="varchar" MaxLength="256" />
-    <Property Name="Roles" Type="char" MaxLength="10" />
-    <Property Name="ProfilePicture" Type="varchar(max)" />
-    <Property Name="TwoStepVerification" Type="int" />
-    <Property Name="EmailVerification" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\WEB-APPLICATION- - -CAR-RENTAL\ASSIGNMENT\ASSIGNMENT\APP_DATA\SYSTEMDATABASE.MDF.dbo.UserRewardPointsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -328,9 +282,7 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_PaymentCard_ToApplicationUser">
-    <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
     <End Role="PaymentCard" Type="Self.PaymentCard" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ApplicationUser">
@@ -341,20 +293,8 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_RedeemItem_Redemption">
-    <End Role="Redemption" Type="Self.Redemption" Multiplicity="0..1" />
-    <End Role="RedeemItem" Type="Self.RedeemItem" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Redemption">
-        <PropertyRef Name="RedemptionID" />
-      </Principal>
-      <Dependent Role="RedeemItem">
-        <PropertyRef Name="RedemptionID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Redemption_ApplicationUser">
-    <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
+    <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="1" />
     <End Role="Redemption" Type="Self.Redemption" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ApplicationUser">
@@ -362,6 +302,18 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
       </Principal>
       <Dependent Role="Redemption">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Redemption_RedeemItem">
+    <End Role="RedeemItem" Type="Self.RedeemItem" Multiplicity="1" />
+    <End Role="Redemption" Type="Self.Redemption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RedeemItem">
+        <PropertyRef Name="RedeemItemId" />
+      </Principal>
+      <Dependent Role="Redemption">
+        <PropertyRef Name="RedeemItemId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -374,18 +326,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
       </Principal>
       <Dependent Role="Reviews">
         <PropertyRef Name="BookingId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TestTrip_ToCar">
-    <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
-    <End Role="TestTrip" Type="Self.TestTrip" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Car">
-        <PropertyRef Name="CarPlate" />
-      </Principal>
-      <Dependent Role="TestTrip">
-        <PropertyRef Name="CarPlateNo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -402,9 +342,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
     <EntitySet Name="RedeemItem" EntityType="Self.RedeemItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Redemption" EntityType="Self.Redemption" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TestBook" EntityType="Self.TestBook" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TestTrip" EntityType="Self.TestTrip" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRewardPointsView" EntityType="Self.UserRewardPointsView" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [UserRewardPointsView].[Username] AS [Username], 
@@ -453,21 +390,17 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
       <End Role="ApplicationUser" EntitySet="ApplicationUser" />
       <End Role="PaymentCard" EntitySet="PaymentCard" />
     </AssociationSet>
-    <AssociationSet Name="FK_RedeemItem_Redemption" Association="Self.FK_RedeemItem_Redemption">
-      <End Role="Redemption" EntitySet="Redemption" />
-      <End Role="RedeemItem" EntitySet="RedeemItem" />
-    </AssociationSet>
     <AssociationSet Name="FK_Redemption_ApplicationUser" Association="Self.FK_Redemption_ApplicationUser">
       <End Role="ApplicationUser" EntitySet="ApplicationUser" />
+      <End Role="Redemption" EntitySet="Redemption" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Redemption_RedeemItem" Association="Self.FK_Redemption_RedeemItem">
+      <End Role="RedeemItem" EntitySet="RedeemItem" />
       <End Role="Redemption" EntitySet="Redemption" />
     </AssociationSet>
     <AssociationSet Name="FK_Reviews_Booking" Association="Self.FK_Reviews_Booking">
       <End Role="Booking" EntitySet="Booking" />
       <End Role="Reviews" EntitySet="Reviews" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TestTrip_ToCar" Association="Self.FK_TestTrip_ToCar">
-      <End Role="Car" EntitySet="Car" />
-      <End Role="TestTrip" EntitySet="TestTrip" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

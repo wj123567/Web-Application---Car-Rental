@@ -309,6 +309,15 @@
     <Compile Include="BookingAddOn.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Car.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CarBrand.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Driver.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ErrorPage.aspx.cs">
       <DependentUpon>ErrorPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -316,12 +325,28 @@
     <Compile Include="ErrorPage.aspx.designer.cs">
       <DependentUpon>ErrorPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Management\AdminReview.aspx.cs">
       <DependentUpon>AdminReview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Management\AdminReview.aspx.designer.cs">
       <DependentUpon>AdminReview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentCard.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RedeemItem.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Redemption.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Review.cs">
+      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="testDate.aspx.cs">
       <DependentUpon>testDate.aspx</DependentUpon>
@@ -337,12 +362,6 @@
     <Compile Include="UserProfile\bookingRecordUpdate.aspx.designer.cs">
       <DependentUpon>bookingRecordUpdate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Car.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CarBrand.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="CarRentalSystemModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -357,12 +376,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CarRentalSystemModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Driver.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Location.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Management\AddOnManagement.aspx.cs">
       <DependentUpon>AddOnManagement.aspx</DependentUpon>
@@ -427,26 +440,7 @@
     <Compile Include="Management\testModel.aspx.designer.cs">
       <DependentUpon>testModel.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PaymentCard.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RedeemItem.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Redemption.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Review.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Security.cs" />
-    <Compile Include="TestBook.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TestTrip.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="UserProfile\bookingrecord.aspx.cs">
       <DependentUpon>bookingrecord.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -590,9 +584,6 @@
     </Compile>
     <Compile Include="Management\UserManagement.aspx.designer.cs">
       <DependentUpon>UserManagement.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UserRegistration.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserRewardPointsView.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>

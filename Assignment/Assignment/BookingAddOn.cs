@@ -15,9 +15,8 @@ namespace Assignment
     public partial class BookingAddOn
     {
         public string BookingId { get; set; }
-        public string AddOnId { get; set; }
+        public int AddOnId { get; set; }
         public Nullable<int> Quantity { get; set; }
-        public Nullable<double> Price { get; set; }
     
         public virtual AddOn AddOn { get; set; }
         public virtual Booking Booking { get; set; }

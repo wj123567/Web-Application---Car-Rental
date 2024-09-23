@@ -16,37 +16,38 @@ using System.Xml.Linq;
 
 namespace Assignment
 {
-	public partial class infopage :System .Web.UI.Page
-	{
+    public partial class infopage : System.Web.UI.Page
+    {
         protected void Page_Load(object sender, EventArgs e)
-		{
-            
+        {
+
             if (!Page.IsPostBack)
             {
                 string prevCar = Request.QueryString["prevCar"];
-                string currentCar = (string)Session["CarPlate"]; 
-                if (Request.QueryString["prevCar"] != null){
+                string currentCar = (string)Session["CarPlate"];
+                if (Request.QueryString["prevCar"] != null)
+                {
                     if (prevCar != currentCar)
                     {
                         Session["SelectedAddOns"] = null;
                     }
                 }
-                
+
                 Session["CurrentStep"] = 2;
                 int currentStep = (int)(Session["CurrentStep"]);
                 UpdateProgressBar(currentStep);
                 if (Session["CarPlate"] != null)
                 {
-                 
+
                     string carPlate = Session["CarPlate"].ToString();
 
                     // Assuming you have a method to get car details by carPlate
                     GetCarDetailsByCarPlate(carPlate);
-                    
+
                 }
 
                 hdnSessionId.Value = Session["Id"] as string ?? string.Empty;
-                
+
                 BindAddOns();
 
                 LoadAddOnSelection();
@@ -59,17 +60,17 @@ namespace Assignment
             }
 
             DataBind();
-            
+
         }
 
-        
+
 
         private void LoadAddOnSelection()
         {
             if (Session["SelectedAddOns"] != null)
             {
                 var selectedAddOns = (Dictionary<int, int>)Session["SelectedAddOns"];
-                
+
 
                 foreach (RepeaterItem item in rptAddOns.Items)
                 {
@@ -84,7 +85,7 @@ namespace Assignment
                     {
                         txtQuantity.Text = selectedAddOns[addOnID].ToString();
                     }
-                    
+
                 }
 
 
@@ -93,7 +94,7 @@ namespace Assignment
 
         public void GetCarDetailsByCarPlate(string carPlate)
         {
-          
+
             // Define your SQL query
             string query = "SELECT * FROM Car WHERE CarPlate = @CarPlate";
 
@@ -110,24 +111,24 @@ namespace Assignment
                 {
                     while (reader.Read())
                     {
-                        
-                        {   
+
+                        {
                             headerCarModel.Text = reader["CarBrand"].ToString() + " " + reader["CarName"].ToString();
                             lblstickyCarModel.Text = reader["CarBrand"].ToString() + " " + reader["CarName"].ToString();
-                            ltrCarPlate.Text =reader["CarPlate"].ToString();
+                            ltrCarPlate.Text = reader["CarPlate"].ToString();
                             specType.Text = reader["CType"].ToString();
-                            specSeat.Text = reader["CarSeat"].ToString() +" People";
+                            specSeat.Text = reader["CarSeat"].ToString() + " People";
                             carImage.ImageUrl = reader["CarImage"].ToString();
                             imgSticky.ImageUrl = reader["CarImage"].ToString();
                             specTransmission.Text = reader["CarTransmission"].ToString();
                             specFuel.Text = reader["CarEnergy"].ToString();
 
 
-                            
-                            Session["CarName"]    = headerCarModel.Text; 
-                            Session["CarImg"]     = carImage.ImageUrl;
-                            
-                            
+
+                            Session["CarName"] = headerCarModel.Text;
+                            Session["CarImg"] = carImage.ImageUrl;
+
+
                             DateTime startDateTime = DateTime.Parse(Session["StartDate"].ToString());
                             DateTime endDateTime = DateTime.Parse(Session["EndDate"].ToString());
 
@@ -154,25 +155,25 @@ namespace Assignment
                             {
                                 lblCarRental.Text = "Price not available";
                             }
-                            
-                            
+
+
                         }
-                        
+
                     }
                 }
 
                 reader.Close();
                 con.Close();
             }
-              
-          
+
+
         }
 
         private void BindAddOns()
         {
             // Assuming you have a method GetAddOns() that returns a DataTable or List<AddOn>
             var addOns = GetAddOns();
-            
+
             rptAddOns.DataSource = addOns;
             rptAddOns.DataBind();
         }
@@ -194,27 +195,27 @@ namespace Assignment
         private void SaveAddOnSelection()
         {
             Dictionary<int, int> selectedAddOns = new Dictionary<int, int>();
-            
+
 
             foreach (RepeaterItem item in rptAddOns.Items)
             {
                 var txtQuantity = (TextBox)item.FindControl("txtAddOnQuantity");
-                
+
                 var hfAddOnID = (HiddenField)item.FindControl("hfAddOnID");
 
                 int quantity = int.Parse(txtQuantity.Text);
-                
+
                 int addOnID = int.Parse(hfAddOnID.Value);
 
                 if (quantity > 0)
                 {
                     selectedAddOns.Add(addOnID, quantity);
-                    
+
                 }
             }
 
             Session["SelectedAddOns"] = selectedAddOns;
-           
+
         }
 
         protected void btnNext_Click(object sender, EventArgs e)
@@ -228,14 +229,14 @@ namespace Assignment
 
             Session["TotalPrice"] = hdnTotalPrice.Value;
             Session["TotalAddOn"] = hdnTotalAddOn.Value;
-            
+
             Response.Redirect("bookInfo.aspx");
         }
 
         protected void previous_btn_Click(object sender, EventArgs e)
         {
-            
-            Response.Redirect("productListing.aspx?prevCar="+ltrCarPlate.Text);
+
+            Response.Redirect("productListing.aspx?prevCar=" + ltrCarPlate.Text);
         }
 
         private void UpdateProgressBar(int currentStep)
@@ -328,5 +329,50 @@ namespace Assignment
             return stars;
         }
 
+        protected void ddlFilterStar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedValue = ddlFilterStar.SelectedValue;
+            LoadSortedComments(selectedValue);
+        }
+
+        private void LoadSortedComments(string sortOption)
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                string currentCar = (string)Session["CarPlate"];
+                var reviewsQuery = db.Reviews.AsQueryable();
+
+                switch (sortOption)
+                {
+
+                    case "HighToLow":
+                        reviewsQuery = reviewsQuery.OrderByDescending(r => r.Rating);
+                        break;
+                    case "LowToHigh":
+                        reviewsQuery = reviewsQuery.OrderBy(r => r.Rating);
+                        break;
+                    case "Recent":
+                    default:
+                        reviewsQuery = reviewsQuery.OrderByDescending(r => r.ReviewDate);
+                        break;
+                }
+
+                var comments = reviewsQuery
+                                .Where(r => r.Booking.CarPlate == currentCar)
+                                .Select(r => new
+                {
+                    Username = r.Booking.ApplicationUser.Username,
+                    ProfilePicture = r.Booking.ApplicationUser.ProfilePicture,
+                    r.ReviewText,
+                    r.ReviewDate,
+                    r.Rating
+                }).ToList();
+
+                lvComments.DataSource = comments;
+                lvComments.DataBind();
+
+            }
+        }
     }
+
 }
