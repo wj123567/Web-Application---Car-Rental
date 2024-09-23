@@ -139,18 +139,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="RedeemItems">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.RedeemItem">
-        <MappingFragment StoreEntitySet="RedeemItem">
-          <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
-          <ScalarProperty Name="ItemPoints" ColumnName="ItemPoints" />
-          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
-          <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Redemptions">
       <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
         <MappingFragment StoreEntitySet="Redemption">
@@ -178,6 +166,18 @@
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="AddOnId" ColumnName="AddOnId" />
           <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RedeemItems">
+      <EntityTypeMapping TypeName="SystemDatabaseModel.RedeemItem">
+        <MappingFragment StoreEntitySet="RedeemItem">
+          <ScalarProperty Name="ItemImage" ColumnName="ItemImage" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+          <ScalarProperty Name="ItemPoints" ColumnName="ItemPoints" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

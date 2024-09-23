@@ -273,14 +273,9 @@
       <End Role="Booking" EntitySet="Bookings" />
       <End Role="Review" EntitySet="Reviews" />
     </AssociationSet>
-    <EntitySet Name="RedeemItems" EntityType="SystemDatabaseModel.RedeemItem" />
     <EntitySet Name="Redemptions" EntityType="SystemDatabaseModel.Redemption" />
     <AssociationSet Name="FK_Redemption_ApplicationUser" Association="SystemDatabaseModel.FK_Redemption_ApplicationUser">
       <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
-      <End Role="Redemption" EntitySet="Redemptions" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Redemption_RedeemItem" Association="SystemDatabaseModel.FK_Redemption_RedeemItem">
-      <End Role="RedeemItem" EntitySet="RedeemItems" />
       <End Role="Redemption" EntitySet="Redemptions" />
     </AssociationSet>
     <EntitySet Name="AddOns" EntityType="SystemDatabaseModel.AddOn" />
@@ -292,6 +287,11 @@
     <AssociationSet Name="FK_BookingAddOn_ToBooking" Association="SystemDatabaseModel.FK_BookingAddOn_ToBooking">
       <End Role="Booking" EntitySet="Bookings" />
       <End Role="BookingAddOn" EntitySet="BookingAddOns" />
+    </AssociationSet>
+    <EntitySet Name="RedeemItems" EntityType="SystemDatabaseModel.RedeemItem" />
+    <AssociationSet Name="FK_Redemption_RedeemItem" Association="SystemDatabaseModel.FK_Redemption_RedeemItem">
+      <End Role="RedeemItem" EntitySet="RedeemItems" />
+      <End Role="Redemption" EntitySet="Redemptions" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="UserRewardPointsView">
@@ -326,18 +326,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="RedeemItem">
-    <Key>
-      <PropertyRef Name="RedeemItemId" />
-    </Key>
-    <Property Name="RedeemItemId" Type="Int32" Nullable="false" />
-    <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ItemPoints" Type="Int32" />
-    <Property Name="ItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ItemImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Redemptions" Relationship="SystemDatabaseModel.FK_Redemption_RedeemItem" FromRole="RedeemItem" ToRole="Redemption" />
-  </EntityType>
   <EntityType Name="Redemption">
     <Key>
       <PropertyRef Name="RedeemItemId" />
@@ -358,18 +346,6 @@
       </Principal>
       <Dependent Role="Redemption">
         <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Redemption_RedeemItem">
-    <End Type="SystemDatabaseModel.RedeemItem" Role="RedeemItem" Multiplicity="1" />
-    <End Type="SystemDatabaseModel.Redemption" Role="Redemption" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="RedeemItem">
-        <PropertyRef Name="RedeemItemId" />
-      </Principal>
-      <Dependent Role="Redemption">
-        <PropertyRef Name="RedeemItemId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -419,6 +395,30 @@
       </Principal>
       <Dependent Role="BookingAddOn">
         <PropertyRef Name="BookingId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RedeemItem">
+    <Key>
+      <PropertyRef Name="RedeemItemId" />
+    </Key>
+    <Property Name="RedeemItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemPoints" Type="Int32" />
+    <Property Name="ItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Redemptions" Relationship="SystemDatabaseModel.FK_Redemption_RedeemItem" FromRole="RedeemItem" ToRole="Redemption" />
+  </EntityType>
+  <Association Name="FK_Redemption_RedeemItem">
+    <End Type="SystemDatabaseModel.RedeemItem" Role="RedeemItem" Multiplicity="1" />
+    <End Type="SystemDatabaseModel.Redemption" Role="Redemption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RedeemItem">
+        <PropertyRef Name="RedeemItemId" />
+      </Principal>
+      <Dependent Role="Redemption">
+        <PropertyRef Name="RedeemItemId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
