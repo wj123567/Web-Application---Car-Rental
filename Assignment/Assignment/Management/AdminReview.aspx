@@ -7,7 +7,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Review Edit</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Review</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -21,7 +21,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Update</button>
                 </div>
             </div>
         </div>
@@ -32,20 +31,47 @@
             <h1>Review Management</h1>
         </div>
 
+        <div class="d-flex justify-content-start mb-3">
+            <asp:DropDownList ID="ddlStarRating" runat="server" CssClass="filterStar" AutoPostBack="true" OnSelectedIndexChanged="ddlStarRating_SelectedIndexChanged">
+                <asp:ListItem Text="All Ratings" Value="0"></asp:ListItem>
+                <asp:ListItem Text="5 Stars" Value="5"></asp:ListItem>
+                <asp:ListItem Text="4 Stars" Value="4"></asp:ListItem>
+                <asp:ListItem Text="3 Stars" Value="3"></asp:ListItem>
+                <asp:ListItem Text="2 Stars" Value="2"></asp:ListItem>
+                <asp:ListItem Text="1 Star" Value="1"></asp:ListItem>
+            </asp:DropDownList>
+        </div>
         
         <asp:ListView ID="lvReview" runat="server" OnSorting="lvReview_Sorting">
             <LayoutTemplate>
                 <table class="table table-striped table-bordered table-responsive">
                     <thead>
-                        <tr class="">
-                            <th><asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewId">
-                                Review ID
-                                <asp:Literal ID="litReviewIdIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton></th>
-                            <th><asp:LinkButton runat="server" CommandName="Sort" CommandArgument="BookingId">Booking ID</asp:LinkButton></th>
-                            <th><asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewText">Review Text</asp:LinkButton></th>
-                            <th><asp:LinkButton runat="server" CommandName="Sort" CommandArgument="Rating">Rating</asp:LinkButton></th>
-                            <th><asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewDate">Review Date</asp:LinkButton></th>
+                        <tr class="lvReview-header">
+                            <th>
+                                <asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewId" CssClass="link-button">Review ID
+                                    <asp:Literal ID="litReviewIdIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+                            <th>
+                                <asp:LinkButton runat="server" CommandName="Sort" CommandArgument="BookingId" CssClass="link-button">Booking ID
+                                    <asp:Literal ID="litBookingIdIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+                            <th>
+                                <asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewText" CssClass="link-button">Review Text
+                                    <asp:Literal ID="litReviewTextIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+                            <th>
+                                <asp:LinkButton runat="server" CommandName="Sort" CommandArgument="Rating" CssClass="link-button">Rating
+                                    <asp:Literal ID="litRatingIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+                            <th>
+                                <asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewDate" CssClass="link-button">Review Date
+                                    <asp:Literal ID="litReviewDateIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -63,11 +89,11 @@
                     <td><%# Eval("Rating") %></td>
                     <td><%# Eval("ReviewDate") %></td>
                     <td>
-                        <asp:LinkButton ID="btnEditReview" 
+                        <asp:LinkButton ID="btnViewReview" 
                                         runat="server" 
                                         CommandArgument='<%# Eval("ReviewId") %>' 
-                                        OnClick="btnEditReview_Click">
-                            <i class="fas fa-edit" style="color: #ffbb00;"></i>
+                                        OnClick="btnViewReview_Click">
+                            <i class="fa-solid fa-eye" style="color: #003899;"></i>
                         </asp:LinkButton>
 
                         <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("ReviewId") %>' OnClick="DeleteButton_Click" OnClientClick="return confirm('Are you sure you want to delete this review?');">

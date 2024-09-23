@@ -60,6 +60,15 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Label lblReviewDate;
 
         /// <summary>
+        /// ddlStarRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlStarRating;
+
+        /// <summary>
         /// lvReview control.
         /// </summary>
         /// <remarks>

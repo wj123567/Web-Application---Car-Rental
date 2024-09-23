@@ -14,3 +14,21 @@
 .Review td {
     padding: 12px;
 }
+
+a.link-button {
+    color: black;
+    padding: 5px;
+    
+}
+
+a.link-button:hover {
+    color: gray; 
+}
+
+.filterStar {
+    margin: 18px 0px 0px 10px;
+
+    height: 40px;
+    width: 110px;
+    padding: 5px;
+}
