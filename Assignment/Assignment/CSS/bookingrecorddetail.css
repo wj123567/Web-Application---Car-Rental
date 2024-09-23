@@ -189,6 +189,11 @@
     }
 
     /*You*/
+
+.star {
+    text-decoration: none;
+}
+
 .rating-container {
     border: 1px solid lightgray;
     border-radius: 12px;
@@ -222,9 +227,8 @@
     color: orange;
 }
 
-/* Clicked state: Orange color */
-.rating i.checked {
-   /* color: orange;*/
+.checked {
+    color: orange !important;
 }
 
 .txtComment {

@@ -70,30 +70,46 @@
     
                 <div>
                   
-                  <!-- row -->
+                  <!-- You -->
                   <div class="row justify-content-between booking_record">
                       <div class="d-flex flex-row flex-wrap img_rating_flex_container">
                           <div style="flex:1;" class="img_container"><asp:Image ID="img_car" runat="server" /></div>
-                          <div style="flex:3;">
-                              <div class="rating-container" style="border:1px solid lightgray;">
-                                  <div class="rate-first-row">
+                          <div class="d-flex flex-column p-3 border border-light rounded" style="flex:3;">
+                              <div class="rating-container p-3">
+                                  <div class="rate-first-row d-flex align-items-center mb-3">
                                     <h5 style="display: inline-block; font-size: clamp(18px, 3vh, 33px)">
                                         <strong>Rate Here: </strong>
                                     </h5>
                                     <div class="rating d-inline-block" style="flex:1">
-                                        <asp:LinkButton ID="btnStar1" runat="server"><i class="fa-solid fa-star checked"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnStar2" runat="server"><i class="fa-solid fa-star checked"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnStar3" runat="server"><i class="fa-solid fa-star checked"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnStar4" runat="server"><i class="fa-solid fa-star checked"></i></asp:LinkButton>
-                                        <asp:LinkButton ID="btnStar5" runat="server"><i class="fa-solid fa-star checked"></i></asp:LinkButton>
+                                        <asp:LinkButton ID="btnStar1" runat="server" CssClass="star" data-value="1" OnClientClick="setRating(1); return false;">
+                                            <i class="fa-solid fa-star"></i>
+                                        </asp:LinkButton>
+                                        <asp:LinkButton ID="btnStar2" runat="server" CssClass="star" data-value="2" OnClientClick="setRating(2); return false;">
+                                            <i class="fa-solid fa-star"></i>
+                                        </asp:LinkButton>
+                                        <asp:LinkButton ID="btnStar3" runat="server" CssClass="star" data-value="3" OnClientClick="setRating(3); return false;">
+                                            <i class="fa-solid fa-star"></i>
+                                        </asp:LinkButton>
+                                        <asp:LinkButton ID="btnStar4" runat="server" CssClass="star" data-value="4" OnClientClick="setRating(4); return false;">
+                                            <i class="fa-solid fa-star"></i>
+                                        </asp:LinkButton>
+                                        <asp:LinkButton ID="btnStar5" runat="server" CssClass="star" data-value="5" OnClientClick="setRating(5); return false;">
+                                            <i class="fa-solid fa-star"></i>
+                                        </asp:LinkButton>
                                     </div>
                                   </div>
+
                                   <div class="rate-second-row">
                                       <asp:TextBox ID="txtComment" runat="server" TextMode="MultiLine" Rows="5" Columns="100" CssClass="txtComment"></asp:TextBox>
                                   </div>
+
                                   <br />
+
                                   <div class="">
-                                      <asp:LinkButton ID="submit" runat="server" CssClass="btn btn-success" data-bs-toggle="modal" data-bs-target="#submitComment">Submit</asp:LinkButton></div>
+                                      <asp:HiddenField ID="hfRating" runat="server" />
+                                      <asp:LinkButton ID="submit" runat="server" CssClass="btn btn-success" OnClick="submit_Click">Submit</asp:LinkButton>
+                                      <asp:Label ID="lblFeedback" runat="server" CssClass="text-success" Visible="false"></asp:Label>
+                                  </div>
                               </div>
                           </div>
                       </div>
@@ -315,5 +331,24 @@
 
         return false;
     }
+
+    //You script
+    function setRating(rating) {
+        document.getElementById('<%= hfRating.ClientID %>').value = rating;
+        updateStarDisplay(rating);
+    }
+
+    function updateStarDisplay(rating) {
+        const stars = document.querySelectorAll('.star i');
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('checked');
+            } else {
+                star.classList.remove('checked');
+            }
+        });
+    }
+
+
 </script>
 </asp:Content>

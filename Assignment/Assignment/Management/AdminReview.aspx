@@ -1,5 +1,4 @@
-﻿
-<%@ Page Title="" Language="C#" MasterPageFile="~/Management/Admin.Master" AutoEventWireup="true" CodeBehind="AdminReview.aspx.cs" Inherits="Assignment.Management.AdminReview" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Management/Admin.Master" AutoEventWireup="true" CodeBehind="AdminReview.aspx.cs" Inherits="Assignment.Management.AdminReview" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
@@ -11,13 +10,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div>Booking ID: <asp:Label ID="lblBookingId" runat="server"></asp:Label></div>
-                    <div></div>
+                    <div><b>Booking ID: </b><asp:Label ID="lblBookingId" runat="server"></asp:Label></div>
+                    <div>
+                        <b>Car Information: </b><asp:Label ID="lblCarName" runat="server"></asp:Label>
+                    </div>
                     <hr />
-                    
-                    <div>Review Text: <asp:Label ID="lblReviewText" runat="server"></asp:Label></div>
-                    <div>Rating: <asp:Label ID="lblRating" runat="server"></asp:Label></div>
-                    <div>Review Date: <asp:Label ID="lblReviewDate" runat="server"></asp:Label></div>
+                    <div><b>Username: </b><asp:Label ID="lblUserId" runat="server"></asp:Label></div>
+                    <div><b>Commented: </b><asp:Label ID="lblReviewText" runat="server"></asp:Label></div>
+                    <div><b>Rating: </b><asp:Label ID="lblRating" runat="server"></asp:Label></div>
+                    <div><b>Review Date: </b><asp:Label ID="lblReviewDate" runat="server"></asp:Label></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -78,8 +79,24 @@
                     <tbody>
                         <tr id="itemPlaceHolder" runat="server"></tr>
                     </tbody>
+
+                    <tr>
+                        <td colspan="6" class="asd">
+                            <div class="d-flex justify-content-center">
+                                <asp:DataPager ID="ReviewsPager" runat="server" PageSize="6">
+                                    <Fields>
+                                        <asp:NextPreviousPagerField ButtonType="Link" ShowPreviousPageButton="true" ShowNextPageButton="false"/>
+                                        <asp:NumericPagerField ButtonType="Link" />
+                                        <asp:NextPreviousPagerField ButtonType="Link" ShowNextPageButton="true" ShowPreviousPageButton="false"/>
+                                    </Fields>
+                                </asp:DataPager>
+                            </div>
+                        </td>
+                    </tr>
                 
                 </table>
+
+
             </LayoutTemplate>
             <ItemTemplate>
                 <tr>

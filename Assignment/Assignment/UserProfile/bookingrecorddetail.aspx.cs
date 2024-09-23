@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace Assignment
 {
@@ -88,9 +89,32 @@ namespace Assignment
                     GetBookingDetails(bookingId);   
                     GetPaymentDetails(bookingId);
                 }
-                              
 
-                txtComment.Attributes.Add("placeholder", "Write Your Comment Here!");
+                //You
+                string userId = Session["Id"] as string;
+
+                using (var db = new SystemDatabaseEntities())
+                {
+                    var existingReview = db.Reviews
+                        .FirstOrDefault(r => r.BookingId == bookingId);
+
+                    if (existingReview != null)
+                    {
+                        txtComment.Text = existingReview.ReviewText;
+                        hfRating.Value = existingReview.Rating.ToString();
+                        lblFeedback.Text = "You can modify your existing comment.";
+                        lblFeedback.Visible = true;
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "updateStarDisplay",
+                    $"setRating({existingReview.Rating});", true);
+                    }
+                    else
+                    {
+
+                        txtComment.Attributes.Add("placeholder", "Write Your Comment Here!");
+                    }
+                }
+
+                
             }
 
         }
@@ -297,5 +321,53 @@ namespace Assignment
             com.ExecuteNonQuery();
             con.Close();
         }
+
+
+        //You
+        protected void submit_Click(object sender, EventArgs e)
+        {
+            int rating = int.Parse(hfRating.Value);
+            string comment = txtComment.Text;
+
+            string bookingId = Session["bookingrecordID"] as string;
+
+            using (var db = new SystemDatabaseEntities())
+            {
+                var existingReview = db.Reviews.FirstOrDefault(r => r.BookingId == bookingId);
+
+                if (existingReview != null)
+                {
+                    // Update the existing review
+                    existingReview.ReviewText = comment;
+                    existingReview.Rating = rating;
+                    existingReview.ReviewDate = DateTime.Now;
+
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var newReview = new Review
+                    {
+                        BookingId = bookingId,
+                        ReviewText = comment,
+                        Rating = rating,
+                        ReviewDate = DateTime.Now
+                    };
+
+                    db.Reviews.Add(newReview);
+                    db.SaveChanges();
+                }
+
+            }
+
+            txtComment.Text = "";
+            hfRating.Value = "";
+
+            lblFeedback.Text = "You have submitted the review.";
+            lblFeedback.Visible = true;
+
+            submit.Enabled = false;
+        }
+
     }
 }

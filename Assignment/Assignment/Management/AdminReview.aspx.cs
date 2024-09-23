@@ -39,11 +39,14 @@ namespace Assignment.Management
             {
                 var review = db.Reviews
                     .Include("Booking.Car")
+                    .Include("Booking.ApplicationUser")
                     .FirstOrDefault(r => r.ReviewId == reviewId);
 
                 if (review != null)
                 {
                     lblBookingId.Text = review.Booking.Id.ToString();
+                    lblCarName.Text = review.Booking.Car.CType.ToString() + " " + review.Booking.Car.CarName.ToString();
+                    lblUserId.Text = review.Booking.ApplicationUser.Username.ToString();
                     lblReviewText.Text = review.ReviewText;
                     lblRating.Text = review.Rating.ToString();
                     lblReviewDate.Text = review.ReviewDate.ToString();

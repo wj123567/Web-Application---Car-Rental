@@ -40,7 +40,7 @@
 
                         <tr>
                             <td colspan="7" class="asd">
-                                <asp:DataPager ID="RewardPointsPager" runat="server" PageSize="5">
+                                <asp:DataPager ID="RewardPointsPager" runat="server" PageSize="6">
                                     <Fields>
                                         <asp:NextPreviousPagerField ButtonType="Link" ShowPreviousPageButton="true" ShowNextPageButton="false"/>
                                         <asp:NumericPagerField ButtonType="Link" />

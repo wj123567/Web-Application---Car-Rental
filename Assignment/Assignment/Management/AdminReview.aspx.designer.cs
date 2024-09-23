@@ -33,6 +33,24 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Label lblBookingId;
 
         /// <summary>
+        /// lblCarName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCarName;
+
+        /// <summary>
+        /// lblUserId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUserId;
+
+        /// <summary>
         /// lblReviewText control.
         /// </summary>
         /// <remarks>

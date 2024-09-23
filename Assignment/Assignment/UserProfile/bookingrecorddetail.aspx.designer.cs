@@ -177,6 +177,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtComment;
 
         /// <summary>
+        /// hfRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfRating;
+
+        /// <summary>
         /// submit control.
         /// </summary>
         /// <remarks>
@@ -184,6 +193,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton submit;
+
+        /// <summary>
+        /// lblFeedback control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFeedback;
 
         /// <summary>
         /// lblPlateNum control.
