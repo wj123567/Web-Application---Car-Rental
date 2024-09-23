@@ -134,7 +134,7 @@
     <Key>
       <PropertyRef Name="RedeemItemId" />
     </Key>
-    <Property Name="RedeemItemId" Type="int" Nullable="false" />
+    <Property Name="RedeemItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ItemName" Type="varchar" MaxLength="50" />
     <Property Name="ItemPoints" Type="int" />
     <Property Name="ItemDescription" Type="varchar(max)" />
