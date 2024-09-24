@@ -91,10 +91,10 @@ namespace Assignment
             switch (cardType)
             {
                 case "Visa":
-                    imgCardType.ImageUrl = "~/Image/WZ/mastercard.png";
+                    imgCardType.ImageUrl = "~/Image/WZ/visa.png";
                     break;
                 case "Master":
-                    imgCardType.ImageUrl = "~/Image/WZ/visa.png";
+                    imgCardType.ImageUrl = "~/Image/WZ/mastercard.png";
                     break;
                 case "Amex":
                     imgCardType.ImageUrl = "~/Image/WZ/amex.png";

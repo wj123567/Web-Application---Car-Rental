@@ -351,7 +351,7 @@
     </div>
     <div class="px-4">
         <div class="container-xl mt-4">
-            <h1 class="text-dark">User Management</h1>
+            <h1 class="text-dark">Security Summary</h1>
             <hr class="mt-0 mb-4">
             <div class="col-12 d-flex">
                 <div class="w-100">
@@ -415,7 +415,9 @@
                                             <asp:LinkButton ID="btnSortUsername" runat="server" OnClick="btnSort_Click" CommandArgument="DESC" CommandName="Username" CssClass="text-dark">Username</asp:LinkButton>
                                         </th>
                                         <th scope="col">
-                                            <asp:LinkButton ID="btnSortEmail" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Email" CssClass="text-dark">Email</asp:LinkButton></th>
+                                            <asp:LinkButton ID="btnSortEmail" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Email" CssClass="text-dark">Email</asp:LinkButton></th>                                        <th scope="col">
+                                            <asp:LinkButton ID="btnSortValidate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EmailVerification" CssClass="text-dark">Email Verification</asp:LinkButton></th>                                        <th scope="col">
+                                            <asp:LinkButton ID="btnSortTFA" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="TwoStepVerification" CssClass="text-dark">2FA</asp:LinkButton></th>
                                         <th scope="col">
                                             <asp:LinkButton ID="btnSortRP" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RewardPoints" CssClass="text-dark">Reward Point</asp:LinkButton></th>
                                         <th scope="col">
@@ -435,6 +437,8 @@
                                             <tr style="text-align: center;">
                                                 <td scope="col"><%# Eval("UserName") %></td>
                                                 <td scope="col"><%# Eval("Email") %></td>
+                                                <td scope="col"><%# Eval("EmailVerification").ToString() == "1" ? "Valid" : "Invalid" %></td>
+                                                <td scope="col"><%# Eval("TwoStepVerification").ToString() == "1" ? "Enabled" : "Disabled"%></td>
                                                 <td scope="col"><%# Eval("RewardPoints") %></td>
                                                 <td scope="col">
                                                     <asp:Label ID="lblRegdate" runat="server"></asp:Label>
