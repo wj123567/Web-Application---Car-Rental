@@ -133,15 +133,21 @@ namespace Assignment
                             DateTime startDateTime = DateTime.Parse(Session["StartDate"].ToString());
                             DateTime endDateTime = DateTime.Parse(Session["EndDate"].ToString());
 
-                            // Extract only the date component
+                          /*  // Extract only the date component
                             DateTime startDate = new DateTime(startDateTime.Year, startDateTime.Month, startDateTime.Day);
-                            DateTime endDate = new DateTime(endDateTime.Year, endDateTime.Month, endDateTime.Day);
+                            DateTime endDate = new DateTime(endDateTime.Year, endDateTime.Month, endDateTime.Day);*/
+
 
                             // Calculate the difference in days
-                            TimeSpan dateDifference = endDate - startDate;
+                            TimeSpan dateTimeDifference = endDateTime - startDateTime;
                             
-                            int dayDifference = dateDifference.Days; 
-                            dayDifference = dayDifference + 1; //add one, first day also considered
+                            int dayDifference = (int)dateTimeDifference.TotalDays; 
+
+                            if(dateTimeDifference.TotalHours %24 > 0)
+                            {
+                                dayDifference += 1;
+                            }
+                            
                             //the total car rental
                             lblTotalDayRent.Text = dayDifference.ToString() + " Days";
                             Session["TotalDayRent"] = lblTotalDayRent.Text;

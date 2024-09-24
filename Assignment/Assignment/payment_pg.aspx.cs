@@ -58,11 +58,12 @@ namespace Assignment
             rptCards.DataSource = addCards;
             rptCards.DataBind();
 
+            
             // Toggle visibility of the checkbox and label based on the presence of items in the DataTable
             if (addCards.Rows.Count > 0)
             {
                 chkApplyCard.Visible = true;
-                lblApplyCard.Visible = true;
+                lblApplyCard.Visible = true; 
             }
             else
             {
@@ -72,7 +73,7 @@ namespace Assignment
             }
 
         }
-
+        
         private DataTable GetCards()
         {
 
@@ -130,6 +131,27 @@ namespace Assignment
             string maskedPart = new string('*', cardNumber.Length - 4);
             string lastFourDigits = cardNumber.Substring(cardNumber.Length - 4);
             return maskedPart + lastFourDigits;
+        }
+
+        protected string CheckCardDefault(string isDefault)
+        {
+            if(isDefault == "1")
+            {
+                
+                return "Default";
+            }
+            return "";
+        }
+
+        protected string GetDefaultBadge(string isDefault)
+        {
+            switch (isDefault)
+            {
+                case "1":
+                    return "bg-light";
+                default:
+                    return "";
+            }
         }
 
         protected void btnPaymentPgBack_Click(object sender, EventArgs e)

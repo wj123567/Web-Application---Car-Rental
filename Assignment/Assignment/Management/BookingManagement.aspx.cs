@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
+using static System.Collections.Specialized.BitVector32;
 namespace Assignment.Management
 {
     public partial class BookingManagement : System.Web.UI.Page
@@ -172,7 +173,7 @@ namespace Assignment.Management
             LoadAvailableUser(userId);
             loadDriverInfo(userId);
             loadBookingInfo(Session["BookingId"].ToString());
-
+            loadAddOnInfo(Session["BookingId"].ToString());
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "modal();", true);
 
         }
@@ -334,6 +335,23 @@ namespace Assignment.Management
             reader.Close();
         }
 
+        private void loadAddOnInfo(string bookingID)
+        {
+            String selectBooking = "SELECT Name, Quantity, Quantity*Price AS SubTotal FROM BookingAddOn b JOIN AddOn a ON b.AddOnId = a.Id WHERE BookingId = @BookingId";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(selectBooking, con);
+            cmd.Parameters.AddWithValue("@BookingId", bookingID);
+
+            DataTable dtAddOn = new DataTable();
+            dtAddOn.Load(cmd.ExecuteReader());
+
+            gvAddOn.DataSource = dtAddOn;
+            gvAddOn.DataBind();
+
+            rptAddOn.DataSource = dtAddOn;
+            rptAddOn.DataBind();
+        }
         protected void UserDriverRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             Label lblApproval = (Label)e.Item.FindControl("lblApproval");

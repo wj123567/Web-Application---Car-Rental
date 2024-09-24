@@ -146,7 +146,14 @@
                                     </div>
                                 </div>
                                 <hr class="mt-2">
+                                <div class="d-flex justify-content-between">
                                 <p class="text-muted mb-0">Feature</p>
+                                <div id="star-container">
+                                    <asp:Label ID="lblStar1" runat="server" CssClass="fa fa-star star fa-xs checked"></asp:Label>
+                                    <asp:Label ID="lblRating" runat="server" text='<%# (Eval("AVG") != DBNull.Value) ? String.Format("{0:F1}", Eval("AVG")) : "0.0" %>'  CssClass="text-muted" Font-Size="0.9em"></asp:Label>
+                                </div>
+                                </div>
+
                                 <div class="flex flex-wrap d-flex flex-row justify-content-between mt-3 mid">
                                     <div class="flex flex-col items-start justify-between align-items-center text-center mx-1">
                                         <i class="fa-solid fa-car" style="width: 35px; height: 25px;"></i>

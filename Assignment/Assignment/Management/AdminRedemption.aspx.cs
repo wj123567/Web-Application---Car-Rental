@@ -129,7 +129,7 @@ namespace Assignment.Management
 
                     db.SaveChanges();
                     ClearFormFields();
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccessMessage", "alert('Redeem item updated successfully!'); setTimeout(function() { window.location = 'AdminRedemption.aspx'; }, 2000);", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccessMessage", "alert('Redeem item updated successfully!'); setTimeout(function() { window.location = 'AdminRedemption.aspx'; }, 1000);", true);
 
                 }
                 else
@@ -178,6 +178,7 @@ namespace Assignment.Management
                         lblMessage.CssClass = "text-warning";
                         lblMessage.Text = "Please select a file to upload.";
                         lblMessage.Visible = true;
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$(document).ready(function() { $('#staticBackdrop').modal('show'); });", true);
                         return;
                     }
 
@@ -194,7 +195,7 @@ namespace Assignment.Management
                     db.SaveChanges();
 
                     ClearFormFields();
-                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccessMessage", "alert('Redeem item added successfully!'); setTimeout(function() { window.location = 'AdminRedemption.aspx'; }, 2000);", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccessMessage", "alert('Redeem item added successfully!'); setTimeout(function() { window.location = 'AdminRedemption.aspx'; }, 1000);", true);
 
                 }
 
@@ -209,10 +210,14 @@ namespace Assignment.Management
             txtItemDescription.Text = "";
             ddlStatus.SelectedIndex = 0;
             lblMessage.Visible = false;
+            hfRedeemItemId.Value = string.Empty;
+            lblMessage.Text = string.Empty;
+            fuItemImage.Attributes.Clear();
         }
 
         protected void btnEditRedeemItem_Click(object sender, EventArgs e)
         {
+            ClearFormFields();
             LinkButton btnEdit = (LinkButton)sender;
             int redeemItemId = Convert.ToInt32(btnEdit.CommandArgument);
 
@@ -236,6 +241,13 @@ namespace Assignment.Management
         protected void lvRedeemItems_Sorting(object sender, ListViewSortEventArgs e)
         {
 
+        }
+
+        protected void btnAddReviewItem_Click(object sender, EventArgs e)
+        {
+            ClearFormFields();
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$(document).ready(function() { $('#staticBackdrop').modal('show'); });", true);
         }
     }
 }

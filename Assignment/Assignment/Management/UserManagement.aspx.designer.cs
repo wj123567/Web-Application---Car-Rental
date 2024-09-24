@@ -690,6 +690,24 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.LinkButton btnSortEmail;
 
         /// <summary>
+        /// btnSortValidate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortValidate;
+
+        /// <summary>
+        /// btnSortTFA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortTFA;
+
+        /// <summary>
         /// btnSortRP control.
         /// </summary>
         /// <remarks>

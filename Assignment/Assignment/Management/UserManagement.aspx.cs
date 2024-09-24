@@ -171,6 +171,8 @@ namespace Assignment
             btnSortRoles.CssClass = "text-dark";
             btnSortBan.CssClass = "text-dark";
             btnBanReason.CssClass = "text-dark";
+            btnSortValidate.CssClass = "text-dark";
+            btnSortTFA.CssClass = "text-dark";
         }
 
         protected void hiddenBtn_Click(object sender, EventArgs e)
