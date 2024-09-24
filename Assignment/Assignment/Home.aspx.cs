@@ -20,15 +20,21 @@ namespace Assignment
            
             if (!Page.IsPostBack)
             {
-               
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "InitFlatpickr", "initialiseFlatpickr();", true);
                 if (Session["SelectedAddOns"] != null)
                 {
                     Session["SelectedAddOns"] = "";
                 }
-             /*   txtDepartureDateTime.Attributes["min"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-ddTHH:mm");
-                txtDepartureDateTime.Attributes["max"] = DateTime.Now.AddMonths(3).ToString("yyyy-MM-ddTHH:mm");*/
-                
-             /*   txtReturnDateTime.Attributes["max"] = DateTime.Now.AddMonths(4).ToString("yyyy-MM-ddTHH:mm");*/
+
+                if (Session["Pickup_point"] != null & Session["Pickup_state"] != null)
+                {
+                    txtDepartureLocation.Text = Session["Pickup_point"].ToString() +", " + Session["Pickup_state"].ToString();
+                    //for product listing use(bcs page transfer hdn will clear off
+                    hdnLocation.Value = Session["Pickup_point"].ToString();
+                    hdnState.Value = Session["Pickup_state"].ToString();
+                }
+               
+
                 PopulateRegionsAndPoints();
 
                 //You - update reward points
@@ -109,15 +115,7 @@ namespace Assignment
             ScriptManager.RegisterStartupScript(this, GetType(), "initializeEventListeners", "initializeEventListeners();", true);
         }
 
-/*        protected void txtDepartureDateTime_TextChanged(object sender, EventArgs e)
-        {
-            DateTime departureDate;
-            if (DateTime.TryParse(txtDepartureDateTime.Text, out departureDate))
-            {
-                DateTime minReturnDate = departureDate.AddDays(1);
-                txtReturnDateTime.Attributes["min"] = minReturnDate.ToString("yyyy-MM-ddTHH:mm");
-            }
-        }*/
+
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
@@ -128,12 +126,10 @@ namespace Assignment
             string txtReturnDateTime = txtReturnDate.Text +"T" + txtReturnTime.Text;
             // Save departure date to the session state
             Session["BookingID"]= saveTripInfo();
-            Session["Pickup_point"]  = hdnDepartureLocation.Value;
-            Session["Pickup_state"]  = hdnDepartureState.Value;
-          /*  Session["StartDate"]     = txtDepartureDateTime;*/
-            Session["Dropoff_point"] = hdnReturnLocation.Value;
-            Session["Dropoff_state"] = hdnReturnState.Value;
-            /*   Session["EndDate"]       = txtReturnDateTime;*/
+            Session["Pickup_point"]  = hdnLocation.Value;
+            Session["Pickup_state"]  = hdnState.Value;
+            Session["Dropoff_point"] = hdnLocation.Value;
+            Session["Dropoff_state"] = hdnState.Value;
 
             string returnDate = txtReturnDate.Text; // This still works
             DateTime parsedTime;
@@ -155,9 +151,9 @@ namespace Assignment
             Session["StartDate"] = formattedDepartureDateTime;
             Session["EndDate"] = formattedReturnDateTime;
 
+            
 
-
-            Response.Redirect("productListing.aspx");
+            Response.Redirect("productListing.aspx?Location="+hdnLocation.Value+"&State="+hdnState.Value);
 
         }
 

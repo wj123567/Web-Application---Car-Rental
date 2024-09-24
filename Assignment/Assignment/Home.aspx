@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Assignment.WebForm1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnBookingId" runat="server" />
 
      <div class="bg_cover">
@@ -14,21 +15,40 @@
    <div class="d-flex justify-content-center mb-3">
     <asp:Label ID="lblerrortext" runat="server" Text="Please Select Location and Time" CssClass="validate" Visible="False"></asp:Label>
 </div>
+      
+
+     <div class="container booking_selection">
+  <div class="row">
+    <div class="col text-center ">
+      <asp:Label ID="lblLocation" runat="server" Text="Pick Up & Drop Off Location" CssClass="home_label_style justify-content-center"></asp:Label> 
+    </div>
+  
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <asp:TextBox ID="txtDepartureLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Pick a Location😁"></asp:TextBox>
+       
+    </div>
+    <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Location is Required" ControlToValidate="txtDepartureLocation"  CssClass="validate text-center"  Display="Dynamic"></asp:RequiredFieldValidator>
+  </div>
+</div>
+          
+                   
         <div class="content_container">
 
         <div class="form_container">            
             
         <div class="form_group">            
+           
             <h5 class="home_pickup">Pick Up</h5>
             <span class="home_icon" style="margin-left:20px;"><i class="ri-map-pin-2-line"></i></span>
             <div class="input_content">
                 <div class="input_group">                    
-                   <asp:Label ID="lblLocation" runat="server" Text="Location" CssClass="home_label_style"></asp:Label>
-                    <asp:TextBox ID="txtDepartureLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Pick-up Location"></asp:TextBox>
+                  
                     <!-- handle viewstate prob bcs location assign thru client-side -->
-                     <asp:HiddenField ID="hdnDepartureLocation" runat="server" />
-                    <asp:HiddenField ID="hdnDepartureState" runat="server" />
-                    <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Pick Up Location is Required" ControlToValidate="txtDepartureLocation"  CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
+                     <asp:HiddenField ID="hdnLocation" runat="server" />
+                    <asp:HiddenField ID="hdnState" runat="server" />
+                    
                     <br />
 
                  <asp:Label ID="lblDepartureDateTime" runat="server" Text="Date & Time" CssClass="home_label_style"></asp:Label>     
@@ -57,12 +77,8 @@
             <h5 class="home_dropoff" >Drop Off</h5>
         <span class="home_icon"  style="margin-left:20px;"><i class="ri-map-pin-2-line"></i></span>
         <div class="input_content">
-            <div class="input_group">
-                        <asp:Label ID="Label1" runat="server" Text="Location" CssClass="home_label_style"></asp:Label>
-                        <asp:TextBox ID="txtReturnLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Return Location"></asp:TextBox>
-                        <asp:HiddenField ID="hdnReturnLocation" runat="server" />
-                        <asp:HiddenField ID="hdnReturnState" runat="server" />
-                <asp:RequiredFieldValidator ID="requireReturnLocation" runat="server" ErrorMessage="Return Location is Required" ControlToValidate="txtReturnLocation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
+            <div class="input_group">                               
+              
                 <br />
               
                 <asp:Label ID="lblReturnDateTime" runat="server" Text="Date & Time" CssClass="home_label_style" ></asp:Label>   
@@ -152,76 +168,70 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script type="text/javascript">
-        var today = new Date();
+        function initialiseFlatpickr(){
+            var today = new Date();
 
-        // Define minimum and maximum dates for departure
-        var minDateDpt = new Date();
-        minDateDpt.setDate(today.getDate() + 1);
-        var maxDateDpt = new Date();
-        maxDateDpt.setMonth(today.getMonth() + 3);
+            // Define minimum and maximum dates for departure
+            var minDateDpt = new Date();
+            minDateDpt.setDate(today.getDate() + 1);
+            var maxDateDpt = new Date();
+            maxDateDpt.setMonth(today.getMonth() + 3);
 
-        var minDateRtn = new Date();
-        minDateRtn.setDate(minDateDpt.getDate() + 1);
-        var maxDateRtn = new Date()
-        maxDateRtn.setMonth(today.setMonth() + 4);
+            var minDateRtn = new Date();
+            minDateRtn.setDate(today.getDate() + 2);
+            var maxDateRtn = new Date()
+            maxDateRtn.setMonth(today.getMonth() + 4);
 
-        // Flatpickr configuration with default time set to 08:00 AM, but not pre-filled in the textbox
-        var dptDateConfig = {
+            // Flatpickr configuration with default time set to 08:00 AM, but not pre-filled in the textbox
+            var dptDateConfig = {
+                altInput: true,
+                altFormat: "d/m/Y ",
+                minuteIncrement: 15,
+                minDate: minDateDpt,
+                maxDate: maxDateDpt,
+            };
 
-            altInput: true,
-            altFormat: "d/m/Y ",
-            
-            minuteIncrement: 15,
-            minDate: minDateDpt,
-            maxDate: maxDateDpt,
-        };
+            var dptTimeConfig = {
+                enableTime: true,
+                noCalendar: true,
+                altInput: true,
+                altFormat: "h:i K",
+                minuteIncrement: 15,
+                minDate: minDateDpt,
+                maxDate: maxDateDpt,
+                minTime: "08:00 ",
+                maxTime: "22:00 ",
+                defaultDate: minDateDpt.setHours(8, 0, 0)
+            };
 
-        var dptTimeConfig = {
-            enableTime: true,
-            noCalendar: true,
-            altInput: true,
-            altFormat: "h:i K",
-            
-            minuteIncrement: 15,
-            minDate: minDateDpt,
-            maxDate: maxDateDpt,
-            minTime: "08:00 ",
-            maxTime: "22:00 ",   
-            defaultDate: minDateDpt.setHours(8, 0, 0)
-        };
+            var rtnDateConfig = {
+                altInput: true,
+                altFormat: "d/m/Y ",
+                minuteIncrement: 15,
+                minDate: minDateRtn,
+                maxDate: maxDateRtn,
+            };
 
-        var rtnDateConfig = {
+            var rtnTimeConfig = {
+                enableTime: true,
+                noCalendar: true,
+                altInput: true,
+                altFormat: "h:i K",
 
-            altInput: true,
-            altFormat: "d/m/Y ",
-            
-            minuteIncrement: 15,
-            minDate: minDateRtn,
-            maxDate: maxDateRtn,
-        };
+                minuteIncrement: 15,
+                minDate: minDateDpt,
+                maxDate: maxDateDpt,
+                minTime: "08:00",
+                maxTime: "22:00",
+                defaultDate: minDateDpt.setHours(8, 0, 0)
+            };
+            // Initialize flatpickr on the input field
+            flatpickr("#<%= txtDepartureDate.ClientID %>", dptDateConfig);
+            flatpickr("#<%= txtDepartureTime.ClientID %>", dptTimeConfig);
+            flatpickr("#<%= txtReturnDate.ClientID %>", rtnDateConfig);
+            flatpickr("#<%= txtReturnTime.ClientID %>", rtnTimeConfig);
 
-        var rtnTimeConfig = {
-            enableTime: true,
-            noCalendar: true,
-            altInput: true,
-            altFormat: "h:i K",
-           
-            minuteIncrement: 15,
-            minDate: minDateDpt,
-            maxDate: maxDateDpt,
-            minTime: "08:00",
-            maxTime: "22:00",      
-            defaultDate: minDateDpt.setHours(8, 0, 0)
-        };
-        // Initialize flatpickr on the input field
-        flatpickr("#<%= txtDepartureDate.ClientID %>", dptDateConfig);
-        flatpickr("#<%= txtDepartureTime.ClientID %>", dptTimeConfig);
-        flatpickr("#<%= txtReturnDate.ClientID %>", rtnDateConfig);
-        flatpickr("#<%= txtReturnTime.ClientID %>", rtnTimeConfig);
-      
-
-        var hiddenInputValue = $('#<%= txtReturnDate.ClientID %>').val(); // This gets the value from the hidden input
-        console.log(hiddenInputValue);
+        }
 
         function validateDateTime(source, args) {
             var txtDepartureDate = document.getElementById('<%= txtDepartureDate.ClientID %>').value;
@@ -255,8 +265,7 @@
             } else {
                 args.IsValid = false;
             }
-            console.log(departureTime);
-            console.log(returnTime);
+      
         }
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -265,7 +274,7 @@
 
         // Get the inputs that open the modal
         var departureInput = document.getElementById('<%= txtDepartureLocation.ClientID %>');
-        var returnInput = document.getElementById('<%= txtReturnLocation.ClientID %>');
+
 
         // Get the <span> element that closes the modal
         var span = document.getElementById("modal_close");
@@ -286,10 +295,6 @@
             modal.style.display = "block";
         }
 
-        returnInput.onclick = function () {
-            activeInput = returnInput;
-            modal.style.display = "block";
-        }
 
         // Close the modal when the user clicks on <span> (x)
         span.onclick = function () {
@@ -360,12 +365,9 @@
                     activeInput.value = combinedValue;
                     // Set the hidden field value based on which input is active
                     if (activeInput === departureInput) {
-                        document.getElementById('<%= hdnDepartureLocation.ClientID %>').value = selectedPoint;
-                        document.getElementById('<%= hdnDepartureState.ClientID %>').value = selectedRegion;
-                    } else if (activeInput === returnInput) {
-                        document.getElementById('<%= hdnReturnLocation.ClientID %>').value = selectedPoint;
-                        document.getElementById('<%= hdnReturnState.ClientID %>').value = selectedRegion;
-                    }
+                        document.getElementById('<%= hdnLocation.ClientID %>').value = selectedPoint;
+                        document.getElementById('<%= hdnState.ClientID %>').value = selectedRegion;
+                    } 
                 }
 
                 // Close the modal

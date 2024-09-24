@@ -65,7 +65,8 @@ namespace Assignment.Management
             }
             int totalRow = getTotalRow();
             lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
-
+           
+            
         }
 
         protected int getTotalRow()
@@ -173,6 +174,7 @@ namespace Assignment.Management
             LoadAvailableUser(userId);
             loadDriverInfo(userId);
             loadBookingInfo(Session["BookingId"].ToString());
+            loadCarInfo(Session["BookingId"].ToString());
             loadAddOnInfo(Session["BookingId"].ToString());
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalScript", "modal();", true);
 
@@ -319,13 +321,15 @@ namespace Assignment.Management
                 DateTime dropoff_time = reader.GetDateTime(reader.GetOrdinal("EndDate"));
                 DateTime custBook_time = reader.GetDateTime(reader.GetOrdinal("BookingDate"));
                 
-               
-
                 txtPickUpTime.Text = pickup_time.ToString("dd/MM/yyyy hh:mm:ss");
                 txtDropOffTime.Text = dropoff_time.ToString("dd/MM/yyyy hh:mm:ss");
                 txtCustBookDate.Text = custBook_time.ToString("dd/MM/yyyy hh:mm:ss");
 
-                
+                //assign for textbox in modal
+                txtInitBookingPrice.Text = "MYR " + reader["Price"].ToString();
+                txtFinalBookingPrice.Text = "MYR " + reader["FinalPrice"].ToString();
+
+
                 if (reader["Notes"].ToString() != null)
                 {
                     txtAdditionalNotes.Text = reader["Notes"].ToString();
@@ -333,6 +337,29 @@ namespace Assignment.Management
             }
             con.Close();
             reader.Close();
+        }
+
+        protected void loadCarInfo(String BookingId)
+        {
+            String selectCar = "SELECT c.CarPlate AS CarPlate,l.LocationName+ ','+ l.LocationState AS Location FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate JOIN Location l ON c.LocationId=l.Id WHERE b.Id = @Id";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectCar, con);
+            com.Parameters.AddWithValue("@Id", BookingId);
+
+            SqlDataReader reader = com.ExecuteReader();
+            if (reader.Read())
+            {
+                //assign for textbox in modal 
+                txtCarPlate.Text = reader["CarPlate"].ToString();
+                txtOriLocation.Text = reader["Location"].ToString();
+
+
+              
+            }
+            reader.Close();
+            con.Close();
+            
         }
 
         private void loadAddOnInfo(string bookingID)
@@ -345,9 +372,6 @@ namespace Assignment.Management
 
             DataTable dtAddOn = new DataTable();
             dtAddOn.Load(cmd.ExecuteReader());
-
-            gvAddOn.DataSource = dtAddOn;
-            gvAddOn.DataBind();
 
             rptAddOn.DataSource = dtAddOn;
             rptAddOn.DataBind();

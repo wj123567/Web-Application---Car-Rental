@@ -51,70 +51,74 @@
         <div class="card-body row">
            
              <div class="col-6">
-     <h5 class="text-dark">Booking Info</h5>
+     <h5 class="text-dark">Time & Location</h5>
      <hr class="mt-0 mb-4">
      <div class="mb-3">
          <h6 class="text-dark mb-1 fw-bold">Pick Up</h6>
      </div>
      <div class="row gx-3 mb-3">
          <div class="col-md-6">
-             <label class="small mb-1">Pick Up Location</label>
+             <asp:Label ID="Label10" runat="server" CssClass="small mb-1" Text="Pick Up Location"></asp:Label>
              <asp:TextBox ID="txtPickUpLocation" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
          </div>
          <div class="col-md-6">
-             <label class="small mb-1">Pick Up Time (dd/MM/yyyy)</label>
+             <asp:Label ID="Label9" runat="server" CssClass="small mb-1" Text="Pick Up Time (dd/MM/yyyy)"></asp:Label>
              <asp:TextBox ID="txtPickUpTime" runat="server" CssClass="form-control" TextMode="DateTime" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
          </div>
      </div>
      <div class="mb-3">
      <h6 class="text-dark mb-1 fw-bold">Drop Off</h6>
      </div>
-     <div class="row gx-3 mb-5">
+     <div class="row gx-3 ">
          <div class="col-md-6">
-             <label class="small mb-1">Drop off Location</label>
-                 <asp:TextBox ID="txtDropOffLocation" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+             <asp:Label ID="Label8" runat="server" CssClass="small mb-1" Text="Drop off Location"></asp:Label>
+                 <asp:TextBox ID="txtDropOffLocation" runat="server" CssClass="form-control"  ReadOnly="True"></asp:TextBox>
           </div>
          <div class="col-md-6">
-             <label class="small mb-1" for="inputBirthday">Drop off Time (dd/MM/yyyy)</label>
-             <asp:TextBox ID="txtDropOffTime" runat="server" CssClass="form-control" TextMode="DateTime" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+             <asp:Label ID="Label7" runat="server"  CssClass="small mb-1" Text="Drop off Time (dd/MM/yyyy)"></asp:Label>
+             <asp:TextBox ID="txtDropOffTime" runat="server" CssClass="form-control" TextMode="DateTime"  ReadOnly="True"></asp:TextBox>
          </div>
      </div>
+     <div class="mb-3">
+ <h6 class="text-dark mb-1 fw-bold">Booking Date</h6>
+ </div>
      <div class="row gx-3 mb-5">
      <div class="col-md-12">
-         <label class="small mb-1">Customer Booking Date (dd/MM/yyyy)</label>
-             <asp:TextBox ID="txtCustBookDate" runat="server" CssClass="form-control"  TextMode="DateTime" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+         <asp:Label ID="Label6" runat="server"  CssClass="small mb-1" Text="Customer Booking Date (dd/MM/yyyy)"></asp:Label>
+             <asp:TextBox ID="txtCustBookDate" runat="server" CssClass="form-control"  TextMode="DateTime"  ReadOnly="True"></asp:TextBox>
              
       </div>
     
  </div>
      <div class="mb-3">
-     <h6 class="text-dark mb-1">Additional Info</h6>
+      <h5 class="text-dark">Additional notes</h5>
+      <hr class="mt-0 mb-4">
      </div>
      <div class="row gx-3 mb-3">
          <div class="col">
-             <label class="small mb-1 d-block">Notes:</label>
-             <asp:TextBox ID="txtAdditionalNotes" runat="server" CssClass="form-control d-block" TextMode="MultiLine" Rows="5"  ReadOnly="True" ValidationGroup="reviewGroup"></asp:TextBox>
+             <asp:Label ID="Label5" runat="server" CssClass="small mb-1 d-block" Text="Notes"></asp:Label>
+             <asp:TextBox ID="txtAdditionalNotes" runat="server" CssClass="form-control d-block" TextMode="MultiLine" Rows="5"  ReadOnly="True" ></asp:TextBox>
          </div>
      </div>
      </div>
          <div class="col-6">
             <!-- car & rental -->
-             <h5 class="text-dark">Car & Rental Info</h5>
+             <h5 class="text-dark">Car Info</h5>
+             <hr class="mt-0 mb-4">
               <div class="row gx-3 mb-3">
-     <div class="col-md-6">
-         <label class="small mb-1">Pick Up Location</label>
-         <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
-     </div>
-     <div class="col-md-6">
-         <label class="small mb-1">Pick Up Time (dd/MM/yyyy)</label>
-         <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" TextMode="DateTime" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
-     </div>
- </div>
+                <div class="col-md-6">
+                    <asp:Label ID="Label4" runat="server" CssClass="small mb-1"  Text="Car Plate"></asp:Label>
+                 <asp:TextBox ID="txtCarPlate" runat="server" CssClass="form-control"   ReadOnly="True"></asp:TextBox>
+             </div>
+             <div class="col-md-6">
+                 <asp:Label ID="Label3" runat="server" CssClass="small mb-1" Text="Original Location"></asp:Label>
+                 <asp:TextBox ID="txtOriLocation" runat="server" CssClass="form-control"  ReadOnly="True"></asp:TextBox>
+             </div>
+            </div>
+            
              <!--add on -->
              <h5 class="text-dark">Add On Info</h5>
-             <asp:GridView ID="gvAddOn" runat="server"></asp:GridView>
-             
-             
+             <hr class="mt-0 mb-4">
              <div class="table-responsive">
              <asp:Repeater ID="rptAddOn" runat="server">
                  <HeaderTemplate>
@@ -142,7 +146,25 @@
                      </FooterTemplate>
              </asp:Repeater>
                   </div>
-         </div>   
+              <!-- booking price -->
+      <h5 class="text-dark">Payment Update</h5>
+      <hr class="mt-0 mb-4">
+       <div class="row gx-3 mb-3">
+         <div class="col-md-6">
+             <asp:Label ID="Label2" runat="server" CssClass="small mb-1" Text="Initial Price"></asp:Label>
+          <asp:TextBox ID="txtInitBookingPrice" runat="server" CssClass="form-control"   ReadOnly="True"></asp:TextBox>
+      </div>
+      <div class="col-md-6">
+          <asp:Label ID="Label1" runat="server" CssClass="small mb-1" Text="Final Price"></asp:Label>
+          <asp:TextBox ID="txtFinalBookingPrice" runat="server" CssClass="form-control"   ReadOnly="True"></asp:TextBox>
+      </div>
+     </div>
+    <div class="row gx-3 mb-3">
+
+
+    </div>
+
+         </div>   <!-- right col end-->
     </div>
 </div>
       <div class="modal-footer d-flex justify-content-between">

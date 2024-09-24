@@ -41,7 +41,11 @@ namespace Assignment
             ddlDFState.SelectedValue = Session["Dropoff_state"].ToString();
             hdnStart.Text = startDate.ToString("dd-MM-yyyy HH:mm");
             hdnEnd.Text = endDate.ToString("dd-MM-yyyy HH:mm");
-            string findCar = "SELECT C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, AVG(R.Rating) as AVG FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate LEFT JOIN Reviews R ON B.Id = R.BookingId WHERE IsDelisted = 0 AND L.LocationName = @Pickup_point AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL) GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy";
+            string findCar = @"SELECT C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, AVG(R.Rating) as AVG 
+                              FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate LEFT JOIN Reviews R ON B.Id = R.BookingId 
+                              WHERE IsDelisted = 0 AND L.LocationName = @Pickup_point 
+                              AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL) 
+                              GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy";
 
             //initial one
             //"SELECT C.*FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN TestTrip T ON C.CarPlate = T.CarPlateNo WHERE IsDelisted = 0 AND L.LocationName = @Pickup_point AND(T.Id IS NULL OR NOT(@startDate < T.EndDate AND @endDate > T.StartDate))"
