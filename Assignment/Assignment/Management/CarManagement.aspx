@@ -30,6 +30,54 @@
         </div>
     </div>
 
+        <div class="modal modal-lg animate__animated animate__slideInLeft animate__faster" id="userBookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userBookingModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-dark" id="staticBookingLabel">Booking Record</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body row">
+
+                        <asp:Label ID="lblNoBooking" runat="server" CssClass="text-dark"></asp:Label>
+                        <asp:Repeater ID="rptBookingRec" runat="server" OnItemDataBound="rptBookingRec_ItemDataBound">
+                            <ItemTemplate>
+                                <div class="card-body rounded border border-dark py-2 mb-2 text-dark">
+                                    <div class="d-flex align-items-center justify-content-between px-2">
+                                        <div class="d-flex align-items-center me-2">
+                                            <div class="driver-car-frame me-2 flex-shrink-0">
+                                                <asp:Image ID="carImage" runat="server" ImageUrl='<%# Eval("CarImage")%>' CssClass="img-fluid" />
+                                            </div>
+                                            <div>
+                                                <asp:Label ID="lblBookingId" runat="server" Text='<%# Eval("Id") +" (" + Eval("CarPlate") +")"%>' CssClass="d-block" />
+                                                <asp:Label ID="lblDriverName" runat="server" Text='<%# (Eval("DriverGender").ToString() == "M" ? "Mr. " : "Ms. ") + Eval("DriverName").ToString()%>' CssClass="d-block" />
+                                                <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Pick Up Point: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-inline" />
+                                                <asp:Label ID="lblPickupTime" runat="server" Text='<%# "(" + Eval("StartDate") +")"%>' CssClass="text-xs text-muted d-inline" />
+                                                <br />
+                                                <asp:Label ID="lblDriverBdate" runat="server" Text='<%# "Drop Off Point: " + Eval("Dropoff_point") %>' CssClass="text-xs text-muted d-inline" />
+                                                <asp:Label ID="lblEndTime" runat="server" Text='<%# "(" + Eval("EndDate") +")"%>' CssClass="text-xs text-muted d-inline" />
+                                                <br />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="driver-frame">
+                                                <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("SelfiePic")%>' CssClass="img-fluid" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -297,7 +345,7 @@
                         <thead>
                             <tr style="text-align: center;">
                                 <th scope="col">
-                                    <asp:LinkButton ID="btnSortCarPlate" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="DESC" CommandName="CarPlate" CssClass="text-dark sortcar-btn">Car Plate</asp:LinkButton>
+                                    <asp:LinkButton ID="btnSortCarPlate" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark sortcar-btn">Car Plate</asp:LinkButton>
                                 </th>
                                 <th scope="col">
                                     <asp:LinkButton ID="btnSortCarBrand" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarBrand" CssClass="text-dark sortcar-btn">Car Brand</asp:LinkButton></th>
@@ -314,7 +362,9 @@
                                 <th scope="col">
                                     <asp:LinkButton ID="btnSortCarLocation" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="LocationName" CssClass="text-dark sortcar-btn">Location Name</asp:LinkButton></th>
                                 <th scope="col">
-                                    <asp:LinkButton ID="btnSortCarState" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="IsDelisted" CssClass="text-dark sortcar-btn">Car Stated</asp:LinkButton></th>
+                                    <asp:LinkButton ID="btnSortCarState" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="IsDelisted" CssClass="text-dark sortcar-btn">Car Stated</asp:LinkButton></th>                                
+                                <th scope="col">
+                                    <asp:LinkButton ID="btnSortUpcoming" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="Upcoming" CssClass="text-dark sortcar-btn">Upcoming</asp:LinkButton></th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -329,9 +379,11 @@
                                         <td scope="col"><%# Eval("CarDayPrice", "{0:F2}") %></td>
                                         <td scope="col"><%# Eval("CarTransmission") %></td>
                                         <td scope="col"><%# Eval("CarEnergy") %></td>
-                                        <td scope="col"><%# Eval("LocationName") %></td>
+                                        <td scope="col"><%# Eval("LocationName") %></td>             
                                         <td scope="col">
                                             <asp:Label ID="lblCarState" runat="server"></asp:Label></td>
+                                            
+                                        <td scope="col"><asp:Button ID="btnUpcoming" runat="server" Text=<%# Eval("Upcoming") %> CssClass="btn btn-sm text-primary" CommandArgument='<%# Eval("CarPlate") %>' OnClick="btnUpcoming_Click"/></td>
                                         <td scope="col">
                                             <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEditCar_Click" CommandArgument='<%# Eval("CarPlate") %>' />
                                             <asp:Button ID="btnView" runat="server" Text="View" CssClass="btn btn-sm text-primary" OnClick="btnViewCar_Click" CommandArgument='<%# Eval("CarPlate") %>' />
@@ -415,6 +467,14 @@
     </script>
 
     <script>
+
+        function bookingModal() {
+            document.addEventListener("DOMContentLoaded", function(){
+                $('#userBookingModal').modal('toggle');
+                return false;
+            });
+        }
+
         function fileUpload() {
             document.getElementById('<%= validateCarPic.ClientID %>').enabled = true;
             document.getElementById('<%= fuCarPic.ClientID %>').click();

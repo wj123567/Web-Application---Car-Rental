@@ -26,7 +26,8 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
-                ViewState["SQLQuery"] = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id";
+                ViewState["SQLQuery"] = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate >= CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Upcoming FROM Car C JOIN Location L ON C.LocationId = L.Id 
+                  LEFT JOIN Booking B ON C.CarPlate = B.CarPlate GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
                 loadCarData();
             }
 
@@ -35,7 +36,7 @@ namespace Assignment
 
         protected void loadCarData()
         {
-            string selectCar = ViewState["SQLQuery"].ToString() + " ORDER BY C.CarPlate OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
+            string selectCar = ViewState["SQLQuery"].ToString() + " ORDER BY Upcoming DESC OFFSET @Pagesize*(@PageNumber - 1) ROWS FETCH NEXT @Pagesize ROWS ONLY";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
@@ -53,7 +54,7 @@ namespace Assignment
             con.Close();
             UpdatePageInfo(getTotalRow());
             removeSort();
-            btnSortCarPlate.CssClass = "text-dark sort-up";
+            btnSortUpcoming.CssClass = "text-dark sort-down";
         }
 
         protected void UpdatePageInfo(int row)
@@ -82,13 +83,24 @@ namespace Assignment
 
         protected int getTotalRow()
         {
+            string sqlQuery = ViewState["SQLQuery"].ToString();
             string selectAll = "SELECT COUNT(*) FROM Car C JOIN Location L ON C.LocationId = L.Id ";
-            int whereIndex = ViewState["SQLQuery"].ToString().IndexOf("WHERE", StringComparison.OrdinalIgnoreCase);
+            int whereIndex = sqlQuery.IndexOf("WHERE", StringComparison.OrdinalIgnoreCase);
 
             if (whereIndex != -1)
             {
-                string afterWhere = ViewState["SQLQuery"].ToString().Substring(whereIndex).Trim();
-                selectAll += afterWhere;
+                int groupByIndex = sqlQuery.IndexOf("GROUP BY", StringComparison.OrdinalIgnoreCase);
+                if (groupByIndex != -1)
+                {
+                    string betweenWhereGroupBy = sqlQuery.Substring(whereIndex, groupByIndex - whereIndex).Trim();
+                    selectAll += betweenWhereGroupBy;
+                }
+                // If no GROUP BY, extract everything after WHERE until the end of the query
+                else
+                {
+                    string afterWhere = sqlQuery.Substring(whereIndex).Trim();
+                    selectAll += afterWhere;
+                }
             }
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
@@ -271,6 +283,30 @@ namespace Assignment
             con.Close();
             reader.Close();
         }
+
+        protected void btnUpcoming_Click(object sender, EventArgs e)
+        {
+            Button btnEdit = (Button)sender;
+            String carPlate = btnEdit.CommandArgument;
+            loadCarBookingData(carPlate);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Popup", "bookingModal()", true);
+        }
+
+        protected void loadCarBookingData(string carPlate)
+        {
+            String selectCar = "SELECT B.*, C.CarPlate, C.CarBrand, C.CarName, C.CarImage, D.DriverName, D.DriverGender, D.SelfiePic FROM Booking B JOIN Car C ON B.CarPlate = C.CarPlate JOIN Location L ON C.LocationId = L.Id JOIN Driver D ON B.DriverId = D.Id WHERE B.CarPlate = @CarPlate AND B.StartDate >= CONVERT (date, SYSDATETIME())";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectCar, con);
+            com.Parameters.AddWithValue("@CarPlate", carPlate);
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataSet ds = new DataSet();
+            da.Fill(ds, "CarTable");
+            rptBookingRec.DataSource = ds.Tables["CarTable"];
+            rptBookingRec.DataBind();
+            con.Close();
+        }
+
         protected void HideControls(Control container)
         {
             foreach (Control c in container.Controls)
@@ -347,6 +383,7 @@ namespace Assignment
             btnSortCarEnergy.CssClass = "text-dark";
             btnSortCarLocation.CssClass = "text-dark";
             btnSortCarState.CssClass = "text-dark";
+            btnSortUpcoming.CssClass = "text-dark";
         }
         
 
@@ -380,10 +417,12 @@ namespace Assignment
         {
             Button btnView = (Button)e.Item.FindControl("btnView");
             Button btnEdit = (Button)e.Item.FindControl("btnEdit");
+            Button btnUpcoming = (Button)e.Item.FindControl("btnUpcoming");
             if (btnView != null && btnEdit != null)
             {
                 ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
                 scriptManager.RegisterPostBackControl(btnView);
+                scriptManager.RegisterPostBackControl(btnUpcoming);
                 scriptManager.RegisterPostBackControl(btnEdit);
             }
         }
@@ -624,7 +663,7 @@ namespace Assignment
         }
         protected void hiddenBtn_Click(object sender, EventArgs e)
         {
-            string findCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR CarPlate LIKE @searchString";
+            string findCar = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate > '09/24/2024' AND Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Upcoming FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR CarPlate LIKE @searchString GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
             ViewState["SQLQuery"] = findCar;
             loadCarData();
             UpdatePanel1.Update();
@@ -641,11 +680,12 @@ namespace Assignment
             string selectCar = " ";
             if (loc != "0")
             {
-                selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id WHERE C.LocationId = @LocationId";
+                selectCar = "SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate >= CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Upcoming FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate WHERE C.LocationId = @LocationId GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
             }
             else
             {
-                selectCar = "SELECT C.*, L.LocationName FROM Car C JOIN Location L ON C.LocationId = L.Id";
+                selectCar = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate >= CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Upcoming FROM Car C JOIN Location L ON C.LocationId = L.Id 
+                  LEFT JOIN Booking B ON C.CarPlate = B.CarPlate GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
             }
 
             ViewState["SQLQuery"] = selectCar;
@@ -653,5 +693,9 @@ namespace Assignment
             UpdatePanel1.Update();
         }
 
+        protected void rptBookingRec_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+
+        }
     }
 }

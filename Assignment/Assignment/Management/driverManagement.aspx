@@ -286,19 +286,16 @@
         });
 
         function loadModal() {
-            document.addEventListener("DOMContentLoaded", modal);
+            document.addEventListener("DOMContentLoaded", function(){
+                $('#reviewDriver').modal('show');
+                return false;
+            });
         }
 
         function addDateApply() {
 
             document.getElementById('<%= btnSortDateApply.ClientID %>').innerHTML = document.getElementById('<%= btnSortDateApply.ClientID %>').innerHTML + " ▲";
         }
-
-
-        function modal() {
-            $('#reviewDriver').modal('toggle');
-            return false;
-        };
 
         function triggerButtonClick(event) {
             if (event.keyCode == 13) {
