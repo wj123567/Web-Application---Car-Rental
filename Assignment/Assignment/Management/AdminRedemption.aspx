@@ -86,10 +86,31 @@
                                     <asp:Literal ID="litItemNameIcon" runat="server"></asp:Literal>
                                 </asp:LinkButton>
                             </th>
-                            <th>ItemPoints</th>
-                            <th>ItemDescription</th>
-                            <th>Status</th>
-                            <th>ItemImage</th>
+                            <th>
+                                <asp:LinkButton ID="lbItemPoints" runat="server" CommandName="Sort" CommandArgument="ItemPoints" CssClass="link-button">
+                                    ItemPoints
+                                    <asp:Literal ID="litItemPointsIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+                            <th>
+                                <asp:LinkButton ID="lbItemDescription" runat="server" CommandName="Sort" CommandArgument="ItemDescription" CssClass="link-button">
+                                    ItemDescription
+                                    <asp:Literal ID="litItemDescriptionIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+                            <th>
+                                <asp:LinkButton ID="lbStatus" runat="server" CommandName="Sort" CommandArgument="Status" CssClass="link-button">
+                                    Status
+                                    <asp:Literal ID="litStatusIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+                            <th>
+                                <asp:LinkButton ID="lbItemImage" runat="server" CommandName="Sort" CommandArgument="ItemImage" CssClass="link-button">
+                                    ItemDescription
+                                    <asp:Literal ID="litItemImageIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+
                             <th>Action</th>
                         </tr>
                     </thead>
