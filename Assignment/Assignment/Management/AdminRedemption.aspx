@@ -69,7 +69,8 @@
         <asp:LinkButton ID="btnAddReviewItem" 
                         runat="server"
                         CssClass="btn btn-primary"
-                        OnClientClick="openModal(); return false;">
+                        OnClick="btnAddReviewItem_Click"
+                        OnClientClick="">
             Add New Redeem Item
         </asp:LinkButton>
     </div>
@@ -85,10 +86,31 @@
                                     <asp:Literal ID="litItemNameIcon" runat="server"></asp:Literal>
                                 </asp:LinkButton>
                             </th>
-                            <th>ItemPoints</th>
-                            <th>ItemDescription</th>
-                            <th>Status</th>
-                            <th>ItemImage</th>
+                            <th>
+                                <asp:LinkButton ID="lbItemPoints" runat="server" CommandName="Sort" CommandArgument="ItemPoints" CssClass="link-button">
+                                    ItemPoints
+                                    <asp:Literal ID="litItemPointsIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+                            <th>
+                                <asp:LinkButton ID="lbItemDescription" runat="server" CommandName="Sort" CommandArgument="ItemDescription" CssClass="link-button">
+                                    ItemDescription
+                                    <asp:Literal ID="litItemDescriptionIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+                            <th>
+                                <asp:LinkButton ID="lbStatus" runat="server" CommandName="Sort" CommandArgument="Status" CssClass="link-button">
+                                    Status
+                                    <asp:Literal ID="litStatusIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+                            <th>
+                                <asp:LinkButton ID="lbItemImage" runat="server" CommandName="Sort" CommandArgument="ItemImage" CssClass="link-button">
+                                    ItemDescription
+                                    <asp:Literal ID="litItemImageIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
+
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -141,17 +163,14 @@
         }
 
         function validateForm() {
-            let isValid = true;
+            Page_ClientValidate('AddItem');
 
-            // Check for required fields
-            $('#staticBackdrop .form-control').each(function () {
-                if ($(this).val().trim() === '') {
-                    isValid = false;
-                    alert($(this).attr('placeholder') + ' is required.');
-                }
-            });
-
-            return isValid; // If all required fields are filled, return true
+            // Check if all validators are valid
+            if (Page_IsValid) {
+                return true; // Proceed with form submission
+            } else {
+                return false; // Prevent form submission if validation fails
+            }
         }
 
 
