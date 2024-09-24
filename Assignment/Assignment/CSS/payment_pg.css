@@ -32,10 +32,19 @@ small {
     letter-spacing: 1px;
 }
 
-.chkApplyCard{
-    margin-top:20px;
+.chkApplyCard {
+    margin-top: 20px;
+    
 }
 
+.chkboxApply{
+    padding-right:10px;
+}
+
+.chkboxApply input[type="checkbox"]{
+    transform: scale(1.5);
+    
+}
 
 
 .accordion-item {

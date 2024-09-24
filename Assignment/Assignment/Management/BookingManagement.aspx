@@ -50,7 +50,7 @@
       <div class="modal-body">
         <div class="card-body row">
            
-             <div class="col">
+             <div class="col-6">
      <h5 class="text-dark">Booking Info</h5>
      <hr class="mt-0 mb-4">
      <div class="mb-3">
@@ -97,7 +97,52 @@
          </div>
      </div>
      </div>
-            
+         <div class="col-6">
+            <!-- car & rental -->
+             <h5 class="text-dark">Car & Rental Info</h5>
+              <div class="row gx-3 mb-3">
+     <div class="col-md-6">
+         <label class="small mb-1">Pick Up Location</label>
+         <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+     </div>
+     <div class="col-md-6">
+         <label class="small mb-1">Pick Up Time (dd/MM/yyyy)</label>
+         <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" TextMode="DateTime" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+     </div>
+ </div>
+             <!--add on -->
+             <h5 class="text-dark">Add On Info</h5>
+             <asp:GridView ID="gvAddOn" runat="server"></asp:GridView>
+             
+             
+             <div class="table-responsive">
+             <asp:Repeater ID="rptAddOn" runat="server">
+                 <HeaderTemplate>
+                 <table class="table table-striped">
+                     <tr>
+                         <th>Type</th>
+                         <th>Quantity</th>
+                         <th>Subtotal</th>
+                     </tr>
+                     </HeaderTemplate>
+                 <ItemTemplate>
+                     <tr>
+                         <td><%# Eval("Name") %></td>
+                         <td><%# Eval("Quantity") %></td>
+                         <td><%# Eval("SubTotal") %></td>
+                     </tr>
+                     
+                </ItemTemplate>
+                     <FooterTemplate>
+                         <tr>
+                             <td colspan="2">Total Price</td>
+                             <td></td>
+                         </tr>
+                         </table>
+                     </FooterTemplate>
+             </asp:Repeater>
+                  </div>
+         </div>   
     </div>
 </div>
       <div class="modal-footer d-flex justify-content-between">

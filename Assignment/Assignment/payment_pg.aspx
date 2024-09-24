@@ -106,6 +106,9 @@
             </div>
           </div>
               <div class="col-3 col-md-3 text-end">
+                  <span class="status_icon badge <%# GetDefaultBadge(Eval("IsDefault").ToString()) %> rounded-pill d-inline me-2">
+                  <asp:Label ID="lblDefaultCard" runat="server" CssClass="text-dark" Text='<%# CheckCardDefault(Eval("IsDefault").ToString()) %>'></asp:Label>
+                  </span>
               <asp:Button ID="btnExistCard" runat="server" Text="Apply"  CssClass="btn btn-dark" CommandArgument='<%# Eval("Id") %>' OnClick="btnExistCard_Click" />
                   </div>
         </div>
