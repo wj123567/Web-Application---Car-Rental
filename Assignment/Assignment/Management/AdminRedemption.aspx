@@ -99,75 +99,91 @@
         </asp:LinkButton>
     </div>
 
-        <asp:ListView ID="lvRedeemItems" runat="server" OnSorting="lvRedeemItems_Sorting">
-            <LayoutTemplate>
-                <table class="table table-striped table-bordered table-responsive redeemTable">
-                    <thead>
-                        <tr class="">
-                            <th>
-                                <asp:LinkButton ID="lbItemName" runat="server" CommandName="Sort" CommandArgument="ItemName" CssClass="link-button">
-                                    ItemName
-                                    <asp:Literal ID="litItemNameIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton>
-                            </th>
-                            <th>
-                                <asp:LinkButton ID="lbItemPoints" runat="server" CommandName="Sort" CommandArgument="ItemPoints" CssClass="link-button">
-                                    ItemPoints
-                                    <asp:Literal ID="litItemPointsIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton>
-                            </th>
-                            <th>
-                                <asp:LinkButton ID="lbItemDescription" runat="server" CommandName="Sort" CommandArgument="ItemDescription" CssClass="link-button">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <asp:ListView ID="lvRedeemItems" runat="server" OnSorting="lvRedeemItems_Sorting">
+                <LayoutTemplate>
+                    <table class="table table-striped table-bordered table-responsive redeemTable">
+                        <thead>
+                            <tr class="">
+                                <th>
+                                    <asp:LinkButton ID="lbItemName" runat="server" CommandName="Sort" CommandArgument="ItemName" CssClass="link-button">
+                                        ItemName
+                                        <asp:Literal ID="litItemNameIcon" runat="server"></asp:Literal>
+                                    </asp:LinkButton>
+                                </th>
+                                <th>
+                                    <asp:LinkButton ID="lbItemPoints" runat="server" CommandName="Sort" CommandArgument="ItemPoints" CssClass="link-button">
+                                        ItemPoints
+                                        <asp:Literal ID="litItemPointsIcon" runat="server"></asp:Literal>
+                                    </asp:LinkButton>
+                                </th>
+                                <th>
+                                    <asp:LinkButton ID="lbItemDescription" runat="server" CommandName="Sort" CommandArgument="ItemDescription" CssClass="link-button">
+                                        ItemDescription
+                                        <asp:Literal ID="litItemDescriptionIcon" runat="server"></asp:Literal>
+                                    </asp:LinkButton>
+                                </th>
+                                <th>
+                                    <asp:LinkButton ID="lbStatus" runat="server" CommandName="Sort" CommandArgument="Status" CssClass="link-button">
+                                        Status
+                                        <asp:Literal ID="litStatusIcon" runat="server"></asp:Literal>
+                                    </asp:LinkButton>
+                                </th>
+                                <th>
                                     ItemDescription
-                                    <asp:Literal ID="litItemDescriptionIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton>
-                            </th>
-                            <th>
-                                <asp:LinkButton ID="lbStatus" runat="server" CommandName="Sort" CommandArgument="Status" CssClass="link-button">
-                                    Status
-                                    <asp:Literal ID="litStatusIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton>
-                            </th>
-                            <th>
-                                <asp:LinkButton ID="lbItemImage" runat="server" CommandName="Sort" CommandArgument="ItemImage" CssClass="link-button">
-                                    ItemDescription
-                                    <asp:Literal ID="litItemImageIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton>
-                            </th>
+                                </th>
 
-                            <th>Action</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="itemPlaceHolder" runat="server"></tr>
+                        </tbody>
+
+                        <tr>
+                            <td colspan="6" class="asd">
+                                <div class="d-flex justify-content-center">
+                                    <asp:DataPager ID="ReviewsPager" runat="server" PageSize="6">
+                                        <Fields>
+                                            <asp:NextPreviousPagerField ButtonType="Link" ShowPreviousPageButton="true" ShowNextPageButton="false"/>
+                                            <asp:NumericPagerField ButtonType="Link" />
+                                            <asp:NextPreviousPagerField ButtonType="Link" ShowNextPageButton="true" ShowPreviousPageButton="false"/>
+                                        </Fields>
+                                    </asp:DataPager>
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr id="itemPlaceHolder" runat="server"></tr>
-                    </tbody>
                     
-                </table>
-            </LayoutTemplate>
-            <ItemTemplate>
-                <tr>
-                    <td><%# Eval("ItemName") %></td>
-                    <td><%# Eval("ItemPoints") %></td>
-                    <td><%# Eval("ItemDescription") %></td>
-                    <td><%# Eval("Status") %></td>
-                    <td>
-                        <img src='<%# ResolveUrl("~/Image/RedeemItem/" + Eval("ItemImage")) %>' alt="<%# Eval("ItemName") %>" style="width: 100px; height: auto;" class="" />
-                    </td>
-                    <td >
+                    </table>
+                </LayoutTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td><%# Eval("ItemName") %></td>
+                        <td><%# Eval("ItemPoints") %></td>
+                        <td><%# Eval("ItemDescription") %></td>
+                        <td><%# Eval("Status") %></td>
+                        <td>
+                            <img src='<%# ResolveUrl("~/Image/RedeemItem/" + Eval("ItemImage")) %>' alt="<%# Eval("ItemName") %>" style="width: 100px; height: auto;" class="" />
+                        </td>
+                        <td >
 
-                        <asp:LinkButton ID="btnEditRedeemItem" 
-                                        runat="server" 
-                                        CommandArgument='<%# Eval("RedeemItemId") %>' 
-                                        OnClick="btnEditRedeemItem_Click">
-                            <i class="fas fa-edit" style="color: #ffbb00;"></i>
-                        </asp:LinkButton>
-                        <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("RedeemItemId") %>' OnClick="DeleteButton_Click" OnClientClick="return confirm('Are you sure you want to delete this Redeem Item?');">
-                            <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
-                        </asp:LinkButton>
-                    </td>
-                </tr>
-            </ItemTemplate>
-        </asp:ListView>
+                            <asp:LinkButton ID="btnEditRedeemItem" 
+                                            runat="server" 
+                                            CommandArgument='<%# Eval("RedeemItemId") %>' 
+                                            OnClick="btnEditRedeemItem_Click">
+                                <i class="fas fa-edit" style="color: #ffbb00;"></i>
+                            </asp:LinkButton>
+                            <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("RedeemItemId") %>' OnClick="DeleteButton_Click" OnClientClick="return confirm('Are you sure you want to delete this Redeem Item?');">
+                                <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
+                            </asp:LinkButton>
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:ListView>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+        
     </div>
 
     <script>
