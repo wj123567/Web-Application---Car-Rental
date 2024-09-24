@@ -68,7 +68,7 @@
                         <label for="fuItemImage" class="fs-6"><b>Item Image</b></label>
                         <asp:FileUpload ID="fuRdmItem" runat="server" CssClass="form-control-file mb-2" onchange="ShowCropModal(event)"/>
                         <asp:CustomValidator ID="cvFileUpload" runat="server" 
-                            ErrorMessage="Only .jpg, .jpeg, or .png files are allowed." 
+                            ErrorMessage="Only .jpg or .png files are allowed." 
                             CssClass="text-warning" 
                             ClientValidationFunction="validateFileUpload" 
                             Display="Dynamic" ValidationGroup="AddItem" ControlToValidate="fuRdmItem" />
@@ -101,7 +101,7 @@
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-            <asp:ListView ID="lvRedeemItems" runat="server" OnSorting="lvRedeemItems_Sorting">
+            <asp:ListView ID="lvRedeemItems" runat="server" OnSorting="lvRedeemItems_Sorting" OnPagePropertiesChanging="lvRedeemItems_PagePropertiesChanging">
                 <LayoutTemplate>
                     <table class="table table-striped table-bordered table-responsive redeemTable">
                         <thead>
@@ -209,7 +209,7 @@
         function validateFileUpload(sender, args) {
             var fileUpload = document.getElementById(sender.controltovalidate);
             var fileName = fileUpload.value;
-            var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+            var allowedExtensions = /(\.jpg|\.png)$/i;
             var maxSize = 2097152;
 
             if (!allowedExtensions.test(fileName)) {

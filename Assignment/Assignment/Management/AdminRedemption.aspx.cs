@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-<<<<<<< Updated upstream
 using System.IO;
-=======
-using System.Drawing;
->>>>>>> Stashed changes
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -123,7 +119,7 @@ namespace Assignment.Management
                         else
                         {
                             lblMessage.CssClass = "text-warning";
-                            lblMessage.Text = "Only .jpg, .jpeg, or .png files are allowed.";
+                            lblMessage.Text = "Only .jpg or .png files are allowed.";
                             lblMessage.Visible = true;
                             return;
                         }
@@ -273,6 +269,8 @@ namespace Assignment.Management
                 lvRedeemItems.DataBind();
 
                 UpdateSortIcons(sortExpression, sortDirection);
+                DataPager reviewsPager = (DataPager)lvRedeemItems.FindControl("ReviewsPager");
+                reviewsPager.DataBind();
                 UpdatePanel1.Update();
             }
         }
@@ -326,6 +324,15 @@ namespace Assignment.Management
             ClearFormFields();
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$(document).ready(function() { $('#staticBackdrop').modal('show'); });", true);
+        }
+
+        protected void lvRedeemItems_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+
+            // Set the new page index
+            DataPager reviewsPager = (DataPager)lvRedeemItems.FindControl("ReviewsPager");
+            reviewsPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            BindListView();
         }
     }
 }
