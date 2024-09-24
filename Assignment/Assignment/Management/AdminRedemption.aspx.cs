@@ -119,7 +119,7 @@ namespace Assignment.Management
                         else
                         {
                             lblMessage.CssClass = "text-warning";
-                            lblMessage.Text = "Only .jpg, .jpeg, or .png files are allowed.";
+                            lblMessage.Text = "Only .jpg or .png files are allowed.";
                             lblMessage.Visible = true;
                             return;
                         }
@@ -232,6 +232,90 @@ namespace Assignment.Management
 
         protected void lvRedeemItems_Sorting(object sender, ListViewSortEventArgs e)
         {
+            string sortExpression = e.SortExpression;
+            string sortDirection = ViewState["SortDirection"] as string == "ASC" ? "DESC" : "ASC";
+
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortExpression"] = sortExpression;
+
+            using (var db = new SystemDatabaseEntities())
+            {
+                var redeemItems = db.RedeemItems.AsQueryable();
+
+                switch (sortExpression)
+                {
+                    case "ItemName":
+                        redeemItems = sortDirection == "ASC" ? redeemItems.OrderBy(i => i.ItemName) :
+                            redeemItems.OrderByDescending(i => i.ItemName);
+                        break;
+                    case "ItemPoints":
+                        redeemItems = sortDirection == "ASC"
+                            ? redeemItems.OrderBy(i => i.ItemPoints)
+                            : redeemItems.OrderByDescending(i => i.ItemPoints);
+                        break;
+                    case "ItemDescription":
+                        redeemItems = sortDirection == "ASC"
+                            ? redeemItems.OrderBy(i => i.ItemDescription)
+                            : redeemItems.OrderByDescending(i => i.ItemDescription);
+                        break;
+                    case "Status":
+                        redeemItems = sortDirection == "ASC"
+                            ? redeemItems.OrderBy(i => i.Status)
+                            : redeemItems.OrderByDescending(i => i.Status);
+                        break;
+                }
+
+                lvRedeemItems.DataSource = redeemItems.ToList();
+                lvRedeemItems.DataBind();
+
+                UpdateSortIcons(sortExpression, sortDirection);
+                DataPager reviewsPager = (DataPager)lvRedeemItems.FindControl("ReviewsPager");
+                reviewsPager.DataBind();
+                UpdatePanel1.Update();
+            }
+        }
+
+        private void UpdateSortIcons(string sortExpression, string sortDirection)
+        {
+            ClearSortIcons();
+
+            string sortIcon = sortDirection == "ASC" ? " ▲" : " ▼";
+
+            switch (sortExpression)
+            {
+                case "ItemName":
+                    var litItemNameIcon = (Literal)lvRedeemItems.FindControl("litItemNameIcon");
+                    if (litItemNameIcon != null) litItemNameIcon.Text = sortIcon;
+                    break;
+                case "ItemPoints":
+                    var litItemPointsIcon = (Literal)lvRedeemItems.FindControl("litItemPointsIcon");
+                    if (litItemPointsIcon != null) litItemPointsIcon.Text = sortIcon;
+                    break;
+                case "ItemDescription":
+                    var litItemDescriptionIcon = (Literal)lvRedeemItems.FindControl("litItemDescriptionIcon");
+                    if (litItemDescriptionIcon != null) litItemDescriptionIcon.Text = sortIcon;
+                    break;
+                case "Status":
+                    var litStatusIcon = (Literal)lvRedeemItems.FindControl("litStatusIcon");
+                    if (litStatusIcon != null) litStatusIcon.Text = sortIcon;
+                    break;
+            }
+
+        }
+
+        private void ClearSortIcons()
+        {
+            var icons = new[] { "litItemNameIcon", "litItemPointsIcon", "litItemDescriptionIcon", "litStatusIcon"};
+
+            foreach (var iconId in icons)
+            {
+                var literal = (Literal)lvRedeemItems.FindControl(iconId);
+                if (literal != null)
+                {
+                    literal.Text = "";
+                }
+            }
+
 
         }
 
@@ -240,6 +324,15 @@ namespace Assignment.Management
             ClearFormFields();
 
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModal", "$(document).ready(function() { $('#staticBackdrop').modal('show'); });", true);
+        }
+
+        protected void lvRedeemItems_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+
+            // Set the new page index
+            DataPager reviewsPager = (DataPager)lvRedeemItems.FindControl("ReviewsPager");
+            reviewsPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            BindListView();
         }
     }
 }

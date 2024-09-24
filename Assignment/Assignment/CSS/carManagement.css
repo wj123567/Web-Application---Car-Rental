@@ -87,5 +87,43 @@ th, td {
     font-size: 12px;
 }
 
+.driver-car-frame {
+    width: 100px;
+    height: 50px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.driver-car-frame img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.driver-frame {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.driver-frame img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 500px){
+    .driver-car-frame{
+        display: none;
+    }
+}
+
 
 

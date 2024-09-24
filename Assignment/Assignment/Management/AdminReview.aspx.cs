@@ -116,6 +116,8 @@ namespace Assignment.Management
             //bind sorted data back to listView
             lvReview.DataSource = reviews;
             lvReview.DataBind();
+
+            UpdatePanel1.Update();
         }
 
         private void SetSortIcon(string sortExpression, string sortDirection)

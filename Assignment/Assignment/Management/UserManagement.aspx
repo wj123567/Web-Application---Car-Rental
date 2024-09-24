@@ -172,12 +172,12 @@
                         <asp:Repeater ID="rptBookingRec" runat="server" OnItemDataBound="rptBookingRec_ItemDataBound">
                             <ItemTemplate>
                                 <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
-                                    <div class="d-flex align-items-center justify-content-between px-4">
+                                    <div class="d-flex align-items-center justify-content-between px-2">
                                         <div class="d-flex align-items-center">
-                                            <div class="user-car-frame">
-                                                <asp:Image ID="carImage" runat="server" ImageUrl='<%# Eval("CarImage")%>' Width="100px" CssClass="img-fluid" />
+                                            <div class="user-car-frame me-2 flex-shrink-0">
+                                                <asp:Image ID="carImage" runat="server" ImageUrl='<%# Eval("CarImage")%>' CssClass="img-fluid" />
                                             </div>
-                                            <div class="mx-4">
+                                            <div>
                                                 <asp:Label ID="lblBookingId" runat="server" Text='<%# Eval("Id") +" (" + Eval("CarPlate") +")"%>' CssClass="d-block" />
                                                 <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Pick Up Point: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-inline" />
                                                 <asp:Label ID="lblPickupTime" runat="server" Text='<%# "(" + Eval("StartDate") +")"%>' CssClass="text-xs text-muted d-inline" />

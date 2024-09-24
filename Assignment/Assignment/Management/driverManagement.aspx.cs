@@ -115,7 +115,6 @@ namespace Assignment
             Label lblDateApply = (Label)e.Item.FindControl("lblDateApply");
             Label lblReject = (Label)e.Item.FindControl("lblReject");
             Label lblUserAvailable = (Label)e.Item.FindControl("lblUserAvailable");
-            Button btnView = (Button)e.Item.FindControl("btnView");
             string approvalStatus = DataBinder.Eval(e.Item.DataItem, "Approval").ToString();
             DateTime bDate = (DateTime)DataBinder.Eval(e.Item.DataItem, "DriverBdate");
             DateTime dateApply = (DateTime)DataBinder.Eval(e.Item.DataItem, "DateApply");

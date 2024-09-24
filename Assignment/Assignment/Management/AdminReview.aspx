@@ -42,83 +42,88 @@
                 <asp:ListItem Text="1 Star" Value="1"></asp:ListItem>
             </asp:DropDownList>
         </div>
-        
-        <asp:ListView ID="lvReview" runat="server" OnSorting="lvReview_Sorting">
-            <LayoutTemplate>
-                <table class="table table-striped table-bordered table-responsive">
-                    <thead>
-                        <tr class="lvReview-header">
-                            <th>
-                                <asp:LinkButton ID="lbReviewId" runat="server" CommandName="Sort" CommandArgument="ReviewId" CssClass="link-button">Review ID
-                                    <asp:Literal ID="litReviewIdIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton>
-                            </th>
-                            <th>
-                                <asp:LinkButton ID="lbBookingId" runat="server" CommandName="Sort" CommandArgument="BookingId" CssClass="link-button">Booking ID
-                                    <asp:Literal ID="litBookingIdIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton>
-                            </th>
-                            <th>
-                                <asp:LinkButton ID="lbReviewText" runat="server" CommandName="Sort" CommandArgument="ReviewText" CssClass="link-button">Review Text
-                                    <asp:Literal ID="litReviewTextIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton>
-                            </th>
-                            <th>
-                                <asp:LinkButton ID="lbRating" runat="server" CommandName="Sort" CommandArgument="Rating" CssClass="link-button">Rating
-                                    <asp:Literal ID="litRatingIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton>
-                            </th>
-                            <th>
-                                <asp:LinkButton ID="lbReviewDate" runat="server" CommandName="Sort" CommandArgument="ReviewDate" CssClass="link-button">Review Date
-                                    <asp:Literal ID="litReviewDateIcon" runat="server"></asp:Literal>
-                                </asp:LinkButton>
-                            </th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr id="itemPlaceHolder" runat="server"></tr>
-                    </tbody>
 
-                    <tr>
-                        <td colspan="6" class="asd">
-                            <div class="d-flex justify-content-center">
-                                <asp:DataPager ID="ReviewsPager" runat="server" PageSize="6">
-                                    <Fields>
-                                        <asp:NextPreviousPagerField ButtonType="Link" ShowPreviousPageButton="true" ShowNextPageButton="false"/>
-                                        <asp:NumericPagerField ButtonType="Link" />
-                                        <asp:NextPreviousPagerField ButtonType="Link" ShowNextPageButton="true" ShowPreviousPageButton="false"/>
-                                    </Fields>
-                                </asp:DataPager>
-                            </div>
-                        </td>
-                    </tr>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:ListView ID="lvReview" runat="server" OnSorting="lvReview_Sorting">
+                    <LayoutTemplate>
+                        <table class="table table-striped table-bordered table-responsive">
+                            <thead>
+                                <tr class="lvReview-header">
+                                    <th>
+                                        <asp:LinkButton ID="lbReviewId" runat="server" CommandName="Sort" CommandArgument="ReviewId" CssClass="link-button">Review ID
+                                            <asp:Literal ID="litReviewIdIcon" runat="server"></asp:Literal>
+                                        </asp:LinkButton>
+                                    </th>
+                                    <th>
+                                        <asp:LinkButton ID="lbBookingId" runat="server" CommandName="Sort" CommandArgument="BookingId" CssClass="link-button">Booking ID
+                                            <asp:Literal ID="litBookingIdIcon" runat="server"></asp:Literal>
+                                        </asp:LinkButton>
+                                    </th>
+                                    <th>
+                                        <asp:LinkButton ID="lbReviewText" runat="server" CommandName="Sort" CommandArgument="ReviewText" CssClass="link-button">Review Text
+                                            <asp:Literal ID="litReviewTextIcon" runat="server"></asp:Literal>
+                                        </asp:LinkButton>
+                                    </th>
+                                    <th>
+                                        <asp:LinkButton ID="lbRating" runat="server" CommandName="Sort" CommandArgument="Rating" CssClass="link-button">Rating
+                                            <asp:Literal ID="litRatingIcon" runat="server"></asp:Literal>
+                                        </asp:LinkButton>
+                                    </th>
+                                    <th>
+                                        <asp:LinkButton ID="lbReviewDate" runat="server" CommandName="Sort" CommandArgument="ReviewDate" CssClass="link-button">Review Date
+                                            <asp:Literal ID="litReviewDateIcon" runat="server"></asp:Literal>
+                                        </asp:LinkButton>
+                                    </th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="itemPlaceHolder" runat="server"></tr>
+                            </tbody>
+
+                            <tr>
+                                <td colspan="6" class="asd">
+                                    <div class="d-flex justify-content-center">
+                                        <asp:DataPager ID="ReviewsPager" runat="server" PageSize="6">
+                                            <Fields>
+                                                <asp:NextPreviousPagerField ButtonType="Link" ShowPreviousPageButton="true" ShowNextPageButton="false"/>
+                                                <asp:NumericPagerField ButtonType="Link" />
+                                                <asp:NextPreviousPagerField ButtonType="Link" ShowNextPageButton="true" ShowPreviousPageButton="false"/>
+                                            </Fields>
+                                        </asp:DataPager>
+                                    </div>
+                                </td>
+                            </tr>
                 
-                </table>
+                        </table>
 
 
-            </LayoutTemplate>
-            <ItemTemplate>
-                <tr>
-                    <td><%# Eval("ReviewId") %></td>
-                    <td><%# Eval("BookingId") %></td>
-                    <td><%# Eval("ReviewText") %></td>
-                    <td><%# Eval("Rating") %></td>
-                    <td><%# Eval("ReviewDate") %></td>
-                    <td>
-                        <asp:LinkButton ID="btnViewReview" 
-                                        runat="server" 
-                                        CommandArgument='<%# Eval("ReviewId") %>' 
-                                        OnClick="btnViewReview_Click">
-                            <i class="fa-solid fa-eye" style="color: #003899;"></i>
-                        </asp:LinkButton>
+                    </LayoutTemplate>
+                    <ItemTemplate>
+                        <tr>
+                            <td><%# Eval("ReviewId") %></td>
+                            <td><%# Eval("BookingId") %></td>
+                            <td><%# Eval("ReviewText") %></td>
+                            <td><%# Eval("Rating") %></td>
+                            <td><%# Eval("ReviewDate") %></td>
+                            <td>
+                                <asp:LinkButton ID="btnViewReview" 
+                                                runat="server" 
+                                                CommandArgument='<%# Eval("ReviewId") %>' 
+                                                OnClick="btnViewReview_Click">
+                                    <i class="fa-solid fa-eye" style="color: #003899;"></i>
+                                </asp:LinkButton>
 
-                        <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("ReviewId") %>' OnClick="DeleteButton_Click" OnClientClick="return confirm('Are you sure you want to delete this review?');">
-                            <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
-                        </asp:LinkButton>
-                    </td>
-                </tr>
-            </ItemTemplate>
-        </asp:ListView>
+                                <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("ReviewId") %>' OnClick="DeleteButton_Click" OnClientClick="return confirm('Are you sure you want to delete this review?');">
+                                    <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
+                                </asp:LinkButton>
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                </asp:ListView>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        
     </div>
 </asp:Content>
