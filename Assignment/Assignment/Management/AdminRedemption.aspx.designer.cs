@@ -24,6 +24,33 @@ namespace Assignment.Management
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// imgCropImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgCropImage;
+
+        /// <summary>
+        /// hdnRedemptionPicture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnRedemptionPicture;
+
+        /// <summary>
+        /// btnUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpload;
+
+        /// <summary>
         /// hfRedeemItemId control.
         /// </summary>
         /// <remarks>
@@ -105,13 +132,13 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
 
         /// <summary>
-        /// fuItemImage control.
+        /// fuRdmItem control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuItemImage;
+        protected global::System.Web.UI.WebControls.FileUpload fuRdmItem;
 
         /// <summary>
         /// cvFileUpload control.

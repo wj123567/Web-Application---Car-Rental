@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addNewUser" >Cancel</button>
                     <asp:Button ID="btnUpload" runat="server" Text="Change Profile Picture" CssClass="btn btn-primary" />
                 </div>
             </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -93,10 +94,9 @@ namespace Assignment.Management
                     item.ItemDescription = txtItemDescription.Text;
                     item.Status = ddlStatus.SelectedValue;
 
-                    if (fuItemImage.HasFile)
+                    if (fuRdmItem.HasFile)
                     {
-                        string fileExtension = System.IO.Path.GetExtension(fuItemImage.FileName).ToLower();
-                        if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png")
+                        if (!string.IsNullOrEmpty(hdnRedemptionPicture.Value))
                         {
                             string oldImagePath = Server.MapPath("~/Image/RedeemItem/") + item.ItemImage;
                             if (System.IO.File.Exists(oldImagePath))
@@ -104,9 +104,12 @@ namespace Assignment.Management
                                 System.IO.File.Delete(oldImagePath);
                             }
 
-                            string newFileName = Guid.NewGuid().ToString() + fileExtension;
+                            string newFileName = Guid.NewGuid().ToString() + ".png";
                             string newFilePath = Server.MapPath("~/Image/RedeemItem/") + newFileName;
-                            fuItemImage.SaveAs(newFilePath);
+                            // Decode the Base64 string and save it as an image file
+                            string base64String = hdnRedemptionPicture.Value.Split(',')[1]; // Remove the data URI scheme part
+                            byte[] imageBytes = Convert.FromBase64String(base64String);
+                            File.WriteAllBytes(newFilePath, imageBytes); // Save the file
 
                             item.ItemImage = newFileName;
 
@@ -141,34 +144,24 @@ namespace Assignment.Management
                     string status = ddlStatus.SelectedValue;
                     string fileName = "";
 
-                    if (fuItemImage.HasFile)
+                    if (!string.IsNullOrEmpty(hdnRedemptionPicture.Value))
                     {
-                        string fileExtension = System.IO.Path.GetExtension(fuItemImage.FileName).ToLower();
-
-                        if (fileExtension == ".jpg" || fileExtension == ".jpeg" || fileExtension == ".png")
+                        try
                         {
-                            try
-                            {
-                                fileName = Guid.NewGuid().ToString() + fileExtension;
-                                string filePath = Server.MapPath("~/Image/RedeemItem/") + fileName;
+                            fileName = Guid.NewGuid().ToString() + ".png";
+                            string filePath = Server.MapPath("~/Image/RedeemItem/") + fileName;
+                            // Decode the Base64 string and save it as an image file
+                            string base64String = hdnRedemptionPicture.Value.Split(',')[1]; // Remove the data URI scheme part
+                            byte[] imageBytes = Convert.FromBase64String(base64String);
+                            File.WriteAllBytes(filePath, imageBytes); // Save the file
 
-                                fuItemImage.SaveAs(filePath);
-
-                                lblMessage.CssClass = "text-success";
-                                lblMessage.Text = "File uploaded successfully!";
-                            }
-                            catch (Exception ex)
-                            {
-                                lblMessage.CssClass = "text-danger";
-                                lblMessage.Text = "Error uploading file: " + ex.Message;
-                                lblMessage.Visible = true;
-                                return;
-                            }
-                        }
-                        else
+                            lblMessage.CssClass = "text-success";
+                            lblMessage.Text = "File uploaded successfully!";
+                        }                       
+                        catch (Exception ex)
                         {
-                            lblMessage.CssClass = "text-warning";
-                            lblMessage.Text = "Only .jpg, .jpeg, or .png files are allowed.";
+                            lblMessage.CssClass = "text-danger";
+                            lblMessage.Text = "Error uploading file: " + ex.Message;
                             lblMessage.Visible = true;
                             return;
                         }
@@ -212,7 +205,6 @@ namespace Assignment.Management
             lblMessage.Visible = false;
             hfRedeemItemId.Value = string.Empty;
             lblMessage.Text = string.Empty;
-            fuItemImage.Attributes.Clear();
         }
 
         protected void btnEditRedeemItem_Click(object sender, EventArgs e)

@@ -465,12 +465,14 @@
             if (!allowedExtensions.test(fileName)) {
                 args.IsValid = false;
                 isPass = false;
+                fileUpload.value = "";
                 return;
             }
 
             if (fileUpload.files[0].size > maxSize) {
                 args.IsValid = false;
                 isPass = false;
+                fileUpload.value = "";
                 return;
             }
 

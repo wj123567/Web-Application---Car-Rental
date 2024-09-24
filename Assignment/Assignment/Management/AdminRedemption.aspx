@@ -1,6 +1,30 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Management/Admin.Master" AutoEventWireup="true" CodeBehind="AdminRedemption.aspx.cs" Inherits="Assignment.Management.AdminRedemption" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" integrity="sha512-JyCZjCOZoyeQZSd5+YEAcFgz2fowJ1F1hyJOXgtKu4llIa0KneLcidn5bwfutiehUTiOuK87A986BZJMko0eWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.css" integrity="sha512-087vysR/jM0N5cp13Vlp+ZF9wx6tKbvJLwPO8Iit6J7R+n7uIMMjg37dEgexOshDmDITHYY5useeSmfD1MYiQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+
+    <%--Crop Modal--%>
+        <div class="modal fade" id="cropModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="cropModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-dark" id="cropModalLabel">Crop Car Picture</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="cropped-container">
+                        <asp:Image ID="imgCropImage" runat="server" Width="100%" />
+                        <asp:HiddenField ID="hdnRedemptionPicture" runat="server" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Cancel</button>
+                    <asp:Button ID="btnUpload" runat="server" Text="Upload Redemption Picture" CssClass="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
 
     <%-- add modal --%>
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -42,12 +66,12 @@
                     </div>
                     <div class="form-group">
                         <label for="fuItemImage" class="fs-6"><b>Item Image</b></label>
-                        <asp:FileUpload ID="fuItemImage" runat="server" CssClass="form-control-file mb-2" />
+                        <asp:FileUpload ID="fuRdmItem" runat="server" CssClass="form-control-file mb-2" onchange="ShowCropModal(event)"/>
                         <asp:CustomValidator ID="cvFileUpload" runat="server" 
                             ErrorMessage="Only .jpg, .jpeg, or .png files are allowed." 
                             CssClass="text-warning" 
                             ClientValidationFunction="validateFileUpload" 
-                            Display="Dynamic" ValidationGroup="AddItem" />
+                            Display="Dynamic" ValidationGroup="AddItem" ControlToValidate="fuRdmItem" />
                         <asp:Label ID="lblMessage" runat="server" Text="" Visible="false" CssClass="text-success"></asp:Label>
                     </div>
                     
@@ -147,17 +171,6 @@
     </div>
 
     <script>
-        function validateFileUpload(sender, args) {
-            var fileUpload = document.getElementById('<%= fuItemImage.ClientID %>');
-            if (fileUpload.files.length > 0) {
-                var fileName = fileUpload.files[0].name;
-                var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-                args.IsValid = allowedExtensions.exec(fileName) !== null;
-            } else {
-                args.IsValid = true; // No file selected is valid
-            }
-        }
-
         function openModal() {
             $('#staticBackdrop').modal('show');
         }
@@ -174,6 +187,99 @@
         }
 
 
+    </script>
+
+    <script>
+        function validateFileUpload(sender, args) {
+            var fileUpload = document.getElementById(sender.controltovalidate);
+            var fileName = fileUpload.value;
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+            var maxSize = 2097152;
+
+            if (!allowedExtensions.test(fileName)) {
+                args.IsValid = false;
+                isPass = false;
+                fileUpload.value = "";
+                return;
+            }
+
+            if (fileUpload.files[0].size > maxSize) {
+                args.IsValid = false;
+                isPass = false;
+                fileUpload.value = "";
+                return;
+            }
+
+            args.IsValid = true;
+            isPass = true;
+
+        }
+
+        var isPass = false;
+        function ShowCropModal(event) {
+            if (isPass) {
+                //read content of the file
+                var ImageDir = new FileReader();
+                //when file read update the image element
+                ImageDir.onload = function () {
+                    var image = document.getElementById('<%= imgCropImage.ClientID %>');
+                    image.src = ImageDir.result;
+                    $('#staticBackdrop').modal('hide');
+                    $('#cropModal').modal('show');
+                };
+                //get file and convert to data url to use in img src = ""
+                ImageDir.readAsDataURL(event.target.files[0]);
+            } else {
+                console.log("out");
+            }
+        }
+
+        let cropper;
+        const imageInput = document.getElementById('<%= fuRdmItem.ClientID %>');
+        const imageElement = document.getElementById('<%= imgCropImage.ClientID %>');
+        const uploadButton = document.getElementById('<%= btnUpload.ClientID %>');
+        const result = document.getElementById('<%= hdnRedemptionPicture.ClientID %>');
+       <%-- const preview = document.getElementById('<%= imgCarPic.ClientID %>');--%>
+
+
+        // Initialize cropper when the modal is shown
+        $('#cropModal').on('shown.bs.modal', function () {
+            cropper = new Cropper(imageElement, {
+                aspectRatio: 0.8,  // Adjust based on your needs
+                viewMode: 3,
+                movable: true,
+                guides: false,
+                cropBoxResizable: true,
+                modal: true,
+                zoomable: true,
+                rotatable: true,
+                scalable: true,
+                width: 100,
+                height: 100,
+            });
+
+            uploadButton.onclick = function () {
+
+                base64Image = cropper.getCroppedCanvas().toDataURL('image/png');
+                //preview.src = base64Image;
+
+                result.value = base64Image;
+                console.log(result.value);
+                $('#cropModal').modal('hide');
+                $('#staticBackdrop').modal('show');
+                return false;
+
+            };
+
+        }).on('hidden.bs.modal', function () {
+            // Destroy the cropper instance when the modal is closed
+            cropper.destroy();
+            cropper = null;
+        });
+
+        function hihi() {
+            console.log("in");
+        }
     </script>
 
 
