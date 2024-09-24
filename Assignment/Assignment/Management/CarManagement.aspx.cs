@@ -294,7 +294,7 @@ namespace Assignment
 
         protected void loadCarBookingData(string carPlate)
         {
-            String selectCar = "SELECT B.*, C.CarPlate, C.CarBrand, C.CarName, C.CarImage, D.DriverName, D.DriverGender, D.SelfiePic FROM Booking B JOIN Car C ON B.CarPlate = C.CarPlate JOIN Location L ON C.LocationId = L.Id JOIN Driver D ON B.DriverId = D.Id WHERE B.CarPlate = @CarPlate AND B.StartDate >= CONVERT (date, SYSDATETIME())";
+            String selectCar = "SELECT B.*, C.CarPlate, C.CarBrand, C.CarName, C.CarImage, D.DriverName, D.DriverGender, D.SelfiePic FROM Booking B JOIN Car C ON B.CarPlate = C.CarPlate JOIN Location L ON C.LocationId = L.Id JOIN Driver D ON B.DriverId = D.Id WHERE B.CarPlate = @CarPlate AND B.StartDate >= CONVERT (date, SYSDATETIME()) AND B.Status NOT IN('Cancelled','Pending') Order BY B.StartDate";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectCar, con);
@@ -695,7 +695,26 @@ namespace Assignment
 
         protected void rptBookingRec_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+            Label lblStatus = (Label)e.Item.FindControl("lblStatus");
+            string startDate = DataBinder.Eval(e.Item.DataItem, "StartDate").ToString();
 
+            TimeSpan delta = DateTime.Parse(startDate) - DateTime.Now;
+            int days = (int)Math.Ceiling((double)delta.TotalHours / 24.0);
+
+            if(days <= 1)
+            {
+                lblStatus.CssClass = "badge bg-danger text-light";
+                lblStatus.Text = "Urgent";
+            }else if (days >= 2 && days <= 5)
+            {
+                lblStatus.CssClass = "badge bg-warning text-dark";
+                lblStatus.Text = "Be Ready";
+            }
+            else if(days >= 6)
+            {
+                lblStatus.CssClass = "badge bg-primary text-light";
+                lblStatus.Text = "Still Long";
+            }
         }
     }
 }

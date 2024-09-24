@@ -44,13 +44,17 @@
                         <asp:Repeater ID="rptBookingRec" runat="server" OnItemDataBound="rptBookingRec_ItemDataBound">
                             <ItemTemplate>
                                 <div class="card-body rounded border border-dark py-2 mb-2 text-dark">
-                                    <div class="d-flex align-items-center justify-content-between px-2">
+                                    <div class="d-flex align-items-center justify-content-between px-2 align-content-center">
                                         <div class="d-flex align-items-center me-2">
                                             <div class="driver-car-frame me-2 flex-shrink-0">
                                                 <asp:Image ID="carImage" runat="server" ImageUrl='<%# Eval("CarImage")%>' CssClass="img-fluid" />
                                             </div>
                                             <div>
-                                                <asp:Label ID="lblBookingId" runat="server" Text='<%# Eval("Id") +" (" + Eval("CarPlate") +")"%>' CssClass="d-block" />
+                                                <div class="d-flex">
+                                                <asp:Label ID="lblBookingId" runat="server" Text='<%# Eval("Id") +" (" + Eval("CarPlate") +")"%>' CssClass="me-2" />
+                                                    <asp:Label ID="lblstatus" runat="server" style="line-height:inherit;"></asp:Label>
+                                                </div>
+
                                                 <asp:Label ID="lblDriverName" runat="server" Text='<%# (Eval("DriverGender").ToString() == "M" ? "Mr. " : "Ms. ") + Eval("DriverName").ToString()%>' CssClass="d-block" />
                                                 <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Pick Up Point: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-inline" />
                                                 <asp:Label ID="lblPickupTime" runat="server" Text='<%# "(" + Eval("StartDate") +")"%>' CssClass="text-xs text-muted d-inline" />
