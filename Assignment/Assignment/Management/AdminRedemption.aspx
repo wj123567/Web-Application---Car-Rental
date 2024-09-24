@@ -11,6 +11,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <asp:HiddenField ID="hfRedeemItemId" runat="server" />
                     <div class="form-group">
                         <label for="txtItemName" class="fs-6"><b>Item Name</b></label>
                         <asp:TextBox ID="txtItemName" runat="server" CssClass="form-control mb-2" placeholder="Enter Item Name"></asp:TextBox>
@@ -73,12 +74,17 @@
         </asp:LinkButton>
     </div>
 
-        <asp:ListView ID="lvRedeemItems" runat="server">
+        <asp:ListView ID="lvRedeemItems" runat="server" OnSorting="lvRedeemItems_Sorting">
             <LayoutTemplate>
                 <table class="table table-striped table-bordered table-responsive redeemTable">
                     <thead>
                         <tr class="">
-                            <th>ItemName</th>
+                            <th>
+                                <asp:LinkButton ID="lbItemName" runat="server" CommandName="Sort" CommandArgument="ItemName" CssClass="link-button">
+                                    ItemName
+                                    <asp:Literal ID="litItemNameIcon" runat="server"></asp:Literal>
+                                </asp:LinkButton>
+                            </th>
                             <th>ItemPoints</th>
                             <th>ItemDescription</th>
                             <th>Status</th>

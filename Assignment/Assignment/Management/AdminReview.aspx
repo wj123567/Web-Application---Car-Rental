@@ -49,27 +49,27 @@
                     <thead>
                         <tr class="lvReview-header">
                             <th>
-                                <asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewId" CssClass="link-button">Review ID
+                                <asp:LinkButton ID="lbReviewId" runat="server" CommandName="Sort" CommandArgument="ReviewId" CssClass="link-button">Review ID
                                     <asp:Literal ID="litReviewIdIcon" runat="server"></asp:Literal>
                                 </asp:LinkButton>
                             </th>
                             <th>
-                                <asp:LinkButton runat="server" CommandName="Sort" CommandArgument="BookingId" CssClass="link-button">Booking ID
+                                <asp:LinkButton ID="lbBookingId" runat="server" CommandName="Sort" CommandArgument="BookingId" CssClass="link-button">Booking ID
                                     <asp:Literal ID="litBookingIdIcon" runat="server"></asp:Literal>
                                 </asp:LinkButton>
                             </th>
                             <th>
-                                <asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewText" CssClass="link-button">Review Text
+                                <asp:LinkButton ID="lbReviewText" runat="server" CommandName="Sort" CommandArgument="ReviewText" CssClass="link-button">Review Text
                                     <asp:Literal ID="litReviewTextIcon" runat="server"></asp:Literal>
                                 </asp:LinkButton>
                             </th>
                             <th>
-                                <asp:LinkButton runat="server" CommandName="Sort" CommandArgument="Rating" CssClass="link-button">Rating
+                                <asp:LinkButton ID="lbRating" runat="server" CommandName="Sort" CommandArgument="Rating" CssClass="link-button">Rating
                                     <asp:Literal ID="litRatingIcon" runat="server"></asp:Literal>
                                 </asp:LinkButton>
                             </th>
                             <th>
-                                <asp:LinkButton runat="server" CommandName="Sort" CommandArgument="ReviewDate" CssClass="link-button">Review Date
+                                <asp:LinkButton ID="lbReviewDate" runat="server" CommandName="Sort" CommandArgument="ReviewDate" CssClass="link-button">Review Date
                                     <asp:Literal ID="litReviewDateIcon" runat="server"></asp:Literal>
                                 </asp:LinkButton>
                             </th>
