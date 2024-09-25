@@ -28,9 +28,10 @@ namespace Assignment
                 int currentStep = (int)(Session["CurrentStep"] ?? 1);
                 UpdateProgressBar(currentStep);
 
+                //in accordion
                 BindCards();
-                
-
+               
+               
             }
         }
 
@@ -46,7 +47,6 @@ namespace Assignment
             lblTotalDayRent.Text = totalDayRent;
             lblAddOnPrice.Text = totalAddOn;
             lblCarRental.Text = carRental;
-
             lblTotalPrice.Text = totalPrice; 
         }
 
@@ -63,7 +63,8 @@ namespace Assignment
             if (addCards.Rows.Count > 0)
             {
                 chkApplyCard.Visible = true;
-                lblApplyCard.Visible = true; 
+                lblApplyCard.Visible = true;
+                applyDefaultCard();
             }
             else
             {
@@ -78,7 +79,7 @@ namespace Assignment
         {
 
             // Assuming you have a way to get the UserId, such as from Session or some other source
-            string userId = "ae0a1581-21ea-4ea6-920c-80bef28a0129"; // Replace with your actual method to retrieve UserId
+            string userId = Session["Id"].ToString(); // Replace with your actual method to retrieve UserId
 
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -99,9 +100,62 @@ namespace Assignment
                 }
                 
             }
-            
-            
+
         }
+
+        private void applyDefaultCard()
+        {
+            string userId = Session["Id"].ToString();
+            string sql = @"SELECT * FROM PaymentCard WHERE UserId = @UserId and IsDefault = 1";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@UserId", userId);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    txtCardName.Text = reader["CardHolderName"].ToString();
+                    txtCardNumber.Text = reader["CardNumber"].ToString();
+                    DateTime expDate = reader.GetDateTime(reader.GetOrdinal("ExpDate"));
+                    txtExpiry.Text = expDate.ToString("yyyy-MM");
+                }
+               
+            }
+            else
+            {
+                txtCardName.Text = "000";
+            }
+
+            chkApplyCard.Checked = true;
+
+            reader.Close();
+            con.Close();
+        }
+
+        /*     protected void rptCards_ItemDataBound(object sender, RepeaterItemEventArgs e)
+             {
+                 // Ensure we're in an item template (and not header/footer templates)
+                 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+                 {
+                     // Access the data for the current item
+                     DataRowView row = (DataRowView)e.Item.DataItem;
+
+                     // Check for a condition on a specific field, e.g., checking the 'CardName' field
+                     if (row["IsDefault"] != DBNull.Value && row["isDefault"].ToString() == "1")
+                     {
+                         // Find the TextBox control and set its value
+                         Button btnExistCard = (Button)e.Item.FindControl("btnExistCard");
+                         if (btnExistCard != null)
+                         {
+                             // Call the button's click event handler manually if needed
+                             btnExistCard_Click(btnExistCard, EventArgs.Empty);
+                         }
+                     }
+                 }
+             }*/
 
         protected string getCardsPhoto(string cardType)
         {
@@ -136,8 +190,7 @@ namespace Assignment
         protected string CheckCardDefault(string isDefault)
         {
             if(isDefault == "1")
-            {
-                
+            {         
                 return "Default";
             }
             return "";
@@ -283,11 +336,9 @@ namespace Assignment
             SqlDataReader reader = com.ExecuteReader();
 
             if (reader.HasRows && reader.Read() )
-            {
-                
-                    status = reader["Approval"].ToString();
-                
-                
+            {             
+                    status = reader["Approval"].ToString();            
+              
             }
 
             reader.Close();

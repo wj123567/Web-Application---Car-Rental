@@ -80,7 +80,7 @@
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
-                        <i class="lni lni-layout"></i>
+                        <i class="ri-booklet-line"></i>
                         <span>Order</span>
                     </a>
                             <ul id="multi" class="sidebar-dropdown list-unstyled collapse">

@@ -189,6 +189,7 @@
                 minuteIncrement: 15,
                 minDate: minDateDpt,
                 maxDate: maxDateDpt,
+                
             };
 
             var dptTimeConfig = {

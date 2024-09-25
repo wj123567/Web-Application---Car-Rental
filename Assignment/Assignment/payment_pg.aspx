@@ -32,7 +32,7 @@
 </div>
 
 
-
+    <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
      <div class="container-fluid">
  <div class="row justify-content-center">
   <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
@@ -121,9 +121,9 @@
           </div>
          </div>
         </div>
-            
+            <itemtemplate>
                 <div class="col-sm-6 mt-5">
-                     
+                   
                   <asp:Label ID="lblCardName" runat="server" Text="Cardholder Name" CssClass="label_style"></asp:Label>
                   <asp:TextBox ID="txtCardName" runat="server" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"  ErrorMessage="Card Name is Required" ControlToValidate="txtCardName" ValidationGroup="PaymentValidation"  CssClass="validate"  Display="Static"></asp:RequiredFieldValidator>
@@ -166,7 +166,7 @@
                     </div>
                   </div>
                 </div>
-    
+    </itemtemplate>
                 
             </div>
           </div>
