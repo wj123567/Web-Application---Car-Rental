@@ -201,9 +201,34 @@ namespace Assignment.Management
         {
             using (var db = new SystemDatabaseEntities())
             {
-                //asd
+                var booking = db.Bookings
+                                .Include("ApplicationUser")
+                                .FirstOrDefault(b => b.Id == bookingId);
+
+                if(booking != null)
+                {
+                    booking.EarnDate = DateTime.Now;
+
+                    var user = booking.ApplicationUser;
+
+                    if(user != null)
+                    {
+                        int pointsEarned = CalculatePoints(booking.FinalPrice);
+
+                        user.RewardPoints += pointsEarned;
+                    }
+
+                }
+                
+                db.SaveChanges();
             }
         }
+
+        private int CalculatePoints(double? finalPrice)
+        {
+            return (int)(finalPrice.Value / 10);
+        }
+
         //you end
         protected void repeaterBookingList_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
