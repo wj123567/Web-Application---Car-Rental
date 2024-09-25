@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -60,7 +61,7 @@ namespace Assignment
 
                     LoadComments(currentCar);
 
-                    LoadRedeemedVouchers();
+                    LoadActiveVouchers();
 
                 }
                 else
@@ -396,14 +397,17 @@ namespace Assignment
             }
         }
 
-        private void LoadRedeemedVouchers()
+        private void LoadActiveVouchers()
         {
             var userId = Session["Id"]?.ToString();
+            var today = DateTime.Now.Date;
 
             using (var db = new SystemDatabaseEntities())
             {
                 var redeemedVouchers = db.Redemptions
-                                        .Where(r => r.UserId == userId && r.RedeemDate <= DateTime.Now)
+                                        .Where(r => r.UserId == userId &&
+                                                    r.IsActive == true &&
+                                                    DbFunctions.TruncateTime(r.RedeemDate) == today)
                                         .Select(r => new
                                         {
                                             r.RedeemItem.ItemName,
@@ -416,51 +420,50 @@ namespace Assignment
                 ddlVouchers.DataValueField = "RedeemItemId";
                 ddlVouchers.DataBind();
 
-                ddlVouchers.Items.Insert(0, new ListItem("Select a Voucher", ""));
+            }
 
+            ddlVouchers.Items.Insert(0, new ListItem("Select a Voucher", ""));
+        }
+
+
+        protected void ddlVouchers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedVoucherId = Convert.ToInt32(ddlVouchers.SelectedValue);
+
+            using (var db = new SystemDatabaseEntities())
+            {
+                var voucher = db.RedeemItems.FirstOrDefault(v => v.RedeemItemId == selectedVoucherId);
+
+                if (voucher != null)
+                {
+                    lblVoucherName.Text = voucher.ItemName;
+                    lblVoucherDescription.Text = voucher.ItemDescription;
+                    btnApplyVoucher.CommandArgument = voucher.RedeemItemId.ToString();
+
+                    // Show voucher details section
+                    voucherDetails.Visible = true;
+                }
+                else
+                {
+                    voucherDetails.Visible = false;
+                }
             }
         }
 
         protected void btnApplyVoucher_Click(object sender, EventArgs e)
         {
             var selectedVoucherId = ddlVouchers.SelectedValue;
-            var bookingID = Session["BookingID"].ToString();
+            var bookingId = Session["BookingID"]?.ToString();
 
             using (var db = new SystemDatabaseEntities())
             {
-                
-            }
-        }
-
-        protected void ddlVouchers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectedValue = ddlVouchers.SelectedValue;
-
-            // Check if user selected a valid voucher
-            if (!string.IsNullOrEmpty(selectedValue))
-            {
-                int voucherId = Convert.ToInt32(selectedValue);
-
-                using (var db = new SystemDatabaseEntities())
+                var voucher = db.RedeemItems.Find(selectedVoucherId);
+                if (voucher != null)
                 {
-                    var voucher = db.RedeemItems.FirstOrDefault(v => v.RedeemItemId == voucherId);
-
-                    if (voucher != null)
-                    {
-                        lblVoucherName.Text = voucher.ItemName;
-                        lblVoucherDescription.Text = voucher.ItemDescription;
-                        btnApplyVoucher.CommandArgument = voucher.RedeemItemId.ToString(); // Pass voucher ID to apply logic
-
-                        voucherDetails.Visible = true;
-                    }
+                    //asd
                 }
             }
-            else
-            {
-                voucherDetails.Visible = false;
-            }
         }
-
     }
 
 }

@@ -11,7 +11,6 @@
     <EntitySet Name="Locations" EntityType="SystemDatabaseModel.Location" />
     <EntitySet Name="PaymentCards" EntityType="SystemDatabaseModel.PaymentCard" />
     <EntitySet Name="RedeemItems" EntityType="SystemDatabaseModel.RedeemItem" />
-    <EntitySet Name="Redemptions" EntityType="SystemDatabaseModel.Redemption" />
     <EntitySet Name="Reviews" EntityType="SystemDatabaseModel.Review" />
     <AssociationSet Name="FK_BookingAddOn_ToAddOn" Association="SystemDatabaseModel.FK_BookingAddOn_ToAddOn">
       <End Role="AddOn" EntitySet="AddOns" />
@@ -28,10 +27,6 @@
     <AssociationSet Name="FK_PaymentCard_ToApplicationUser" Association="SystemDatabaseModel.FK_PaymentCard_ToApplicationUser">
       <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
       <End Role="PaymentCard" EntitySet="PaymentCards" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Redemption_ApplicationUser" Association="SystemDatabaseModel.FK_Redemption_ApplicationUser">
-      <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
-      <End Role="Redemption" EntitySet="Redemptions" />
     </AssociationSet>
     <AssociationSet Name="FK_Booking_ToCar" Association="SystemDatabaseModel.FK_Booking_ToCar">
       <End Role="Car" EntitySet="Cars" />
@@ -60,6 +55,11 @@
     <AssociationSet Name="FK_Car_ToLocation" Association="SystemDatabaseModel.FK_Car_ToLocation">
       <End Role="Location" EntitySet="Locations" />
       <End Role="Car" EntitySet="Cars" />
+    </AssociationSet>
+    <EntitySet Name="Redemptions" EntityType="SystemDatabaseModel.Redemption" />
+    <AssociationSet Name="FK_Redemption_ApplicationUser" Association="SystemDatabaseModel.FK_Redemption_ApplicationUser">
+      <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+      <End Role="Redemption" EntitySet="Redemptions" />
     </AssociationSet>
     <AssociationSet Name="FK_Redemption_RedeemItem" Association="SystemDatabaseModel.FK_Redemption_RedeemItem">
       <End Role="RedeemItem" EntitySet="RedeemItems" />
@@ -230,17 +230,6 @@
     <Property Name="ItemImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Redemptions" Relationship="SystemDatabaseModel.FK_Redemption_RedeemItem" FromRole="RedeemItem" ToRole="Redemption" />
   </EntityType>
-  <EntityType Name="Redemption">
-    <Key>
-      <PropertyRef Name="RedeemItemId" />
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Name="RedeemItemId" Type="Int32" Nullable="false" />
-    <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="RedeemDate" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="ApplicationUser" Relationship="SystemDatabaseModel.FK_Redemption_ApplicationUser" FromRole="Redemption" ToRole="ApplicationUser" />
-    <NavigationProperty Name="RedeemItem" Relationship="SystemDatabaseModel.FK_Redemption_RedeemItem" FromRole="Redemption" ToRole="RedeemItem" />
-  </EntityType>
   <EntityType Name="Review">
     <Key>
       <PropertyRef Name="ReviewId" />
@@ -296,18 +285,6 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="PaymentCard">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Redemption_ApplicationUser">
-    <End Type="SystemDatabaseModel.ApplicationUser" Role="ApplicationUser" Multiplicity="1" />
-    <End Type="SystemDatabaseModel.Redemption" Role="Redemption" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ApplicationUser">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Redemption">
         <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
@@ -395,6 +372,33 @@
       </Principal>
       <Dependent Role="Car">
         <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Redemption">
+    <Key>
+      <PropertyRef Name="RedeemItemId" />
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RedeemDate" />
+    </Key>
+    <Property Name="RedeemItemId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RedeemDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ApplicationUser" Relationship="SystemDatabaseModel.FK_Redemption_ApplicationUser" FromRole="Redemption" ToRole="ApplicationUser" />
+    <NavigationProperty Name="RedeemItem" Relationship="SystemDatabaseModel.FK_Redemption_RedeemItem" FromRole="Redemption" ToRole="RedeemItem" />
+  </EntityType>
+  <Association Name="FK_Redemption_ApplicationUser">
+    <End Type="SystemDatabaseModel.ApplicationUser" Role="ApplicationUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SystemDatabaseModel.Redemption" Role="Redemption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApplicationUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Redemption">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
