@@ -126,6 +126,9 @@ namespace Assignment
                     }
 
                     user.RewardPoints -= itemPoints.Value;
+
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
 
                 string sql = "INSERT INTO Redemption (UserId, RedeemItemId, RedeemDate) VALUES (@UserId, @RedeemItemId, @RedeemDate)";
@@ -141,7 +144,6 @@ namespace Assignment
                     // Execute the SQL command
                     db.Database.ExecuteSqlCommand(sql, parameters);
 
-                    db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
 
                     ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Redemption successful!');", true);

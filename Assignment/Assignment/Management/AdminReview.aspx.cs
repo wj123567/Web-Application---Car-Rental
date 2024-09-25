@@ -117,6 +117,9 @@ namespace Assignment.Management
             lvReview.DataSource = reviews;
             lvReview.DataBind();
 
+            DataPager reviewsPager = (DataPager)lvReview.FindControl("ReviewsPager");
+            reviewsPager.DataBind();
+
             UpdatePanel1.Update();
         }
 
@@ -201,5 +204,11 @@ namespace Assignment.Management
             
         }
 
+        protected void lvReview_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            DataPager reviewsPager = (DataPager)lvReview.FindControl("ReviewsPager");
+            reviewsPager.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            BindListView();
+        }
     }
 }

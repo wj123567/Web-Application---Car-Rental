@@ -131,8 +131,8 @@ namespace Assignment.Management
                 dateFrom = DateTime.Parse(txtStartDate_cust.Text);
                 dateTo = DateTime.Parse(txtEndDate_cust.Text);
             }
-            string timeFilter = ddlTimeFilter_cust.SelectedValue;
-            string quarterFilter = ddlQuarterFilter_cust.SelectedValue;
+            string timeFilter = hdnTimeFilter_cust.Value;
+            string quarterFilter = "ddl.SelectedValue";
             loadTopCust(dateFrom,dateTo,timeFilter,quarterFilter);
         }
 
@@ -164,7 +164,7 @@ namespace Assignment.Management
                
             }
            
-            string timeFilter = ddlTimeFilter.SelectedValue;
+            string timeFilter = hdnTimeFilter.Value;
 
             loadDataofLineChart(dateFrom, dateTo, timeFilter,customFormat);
         }

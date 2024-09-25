@@ -18,20 +18,13 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Id"] != null)
-            {
-                //System.Diagnostics.Debug.WriteLine("SessionId: " + Session["Id"]);
-                LoadUserData(Session["Id"].ToString());
-
-            }
 
             if (!IsPostBack)
             {
                 if (Session["Id"] != null)
                 {
-                    //System.Diagnostics.Debug.WriteLine("SessionId: " + Session["Id"]);
-                    LoadUserData(Session["Id"].ToString());
-                    
+                    string userId = Session["Id"]?.ToString();
+                    LoadUserData(userId);
                 }
                 else
                 {
@@ -40,57 +33,25 @@ namespace Assignment
             }
         }
 
-        private void LoadUserData(string userid)
+        private void LoadUserData(string userId)
         {
-            //System.Diagnostics.Debug.WriteLine("SessionId.toString: " + userid);
-
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
+            using (var db = new SystemDatabaseEntities())
             {
-                //get username and total points
-                string sql = "SELECT au.Username, au.RewardPoints, bk.PointsRemaining, bk.EarnDate" +
-                    " FROM ApplicationUser au" +
-                    " JOIN Booking bk ON au.Id = bk.UserId" +
-                    " WHERE au.Id = @userId";
+                var user = db.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
 
-                using (SqlCommand cmd = new SqlCommand(sql,con))
+                if (user != null)
                 {
-                    cmd.Parameters.AddWithValue("@userId", userid);
+                    lblUsername.Text = user.Username;
+                    lblTotalPoints.Text = user.RewardPoints.ToString() + " Points";
+                    lblExpiryDate.Text = DateTime.Now.ToString();
 
-                    con.Open();
-                    using (SqlDataReader rd = cmd.ExecuteReader())
-                    {
-                        if (rd.Read())
-                        {
-                            lblUsername.Text = rd["Username"].ToString();
-                            lblTotalPoints.Text = "Total Points: " + rd["RewardPoints"].ToString() + " Pts";
-                        }
-                    }
                 }
-
-                //Get expiry date by the earliest and is active
-                string sqlGetExpiryDate = "SELECT EarnDate, PointsRemaining FROM Booking WHERE UserId = @userid AND PointsStatus = 'active' ORDER BY EarnDate ASC";
-
-                using (SqlCommand cmd = new SqlCommand(sqlGetExpiryDate, con))
+                else
                 {
-                    cmd.Parameters.AddWithValue("@userid", userid);
-
-                    using (SqlDataReader rd = cmd.ExecuteReader())
-                    {
-                        if (rd.Read())
-                        {
-                            DateTime earnDate = Convert.ToDateTime(rd["EarnDate"]);
-                            DateTime expiryDate = earnDate.AddYears(1);
-                            lblExpiryPoints.Text = rd["PointsRemaining"].ToString();
-                            lblExpiryDate.Text = expiryDate.ToString();
-                        }
-                        else
-                        {
-                            lblExpiryDate.Text = "No Points Yet ~";
-                        }
-                    }
+                    // Handle the case where the user is not found
+                    lblUsername.Text = "User not found";
+                    lblTotalPoints.Text = "0";
                 }
-
-
             }
         }
 

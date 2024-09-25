@@ -313,13 +313,28 @@
            
         </div>
             <div class="box_left">
-                Box 2 - Left
+                <div class="addon_header" style="margin-bottom:20px;">
+                    <i class="ri-add-circle-line"></i><span>Apply Your Vouchers</span>
+                </div> 
 
-            </div>
-
-            <div class="box_left">
-                Box 3 - Left
-
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                  <ContentTemplate>
+                      <asp:DropDownList ID="ddlVouchers" runat="server" CssClass="form-select" 
+                          AutoPostBack="true" OnSelectedIndexChanged="ddlVouchers_SelectedIndexChanged">
+                          <asp:ListItem Text="Select a Voucher" Value="" />
+                      </asp:DropDownList>
+                      
+                      <div id="voucherDetails" runat="server" visible="false" class="card mt-3">
+                          <div class="card-body">
+                              <h5 class="card-title mb-3">Voucher Details</h5>
+                              <p><strong>Name:</strong> <asp:Label ID="lblVoucherName" runat="server" /></p>
+                              <p><strong>Description:</strong> <asp:Label ID="lblVoucherDescription" runat="server" /></p>
+                              <asp:Button ID="btnApplyVoucher" runat="server" Text="Apply Voucher" 
+                                        CssClass="btn btn-primary" OnClick="btnApplyVoucher_Click" />
+                          </div>
+                      </div>
+                  </ContentTemplate>
+              </asp:UpdatePanel>
             </div>
 
     </div>

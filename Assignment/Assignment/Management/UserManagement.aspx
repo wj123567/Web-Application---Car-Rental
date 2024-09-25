@@ -33,7 +33,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel4">User Detail</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="autoscroll()"></button>
                 </div>
                 <div class="modal-body">
                     <h5 class="text-dark">Are you sure you want to delete?</h5>
@@ -594,12 +594,14 @@
             if (!allowedExtensions.test(fileName)) {
                 args.IsValid = false;
                 isPass = false;
+                fileUpload.value = "";
                 return;
             }
 
             if (fileUpload.files[0].size > maxSize) {
                 args.IsValid = false;
                 isPass = false;
+                fileUpload.value = "";
                 return;
             }
 
@@ -698,6 +700,10 @@
                 event.preventDefault();
                 document.getElementById('<%= hiddenBtn.ClientID %>').click();
             }
+        }
+
+        function autoscroll() {
+            window.scrollTo(0, document.body.scrollHeight);
         }
 
     </script>

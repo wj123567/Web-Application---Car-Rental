@@ -125,13 +125,28 @@
             </div>
         </div>
         <!-- WZ Demo 1 Start-->
-        <div class="row mt-2 mx-1" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
-
-            <div class="card flex-fill w-100">
+        <div class="row my-2">
+            <div class="col-12">
+                <div class="card overflow-auto mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
                     <div class="card-body p-3">
-                        <h5 class="card-title mb-0">Summary Report On Car Booking(Rented)</h5>
+                        <div class="d-flex justify-content-between">
+                        <h5 class="card-title flex-grow-3 mb-0">Summary Report On Car Booking(Rented)</h5>
+                                                    <div class="filter flex-shrink-0 mx-2">
+                                <div id="carBookingRpt" class="d-flex align-items-center justify-content-between" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;">
+                                    <div>
+                                        <i class="fa fa-calendar me-2"></i>
+                                        <span></span>
+                                    </div>
+                                    <i class="fa fa-caret-down"></i>
+                                </div>
+                                </div>
+                                                        <asp:HiddenField ID="hdnTimeFilter" runat="server" />
+                                                        <asp:TextBox ID="txtStartDate" class="form-control" TextMode="Date" runat="server" style="display:none"></asp:TextBox>
+                                                        <asp:TextBox ID="txtEndDate" class="form-control" TextMode="Date" runat="server" style="display:none"></asp:TextBox>
+                                                        <asp:Button ID="btnProcessBookRecord" runat="server" Text="Generate" OnClick="btnBookRecord_Click" CssClass="btn btn-primary " style="display:none"/>
+                            </div>
                         <hr />
-                        <div class="container">
+                        <div class="container" style="display:none;">
                             <div class="row">
                                 <div class="col col-md-4">
                                     <div class="form-group">
@@ -149,28 +164,28 @@
                                             <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
                                         </asp:DropDownList>
                                         <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
-                                        <asp:HiddenField ID="hdnTimeFilter" runat="server" />
+                                        
 
                                         <!-- Custom Date Pickers (Initially Hidden) -->
                                         <div id="customDateFilter" style="display: none;">
                                             <label for="startDate">Start Date</label>
 
-                                            <asp:TextBox ID="txtStartDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                                            
                                             <label for="endDate">End Date</label>
 
-                                            <asp:TextBox ID="txtEndDate" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+                                            
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col col-md-4">
-                                    <asp:Button ID="btnProcessBookRecord" runat="server" Text="Generate" OnClick="btnBookRecord_Click" CssClass="btn btn-primary " />
+                                    
                                 </div>
 
                             </div>
                         </div>
                         <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
-                                <div class="chart container-fluid">
+                                <div class="chart container">
                                     <div class="row">
                                         <div class="col-12">
                                             <asp:GridView ID="gvBooking" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal">
@@ -211,15 +226,30 @@
                         </asp:UpdatePanel>
                     </div>
                 </div>
-        </div>
-        <!-- WZ Demo 1 End-->
-        <!-- WZ Demo 2 Start-->
-        <div class="row my-2 mx-1" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
-            <div class="card flex-fill w-100">
+            </div>
+            <!-- WZ Demo 1 End-->
+            <!-- WZ Demo 2 Start-->
+            <div class="col-12">
+                <div class="card overflow-auto" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
                     <div class="card-body p-3">
-                        <h5 class="card-title mb-0">Exception Report on Car Rental Amount Made by Customers</h5>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title flex-grow-3mb-0">Exception Report on Car Rental Amount Made by Customers</h5>
+                            <div class="filter flex-shrink-0 mx-2">
+                                <div id="carRentalAmt" class="d-flex align-items-center justify-content-between" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;">
+                                    <div>
+                                        <i class="fa fa-calendar me-2"></i>
+                                        <span></span>
+                                    </div>
+                                    <i class="fa fa-caret-down"></i>
+                                </div>
+                                <asp:HiddenField ID="hdnTimeFilter_cust" runat="server" />
+                                <asp:TextBox ID="txtStartDate_cust" class="form-control" TextMode="Date" runat="server" Style="display: none;"></asp:TextBox>
+                                <asp:TextBox ID="txtEndDate_cust" class="form-control" TextMode="Date" runat="server" Style="display: none;"></asp:TextBox>
+                                <asp:Button ID="btnCustRecord" runat="server" Text="Generate" OnClick="btnCustRecord_Click" CssClass="btn btn-primary" ValidationGroup="custQuarter" Style="display: none" />
+                            </div>
+                        </div>
                         <hr />
-                        <div class="container">
+                        <%--<div class="container" style="display:none">
                             <div class="row">
 
                                 <div class="col col-md-4">
@@ -238,15 +268,12 @@
                                             <asp:ListItem Value="Custom" Text="Custom Date"></asp:ListItem>
                                         </asp:DropDownList>
                                         <asp:Label ID="lblChecking" runat="server" Text="Label"></asp:Label>
-
-                                        <asp:HiddenField ID="hdnTimeFilter_cust" runat="server" />
                                         <!-- Custom Date Pickers (Initially Hidden) -->
                                         <div id="customDateFilter_cust" style="display: none;">
                                             <asp:Label ID="lblStartDate" runat="server" Text="Start Date"></asp:Label>
-                                            <asp:TextBox ID="txtStartDate_cust" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
 
                                             <asp:Label ID="lblEndDate" runat="server" Text="End Date"></asp:Label>
-                                            <asp:TextBox ID="txtEndDate_cust" class="form-control" TextMode="Date" runat="server"></asp:TextBox>
+
                                         </div>
                                         <!-- Custom Quarter Pickers (Initially Hidden) -->
                                         <div id="customQuarterFilter_cust" style="display: none">
@@ -263,72 +290,68 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col col-md-4">
-                                    <asp:Button ID="btnCustRecord" runat="server" Text="Generate" OnClick="btnCustRecord_Click" CssClass="btn btn-primary" ValidationGroup="custQuarter" />
-                                </div>
-
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="chart">
                             <asp:UpdatePanel ID="updateTopCust" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                                 <ContentTemplate>
                                     <div class="table-responsive">
-                                    <table class="table table-border table-hover table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th style="text-align: center" colspan="4">
-                                                    <asp:Label ID="lblTopCust" CssClass="lblTopCust_style" runat="server"></asp:Label>
-                                                </th>
-                                            </tr>
-                                            <tr style="font-size: 16px;">
-                                                <th scope="col">User Profile</th>
-                                                <th scope="col">User Name</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Total Rent Made(MYR)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <asp:Repeater ID="rptTopCustRental" runat="server">
-                                                <ItemTemplate>
-                                                    <tr>
-                                                        <td scope="col">
-                                                            <div class="img-fluid">
-                                                                <asp:Image ID="imgUserProfile" runat="server" ImageUrl='<%# Eval("ProfilePicture") %>' Width="50px" />
-                                                            </div>
-                                                        </td>
+                                        <table class="table table-border table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center" colspan="4">
+                                                        <asp:Label ID="lblTopCust" CssClass="lblTopCust_style" runat="server"></asp:Label>
+                                                    </th>
+                                                </tr>
+                                                <tr style="font-size: 16px;">
+                                                    <th scope="col">User Profile</th>
+                                                    <th scope="col">User Name</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Total Rent Made(MYR)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <asp:Repeater ID="rptTopCustRental" runat="server">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td scope="col">
+                                                                <div class="img-fluid">
+                                                                    <asp:Image ID="imgUserProfile" runat="server" ImageUrl='<%# Eval("ProfilePicture") %>' Width="50px" />
+                                                                </div>
+                                                            </td>
 
-                                                        <td scope="col">
-                                                            <asp:Label ID="lblUserName" runat="server" Text='<%# Eval("Username") %>' />
-                                                        </td>
+                                                            <td scope="col">
+                                                                <asp:Label ID="lblUserName" runat="server" Text='<%# Eval("Username") %>' />
+                                                            </td>
 
-                                                        <td scope="col">
-                                                            <asp:Label ID="lblUserEmail" runat="server" Text='<%# Eval("Email") %>' />
-                                                        </td>
+                                                            <td scope="col">
+                                                                <asp:Label ID="lblUserEmail" runat="server" Text='<%# Eval("Email") %>' />
+                                                            </td>
 
-                                                        <td scope="col">
-                                                            <asp:Label ID="lblRentAmount" runat="server" Text='<%# Eval("TotalPrice","{0:F2}") %>' />
-                                                        </td>
+                                                            <td scope="col">
+                                                                <asp:Label ID="lblRentAmount" runat="server" Text='<%# Eval("TotalPrice","{0:F2}") %>' />
+                                                            </td>
 
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                                <asp:PlaceHolder ID="phLackCustRecord" runat="server" Visible="false">
+                                                    <tr class="text-center">
+                                                        <th colspan="5" style="background-color: rgb(210, 180, 140);">
+                                                            <asp:Label ID="lblLackCustRecord" runat="server" Font-Size="1.3em"></asp:Label>
+                                                        </th>
                                                     </tr>
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                            <asp:PlaceHolder ID="phLackCustRecord" runat="server" Visible="false">
-                                                <tr class="text-center">
-                                                    <th colspan="5" style="background-color: rgb(210, 180, 140);">
-                                                        <asp:Label ID="lblLackCustRecord" runat="server" Font-Size="1.3em"></asp:Label>
-                                                    </th>
-                                                </tr>
-                                            </asp:PlaceHolder>
-                                            <asp:PlaceHolder ID="phNoCustRecord" runat="server" Visible="false">
-                                                <tr class="text-center">
-                                                    <th colspan="5" style="background-color: rgb(233, 116, 81);">
-                                                        <asp:Label ID="lblNoCust" runat="server" Text="No Customer Rental Record 😕" Font-Size="1.3em"></asp:Label>
-                                                    </th>
-                                                </tr>
-                                            </asp:PlaceHolder>
-                                        </tbody>
-                                    </table>
-                                        </div>
+                                                </asp:PlaceHolder>
+                                                <asp:PlaceHolder ID="phNoCustRecord" runat="server" Visible="false">
+                                                    <tr class="text-center">
+                                                        <th colspan="5" style="background-color: rgb(233, 116, 81);">
+                                                            <asp:Label ID="lblNoCust" runat="server" Text="No Customer Rental Record 😕" Font-Size="1.3em"></asp:Label>
+                                                        </th>
+                                                    </tr>
+                                                </asp:PlaceHolder>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="btnCustRecord" EventName="Click" />
@@ -338,6 +361,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
         <!-- WZ Demo 2 End-->
 
@@ -352,10 +376,10 @@
                             <h5 class="card-title flex-grow-3">Top 5 Rented <span id="topRentalDay" class="text-muted" style="font-size: 0.7em">| All Time</span></h5>
 
                             <div class="filter flex-shrink-0 mx-2">
-                                <div id="topRentalRange" class="d-flex align-items-center justify-content-between" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;" >
+                                <div id="topRentalRange" class="d-flex align-items-center justify-content-between" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;">
                                     <div>
-                                    <i class="fa fa-calendar me-2"></i>
-								<span></span>
+                                        <i class="fa fa-calendar me-2"></i>
+                                        <span></span>
                                     </div>
                                     <i class="fa fa-caret-down"></i>
                                 </div>
@@ -432,8 +456,8 @@
                             <h5 class="card-title flex-grow-3">Rented Car Type <span id="carTypeDay" class="text-muted" style="font-size: 0.6em">| All Time</span></h5>
                             <div id="carCategoryRange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc;" class="flex-shrink-0 d-flex align-content-center justify-content-between custom-type-range">
                                 <div>
-                                <i class="fa fa-calendar"></i>
-								<span class="custom-type-span">HIHI</span>
+                                    <i class="fa fa-calendar"></i>
+                                    <span class="custom-type-span">HIHI</span>
                                 </div>
                                 <i class="fa fa-caret-down"></i>
                             </div>
@@ -674,9 +698,95 @@
             cb(start, end, true);
 
         });
+
+        $(function () {
+
+            var start = moment().subtract(2, 'days');
+            var end = moment().subtract(2, 'days');
+
+            function cb(start, end, isClick) {                
+                document.getElementById('<%=txtStartDate_cust.ClientID %>').value = start.format('YYYY-MM-DD');
+                document.getElementById('<%=txtEndDate_cust.ClientID %>').value = end.format('YYYY-MM-DD');
+                if (isClick) {
+                    document.getElementById('<%=btnCustRecord.ClientID %>').click();
+                }
+            }
+
+            $('#carRentalAmt').daterangepicker({
+                startDate: start,
+                endDate: end,
+                autoApply: true,
+                opens: "left",
+                ranges: {
+                    'All Time': [moment().subtract(2, 'days'), moment().subtract(2, 'days')],
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'This Week': [moment().subtract(6, 'days'), moment()],
+                    'Last Week': [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')], 'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    'This Year': [moment().startOf('year'), moment().endOf('year')],
+                }
+            }, function (start, end, label) {
+                if (label != "Custom Range") {
+                    document.getElementById('<%=hdnTimeFilter_cust.ClientID %>').value = label;
+                    $('#carRentalAmt span').html(label);
+                } else {
+                    document.getElementById('<%=hdnTimeFilter_cust.ClientID %>').value = "Custom";
+                    $('#carRentalAmt span').html(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY') + '  ');
+                }
+                cb(start, end, true);
+                console.log(label);
+            });
+
+            cb(start, end, false);
+
+        });
+
+        $(function () {
+
+            var start = moment();
+            var end = moment();
+
+            function cb(start, end, isClick) {
+                document.getElementById('<%=txtStartDate.ClientID %>').value = start.format('YYYY-MM-DD');
+                document.getElementById('<%=txtEndDate.ClientID %>').value = end.format('YYYY-MM-DD');
+                if (isClick) {
+                    document.getElementById('<%=btnProcessBookRecord.ClientID %>').click();
+                }
+            }
+
+            $('#carBookingRpt').daterangepicker({
+                startDate: start,
+                endDate: end,
+                autoApply: true,
+                opens: "left",
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'This Week': [moment().subtract(6, 'days'), moment()],
+                    'Last Week': [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    'This Year': [moment().startOf('year'), moment().endOf('year')],
+                    '3 Year': [moment().subtract(3,"year").startOf('year'), moment().endOf('year')],
+                }
+            }, function (start, end, label) {
+                if (label != "Custom Range") {
+                    document.getElementById('<%=hdnTimeFilter.ClientID %>').value = label;
+                    $('#carBookingRpt span').html(label);
+                } else {
+                    document.getElementById('<%=hdnTimeFilter.ClientID %>').value = "Custom";
+                    $('#carBookingRpt span').html(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY') + '  ');
+                }
+                cb(start, end, true);
+                console.log(label);
+            });
+
+                    cb(start, end, false);
+
+                });
     </script>
     <!-- End Date Picker -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- Theme JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -804,14 +914,7 @@
             });
         });
     </script>
-    <script>
-        // Initialize Flatpickr in inline mode
-        flatpickr("#datetimepicker-dashboard", {
-            inline: true, // Display calendar directly
-            dateFormat: "Y-m-d", // Format for the selected date
-            altInput: false // Do not show an alternative input
-        });
-    </script>
+    <!-- Theme JS -->
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -892,20 +995,20 @@
 
             // When dropdown value changes
             $('#<%= ddlTimeFilter.ClientID %>').change(function () {
-                    var selectedValue = $(this).val();
-                    $('#<%= hdnTimeFilter.ClientID %>').val(selectedValue);
+                var selectedValue = $(this).val();
+                $('#<%= hdnTimeFilter.ClientID %>').val(selectedValue);
 
-                    // If "Custom Date" is selected, show the date pickers
-                    if (selectedValue === 'Custom') {
-                        $('#customDateFilter').show();
-                    } else {
-                        $('#customDateFilter').hide();
-                    }
-                });
+                // If "Custom Date" is selected, show the date pickers
+                if (selectedValue === 'Custom') {
+                    $('#customDateFilter').show();
+                } else {
+                    $('#customDateFilter').hide();
+                }
+            });
 
-                $('#<%= ddlTimeFilter_cust.ClientID %>').change(function () {
-                    var selectedValue = $(this).val();
-                    $('#<%= hdnTimeFilter_cust.ClientID%>').val(selectedValue);
+<%--            $('#<%= ddlTimeFilter_cust.ClientID %>').change(function () {
+                var selectedValue = $(this).val();
+                $('#<%= hdnTimeFilter_cust.ClientID%>').val(selectedValue);
 
                     if (selectedValue === 'Custom') {
                         $('#customDateFilter_cust').show();
@@ -926,11 +1029,11 @@
 
                 });
 
-                $('#<%= ddlQuarterFilter_cust.ClientID %>').change(function () {
-                    var selectedQuarter = $(this).val;
-                    $('#<%=hdnQuarterFilter.ClientID %>').val(selectedQuarter);
+            $('#<%= ddlQuarterFilter_cust.ClientID %>').change(function () {
+                var selectedQuarter = $(this).val;
+                $('#<%=hdnQuarterFilter.ClientID %>').val(selectedQuarter);
 
-                });
-            });
+                });--%>
+        });
     </script>
 </asp:Content>

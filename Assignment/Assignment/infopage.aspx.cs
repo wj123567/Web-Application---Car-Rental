@@ -23,44 +23,52 @@ namespace Assignment
 
             if (!Page.IsPostBack)
             {
-                string prevCar = Request.QueryString["prevCar"];
-                string currentCar = (string)Session["CarPlate"];
-                if (Request.QueryString["prevCar"] != null )
+                if (Session["Id"] != null)
                 {
-                    if (prevCar != currentCar)
+                    string prevCar = Request.QueryString["prevCar"];
+                    string currentCar = (string)Session["CarPlate"];
+                    if (Request.QueryString["prevCar"] != null)
                     {
-                        Session["SelectedAddOns"] = null;
+                        if (prevCar != currentCar)
+                        {
+                            Session["SelectedAddOns"] = null;
+                        }
                     }
-                }
 
-                Session["CurrentStep"] = 2;
-                int currentStep = (int)(Session["CurrentStep"]);
-                UpdateProgressBar(currentStep);
-                if (Session["CarPlate"] != null)
+                    Session["CurrentStep"] = 2;
+                    int currentStep = (int)(Session["CurrentStep"]);
+                    UpdateProgressBar(currentStep);
+                    if (Session["CarPlate"] != null)
+                    {
+
+                        string carPlate = Session["CarPlate"].ToString();
+
+                        // Assuming you have a method to get car details by carPlate
+                        GetCarDetailsByCarPlate(carPlate);
+
+                    }
+
+                    hdnSessionId.Value = Session["Id"] as string ?? string.Empty;
+
+                    BindAddOns();
+
+                    /*    LoadAddOnSelection();*/
+
+                    //you
+
+                    LoadReviewData(currentCar);
+
+                    LoadComments(currentCar);
+
+                    LoadRedeemedVouchers();
+
+                }
+                else
                 {
-
-                    string carPlate = Session["CarPlate"].ToString();
-
-                    // Assuming you have a method to get car details by carPlate
-                    GetCarDetailsByCarPlate(carPlate);
-
+                    Response.Redirect("~/Home.aspx");
                 }
-
-                hdnSessionId.Value = Session["Id"] as string ?? string.Empty;
-
-                BindAddOns();
-
-            /*    LoadAddOnSelection();*/
-
-                //you
-
-                LoadReviewData(currentCar);
-
-                LoadComments(currentCar);      
-                   
             }
-
-        /*    DataBind();*/
+                
 
         }
 
@@ -266,6 +274,7 @@ namespace Assignment
         {
             using (var db = new SystemDatabaseEntities())
             {
+
                 var reviews = db.Reviews.Where(r => r.Booking.Car.CarPlate == currentCar).ToList();
 
                 int totalReviews = reviews.Count;
@@ -386,6 +395,72 @@ namespace Assignment
 
             }
         }
+
+        private void LoadRedeemedVouchers()
+        {
+            var userId = Session["Id"]?.ToString();
+
+            using (var db = new SystemDatabaseEntities())
+            {
+                var redeemedVouchers = db.Redemptions
+                                        .Where(r => r.UserId == userId && r.RedeemDate <= DateTime.Now)
+                                        .Select(r => new
+                                        {
+                                            r.RedeemItem.ItemName,
+                                            r.RedeemItemId
+                                        })
+                                        .ToList();
+
+                ddlVouchers.DataSource = redeemedVouchers;
+                ddlVouchers.DataTextField = "ItemName";
+                ddlVouchers.DataValueField = "RedeemItemId";
+                ddlVouchers.DataBind();
+
+                ddlVouchers.Items.Insert(0, new ListItem("Select a Voucher", ""));
+
+            }
+        }
+
+        protected void btnApplyVoucher_Click(object sender, EventArgs e)
+        {
+            var selectedVoucherId = ddlVouchers.SelectedValue;
+            var bookingID = Session["BookingID"].ToString();
+
+            using (var db = new SystemDatabaseEntities())
+            {
+                
+            }
+        }
+
+        protected void ddlVouchers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedValue = ddlVouchers.SelectedValue;
+
+            // Check if user selected a valid voucher
+            if (!string.IsNullOrEmpty(selectedValue))
+            {
+                int voucherId = Convert.ToInt32(selectedValue);
+
+                using (var db = new SystemDatabaseEntities())
+                {
+                    var voucher = db.RedeemItems.FirstOrDefault(v => v.RedeemItemId == voucherId);
+
+                    if (voucher != null)
+                    {
+                        lblVoucherName.Text = voucher.ItemName;
+                        lblVoucherDescription.Text = voucher.ItemDescription;
+                        btnApplyVoucher.CommandArgument = voucher.RedeemItemId.ToString(); // Pass voucher ID to apply logic
+
+                        voucherDetails.Visible = true;
+                    }
+                }
+            }
+            else
+            {
+                voucherDetails.Visible = false;
+            }
+        }
+
     }
 
 }
