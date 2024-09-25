@@ -3,8 +3,15 @@
 <asp:Content ID="Redemption" ContentPlaceHolderID="main" runat="server">
 
     <div class="redemption-container">
-        <div class="redemption-container-header">
+        <div class="redemption-container-header mb-1">
             <h2>Redeem What You Like?</h2>
+        </div>
+
+        <div class="fs-2 ps-1 mb-5">
+            <b>
+                Points Balance:
+                <asp:Label ID="lblPointsBalance" runat="server" Text="" CssClass="text-secondary fs-1"></asp:Label>
+            </b>
         </div>
 
         <div class="redemption-container-body d-flex flex-row justify-content-around flex-wrap">
@@ -20,7 +27,8 @@
                         <div class="vouchercard p-3 d-flex flex-column justify-content-around">                            
                             <div class="d-flex flex-column justify-content-around" style="width: 90%">
                                 <div class="voucher-head" style="flex:1">
-                                    <h1 class="ItemName mt-0"><%# Eval("ItemName") %></h1>
+                                    <h1 class="ItemName mt-0 mb-0 pb-0"><%# Eval("ItemName") %></h1>
+                                    <p class="ps-4 text-secondary"><b><%# Eval("ItemPoints") %> Points</b></p>
                                 </div>
                                 <div class="image" style="flex:3">
                                     <img src='<%# ResolveUrl("~/Image/RedeemItem/" + Eval("ItemImage")) %>' alt="<%# Eval("ItemName") %>" class="ItemImage" />

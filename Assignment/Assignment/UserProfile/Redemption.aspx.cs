@@ -37,10 +37,17 @@ namespace Assignment
         {
             using (var db = new SystemDatabaseEntities())
             {   
-                
                 var redeemItems = db.RedeemItems.ToList();
                 var userId = Session["Id"].ToString();
                 var today = DateTime.Now.Date;
+
+
+                var userPoints = db.ApplicationUsers
+                    .Where(a => a.Id == userId)
+                    .Select(a => a.RewardPoints)
+                    .FirstOrDefault();
+
+                lblPointsBalance.Text = userPoints.ToString();
 
                 var redeemedItemsToday = db.Redemptions
                     .Where(r => r.UserId == userId &&
@@ -74,16 +81,51 @@ namespace Assignment
 
             using (var db = new SystemDatabaseEntities())
             {
+                // Get user points
+                var user = db.ApplicationUsers.FirstOrDefault(a => a.Id == userId);
+                if (user == null)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('User not found.');", true);
+                    return;
+                }
 
-                bool hasRedeemedToday = db.Redemptions
+                int? userPoints = user.RewardPoints;
+
+                // Get item points
+                var item = db.RedeemItems.FirstOrDefault(i => i.RedeemItemId == redeemItemId);
+                if (item == null)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Item not found.');", true);
+                    return;
+                }
+
+                int? itemPoints = item.ItemPoints;
+
+                if (userPoints == null || itemPoints == null)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Error: Unable to retrieve points.');", true);
+                    return;
+                }
+
+                if (userPoints < itemPoints)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('You do not have enough points to redeem this item.');", true);
+                    return; // Exit if points are insufficient
+                }
+                else
+                {
+                    bool hasRedeemedToday = db.Redemptions
                     .Any(r => r.UserId == userId &&
                                r.RedeemItemId == redeemItemId &&
                                DbFunctions.TruncateTime(r.RedeemDate) == DbFunctions.TruncateTime(DateTime.Now));
 
-                if (hasRedeemedToday)
-                {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('You have already redeemed this item today.');", true);
-                    return; // Exit if already redeemed
+                    if (hasRedeemedToday)
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('You have already redeemed this item today.');", true);
+                        return; // Exit if already redeemed
+                    }
+
+                    user.RewardPoints -= itemPoints.Value;
                 }
 
                 string sql = "INSERT INTO Redemption (UserId, RedeemItemId, RedeemDate) VALUES (@UserId, @RedeemItemId, @RedeemDate)";
@@ -98,6 +140,10 @@ namespace Assignment
                 {
                     // Execute the SQL command
                     db.Database.ExecuteSqlCommand(sql, parameters);
+
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+
                     ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Redemption successful!');", true);
                     LoadRedeemItem();
                 }
