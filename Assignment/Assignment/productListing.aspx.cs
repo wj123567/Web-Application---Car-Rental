@@ -41,7 +41,7 @@ namespace Assignment
             string findCar = @"SELECT C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, AVG(R.Rating) as AVG 
                               FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate LEFT JOIN Reviews R ON B.Id = R.BookingId 
                               WHERE IsDelisted = 0 AND L.LocationName = @Pickup_point 
-                              AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL) 
+                              AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL AND B.Status IN('Booked','Pending')) 
                               GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy";
 
             //initial one
@@ -93,7 +93,7 @@ namespace Assignment
                 }
             }
 
-            string carInfo = "SELECT C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, AVG(R.Rating) as AVG FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate LEFT JOIN Reviews R ON B.Id = R.BookingId WHERE IsDelisted = 0 AND L.LocationName = @LocationName AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL)";
+            string carInfo = "SELECT C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, AVG(R.Rating) as AVG FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate LEFT JOIN Reviews R ON B.Id = R.BookingId WHERE IsDelisted = 0 AND L.LocationName = @LocationName AND C.CarPlate NOT IN (SELECT B.CarPlate FROM Booking B WHERE (B.StartDate < @endDate AND B.EndDate > @startDate) AND B.CarPlate IS NOT NULL AND B.Status IN('Booked','Pending'))";
 
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@LocationName", ddlPULocation.SelectedValue));

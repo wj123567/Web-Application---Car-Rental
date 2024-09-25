@@ -453,7 +453,9 @@ namespace Assignment
         }
 
         protected void btnConfirmDelete_Click(object sender, EventArgs e)
-        {            
+        {
+            if (Page.IsValid)
+            {
             string deleteString = "DELETE FROM Car WHERE CarPlate = @CarPlate";
 
             string path = Server.MapPath("~/Image/CarImage/");
@@ -466,6 +468,11 @@ namespace Assignment
             com.ExecuteNonQuery();
             con.Close();
             Response.Redirect("CarManagement.aspx");
+            }
+            else
+            {
+                upDelete.Update();
+            }
         }
 
         protected void ddlChooseLocation_SelectedIndexChanged(object sender, EventArgs e)
@@ -673,7 +680,7 @@ namespace Assignment
         }
         protected void hiddenBtn_Click(object sender, EventArgs e)
         {
-            string findCar = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate > '09/24/2024' AND Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Upcoming FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR CarPlate LIKE @searchString GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
+            string findCar = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate > '09/24/2024' AND Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Upcoming FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR C.CarPlate LIKE @searchString GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
             ViewState["SQLQuery"] = findCar;
             loadCarData();
             UpdatePanel1.Update();
@@ -724,6 +731,25 @@ namespace Assignment
             {
                 lblStatus.CssClass = "badge bg-primary text-light";
                 lblStatus.Text = "Chill (" + days + " days left)";
+            }
+        }
+
+        protected void cvDelete_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            string selectCar = "SELECT COUNT(*) FROM Booking WHERE CarPlate = @CarPlate AND StartDate >= CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled')";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(selectCar, con);
+            com.Parameters.AddWithValue("@CarPlate", hdnCarPlate.Value);
+            int temp = Convert.ToInt32(com.ExecuteScalar().ToString());
+            con.Close();
+            if(temp == 0)
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
             }
         }
     }

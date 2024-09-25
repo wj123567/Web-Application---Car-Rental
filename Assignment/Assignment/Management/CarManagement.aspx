@@ -81,18 +81,24 @@
     <div class="modal fade" id="ConfirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ConfirmDelete" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                <asp:UpdatePanel ID="upDelete" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+                    <ContentTemplate>
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">Car Detail</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <h5 class="text-dark">Are you sure you want to delete?</h5>
+                    <asp:TextBox ID="txtDelete" runat="server" style="display:none" ValidationGroup="deleteGroup"></asp:TextBox>
+                    <asp:CustomValidator ID="cvDelete" runat="server" ErrorMessage="Car Cannot Be Deleted Booking Still Available" CssClass="validate" ValidationGroup="deleteGroup" OnServerValidate="cvDelete_ServerValidate" ControlToValidate="txtDelete" ValidateEmptyText="True"></asp:CustomValidator>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <asp:Button ID="btnConfirmDelete" runat="server" Text="Confirm Delete" CssClass="btn btn-danger" ValidationGroup="deleteGroup" OnClick="btnConfirmDelete_Click" />
                 </div>
             </div>
+                 </ContentTemplate>
+                </asp:UpdatePanel>
         </div>
     </div>
 

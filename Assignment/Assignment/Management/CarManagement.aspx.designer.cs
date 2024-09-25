@@ -105,6 +105,33 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Repeater rptBookingRec;
 
         /// <summary>
+        /// upDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upDelete;
+
+        /// <summary>
+        /// txtDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDelete;
+
+        /// <summary>
+        /// cvDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvDelete;
+
+        /// <summary>
         /// btnConfirmDelete control.
         /// </summary>
         /// <remarks>

@@ -209,7 +209,7 @@ namespace Assignment
 
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
 
-                string deleteCom = "DELETE FROM PaymentCard WHERE UserId = @id; DELETE FROM ApplicationUser WHERE Id = @id";
+                string deleteCom = @"UPDATE Booking SET Status = 'Cancelled', UpdateReason = 'User Account Deleted' WHERE UserId = @id AND StartDate >= CONVERT (date, SYSDATETIME()); DELETE FROM PaymentCard WHERE UserId = @id;DELETE FROM ApplicationUser WHERE Id = @id;";
 
                 con.Open();
                 SqlCommand com = new SqlCommand(deleteCom, con);

@@ -77,7 +77,7 @@ namespace Assignment
                 btnEditDriver.Visible = true;
                 LoadAvailableDriver(id);
                 HideControls(editPanel);
-                }
+            }
             con.Close();
         }
         /*
@@ -326,7 +326,7 @@ namespace Assignment
 
         protected void btnConfirmDelete_Click(object sender, EventArgs e)
         {
-            string deleteDriver = "UPDATE Driver SET UserID = NULL WHERE Id = @id";
+            string deleteDriver = @"UPDATE Booking SET Status = 'Cancelled', UpdateReason = 'Driver Profile Deleted' WHERE DriverId = @id AND StartDate >= CONVERT (date, SYSDATETIME()); UPDATE Driver SET UserID = NULL WHERE Id = @id";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             
@@ -383,6 +383,8 @@ namespace Assignment
                 case "A":
                     lblApproval.Text = "Approved";
                     lblApproval.CssClass = "badge bg-success text-light";
+                    btnEditDriver.Visible = false;
+                    btnDeleteDriver.Visible = true;
                     break;
                 case "R":
                     lblApproval.Text = "Rejected";

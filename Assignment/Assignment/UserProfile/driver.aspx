@@ -242,6 +242,7 @@
     <h1 class="d-inline">Driver Info</h1>
     <div class="d-inline">
     <asp:Button ID="btnEditDriver" runat="server" Text="Edit" CssClass="btn btn-sm btn-primary mb-1" OnClick="btnEdit_Click" />
+    <asp:Button ID="btnDeleteDriver" runat="server" Text="Delete" CssClass="btn btn-sm btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False" />
     </div>
     </div>
     <hr class="mt-0 mb-4">

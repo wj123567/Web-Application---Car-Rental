@@ -396,7 +396,7 @@ namespace Assignment
 
         protected void btnConfirmDelete_Click(object sender, EventArgs e)
         {
-            string deleteCom = "DELETE FROM PaymentCard WHERE UserId = @id;DELETE FROM ApplicationUser WHERE Id = @id";
+            string deleteCom = "UPDATE Booking SET Status = 'Cancelled', UpdateReason = 'User Account Deleted' WHERE UserId = @id AND StartDate >= CONVERT (date, SYSDATETIME()); DELETE FROM PaymentCard WHERE UserId = @id;DELETE FROM ApplicationUser WHERE Id = @id;";
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             SqlCommand com = new SqlCommand(deleteCom, con);
