@@ -186,6 +186,28 @@ namespace Assignment.Management
             String bookingId = btnView.CommandArgument;
             string approvesql = "UPDATE Booking SET Status = 'Completed' WHERE Id = @Id";
             updateAfterBookStatus(approvesql,bookingId);
+
+            //you start
+            if (Session["SelectedVoucherId"] != null && int.TryParse(Session["SelectedVoucherId"].ToString(), out int selectedVoucherId))
+            {
+                using (var db = new SystemDatabaseEntities())
+                {
+                    var sql = @"
+                        UPDATE Redemption
+                        SET IsActive = 1
+                        WHERE RedeemItemId = @selectedVoucherId AND 
+                        RedeemDate = (
+                            SELECT MAX(RedeemDate)
+                            FROM Redemption
+                            WHERE RedeemItemId = @selectedVoucherId
+                        )";
+
+                    db.Database.ExecuteSqlCommand(sql, new SqlParameter("@selectedVoucherId", selectedVoucherId));
+                }
+            }
+            //you end
+
+
             Response.Redirect("BookingManagement.aspx");
             
         }

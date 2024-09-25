@@ -215,24 +215,6 @@ namespace Assignment
             Session["CurrentStep"] = currentStep;
             UpdateProgressBar(currentStep);
 
-            //you start
-            var selectedVoucherId = Session["SelectedVoucherId"].ToString();
-            using (var db = new SystemDatabaseEntities())
-            {
-                var sql = @"
-                                UPDATE Redemption
-                                SET IsActive = 0
-                                WHERE RedeemItemId = @selectedVoucherId AND 
-                                RedeemDate = (
-                                    SELECT MAX(RedeemDate)
-                                    FROM Redemption
-                                    WHERE RedeemItemId = @selectedVoucherId
-                                )";
-
-                db.Database.ExecuteSqlCommand(sql, new SqlParameter("@selectedVoucherId", selectedVoucherId));
-            }
-            //you end
-
             Response.Redirect("bookinfo.aspx");
         }
 
@@ -274,11 +256,31 @@ namespace Assignment
                 SaveBookingAddOnInfo(insertBookingAddOnString, selectedAddOns);
             }
 
-                
 
-/*
-            // Trigger the modal to be shown after the record is inserted
-            ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "$('#paymentModal').modal('show');", true);*/
+
+            /*
+                        // Trigger the modal to be shown after the record is inserted
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showModal", "$('#paymentModal').modal('show');", true);*/
+
+            //you start
+            if (Session["SelectedVoucherId"] != null && int.TryParse(Session["SelectedVoucherId"].ToString(), out int selectedVoucherId))
+            {
+                using (var db = new SystemDatabaseEntities())
+                {
+                    var sql = @"
+                        UPDATE Redemption
+                        SET IsActive = 0
+                        WHERE RedeemItemId = @selectedVoucherId AND 
+                        RedeemDate = (
+                            SELECT MAX(RedeemDate)
+                            FROM Redemption
+                            WHERE RedeemItemId = @selectedVoucherId
+                        )";
+
+                    db.Database.ExecuteSqlCommand(sql, new SqlParameter("@selectedVoucherId", selectedVoucherId));
+                }
+            }
+            //you end
 
 
             Response.Redirect("Home.aspx");
