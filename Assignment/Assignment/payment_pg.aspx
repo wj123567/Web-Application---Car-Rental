@@ -68,10 +68,11 @@
             <div class="shadow-sm bg-white p-4 my-4">
                 <h4>Payment Info</h4>
 
-            
+             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+     <ContentTemplate>
                 <div class="chkApplyCard">
-                <asp:CheckBox ID="chkApplyCard" runat="server" onchange="toggleAccordion()"  CssClass="chkboxApply"/>
-                <asp:Label ID="lblApplyCard" runat="server" Text="Apply Existing Card"></asp:Label>
+                <asp:CheckBox ID="chkApplyCard" runat="server"   CssClass="chkboxApply" AutoPostBack="true" OnCheckedChanged="chkApplyCard_CheckedChanged"/>
+                <asp:Label ID="lblApplyCard" runat="server" CssClass="text-primary fw-bold" Text="Apply Existing Card"></asp:Label>
                 </div>
                
 
@@ -122,52 +123,59 @@
           </div>
          </div>
         </div>
-            <itemtemplate>
-                <div class="col-sm-6 mt-5">
-                   
-                  <asp:Label ID="lblCardName" runat="server" Text="Cardholder Name" CssClass="label_style"></asp:Label>
-                  <asp:TextBox ID="txtCardName" runat="server" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"  ErrorMessage="Card Name is Required" ControlToValidate="txtCardName" ValidationGroup="PaymentValidation"  CssClass="validate"  Display="Static"></asp:RequiredFieldValidator>
-                </div>
-                <div class="col-sm-8 mt-4">
-                  <asp:Label ID="lblCardNumber" runat="server" Text="Card Number" CssClass="label_style"></asp:Label>
-                    <asp:Label ID="lblVisaCard" runat="server" Text="" CssClass="fab fa-cc-visa fa-lg"></asp:Label>
-                    <asp:Label ID="lblMasterCard" runat="server" Text="" CssClass="fab fa-cc-mastercard fa-lg"></asp:Label>
-                    <asp:Label ID="lblAmexCard" runat="server" Text="" CssClass="fab fa-cc-amex fa-lg"></asp:Label>
+               
+                    <div class="col-sm-6 mt-5">
+                        <asp:Label ID="lblCardName" runat="server" Text="Cardholder Name" CssClass="label_style"></asp:Label>
+                        <asp:TextBox ID="txtCardName" runat="server" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Card Name is Required" ControlToValidate="txtCardName" ValidationGroup="PaymentValidation" CssClass="validate" Display="Static"></asp:RequiredFieldValidator>
+                    </div>
+                    <div class="col-sm-8 mt-4">
+                        <asp:Label ID="lblCardNumber" runat="server" Text="Card Number" CssClass="label_style"></asp:Label>
+                        <asp:Label ID="lblVisaCard" runat="server" Text="" CssClass="fab fa-cc-visa fa-lg"></asp:Label>
+                        <asp:Label ID="lblMasterCard" runat="server" Text="" CssClass="fab fa-cc-mastercard fa-lg"></asp:Label>
+                        <asp:Label ID="lblAmexCard" runat="server" Text="" CssClass="fab fa-cc-amex fa-lg"></asp:Label>
 
-                    <asp:HiddenField ID="hdnUsedCardId" runat="server" />
+                        <asp:HiddenField ID="hdnUsedCardId" runat="server" />
 
-                  <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control my-1" placeholder="0000 0000 0000 0000" MaxLength="19" ValidationGroup="PaymentValidation"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"  ErrorMessage="Card Number is Required." ControlToValidate="txtCardNumber" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
-                     <asp:CustomValidator ID="validateCard" runat="server" ErrorMessage="Card is Invalid." CssClass="validate" ValidationGroup="PaymentValidation" ClientValidationFunction="validateCard" ControlToValidate="txtCardNumber" ValidateEmptyText="True" Display="Dynamic"></asp:CustomValidator>
-                </div>
-                <div class="row">
-                  <div class="col-sm-4 col-xs-6 mt-4">
-                    <asp:Label ID="lblExpiry" runat="server" Text="Expiry Date" CssClass="label_style"></asp:Label>
-                    <asp:TextBox ID="txtExpiry" runat="server" TextMode="Month" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
-                      <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Card Expiry Date is Required" ControlToValidate="txtExpiry" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
-                  </div>
-                  <div class="col-sm-4 col-xs-6 mt-4">      
-                    <asp:Label ID="lblCvv" runat="server" Text="Security Code(CVV)" CssClass="label_style"></asp:Label>
-                    <asp:TextBox ID="txtCvv" runat="server" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
-                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"  ErrorMessage="CVV is Required" ControlToValidate="txtCvv" ValidationGroup="PaymentValidation" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
-                  </div>
-                </div>
+                        <asp:TextBox ID="txtCardNumber" runat="server" CssClass="form-control my-1" placeholder="0000 0000 0000 0000" MaxLength="19" ValidationGroup="PaymentValidation"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Card Number is Required." ControlToValidate="txtCardNumber" ValidationGroup="PaymentValidation" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+                        <asp:CustomValidator ID="validateCard" runat="server" ErrorMessage="Card is Invalid." CssClass="validate" ValidationGroup="PaymentValidation" ClientValidationFunction="validateCard" ControlToValidate="txtCardNumber" ValidateEmptyText="True" Display="Dynamic"></asp:CustomValidator>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-6 mt-4">
+                            <asp:Label ID="lblExpiry" runat="server" Text="Expiry Date" CssClass="label_style"></asp:Label>
+                            <asp:TextBox ID="txtExpiry" runat="server" TextMode="Month" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Card Expiry Date is Required" ControlToValidate="txtExpiry" ValidationGroup="PaymentValidation" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+                            <asp:CustomValidator ID="cvExpiry" runat="server" ErrorMessage="Expiry date must be greater than the current month."  ControlToValidate="txtExpiry" ValidationGroup="PaymentValidation" CssClass="validate" ClientValidationFunction="validateExpiryDate"  Display="Dynamic" ></asp:CustomValidator>
+                        </div>
+                        <div class="col-sm-4 col-xs-6 mt-4">
+                            <asp:Label ID="lblCvv" runat="server" Text="Security Code(CVV)" CssClass="label_style"></asp:Label>
+                            <asp:TextBox ID="txtCvv" runat="server" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="rqCvv" runat="server" ErrorMessage="CVV is Required" ControlToValidate="txtCvv" ValidationGroup="PaymentValidation" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+
+                    <div class="my-3">
+                        <small class="text-secondary">I authorize some insurance company to charge my debit / credit card for the total amount of xxx.xx</small>
+                    </div>
+                    <div class="mt-5 mb-3">
+                        <div class="row paymentbtn_row">
+                            <div class="col">
+                                <asp:Button ID="btnPaymentPgBack" runat="server" Text="Go Back" CssClass="paymentpg_backbtn prev_btn w-100" OnClick="btnPaymentPgBack_Click" />
+                            </div>
+                            <div class="col">
+                                <asp:Button ID="btnPaymentPgPay" runat="server" Text="Pay Now" CssClass="paymentpg_paybtn next-btn w-100" OnClientClick="return validateForm();" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                             </ContentTemplate>
+                 <Triggers>
+        <asp:AsyncPostBackTrigger ControlID="chkApplyCard" EventName="CheckedChanged" />
+    </Triggers>
+</asp:UpdatePanel>
                 
-                <div class="my-3">
-                  <small class="text-secondary">I authorize some insurance company to charge my debit / credit card for the total amount of xxx.xx</small>
-                </div>
-                <div class="mt-5 mb-3">
-                  <div class="row paymentbtn_row">
-                    <div class="col">    
-                      <asp:Button ID="btnPaymentPgBack" runat="server" Text="Go Back" CssClass="paymentpg_backbtn prev_btn w-100" OnClick="btnPaymentPgBack_Click"/>
-                    </div>
-                    <div class="col">
-                     <asp:Button ID="btnPaymentPgPay" runat="server" Text="Pay Now" CssClass="paymentpg_paybtn next-btn w-100"  OnClientClick="return validateForm();"/>
-                    </div>
-                  </div>
-                </div>
-    </itemtemplate>
+    
                 
             </div>
           </div>
@@ -279,16 +287,19 @@
             const txtCardName = document.getElementById("<%= txtCardName.ClientID %>");
             const txtCardNumber = document.getElementById("<%= txtCardNumber.ClientID %>");
             const txtExpiry = document.getElementById("<%= txtExpiry.ClientID %>");
+            const lblCvv = document.getElementById("<%= lblCvv.ClientID %>");
             const txtCvv = document.getElementById("<%= txtCvv.ClientID %>");
             const hdnCardCheck = document.getElementById("<%= hdnCardCheck.ClientID %>");
+            var CVV_validator = document.getElementById("<%= rqCvv.ClientID %>");
             
             var accordion = document.getElementById('cardAccordion');
             if (checkbox.checked) {
                 accordion.style.display = 'block';  // Show accordion
                 txtCardName.disabled   = true;
                 txtCardNumber.disabled = true;
-                txtExpiry.disabled     = true;
-                txtCvv.disabled = true;
+                txtExpiry.disabled = true;
+                lblCvv.style.display = 'none';
+                txtCvv.style.display = 'none';         
                 hdnCardCheck.value = "";
                 lblCheck.innerText = hdnCardCheck.value;
                 
@@ -300,8 +311,9 @@
                 txtCardNumber.value = "";
                 txtExpiry.disabled = false;
                 txtExpiry.value = "";
-                txtCvv.disabled = false;
-                txtCvv.value = "";
+                lblCvv.style.display = 'block';
+                txtCvv.style.display = 'block';
+                txtCvv.value = "";              
                 hdnCardCheck.value = "NewAdded";
                 lblCheck.innerText = hdnCardCheck.value;
             }
@@ -309,6 +321,14 @@
 
         function validateForm(event) {
             // Trigger ASP.NET validation
+            var checkbox = document.getElementById("<%= chkApplyCard.ClientID %>");
+
+            var CVV_validator = document.getElementById("<%= rqCvv.ClientID %>");
+            if (checkbox.checked) {
+                ValidatorEnable(CVV_validator, false);
+            } else {
+                ValidatorEnable(CVV_validator, true);
+            }
             var isValid = Page_ClientValidate('PaymentValidation');
             
             if (!isValid) {
@@ -339,6 +359,34 @@
                     element.classList.remove('active');
                 }
             });
+        }
+
+        function validateExpiryDate(sender, args) {
+            var today = new Date();
+            var currentMonth = today.getMonth() + 1; // JavaScript months are 0-11, so we add 1
+            var currentYear = today.getFullYear();
+
+            var expiryDate = document.getElementById('<%= txtExpiry.ClientID %>').value;
+
+            // Check if expiryDate is in "yyyy-mm" format
+            if (expiryDate) {
+                var expiryYear = parseInt(expiryDate.split('-')[0]);
+                var expiryMonth = parseInt(expiryDate.split('-')[1]);
+
+               
+                if (expiryYear > currentYear) {
+                    args.IsValid = true; // Valid
+                }
+                
+                else if (expiryYear === currentYear && expiryMonth > currentMonth) {
+                    args.IsValid = true; // Valid
+                }
+                else {
+                    args.IsValid = false; // Invalid
+                }
+            } else {
+                args.IsValid = false; // Invalid if the field is empty
+            }
         }
 
         function validateCard(sender, args) {

@@ -65,7 +65,6 @@ namespace Assignment
             {
                 chkApplyCard.Visible = true;
                 lblApplyCard.Visible = true;
-                applyDefaultCard();
             }
             else
             {
@@ -104,6 +103,17 @@ namespace Assignment
 
         }
 
+        protected void chkApplyCard_CheckedChanged(object sender, EventArgs e)
+        {
+            //toggle the accordion depending on checkbox 
+            ScriptManager.RegisterStartupScript(this, GetType(), "toggleAccordionScript", "toggleAccordion();", true);
+            if (chkApplyCard.Checked)
+            {
+                applyDefaultCard();  // Call the method to fetch and apply default card details
+            }
+            
+        }
+
         private void applyDefaultCard()
         {
             string userId = Session["Id"].ToString();
@@ -122,6 +132,8 @@ namespace Assignment
                     txtCardNumber.Text = reader["CardNumber"].ToString();
                     DateTime expDate = reader.GetDateTime(reader.GetOrdinal("ExpDate"));
                     txtExpiry.Text = expDate.ToString("yyyy-MM");
+                    //need to use when save to booking later
+                    hdnUsedCardId.Value = reader["Id"].ToString();
                 }
                
             }
@@ -136,27 +148,7 @@ namespace Assignment
             con.Close();
         }
 
-        /*     protected void rptCards_ItemDataBound(object sender, RepeaterItemEventArgs e)
-             {
-                 // Ensure we're in an item template (and not header/footer templates)
-                 if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-                 {
-                     // Access the data for the current item
-                     DataRowView row = (DataRowView)e.Item.DataItem;
-
-                     // Check for a condition on a specific field, e.g., checking the 'CardName' field
-                     if (row["IsDefault"] != DBNull.Value && row["isDefault"].ToString() == "1")
-                     {
-                         // Find the TextBox control and set its value
-                         Button btnExistCard = (Button)e.Item.FindControl("btnExistCard");
-                         if (btnExistCard != null)
-                         {
-                             // Call the button's click event handler manually if needed
-                             btnExistCard_Click(btnExistCard, EventArgs.Empty);
-                         }
-                     }
-                 }
-             }*/
+        
 
         protected string getCardsPhoto(string cardType)
         {
@@ -220,17 +212,7 @@ namespace Assignment
 
         protected void btnBookingConfirm_Click(object sender, EventArgs e)
         {
-            /*       Session["Pickup_point"]
-           Session["Pickup_state"]
-           Session["StartDate"]
-           Session["Dropoff_point"]
-           Session["Dropoff_state"]
-           Session["EndDate"]
-
-           Session["CarPlate"]
-                Session["TotalAddOn"]
-                Session["TotalPrice"]
-          */
+         
             if (hdnCardCheck.Value == "New" || hdnCardCheck.Value == "NewAdded")
             {
                 string insertCardString = @"INSERT into PaymentCard (CardNumber, CardHolderName, ExpDate, CVV, UserId, CardType, Id, IsDefault) 
@@ -482,10 +464,12 @@ namespace Assignment
                         
                         DateTime expDate = reader.GetDateTime(reader.GetOrdinal("ExpDate"));
                         txtExpiry.Text = expDate.ToString("yyyy-MM");
-                        txtCvv.Text = reader["CVV"].ToString();
+               
                     }
                 }
-
+                chkApplyCard.Checked = true;
+                //toggle the accordion depending on checkbox 
+                ScriptManager.RegisterStartupScript(this, GetType(), "toggleAccordionScript", "toggleAccordion();", true);
                 con.Close();
             }
            

@@ -154,11 +154,12 @@ namespace Assignment
                         // Populate the table with the data
                         lblBookingNumber.Text = bookingId;
                         img_car.ImageUrl = reader["CarImage"].ToString();
+                        lblBookingDate.Text = Convert.ToDateTime(reader["BookingDate"]).ToString("dd-MMM-yyyy hh:mm tt");
                         lblPlateNum.Text = reader["CarPlate"].ToString();
                         lblPickUpLocation.Text = reader["Pickup_point"].ToString();
-                        lblPickUpTime.Text = Convert.ToDateTime(reader["StartDate"]).ToString("dd/MM/yyyy HH:mm:ss tt");
+                        lblPickUpTime.Text = Convert.ToDateTime(reader["StartDate"]).ToString("dd-MMM-yyyy hh:mm tt");
                         lblDropOffLocation.Text = reader["Dropoff_point"].ToString();
-                        lblDropOffTime.Text = Convert.ToDateTime(reader["EndDate"]).ToString("dd-MM-yyyy HH:mm:ss tt");
+                        lblDropOffTime.Text = Convert.ToDateTime(reader["EndDate"]).ToString("dd-MMM-yyyy hh:mm tt");
                         txtNotes.Text = reader["Notes"].ToString();
                         string status = reader["Status"].ToString();
 
@@ -257,11 +258,13 @@ namespace Assignment
             switch (status)
             {
                 case "Pending":         
-                    return "bg-primary";
+                    return "bg-warning";
                 case "Booked":
                     return "bg-success";
                 case "Cancelled":
                     return "bg-danger";
+                case "Completed":
+                    return "bg-primary";
                 default:
                     return "bg-default"; // Or any default class
             }

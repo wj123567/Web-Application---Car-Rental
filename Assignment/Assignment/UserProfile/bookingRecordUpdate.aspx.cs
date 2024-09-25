@@ -21,7 +21,8 @@ namespace Assignment
             {
                 //tis shows current add on
                 BindAddOns();
- 
+                //tis is for adding add on
+                BindAllAddOns();
 
                 if (!string.IsNullOrEmpty(bookingId))
                 {
@@ -144,12 +145,8 @@ namespace Assignment
         
         protected void btnAddOn_Click(object sender, EventArgs e)
         {
-            //tis is for adding add on
-            BindAllAddOns();
-            if(hdnExtraAddOnCheck.Value != "false")
-            {
+           
                 ScriptManager.RegisterStartupScript(this, GetType(), "addExtraAddOnModal", "addExtraAddOnModal();", true);
-            }
            
         }
 
@@ -162,6 +159,7 @@ namespace Assignment
             double newAddOnAmt = calculateNewAddOnAmt(bookingId);
             updateBookingRecord(bookingId, rental, newAddOnAmt);
             BindAddOns();
+            BindAllAddOns();
         }
 
         private void BindAllAddOns()
@@ -172,7 +170,11 @@ namespace Assignment
 
             if (addOns.Rows.Count == 0)
             {
-                hdnExtraAddOnCheck.Value = "false";
+                btnAddOn.Visible = false;
+            }
+            else
+            {
+                btnAddOn.Visible = true;
             }
 
             rptAddOns.DataSource = addOns;
@@ -277,7 +279,7 @@ namespace Assignment
             double newAddOnAmt = calculateNewAddOnAmt(bookingId);
             updateBookingRecord(bookingId, rental, newAddOnAmt);
             BindAddOns();
-
+            BindAllAddOns();
         }
 
         protected void modalYesBtn_Click(object sender, EventArgs e)

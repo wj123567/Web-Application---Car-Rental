@@ -29,13 +29,13 @@
                
               
         </div>
-      
+            
 
         <asp:UpdatePanel ID="updatebookingRecordTable" class="bookingRecordTablePanel" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="table-responsive">
     <table class="table align-middle mb-0 booking_record_table datatable" id="bookingRecordTable">
-        <thead class="bg-secondary" style=" line-height:2;">
+        <thead class="bg-secondary" style=" line-height:2;text-align:center">
           <tr class="header_row_title" >
 
               
@@ -46,12 +46,18 @@
                 </asp:LinkButton>
                 
             </th>
+                            <th class="booking_dropoff">
+    <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Dropoff_point" CssClass="text-dark sort-button">
+    Booking Date<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+    </asp:LinkButton>
+</th>     
              <th class="booking_status">
                  <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark sort-button">
-                 Status 
+                 Status <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
                  <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
              </th>
+   
             <th class="booking_vehicle">
                 <asp:LinkButton ID="btnSortVehicle" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark sort-button">
                 Vehicle Plate No. 
@@ -59,7 +65,7 @@
             </th>
             <th class="booking_pickup">
                 <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Pickup_point" CssClass="text-dark  sort-button">
-                Pick Up Location <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                Pick Up & Drop Off Location <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>            
              <th class="booking_pickup">
@@ -67,12 +73,7 @@
                 Pick Up Time <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>
-
-            <th class="booking_dropoff">
-                <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Dropoff_point" CssClass="text-dark sort-button">
-                Drop Off Location<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-                </asp:LinkButton>
-            </th>            
+           
              <th class="booking_dropoff">
                 <asp:LinkButton ID="btnSortDropOffTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EndDate" CssClass="text-dark sort-button">
                 Drop Off Time<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
@@ -80,62 +81,61 @@
             </th>
             <th class="booking_price">
                 <asp:LinkButton ID="btnSortPrice" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Price" CssClass="text-dark  sort-button">
-                Price<i class="sort-icon ri-arrow-up-s-fill" style="margin-right:10px"></i>
+                Price(MYR)<i class="sort-icon ri-arrow-up-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>
              <th class="booking_edit" style="width:5%;"></th>
           </tr>
         </thead>
-        <tbody id="bookingtable_record">
+        <tbody id="bookingtable_record" style="text-align:center">
 
     <asp:Repeater ID="rptBookingList" runat="server" >
     <ItemTemplate>
-          <tr class="rows1">
-        <td>
-          <div class=" align-items-center">    
-            <div class="ms-1">
-                <asp:HiddenField ID="hdnBookingId" runat="server" />
-              <p class="fw-bold mb-1"><%# Eval("Id") %></p>
-            </div>
-          </div>
-        </td>
-      
-           <td>         
-               <span class="status_icon badge <%# GetBadgeClass(Eval("Status").ToString()) %> rounded-pill d-inline">
-                   <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
-                   
-               </span>
-          </td>
-      
-        <td class="carplate_data">
-        <p class="fw-normal mb-1"><%# Eval("CarPlate") %></p>
-        </td>
+        <tr class="rows1">
+            <td>
+                <div class=" align-items-center">
+                    <div class="ms-1">
+                        <asp:HiddenField ID="hdnBookingId" runat="server" />
+                        <p class="fw-bold mb-1"><%# Eval("Id") %></p>
+                    </div>
+                </div>
+            </td>
 
-        <td>
-          <p class="fw-normal mb-1"><%# Eval("Pickup_point") %></p>
+            <td>
+                <p class="fw-normal mb-1"><%# Eval("BookingDate", "{0:dd-MMM-yyyy}") %></p>
+            </td>
+            <td>
+                <span class="status_icon badge <%# GetBadgeClass(Eval("Status").ToString()) %> rounded-pill d-inline">
+                    <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
 
-        </td>
+                </span>
+            </td>
 
-        <td>
-          <p class="text-muted mb-0"><%# Eval("StartDate") %></p>
-        </td>
+            <td class="carplate_data">
+                <p class="fw-normal mb-1"><%# Eval("CarPlate") %></p>
+            </td>
 
-        <td>
-            <p class="fw-normal mb-1"><%# Eval("Dropoff_point") %></p>
-        </td>
-        
-        <td>
-              <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
-        </td>
+            <td>
+                <p class="fw-normal mb-1"><%# Eval("Pickup_point") %></p>
 
-        <td class="price_data">
-              <p class="fw-normal mb-1"><%# Eval("FinalPrice") %></p>
-        </td>
-         
-        <td>
-              <asp:Button ID="btnView" runat="server" CSSclass="edit_btn_style" Text="View" OnClick="btnView_Click"  CommandArgument='<%# Eval("Id") %>'/>
-        </td>
-      </tr>
+            </td>
+
+            <td>
+                <p class="text-muted mb-0"><%# Eval("StartDate","{0:dd-MMM-yyyy hh:mm tt}") %></p>
+            </td>
+
+            <td>
+                <p class="text-muted mb-0"><%# Eval("EndDate","{0:dd-MMM-yyyy hh:mm tt}") %></p>
+            </td>
+
+            <td class="price_data">
+                <p class="fw-normal mb-1"><%# Eval("FinalPrice") %></p>
+            </td>
+
+            <td>
+                <asp:Button ID="btnView" runat="server" CssClass="edit_btn_style" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>' />
+            </td>
+        </tr>
       </ItemTemplate>
      </asp:Repeater>  
            

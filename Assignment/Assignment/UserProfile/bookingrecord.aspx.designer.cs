@@ -60,6 +60,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.LinkButton btnSortID;
 
         /// <summary>
+        /// btnSortDropOffLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortDropOffLocation;
+
+        /// <summary>
         /// btnSortStatus control.
         /// </summary>
         /// <remarks>
@@ -103,15 +112,6 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSortPickUpTime;
-
-        /// <summary>
-        /// btnSortDropOffLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortDropOffLocation;
 
         /// <summary>
         /// btnSortDropOffTime control.

@@ -218,11 +218,14 @@
                                   </td>
                                   
                               </tr>
-
+                           
                          </ItemTemplate>
-
-                               <FooterTemplate>
-                                  </table>
+                          <FooterTemplate>
+                              </table>
+                          </FooterTemplate>
+                          </asp:Repeater>  
+                               
+                                  
                              <div class="container mt-2">
                                  <div class="row">
                                      <asp:Button ID="btnAddOn" runat="server" Text="Go for Extra Add On"  CssClass="btn btn-success" OnClick="btnAddOn_Click"/>
@@ -234,9 +237,9 @@
 
                             
                          
-                             </FooterTemplate>
+                            
 
-                        </asp:Repeater>  
+                        
                              
                       
                   </div>

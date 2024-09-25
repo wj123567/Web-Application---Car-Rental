@@ -14,19 +14,21 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack) { 
-                GetBookRecords();
+            if (!Page.IsPostBack) {
+                string userId = Session["Id"].ToString();
+
+                GetBookRecords("All",userId);
             }
   
         }
 
-        private void GetBookRecords(string statusFilter = "All")
+        private void GetBookRecords(string statusFilter, string userId)
         {
             
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string sql = "SELECT * FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate ";
+                string sql = "SELECT * FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate WHERE UserId = @UserId ";
 
 
                 // Apply status filter if necessary
@@ -36,7 +38,16 @@ namespace Assignment
                 }
 
                 SqlCommand cmd = new SqlCommand(sql, con);
-
+                if (Session["Id"].ToString() != null)
+                {
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+                }
+                else
+                {
+                    Response.Redirect("../Home.aspx");
+                }
+                
+                
                 if (statusFilter != "All")
                 {
                     cmd.Parameters.AddWithValue("@Status", statusFilter);
@@ -53,18 +64,21 @@ namespace Assignment
                     }
                
             }
-            int totalRow = getTotalRow();
+            int totalRow = getTotalRow(userId);
             lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
         }
 
-        protected int getTotalRow()
+        protected int getTotalRow(string userId)
         {
-            string selectAll = "SELECT COUNT(*) FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate";
+            string countRowSql = "SELECT COUNT(*) FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate WHERE UserId = @UserId";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            SqlCommand com = new SqlCommand(selectAll, con);
             con.Open();
-            return (int)com.ExecuteScalar();
-
+            SqlCommand com = new SqlCommand(countRowSql, con);
+            com.Parameters.AddWithValue("@UserId", userId);
+            int totalRow = (int)com.ExecuteScalar();
+            con.Close();
+            return totalRow;
+            
         }
 
         protected string GetBadgeClass(string status)
@@ -72,13 +86,13 @@ namespace Assignment
             switch (status)
             {
                 case "Pending":
-                    return "bg-primary";
+                    return "bg-warning";
                 case "Booked":
                     return "bg-success";
                 case "Cancelled":
                     return "bg-danger";
                 case "Completed":
-                    return "bg-warning";
+                    return "bg-primary";
                 default:
                     return "bg-default"; // Or any default class
             }
@@ -140,8 +154,9 @@ namespace Assignment
 
         protected void ddlStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string userId = Session["UserId"].ToString();
             string selectedStatus = ddlStatusFilter.SelectedValue;
-            GetBookRecords(selectedStatus);
+            GetBookRecords(selectedStatus,userId);
         }
 
         protected void sortReview(object sender, EventArgs e)

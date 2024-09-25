@@ -118,14 +118,19 @@
                           <table class="booking_car_table">
 
                               <tr class="booking_car_table_header">
-                                  <th colspan="5">
-                                      CAR RENTAL INFO
+                                  <th colspan="5">CAR RENTAL INFO
                                   </th>
                               </tr>
-   
                               <tr class="booking_car_table_info">
-                                  <th style="width:30%">Plate Number:</th>
-                                  <td style="width:70%">
+                                  <th class="text-primary" style="width: 30%;" >Booking Date</th>
+                                  <td class="text-primary" style="width: 70%;" >
+                                      <asp:Label ID="lblBookingDate" runat="server" Text="Label"></asp:Label>
+
+                                  </td>
+                              </tr>
+                              <tr class="booking_car_table_info">
+                                  <th style="width: 30%">Plate Number:</th>
+                                  <td style="width: 70%">
                                       <asp:Label ID="lblPlateNum" runat="server" Text="Label"></asp:Label>
 
                                   </td>
@@ -234,36 +239,37 @@
 
             </div>
 
-  <div class="card border-secondary" > 
-     <div class="container">
-         <div class="row">
-         <div class="col ms-3 me-3 payment_block">
-                     <h5 class="card-title">Payment Detail</h5>
-     <p>
-  <span class=" badge bg-success">Paid</span>
-</p>
-  <p class="mb-0 ">
-     Cardholder:
+                <div class="card border-secondary">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col ms-3 me-3 payment_block">
+                                <h5 class="card-title">Payment Detail</h5>
+                                <p>
+                                    <span class=" badge bg-success">Paid</span>
+                                </p>
+                                <p class="mb-0 ">
+                                    Cardholder:
        <asp:Label ID="lblCardHolderName" runat="server" Text="Label"></asp:Label>
-   </p>
-<p class="mb-0 ">
-  Ending with 
+                                </p>
+                                <p class="mb-0 ">
+                                    Ending with 
     <asp:Label ID="lblCardNumberEnd" runat="server" Text="Label"></asp:Label>
-</p>
-<p class="mb-0">
-    Expires in <asp:Label ID="lblCardExpire" runat="server" Text="Label"></asp:Label>
-</p>
-         </div>
-         <div class="col">
-                  <h5 class="card-title">Booking Status</h5>
-<p>
-   <asp:Label ID="lblBookStatus" CssClass="badge"  runat="server" Text="Label"></asp:Label>
-</p>
-         </div>
-             </div>
-     </div>
+                                </p>
+                                <p class="mb-0">
+                                    Expires in
+                                    <asp:Label ID="lblCardExpire" runat="server" Text="Label"></asp:Label>
+                                </p>
+                            </div>
+                            <div class="col">
+                                <h5 class="card-title">Booking Status</h5>
+                                <p>
+                                    <asp:Label ID="lblBookStatus" CssClass="badge" runat="server" Text="Label"></asp:Label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
 
-  </div>
+                </div>
 
 
 

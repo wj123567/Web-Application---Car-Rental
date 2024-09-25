@@ -34,8 +34,8 @@ small {
 
 .chkApplyCard {
     margin-top: 20px;
-    
 }
+
 
 .chkboxApply{
     padding-right:10px;
@@ -43,7 +43,7 @@ small {
 
 .chkboxApply input[type="checkbox"]{
     transform: scale(1.5);
-    
+   
 }
 
 
