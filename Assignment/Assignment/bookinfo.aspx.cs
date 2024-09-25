@@ -48,11 +48,13 @@ namespace Assignment
             string totalPrice = Session["TotalPrice"] as string ?? "0.00";
             string totalAddOn = Session["TotalAddOn"] as string ?? "0.00";
             string carRental = Session["CarRental"].ToString();
-            
+
+            string discount = Session["Discount"] as string ?? "0.00";
             
 
             lblTotalDayRent.Text = totalDayRent;
             lblAddOnPrice.Text = totalAddOn;
+            lblDiscount.Text = discount;
             lblCarRental.Text = carRental;
             lblstickyCarModel.Text = carName;
             lblTotalPrice.Text = totalPrice;

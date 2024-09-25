@@ -329,8 +329,6 @@
                               <h5 class="card-title mb-3">Voucher Details</h5>
                               <p><strong>Name:</strong> <asp:Label ID="lblVoucherName" runat="server" /></p>
                               <p><strong>Description:</strong> <asp:Label ID="lblVoucherDescription" runat="server" /></p>
-                              <asp:Button ID="btnApplyVoucher" runat="server" Text="Apply Voucher" 
-                                        CssClass="btn btn-primary" OnClick="btnApplyVoucher_Click" />
                           </div>
                       </div>
                   </ContentTemplate>
@@ -397,11 +395,20 @@
                     </div>
 
                     <hr />
+
+                    <div class="charge_item">
+                        <p class="summary_title">Discount</p>
+                        <asp:Label ID="lblDiscount" runat="server" CssClass="summary_amt summary_Discount" Text="0.00"></asp:Label>
+                        <asp:HiddenField ID="hdnFinalDiscount" runat="server" />
+                    </div>
+
+                    <hr />
                     <div class="charge_item">
                     <p class="summary_title">Rental</p>
                     <p class ="summary_amt">0.00</p>
                     </div>
                     <hr />
+
                    
                     <div class="charge_item summary_total">
                     <p class="summary_title">Total (MYR):</p>
@@ -466,10 +473,16 @@
                 // Update the total in the summary_add_on element
                 document.querySelector('.summary_add_on').textContent = total.toFixed(2);
 
+                // Calculate Discount
+                let discount = calculateDiscount(total);
+                // Update hidden field with the final discount value
+                document.querySelector('#<%= hdnFinalDiscount.ClientID %>').value = discount.toFixed(2);
+                document.querySelector('.summary_Discount').textContent = discount.toFixed(2); // Update discount display
+
                 // Static rental amount
                 const rentalAmount = parseFloat(document.querySelector('.rental_amt').textContent);
                 // Calculate the grand total
-                const grandTotal = rentalAmount + total;
+                const grandTotal = rentalAmount + total - discount;
                 const grandTotalToFixed = grandTotal.toFixed(2);
 
                 document.getElementById('<%= hdnTotalPrice.ClientID %>').value = grandTotal.toFixed(2);
@@ -500,10 +513,72 @@
                 input.addEventListener('input', updateTotal);       //call the updateTotal every time user change on the quantity(fires everytime input change)
             });
 
+            // Add event listener to voucher dropdown to trigger updateTotal on change
+            const voucherDropdown = document.getElementById('<%= ddlVouchers.ClientID %>');
+            if (voucherDropdown) {
+                voucherDropdown.addEventListener('change', function () {
+                    updateTotal(); // Trigger updateTotal on voucher change
+                });
+            }
+
             // Initial calculation on page load to set initial total value
             updateTotal();
 
+
+            window.updateTotal = updateTotal;
+
+            // Function to attach event listeners
+            function attachEventListeners() {
+                const quantities = document.querySelectorAll('.quantity_input');
+                quantities.forEach(input => {
+                    input.addEventListener('input', updateTotal);
+                });
+
+                const voucherDropdown = document.getElementById('<%= ddlVouchers.ClientID %>');
+                if (voucherDropdown) {
+                    voucherDropdown.addEventListener('change', function () {
+                        /*console.log("Event listener fired for voucher change");*/
+                        updateTotal(); // Trigger updateTotal on voucher change
+                    });
+                } else {
+                    /*console.error("Voucher dropdown not found!");*/
+                }
+            }
+
+            // Attach event listeners on initial load
+            attachEventListeners();
+
+            // Handle partial postbacks (if using UpdatePanel)
+            Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function () {
+                /*console.log("Postback complete, re-attaching event listeners.");*/
+                attachEventListeners();
+            });
+
         });
+
+        function calculateDiscount(total) {
+            const rentalPrice = parseFloat(document.querySelector('.rental_amt').textContent) || 0; // Ensure rental price is a number
+            const addOnPrice = total; // Total calculated from add-ons
+            const voucherId = document.getElementById('<%= ddlVouchers.ClientID %>').value.trim(); // Get selected voucher ID
+
+            let discount = 0;
+
+            if (!voucherId || voucherId === "0") {
+                return discount;
+            }
+
+            if (voucherId === "1") {
+                discount = (rentalPrice + addOnPrice) * 0.10; // 10% discount
+            } else if (voucherId === "2") {
+                discount = (rentalPrice + addOnPrice) * 0.20; // 20% discount
+            } else {
+                discount = (rentalPrice + addOnPrice) * 0.30; // 30% discount for all other vouchers
+            }
+
+            return discount;
+        }
+
+
 
         
         function updateProgressBar(step) {
@@ -578,6 +653,9 @@
                 }
             });
         }
+
+        
+
 
     </script>
 </asp:Content>

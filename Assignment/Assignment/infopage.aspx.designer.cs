@@ -204,15 +204,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblVoucherDescription;
 
         /// <summary>
-        /// btnApplyVoucher control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnApplyVoucher;
-
-        /// <summary>
         /// lblTotalDayRent control.
         /// </summary>
         /// <remarks>
@@ -247,6 +238,24 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnTotalAddOn;
+
+        /// <summary>
+        /// lblDiscount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDiscount;
+
+        /// <summary>
+        /// hdnFinalDiscount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnFinalDiscount;
 
         /// <summary>
         /// lblTotalPrice control.

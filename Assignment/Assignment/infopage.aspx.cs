@@ -248,9 +248,19 @@ namespace Assignment
             Session["TotalPrice"] = hdnTotalPrice.Value;
             Session["TotalAddOn"] = hdnTotalAddOn.Value;
 
+            string finalDiscountString = Request.Form[hdnFinalDiscount.UniqueID];
+
+            if (!string.IsNullOrEmpty(finalDiscountString))
+            {
+                // Store the discount in session
+                Session["Discount"] = finalDiscountString;
+            }
+
+
             Dictionary<int, int> selectedAddOns = Session["SelectedAddOns"] as Dictionary<int, int>;
-            
-                Response.Redirect("bookInfo.aspx");
+
+
+            Response.Redirect("bookInfo.aspx");
         }
        
         
@@ -407,7 +417,8 @@ namespace Assignment
                 var redeemedVouchers = db.Redemptions
                                         .Where(r => r.UserId == userId &&
                                                     r.IsActive == true &&
-                                                    DbFunctions.TruncateTime(r.RedeemDate) == today)
+                                                    DbFunctions.TruncateTime(r.RedeemDate) == today &&
+                                                    new[] { 1, 2, 3 }.Contains(r.RedeemItemId))
                                         .Select(r => new
                                         {
                                             r.RedeemItem.ItemName,
@@ -428,42 +439,60 @@ namespace Assignment
 
         protected void ddlVouchers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedVoucherId = Convert.ToInt32(ddlVouchers.SelectedValue);
-
-            using (var db = new SystemDatabaseEntities())
+            int selectedVoucherId;
+            
+            if (int.TryParse(ddlVouchers.SelectedValue, out selectedVoucherId) && selectedVoucherId > 0)
             {
-                var voucher = db.RedeemItems.FirstOrDefault(v => v.RedeemItemId == selectedVoucherId);
-
-                if (voucher != null)
+                using (var db = new SystemDatabaseEntities())
                 {
-                    lblVoucherName.Text = voucher.ItemName;
-                    lblVoucherDescription.Text = voucher.ItemDescription;
-                    btnApplyVoucher.CommandArgument = voucher.RedeemItemId.ToString();
+                    var voucher = db.RedeemItems.FirstOrDefault(v => v.RedeemItemId == selectedVoucherId);
 
-                    // Show voucher details section
-                    voucherDetails.Visible = true;
+                    if (voucher != null)
+                    {
+                        lblVoucherName.Text = voucher.ItemName;
+                        lblVoucherDescription.Text = voucher.ItemDescription;
+
+                        voucherDetails.Visible = true;
+
+                        decimal rentalPrice = decimal.Parse(lblCarRental.Text);
+                        decimal addOnPrice = decimal.Parse(lblAddOnPrice.Text);
+                        decimal discount = 0;
+
+                        if (voucher.RedeemItemId == 1)
+                        {
+                            discount = (rentalPrice + addOnPrice) * (10 / 100);
+                        }
+                        else if (voucher.RedeemItemId == 2)
+                        {
+                            discount = (rentalPrice + addOnPrice) * (20 / 100);
+                        }
+                        else
+                        {
+                            discount = (rentalPrice + addOnPrice) * (30 / 100);
+                        }
+
+                        decimal totalPrice = rentalPrice + addOnPrice - discount;
+
+                        lblTotalPrice.Text = totalPrice.ToString("F2");
+                        hdnTotalPrice.Value = totalPrice.ToString();
+                        Debug.WriteLine(hdnTotalPrice.Value);
+
+                        ScriptManager.RegisterStartupScript(this, GetType(), "UpdateTotal", "if (typeof updateTotal === 'function') { updateTotal(); }", true);
+
+                    }
                 }
-                else
-                {
-                    voucherDetails.Visible = false;
-                }
+            }
+            else
+            {
+                voucherDetails.Visible = false;
+                lblVoucherName.Text = "";
+                lblVoucherDescription.Text = "";
+                lblTotalPrice.Text = "";
             }
         }
 
-        protected void btnApplyVoucher_Click(object sender, EventArgs e)
-        {
-            var selectedVoucherId = ddlVouchers.SelectedValue;
-            var bookingId = Session["BookingID"]?.ToString();
-
-            using (var db = new SystemDatabaseEntities())
-            {
-                var voucher = db.RedeemItems.Find(selectedVoucherId);
-                if (voucher != null)
-                {
-                    //asd
-                }
-            }
-        }
+          
+        
     }
 
 }

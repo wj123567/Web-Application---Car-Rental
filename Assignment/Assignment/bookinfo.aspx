@@ -127,6 +127,15 @@
                         <asp:Label ID="lblAddOnPrice" runat="server" CssClass="summary_amt summary_add_on" Text=""></asp:Label>
                         </div>
                         <hr />
+
+                        <div class="charge_item">
+                            <p class="summary_title">Discount</p>
+                            <asp:Label ID="lblDiscount" runat="server" CssClass="summary_amt summary_Discount" Text="0.00"></asp:Label>
+                        </div>
+
+                        <hr />
+
+
                         <div class="charge_item">
                         <p class="summary_title">Rental</p>
                         <p class ="summary_amt">0.00</p>
