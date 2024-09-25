@@ -23,44 +23,52 @@ namespace Assignment
 
             if (!Page.IsPostBack)
             {
-                string prevCar = Request.QueryString["prevCar"];
-                string currentCar = (string)Session["CarPlate"];
-                if (Request.QueryString["prevCar"] != null )
+                if (Session["Id"] != null)
                 {
-                    if (prevCar != currentCar)
+                    string prevCar = Request.QueryString["prevCar"];
+                    string currentCar = (string)Session["CarPlate"];
+                    if (Request.QueryString["prevCar"] != null)
                     {
-                        Session["SelectedAddOns"] = null;
+                        if (prevCar != currentCar)
+                        {
+                            Session["SelectedAddOns"] = null;
+                        }
                     }
-                }
 
-                Session["CurrentStep"] = 2;
-                int currentStep = (int)(Session["CurrentStep"]);
-                UpdateProgressBar(currentStep);
-                if (Session["CarPlate"] != null)
+                    Session["CurrentStep"] = 2;
+                    int currentStep = (int)(Session["CurrentStep"]);
+                    UpdateProgressBar(currentStep);
+                    if (Session["CarPlate"] != null)
+                    {
+
+                        string carPlate = Session["CarPlate"].ToString();
+
+                        // Assuming you have a method to get car details by carPlate
+                        GetCarDetailsByCarPlate(carPlate);
+
+                    }
+
+                    hdnSessionId.Value = Session["Id"] as string ?? string.Empty;
+
+                    BindAddOns();
+
+                    /*    LoadAddOnSelection();*/
+
+                    //you
+
+                    LoadReviewData(currentCar);
+
+                    LoadComments(currentCar);
+
+                    LoadRedeemedVouchers();
+
+                }
+                else
                 {
-
-                    string carPlate = Session["CarPlate"].ToString();
-
-                    // Assuming you have a method to get car details by carPlate
-                    GetCarDetailsByCarPlate(carPlate);
-
+                    Response.Redirect("~/Home.aspx");
                 }
-
-                hdnSessionId.Value = Session["Id"] as string ?? string.Empty;
-
-                BindAddOns();
-
-            /*    LoadAddOnSelection();*/
-
-                //you
-
-                LoadReviewData(currentCar);
-
-                LoadComments(currentCar);      
-                   
             }
-
-            //DataBind();
+                
 
         }
 
@@ -386,6 +394,34 @@ namespace Assignment
                 lvComments.DataBind();
 
             }
+        }
+
+        private void LoadRedeemedVouchers()
+        {
+            var userId = Session["Id"]?.ToString();
+
+            using (var db = new SystemDatabaseEntities())
+            {
+                // Fetch redeemed items for the user
+                var redeemedVouchers = db.Redemptions
+                    .Where(r => r.UserId == userId)
+                    .Select(r => new
+                    {
+                        r.RedeemItem.ItemName,
+                        r.RedeemItem.ItemDescription,
+                        r.RedeemItemId
+                    })
+                    .ToList();
+
+                // Bind the redeemed vouchers to a repeater or other data control
+                rptVouchers.DataSource = redeemedVouchers;
+                rptVouchers.DataBind();
+            }
+        }
+
+        protected void btnApplyVoucher_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

@@ -311,13 +311,21 @@
            
         </div>
             <div class="box_left">
-                Box 2 - Left
-
-            </div>
-
-            <div class="box_left">
-                Box 3 - Left
-
+                <h3>Apply Your Vouchers</h3>
+                <asp:Repeater ID="rptVouchers" runat="server">
+                    <HeaderTemplate>
+                        <ul>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <li>
+                            <strong><%# Eval("ItemName") %></strong> - <%# Eval("ItemDescription") %>
+                            <asp:Button ID="btnApplyVoucher" runat="server" Text="Apply" CommandArgument='<%# Eval("RedeemItemId") %>' OnClick="btnApplyVoucher_Click" />
+                        </li>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </ul>
+                    </FooterTemplate>
+                </asp:Repeater>
             </div>
 
     </div>

@@ -1,47 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="RewardPoint.aspx.cs" Inherits="Assignment.RewardPoint" %>
 <asp:Content ID="rewardPoint" ContentPlaceHolderID="main" runat="server">
-    
-    <div class="RP d-flex flex-wrap">
-        <div class="RP-left" style="flex:1;">
-            <div class="RPHeader">
-                <h2>Welcome to 
-                <br /><span class="RPHeader-1">Reward Point</span>
-                </h2>
-            </div>
-            <div class="RPHeader-Bottom" style="flex: 1;">
-                <p>
-                    Hi, 
-                    
-                <asp:Label ID="lblUsername" runat="server" Text="[Username]"></asp:Label>
-                </p>
-
-                <p class="ex-1">
-                    <asp:Label ID="lblExpiryPoints" runat="server" Text="[Points]" CssClass="ex-2"></asp:Label> Points will be expired at <asp:Label ID="lblExpiryDate" runat="server" Text="[Expriy Date]" CssClass="ex-3"></asp:Label>
-                </p>
-
-                <p>
-                    <asp:Label ID="lblTotalPoints" runat="server" Text="[Total Points]"></asp:Label>
-                </p>
-
-                <asp:Button ID="btnRedeem" runat="server" Text="Reward" CssClass="btn btn-success" OnClick="btnRedeem_Click"/>
-            </div>
-        </div>
-
-        <div class="RP-right";>
-            <div class="right-upperside">
-                <!-- a tag trigger modal -->
-                <a href="#" class="" data-bs-toggle="modal" data-bs-target="#History">Points History</a>
-            </div>
-            
-            <div class="right-lowerside-1">
-                <div class="right-lowerside-2">
-                    <img src="../Image/RewardPoint/bg-5.png" class="RPImage" />
-                </div>
-            </div>
-           
-        </div>
-    </div>
-    
     <!-- Modal -->  
     <div class="modal modal-lg fade" id="History" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable">
@@ -80,5 +38,45 @@
             </div>
         </div>
     </div>
+
+    <div class="RP d-flex flex-wrap">
+        <div class="RP-left" style="flex:1;">
+            <div class="RPHeader">
+                <h2>Welcome to 
+                <br /><span class="RPHeader-1">Reward Point</span>
+                </h2>
+            </div>
+            <div class="RPHeader-Bottom" style="flex: 1;">
+                <p>
+                    Hi, 
+                    
+                <asp:Label ID="lblUsername" runat="server" Text="[Username]"></asp:Label>
+                </p>
+
+                <p class="ex-1">
+                     <asp:Label ID="lblTotalPoints" runat="server" Text="[Total Points]" CssClass="fs-1"></asp:Label> will be expired at <asp:Label ID="lblExpiryDate" runat="server" Text="[Expriy Date]" CssClass="ex-3"></asp:Label>
+                </p>
+
+
+                <asp:Button ID="btnRedeem" runat="server" Text="Reward" CssClass="btn btn-success" OnClick="btnRedeem_Click"/>
+            </div>
+        </div>
+
+        <div class="RP-right";>
+            <div class="right-upperside">
+                <!-- a tag trigger modal -->
+                <a href="#" class="" data-bs-toggle="modal" data-bs-target="#History">Points History</a>
+            </div>
+            
+            <div class="right-lowerside-1">
+                <div class="right-lowerside-2">
+                    <img src="../Image/RewardPoint/bg-5.png" class="RPImage" />
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    
+    
     
 </asp:Content>

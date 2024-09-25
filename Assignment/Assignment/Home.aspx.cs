@@ -37,12 +37,6 @@ namespace Assignment
 
                 PopulateRegionsAndPoints();
 
-                //You - update reward points
-                if (Session["Id"] != null)
-                {
-                    UpdateRewardPoints(Session["Id"].ToString());
-                }
-
                 if (Request.QueryString["Error"] != null)
                 {
                     lblerrortext.Visible = true;
@@ -217,22 +211,6 @@ namespace Assignment
             base.Render(writer);
         }*/
 
-        //You - update points
-        private void UpdateRewardPoints(string userId)
-        {
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))
-            {
-                string sqlUpdateRewardPoints = "Update ApplicationUser Set RewardPoints = (Select ISNULL(SUM(PointsRemaining), 0) From Booking Where UserId = @userid AND PointsStatus = 'active') Where Id = @userid";
-
-                using (SqlCommand cmd = new SqlCommand(sqlUpdateRewardPoints, con))
-                {
-                    cmd.Parameters.AddWithValue("userid", userId);
-
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                }
-                con.Close() ;
-            }
-        }
+        
     }
 }
