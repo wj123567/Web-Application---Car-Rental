@@ -303,22 +303,58 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.HiddenField hdnOriAddOnPrice;
 
         /// <summary>
-        /// lblAddOnAmtUpdateTitle control.
+        /// lblDiscount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddOnAmtUpdateTitle;
+        protected global::System.Web.UI.WebControls.Label lblDiscount;
 
         /// <summary>
-        /// lblAddOnAmtUpdate control.
+        /// lblDiscountAmt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddOnAmtUpdate;
+        protected global::System.Web.UI.WebControls.Label lblDiscountAmt;
+
+        /// <summary>
+        /// lblInitialAmt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblInitialAmt;
+
+        /// <summary>
+        /// lblAfterUpdateAmt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAfterUpdateAmt;
+
+        /// <summary>
+        /// lblPriceFinalOutcome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPriceFinalOutcome;
+
+        /// <summary>
+        /// lblPriceFinalOutcomeAmt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPriceFinalOutcomeAmt;
 
         /// <summary>
         /// lblCardHolderName control.

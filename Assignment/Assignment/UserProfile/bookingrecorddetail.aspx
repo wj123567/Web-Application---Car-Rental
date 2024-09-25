@@ -213,24 +213,25 @@
                     <!-- list -->
                     <ul class="list-unstyled mb-0">
                       <li class="d-flex justify-content-between mb-2">
-                        <asp:Label ID="lblAddOnAmtUpdateTitle" runat="server" Text=""  Visible="false"></asp:Label>
-                        <asp:Label ID="lblAddOnAmtUpdate" runat="server" Text="0.00" Visible="false" ></asp:Label>
+                        <asp:Label ID="lblDiscount" runat="server" CssClass="text-danger" Text="Discount" ></asp:Label>
+                        <asp:Label ID="lblDiscountAmt" runat="server" Text="0.00" ></asp:Label>
                       </li>
-                      <li class="d-flex justify-content-between mb-2">
-                        <span>Shipping</span>
-                        <span class="text-dark fw-medium">0.00</span>
+                        <li class="border-top my-2"></li>
+                        <li class="d-flex justify-content-between mb-2">
+                            <span>i. Initial Payment Amount</span>
+                            <asp:Label ID="lblInitialAmt" runat="server" CssClass="text-dark fw-medium" Text="Label"></asp:Label>
+                            
+                        </li>
+                        <li class="d-flex justify-content-between mb-2">
+                            <span>ii. Post-update Charges Amount</span>
+                            <asp:Label ID="lblAfterUpdateAmt" runat="server" CssClass="text-dark fw-medium" Text="Label"></asp:Label>
                       </li>
-                      <li class="d-flex justify-content-between mb-2">
-                        <span>Discount</span>
-                        <span class="text-dark fw-medium">0.00</span>
-                      </li>
-                      <li class="d-flex justify-content-between mb-2">
-                        <span>Tax</span>
-                        <span class="text-dark fw-medium">0.00</span>
-                      </li>
+                      
                       <li class="border-top my-2"></li>
                       <li class="d-flex justify-content-between mb-2">
-                        <span class="fw-medium text-dark">Grand Total(RM)</span>
+                       
+                          <asp:Label ID="lblPriceFinalOutcome" runat="server" CssClass="fw-medium text-dark" Text="Grand Total(ii - i)"></asp:Label>
+                          <asp:Label ID="lblPriceFinalOutcomeAmt" runat="server" Text="Label"></asp:Label>
                         <span class="fw-medium text-dark">128.00</span>
                       </li>
                     </ul>

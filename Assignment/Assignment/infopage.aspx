@@ -346,7 +346,7 @@
 
                     <tr >
                         <td></td>
-                        <td class="timeline StartDateSes"><%= DateTime.Parse(Session["StartDate"].ToString()) %></td>
+                        <td class="timeline StartDateSes"><%= DateTime.Parse(Session["StartDate"].ToString()).ToString("dd-MMM-yyyy hh:mm tt") %></td>
                     </tr>
                     <tr>
                         <td><i class="ri-circle-line" style="color:green"> </i></td>
@@ -360,7 +360,7 @@
                
                     <tr>
                         <td></td>
-                        <td class="timeline StartDateSes" ><%=DateTime.Parse(Session["EndDate"].ToString()) %></td>
+                        <td class="timeline StartDateSes" ><%=DateTime.Parse(Session["EndDate"].ToString()).ToString("dd-MMM-yyyy hh:mm tt") %></td>
                     </tr>
                     <tr>
                         <td><i class="ri-map-pin-2-line" style="color:red"></i></td>

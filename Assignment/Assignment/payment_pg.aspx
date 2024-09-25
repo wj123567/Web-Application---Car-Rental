@@ -33,7 +33,7 @@
 </div>
 
 
-    <asp:Label ID="lblCheck" runat="server" Text="Label"></asp:Label>
+
      <div class="container-fluid">
  <div class="row justify-content-center">
   <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
@@ -195,7 +195,7 @@
 
        <tr >
     <td></td>
-    <td class="timeline StartDateSes"><%= DateTime.Parse(Session["StartDate"].ToString()) %></td>
+    <td class="timeline StartDateSes"><%= DateTime.Parse(Session["StartDate"].ToString()).ToString("dd-MMM-yyyy hh:mm tt") %></td>
        </tr>
        <tr>
            <td><i class="ri-circle-line" style="color:green"> </i></td>
@@ -209,7 +209,7 @@
                   
        <tr>
            <td></td>
-           <td class="timeline StartDateSes" ><%=DateTime.Parse(Session["EndDate"].ToString()) %></td>
+           <td class="timeline StartDateSes" ><%=DateTime.Parse(Session["EndDate"].ToString()).ToString("dd-MMM-yyyy hh:mm tt") %></td>
        </tr>
        <tr>
            <td><i class="ri-map-pin-2-line" style="color:red"></i></td>
@@ -300,8 +300,7 @@
                 txtExpiry.disabled = true;
                 lblCvv.style.display = 'none';
                 txtCvv.style.display = 'none';         
-                hdnCardCheck.value = "";
-                lblCheck.innerText = hdnCardCheck.value;
+                hdnCardCheck.value = "";    
                 
             } else {
                 accordion.style.display = 'none';   // Hide accordion
@@ -315,7 +314,6 @@
                 txtCvv.style.display = 'block';
                 txtCvv.value = "";              
                 hdnCardCheck.value = "NewAdded";
-                lblCheck.innerText = hdnCardCheck.value;
             }
         }
 

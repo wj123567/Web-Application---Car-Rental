@@ -47,7 +47,7 @@
                 
             </th>
                             <th class="booking_dropoff">
-    <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Dropoff_point" CssClass="text-dark sort-button">
+    <asp:LinkButton ID="btnSortBookingDate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="BookingDate" CssClass="text-dark sort-button">
     Booking Date<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
     </asp:LinkButton>
 </th>     
@@ -69,7 +69,7 @@
                 </asp:LinkButton>
             </th>            
              <th class="booking_pickup">
-                <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="StartDate" CssClass="text-dark  sort-button">
+                <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="StartDate" CssClass="text-dark sort-button">
                 Pick Up Time <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>
@@ -102,7 +102,7 @@
             </td>
 
             <td>
-                <p class="fw-normal mb-1"><%# Eval("BookingDate", "{0:dd-MMM-yyyy}") %></p>
+                <p class="fw-normal mb-1"><%# Eval("BookingDate", "{0:dd-MMM-yyyy hh:mm tt}") %></p>
             </td>
             <td>
                 <span class="status_icon badge <%# GetBadgeClass(Eval("Status").ToString()) %> rounded-pill d-inline">
