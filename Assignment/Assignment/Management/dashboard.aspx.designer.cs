@@ -24,24 +24,6 @@ namespace Assignment.Management
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// ddlTimeFilter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTimeFilter;
-
-        /// <summary>
-        /// lblCheck control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCheck;
-
-        /// <summary>
         /// hdnTimeFilter control.
         /// </summary>
         /// <remarks>
@@ -76,6 +58,24 @@ namespace Assignment.Management
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnProcessBookRecord;
+
+        /// <summary>
+        /// ddlTimeFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTimeFilter;
+
+        /// <summary>
+        /// lblCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCheck;
 
         /// <summary>
         /// UpdatePanel2 control.
@@ -114,24 +114,6 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Label Label3;
 
         /// <summary>
-        /// ddlTimeFilter_cust control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTimeFilter_cust;
-
-        /// <summary>
-        /// lblChecking control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblChecking;
-
-        /// <summary>
         /// hdnTimeFilter_cust control.
         /// </summary>
         /// <remarks>
@@ -139,15 +121,6 @@ namespace Assignment.Management
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnTimeFilter_cust;
-
-        /// <summary>
-        /// lblStartDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStartDate;
 
         /// <summary>
         /// txtStartDate_cust control.
@@ -159,15 +132,6 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.TextBox txtStartDate_cust;
 
         /// <summary>
-        /// lblEndDate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEndDate;
-
-        /// <summary>
         /// txtEndDate_cust control.
         /// </summary>
         /// <remarks>
@@ -175,42 +139,6 @@ namespace Assignment.Management
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEndDate_cust;
-
-        /// <summary>
-        /// lblQuarter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQuarter;
-
-        /// <summary>
-        /// ddlQuarterFilter_cust control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlQuarterFilter_cust;
-
-        /// <summary>
-        /// hdnQuarterFilter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnQuarterFilter;
-
-        /// <summary>
-        /// rqQuarterFilter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqQuarterFilter;
 
         /// <summary>
         /// btnCustRecord control.
