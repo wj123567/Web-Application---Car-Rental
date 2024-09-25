@@ -30,12 +30,12 @@
         </div>
     </div>
 
-        <div class="modal modal-lg animate__animated animate__slideInLeft animate__faster" id="userBookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userBookingModal" aria-hidden="true">
+        <div class="modal modal-lg fade" id="userBookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userBookingModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-dark" id="staticBookingLabel">Booking Record</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="autoscroll()"></button>
                 </div>
                 <div class="modal-body">
                     <div class="card-body row">
@@ -56,12 +56,8 @@
                                                 </div>
 
                                                 <asp:Label ID="lblDriverName" runat="server" Text='<%# (Eval("DriverGender").ToString() == "M" ? "Mr. " : "Ms. ") + Eval("DriverName").ToString()%>' CssClass="d-block" />
-                                                <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Pick Up Point: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-inline" />
-                                                <asp:Label ID="lblPickupTime" runat="server" Text='<%# "(" + Eval("StartDate") +")"%>' CssClass="text-xs text-muted d-inline" />
-                                                <br />
-                                                <asp:Label ID="lblDriverBdate" runat="server" Text='<%# "Drop Off Point: " + Eval("Dropoff_point") %>' CssClass="text-xs text-muted d-inline" />
-                                                <asp:Label ID="lblEndTime" runat="server" Text='<%# "(" + Eval("EndDate") +")"%>' CssClass="text-xs text-muted d-inline" />
-                                                <br />
+                                                <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Location: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-block" />
+                                                <asp:Label ID="lblPickupTime" runat="server" Text='<%# "Time: (" + Eval("StartDate") +")" + " - (" + Eval("EndDate") +")"%>' CssClass="text-xs text-muted d-block" />
                                             </div>
                                         </div>
                                         <div>
@@ -580,6 +576,10 @@
             e.target.value = (value || value === 0)
                 ? localStringToNumber(value).toLocaleString(undefined, options)
                 : ''
+        }
+
+        function autoscroll() {
+            window.scrollTo(0, document.body.scrollHeight);
         }
 
     </script>

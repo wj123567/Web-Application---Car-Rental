@@ -301,9 +301,19 @@ namespace Assignment
             com.Parameters.AddWithValue("@CarPlate", carPlate);
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();
-            da.Fill(ds, "CarTable");
-            rptBookingRec.DataSource = ds.Tables["CarTable"];
-            rptBookingRec.DataBind();
+            da.Fill(ds, "BookingData");
+            if (ds.Tables["BookingData"].Rows.Count == 0)
+            {
+                rptBookingRec.DataSource = ds.Tables["BookingData"];
+                rptBookingRec.DataBind();
+                lblNoBooking.Text = "No Booking Record";
+            }
+            else
+            {
+                lblNoBooking.Text = "";
+                rptBookingRec.DataSource = ds.Tables["BookingData"];
+                rptBookingRec.DataBind();
+            }
             con.Close();
         }
 
@@ -704,16 +714,16 @@ namespace Assignment
             if(days <= 1)
             {
                 lblStatus.CssClass = "badge bg-danger text-light";
-                lblStatus.Text = "Urgent";
+                lblStatus.Text = "Urgent ("+days+" day left)";
             }else if (days >= 2 && days <= 5)
             {
                 lblStatus.CssClass = "badge bg-warning text-dark";
-                lblStatus.Text = "Be Ready";
+                lblStatus.Text = "Be Ready (" + days + " days left)";
             }
             else if(days >= 6)
             {
                 lblStatus.CssClass = "badge bg-primary text-light";
-                lblStatus.Text = "Still Long";
+                lblStatus.Text = "Chill (" + days + " days left)";
             }
         }
     }

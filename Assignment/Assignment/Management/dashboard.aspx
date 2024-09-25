@@ -125,16 +125,12 @@
             </div>
         </div>
         <!-- WZ Demo 1 Start-->
-        <div class="row">
+        <div class="row mt-2 mx-1" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
 
             <div class="card flex-fill w-100">
-                <div class="card-header">
-
-                    <h5 class="card-title mb-0">Summary Report On Car Booking(Rented)</h5>
-                </div>
-
-                <div class="card mb-3">
                     <div class="card-body p-3">
+                        <h5 class="card-title mb-0">Summary Report On Car Booking(Rented)</h5>
+                        <hr />
                         <div class="container">
                             <div class="row">
                                 <div class="col col-md-4">
@@ -215,20 +211,14 @@
                         </asp:UpdatePanel>
                     </div>
                 </div>
-            </div>
         </div>
         <!-- WZ Demo 1 End-->
         <!-- WZ Demo 2 Start-->
-        <div class="row">
+        <div class="row my-2 mx-1" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
             <div class="card flex-fill w-100">
-                <div class="card-header">
-
-                    <h5 class="card-title mb-0">Exception Report on Car Rental Amount Made by Customers</h5>
-
-                </div>
-
-                <div class="card mb-3">
                     <div class="card-body p-3">
+                        <h5 class="card-title mb-0">Exception Report on Car Rental Amount Made by Customers</h5>
+                        <hr />
                         <div class="container">
                             <div class="row">
 
@@ -282,7 +272,8 @@
                         <div class="chart">
                             <asp:UpdatePanel ID="updateTopCust" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
                                 <ContentTemplate>
-                                    <table class="table table-border table-responsive table-hover table-striped">
+                                    <div class="table-responsive">
+                                    <table class="table table-border table-hover table-striped">
                                         <thead>
                                             <tr>
                                                 <th style="text-align: center" colspan="4">
@@ -337,6 +328,7 @@
                                             </asp:PlaceHolder>
                                         </tbody>
                                     </table>
+                                        </div>
                                 </ContentTemplate>
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="btnCustRecord" EventName="Click" />
@@ -346,48 +338,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
         <!-- WZ Demo 2 End-->
-
-
-        <div class="row" style="margin-bottom: 20px">
-            <div class="col-sm-6 col-md-8 col-xl-6 d-flex order-2">
-                <div class="card flex-fill w-100">
-                    <div class="card-header">
-
-                        <h5 class="card-title mb-0">Recent Bookings</h5>
-                    </div>
-                    <div class="card-body d-flex w-100">
-                        <div class="align-self-center chart chart-lg" style="width: 80%; margin: 0 auto;">
-                            <%--<img style="width:100%" src="../Image/Dashboard/booking.png" />--%>
-                            <div class="card mb-3">
-                                <div class="card-body p-3">
-                                    <div class="chart">
-                                        <canvas id="bar-chart" class="chart-canvas" height="300"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-md-4 col-xl-3 d-flex order-1 order-xxl-1">
-                <div class="card flex-fill">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Calendar</h5>
-                    </div>
-                    <div class="card-body d-flex">
-                        <div class="align-self-center w-100">
-                            <div class="chart">
-                                <div id="datetimepicker-dashboard"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row">
             <!-- Top Renting -->

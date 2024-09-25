@@ -32,13 +32,10 @@ namespace Assignment
         protected void retrievedAllData() {
             string pickupPoint = Session["Pickup_point"].ToString();
             DateTime startDate = DateTime.Parse(Session["StartDate"].ToString());
-            DateTime endDate = DateTime.Parse(Session["EndDate"].ToString());
-            addDdlDFLocation();
+            DateTime endDate = DateTime.Parse(Session["EndDate"].ToString());            
             addDdlPULocation();
             ddlPULocation.SelectedValue = pickupPoint;
-            ddlDFLocation.SelectedValue = Session["Dropoff_point"].ToString();
             ddlPUState.SelectedValue = Session["Pickup_state"].ToString();
-            ddlDFState.SelectedValue = Session["Dropoff_state"].ToString();
             hdnStart.Text = startDate.ToString("dd-MM-yyyy HH:mm");
             hdnEnd.Text = endDate.ToString("dd-MM-yyyy HH:mm");
             string findCar = @"SELECT C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, AVG(R.Rating) as AVG 
@@ -175,10 +172,10 @@ namespace Assignment
                     productRepeater.DataSource = ds;
                     productRepeater.DataBind();
                     Session["Pickup_point"] = ddlPULocation.SelectedValue;
-                    Session["Dropoff_point"] = ddlDFLocation.SelectedValue;
+                    Session["Dropoff_point"] = ddlPULocation.SelectedValue;
                     Session["StartDate"] = hdnStart.Text;
                     Session["EndDate"] = hdnEnd.Text;
-                    Session["Dropoff_state"] = ddlDFState.SelectedValue;
+                    Session["Dropoff_state"] = ddlPULocation.SelectedValue;
                     Session["Pickup_state"] = ddlPUState.SelectedValue;
             con.Close();
         }
@@ -232,11 +229,6 @@ namespace Assignment
             ddlPULocation.Items.Insert(0, new ListItem("Select Location", "0"));
         }
 
-        protected void ddlDFLocation_DataBound(object sender, EventArgs e)
-        {
-            ddlDFLocation.Items.Insert(0, new ListItem("Select Location", "0"));
-        }
-
         protected void productRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             Label lblCarPrice = (Label)e.Item.FindControl("lblCarPrice");
@@ -259,23 +251,6 @@ namespace Assignment
             
         }
 
-        protected void ddlDFState_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selectState = "Select * from Location where LocationState = @state";
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            SqlCommand com = new SqlCommand(selectState, con);
-            con.Open();
-            com.Parameters.AddWithValue("@state", ddlDFState.SelectedValue);
-            SqlDataAdapter da = new SqlDataAdapter(com);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "Location");
-            ddlDFLocation.DataSource = ds;
-            ddlDFLocation.DataTextField = "LocationName";
-            ddlDFLocation.DataValueField = "LocationName";
-            ddlDFLocation.DataBind();
-            con.Close();
-            updateLocation.Update();
-        }
 
         protected void ddlPUState_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -309,23 +284,6 @@ namespace Assignment
             ddlPULocation.DataTextField = "LocationName";
             ddlPULocation.DataValueField = "LocationName";
             ddlPULocation.DataBind();
-            con.Close();
-        }
-
-        protected void addDdlDFLocation()
-        {
-            string selectState = "Select * from Location where LocationState = @state";
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            SqlCommand com = new SqlCommand(selectState, con);
-            con.Open();
-            com.Parameters.AddWithValue("@state", Session["Dropoff_state"].ToString());
-            SqlDataAdapter da = new SqlDataAdapter(com);
-            DataSet ds = new DataSet();
-            da.Fill(ds, "Location");
-            ddlDFLocation.DataSource = ds;
-            ddlDFLocation.DataTextField = "LocationName";
-            ddlDFLocation.DataValueField = "LocationName";
-            ddlDFLocation.DataBind();
             con.Close();
         }
 

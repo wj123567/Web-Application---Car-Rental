@@ -179,12 +179,8 @@
                                             </div>
                                             <div>
                                                 <asp:Label ID="lblBookingId" runat="server" Text='<%# Eval("Id") +" (" + Eval("CarPlate") +")"%>' CssClass="d-block" />
-                                                <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Pick Up Point: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-inline" />
-                                                <asp:Label ID="lblPickupTime" runat="server" Text='<%# "(" + Eval("StartDate") +")"%>' CssClass="text-xs text-muted d-inline" />
-                                                <br />
-                                                <asp:Label ID="lblDriverBdate" runat="server" Text='<%# "Drop Off Point: " + Eval("Dropoff_point") %>' CssClass="text-xs text-muted d-inline" />
-                                                <asp:Label ID="lblEndTime" runat="server" Text='<%# "(" + Eval("EndDate") +")"%>' CssClass="text-xs text-muted d-inline" />
-                                                <br />
+                                                <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Location: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-block" />
+                                                <asp:Label ID="lblPickupTime" runat="server" Text='<%# "Time: (" + Eval("StartDate") +")" + " - (" + Eval("EndDate") +")"%>' CssClass="text-xs text-muted d-block" />
                                                 <asp:Label ID="lblBookUpdate" runat="server" CssClass="text-danger small"></asp:Label>
                                                 <asp:Label ID="lblBookReject" runat="server" CssClass="text-danger small"></asp:Label>
                                             </div>

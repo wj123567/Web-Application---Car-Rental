@@ -132,33 +132,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.RequiredFieldValidator requirePULocation;
 
         /// <summary>
-        /// ddlDFState control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDFState;
-
-        /// <summary>
-        /// ddlDFLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDFLocation;
-
-        /// <summary>
-        /// requireDFLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requireDFLocation;
-
-        /// <summary>
         /// hdnStart control.
         /// </summary>
         /// <remarks>

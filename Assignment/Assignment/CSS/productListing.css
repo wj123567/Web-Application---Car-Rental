@@ -2,7 +2,7 @@
     width: 1500px;
 }
 
-.hourselect option:nth-child(-n+8), .hourselect option:nth-child(n+22) {
+.hourselect option:nth-child(-n+8), .hourselect option:nth-child(n+24) {
     display: none;
 }
 
