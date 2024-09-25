@@ -187,26 +187,6 @@ namespace Assignment.Management
             string approvesql = "UPDATE Booking SET Status = 'Completed' WHERE Id = @Id";
             updateAfterBookStatus(approvesql,bookingId);
 
-            //you start
-            if (Session["SelectedVoucherId"] != null && int.TryParse(Session["SelectedVoucherId"].ToString(), out int selectedVoucherId))
-            {
-                using (var db = new SystemDatabaseEntities())
-                {
-                    var sql = @"
-                        UPDATE Redemption
-                        SET IsActive = 1
-                        WHERE RedeemItemId = @selectedVoucherId AND 
-                        RedeemDate = (
-                            SELECT MAX(RedeemDate)
-                            FROM Redemption
-                            WHERE RedeemItemId = @selectedVoucherId
-                        )";
-
-                    db.Database.ExecuteSqlCommand(sql, new SqlParameter("@selectedVoucherId", selectedVoucherId));
-                }
-            }
-            //you end
-
 
             Response.Redirect("BookingManagement.aspx");
             
@@ -432,6 +412,27 @@ namespace Assignment.Management
             string approve = "UPDATE Booking SET Status = 'Cancelled', RejectReason = @RejectReason WHERE Id = @Id";
             string rejectReason = " ";
             updateApproval(approve, rejectReason);
+
+            //you start
+            if (Session["SelectedVoucherId"] != null && int.TryParse(Session["SelectedVoucherId"].ToString(), out int selectedVoucherId))
+            {
+                using (var db = new SystemDatabaseEntities())
+                {
+                    var sql = @"
+                        UPDATE Redemption
+                        SET IsActive = 1
+                        WHERE RedeemItemId = @selectedVoucherId AND 
+                        RedeemDate = (
+                            SELECT MAX(RedeemDate)
+                            FROM Redemption
+                            WHERE RedeemItemId = @selectedVoucherId
+                        )";
+
+                    db.Database.ExecuteSqlCommand(sql, new SqlParameter("@selectedVoucherId", selectedVoucherId));
+                }
+            }
+            //you end
+
             Response.Redirect("BookingManagement.aspx");
         }
 
