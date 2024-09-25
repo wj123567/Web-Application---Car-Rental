@@ -15,6 +15,12 @@
     box-shadow: 5px 0px 18px 0px rgba(105,105,105,0.8);
 }
 
+/*card css*/
+.card {
+    z-index: 0;
+    background-color: #effaf6 !important;
+}
+
 .booking_content_box {
     margin-top: 30px;
     box-sizing: border-box;
@@ -141,6 +147,7 @@
     
 }
 
+
 .booking_edit_btn {
     display: flex;
     align-items: center;
@@ -244,13 +251,20 @@
     }
 }
 
+
 @media only screen and (max-width:770px) {
     .payment_block {
         margin-bottom: 10px;
     }
 
    
-} 
+}
+
+@media only screen and (max-width:670px) {
+    .note_multilineText {
+        width: 350px;
+    }
+}
 
 @media only screen and (max-width:600px) {
     .col-8 {
@@ -260,12 +274,19 @@
     .col-2 {
         width: 25%;
     }
-    .booking_car_table_info th{
-        padding-left:0;
+
+    .booking_car_table_info th {
+        padding-left: 0;
     }
 
-    .booking_Id_title_container{
-        text-align:center;
+    .booking_Id_title_container {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width:575px){
+    .card-group .card-body{
+     height:100px;
     }
 }
 
@@ -306,13 +327,20 @@
     .booking_delete_btn_container,
     .rating-container,
     .invoice_btn,
-    .payment_booking_summary,
     .container-footer{
         display: none !important;
     }
 
-    .img_rating_flex_container{
-        margin-left:300px;
+    .payment_block{
+        margin-left:0px;
+        margin-right:0px;
+        left:0%;
+        padding-left:0px;
+        padding-right:0px;
+    }
+
+    .img_rating_flex_container {
+        margin-left: 300px;
     }
 
     .booking_Id_title_container {

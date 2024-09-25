@@ -14,6 +14,13 @@
     color: black;
     box-shadow: 5px 0px 18px 0px rgba(105,105,105,0.8);
 }
+/*card css*/
+.card {
+    z-index: 0;
+    background-color: #effaf6 !important;
+}
+
+/* add on btn */
 
 .booking_content_box {
     margin-top: 30px;
@@ -66,6 +73,7 @@
 .booking_car_table_info {
     width: 100%;
     line-height: 2;
+    border-bottom: 1px solid gray;
 }
 
     .booking_car_table_info th, .booking_car_table_info td {
@@ -154,3 +162,38 @@
         border-bottom-width: 2px;
         transform: translateY(2px);
     }
+
+
+@media only screen and (max-width:1320px) {
+    .note_multilineText {
+        width: 500px;
+    }
+}
+
+
+@media only screen and (max-width:770px) {
+    .payment_block {
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width:670px) {
+    .note_multilineText {
+        width: 350px;
+    }
+}
+
+
+@media only screen and (max-width:520px) {
+
+    .note_multilineText {
+        width: 250px;
+    }
+}
+
+@media only screen and (max-width:440px) {
+
+    .note_multilineText {
+        width: 150px;
+    }
+}

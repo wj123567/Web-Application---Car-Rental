@@ -19,8 +19,9 @@ namespace Assignment
             
             if (!Page.IsPostBack)
             {
+                //tis shows current add on
                 BindAddOns();
-                             
+ 
 
                 if (!string.IsNullOrEmpty(bookingId))
                 {
@@ -141,6 +142,106 @@ namespace Assignment
             }
         }
         
+        protected void btnAddOn_Click(object sender, EventArgs e)
+        {
+            //tis is for adding add on
+            BindAllAddOns();
+            if(hdnExtraAddOnCheck.Value != "false")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "addExtraAddOnModal", "addExtraAddOnModal();", true);
+            }
+           
+        }
+
+        protected void btnConfirmNewAddOn_Click(object sender, EventArgs e)
+        {
+            string bookingId = Session["BookingRecordId"].ToString();
+            string rentalQuery = Request.QueryString["rental"];
+            double rental = Convert.ToDouble(rentalQuery);
+            SaveAddOnSelection(bookingId);
+            double newAddOnAmt = calculateNewAddOnAmt(bookingId);
+            updateBookingRecord(bookingId, rental, newAddOnAmt);
+            BindAddOns();
+        }
+
+        private void BindAllAddOns()
+        {
+            string bookingId = Session["BookingRecordId"].ToString();
+            // Assuming you have a method GetAddOns() that returns a DataTable or List<AddOn>
+            var addOns = GetAllAddOns(bookingId);
+
+            if (addOns.Rows.Count == 0)
+            {
+                hdnExtraAddOnCheck.Value = "false";
+            }
+
+            rptAddOns.DataSource = addOns;
+            rptAddOns.DataBind();
+        }
+
+        private DataTable GetAllAddOns(string bookingId)
+        {
+            string sql = @"SELECT a.Id,Name, Description, Price, Url, MaxQuantity 
+                               FROM AddOn a LEFT JOIN BookingAddOn b
+                               ON a.Id = b.AddOnId AND b.BookingId = @bookingID
+                               WHERE
+                               b.AddOnId IS NULL";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@bookingID", bookingId);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            con.Close();
+            return dt;
+
+           
+            
+        }
+
+        private void SaveAddOnSelection(string bookingID)
+        {
+            string insertBookingAddOn = @"INSERT INTO BookingAddOn (BookingId,AddOnId, Quantity)
+                                                VALUES (@BookedID,@AddOnID, @Quantity)";
+            Dictionary<int, int> selectedAddOns = new Dictionary<int, int>();
+
+
+            foreach (RepeaterItem item in rptAddOns.Items)
+            {
+                var txtQuantity = (TextBox)item.FindControl("txtAddOnQuantity");
+                var hfAddOnID = (HiddenField)item.FindControl("hfAddOnID");
+
+                int quantity = int.Parse(txtQuantity.Text);
+                int addOnID = int.Parse(hfAddOnID.Value);
+
+                if (quantity > 0)
+                {
+                    selectedAddOns.Add(addOnID, quantity);
+
+                }
+            }
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand com = new SqlCommand(insertBookingAddOn, con);
+            foreach (var addOn in selectedAddOns)
+            {
+                int addOnID = addOn.Key;
+                int quantity = addOn.Value;
+                // Set parameters for the current iteration
+                com.Parameters.Clear();
+                com.Parameters.AddWithValue("@BookedID", bookingID);
+                com.Parameters.AddWithValue("@AddOnID", addOnID);
+                com.Parameters.AddWithValue("@Quantity", quantity);
+                com.ExecuteNonQuery();
+            }
+            con.Close();
+
+        }
+
         protected void lkbtnBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("bookingrecorddetail.aspx");
@@ -214,7 +315,7 @@ namespace Assignment
                 //update new total in Booking table
                 updateBookingRecord(bookingID, rental, newAddOnTotal);
             }
-            Response.Redirect("bookingrecorddetail.aspx?addOnUpdate="+addOnPriceDiff.ToString()+"&addOnDeleteAmt="+lblDeleteAddOnAmt.Text);
+            Response.Redirect("bookingrecorddetail.aspx?addOnUpdate="+addOnPriceDiff.ToString());
         }
 
         private Dictionary<int,int> saveBookingAddOnRecord()

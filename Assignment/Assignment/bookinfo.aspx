@@ -2,6 +2,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <link href="CSS/stickybar.css" rel="stylesheet" />
     <link href="CSS/bookinfo.css" rel="stylesheet" />
+    <link href="CSS/tracking.css" rel="stylesheet" />
+
     <asp:HiddenField ID="hdnDriverId" runat="server" />
 
 

@@ -402,27 +402,65 @@ namespace Assignment
 
             using (var db = new SystemDatabaseEntities())
             {
-                // Fetch redeemed items for the user
                 var redeemedVouchers = db.Redemptions
-                    .Where(r => r.UserId == userId)
-                    .Select(r => new
-                    {
-                        r.RedeemItem.ItemName,
-                        r.RedeemItem.ItemDescription,
-                        r.RedeemItemId
-                    })
-                    .ToList();
+                                        .Where(r => r.UserId == userId && r.RedeemDate <= DateTime.Now)
+                                        .Select(r => new
+                                        {
+                                            r.RedeemItem.ItemName,
+                                            r.RedeemItemId
+                                        })
+                                        .ToList();
 
-                // Bind the redeemed vouchers to a repeater or other data control
-                rptVouchers.DataSource = redeemedVouchers;
-                rptVouchers.DataBind();
+                ddlVouchers.DataSource = redeemedVouchers;
+                ddlVouchers.DataTextField = "ItemName";
+                ddlVouchers.DataValueField = "RedeemItemId";
+                ddlVouchers.DataBind();
+
+                ddlVouchers.Items.Insert(0, new ListItem("Select a Voucher", ""));
+
             }
         }
 
         protected void btnApplyVoucher_Click(object sender, EventArgs e)
         {
+            var selectedVoucherId = ddlVouchers.SelectedValue;
+            var bookingID = Session["BookingID"].ToString();
 
+            using (var db = new SystemDatabaseEntities())
+            {
+                
+            }
         }
+
+        protected void ddlVouchers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedValue = ddlVouchers.SelectedValue;
+
+            // Check if user selected a valid voucher
+            if (!string.IsNullOrEmpty(selectedValue))
+            {
+                int voucherId = Convert.ToInt32(selectedValue);
+
+                using (var db = new SystemDatabaseEntities())
+                {
+                    var voucher = db.RedeemItems.FirstOrDefault(v => v.RedeemItemId == voucherId);
+
+                    if (voucher != null)
+                    {
+                        lblVoucherName.Text = voucher.ItemName;
+                        lblVoucherDescription.Text = voucher.ItemDescription;
+                        btnApplyVoucher.CommandArgument = voucher.RedeemItemId.ToString(); // Pass voucher ID to apply logic
+
+                        voucherDetails.Visible = true;
+                    }
+                }
+            }
+            else
+            {
+                voucherDetails.Visible = false;
+            }
+        }
+
     }
 
 }

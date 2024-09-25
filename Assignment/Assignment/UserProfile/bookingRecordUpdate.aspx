@@ -4,6 +4,7 @@
      <link href="../CSS/bookingrecordupdate.css" rel="stylesheet" />
     <asp:HiddenField ID="hdnAddOnUpdateChk" runat="server"  />
     <asp:HiddenField ID="hdnDeletingAddOnId" runat="server" />
+    <asp:HiddenField ID="hdnExtraAddOnCheck" runat="server" />
 
 <div id="confirmModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -40,6 +41,71 @@
         </div>
     </div>
 </div>
+
+<div class="modal animate__animated animate__slideInLeft animate__faster" id="addOnModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addOnModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel2">Add On</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <asp:Repeater ID="rptAddOns" runat="server">
+<HeaderTemplate>
+<table class="addon_container">
+  
+    <tr class="addon_title" >
+        <th style="width:10%" class="addon_icon_header"></th>
+        <th style="width:50%;padding-left:5%;" class="addon_type_header">Type</th>
+        <th style=" width:20%; text-align:center;" class="addon_price_header">Price</th>
+        <th style=" width:20%; text-align:center; "class="addon_quantity_header">Quantity</th>
+    </tr>
+ </HeaderTemplate>
+  <ItemTemplate>
+    <tr class="addon_list">
+        <td rowspan="2"><asp:Image ID="imgIcon" runat="server" Width="45px" Height="45px" ImageUrl='<%# Eval("Url") %>' /></td>
+        <td class="addon_list_title"><%# Eval("Name") %></td>
+        <td class="text_center" data-price='<%# Eval("Price") %>'> <asp:Label ID="lblAddOnPrice" runat="server" Text='<%# Eval("Price","{0:F2}") %>'></asp:Label></td>
+        
+        <td rowspan="2" style="text-align:center">
+            <asp:TextBox ID="txtAddOnQuantity" runat="server" TextMode="Number" CssClass="quantity_style quantity_input" min="0" max='<%# Eval("MaxQuantity") %>' value="0" ></asp:TextBox>
+             <asp:HiddenField ID="hfAddOnID" runat="server" Value='<%# Eval("Id") %>' />
+        </td>
+    </tr>
+    <tr class="addon_list">
+        <td class="addon_subinfo"><%# Eval("Description") %></td>
+    </tr>
+    <tr class="separator">
+        <td style="visibility:hidden">a</td>
+    </tr>
+   
+    </ItemTemplate>
+
+     <FooterTemplate>
+    <tr>
+        <td class="end_text" colspan="3">TOTAL(RM)</td>
+        <td class="end_text addon_total">
+            <asp:Label ID="lblTotalAddOn" runat="server" Text="0.00"></asp:Label> 
+           
+        </td>
+    </tr>
+
+    <tr class="separator">
+       <td style="visibility:hidden">a</td>                 
+    </tr> 
+</table>
+</FooterTemplate>
+</asp:Repeater>
+        
+    </div>
+      <div class="modal-footer">
+          <asp:Button ID="btnConfirmNewAddOn"  CssClass="btn btn-primary " runat="server" Text="Confirm Add"   OnClick="btnConfirmNewAddOn_Click"/>
+      </div>
+    </div>
+    </div>
+  </div>  
+
+
            <!-- Page Content -->
     <main id="page-content" >
       
@@ -47,7 +113,7 @@
       <section class="container-fluid p-4" style="margin-bottom:20px;">
         
         <div class="row justify-content-center" >
-          <div class="col-lg-8 col-12" style="border:1px solid gray; ">
+          <div class="col-lg-8 col-12">
             <div class="card">
               <div class="card-body">
                   <div class ="row">
@@ -108,16 +174,19 @@
                               <tr class="booking_car_table_info">
                                   <th>Notes</th>
                                   <td>
-                                      <asp:TextBox ID="txtNotes" TextMode="MultiLine" runat="server" Rows="5" Columns="100"></asp:TextBox>
+                                      <asp:TextBox ID="txtNotes" TextMode="MultiLine" runat="server" Rows="5" Columns="100" CssClass="note_multilineText"></asp:TextBox>
                                   </td>
                               </tr>
                               
                           </table>
-                      <asp:Label ID="lblDeleteAddOnAmt" runat="server" Text="0.00"></asp:Label>
-                      <asp:Label ID="lblCheck2" runat="server" Text="Label"></asp:Label>
+
+
+                      <asp:Repeater ID="rptAddOnList" runat="server" OnItemDataBound="rptAddOnList_ItemDataBound">
+                          <HeaderTemplate>
                           <table class="booking_price_table">
                               <tr class="booking_price_table_header">
-                                  <th colspan="4">ADD ON</th>
+                                  <th colspan="5" style="text-align:center">ADD ON </th>
+                                  
                               </tr>
 
                             <tr class="booking_price_table_title" >
@@ -127,7 +196,7 @@
                                 <th></th>
                             </tr>
 
-                       <asp:Repeater ID="rptAddOnList" runat="server" OnItemDataBound="rptAddOnList_ItemDataBound">
+                       </HeaderTemplate>
                        <ItemTemplate>
                            
                               <tr class="booking_price_table_info">
@@ -151,9 +220,24 @@
                               </tr>
 
                          </ItemTemplate>
-                        </asp:Repeater>  
 
-                          </table>
+                               <FooterTemplate>
+                                  </table>
+                             <div class="container mt-2">
+                                 <div class="row">
+                                     <asp:Button ID="btnAddOn" runat="server" Text="Go for Extra Add On"  CssClass="btn btn-success" OnClick="btnAddOn_Click"/>
+                                     
+                                 </div>
+                             </div>
+         
+   
+
+                            
+                         
+                             </FooterTemplate>
+
+                        </asp:Repeater>  
+                             
                       
                   </div>
 
@@ -223,6 +307,39 @@
             return false;
         });
     };
+
+    function addExtraAddOnModal() {
+        addEventListener("DOMContentLoaded", (event) => {
+            $('#addOnModal').modal('toggle');
+            return false;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        function updateTotal() {
+            let total = 0.00;
+            const quantities = document.querySelectorAll('.quantity_input');
+
+            quantities.forEach(input => {   //when updateTotal is called, calculate again the total price in this code block
+                const price = parseFloat(input.closest('tr').querySelector('.text_center[data-price]').dataset.price);
+                const quantity = parseInt(input.value);
+                total += price * quantity;      //add on continuously
+
+            });
+
+            document.querySelector('.addon_total').textContent = total.toFixed(2);  //decimal place
+        }
+
+        // Add event listeners to quantity inputs
+        document.querySelectorAll('.quantity_input').forEach(input => {
+            input.addEventListener('input', updateTotal);       //call the updateTotal every time user change on the quantity(fires everytime input change)
+        });
+
+        // Initial calculation on page load to set initial total value
+        updateTotal();
+
+       
+    });
 
 </script>
 </asp:Content>
