@@ -187,11 +187,24 @@ namespace Assignment.Management
             string approvesql = "UPDATE Booking SET Status = 'Completed' WHERE Id = @Id";
             updateAfterBookStatus(approvesql,bookingId);
 
+            //you start (update reward point after the booking is completed)
+            updateRewardPointsAfterBookStatus(bookingId);
+            //you end
 
             Response.Redirect("BookingManagement.aspx");
             
         }
 
+
+        //you start
+        private void updateRewardPointsAfterBookStatus(string bookingId)
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                //asd
+            }
+        }
+        //you end
         protected void repeaterBookingList_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
             Button btnView = (Button)e.Item.FindControl("btnView");

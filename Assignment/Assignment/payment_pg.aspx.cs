@@ -262,6 +262,27 @@ namespace Assignment
                     db.Database.ExecuteSqlCommand(sql, new SqlParameter("@selectedVoucherId", selectedVoucherId));
                 }
             }
+
+            if (Session["Discount"] != null && decimal.TryParse(Session["Discount"].ToString(), out decimal discountValue))
+            {
+                
+                using (var db = new SystemDatabaseEntities())
+                {
+
+                    string bookingIdString = Session["BookingID"]?.ToString();
+
+                    if (!string.IsNullOrEmpty(bookingIdString))
+                    {
+                        var booking = db.Bookings.FirstOrDefault(b => b.Id == bookingIdString);
+
+                        if (booking != null)
+                        {
+                            booking.Discount = discountValue;
+                            db.SaveChanges();
+                        }
+                    }
+                }
+            }
             //you end
 
 

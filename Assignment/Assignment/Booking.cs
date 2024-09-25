@@ -33,8 +33,7 @@ namespace Assignment
         public string PaymentCardId { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<System.DateTime> EarnDate { get; set; }
-        public Nullable<int> PointsRemaining { get; set; }
-        public string PointsStatus { get; set; }
+        public Nullable<decimal> Discount { get; set; }
         public string UpdateReason { get; set; }
         public string RejectReason { get; set; }
         public string Notes { get; set; }
