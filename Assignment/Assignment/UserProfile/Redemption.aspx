@@ -1,24 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="Redemption.aspx.cs" Inherits="Assignment.Redemption" %>
 
 <asp:Content ID="Redemption" ContentPlaceHolderID="main" runat="server">
-    <!-- Redeem -->
-    <div class="modal fade" id="Redeem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Redeem Confimation</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            Are you sure you want to redeem VoucherProMax?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button id="confirmRedeem" type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirm Redeem</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="redemption-container">
         <div class="redemption-container-header">
@@ -53,7 +35,8 @@
                                 <asp:LinkButton ID="btnRedeem" runat="server" 
                                     CssClass='<%# (bool)Eval("IsRedeemed") || (bool)Eval("IsUnavailable") ? "btn btn-danger resize disabled-btn" : "btn btn-danger resize" %>'
                                     CommandArgument='<%# Eval("RedeemItemId") %>' 
-                                    OnClick="btnRedeem_Click">
+                                    OnClick="btnRedeem_Click"
+                                    OnClientClick="return confirm('Are you sure you want to redeem this item?');">
                                     Redeem
                                 </asp:LinkButton>
                             </span>

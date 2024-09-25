@@ -1,24 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="SystemDatabaseModelStoreContainer" CdmEntityContainer="SystemDatabaseEntities">
+    <EntitySetMapping Name="AddOns">
+      <EntityTypeMapping TypeName="SystemDatabaseModel.AddOn">
+        <MappingFragment StoreEntitySet="AddOn">
+          <ScalarProperty Name="maxQuantity" ColumnName="maxQuantity" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ApplicationUsers">
       <EntityTypeMapping TypeName="SystemDatabaseModel.ApplicationUser">
         <MappingFragment StoreEntitySet="ApplicationUser">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="DOB" ColumnName="DOB" />
-          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
-          <ScalarProperty Name="Roles" ColumnName="Roles" />
-          <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
-          <ScalarProperty Name="TwoStepVerification" ColumnName="TwoStepVerification" />
-          <ScalarProperty Name="EmailVerification" ColumnName="EmailVerification" />
-          <ScalarProperty Name="IsBan" ColumnName="IsBan" />
-          <ScalarProperty Name="BanReason" ColumnName="BanReason" />
-          <ScalarProperty Name="OtpCode" ColumnName="OtpCode" />
-          <ScalarProperty Name="OtpCreatedTime" ColumnName="OtpCreatedTime" />
           <ScalarProperty Name="RewardPoints" ColumnName="RewardPoints" />
+          <ScalarProperty Name="OtpCreatedTime" ColumnName="OtpCreatedTime" />
+          <ScalarProperty Name="OtpCode" ColumnName="OtpCode" />
+          <ScalarProperty Name="BanReason" ColumnName="BanReason" />
+          <ScalarProperty Name="IsBan" ColumnName="IsBan" />
+          <ScalarProperty Name="EmailVerification" ColumnName="EmailVerification" />
+          <ScalarProperty Name="TwoStepVerification" ColumnName="TwoStepVerification" />
+          <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+          <ScalarProperty Name="Roles" ColumnName="Roles" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -30,38 +42,47 @@
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
           <ScalarProperty Name="UpdateReason" ColumnName="UpdateReason" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="CarPlate" ColumnName="CarPlate" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="Pickup_point" ColumnName="Pickup_point" />
-          <ScalarProperty Name="Dropoff_point" ColumnName="Dropoff_point" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="PaymentCardId" ColumnName="PaymentCardId" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="EarnDate" ColumnName="EarnDate" />
-          <ScalarProperty Name="PointsRemaining" ColumnName="PointsRemaining" />
           <ScalarProperty Name="PointsStatus" ColumnName="PointsStatus" />
+          <ScalarProperty Name="PointsRemaining" ColumnName="PointsRemaining" />
+          <ScalarProperty Name="EarnDate" ColumnName="EarnDate" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PaymentCardId" ColumnName="PaymentCardId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Dropoff_point" ColumnName="Dropoff_point" />
+          <ScalarProperty Name="Pickup_point" ColumnName="Pickup_point" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CarPlate" ColumnName="CarPlate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingAddOns">
+      <EntityTypeMapping TypeName="SystemDatabaseModel.BookingAddOn">
+        <MappingFragment StoreEntitySet="BookingAddOn">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="AddOnId" ColumnName="AddOnId" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Cars">
       <EntityTypeMapping TypeName="SystemDatabaseModel.Car">
         <MappingFragment StoreEntitySet="Car">
-          <ScalarProperty Name="CarPlate" ColumnName="CarPlate" />
-          <ScalarProperty Name="CarBrand" ColumnName="CarBrand" />
-          <ScalarProperty Name="CarName" ColumnName="CarName" />
-          <ScalarProperty Name="CType" ColumnName="CType" />
-          <ScalarProperty Name="CarDesc" ColumnName="CarDesc" />
-          <ScalarProperty Name="CarImage" ColumnName="CarImage" />
-          <ScalarProperty Name="CarDayPrice" ColumnName="CarDayPrice" />
-          <ScalarProperty Name="CarSeat" ColumnName="CarSeat" />
-          <ScalarProperty Name="CarTransmission" ColumnName="CarTransmission" />
-          <ScalarProperty Name="CarEnergy" ColumnName="CarEnergy" />
-          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
           <ScalarProperty Name="IsDelisted" ColumnName="IsDelisted" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="CarEnergy" ColumnName="CarEnergy" />
+          <ScalarProperty Name="CarTransmission" ColumnName="CarTransmission" />
+          <ScalarProperty Name="CarSeat" ColumnName="CarSeat" />
+          <ScalarProperty Name="CarDayPrice" ColumnName="CarDayPrice" />
+          <ScalarProperty Name="CarImage" ColumnName="CarImage" />
+          <ScalarProperty Name="CarDesc" ColumnName="CarDesc" />
+          <ScalarProperty Name="CType" ColumnName="CType" />
+          <ScalarProperty Name="CarName" ColumnName="CarName" />
+          <ScalarProperty Name="CarBrand" ColumnName="CarBrand" />
+          <ScalarProperty Name="CarPlate" ColumnName="CarPlate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -75,78 +96,46 @@
     <EntitySetMapping Name="Drivers">
       <EntityTypeMapping TypeName="SystemDatabaseModel.Driver">
         <MappingFragment StoreEntitySet="Driver">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
-          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
-          <ScalarProperty Name="DriverLicense" ColumnName="DriverLicense" />
-          <ScalarProperty Name="DriverPno" ColumnName="DriverPno" />
-          <ScalarProperty Name="DriverBdate" ColumnName="DriverBdate" />
-          <ScalarProperty Name="DriverGender" ColumnName="DriverGender" />
-          <ScalarProperty Name="IDpic" ColumnName="IDpic" />
-          <ScalarProperty Name="Selfiepic" ColumnName="Selfiepic" />
-          <ScalarProperty Name="LicenseFpic" ColumnName="LicenseFpic" />
-          <ScalarProperty Name="LicenseBpic" ColumnName="LicenseBpic" />
-          <ScalarProperty Name="Approval" ColumnName="Approval" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
           <ScalarProperty Name="DateApply" ColumnName="DateApply" />
+          <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Approval" ColumnName="Approval" />
+          <ScalarProperty Name="LicenseBpic" ColumnName="LicenseBpic" />
+          <ScalarProperty Name="LicenseFpic" ColumnName="LicenseFpic" />
+          <ScalarProperty Name="Selfiepic" ColumnName="Selfiepic" />
+          <ScalarProperty Name="IDpic" ColumnName="IDpic" />
+          <ScalarProperty Name="DriverGender" ColumnName="DriverGender" />
+          <ScalarProperty Name="DriverBdate" ColumnName="DriverBdate" />
+          <ScalarProperty Name="DriverPno" ColumnName="DriverPno" />
+          <ScalarProperty Name="DriverLicense" ColumnName="DriverLicense" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Locations">
       <EntityTypeMapping TypeName="SystemDatabaseModel.Location">
         <MappingFragment StoreEntitySet="Location">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
-          <ScalarProperty Name="LocationState" ColumnName="LocationState" />
-          <ScalarProperty Name="LocationAddress" ColumnName="LocationAddress" />
           <ScalarProperty Name="LocationPostcode" ColumnName="LocationPostcode" />
+          <ScalarProperty Name="LocationAddress" ColumnName="LocationAddress" />
+          <ScalarProperty Name="LocationState" ColumnName="LocationState" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PaymentCards">
       <EntityTypeMapping TypeName="SystemDatabaseModel.PaymentCard">
         <MappingFragment StoreEntitySet="PaymentCard">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
-          <ScalarProperty Name="CardHolderName" ColumnName="CardHolderName" />
-          <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
-          <ScalarProperty Name="CVV" ColumnName="CVV" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="CardType" ColumnName="CardType" />
           <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Reviews">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.Review">
-        <MappingFragment StoreEntitySet="Reviews">
-          <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
-          <ScalarProperty Name="Rating" ColumnName="Rating" />
-          <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
-          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
-          <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AddOns">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.AddOn">
-        <MappingFragment StoreEntitySet="AddOn">
-          <ScalarProperty Name="maxQuantity" ColumnName="maxQuantity" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CardType" ColumnName="CardType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CVV" ColumnName="CVV" />
+          <ScalarProperty Name="ExpDate" ColumnName="ExpDate" />
+          <ScalarProperty Name="CardHolderName" ColumnName="CardHolderName" />
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BookingAddOns">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.BookingAddOn">
-        <MappingFragment StoreEntitySet="BookingAddOn">
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="AddOnId" ColumnName="AddOnId" />
-          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -168,6 +157,17 @@
           <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="SystemDatabaseModel.Review">
+        <MappingFragment StoreEntitySet="Reviews">
+          <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
+          <ScalarProperty Name="BookingId" ColumnName="BookingId" />
+          <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

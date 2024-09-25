@@ -160,17 +160,6 @@
     <Property Name="Rating" Type="int" />
     <Property Name="ReviewDate" Type="datetime" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\WEB-APPLICATION- - -CAR-RENTAL\ASSIGNMENT\ASSIGNMENT\APP_DATA\SYSTEMDATABASE.MDF.dbo.UserRewardPointsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-  <EntityType Name="UserRewardPointsView">
-    <Key>
-      <PropertyRef Name="Username" />
-    </Key>
-    <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="RewardPoints" Type="int" />
-    <Property Name="Price" Type="float" />
-    <Property Name="PointsRemaining" Type="int" />
-  </EntityType>
   <Association Name="FK_Booking_ToApplicationUser">
     <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="0..1" />
     <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
@@ -342,14 +331,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
     <EntitySet Name="RedeemItem" EntityType="Self.RedeemItem" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Redemption" EntityType="Self.Redemption" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="UserRewardPointsView" EntityType="Self.UserRewardPointsView" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [UserRewardPointsView].[Username] AS [Username], 
-    [UserRewardPointsView].[RewardPoints] AS [RewardPoints], 
-    [UserRewardPointsView].[Price] AS [Price], 
-    [UserRewardPointsView].[PointsRemaining] AS [PointsRemaining]
-    FROM [dbo].[UserRewardPointsView] AS [UserRewardPointsView]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_Booking_ToApplicationUser" Association="Self.FK_Booking_ToApplicationUser">
       <End Role="ApplicationUser" EntitySet="ApplicationUser" />
       <End Role="Booking" EntitySet="Booking" />
