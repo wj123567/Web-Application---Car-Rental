@@ -234,8 +234,6 @@
     <Content Include="bookinfo.aspx" />
     <Content Include="Management\BookingManagement.aspx" />
     <Content Include="Management\dashboard.aspx" />
-    <Content Include="Management\test.aspx" />
-    <Content Include="Management\testModel.aspx" />
     <Content Include="UserProfile\bookingrecord.aspx" />
     <Content Include="UserProfile\bookingrecorddetail.aspx" />
     <Content Include="Management\CarManagement.aspx" />
@@ -426,20 +424,6 @@
     <Compile Include="Management\dashboard.aspx.designer.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Management\test.aspx.cs">
-      <DependentUpon>test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Management\test.aspx.designer.cs">
-      <DependentUpon>test.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Management\testModel.aspx.cs">
-      <DependentUpon>testModel.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Management\testModel.aspx.designer.cs">
-      <DependentUpon>testModel.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Security.cs" />
     <Compile Include="UserProfile\bookingrecord.aspx.cs">
       <DependentUpon>bookingrecord.aspx</DependentUpon>
@@ -584,9 +568,6 @@
     </Compile>
     <Compile Include="Management\UserManagement.aspx.designer.cs">
       <DependentUpon>UserManagement.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="UserRewardPointsView.cs">
-      <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="validateEmail.aspx.cs">
       <DependentUpon>validateEmail.aspx</DependentUpon>

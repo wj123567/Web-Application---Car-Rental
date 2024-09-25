@@ -148,7 +148,7 @@
     </Key>
     <Property Name="RedeemItemId" Type="int" Nullable="false" />
     <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="RedeemDate" Type="datetime" />
+    <Property Name="RedeemDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Reviews">
     <Key>

@@ -46,8 +46,17 @@
                             </div>
         
                             <p><%# Eval("ItemDescription") %> </p>
-
-                            <asp:LinkButton ID="btnRedeem" runat="server" CssClass="btn btn-danger resize" OnClick="btnRedeem_Click" CommandArgument='<%# Eval("RedeemItemId") %>'>Redeem</asp:LinkButton>
+                            <span class="d-inline-block d-flex justify-content-center" style="width: 100%" tabindex="0" 
+                                  data-bs-toggle="tooltip" 
+                                  title='<%# (bool)Eval("IsRedeemed") ? "Already Redeemed Today" : (bool)Eval("IsUnavailable") ? "Item Unavailable" : "" %>' 
+                                  data-bs-placement="top">
+                                <asp:LinkButton ID="btnRedeem" runat="server" 
+                                    CssClass='<%# (bool)Eval("IsRedeemed") || (bool)Eval("IsUnavailable") ? "btn btn-danger resize disabled-btn" : "btn btn-danger resize" %>'
+                                    CommandArgument='<%# Eval("RedeemItemId") %>' 
+                                    OnClick="btnRedeem_Click">
+                                    Redeem
+                                </asp:LinkButton>
+                            </span>
                         </div>
                     </div>
                 </ItemTemplate>
@@ -55,6 +64,17 @@
             </asp:ListView>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize Bootstrap tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+
+    </script>
     
     
 </asp:Content>

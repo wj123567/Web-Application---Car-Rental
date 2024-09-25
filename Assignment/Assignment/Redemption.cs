@@ -16,7 +16,7 @@ namespace Assignment
     {
         public int RedeemItemId { get; set; }
         public string UserId { get; set; }
-        public Nullable<System.DateTime> RedeemDate { get; set; }
+        public System.DateTime RedeemDate { get; set; }
     
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual RedeemItem RedeemItem { get; set; }

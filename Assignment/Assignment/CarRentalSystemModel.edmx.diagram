@@ -20,16 +20,15 @@
         <AssociationConnector Association="SystemDatabaseModel.FK_Booking_ToPaymentCard" ManuallyRouted="false" />
         <AssociationConnector Association="SystemDatabaseModel.FK_Car_ToCarBrand" ManuallyRouted="false" />
         <AssociationConnector Association="SystemDatabaseModel.FK_Car_ToLocation" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SystemDatabaseModel.UserRewardPointsView" Width="2.75" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="SystemDatabaseModel.Review" Width="1.5" PointX="5.125" PointY="17.625" />
         <AssociationConnector Association="SystemDatabaseModel.FK_Reviews_Booking" />
-        <EntityTypeShape EntityType="SystemDatabaseModel.Redemption" Width="1.5" PointX="10" PointY="15" />
-        <AssociationConnector Association="SystemDatabaseModel.FK_Redemption_ApplicationUser" />
         <EntityTypeShape EntityType="SystemDatabaseModel.AddOn" Width="1.5" PointX="6.125" PointY="7.125" />
         <EntityTypeShape EntityType="SystemDatabaseModel.BookingAddOn" Width="1.5" PointX="8.375" PointY="12.25" />
         <AssociationConnector Association="SystemDatabaseModel.FK_BookingAddOn_ToAddOn" />
         <AssociationConnector Association="SystemDatabaseModel.FK_BookingAddOn_ToBooking" />
         <EntityTypeShape EntityType="SystemDatabaseModel.RedeemItem" Width="1.5" PointX="8" PointY="15.125" />
+        <EntityTypeShape EntityType="SystemDatabaseModel.Redemption" Width="1.5" PointX="11.25" PointY="11.625" />
+        <AssociationConnector Association="SystemDatabaseModel.FK_Redemption_ApplicationUser" />
         <AssociationConnector Association="SystemDatabaseModel.FK_Redemption_RedeemItem" />
       </Diagram>
     </edmx:Diagrams>

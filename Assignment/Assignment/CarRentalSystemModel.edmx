@@ -153,7 +153,7 @@
           </Key>
           <Property Name="RedeemItemId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="RedeemDate" Type="datetime" />
+          <Property Name="RedeemDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Reviews">
           <Key>
@@ -679,16 +679,10 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             <End Role="Location" EntitySet="Locations" />
             <End Role="Car" EntitySet="Cars" />
           </AssociationSet>
-          <EntitySet Name="UserRewardPointsViews" EntityType="SystemDatabaseModel.UserRewardPointsView" />
           <EntitySet Name="Reviews" EntityType="SystemDatabaseModel.Review" />
           <AssociationSet Name="FK_Reviews_Booking" Association="SystemDatabaseModel.FK_Reviews_Booking">
             <End Role="Booking" EntitySet="Bookings" />
             <End Role="Review" EntitySet="Reviews" />
-          </AssociationSet>
-          <EntitySet Name="Redemptions" EntityType="SystemDatabaseModel.Redemption" />
-          <AssociationSet Name="FK_Redemption_ApplicationUser" Association="SystemDatabaseModel.FK_Redemption_ApplicationUser">
-            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
-            <End Role="Redemption" EntitySet="Redemptions" />
           </AssociationSet>
           <EntitySet Name="AddOns" EntityType="SystemDatabaseModel.AddOn" />
           <EntitySet Name="BookingAddOns" EntityType="SystemDatabaseModel.BookingAddOn" />
@@ -701,20 +695,16 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             <End Role="BookingAddOn" EntitySet="BookingAddOns" />
           </AssociationSet>
           <EntitySet Name="RedeemItems" EntityType="SystemDatabaseModel.RedeemItem" />
+          <EntitySet Name="Redemptions" EntityType="SystemDatabaseModel.Redemption" />
+          <AssociationSet Name="FK_Redemption_ApplicationUser" Association="SystemDatabaseModel.FK_Redemption_ApplicationUser">
+            <End Role="ApplicationUser" EntitySet="ApplicationUsers" />
+            <End Role="Redemption" EntitySet="Redemptions" />
+          </AssociationSet>
           <AssociationSet Name="FK_Redemption_RedeemItem" Association="SystemDatabaseModel.FK_Redemption_RedeemItem">
             <End Role="RedeemItem" EntitySet="RedeemItems" />
             <End Role="Redemption" EntitySet="Redemptions" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="UserRewardPointsView">
-          <Key>
-            <PropertyRef Name="Username" />
-          </Key>
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RewardPoints" Type="Int32" />
-          <Property Name="Price" Type="Double" />
-          <Property Name="PointsRemaining" Type="Int32" />
-        </EntityType>
         <EntityType Name="Review">
           <Key>
             <PropertyRef Name="ReviewId" />
@@ -735,29 +725,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
             </Principal>
             <Dependent Role="Review">
               <PropertyRef Name="BookingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Redemption">
-          <Key>
-            <PropertyRef Name="RedeemItemId" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="RedeemItemId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RedeemDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ApplicationUser" Relationship="SystemDatabaseModel.FK_Redemption_ApplicationUser" FromRole="Redemption" ToRole="ApplicationUser" />
-          <NavigationProperty Name="RedeemItem" Relationship="SystemDatabaseModel.FK_Redemption_RedeemItem" FromRole="Redemption" ToRole="RedeemItem" />
-        </EntityType>
-        <Association Name="FK_Redemption_ApplicationUser">
-          <End Type="SystemDatabaseModel.ApplicationUser" Role="ApplicationUser" Multiplicity="1" />
-          <End Type="SystemDatabaseModel.Redemption" Role="Redemption" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicationUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Redemption">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -822,6 +789,29 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
           <Property Name="ItemImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Redemptions" Relationship="SystemDatabaseModel.FK_Redemption_RedeemItem" FromRole="RedeemItem" ToRole="Redemption" />
         </EntityType>
+        <EntityType Name="Redemption">
+          <Key>
+            <PropertyRef Name="RedeemItemId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="RedeemItemId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RedeemDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ApplicationUser" Relationship="SystemDatabaseModel.FK_Redemption_ApplicationUser" FromRole="Redemption" ToRole="ApplicationUser" />
+          <NavigationProperty Name="RedeemItem" Relationship="SystemDatabaseModel.FK_Redemption_RedeemItem" FromRole="Redemption" ToRole="RedeemItem" />
+        </EntityType>
+        <Association Name="FK_Redemption_ApplicationUser">
+          <End Type="SystemDatabaseModel.ApplicationUser" Role="ApplicationUser" Multiplicity="1" />
+          <End Type="SystemDatabaseModel.Redemption" Role="Redemption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Redemption">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Redemption_RedeemItem">
           <End Type="SystemDatabaseModel.RedeemItem" Role="RedeemItem" Multiplicity="1" />
           <End Type="SystemDatabaseModel.Redemption" Role="Redemption" Multiplicity="*" />
@@ -957,16 +947,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UserRewardPointsViews">
-            <EntityTypeMapping TypeName="SystemDatabaseModel.UserRewardPointsView">
-              <MappingFragment StoreEntitySet="UserRewardPointsView">
-                <ScalarProperty Name="PointsRemaining" ColumnName="PointsRemaining" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="RewardPoints" ColumnName="RewardPoints" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Reviews">
             <EntityTypeMapping TypeName="SystemDatabaseModel.Review">
               <MappingFragment StoreEntitySet="Reviews">
@@ -975,15 +955,6 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
                 <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
                 <ScalarProperty Name="BookingId" ColumnName="BookingId" />
                 <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Redemptions">
-            <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
-              <MappingFragment StoreEntitySet="Redemption">
-                <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1016,6 +987,15 @@ warning 6002: The table/view 'A70C90FD59758EF89689BEAD389644EF_S\JAVAASSIGNMENT\
                 <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
                 <ScalarProperty Name="ItemPoints" ColumnName="ItemPoints" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Redemptions">
+            <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
+              <MappingFragment StoreEntitySet="Redemption">
+                <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
               </MappingFragment>
             </EntityTypeMapping>

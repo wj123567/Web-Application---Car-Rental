@@ -1,4 +1,10 @@
-﻿.redemption-container {
+﻿.disabled-btn {
+    pointer-events: none; 
+    opacity: 0.5; 
+    cursor: not-allowed; 
+}
+
+.redemption-container {
     font-size: clamp(15px, 3vw, 60px);
     font-family: 'Leelawadee UI', sans-serif !important;
     padding: 30px;

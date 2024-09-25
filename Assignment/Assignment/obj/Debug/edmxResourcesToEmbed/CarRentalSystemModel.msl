@@ -118,16 +118,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserRewardPointsViews">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.UserRewardPointsView">
-        <MappingFragment StoreEntitySet="UserRewardPointsView">
-          <ScalarProperty Name="PointsRemaining" ColumnName="PointsRemaining" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="RewardPoints" ColumnName="RewardPoints" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Reviews">
       <EntityTypeMapping TypeName="SystemDatabaseModel.Review">
         <MappingFragment StoreEntitySet="Reviews">
@@ -136,15 +126,6 @@
           <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
           <ScalarProperty Name="BookingId" ColumnName="BookingId" />
           <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Redemptions">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
-        <MappingFragment StoreEntitySet="Redemption">
-          <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -177,6 +158,15 @@
           <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
           <ScalarProperty Name="ItemPoints" ColumnName="ItemPoints" />
           <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Redemptions">
+      <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
+        <MappingFragment StoreEntitySet="Redemption">
+          <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
         </MappingFragment>
       </EntityTypeMapping>
