@@ -226,12 +226,16 @@
                         <asp:Label ID="lblDriverText" runat="server" CssClass="text-dark"></asp:Label>
                         <asp:PlaceHolder ID="phUserDriver" runat="server">
                             <div class="card-body rounded border border-dark px-0 py-2 mb-2 text-dark">
-                                <div class="d-flex align-items-center justify-content-between px-4">
+                                <div class="d-flex align-items-center justify-content-between px-2 align-content-center">
                                     <div class="d-flex align-items-center">
-                                        <i class="fa-regular fa-id-card" style="font-size: 1.5em;"></i>
-                                        <div class="mx-4">
-                                            <asp:Label ID="lblDriverName" runat="server" Text="" CssClass="small d-block" />
-                                            <asp:Label ID="lblDriverId" runat="server" Text="" CssClass="text-xs text-muted d-inline" />
+                                            <div class="user-driver-frame me-3 flex-shrink-0">
+                                                <asp:Image ID="imgDriverSelfie" runat="server" CssClass="img-fluid" />
+                                            </div>
+                                        <div>
+                                            <asp:Label ID="lblDriverName" runat="server" Text="" CssClass="text-xs d-block" />
+                                            <asp:Label ID="lblDriverId" runat="server" Text="" CssClass="text-xs text-muted d-block" />
+                                            <asp:Label ID="lblDriverPno" runat="server" Text="Phone No: " CssClass="text-xs text-muted d-block" />
+                                            <asp:Label ID="lblDriverBdate" runat="server" Text="Date Of Birth: " CssClass="text-xs text-muted d-block" />
                                             <br />
                                             <asp:Label ID="lblReject" runat="server" CssClass="text-danger small"></asp:Label>
                                         </div>

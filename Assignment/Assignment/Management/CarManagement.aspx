@@ -55,7 +55,8 @@
                                                     <asp:Label ID="lblstatus" runat="server" style="line-height:inherit;"></asp:Label>
                                                 </div>
 
-                                                <asp:Label ID="lblDriverName" runat="server" Text='<%# (Eval("DriverGender").ToString() == "M" ? "Mr. " : "Ms. ") + Eval("DriverName").ToString()%>' CssClass="d-block" />
+                                                <asp:Label ID="lblDriverName" runat="server" Text='<%# (Eval("DriverGender").ToString() == "M" ? "Mr. " : "Ms. ") + Eval("DriverName").ToString()%>' CssClass="d-block text-muted d-block" />
+                                                <asp:Label ID="lblDriverPno" runat="server" Text='<%# "Phone No: " + Eval("DriverPno") %>' CssClass="text-xs text-muted d-block" />
                                                 <asp:Label ID="lblPickupPoint" runat="server" Text='<%# "Location: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-block" />
                                                 <asp:Label ID="lblPickupTime" runat="server" Text='<%# "Time: (" + Eval("StartDate") +")" + " - (" + Eval("EndDate") +")"%>' CssClass="text-xs text-muted d-block" />
                                             </div>
@@ -85,7 +86,7 @@
                     <ContentTemplate>
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">Car Detail</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="autoscroll()"></button>
                 </div>
                 <div class="modal-body">
                     <h5 class="text-dark">Are you sure you want to delete?</h5>
@@ -93,14 +94,14 @@
                     <asp:CustomValidator ID="cvDelete" runat="server" ErrorMessage="Car Cannot Be Deleted Booking Still Available" CssClass="validate" ValidationGroup="deleteGroup" OnServerValidate="cvDelete_ServerValidate" ControlToValidate="txtDelete" ValidateEmptyText="True"></asp:CustomValidator>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="autoscroll()">Cancel</button>
                     <asp:Button ID="btnConfirmDelete" runat="server" Text="Confirm Delete" CssClass="btn btn-danger" ValidationGroup="deleteGroup" OnClick="btnConfirmDelete_Click" />
-                </div>
-            </div>
+                </div>            
                  </ContentTemplate>
                 </asp:UpdatePanel>
         </div>
     </div>
+</div>
 
     <div class="modal fade" id="addBrand" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addLocation" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

@@ -71,10 +71,10 @@
                             <i class="fa fa-calendar"></i>
 		                <span class="mx-2"></span><i class="fa fa-caret-down"></i>
                         </div>
+                        <asp:CustomValidator ID="cvRange" runat="server" ErrorMessage="End date must after start date" CssClass="validate" ControlToValidate="hdnEnd" ClientValidationFunction="validateDate" ValidationGroup="filter"></asp:CustomValidator>
                     </a>
                     <asp:TextBox ID="hdnStart" runat="server" Style="display: none" ValidationGroup="filter"></asp:TextBox>
                     <asp:TextBox ID="hdnEnd" runat="server" Style="display: none" ValidationGroup="filter"></asp:TextBox>
-                    <asp:CustomValidator ID="validateRange" runat="server" ErrorMessage="Range is Required" ClientValidationFunction="validateDate" ControlToValidate="hdnStart" CssClass="validate" ValidationGroup="filter" Display="Dynamic"></asp:CustomValidator>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link text-black">
@@ -188,14 +188,6 @@
                 document.getElementById('<%= btnFilter.ClientID %>').click();
             }
         }
-
-        function validateDate(sender, args) {
-            if (hdnstart.value == "" || hdnend.value == "") {
-                args.valid = false;
-            } else {
-                args.valid = true;
-            }
-        }
     </script>
 
     <script>
@@ -229,5 +221,22 @@
         });
 
         cb(startDate, endDate);
+
+        function validateDate(source, args) {
+            // Get the start and end date values from the hidden fields
+            var startDate = document.getElementById('<%= hdnStart.ClientID %>').value;
+            var endDate = document.getElementById('<%= hdnEnd.ClientID %>').value;
+
+            // Parse the dates to JavaScript Date objects
+            var start = moment(startDate, 'DD-MM-YYYY HH:mm');
+            var end = moment(endDate, 'DD-MM-YYYY HH:mm');
+
+            // Check if end date is after start date
+            if (start.isValid() && end.isValid() && end.isAfter(start,"day")) {
+                args.IsValid = true;  // Validation passes
+            } else {
+                args.IsValid = false;  // Validation fails
+            }
+        }
     </script>
 </asp:Content>

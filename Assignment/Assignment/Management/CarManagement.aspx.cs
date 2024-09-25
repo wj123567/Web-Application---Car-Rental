@@ -294,7 +294,7 @@ namespace Assignment
 
         protected void loadCarBookingData(string carPlate)
         {
-            String selectCar = "SELECT B.*, C.CarPlate, C.CarBrand, C.CarName, C.CarImage, D.DriverName, D.DriverGender, D.SelfiePic FROM Booking B JOIN Car C ON B.CarPlate = C.CarPlate JOIN Location L ON C.LocationId = L.Id JOIN Driver D ON B.DriverId = D.Id WHERE B.CarPlate = @CarPlate AND B.StartDate >= CONVERT (date, SYSDATETIME()) AND B.Status NOT IN('Cancelled','Pending') Order BY B.StartDate";
+            String selectCar = "SELECT B.*, C.CarPlate, C.CarBrand, C.CarName, C.CarImage, D.DriverName, D.DriverGender, D.SelfiePic, D.DriverPno FROM Booking B JOIN Car C ON B.CarPlate = C.CarPlate JOIN Location L ON C.LocationId = L.Id JOIN Driver D ON B.DriverId = D.Id WHERE B.CarPlate = @CarPlate AND B.StartDate >= CONVERT (date, SYSDATETIME()) AND B.Status NOT IN('Cancelled','Pending') Order BY B.StartDate";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectCar, con);

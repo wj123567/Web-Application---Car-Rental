@@ -285,7 +285,7 @@ namespace Assignment
 
         protected void loadDriverInfo(string id)
         {
-            String selectDriver = "SELECT Id, DriverName, DriverId, Approval, RejectReason FROM Driver WHERE UserId = @id";
+            String selectDriver = "SELECT Id, DriverName, DriverId, Approval, RejectReason, Selfiepic, DriverGender, DriverBdate, DriverPno FROM Driver WHERE UserId = @id";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(selectDriver, con);
@@ -297,7 +297,20 @@ namespace Assignment
                 lblDriverText.Text = "";
                 if (reader.Read())
                 {
-                    lblDriverName.Text = reader["DriverName"].ToString();
+                    lblDriverPno.Text += reader["DriverPno"].ToString();
+                    lblDriverBdate.Text += DateTime.Parse(reader["DriverBdate"].ToString()).ToString("dd/MM/yyyy");
+                    string gender = reader["DriverGender"].ToString();
+                    string title = "";
+                    if(gender == "M")
+                    {
+                        title = "Mr. ";
+                    }
+                    else
+                    {
+                        title = "Ms. ";
+                    }
+                    imgDriverSelfie.ImageUrl = reader["Selfiepic"].ToString();
+                    lblDriverName.Text = title + reader["DriverName"].ToString();
                     lblDriverId.Text = "Driver ID: "+reader["DriverId"].ToString();
                     string approvalStatus = reader["Approval"].ToString();
                     switch (approvalStatus)

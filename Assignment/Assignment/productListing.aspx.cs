@@ -74,7 +74,7 @@ namespace Assignment
         {
             List<ListItem> brandSelected = new List<ListItem>();
             List<ListItem> typeSelected = new List<ListItem>();
-            TimeSpan delta = DateTime.Parse(Request.Form[hdnEnd.UniqueID]) - DateTime.Parse(Request.Form[hdnStart.UniqueID]);
+            TimeSpan delta = DateTime.Parse(hdnEnd.Text) - DateTime.Parse(hdnStart.Text);
             int days = (int)Math.Ceiling((double)delta.TotalHours / 24.0);
 
             foreach (ListItem item in cblCarBrand.Items)

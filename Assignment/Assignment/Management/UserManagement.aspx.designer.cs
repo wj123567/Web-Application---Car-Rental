@@ -303,6 +303,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.PlaceHolder phUserDriver;
 
         /// <summary>
+        /// imgDriverSelfie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgDriverSelfie;
+
+        /// <summary>
         /// lblDriverName control.
         /// </summary>
         /// <remarks>
@@ -319,6 +328,24 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDriverId;
+
+        /// <summary>
+        /// lblDriverPno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDriverPno;
+
+        /// <summary>
+        /// lblDriverBdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDriverBdate;
 
         /// <summary>
         /// lblReject control.
