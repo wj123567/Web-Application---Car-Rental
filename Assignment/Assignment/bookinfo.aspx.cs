@@ -100,7 +100,7 @@ namespace Assignment
             DateTime driverBDate = DateTime.Now;
 
             // Define your SQL query
-            string query = "SELECT * FROM Driver WHERE UserId = @userId";
+            string query = "SELECT * FROM Driver WHERE UserId = @userId AND Approval = 'A'";
 
             // Assuming you're using ADO.NET for database access
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString))

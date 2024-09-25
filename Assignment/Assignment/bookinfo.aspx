@@ -151,7 +151,7 @@
                        <h3 class="title">Driver Info</h3>
 
                        <div class="check_driver" style="height:50px;">
-                        <asp:Label ID="lblNoDriver" runat="server" Text="Unfortunately. No driver record is found." cssclass="lblNoDriver_style alert alert-warning" Enabled="false"></asp:Label>
+                        <asp:Label ID="lblNoDriver" runat="server" Text="Unfortunately. No approved driver record is found." cssclass="lblNoDriver_style alert alert-warning" Enabled="false"></asp:Label>
                         <asp:Button ID="btnRegisterDriver" runat="server" CssClass="btn btn-primary btn_register_style" Text="Register a Driver" OnClick="btnRegisterDriver_Click"/>
 
                        <asp:CheckBox ID="chkDriver" runat="server" cssclass="driver_checkbox_style" />

@@ -53,7 +53,7 @@
                     <ContentTemplate>
                         <div class="modal-header">
                             <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel">Ban Reason</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="autoscroll()"></button>
                         </div>
                         <div class="modal-body">
                             <asp:DropDownList ID="ddlBanReason" runat="server" CssClass="form-select" AutoPostBack="True" ValidationGroup="banGroup" OnSelectedIndexChanged="ddlBanReason_SelectedIndexChanged">
@@ -85,7 +85,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel2">User Detail</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="autoscroll()"></button>
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs mb-2 justify-content-center" id="userModalTab">
@@ -152,7 +152,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-dark" id="staticBookingLabel">Booking Record</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="autoscroll()"></button>
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs mb-2 justify-content-center" id="bookingModalTab">
@@ -208,7 +208,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel3">Available Driver</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="autoscroll()"></button>
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs mb-2 justify-content-center" id="driverModalTab">
