@@ -33,6 +33,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.HiddenField hdnDeletingAddOnId;
 
         /// <summary>
+        /// hdnExtraAddOnCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnExtraAddOnCheck;
+
+        /// <summary>
         /// modalYesBtn control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,24 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClear;
+
+        /// <summary>
+        /// rptAddOns control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptAddOns;
+
+        /// <summary>
+        /// btnConfirmNewAddOn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConfirmNewAddOn;
 
         /// <summary>
         /// lkbtnBack control.
@@ -121,24 +148,6 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNotes;
-
-        /// <summary>
-        /// lblDeleteAddOnAmt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeleteAddOnAmt;
-
-        /// <summary>
-        /// lblCheck2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCheck2;
 
         /// <summary>
         /// rptAddOnList control.

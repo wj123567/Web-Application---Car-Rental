@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="infopage.aspx.cs" Inherits="Assignment.infopage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <link href="CSS/stickybar.css" rel="stylesheet" />
+    <link href="CSS/tracking.css" rel="stylesheet" />
+
     <asp:HiddenField ID="hdnSessionId" runat="server" />
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 

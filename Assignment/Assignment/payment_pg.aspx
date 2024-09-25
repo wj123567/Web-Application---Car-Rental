@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="payment_pg.aspx.cs" Inherits="Assignment.payment_pg" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
     <link href="CSS/payment_pg.css" rel="stylesheet" />
+    <link href="CSS/tracking.css" rel="stylesheet" />
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:DatabaseConnectionString %>" SelectCommand="SELECT * FROM [PaymentCard]"></asp:SqlDataSource>
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>

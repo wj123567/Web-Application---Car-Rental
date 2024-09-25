@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookingrecorddetail.aspx.cs" Inherits="Assignment.bookingrecorddetail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
         <link href="../CSS/bookingrecorddetail.css" rel="stylesheet" />
+
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <div id="cancelModal" class="modal fade"  data-bs-backdrop="static" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
@@ -46,7 +47,7 @@
         
         <!-- row -->
         <div class="row justify-content-center" >
-          <div class="col-lg-8 col-12 entire_container" style="border:1px solid gray;" >           
+          <div class="col-lg-8 col-12 entire_container" >           
             <div class="card">
               <div class="card-body">
               <div class="row">
@@ -232,42 +233,40 @@
                 </div>
 
             </div>
-                 <!-- card -->
- <div class="card mt-4 payment_booking_summary">
-   <!-- card body -->
-   <div class="card-body">
-    
-     <div class="row">
-       <div class="col-md-6 col-12 payment_block">
-         <!-- address -->
-         <h4>Payment Status</h4>
-         <p>
-           <span class=" badge bg-success">Paid</span>
-         </p>
-           <p class="mb-0 text-dark">
-              Cardholder:
-                <asp:Label ID="lblCardHolderName" runat="server" Text="Label"></asp:Label>
-            </p>
-         <p class="mb-0 text-dark">
-           Ending with 
-             <asp:Label ID="lblCardNumberEnd" runat="server" Text="Label"></asp:Label>
-         </p>
-         <p class="mb-0">
-             Expires in <asp:Label ID="lblCardExpire" runat="server" Text="Label"></asp:Label>
-         </p>
-         
-       </div>
-       <div class="col-md-6 col-12 booking_block">
-         <!-- text -->
-         <h4 class="mb-3">Booking Status</h4> 
-          <p>
-             <asp:Label ID="lblBookStatus" CssClass="badge"  runat="server" Text="Label"></asp:Label>
-          </p>
-       </div>
-        
-   </div>
- </div>
- </div>
+
+  <div class="card border-secondary" > 
+     <div class="container">
+         <div class="row">
+         <div class="col ms-3 me-3 payment_block">
+                     <h5 class="card-title">Payment Detail</h5>
+     <p>
+  <span class=" badge bg-success">Paid</span>
+</p>
+  <p class="mb-0 ">
+     Cardholder:
+       <asp:Label ID="lblCardHolderName" runat="server" Text="Label"></asp:Label>
+   </p>
+<p class="mb-0 ">
+  Ending with 
+    <asp:Label ID="lblCardNumberEnd" runat="server" Text="Label"></asp:Label>
+</p>
+<p class="mb-0">
+    Expires in <asp:Label ID="lblCardExpire" runat="server" Text="Label"></asp:Label>
+</p>
+         </div>
+         <div class="col">
+                  <h5 class="card-title">Booking Status</h5>
+<p>
+   <asp:Label ID="lblBookStatus" CssClass="badge"  runat="server" Text="Label"></asp:Label>
+</p>
+         </div>
+             </div>
+     </div>
+
+  </div>
+
+
+
               
 <div class="mt-4 text_center invoice_container">
 <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-info invoice_style invoice_btn" OnClientClick="return printInvoice(event)" UseSubmitBehaviour="false">
