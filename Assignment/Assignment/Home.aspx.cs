@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -46,8 +47,30 @@ namespace Assignment
                     lblerrortext.Visible = false;
                 }
 
+                //You
+                UpdateExpiredVouchers();
+
             }
         }
+
+        //You
+        private void UpdateExpiredVouchers()
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                var today = DateTime.Now.Date;
+
+                string sqlCommand = @"
+                                    UPDATE Redemption 
+                                    SET IsActive = 0 
+                                    WHERE IsActive = 1 AND RedeemDate < @p0";
+
+                db.Database.ExecuteSqlCommand(sqlCommand, today);
+
+            }
+        }
+
+        //You
 
         private void PopulateRegionsAndPoints()
         {

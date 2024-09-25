@@ -151,15 +151,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Redemptions">
-      <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
-        <MappingFragment StoreEntitySet="Redemption">
-          <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Reviews">
       <EntityTypeMapping TypeName="SystemDatabaseModel.Review">
         <MappingFragment StoreEntitySet="Reviews">
@@ -168,6 +159,16 @@
           <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
           <ScalarProperty Name="BookingId" ColumnName="BookingId" />
           <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Redemptions">
+      <EntityTypeMapping TypeName="SystemDatabaseModel.Redemption">
+        <MappingFragment StoreEntitySet="Redemption">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="RedeemDate" ColumnName="RedeemDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RedeemItemId" ColumnName="RedeemItemId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

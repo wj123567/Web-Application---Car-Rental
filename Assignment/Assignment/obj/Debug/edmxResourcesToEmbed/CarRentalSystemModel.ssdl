@@ -145,10 +145,12 @@
     <Key>
       <PropertyRef Name="RedeemItemId" />
       <PropertyRef Name="UserId" />
+      <PropertyRef Name="RedeemDate" />
     </Key>
     <Property Name="RedeemItemId" Type="int" Nullable="false" />
     <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RedeemDate" Type="datetime" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Reviews">
     <Key>
@@ -283,7 +285,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Redemption_ApplicationUser">
-    <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="1" />
+    <End Role="ApplicationUser" Type="Self.ApplicationUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Redemption" Type="Self.Redemption" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ApplicationUser">

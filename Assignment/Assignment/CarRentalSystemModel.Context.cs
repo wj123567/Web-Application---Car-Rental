@@ -35,7 +35,7 @@ namespace Assignment
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<PaymentCard> PaymentCards { get; set; }
         public virtual DbSet<RedeemItem> RedeemItems { get; set; }
-        public virtual DbSet<Redemption> Redemptions { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<Redemption> Redemptions { get; set; }
     }
 }
