@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Web;
@@ -248,6 +249,8 @@ namespace Assignment
             Session["TotalPrice"] = hdnTotalPrice.Value;
             Session["TotalAddOn"] = hdnTotalAddOn.Value;
 
+
+            //you start
             string finalDiscountString = Request.Form[hdnFinalDiscount.UniqueID];
 
             if (!string.IsNullOrEmpty(finalDiscountString))
@@ -256,6 +259,21 @@ namespace Assignment
                 Session["Discount"] = finalDiscountString;
             }
 
+            string selectedValue = ddlVouchers.SelectedValue;
+            int selectedVoucherId;
+
+            if (int.TryParse(selectedValue, out selectedVoucherId))
+            {
+                // Store the voucher ID in the session
+                Session["SelectedVoucherId"] = selectedVoucherId;
+
+            }
+            else
+            {
+                Debug.WriteLine("No valid voucher selected.");
+            }
+
+            //you end
 
             Dictionary<int, int> selectedAddOns = Session["SelectedAddOns"] as Dictionary<int, int>;
 

@@ -214,6 +214,25 @@ namespace Assignment
             currentStep = Math.Max(currentStep - 1, 1);
             Session["CurrentStep"] = currentStep;
             UpdateProgressBar(currentStep);
+
+            //you start
+            var selectedVoucherId = Session["SelectedVoucherId"].ToString();
+            using (var db = new SystemDatabaseEntities())
+            {
+                var sql = @"
+                                UPDATE Redemption
+                                SET IsActive = 0
+                                WHERE RedeemItemId = @selectedVoucherId AND 
+                                RedeemDate = (
+                                    SELECT MAX(RedeemDate)
+                                    FROM Redemption
+                                    WHERE RedeemItemId = @selectedVoucherId
+                                )";
+
+                db.Database.ExecuteSqlCommand(sql, new SqlParameter("@selectedVoucherId", selectedVoucherId));
+            }
+            //you end
+
             Response.Redirect("bookinfo.aspx");
         }
 
