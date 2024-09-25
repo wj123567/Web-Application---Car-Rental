@@ -60,7 +60,7 @@ namespace Assignment
                    
             }
 
-        /*    DataBind();*/
+            //DataBind();
 
         }
 
@@ -266,6 +266,7 @@ namespace Assignment
         {
             using (var db = new SystemDatabaseEntities())
             {
+
                 var reviews = db.Reviews.Where(r => r.Booking.Car.CarPlate == currentCar).ToList();
 
                 int totalReviews = reviews.Count;

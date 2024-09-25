@@ -45,7 +45,8 @@
 
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <asp:ListView ID="lvReview" runat="server" OnSorting="lvReview_Sorting">
+                <asp:ListView ID="lvReview" runat="server" OnSorting="lvReview_Sorting"
+                    OnPagePropertiesChanging="lvReview_PagePropertiesChanging">
                     <LayoutTemplate>
                         <table class="table table-striped table-bordered table-responsive">
                             <thead>
