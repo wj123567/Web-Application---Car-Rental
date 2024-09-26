@@ -240,6 +240,15 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.Label lblPickUpLocation;
 
         /// <summary>
+        /// hlPickUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hlPickUp;
+
+        /// <summary>
         /// lblPickUpTime control.
         /// </summary>
         /// <remarks>
@@ -256,6 +265,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDropOffLocation;
+
+        /// <summary>
+        /// hlDropOff control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hlDropOff;
 
         /// <summary>
         /// lblDropOffTime control.
