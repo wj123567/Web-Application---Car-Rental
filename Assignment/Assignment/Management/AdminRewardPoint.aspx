@@ -40,7 +40,30 @@
                 </LayoutTemplate>
 
                 <ItemTemplate>
-                    
+                    <tr>
+                        <td><%# Eval("Username") %></td>
+                        <td><%# Eval("Email") %></td>
+                        <td><%# Eval("RewardPoints") %></td>
+                       
+                        <td>
+                            <asp:LinkButton ID="btnAddRewardPoints" 
+                                            runat="server" 
+                                            CommandArgument='<%# Eval("Id") %>' 
+                                            OnClick="btnAddRewardPoints_Click"
+                                            CssClass="text-warning pe-1">
+                                <i class="fa-regular fa-square-plus"></i>
+                            </asp:LinkButton>
+
+                            <asp:LinkButton ID="btnDeductRewardPoints" 
+                                            runat="server" 
+                                            CommandArgument='<%# Eval("Id") %>' 
+                                            OnClick="btnDeductRewardPoints_Click"
+                                            CssClass="text-danger">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </asp:LinkButton>
+
+                        </td>
+                    </tr>
                 </ItemTemplate>
 
             </asp:ListView>

@@ -24,9 +24,21 @@ namespace Assignment
         {
             using (var db = new SystemDatabaseEntities())
             {
-                
+                var user = db.ApplicationUsers.ToList();
+
+                RewardPointsListView.DataSource = user;
+                RewardPointsListView.DataBind();
             }
         }
 
+        protected void btnAddRewardPoints_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnDeductRewardPoints_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
