@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="bookingrecorddetail.aspx.cs" Inherits="Assignment.bookingrecorddetail" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
         <link href="../CSS/bookingrecorddetail.css" rel="stylesheet" />
+    <asp:HiddenField ID="hdnFinalPriceInfo" runat="server" />
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
@@ -214,7 +215,7 @@
                     <ul class="list-unstyled mb-0">
                       <li class="d-flex justify-content-between mb-2">
                         <asp:Label ID="lblDiscount" runat="server" CssClass="text-danger" Text="Discount" ></asp:Label>
-                        <asp:Label ID="lblDiscountAmt" runat="server" Text="0.00" ></asp:Label>
+                        <asp:Label ID="lblDiscountAmt" runat="server" CssClass="text-danger" Text="0.00" ></asp:Label>
                       </li>
                         <li class="border-top my-2"></li>
                         <li class="d-flex justify-content-between mb-2">
@@ -228,11 +229,10 @@
                       </li>
                       
                       <li class="border-top my-2"></li>
-                      <li class="d-flex justify-content-between mb-2">
+                      <li class="d-flex mb-2 " id="finalOutcome_list"> 
+                          <asp:Label ID="lblPriceFinalOutcome" runat="server" CssClass="fw-bold " Text="Grand Total(ii - i)"></asp:Label>
+                          <asp:Label ID="lblPriceFinalOutcomeAmt" runat="server" CssClass="fw-bold" Text=""></asp:Label>
                        
-                          <asp:Label ID="lblPriceFinalOutcome" runat="server" CssClass="fw-medium text-dark" Text="Grand Total(ii - i)"></asp:Label>
-                          <asp:Label ID="lblPriceFinalOutcomeAmt" runat="server" Text="Label"></asp:Label>
-                        <span class="fw-medium text-dark">128.00</span>
                       </li>
                     </ul>
                   </div>
@@ -246,25 +246,25 @@
                             <div class="col ms-3 me-3 payment_block">
                                 <h5 class="card-title">Payment Detail</h5>
                                 <p>
-                                    <span class=" badge bg-success">Paid</span>
+                                    <span class=" badge bg-success" style="font-size:16px">Paid</span>
                                 </p>
                                 <p class="mb-0 ">
-                                    Cardholder:
+                                    <span class="fw-bold">Cardholder:</span>
        <asp:Label ID="lblCardHolderName" runat="server" Text="Label"></asp:Label>
                                 </p>
                                 <p class="mb-0 ">
-                                    Ending with 
+                                    <span class="fw-bold">Ending with</span>
     <asp:Label ID="lblCardNumberEnd" runat="server" Text="Label"></asp:Label>
                                 </p>
                                 <p class="mb-0">
-                                    Expires in
+                                    <span class="fw-bold">Expires in</span>
                                     <asp:Label ID="lblCardExpire" runat="server" Text="Label"></asp:Label>
                                 </p>
                             </div>
                             <div class="col">
                                 <h5 class="card-title">Booking Status</h5>
                                 <p>
-                                    <asp:Label ID="lblBookStatus" CssClass="badge" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblBookStatus" CssClass="badge " runat="server" Text="Label"></asp:Label>
                                 </p>
                             </div>
                         </div>
@@ -327,13 +327,9 @@
 
     function printInvoice(event) {
 
-        event.preventDefault();
-
-     
+        event.preventDefault();   
         // Trigger print dialog
         window.print();
-
-      
 
         return false;
     }
@@ -355,6 +351,25 @@
         });
     }
 
+    document.addEventListener('DOMContentLoaded', function () {
+        var hdnFinalPriceInfo = document.getElementById('<%= hdnFinalPriceInfo.ClientID %>');
+        var lblFinalAmtTitle = document.getElementById('<%= lblPriceFinalOutcome.ClientID %>');
+        var lblFinalAmtValue = document.getElementById('<%= lblPriceFinalOutcomeAmt.ClientID %>');
+        var finalOutcome_list = document.getElementById('finalOutcome_list');
 
+        if (hdnFinalPriceInfo.value == "Extra") {
+            lblFinalAmtTitle.style.color = "red";
+            lblFinalAmtValue.style.color = "red";
+            finalOutcome_list.style.justifyContent = "space-between";
+
+        } else if (hdnFinalPriceInfo.value == "Refund") {
+            lblFinalAmtTitle.style.color = "green";
+            lblFinalAmtValue.style.color = "green";
+            finalOutcome_list.style.justifyContent = "space-between";
+        }
+        else {
+            finalOutcome_list.style.justifyContent = "center";
+        }
+    });
 </script>
 </asp:Content>

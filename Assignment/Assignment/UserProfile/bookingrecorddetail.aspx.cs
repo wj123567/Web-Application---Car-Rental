@@ -179,6 +179,43 @@ namespace Assignment
                         double totalRental = carDayPrice * Math.Ceiling(timeDiff.TotalDays);
                         lblRental.Text = totalRental.ToString("F2"); //TotalDays returns fractional number of days, use ceiling to meet our business rule
                         lblAddOnPrice.Text= addonTotal.ToString("F2");
+
+                        //handle price diff due to update
+                        double initialAmt = Convert.ToDouble(reader["Price"]);
+                        double afterUpdateAmt = Convert.ToDouble(reader["FinalPrice"]);
+                        lblInitialAmt.Text = initialAmt.ToString("F2");
+                        lblAfterUpdateAmt.Text = afterUpdateAmt.ToString("F2");
+                        if (reader["Discount"] != DBNull.Value)
+                        {
+                            lblDiscountAmt.Text = Convert.ToDouble(reader["Discount"]).ToString("F2");
+                        }
+                        else
+                        {
+                            lblDiscount.Visible = false;
+                            lblDiscountAmt.Visible = false;
+                        }
+
+                        double priceDiff = afterUpdateAmt - initialAmt;
+                        double absPriceDiff = Math.Abs(priceDiff);
+
+                        if (priceDiff > 0)
+                        {
+                            lblPriceFinalOutcome.Text = "Post-update Additional Charges (MYR)";
+                            lblPriceFinalOutcomeAmt.Text = absPriceDiff.ToString("F2");
+                            hdnFinalPriceInfo.Value = "Extra";
+                        }
+                        else if (priceDiff == 0)
+                        {
+                            lblPriceFinalOutcome.Text = "No Refund / Charges";
+                            lblPriceFinalOutcomeAmt.Text = "";
+                            hdnFinalPriceInfo.Value = "No";
+                        }
+                        else
+                        {
+                            lblPriceFinalOutcome.Text = "Post-update Partial Refund (MYR)";
+                            lblPriceFinalOutcomeAmt.Text = absPriceDiff.ToString("F2");
+                            hdnFinalPriceInfo.Value = "Refund";
+                        }
                        /* if (Session["oriAddOnPrice"] == null)
                         {
                             Session["oriAddOnPrice"] = addonTotal.ToString("F2");
@@ -215,7 +252,13 @@ namespace Assignment
                     string lastThreeDigits = cardNumber.Substring(cardNumber.Length - 3);
                     lblCardNumberEnd.Text = maskedPart + lastThreeDigits;
                 }
-                
+
+            }
+            else
+            {
+                lblCardHolderName.Text = "";
+                lblCardNumberEnd.Text = "";
+                lblCardExpire.Text = "";
             }
             con.Close();
         }

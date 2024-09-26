@@ -10,6 +10,7 @@
         <p class="booking_title">Car Rental Booking</p>
         
         <div class="container">
+            <div class="container">
             <div class="row">
                 <div class="col-6 col-md-8 search_style">
                     <div class="form">
@@ -26,9 +27,27 @@
                         <asp:ListItem Value="Completed" Text="Completed" />
                    </asp:DropDownList>
                 </div>
-               
+                </div>
+                <div class="container">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-4">
+                        <asp:TextBox ID="txtFilterStartDate" runat="server" CssClass="form-control form-input" TextMode="Date" ></asp:TextBox>
+                    </div>
+                    <div class="col-4">
+                        <asp:TextBox ID="txtFilterEndDate" runat="server" CssClass="form-control form-input" TextMode="Date"></asp:TextBox>
+                    </div>
+                    <div class="col-2">
+                        <asp:Button ID="btnFilterBookingDate" runat="server" CssClass="btn btn-primary" Text="Filter by Booking Date" />
+                    </div>
+                    <div class="col-2">
+                        <asp:Button ID="btnFilterPickUpDate" runat="server" CssClass="btn btn-secondary" Text="Filter by Pickup Date" />
+                    </div>
+                </div>
+                </div>
               
-        </div>
+        
+                
             
 
         <asp:UpdatePanel ID="updatebookingRecordTable" class="bookingRecordTablePanel" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
