@@ -315,13 +315,13 @@
                                     <div class="mb-3">
                                         <label class="small mb-1">Password</label>
                                         <asp:TextBox ID="txtAddPassword" runat="server" CssClass="form-control mb-2" TextMode="Password" ValidationGroup="addUser" onkeyup="validatePassword()"></asp:TextBox>
-                                        <asp:CheckBox ID="cbEight" runat="server" Text="at least eight characters" Enabled="True" Checked="False" CssClass="passCheckBox" ValidationGroup="addUser" />
+                                        <asp:CheckBox ID="cbEight" runat="server" Text="" Enabled="True" Checked="False" CssClass="passCheckBox" ValidationGroup="addUser" /><span> at least eight characters</span>
                                         <br />
-                                        <asp:CheckBox ID="cbNum" runat="server" Text="at least one number" Enabled="True" CssClass="passCheckBox" ValidationGroup="addUser" />
+                                        <asp:CheckBox ID="cbNum" runat="server" Text="" Enabled="True" CssClass="passCheckBox" ValidationGroup="addUser" /><span> at least one number</span>
                                         <br />
-                                        <asp:CheckBox ID="cbUpLow" runat="server" Text="both lower and uppercase letters" Enabled="True" CssClass="passCheckBox" ValidationGroup="addUser" />
+                                        <asp:CheckBox ID="cbUpLow" runat="server" Text="" Enabled="True" CssClass="passCheckBox" ValidationGroup="addUser" /><span> both lower and uppercase letters</span>
                                         <br />
-                                        <asp:CheckBox ID="cbSpecial" runat="server" Text="must contain one special characters" Enabled="True" CssClass="passCheckBox" ValidationGroup="addUser" />
+                                        <asp:CheckBox ID="cbSpecial" runat="server" Text="" Enabled="True" CssClass="passCheckBox" ValidationGroup="addUser" /><span> must contain one special characters</span>
                                         <asp:CustomValidator ID="validatePassword" runat="server" ControlToValidate="txtAddPassword" ErrorMessage="Invalid Password" ValidationGroup="addUser" CssClass="validate" ClientValidationFunction="validatePassword" ValidateEmptyText="True" Visible="false"></asp:CustomValidator>
                                     </div>
                                     <div class="mb-3">

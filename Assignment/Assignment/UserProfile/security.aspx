@@ -45,7 +45,7 @@
                             <!-- Form Group (current password)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="currentPassword">Current Password</label>
-                                <asp:TextBox ID="txtCurrentPass" runat="server" CssClass="form-control" placeholder="Enter current password" TextMode="Password" ValidationGroup="passwordGroup"></asp:TextBox>
+                                <asp:TextBox ID="txtCurrentPass" runat="server" CssClass="form-control" placeholder="Enter current password" TextMode="Password" ValidationGroup="passwor dGroup"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="requireCurrentPassword" runat="server" ErrorMessage="Current Password is Required" Display="Dynamic" CssClass="validate" ControlToValidate="txtCurrentPass" ValidationGroup="passwordGroup"></asp:RequiredFieldValidator>
                                 <asp:CustomValidator ID="validCurrentPassword" runat="server" ErrorMessage="Incorrect Password" CssClass="validate" ControlToValidate="txtCurrentPass" ValidationGroup="passwordGroup" OnServerValidate="validCurrentPassword_ServerValidate" Display="Dynamic"></asp:CustomValidator>
                             </div>
@@ -56,13 +56,13 @@
                      <asp:RequiredFieldValidator ID="requireNewPassword" runat="server" ErrorMessage="New Password is Required" Display="Dynamic" CssClass="validate" ControlToValidate="txtNewPassword" ValidationGroup="passwordGroup"></asp:RequiredFieldValidator>
                      <asp:CustomValidator ID="validNewPassword" runat="server" ErrorMessage="New Password Cannot be same as Old Password" CssClass="validate" ControlToValidate="txtNewPassword" ValidationGroup="passwordGroup" OnServerValidate="validNewPassword_ServerValidate" Display="Dynamic"></asp:CustomValidator>
                     <br />
-                        <asp:CheckBox ID="cbEight" runat="server" Text="must contain at least eight characters" Enabled="True" Checked="False" CssClass="passCheckBox" ValidationGroup="passwordGroup" />
+                        <asp:CheckBox ID="cbEight" runat="server" Text="" Enabled="True" Checked="False" CssClass="passCheckBox" ValidationGroup="passwordGroup" /><span"> at least eight characters</span>
             <br />
-                        <asp:CheckBox ID="cbNum" runat="server" Text="at least one number" Enabled="True" CssClass="passCheckBox" ValidationGroup="passwordGroup" />
+                        <asp:CheckBox ID="cbNum" runat="server" Text="" Enabled="True" CssClass="passCheckBox" ValidationGroup="passwordGroup" /><span> at least one number</span>
             <br />
-                        <asp:CheckBox ID="cbUpLow" runat="server" Text="both lower and uppercase letters" Enabled="True" CssClass="passCheckBox" ValidationGroup="passwordGroup" />
+                        <asp:CheckBox ID="cbUpLow" runat="server" Text="" Enabled="True" CssClass="passCheckBox" ValidationGroup="passwordGroup" /><span> both lower and uppercase letters</span>
             <br />
-                         <asp:CheckBox ID="cbSpecial" runat="server" Text="must contain one special characters" Enabled="True" CssClass="passCheckBox" ValidationGroup="passwordGroup" />
+                         <asp:CheckBox ID="cbSpecial" runat="server" Text="" Enabled="True" CssClass="passCheckBox" ValidationGroup="passwordGroup" /><span> must contain one special characters</span>
             <asp:RegularExpressionValidator ID="regPass" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="txtNewPassword" ValidationGroup="passwordGroup" ValidationExpression="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+\-=\[\]{};':&quot;\\|,.&lt;&gt;\/?]).{8,}$" hidden="true"></asp:RegularExpressionValidator>
                             </div>
                             <!-- Form Group (confirm password)-->

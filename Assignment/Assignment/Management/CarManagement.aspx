@@ -363,13 +363,13 @@
                                 <th scope="col">
                                     <asp:LinkButton ID="btnSortCarDayPrice" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarDayPrice" CssClass="text-dark sortcar-btn">Car Day Price</asp:LinkButton></th>
                                 <th scope="col">
-                                    <asp:LinkButton ID="btnSortCarTransmission" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarTransmission" CssClass="text-dark sortcar-btn">Car Transmission</asp:LinkButton></th>
-                                <th scope="col">
                                     <asp:LinkButton ID="btnSortCarEnergy" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="CarEnergy" CssClass="text-dark">Car Energy</asp:LinkButton></th>
                                 <th scope="col">
                                     <asp:LinkButton ID="btnSortCarLocation" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="LocationName" CssClass="text-dark sortcar-btn">Location Name</asp:LinkButton></th>
                                 <th scope="col">
-                                    <asp:LinkButton ID="btnSortCarState" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="IsDelisted" CssClass="text-dark sortcar-btn">Car Stated</asp:LinkButton></th>                                
+                                    <asp:LinkButton ID="btnSortCarState" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="IsDelisted" CssClass="text-dark sortcar-btn">Car Stated</asp:LinkButton></th>   
+                                <th scope="col">
+                                    <asp:LinkButton ID="btnSortBooking" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="Booking" CssClass="text-dark sortcar-btn">Total Booking</asp:LinkButton></th>                                
                                 <th scope="col">
                                     <asp:LinkButton ID="btnSortUpcoming" runat="server" OnClick="btnSortCarPlate_Click" CommandArgument="ASC" CommandName="Upcoming" CssClass="text-dark sortcar-btn">Upcoming</asp:LinkButton></th>
                                 <th scope="col">Actions</th>
@@ -383,13 +383,11 @@
                                         <td scope="col"><%# Eval("CarBrand") %></td>
                                         <td scope="col"><%# Eval("CarName") %></td>
                                         <td scope="col"><%# Eval("CType") %></td>
-                                        <td scope="col"><%# Eval("CarDayPrice", "{0:F2}") %></td>
-                                        <td scope="col"><%# Eval("CarTransmission") %></td>
-                                        <td scope="col"><%# Eval("CarEnergy") %></td>
+                                        <td scope="col"><%# Eval("CarDayPrice", "{0:F2}") %></td>                   <td scope="col"><%# Eval("CarEnergy") %></td>
                                         <td scope="col"><%# Eval("LocationName") %></td>             
                                         <td scope="col">
                                             <asp:Label ID="lblCarState" runat="server"></asp:Label></td>
-                                            
+                                        <td scope="col"><%# Eval("Booking") %></td>    
                                         <td scope="col"><asp:Button ID="btnUpcoming" runat="server" Text=<%# Eval("Upcoming") %> CssClass="btn btn-sm text-primary" CommandArgument='<%# Eval("CarPlate") %>' OnClick="btnUpcoming_Click"/></td>
                                         <td scope="col">
                                             <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEditCar_Click" CommandArgument='<%# Eval("CarPlate") %>' />

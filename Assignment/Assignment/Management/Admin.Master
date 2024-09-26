@@ -89,7 +89,7 @@
                         </li>               
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
+                        data-bs-target="#rp" aria-expanded="false" aria-controls="multi">
                         <i class="lni lni-coin"></i>
                         <span>Reward Point</span>
                     </a>
