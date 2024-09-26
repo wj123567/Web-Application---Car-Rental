@@ -60,10 +60,18 @@ namespace Assignment
             DataSet ds = new DataSet();
             da.Fill(ds, "CarData");
 
-            ViewState["CarData"] = ds.Tables["CarData"];
+            if (ds.Tables["CarData"].Rows.Count == 0)
+            {
+                lblSearchFail.Text = "No search results found";
+            }
+            else
+            {
+                lblSearchFail.Text = string.Empty;
+                ViewState["CarData"] = ds.Tables["CarData"];
+            }
+
             productRepeater.DataSource = ds.Tables["CarData"];
             productRepeater.DataBind();
-
 
             con.Close();
 

@@ -157,7 +157,9 @@ namespace Assignment
 
 
                     con.Close();
-                    Response.AddHeader("REFRESH", "2;Home.aspx");
+                    Session["Id"] = null;
+                    FormsAuthentication.SignOut();
+                    Response.Redirect("~/Home.aspx");
                 }
                 catch (Exception ex)
                 {

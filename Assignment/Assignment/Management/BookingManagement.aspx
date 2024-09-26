@@ -6,6 +6,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnBookingId" runat="server" />
     <asp:HiddenField ID="hdnCancelDateCheck" runat="server" />
+     <asp:HiddenField ID="hdnFinalPriceInfo" runat="server" />
 
 <div class="modal fade" id="rejectReason" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rejectReason" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -44,7 +45,7 @@
   <div class="modal-dialog modal-dialog-centered"">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel4">Booking Detail</h1>
+        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel4">Booking Detail <asp:Label ID="lblBookingId" runat="server" Text=""></asp:Label></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -96,7 +97,7 @@
      </div>
      <div class="row gx-3 mb-3">
          <div class="col">
-             <asp:Label ID="Label5" runat="server" CssClass="small mb-1 d-block" Text="Notes"></asp:Label>
+             
              <asp:TextBox ID="txtAdditionalNotes" runat="server" CssClass="form-control d-block" TextMode="MultiLine" Rows="5"  ReadOnly="True" ></asp:TextBox>
          </div>
      </div>
@@ -126,7 +127,7 @@
                      <tr>
                          <th>Type</th>
                          <th>Quantity</th>
-                         <th>Subtotal</th>
+                         <th>Subtotal (MYR)</th>
                      </tr>
                      </HeaderTemplate>
                  <ItemTemplate>
@@ -136,7 +137,7 @@
 
                          </td>
                          <td>
-                             <asp:Label ID="lblAddOnQuantity" runat="server" Text='<%# Eval("Quantity","{0:F2}") %>'></asp:Label>
+                             <asp:Label ID="lblAddOnQuantity" runat="server" Text='<%# Eval("Quantity") %>'></asp:Label>
                              
 
                          </td>
@@ -149,7 +150,7 @@
                 </ItemTemplate>
                      <FooterTemplate>
                          <tr>
-                             <td colspan="2">Total Price</td>
+                             <td colspan="2" class="fw-bold">Total Price</td>
                              <td>
                                  <asp:Label ID="lblAddOnTotal" runat="server" Text=""></asp:Label></td>
                          </tr>
@@ -163,18 +164,24 @@
       <hr class="mt-0 mb-4">
        <div class="row gx-3 mb-3">
          <div class="col-md-6">
-             <asp:Label ID="Label2" runat="server" CssClass="small mb-1" Text="Initial Price"></asp:Label>
+             <asp:Label ID="Label2" runat="server" CssClass="small mb-1" Text="Initial Payment Price (MYR)"></asp:Label>
           <asp:TextBox ID="txtInitBookingPrice" runat="server" CssClass="form-control"   ReadOnly="True"></asp:TextBox>
       </div>
       <div class="col-md-6">
-          <asp:Label ID="Label1" runat="server" CssClass="small mb-1" Text="Final Price"></asp:Label>
-          <asp:TextBox ID="txtFinalBookingPrice" runat="server" CssClass="form-control"   ReadOnly="True"></asp:TextBox>
+          <asp:Label ID="Label1" runat="server" CssClass="small mb-1" Text="Post-update Charges Amount (MYR)"></asp:Label>
+          <asp:TextBox ID="txtUpdatedBookingPrice" runat="server" CssClass="form-control"   ReadOnly="True"></asp:TextBox>
       </div>
      </div>
     <div class="row gx-3 mb-3">
-
-
+        <asp:Label ID="lblFinalPriceInfo" runat="server" CssClass="small mb-1" Text=""></asp:Label>
+        <asp:TextBox ID="txtFinalPriceAmt" runat="server" CssClass="form-control"  ReadOnly="True"></asp:TextBox>
     </div>
+<h5 class="text-dark">Reject Reason</h5>
+<hr class="mt-0 mb-4">
+<div class="row gx-3 mb-3">
+    
+    <asp:TextBox ID="txtRejectReason" runat="server" CssClass="form-control"  ReadOnly="True"></asp:TextBox>
+</div>
 
          </div>   <!-- right col end-->
     </div>
@@ -294,156 +301,153 @@
   </div>
 
 
-     
 
 
-
-      <div class="container-xl px-4 mt-4">
-  <h1 class="text-dark">Car Rental Booking Management</h1>
-  <hr class="mt-0 mb-4">
-
-              <div class="row">
-        <div class="col-6 col-md-8 search_style">
-            <div class="form">
-            <i class="fa fa-search"></i>
-            <asp:TextBox ID="txtBookingSearch" cssclass="form-control form-input" runat="server"  placeholder="Search.."></asp:TextBox>
-            </div>
-        </div>
-        <div class="col-6 col-md-2">
-           <asp:DropDownList ID="ddlStatusFilter" runat="server" cssclass="form-control statusddl_style" AutoPostBack="True" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
-                <asp:ListItem Value="All" Text="All Statuses" />
-                <asp:ListItem Value="Pending" Text="Pending" />
-                <asp:ListItem Value="Booked" Text="Booked" />
-                <asp:ListItem Value="Cancelled" Text="Cancelled" />
-               <asp:ListItem Value="Completed" Text="Completed" />
-           </asp:DropDownList>
-        </div>
-        
-</div>
-
-  <div>
 
     <asp:UpdatePanel ID="updatebookingRecordTable" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
         <ContentTemplate>
-         <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover mb-2 mt-4 booking_record_table " id="bookingRecordTable">
-        <thead class="bg-secondary" style=" line-height:2;">
-          <tr class="header_row_title" >
+            <div class="container-xl px-3 mt-4">
+                <h1 class="text-dark">Car Rental Booking Management</h1>
+                <hr class="mt-0 mb-4">
 
-         
+                <div class="row">
+                    <div class="col-6 col-md-8 search_style">
+                        <div class="form">
+                            <i class="fa fa-search"></i>
+                            <asp:TextBox ID="txtBookingSearch" CssClass="form-control form-input" runat="server" placeholder="Search.."></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <asp:DropDownList ID="ddlStatusFilter" runat="server" CssClass="form-control statusddl_style" AutoPostBack="True" OnSelectedIndexChanged="ddlStatusFilter_SelectedIndexChanged">
+                            <asp:ListItem Value="All" Text="All Statuses" />
+                            <asp:ListItem Value="Pending" Text="Pending" />
+                            <asp:ListItem Value="Booked" Text="Booked" />
+                            <asp:ListItem Value="Cancelled" Text="Cancelled" />
+                            <asp:ListItem Value="Completed" Text="Completed" />
+                        </asp:DropDownList>
+                    </div>
 
-            <th class="booking_id">
-                <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark sort-button">
+                </div>
+
+                <div>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover mb-2 mt-4 booking_record_table " id="bookingRecordTable">
+                            <thead class="bg-secondary" style="line-height: 2;">
+                                <tr class="header_row_title">
+
+
+
+                                    <th class="booking_id">
+                                        <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark sort-button">
                 Booking ID<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-                </asp:LinkButton>
-            
-            </th>
-             <th class="booking_status">
-                 <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark sort-button">
+                                        </asp:LinkButton>
+                                        <th class="booking_date">
+                                            <asp:LinkButton ID="btnSortBookingDate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="BookingDate" CssClass="text-dark sort-button">
+    Booking Date<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                                            </asp:LinkButton>
+                                        </th>
+                                    </th>
+                                    <th class="booking_status">
+                                        <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark sort-button">
                  Status 
-                </asp:LinkButton>
-                 <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
-             </th>
-        
-            <th class="booking_pickup">
-                <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Pickup_point" CssClass="text-dark  sort-button">
-                Pick Up Location <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-                </asp:LinkButton>
-            </th>            
-             <th class="booking_pickup">
-                <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="StartDate" CssClass="text-dark  sort-button">
+                                        </asp:LinkButton>
+                                        <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
+                                    </th>
+
+                                    <th class="booking_pickup">
+                                        <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Pickup_point" CssClass="text-dark  sort-button">
+                Pick Up & Drop Off Location <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                                        </asp:LinkButton>
+                                    </th>
+                                    <th class="booking_pickup">
+                                        <asp:LinkButton ID="btnSortPickUpTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="StartDate" CssClass="text-dark  sort-button">
                 Pick Up Time <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-                </asp:LinkButton>
-            </th>
+                                        </asp:LinkButton>
+                                    </th>
 
-            <th class="booking_dropoff">
-                <asp:LinkButton ID="btnSortDropOffLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Dropoff_point" CssClass="text-dark sort-button">
-                Drop Off Location<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-                </asp:LinkButton>
-            </th>            
-             <th class="booking_dropoff">
-                <asp:LinkButton ID="btnSortDropOffTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EndDate" CssClass="text-dark sort-button">
+
+                                    <th class="booking_dropoff">
+                                        <asp:LinkButton ID="btnSortDropOffTime" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="EndDate" CssClass="text-dark sort-button">
                 Drop Off Time<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-                </asp:LinkButton>
-            </th>
-             <th class="booking_cancel">
-                <asp:LinkButton ID="btnCancelReason" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CancelReason" CssClass="text-dark sort-button">
+                                        </asp:LinkButton>
+                                    </th>
+                                    <th class="booking_cancel">
+                                        <asp:LinkButton ID="btnCancelReason" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CancelReason" CssClass="text-dark sort-button">
                 Update Reason<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-                </asp:LinkButton>
-            </th>
-             <th class="booking_reject">
-                <asp:LinkButton ID="btnRejectReason" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="RejectReason" CssClass="text-dark sort-button">
-                Reject Reason<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-                </asp:LinkButton>
-            </th>
+                                        </asp:LinkButton>
+                                    </th>
+                                   
 
-             <th class="booking_edit" style="width:5%;text-align:center;">
-                 Action
-             </th>
-          </tr>
-        </thead>
-        <tbody id="bookingtable_record">
+                                    <th class="booking_edit" style="width: 5%; text-align: center;">Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingtable_record">
 
-    <asp:Repeater ID="rptBookingList" runat="server" OnItemDataBound="repeaterBookingList_ItemDataBound" OnItemCreated="repeaterBookingList_ItemCreated">
-    <ItemTemplate>
-          <tr class="rows1">
-        <td>
-          <div class=" align-items-center">    
-            <div class="ms-1">
-                
-              <p class="fw-bold mb-1"><%# Eval("Id") %></p>
+                                <asp:Repeater ID="rptBookingList" runat="server" OnItemDataBound="repeaterBookingList_ItemDataBound" OnItemCreated="repeaterBookingList_ItemCreated">
+                                    <ItemTemplate>
+                                        <tr class="rows1">
+                                            <td>
+                                                <div class=" align-items-center">
+                                                    <div class="ms-1">
+
+                                                        <p class="fw-bold mb-1"><%# Eval("Id") %></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <p class="fw-normal mb-1"><%# Eval("BookingDate","{0:dd/MM/yyyy hh:mm tt}") %></p>
+                                            </td>
+
+                                            <td>
+                                                <span class="status_icon badge <%# GetBadgeClass(Eval("Status").ToString()) %> rounded-pill d-inline">
+                                                    <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
+                                                </span>
+                                                <asp:HiddenField ID="hdnBookStatus" runat="server" Value='<%# Eval("Status") %>' />
+                                            </td>
+
+
+                                            <td>
+                                                <p class="fw-normal mb-1"><%# Eval("Pickup_point") %></p>
+                                            </td>
+
+                                            <td>
+                                                <p class="text-muted mb-0"><%# Eval("StartDate","{0:dd/MM/yyyy hh:mm tt}") %></p>
+                                            </td>
+
+
+
+                                            <td>
+                                                <p class="text-muted mb-0"><%# Eval("EndDate","{0:dd/MM/yyyy hh:mm tt}") %></p>
+                                            </td>
+                                            <td>
+                                                <p class="text-muted mb-0"><%# Eval("UpdateReason") %></p>
+                                            </td>
+                                            
+                                            <td>
+                                                <asp:Button ID="btnView" runat="server" CssClass="btn btn-sm text-primary" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>' />
+                                                <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-sm text-primary" Text="Mark as Done" OnClick="btnUpdate_Click" CommandArgument='<%# Eval("Id") %>' />
+
+                                            </td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </tbody>
+                            <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
+                        </table>
+                    </div>
+
+                </div>
             </div>
-          </div>
-        </td>
-  
-           <td>      
-               <span class="status_icon badge <%# GetBadgeClass(Eval("Status").ToString()) %> rounded-pill d-inline">
-                 <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
-                </span>   
-               <asp:HiddenField ID="hdnBookStatus" runat="server"  Value='<%# Eval("Status") %>'/>
-          </td>
-  
-  
-        <td>
-          <p class="fw-normal mb-1"><%# Eval("Pickup_point") %></p>
-
-        </td>
-
-        <td>
-          <p class="text-muted mb-0"><%# Eval("StartDate") %></p>
-        </td>
-
-        <td>
-            <p class="fw-normal mb-1"><%# Eval("Dropoff_point") %></p>
-        </td>
-    
-        <td>
-              <p class="text-muted mb-0"><%# Eval("EndDate") %></p>
-        </td>
-        <td>
-            <p class="text-muted mb-0"><%# Eval("UpdateReason") %></p>
-        </td>
-         <td>
-             <p class="text-muted mb-0"><%# Eval("RejectReason") %>
-         </td>
-        <td>
-             <asp:Button ID="btnView" runat="server" CSSclass="btn btn-sm text-primary" Text="View" OnClick="btnView_Click" CommandArgument='<%# Eval("Id") %>'/>
-             <asp:Button ID="btnUpdate" runat="server" CSSclass="btn btn-sm text-primary" Text="Mark as Done" OnClick="btnUpdate_Click" CommandArgument='<%# Eval("Id") %>'/>
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="ddlStatusFilter" EventName="SelectedIndexChanged" />
             
-        </td>
-      </tr>
-      </ItemTemplate>
-     </asp:Repeater>   
-        </tbody>
-         <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
-      </table>
-       </div>
-    </ContentTemplate>
+        </Triggers>
     </asp:UpdatePanel>
-       
-  </div>
-  </div>   
-
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         
@@ -478,29 +482,31 @@
                 return false;
             });
         }
+        function initializePagination() {
+            $('#bookingRecordTable').paging({ limit: 10 });
+        }
+
+        function setupSearchFunctionality(searchBoxId) {
+
+            $(searchBoxId).on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#bookingtable_record tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        }
 
          $(document).ready(function () {
              var searchBoxId = "#" + '<%= txtBookingSearch.ClientID %>';
 
-  
-            $(searchBoxId).on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#bookingtable_record tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
 
-            function initializePagination() {
-                $('#bookingRecordTable').paging({ limit: 10 });
-            }
+             setupSearchFunctionality(searchBoxId);
 
             initializePagination(); // Initialize on page load
 
 
          });
        
-        
-
     </script>
     
 

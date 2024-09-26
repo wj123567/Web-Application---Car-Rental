@@ -96,6 +96,24 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Label lblActiveDate;
 
         /// <summary>
+        /// UpdatePanel3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
+
+        /// <summary>
+        /// lvTopFiveUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView lvTopFiveUser;
+
+        /// <summary>
         /// hdnTimeFilter control.
         /// </summary>
         /// <remarks>

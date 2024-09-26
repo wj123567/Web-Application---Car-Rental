@@ -30,7 +30,56 @@
         </div>
     </div>
 
-        <div class="modal modal-lg fade" id="userBookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userBookingModal" aria-hidden="true">
+        <div class="modal modal-lg fade" id="userTotalBookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userBookingModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-dark" id="staticTotalBookingLabel">All Booking Record</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="autoscroll()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body row">
+
+                        <asp:Label ID="ttlblNoBooking" runat="server" CssClass="text-dark"></asp:Label>
+                        <asp:Repeater ID="rptTotalBookingRec" runat="server" OnItemDataBound="rptTotalBookingRec_ItemDataBound">
+                            <ItemTemplate>
+                                <div class="card-body rounded border border-dark py-2 mb-2 text-dark">
+                                    <div class="d-flex align-items-center justify-content-between px-2 align-content-center">
+                                        <div class="d-flex align-items-center me-2">
+                                            <div class="driver-car-frame me-2 flex-shrink-0">
+                                                <asp:Image ID="ttcarImage" runat="server" ImageUrl='<%# Eval("CarImage")%>' CssClass="img-fluid" />
+                                            </div>
+                                            <div>
+                                                <div class="d-flex">
+                                                <asp:Label ID="ttlblBookingId" runat="server" Text='<%# Eval("Id") +" (" + Eval("CarPlate") +")"%>' CssClass="me-2" />
+                                                    <asp:Label ID="ttlblstatus" runat="server" style="line-height:inherit;"></asp:Label>
+                                                </div>
+
+                                                <asp:Label ID="ttlblDriverName" runat="server" Text='<%# (Eval("DriverGender").ToString() == "F" ? "Ms. " : "Mr. ") + (Eval("DriverName") != null && !string.IsNullOrEmpty(Eval("DriverName").ToString()) ? Eval("DriverName").ToString() : "Nobody") %>' CssClass="d-block text-muted d-block" />
+                                                <asp:Label ID="ttlblDriverPno" runat="server" Text='<%# "Phone No: " + (Eval("DriverPno") != null && !string.IsNullOrEmpty(Eval("DriverPno").ToString()) ? Eval("DriverPno").ToString() : "N/A") %>' CssClass="text-xs text-muted d-block" />
+                                                <asp:Label ID="ttlblPickupPoint" runat="server" Text='<%# "Location: " + Eval("Pickup_point") %>' CssClass="text-xs text-muted d-block" />
+                                                <asp:Label ID="ttlblPickupTime" runat="server" Text='<%# "Time: (" + Eval("StartDate") +")" + " - (" + Eval("EndDate") +")"%>' CssClass="text-xs text-muted d-block" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="driver-frame">
+                                                <asp:Image ID="ttimgSelfie" runat="server" ImageUrl='<%# Eval("SelfiePic") != null && !string.IsNullOrEmpty(Eval("SelfiePic").ToString()) ? Eval("SelfiePic").ToString() : "~/Image/no-img.jpg" %>' CssClass="img-fluid" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <div class="modal modal-lg fade" id="userBookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userBookingModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -386,7 +435,7 @@
                                         <td scope="col">
                                             <asp:Label ID="lblCarState" runat="server"></asp:Label></td>
                                         <td scope="col"><%# Eval("Revenue","{0:F2}") %></td>
-                                        <td scope="col"><%# Eval("Booking") %></td>    
+                                        <td scope="col"><asp:Button ID="btnTotalBooking" runat="server" Text=<%# Eval("Booking") %> CssClass="btn btn-sm text-primary" CommandArgument='<%# Eval("CarPlate") %>' OnClick="btnTotalBooking_Click"/></td>    
                                         <td scope="col"><asp:Button ID="btnUpcoming" runat="server" Text=<%# Eval("Upcoming") %> CssClass="btn btn-sm text-primary" CommandArgument='<%# Eval("CarPlate") %>' OnClick="btnUpcoming_Click"/></td>
                                         <td scope="col">
                                             <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm text-primary" OnClick="btnEditCar_Click" CommandArgument='<%# Eval("CarPlate") %>' />
@@ -475,6 +524,13 @@
         function bookingModal() {
             document.addEventListener("DOMContentLoaded", function(){
                 $('#userBookingModal').modal('toggle');
+                return false;
+            });
+        }
+        
+        function TTbookingModal() {
+            document.addEventListener("DOMContentLoaded", function(){
+                $('#userTotalBookingModal').modal('toggle');
                 return false;
             });
         }

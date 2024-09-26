@@ -142,7 +142,7 @@ namespace Assignment
             {
                 con.Open();
 
-                string query = "SELECT * FROM Booking b JOIN Car c ON b.CarPlate=c.CarPlate WHERE b.Id = @BookingId";
+                string query = "SELECT b.*, c.*,l.LocationAddress FROM Booking b JOIN Car c ON b.CarPlate=c.CarPlate JOIN Location l ON b.Pickup_point = l.LocationName WHERE b.Id = @BookingId";
                 
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@BookingId", bookingId);
@@ -152,6 +152,8 @@ namespace Assignment
                     if (reader.Read())
                     {
                         // Populate the table with the data
+                        hlPickUp.NavigateUrl = $"https://www.google.com/maps/search/?api=1&query={reader["LocationAddress"].ToString()}";
+                        hlDropOff.NavigateUrl = $"https://www.google.com/maps/search/?api=1&query={reader["LocationAddress"].ToString()}";
                         lblBookingNumber.Text = bookingId;
                         img_car.ImageUrl = reader["CarImage"].ToString();
                         lblBookingDate.Text = Convert.ToDateTime(reader["BookingDate"]).ToString("dd-MMM-yyyy hh:mm tt");
@@ -429,6 +431,7 @@ namespace Assignment
             lblFeedback.Visible = true;
 
             submit.Enabled = false;
+            Response.Redirect("bookingrecorddetail.aspx");
         }
 
     }

@@ -22,9 +22,32 @@ namespace Assignment.Management
             {
                 /*loadDataofLineChart();*/
                 loadVisitorState();
+
+                //you
+                loadTopUsers(); 
             }
         }
 
+        //you start
+        private void loadTopUsers()
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                var topFiveUser = db.ApplicationUsers
+                                    .OrderByDescending(u => u.RewardPoints)
+                                    .Select(user => new
+                                    {
+                                        Username = user.Username,
+                                        RewardPoints = user.RewardPoints,
+                                        ProfilePic = user.ProfilePicture
+                                    })
+                                    .Take(5)
+                                    .ToList();
+                lvTopFiveUser.DataSource = topFiveUser;
+                lvTopFiveUser.DataBind();       
+            }
+        }
+        //you end
         private void loadVisitorState()
         {
             try

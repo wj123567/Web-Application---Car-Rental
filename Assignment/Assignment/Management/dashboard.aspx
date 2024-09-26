@@ -105,22 +105,45 @@
                 </div>
             </div>
 
-            <div class="col-xl-6 col-xxl-7" style="margin-bottom: 20px">
-                <div class="card flex-fill w-100">
-                    <div class="card-header">
-
-                        <h5 class="card-title mb-0">Recent Monthly Sales</h5>
-                    </div>
-                    <%--<img src="../Image/Dashboard/chart.png" />--%>
+            <div class="col-xl-6 col-xxl-7" style="margin-bottom: 20px"> 
                     <div class="card mb-3">
-                        <div class="card-body p-3">
-                            <div class="chart">
-                                <canvas id="line-chart" class="chart-canvas" height="300"></canvas>
-                            </div>
+                        <div class="card-header">
+                            <h5 class="card-title m-2">
+                                <b>Top 5 Users Points Earned</b>
+                            </h5>
                         </div>
+                        <div class="card-body p-3">
+                                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                    <ContentTemplate>
+                                        <div class="list-group">
+                                            <asp:ListView ID="lvTopFiveUser" runat="server">
+                                                <LayoutTemplate>
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="fs-6">User ID </th>
+                                                                <th class="fs-6">Total Points Earned </th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                                <asp:PlaceHolder ID="itemPlaceholder" runat="server"></asp:PlaceHolder>
+                                                        </tbody>
+                                                    </table>
+                                                </LayoutTemplate>
+                                                <ItemTemplate>
+                                                    <tr>
+                                                        <td class="fs-6"><%# Eval("Username") %></td>
+                                                        <td class="fs-6"><%# Eval("RewardPoints") %></td>
+                                                    </tr>
+                                                </ItemTemplate>
+                                            </asp:ListView>
+                                        </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
                     </div>
                 </div>
-            </div>
         </div>
         <!-- WZ Demo 1 Start-->
         <div class="row my-2">
@@ -788,7 +811,7 @@
     <!-- End Date Picker -->
     <!-- Theme JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
+    <%--<script>
         document.addEventListener('DOMContentLoaded', function () {
             // Function to generate random sales data
             function generateRandomSales() {
@@ -846,7 +869,7 @@
                 }
             });
         });
-    </script>
+    </script>--%>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Function to generate random booking numbers

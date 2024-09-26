@@ -64,18 +64,31 @@ namespace Assignment.Management
                 }
                 con.Close();
             }
-            int totalRow = getTotalRow();
+
+            int totalRow = getTotalRow("All");
             lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
            
             
         }
 
-        protected int getTotalRow()
+        protected int getTotalRow(string statusFilter)
         {
             string selectAll = "SELECT COUNT(*) FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate";
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            SqlCommand com = new SqlCommand(selectAll, con);
             con.Open();
+            if (statusFilter != "All")
+            {
+                selectAll += " WHERE Status = @Status";
+               
+            }
+            SqlCommand com = new SqlCommand(selectAll, con);
+
+            if(statusFilter != "All")
+            {
+                
+                com.Parameters.AddWithValue("@Status", statusFilter);
+            }
+            
             return (int)com.ExecuteScalar();
 
         }
@@ -102,6 +115,14 @@ namespace Assignment.Management
             string selectedStatus = ddlStatusFilter.SelectedValue;
             
             GetBookRecords(selectedStatus);
+            //refresh searching
+            string searchBoxID = txtBookingSearch.ClientID;
+            string searchScript = $"setupSearchFunctionality({searchBoxID});";
+            ScriptManager.RegisterStartupScript(this, GetType(), "refreshSearching", searchScript, true);
+            //refresh pagination
+            ScriptManager.RegisterStartupScript(this, GetType(), "refreshPagination", "initializePagination();", true);
+            int totalRow = getTotalRow(selectedStatus);
+            lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
         }
 
         protected void btnSort_Click(object sender, EventArgs e)
@@ -355,6 +376,7 @@ namespace Assignment.Management
             SqlDataReader reader = com.ExecuteReader();
             if (reader.Read())
             {
+                lblBookingId.Text = reader["Id"].ToString();
                 txtPickUpLocation.Text = reader["Pickup_point"].ToString();
                 txtDropOffLocation.Text = reader["Dropoff_point"].ToString();
 
@@ -365,16 +387,54 @@ namespace Assignment.Management
                 txtPickUpTime.Text = pickup_time.ToString("dd/MM/yyyy hh:mm:ss");
                 txtDropOffTime.Text = dropoff_time.ToString("dd/MM/yyyy hh:mm:ss");
                 txtCustBookDate.Text = custBook_time.ToString("dd/MM/yyyy hh:mm:ss");
-
-                //assign for textbox in modal
-                txtInitBookingPrice.Text = "MYR " + reader["Price"].ToString();
-                txtFinalBookingPrice.Text = "MYR " + reader["FinalPrice"].ToString();
-
-
                 if (reader["Notes"].ToString() != null)
                 {
                     txtAdditionalNotes.Text = reader["Notes"].ToString();
                 }
+
+                //assign for price textbox in modal
+                double initPrice = Convert.ToDouble(reader["Price"]);
+                double updatedPrice = Convert.ToDouble(reader["FinalPrice"]);
+
+                double priceDiff = updatedPrice- initPrice;
+                double absPriceDiff = Math.Abs(priceDiff);
+
+                txtInitBookingPrice.Text = initPrice.ToString("F2");
+                txtUpdatedBookingPrice.Text =  updatedPrice.ToString("F2");
+
+                if (priceDiff > 0)
+                {
+                    lblFinalPriceInfo.Visible = true;
+                    txtFinalPriceAmt.Visible = true;
+                    lblFinalPriceInfo.Text = "Post-update Additional Charges (MYR)";
+                    txtFinalPriceAmt.Text = absPriceDiff.ToString("F2");
+                    hdnFinalPriceInfo.Value = "Extra";
+                }
+                else if (priceDiff == 0)
+                {
+                    lblFinalPriceInfo.Visible = false;
+                    txtFinalPriceAmt.Visible = false;
+                    hdnFinalPriceInfo.Value = "No";
+                }
+                else
+                {
+                    lblFinalPriceInfo.Visible = true;
+                    txtFinalPriceAmt.Visible = true;
+                    lblFinalPriceInfo.Text = "Post-update Partial Refund (MYR)";
+                    txtFinalPriceAmt.Text = absPriceDiff.ToString("F2");
+                    hdnFinalPriceInfo.Value = "Refund";
+                }
+
+                if (reader["RejectReason"]!= DBNull.Value)
+                {
+                    txtRejectReason.Text = reader["RejectReason"].ToString();
+                }
+                else
+                {
+                    txtRejectReason.Text = "-";
+                }
+
+
             }
             con.Close();
             reader.Close();
@@ -564,118 +624,6 @@ namespace Assignment.Management
             Response.Redirect("BookingManagement.aspx");
         }
 
-        /*  protected void UserReapeter_ItemCreated(object sender, RepeaterItemEventArgs e)
-          {
-              Button btnView = (Button)e.Item.FindControl("btnView");
-              Button btnDelete = (Button)e.Item.FindControl("btnDelete");
-              if (btnView != null)
-              {
-                  ScriptManager scriptManager = ScriptManager.GetCurrent(this.Page);
-                  scriptManager.RegisterPostBackControl(btnView);
-                  scriptManager.RegisterPostBackControl(btnDelete);
-              }
-          }
-
-          protected void UserReapeter_ItemDataBound(object sender, RepeaterItemEventArgs e)
-          {
-              Label lblRegDate = (Label)e.Item.FindControl("lblRegDate");
-              Label lblBdate = (Label)e.Item.FindControl("lblBdate");
-              Label lblUserStatus = (Label)e.Item.FindControl("lblUserStatus");
-              DateTime bDate = (DateTime)DataBinder.Eval(e.Item.DataItem, "DOB");
-              DateTime regDate = (DateTime)DataBinder.Eval(e.Item.DataItem, "RegistrationDate");
-              string isBan = DataBinder.Eval(e.Item.DataItem, "IsBan").ToString();
-
-              lblBdate.Text = bDate.ToString("dd/MM/yyyy");
-              lblRegDate.Text = regDate.ToString("dd/MM/yyyy");
-
-              if (isBan == "0")
-              {
-                  lblUserStatus.Text = "Active";
-              }
-              else if (isBan == "1")
-              {
-                  lblUserStatus.Text = "Banned";
-              }
-          }
-          protected void UserDriverReapeter_ItemDataBound(object sender, RepeaterItemEventArgs e)
-          {
-              Label lblApproval = (Label)e.Item.FindControl("lblApproval");
-              Label lblReject = (Label)e.Item.FindControl("lblReject");
-              string approvalStatus = DataBinder.Eval(e.Item.DataItem, "Approval").ToString();
-              string rejectReason = DataBinder.Eval(e.Item.DataItem, "rejectReason").ToString();
-
-              switch (approvalStatus)
-              {
-                  case "P":
-                      lblApproval.Text = "Pending";
-                      lblApproval.CssClass = "badge bg-warning text-light";
-                      break;
-                  case "A":
-                      lblApproval.Text = "Approved";
-                      lblApproval.CssClass = "badge bg-success text-light";
-                      break;
-                  case "R":
-                      lblApproval.Text = "Rejected";
-                      lblApproval.CssClass = "badge bg-danger text-light";
-                      lblReject.Text = "Reject Reason:" + rejectReason;
-                      break;
-                  default:
-                      lblApproval.Text = "Unknown";
-                      break;
-              }
-          }
-          protected void btnBan_Click(object sender, EventArgs e)
-          {
-              string sql = "UPDATE ApplicationUser SET IsBan = 1 , BanReason = @banReason WHERE Id = @id";
-              banUser(sql, true);
-              Server.Transfer("UserManagement.aspx");
-          }
-          protected void btnUnban_Click(object sender, EventArgs e)
-          {
-              string sql = "UPDATE ApplicationUser SET IsBan = 0 , BanReason = @banReason WHERE Id = @id";
-              banUser(sql, false);
-              Server.Transfer("UserManagement.aspx");
-          }
-
-          protected void banUser(string sql, Boolean isBan)
-          {
-              SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-              SqlCommand com = new SqlCommand(sql, con);
-              con.Open();
-              com.Parameters.AddWithValue("@id", Session["UserTableID"].ToString());
-              if (isBan)
-              {
-                  if (ddlBanReason.SelectedValue != "Other")
-                  {
-                      com.Parameters.AddWithValue("@banReason", ddlBanReason.SelectedValue);
-                  }
-                  else
-                  {
-                      com.Parameters.AddWithValue("@banReason", txtOtherReason.Text);
-                  }
-              }
-              else
-              {
-                  com.Parameters.AddWithValue("@banReason", "");
-              }
-              com.ExecuteNonQuery();
-              con.Close();
-          }
-
-          protected void ddlBanReason_SelectedIndexChanged(object sender, EventArgs e)
-          {
-              if (ddlBanReason.SelectedValue == "Other")
-              {
-                  txtOtherReason.Visible = true;
-                  requireOtherReason.Enabled = true;
-                  banReasonUpdate.Update();
-              }
-              else
-              {
-                  txtOtherReason.Visible = false;
-                  requireOtherReason.Enabled = false;
-                  banReasonUpdate.Update();
-              }
-          }*/
+    
     }
 }

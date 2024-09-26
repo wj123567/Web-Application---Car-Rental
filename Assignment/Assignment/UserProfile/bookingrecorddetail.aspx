@@ -140,6 +140,7 @@
                                    <th style="width:30%">Pick Up Location</th>
                                    <td style="width:70%">
                                        <asp:Label ID="lblPickUpLocation" runat="server" Text="Label"></asp:Label>
+                                       <asp:HyperLink ID="hlPickUp" runat="server" CssClass="lni lni-map-marker text-decoration-none"></asp:HyperLink>
                                    </td>
                                </tr>
                                <tr class="booking_car_table_info">
@@ -152,6 +153,7 @@
                                    <th style="width:30%">Drop Off Location</th>
                                    <td style="width:70%">
                                        <asp:Label ID="lblDropOffLocation" runat="server" Text="Label"></asp:Label>
+                                       <asp:HyperLink ID="hlDropOff" runat="server" CssClass="lni lni-map-marker text-decoration-none"></asp:HyperLink>
                                    </td>
                                </tr>
                                <tr class="booking_car_table_info">

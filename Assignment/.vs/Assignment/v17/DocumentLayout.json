@@ -11,6 +11,10 @@
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\bookingmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\github desk\\web\\web-application---car-rental\\assignment\\assignment\\css\\bookingmanagement.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\css\\bookingmanagement.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\assignment\\userprofile\\bookingrecordupdate.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\userprofile\\bookingrecordupdate.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -73,11 +77,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 279,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "dbo.PaymentCard [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__GITHUB_DESK_WEB_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.PaymentCard.sql",
               "ToolTip": "dbo.PaymentCard [Data]",
@@ -87,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "dbo.Car [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__GITHUB_DESK_WEB_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.Car.sql",
               "ToolTip": "dbo.Car [Data]",
@@ -97,7 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "dbo.BookingAddOn [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__GITHUB_DESK_WEB_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.BookingAddOn.sql",
               "ToolTip": "dbo.BookingAddOn [Data]",
@@ -107,7 +111,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "dbo.AddOn [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__GITHUB_DESK_WEB_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.AddOn.sql",
               "ToolTip": "dbo.AddOn [Data]",
@@ -117,7 +121,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "dbo.Booking [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/C__GITHUB_DESK_WEB_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.Booking.sql",
               "ToolTip": "dbo.Booking [Data]",
@@ -127,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Home.aspx",
               "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx",
               "RelativeDocumentMoniker": "Assignment\\Home.aspx",
@@ -140,7 +144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "bookingrecord.aspx",
               "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingrecord.aspx",
               "RelativeDocumentMoniker": "Assignment\\UserProfile\\bookingrecord.aspx",
@@ -153,7 +157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "bookingrecord.aspx.cs",
               "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingrecord.aspx.cs",
               "RelativeDocumentMoniker": "Assignment\\UserProfile\\bookingrecord.aspx.cs",
@@ -166,7 +170,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "bookingrecorddetail.aspx",
               "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingrecorddetail.aspx",
               "RelativeDocumentMoniker": "Assignment\\UserProfile\\bookingrecorddetail.aspx",
@@ -179,7 +183,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "bookingrecorddetail.aspx.cs",
               "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingrecorddetail.aspx.cs",
               "RelativeDocumentMoniker": "Assignment\\UserProfile\\bookingrecorddetail.aspx.cs",
@@ -192,7 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "bookingRecordUpdate.aspx",
               "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingRecordUpdate.aspx",
               "RelativeDocumentMoniker": "Assignment\\UserProfile\\bookingRecordUpdate.aspx",
@@ -205,16 +209,30 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "bookingRecordUpdate.aspx.cs",
               "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingRecordUpdate.aspx.cs",
               "RelativeDocumentMoniker": "Assignment\\UserProfile\\bookingRecordUpdate.aspx.cs",
               "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingRecordUpdate.aspx.cs",
               "RelativeToolTip": "Assignment\\UserProfile\\bookingRecordUpdate.aspx.cs",
-              "ViewState": "AQIAAIgAAAAAAAAAAAAgwKIAAAAyAAAA",
+              "ViewState": "AQIAAIgAAAAAAAAAAAAgwKIAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-26T09:39:57.594Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "bookingManagement.css",
+              "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\bookingManagement.css",
+              "RelativeDocumentMoniker": "Assignment\\CSS\\bookingManagement.css",
+              "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\bookingManagement.css",
+              "RelativeToolTip": "Assignment\\CSS\\bookingManagement.css",
+              "ViewState": "AQIAADwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-09-26T12:49:05.552Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -228,14 +246,14 @@
               "RelativeDocumentMoniker": "Assignment\\Management\\BookingManagement.aspx.cs",
               "ToolTip": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\BookingManagement.aspx.cs",
               "RelativeToolTip": "Assignment\\Management\\BookingManagement.aspx.cs",
-              "ViewState": "AQIAAJwBAAAAAAAAAAAMwLgBAAANAAAA",
+              "ViewState": "AQIAAGEBAAAAAAAAAAAAAG8BAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-26T10:33:20.943Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "bookingrecord.css",
               "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\CSS\\bookingrecord.css",
               "RelativeDocumentMoniker": "Assignment\\CSS\\bookingrecord.css",
@@ -260,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "dashboard.aspx",
               "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\dashboard.aspx",
               "RelativeDocumentMoniker": "Assignment\\Management\\dashboard.aspx",
@@ -272,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "payment_pg.aspx",
               "DocumentMoniker": "C:\\Github desk\\Web\\Web-Application---Car-Rental\\Assignment\\Assignment\\payment_pg.aspx",
               "RelativeDocumentMoniker": "Assignment\\payment_pg.aspx",

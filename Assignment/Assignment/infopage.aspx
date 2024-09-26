@@ -234,9 +234,6 @@
                                             <div class="review-text mb-3">
                                                 <p><%# Eval("ReviewText") %></p>
                                             </div>
-                                            <div class="align-self-end mt-auto">
-                                                <a class="btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-                                            </div>
                                         </div>
                                     </div>
 

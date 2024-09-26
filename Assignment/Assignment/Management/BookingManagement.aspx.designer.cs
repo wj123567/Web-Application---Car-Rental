@@ -42,6 +42,15 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.HiddenField hdnCancelDateCheck;
 
         /// <summary>
+        /// hdnFinalPriceInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnFinalPriceInfo;
+
+        /// <summary>
         /// updateReason control.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace Assignment.Management
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnReject2;
+
+        /// <summary>
+        /// lblBookingId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBookingId;
 
         /// <summary>
         /// Label10 control.
@@ -195,15 +213,6 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.TextBox txtCustBookDate;
 
         /// <summary>
-        /// Label5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
-
-        /// <summary>
         /// txtAdditionalNotes control.
         /// </summary>
         /// <remarks>
@@ -285,13 +294,40 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
-        /// txtFinalBookingPrice control.
+        /// txtUpdatedBookingPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFinalBookingPrice;
+        protected global::System.Web.UI.WebControls.TextBox txtUpdatedBookingPrice;
+
+        /// <summary>
+        /// lblFinalPriceInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFinalPriceInfo;
+
+        /// <summary>
+        /// txtFinalPriceAmt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFinalPriceAmt;
+
+        /// <summary>
+        /// txtRejectReason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRejectReason;
 
         /// <summary>
         /// btnOk control.
@@ -402,6 +438,15 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.Button btnDriverNext;
 
         /// <summary>
+        /// updatebookingRecordTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatebookingRecordTable;
+
+        /// <summary>
         /// txtBookingSearch control.
         /// </summary>
         /// <remarks>
@@ -420,15 +465,6 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.DropDownList ddlStatusFilter;
 
         /// <summary>
-        /// updatebookingRecordTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatebookingRecordTable;
-
-        /// <summary>
         /// btnSortID control.
         /// </summary>
         /// <remarks>
@@ -436,6 +472,15 @@ namespace Assignment.Management
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSortID;
+
+        /// <summary>
+        /// btnSortBookingDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortBookingDate;
 
         /// <summary>
         /// btnSortStatus control.
@@ -474,15 +519,6 @@ namespace Assignment.Management
         protected global::System.Web.UI.WebControls.LinkButton btnSortPickUpTime;
 
         /// <summary>
-        /// btnSortDropOffLocation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortDropOffLocation;
-
-        /// <summary>
         /// btnSortDropOffTime control.
         /// </summary>
         /// <remarks>
@@ -499,15 +535,6 @@ namespace Assignment.Management
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnCancelReason;
-
-        /// <summary>
-        /// btnRejectReason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRejectReason;
 
         /// <summary>
         /// rptBookingList control.
