@@ -21,9 +21,47 @@ namespace Assignment.Management
             if (!Page.IsPostBack)
             {
                 /*loadDataofLineChart();*/
+                loadVisitorState();
             }
         }
 
+        private void loadVisitorState()
+        {
+            try
+            {
+            lblVisitor.Text = Application["VisitorCount"].ToString();
+            lblVisitorDate.Text += DateTime.Parse(Application["LastVisitDate"].ToString()).ToString("dd/MM/yyyy");
+            lblActiveUser.Text = Application["ActiveUsers"].ToString();
+            lblActiveDate.Text += DateTime.Parse(Application["ActiveDate"].ToString()).ToString("dd/MM/yyyy HH:mm");
+            }
+            catch(Exception e)
+            {
+                Response.Redirect("~/Error.aspx");
+            }
+
+            string select = @"SELECT COUNT(*) as Sales, COALESCE(SUM(FinalPrice), 0) as Earn , (SELECT TOP 1 BookingDate FROM Booking WHERE Status NOT IN ('Cancelled', 'Pending') ORDER BY BookingDate DESC) AS LastBooking FROM Booking WHERE Status NOT IN ('Cancelled', 'Pending') AND CAST(BookingDate AS DATE) = CAST(SYSDATETIME() AS DATE)";
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            SqlCommand com = new SqlCommand(select, con);
+            con.Open();
+            SqlDataReader reader = com.ExecuteReader();
+            if (reader.Read())
+            {
+                lblEarning.Text += Convert.ToDouble(reader["Earn"]).ToString("F2");
+                lblSales.Text += reader["Sales"].ToString();
+                if (reader["LastBooking"] != DBNull.Value)
+                {
+                    lblEarningLast.Text += DateTime.Parse(reader["LastBooking"].ToString()).ToString("dd/MM/yyyy");
+                    lblLastSales.Text += DateTime.Parse(reader["LastBooking"].ToString()).ToString("dd/MM/yyyy");
+                }
+                else
+                {
+                    lblEarningLast.Text += "No Booking Today";
+                    lblLastSales.Text += "No Booking Today";
+                }
+            }
+
+
+        }
         private void loadTopRental()
         {
             string select = @"SELECT TOP 5 COUNT(B.CarPlate) AS RentalCount, MAX(C.CarImage) AS Image, SUM(C.CarDayPrice) AS Price, SUM(B.Price) AS TotalRevenue, (C.CarBrand + ' ' + C.CarName) AS CarName FROM [Car] C JOIN [Booking] B ON C.CarPlate = B.CarPlate WHERE B.Status NOT IN ('Cancelled', 'Pending') GROUP BY C.CarBrand, C.CarName ORDER BY COUNT(B.CarPlate) DESC";

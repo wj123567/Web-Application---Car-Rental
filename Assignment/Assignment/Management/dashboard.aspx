@@ -24,7 +24,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col mt-0">
-                                            <h5 class="card-title">Sales</h5>
+                                            <h5 class="card-title">Booking</h5>
                                         </div>
 
                                         <div class="col-auto">
@@ -33,10 +33,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h1 class="mt-1 mb-3">2.382</h1>
+                                    <h1 class="mt-1 mb-3"><asp:Label ID="lblSales" runat="server" Text=""></asp:Label></h1>
                                     <div class="mb-0">
-                                        <span class="text-danger">-3.65%</span>
-                                        <span class="text-muted">Since last week</span>
+                                            <asp:Label ID="lblLastSales" runat="server" Text="Last Booking: " CssClass="text-muted"></asp:Label>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +43,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col mt-0">
-                                            <h5 class="card-title">Visitors</h5>
+                                            <h5 class="card-title">Today Visitors</h5>
                                         </div>
 
                                         <div class="col-auto">
@@ -53,10 +52,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h1 class="mt-1 mb-3">38</h1>
+                                    <h1 class="mt-1 mb-3">
+                                        <asp:Label ID="lblVisitor" runat="server" Text=""></asp:Label></h1>
                                     <div class="mb-0">
-                                        <span class="text-success">5.25%</span>
-                                        <span class="text-muted">Since last week</span>
+                                        <asp:Label ID="lblVisitorDate" runat="server" Text="Last Update: " CssClass="text-muted"></asp:Label>
                                     </div>
                                 </div>
                             </div>
@@ -75,10 +74,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h1 class="mt-1 mb-3">RM 21.30</h1>
+                                    <h1 class="mt-1 mb-3">
+                                        <asp:Label ID="lblEarning" runat="server" Text="RM "></asp:Label></h1>
                                     <div class="mb-0">
-                                        <span class="text-success">6.65%</span>
-                                        <span class="text-muted">Since last week</span>
+                                            <asp:Label ID="lblEarningLast" runat="server" Text="Last Booking: " CssClass="text-muted"></asp:Label>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +85,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col mt-0">
-                                            <h5 class="card-title">Orders</h5>
+                                            <h5 class="card-title">Active Users</h5>
                                         </div>
 
                                         <div class="col-auto">
@@ -95,10 +94,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h1 class="mt-1 mb-3">64</h1>
+                                    <h1 class="mt-1 mb-3"><asp:Label ID="lblActiveUser" runat="server" Text=""></asp:Label></h1>
                                     <div class="mb-0">
-                                        <span class="text-danger">-2.25%</span>
-                                        <span class="text-muted">Since last week</span>
+                                            <asp:Label ID="lblActiveDate" runat="server" Text="Last Update: " CssClass="text-muted"></asp:Label>
                                     </div>
                                 </div>
                             </div>
