@@ -9,28 +9,39 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <h5>5260 Points</h5>
-                    <p>Points expire 12 months after they were earned</p>
+                    <h5><%= lblTotalPoints.Text %> Points</h5>
+                    <p>Points expire every December 31st</p>
                     <hr>
                     <h5>Points history</h5>
                     <br />
-                    <div class="d-flex justify-content-between">
-                        <div style="flex:10%"><i class="fa-solid fa-caret-up" style="color: #398000;"></i></div>
-                        <div style="flex:80%">
-                            <div>Earned</div>
-                            <div>2024-08-09</div>
-                        </div>
-                        <div style="flex:10%">1000 &nbsp; <i class="fa-solid fa-coins" style="color: #eb8900;"></i></div>
-                    </div>
-                    <br />
-                    <div class="d-flex justify-content-between">
-                        <div style="flex:10%"><i class="fa-solid fa-caret-down" style="color: #e00000;"></i></div>
-                        <div style="flex:80%">
-                            <div>Used</div>
-                            <div>2024-08-10</div>
-                        </div>
-                        <div style="flex:10%">-1000 &nbsp; <i class="fa-solid fa-coins" style="color: #eb8900;"></i></div>
-                    </div>
+
+                    <asp:ListView ID="lvPointsHistory" runat="server">
+                        <ItemTemplate>
+                            <div class="d-flex justify-content-between">
+                                <div class="pe-3" style="flex:2%; text-align:end">
+                                    <i class='<%# Convert.ToBoolean(Eval("IsEarned")) ? "fa-solid fa-caret-up" : "fa-solid fa-caret-down" %>' 
+                                       style='<%# Convert.ToBoolean(Eval("IsEarned")) ? "color: #398000;" : "color: #e00000;" %>'></i>
+                                </div>
+
+                                <div class="ps-4" style="flex:50%">
+                                    <div><%# Convert.ToBoolean(Eval("IsEarned")) ? "Earned" : "Used" %></div>
+                                    <div><%# Eval("Date", "{0:yyyy-MM-dd}") %></div>
+                                    <div style='font-size: small; color: gray; <%# Convert.ToBoolean(Eval("IsEarned")) ? "display:none;" : "" %>'>
+                                        Redeemed Description: <%# Eval("RedeemDescription") %>
+                                    </div>
+                                </div>
+                                <div style="flex:10%; text-align: end">
+                                    <%# (Convert.ToBoolean(Eval("IsEarned")) ? "+" : "-") + Eval("Points") + " " %>
+                                </div>
+                                <div class="ms-2" style="flex:10%;">
+                                    <i class="fa-solid fa-coins" style="color: #eb8900;"></i>
+                                </div>
+                            </div>
+                            <br />
+                        </ItemTemplate>
+
+                    </asp:ListView>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

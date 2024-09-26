@@ -38,7 +38,7 @@
                             <p><%# Eval("ItemDescription") %> </p>
                             <span class="d-inline-block d-flex justify-content-center" style="width: 100%" tabindex="0" 
                                   data-bs-toggle="tooltip" 
-                                  title='<%# (bool)Eval("IsRedeemed") ? "Already Redeemed Today" : (bool)Eval("IsUnavailable") ? "Item Unavailable" : "" %>' 
+                                  title='<%# (bool)Eval("IsRedeemed") ? "Already Redeemed Today" : (bool)Eval("IsUnavailable") ? "Voucher Coming Soon!" : "" %>' 
                                   data-bs-placement="top">
                                 <asp:LinkButton ID="btnRedeem" runat="server" 
                                     CssClass='<%# (bool)Eval("IsRedeemed") || (bool)Eval("IsUnavailable") ? "btn btn-danger resize disabled-btn" : "btn btn-danger resize" %>'

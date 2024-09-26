@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Web.Util;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Data;
+using Assignment.Models;
 
 namespace Assignment
 {
@@ -25,11 +26,69 @@ namespace Assignment
                 {
                     string userId = Session["Id"]?.ToString();
                     LoadUserData(userId);
+                    LoadPointsHistory(userId);
+                    BindPointsHistory();
                 }
                 else
                 {
                     Response.Redirect("~/Home.aspx");
                 }
+            }
+        }
+
+        private void BindPointsHistory()
+        {
+            var pointsRecords = ViewState["PointsRecords"] as List<PointsRecord>;
+
+            if (pointsRecords != null)
+            {
+                lvPointsHistory.DataSource = pointsRecords;
+                lvPointsHistory.DataBind();
+            }
+        }
+
+        private void LoadPointsHistory(string userId)
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                var pointsRecords = new List<PointsRecord>();
+
+                //earned points
+                var earnedPoints = db.Bookings
+                                     .Where(b => b.UserId == userId
+                                            && b.Status == "Completed"
+                                            && b.EarnDate.HasValue)
+                                     .Select(b => new PointsRecord
+                                     {
+                                         Date = b.EarnDate.Value,
+                                         Points = (int)(b.FinalPrice / 10),
+                                         IsEarned = true,
+                                         RedeemDescription = null
+                                     }).ToList();
+
+                // Used points
+                var usedPoints = db.Redemptions
+                                   .Where(r => r.UserId == userId)
+                                   .Select(r => new PointsRecord
+                                   {
+                                       Date = r.RedeemDate,
+                                       Points = db.RedeemItems
+                                                .Where(i => i.RedeemItemId == r.RedeemItemId)
+                                                .Select(i => i.ItemPoints)
+                                                .FirstOrDefault() ?? 0,
+                                       IsEarned = false,
+                                       RedeemDescription = db.RedeemItems.Where(i => i.RedeemItemId == r.RedeemItemId)
+                                                                        .Select(i => i.ItemDescription)
+                                                                        .FirstOrDefault()
+                                   }).ToList();
+
+                // Combine and sort records by date
+                pointsRecords.AddRange(earnedPoints);
+                pointsRecords.AddRange(usedPoints);
+                pointsRecords = pointsRecords.OrderByDescending(pr => pr.Date).ToList();
+
+                // Save to ViewState
+                ViewState["PointsRecords"] = pointsRecords;
             }
         }
 
@@ -44,14 +103,10 @@ namespace Assignment
                     lblUsername.Text = user.Username;
                     lblTotalPoints.Text = user.RewardPoints.ToString() + " Points";
 
-                    var oldestBooking = db.Bookings
-                                        .Where(b => b.UserId == userId && b.EarnDate != null)
-                                        .OrderBy(b => b.EarnDate)
-                                        .FirstOrDefault();
+                    DateTime expiryDate = new DateTime(DateTime.Now.Year, 12, 31);
 
-                    if (oldestBooking != null && oldestBooking.EarnDate.HasValue)
+                    if (user.RewardPoints > 0)
                     {
-                        DateTime expiryDate = oldestBooking.EarnDate.Value.AddYears(1);
                         lblExpiryDate.Text = expiryDate.ToString();
                     }
                     else

@@ -3,35 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\users\\zobby\\documents\\netbeansprojects\\javaassignment\\web-application---car-rental\\assignment\\assignment\\management\\bookingmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\bookingmanagement.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/A70C90FD59758EF89689BEAD389644EF_S_JAVAASSIGNMENT_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.Redemption.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\users\\zobby\\documents\\netbeansprojects\\javaassignment\\web-application---car-rental\\assignment\\assignment\\management\\bookingmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\bookingmanagement.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\users\\zobby\\documents\\netbeansprojects\\javaassignment\\web-application---car-rental\\assignment\\assignment\\userprofile\\rewardpoint.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\userprofile\\rewardpoint.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\users\\zobby\\documents\\netbeansprojects\\javaassignment\\web-application---car-rental\\assignment\\assignment\\payment_pg.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\payment_pg.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\users\\zobby\\documents\\netbeansprojects\\javaassignment\\web-application---car-rental\\assignment\\assignment\\payment_pg.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\payment_pg.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\users\\zobby\\documents\\netbeansprojects\\javaassignment\\web-application---car-rental\\assignment\\assignment\\management\\adminrewardpoint.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\management\\adminrewardpoint.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\users\\zobby\\documents\\netbeansprojects\\javaassignment\\web-application---car-rental\\assignment\\assignment\\userprofile\\rewardpoint.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\userprofile\\rewardpoint.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|c:\\users\\zobby\\documents\\netbeansprojects\\javaassignment\\web-application---car-rental\\assignment\\assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\home.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 279,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -69,103 +42,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "dbo.Redemption [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/A70C90FD59758EF89689BEAD389644EF_S_JAVAASSIGNMENT_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.Redemption.sql",
-              "ToolTip": "dbo.Redemption [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-09-26T00:32:47.744Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "BookingManagement.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\BookingManagement.aspx.cs",
-              "RelativeDocumentMoniker": "Assignment\\Management\\BookingManagement.aspx.cs",
-              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\BookingManagement.aspx.cs",
-              "RelativeToolTip": "Assignment\\Management\\BookingManagement.aspx.cs",
-              "ViewState": "AgIAAMUAAAAAAAAAAAAhwNEAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T00:28:01.941Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BookingManagement.aspx",
-              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\BookingManagement.aspx",
-              "RelativeDocumentMoniker": "Assignment\\Management\\BookingManagement.aspx",
-              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\BookingManagement.aspx",
-              "RelativeToolTip": "Assignment\\Management\\BookingManagement.aspx",
+              "Title": "Home.aspx",
+              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx",
+              "RelativeDocumentMoniker": "Assignment\\Home.aspx",
+              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Home.aspx",
+              "RelativeToolTip": "Assignment\\Home.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-09-26T00:28:00.411Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "payment_pg.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\payment_pg.aspx.cs",
-              "RelativeDocumentMoniker": "Assignment\\payment_pg.aspx.cs",
-              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\payment_pg.aspx.cs",
-              "RelativeToolTip": "Assignment\\payment_pg.aspx.cs",
-              "ViewState": "AgIAAJkBAAAAAAAAAIA5wKUBAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T00:27:45.675Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "payment_pg.aspx",
-              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\payment_pg.aspx",
-              "RelativeDocumentMoniker": "Assignment\\payment_pg.aspx",
-              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\payment_pg.aspx",
-              "RelativeToolTip": "Assignment\\payment_pg.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-09-26T00:27:44.617Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RewardPoint.aspx.cs",
-              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\RewardPoint.aspx.cs",
-              "RelativeDocumentMoniker": "Assignment\\UserProfile\\RewardPoint.aspx.cs",
-              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\RewardPoint.aspx.cs",
-              "RelativeToolTip": "Assignment\\UserProfile\\RewardPoint.aspx.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAwwDMAAABRAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T00:12:59.609Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AdminRewardPoint.aspx",
-              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AdminRewardPoint.aspx",
-              "RelativeDocumentMoniker": "Assignment\\Management\\AdminRewardPoint.aspx",
-              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\Management\\AdminRewardPoint.aspx",
-              "RelativeToolTip": "Assignment\\Management\\AdminRewardPoint.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-09-26T00:11:47.84Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "RewardPoint.aspx",
-              "DocumentMoniker": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\RewardPoint.aspx",
-              "RelativeDocumentMoniker": "Assignment\\UserProfile\\RewardPoint.aspx",
-              "ToolTip": "C:\\Users\\zobby\\Documents\\NetBeansProjects\\JavaAssignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\RewardPoint.aspx",
-              "RelativeToolTip": "Assignment\\UserProfile\\RewardPoint.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-09-26T00:11:38.828Z",
+              "WhenOpened": "2024-09-26T03:18:35.547Z",
               "EditorCaption": ""
             }
           ]

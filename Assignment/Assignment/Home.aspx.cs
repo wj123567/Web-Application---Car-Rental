@@ -65,20 +65,12 @@ namespace Assignment
 
                 foreach (var user in users)
                 {
-                    var oldestBooking = db.Bookings
-                                          .Where(b => b.UserId == user.Id && b.EarnDate != null)
-                                          .OrderBy(b => b.EarnDate)
-                                          .FirstOrDefault();
+                    DateTime endOfLastYear = new DateTime(DateTime.Now.Year, 12, 31);
 
-                    if (oldestBooking != null && oldestBooking.EarnDate.HasValue)
+                    if (DateTime.Now > endOfLastYear)
                     {
-                        DateTime expiryDate = oldestBooking.EarnDate.Value.AddYears(1);
-
-                        if (DateTime.Now > expiryDate)
-                        {
-                            // Reset the reward points to 0
-                            user.RewardPoints = 0;
-                        }
+                        // Reset reward points to 0
+                        user.RewardPoints = 0;
                     }
                 }
 

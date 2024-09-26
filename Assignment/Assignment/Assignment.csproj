@@ -333,6 +333,7 @@
     <Compile Include="Management\AdminReview.aspx.designer.cs">
       <DependentUpon>AdminReview.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PointsRecord.cs" />
     <Compile Include="PaymentCard.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
     </Compile>
