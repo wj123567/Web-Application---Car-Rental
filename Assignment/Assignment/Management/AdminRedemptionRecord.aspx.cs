@@ -229,9 +229,11 @@ namespace Assignment.Management
                             ShowErrorMessage("No records were updated. Please verify the details.");
                         }
                     }
-
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccessMessage", "alert('Status Updated successfully!');", true);
                     // Rebind the ListView to reflect changes
                     BindListView();
+
+
                 }
                 catch (Exception ex)
                 {
@@ -265,6 +267,45 @@ namespace Assignment.Management
                 if (ddlStatus != null)
                 {
                     ddlStatus.SelectedValue = dataItem.IsActive ? "True" : "False";
+                }
+            }
+        }
+
+
+
+        protected void DeleteButton_Click(object sender, EventArgs e)
+        {
+            LinkButton btn = (LinkButton)sender;
+            string commandArgument = btn.CommandArgument;
+
+            // Split command argument to retrieve IDs
+            string[] args = commandArgument.Split('|');
+            string redeemItemId = args[0];
+            string userId = args[1];
+            DateTime redeemDate = DateTime.Parse(args[2]);
+
+            using (var db = new SystemDatabaseEntities())
+            {
+                string query = "DELETE FROM Redemption WHERE RedeemItemId = @RedeemItemId AND UserId = @UserId AND CAST(RedeemDate AS DATE) = @RedeemDate";
+
+                var parameters = new[]
+                {
+                    new SqlParameter("@RedeemItemId", redeemItemId),
+                    new SqlParameter("@UserId", userId),
+                    new SqlParameter("@RedeemDate", redeemDate)
+                };
+
+
+                int rowsAffected = db.Database.ExecuteSqlCommand(query, parameters);
+
+                if (rowsAffected > 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccessMessage", "alert('Redemption Record Deleted successfully!');", true);
+                    BindListView();
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showSuccessMessage", "alert('Redemption Record Deleted Failed!');", true);
                 }
             }
         }

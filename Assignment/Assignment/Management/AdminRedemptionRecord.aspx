@@ -86,16 +86,18 @@
                             <asp:HiddenField ID="hfRedeemDate" runat="server" Value='<%# Eval("RedeemDate", "{0:yyyy-MM-dd}") %>' />
 
                             <asp:DropDownList ID="ddlStatus" runat="server" AutoPostBack="true" 
-                                OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged">
+                                OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged"
+                                style="width: 80%; height:30px;">
                                 <asp:ListItem Text="Active" Value="True"></asp:ListItem>
                                 <asp:ListItem Text="Inactive" Value="False"></asp:ListItem>
                             </asp:DropDownList>
                         </td>
                         
                         <td >
-                            <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("RedeemItemId") + "|" + Eval("UserId") + "|" + Eval("RedeemDate", "{0:yyyy-MM-dd}") %>'  >
-                                <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
-                            </asp:LinkButton>
+                                <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" CommandArgument='<%# Eval("RedeemItemId") + "|" + Eval("UserId") + "|" + Eval("RedeemDate", "{0:yyyy-MM-dd}") %>' OnClick="DeleteButton_Click"
+                                OnClientClick="return confirm('Are you sure you want to delete this redemption record?');">
+                                    <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
+                                </asp:LinkButton>
                         </td>
                     </tr>
                 </ItemTemplate>
