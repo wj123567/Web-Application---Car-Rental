@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     
-    <link href="../CSS/admin.css" rel="stylesheet" />      
+    <link href="../CSS/admin.css" rel="stylesheet" />
+    <link href="../CSS/AdminRewardpoint.css" rel="stylesheet" />      
     <link href="../CSS/AdminRedemption.css" rel="stylesheet" />
     <link href="../CSS/dashboard.css" rel="stylesheet" />
     <link href="../CSS/AdminReview.css" rel="stylesheet" />
@@ -70,7 +71,10 @@
                             <a href="AdminRewardPoint.aspx" class="sidebar-link">Reward Point Management</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="AdminRedemption.aspx" class="sidebar-link">Redemption Management</a>
+                            <a href="AdminRedemptionRecord.aspx" class="sidebar-link">Redemption Management</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="AdminRedemption.aspx" class="sidebar-link">Redeem Item Management</a>
                         </li>
                         <li class="sidebar-item">
                             <a href="AdminReview.aspx" class="sidebar-link">Review Management</a>

@@ -200,6 +200,7 @@
     <Content Include="ErrorPage.aspx" />
     <Content Include="Image\Dashboard\booking.png" />
     <Content Include="Image\Dashboard\chart.png" />
+    <Content Include="Management\AdminRedemptionRecord.aspx" />
     <Content Include="Management\AdminReview.aspx" />
     <Content Include="testDate.aspx" />
     <Content Include="UserProfile\bookingRecordUpdate.aspx" />
@@ -325,6 +326,13 @@
     </Compile>
     <Compile Include="Location.cs">
       <DependentUpon>CarRentalSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Management\AdminRedemptionRecord.aspx.cs">
+      <DependentUpon>AdminRedemptionRecord.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\AdminRedemptionRecord.aspx.designer.cs">
+      <DependentUpon>AdminRedemptionRecord.aspx</DependentUpon>
     </Compile>
     <Compile Include="Management\AdminReview.aspx.cs">
       <DependentUpon>AdminReview.aspx</DependentUpon>

@@ -1,37 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Management/Admin.Master" AutoEventWireup="true" CodeBehind="AdminRewardPoint.aspx.cs" Inherits="Assignment.AdminRewardPoint" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
-    <link href="../CSS/AdminRewardpoint.css" rel="stylesheet" />
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:DatabaseConnectionString %>' SelectCommand="SELECT ApplicationUser.Username, Booking.Price, Booking.EarnDate, Booking.PointsRemaining, Booking.PointsStatus FROM ApplicationUser INNER JOIN Booking ON ApplicationUser.Id = Booking.UserId"></asp:SqlDataSource>
+
 
     <div class="RewardPointContainer container-xl px-4 mt-4">
         <div class="title">
                 <h1>Reward Points Management</h1>
             </div>
         <div class="Add">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-              Add
-            </button>
+
         </div>
-        <asp:ListView ID="RewardPointsListView" runat="server" DataSourceID="SqlDataSource1">
+
+        <asp:ListView ID="RewardPointsListView" runat="server">
             <LayoutTemplate>
                 <table class="table table-bordered tableReward table-striped">
                     <thead>
                         <tr class="header-section">
-                            <th>
-                                Username
-                            </th>
-                            <th>
-                                EarnedPoints</th>
-                            <th>
-                                Remaining Points</th>
-                            <th>
-                                Earned Date</th>
-                            <th>
-                                Expiry Date</th>
-                            <th>
-                                Status</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Reward Points</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -53,24 +40,7 @@
                 </LayoutTemplate>
 
                 <ItemTemplate>
-                    <tr class="rp-record">
-                        <td><%# Eval("Username") %></td>
-                        <td><%# Eval("Price") %></td>
-                        <td><%# Eval("PointsRemaining") %></td>
-                        <td><%# Eval("EarnDate") %></td>
-                        <td>
-                            <asp:Label ID="lblExpiryDate" runat="server" Text='<%# Eval("EarnDate") != DBNull.Value ? ((DateTime)Eval("EarnDate")).AddYears(1).ToString() : "N/A" %>'></asp:Label>
-                        </td>
-                        <td><%# Eval("PointsStatus") %></td>
-                        <td>
-                            <asp:LinkButton ID="EditButton" runat="server" CommandName="Edit">
-                                <i class="fas fa-edit" style="color: #ffbb00;"></i>
-                            </asp:LinkButton>
-                            <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete">
-                                <i class="fa-solid fa-trash-can" style="color: #ff0000;"></i>
-                            </asp:LinkButton>
-                        </td>
-                    </tr>
+                    
                 </ItemTemplate>
 
             </asp:ListView>

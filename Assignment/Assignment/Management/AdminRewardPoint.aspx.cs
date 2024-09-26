@@ -13,7 +13,19 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!IsPostBack)
+            {
+                BindListView();
+            }
+
+        }
+
+        private void BindListView()
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                
+            }
         }
 
     }

@@ -87,7 +87,7 @@
 
     <div class="Redemption container-xl px-4 mt-4 container-fluid">
     <div class="title">
-        <h1>Redemption Management</h1>
+        <h1>Redeem Items Management</h1>
     </div>
     <div class="RedeemItemAdd">
         <asp:LinkButton ID="btnAddReviewItem" 
