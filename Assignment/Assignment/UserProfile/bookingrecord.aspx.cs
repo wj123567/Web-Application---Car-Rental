@@ -15,16 +15,59 @@ namespace Assignment
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack) {
+                
                 string userId = Session["Id"].ToString();
 
-                GetBookRecords("All",userId);
+                GetBookRecords("All",userId,"" ,"", "");
             }
   
         }
 
-        private void GetBookRecords(string statusFilter, string userId)
+        protected void btnFilterBookingDate_Click(object sender, EventArgs e)
         {
+            Button button = (Button)sender;
+            string commandName = button.CommandName;
+            string userId = Session["Id"].ToString();
             
+            string filterStartDate = txtFilterStartDate.Text;
+            string filterEndDate = txtFilterEndDate.Text;
+
+            GetBookRecords("All", userId, commandName ,filterStartDate, filterEndDate);
+            //refresh pagination
+            ScriptManager.RegisterStartupScript(this, GetType(), "refreshPagination", "initializePagination();", true);
+            int totalRow = getTotalRow(userId, "All", commandName, filterStartDate, filterEndDate);
+            lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
+
+        }
+
+        protected void btnFilterPickUpDate_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string commandName = button.CommandName;
+
+            string userId = Session["Id"].ToString();
+            string filterStartDate = txtFilterStartDate.Text;
+            string filterEndDate = txtFilterEndDate.Text;
+            
+            GetBookRecords("All", userId, commandName, filterStartDate, filterEndDate);
+            //refresh pagination
+            ScriptManager.RegisterStartupScript(this, GetType(), "refreshPagination", "initializePagination();", true);
+            int totalRow = getTotalRow(userId, "All", commandName, filterStartDate, filterEndDate);
+            lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
+
+        }
+
+        protected void btnClearFilter_Click(object sender, EventArgs e)
+        {
+            string userId = Session["Id"].ToString();
+            GetBookRecords("All", userId,"" ,"", "");
+            //refresh pagination
+            ScriptManager.RegisterStartupScript(this, GetType(), "refreshPagination", "initializePagination();", true);
+        }
+
+        private void GetBookRecords(string statusFilter, string userId, string filterType, string filterStartDate, string filterEndDate)
+        {
+            int totalRow;
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
             {
@@ -34,23 +77,35 @@ namespace Assignment
                 // Apply status filter if necessary
                 if (statusFilter != "All")
                 {
-                    sql += " WHERE b.Status = @Status";
+                    sql += " AND b.Status = @Status";
                 }
+          
+                if(filterType == "BookingDate")
+                {
+                    sql += " AND BookingDate BETWEEN @FilterStartDate AND DATEADD(day,1,@FilterEndDate)";
+
+                }
+                else if(filterType == "PickUpDate")
+                {
+                    sql += " AND StartDate BETWEEN @FilterStartDate AND DATEADD(day,1,@FilterEndDate)";
+                }
+               
 
                 SqlCommand cmd = new SqlCommand(sql, con);
-                if (Session["Id"].ToString() != null)
-                {
-                    cmd.Parameters.AddWithValue("@UserId", userId);
-                }
-                else
-                {
-                    Response.Redirect("../Home.aspx");
-                }
+
+                cmd.Parameters.AddWithValue("@UserId", userId);
+              
                 
                 
                 if (statusFilter != "All")
                 {
                     cmd.Parameters.AddWithValue("@Status", statusFilter);
+                }
+
+                if (filterStartDate != "" && filterEndDate != "")
+                {
+                    cmd.Parameters.AddWithValue("@FilterStartDate", filterStartDate);
+                    cmd.Parameters.AddWithValue("@FilterEndDate", filterEndDate);
                 }
 
 
@@ -64,17 +119,48 @@ namespace Assignment
                     }
                
             }
-            int totalRow = getTotalRow(userId);
-            lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
+       
+           if(filterStartDate=="" && filterStartDate == "")
+            {
+                totalRow = getTotalRow(userId, "All","" ,"", "");
+                lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
+            }
+                  
         }
 
-        protected int getTotalRow(string userId)
+        protected int getTotalRow(string userId,string statusFilter,string filterType ,string filterStartDate , string filterEndDate)
         {
             string countRowSql = "SELECT COUNT(*) FROM Booking b JOIN Car c ON b.CarPlate = c.CarPlate WHERE UserId = @UserId";
+            if (statusFilter != "All")
+            {
+                countRowSql += " AND b.Status = @Status";
+            }
+
+            if (filterType == "BookingDate")
+            {
+                countRowSql += " AND BookingDate BETWEEN @FilterStartDate AND DATEADD(day,1,@FilterEndDate)";
+
+            }
+            else if (filterType == "PickUpDate")
+            {
+                countRowSql += " AND StartDate BETWEEN @FilterStartDate AND DATEADD(day,1,@FilterEndDate)";
+            }
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
             con.Open();
             SqlCommand com = new SqlCommand(countRowSql, con);
             com.Parameters.AddWithValue("@UserId", userId);
+
+            if (statusFilter != "All")
+            {
+                com.Parameters.AddWithValue("@Status", statusFilter);
+            }
+
+            if (filterStartDate != "" && filterEndDate != "")
+            {
+                com.Parameters.AddWithValue("@FilterStartDate", filterStartDate);
+                com.Parameters.AddWithValue("@FilterEndDate", filterEndDate);
+            }
             int totalRow = (int)com.ExecuteScalar();
             con.Close();
             return totalRow;
@@ -154,9 +240,18 @@ namespace Assignment
 
         protected void ddlStatusFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string userId = Session["UserId"].ToString();
+            string userId = Session["Id"].ToString();
             string selectedStatus = ddlStatusFilter.SelectedValue;
-            GetBookRecords(selectedStatus,userId);
+            GetBookRecords(selectedStatus,userId,"","", "");
+            //refresh searching
+            string searchBoxID = txtBookingSearch.ClientID;
+            string searchScript = $"setupSearchFunctionality({searchBoxID});";
+            ScriptManager.RegisterStartupScript(this, GetType(), "refreshSearching", searchScript, true);
+            //refresh pagination
+            ScriptManager.RegisterStartupScript(this, GetType(), "refreshPagination", "initializePagination();", true);
+
+            int totalRow = getTotalRow(userId,selectedStatus,"" ,"", "");
+            lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
         }
 
         protected void sortReview(object sender, EventArgs e)

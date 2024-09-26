@@ -4,11 +4,13 @@
     <link href="../CSS/paging.css" rel="stylesheet" />
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    
+    <asp:UpdatePanel ID="updatebookingRecordTable" class="bookingRecordTablePanel" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
+        <ContentTemplate>
     <div class="booking_container">
        
-        <p class="booking_title">Car Rental Booking</p>
-        
+        <p class="booking_title">Car Rental Booking Record</p>
+
+      
         <div class="container">
             <div class="container">
             <div class="row">
@@ -28,21 +30,29 @@
                    </asp:DropDownList>
                 </div>
                 </div>
-                <div class="container">
-                </div>
+
+                 <asp:Label ID="lblFilterTitle" runat="server" CssClass="fw-bold fs-4" Text="Filter Record By Date"></asp:Label>
+                <asp:Label ID="Label3" runat="server" CssClass="small mb-1"  Text="(select same date to filter record(s) on certain day)"></asp:Label>
+                <asp:Button ID="btnClearFilter" runat="server" CssClass="btn btn-danger" Text="Clear Filter" ValidationGroup="Filter" OnClick="btnClearFilter_Click"/>
+
                 <div class="row mt-3">
-                    <div class="col-4">
-                        <asp:TextBox ID="txtFilterStartDate" runat="server" CssClass="form-control form-input" TextMode="Date" ></asp:TextBox>
+                    <div class=" col-md-3">
+                        <asp:Label ID="lblFilterStartDate" runat="server" CssClass="small mb-1"  Text="Start Date (inclusive)"></asp:Label>
+                        <asp:TextBox ID="txtFilterStartDate" runat="server" CssClass="form-control" TextMode="Date" ></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rqFilterStartDate" runat="server" ErrorMessage="Please Select Filter Start Date" ControlToValidate="txtFilterStartDate" CssClass="validate" ValidationGroup="Filter"  Display="Dynamic"></asp:RequiredFieldValidator>
                     </div>
-                    <div class="col-4">
-                        <asp:TextBox ID="txtFilterEndDate" runat="server" CssClass="form-control form-input" TextMode="Date"></asp:TextBox>
+                    <div class=" col-md-3">
+                        <asp:Label ID="lblFilterEndDate" runat="server" CssClass="small mb-1"  Text="End Date (inclusive)"></asp:Label>
+                        <asp:TextBox ID="txtFilterEndDate" runat="server" CssClass="form-control " TextMode="Date"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rqFilterEndDate" runat="server" ErrorMessage="Please Select Filter End Date" ControlToValidate="txtFilterEndDate" ValidationGroup="Filter" CssClass="validate"  Display="Dynamic"></asp:RequiredFieldValidator>
                     </div>
-                    <div class="col-2">
-                        <asp:Button ID="btnFilterBookingDate" runat="server" CssClass="btn btn-primary" Text="Filter by Booking Date" />
+                    <div class=" col-md-3 d-flex align-items-center justify-content-center">
+                        <asp:Button ID="btnFilterBookingDate" runat="server" CssClass="btn btn-primary" Text="Filter By Booking Date"  ValidationGroup="Filter" CommandName="BookingDate" OnClick="btnFilterBookingDate_Click"/>
                     </div>
-                    <div class="col-2">
-                        <asp:Button ID="btnFilterPickUpDate" runat="server" CssClass="btn btn-secondary" Text="Filter by Pickup Date" />
+                    <div class="col-md-3 d-flex align-items-center justify-content-center" >
+                        <asp:Button ID="btnFilterPickUpDate" runat="server" CssClass="btn btn-secondary" Text="Filter By Pickup Date" ValidationGroup="Filter" CommandName="PickUpDate" OnClick="btnFilterPickUpDate_Click"/>
                     </div>
+                   
                 </div>
                 </div>
               
@@ -50,37 +60,34 @@
                 
             
 
-        <asp:UpdatePanel ID="updatebookingRecordTable" class="bookingRecordTablePanel" runat="server" ChildrenAsTriggers="False" UpdateMode="Conditional">
-        <ContentTemplate>
+        
             <div class="table-responsive">
-    <table class="table align-middle mb-0 booking_record_table datatable" id="bookingRecordTable">
-        <thead class="bg-secondary" style=" line-height:2;text-align:center">
+    <table class="table table-striped align-middle mb-0 booking_record_table datatable" id="bookingRecordTable">
+        <thead class="table-info bg-secondary" style=" line-height:2;text-align:center">
           <tr class="header_row_title" >
 
-              
-
-            <th class="booking_id">
-                <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark  sort-button">
+              <th class="booking_id">
+                  <asp:LinkButton ID="btnSortID" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Id" CssClass="text-dark  sort-button">
                 Booking ID<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-                </asp:LinkButton>
-                
-            </th>
-                            <th class="booking_dropoff">
-    <asp:LinkButton ID="btnSortBookingDate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="BookingDate" CssClass="text-dark sort-button">
+                  </asp:LinkButton>
+
+              </th>
+              <th class="booking_dropoff">
+                  <asp:LinkButton ID="btnSortBookingDate" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="BookingDate" CssClass="text-dark sort-button">
     Booking Date<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-    </asp:LinkButton>
-</th>     
-             <th class="booking_status">
-                 <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark sort-button">
+                  </asp:LinkButton>
+              </th>
+              <th class="booking_status">
+                  <asp:LinkButton ID="btnSortStatus" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Status" CssClass="text-dark sort-button">
                  Status <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
-                </asp:LinkButton>
-                 <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
-             </th>
-   
-            <th class="booking_vehicle">
-                <asp:LinkButton ID="btnSortVehicle" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark sort-button">
-                Vehicle Plate No. 
-                </asp:LinkButton>
+                  </asp:LinkButton>
+                  <asp:HiddenField ID="hdnSortDirection" runat="server" Value="" />
+              </th>
+
+              <th class="booking_vehicle">
+                  <asp:LinkButton ID="btnSortVehicle" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="CarPlate" CssClass="text-dark sort-button">
+                Vehicle Plate <i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
+                  </asp:LinkButton>
             </th>
             <th class="booking_pickup">
                 <asp:LinkButton ID="btnSortPickUpLocation" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Pickup_point" CssClass="text-dark  sort-button">
@@ -100,7 +107,7 @@
             </th>
             <th class="booking_price">
                 <asp:LinkButton ID="btnSortPrice" runat="server" OnClick="btnSort_Click" CommandArgument="ASC" CommandName="Price" CssClass="text-dark  sort-button">
-                Price(MYR)<i class="sort-icon ri-arrow-up-s-fill" style="margin-right:10px"></i>
+                Price(MYR)<i class="sort-icon ri-arrow-down-s-fill" style="margin-right:10px"></i>
                 </asp:LinkButton>
             </th>
              <th class="booking_edit" style="width:5%;"></th>
@@ -162,14 +169,19 @@
         <asp:Label ID="lblTotalRecord" runat="server" Text="" CssClass="float-end text-muted"></asp:Label>
       </table>
            </div>
-    </ContentTemplate>
-
-
-    </asp:UpdatePanel>
+   
 
       </div>
   </div>
+     </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="ddlStatusFilter" EventName="SelectedIndexChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="btnFilterBookingDate" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="btnFilterPickUpDate" EventName="Click" />
+                    <asp:AsyncPostBackTrigger ControlID="btnClearFilter" EventName="Click" />
+                </Triggers>
 
+ </asp:UpdatePanel>
 
 
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -182,27 +194,31 @@
     <script type="text/javascript" src="../JS/paging.js"></script>
 
     <script>
+        function initializePagination() {
+            $('#bookingRecordTable').paging({ limit: 10 });
+        }
+
+        function setupSearchFunctionality(searchBoxId) {
+            
+            $(searchBoxId).on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#bookingtable_record tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        }
 
         $(document).ready(function () {
             var searchBoxId = "#" + '<%= txtBookingSearch.ClientID %>';
 
-         
-            $(searchBoxId).on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#bookingtable_record tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-
-            function initializePagination() {
-                $('#bookingRecordTable').paging({ limit: 10 });
-            }
-
+            setupSearchFunctionality(searchBoxId) 
+           
             initializePagination(); // Initialize on page load
 
             
         });
 
+        
 
         function updateSortIcons() {
             // Get the current sort direction from the HiddenField

@@ -120,7 +120,7 @@
              <h5 class="text-dark">Add On Info</h5>
              <hr class="mt-0 mb-4">
              <div class="table-responsive">
-             <asp:Repeater ID="rptAddOn" runat="server">
+             <asp:Repeater ID="rptAddOn" runat="server" OnItemDataBound="rptAddOn_ItemDataBound">
                  <HeaderTemplate>
                  <table class="table table-striped">
                      <tr>
@@ -131,19 +131,31 @@
                      </HeaderTemplate>
                  <ItemTemplate>
                      <tr>
-                         <td><%# Eval("Name") %></td>
-                         <td><%# Eval("Quantity") %></td>
-                         <td><%# Eval("SubTotal") %></td>
+                         <td>
+                             <%# Eval("Name") %>
+
+                         </td>
+                         <td>
+                             <asp:Label ID="lblAddOnQuantity" runat="server" Text='<%# Eval("Quantity","{0:F2}") %>'></asp:Label>
+                             
+
+                         </td>
+                         <td>
+                             <asp:Label ID="lblAddOnSubtotal" runat="server" Text='<%# Eval("SubTotal","{0:F2}") %>'></asp:Label>
+                            
+                         </td>
                      </tr>
-                     
+                  
                 </ItemTemplate>
                      <FooterTemplate>
                          <tr>
                              <td colspan="2">Total Price</td>
-                             <td></td>
+                             <td>
+                                 <asp:Label ID="lblAddOnTotal" runat="server" Text=""></asp:Label></td>
                          </tr>
                          </table>
                      </FooterTemplate>
+                         
              </asp:Repeater>
                   </div>
               <!-- booking price -->

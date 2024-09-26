@@ -29,8 +29,20 @@ namespace Assignment
                     string notes = Request.QueryString["notes"];
                     // Fetch booking details from the database
                     GetRentalDetails(bookingId,notes);
-                   
                 }
+
+                
+                string pickUpDateQuery = Request.QueryString["pickUpDateTime"];
+
+                DateTime pickupDateTime = DateTime.Parse(pickUpDateQuery);
+                DateTime currentDate = DateTime.Now;
+
+                TimeSpan datediff = pickupDateTime - currentDate;
+                if( datediff.TotalDays < 3)
+                {
+                    btnAddOn.Visible = false;
+                }
+
             }
         }
 
@@ -117,6 +129,7 @@ namespace Assignment
                 DropDownList ddlNewQuantity = (DropDownList)e.Item.FindControl("ddlNewQuantity");
                 Button btnAddOnClear = (Button)e.Item.FindControl("btnAddOnClear");
 
+
                 object maxQuantityValue = DataBinder.Eval(e.Item.DataItem, "maxQuantity");
 
                 if (maxQuantityValue != DBNull.Value)
@@ -139,7 +152,17 @@ namespace Assignment
                 }
                     
                     ddlNewQuantity.SelectedValue = currentQuantity.ToString();
-                
+                //hide the remove add on if current date is within 3 days of pickup
+                string pickUpDateQuery = Request.QueryString["pickUpDateTime"];
+
+                DateTime pickupDateTime = DateTime.Parse(pickUpDateQuery);
+                DateTime currentDate = DateTime.Now;
+
+                TimeSpan datediff = pickupDateTime - currentDate;
+                if (datediff.TotalDays < 3)
+                {
+                    btnAddOnClear.Visible = false;
+                }
             }
         }
         

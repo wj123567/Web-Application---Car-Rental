@@ -24,6 +24,15 @@ namespace Assignment
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
+        /// updatebookingRecordTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatebookingRecordTable;
+
+        /// <summary>
         /// txtBookingSearch control.
         /// </summary>
         /// <remarks>
@@ -42,6 +51,42 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.DropDownList ddlStatusFilter;
 
         /// <summary>
+        /// lblFilterTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFilterTitle;
+
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+
+        /// <summary>
+        /// btnClearFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClearFilter;
+
+        /// <summary>
+        /// lblFilterStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFilterStartDate;
+
+        /// <summary>
         /// txtFilterStartDate control.
         /// </summary>
         /// <remarks>
@@ -51,6 +96,24 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.TextBox txtFilterStartDate;
 
         /// <summary>
+        /// rqFilterStartDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqFilterStartDate;
+
+        /// <summary>
+        /// lblFilterEndDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFilterEndDate;
+
+        /// <summary>
         /// txtFilterEndDate control.
         /// </summary>
         /// <remarks>
@@ -58,6 +121,15 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFilterEndDate;
+
+        /// <summary>
+        /// rqFilterEndDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rqFilterEndDate;
 
         /// <summary>
         /// btnFilterBookingDate control.
@@ -76,15 +148,6 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnFilterPickUpDate;
-
-        /// <summary>
-        /// updatebookingRecordTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatebookingRecordTable;
 
         /// <summary>
         /// btnSortID control.

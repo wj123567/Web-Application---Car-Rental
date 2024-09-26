@@ -164,10 +164,13 @@ namespace Assignment
                         string status = reader["Status"].ToString();
 
                         //status part(hide edit and cancel)
-                        if (reader["Status"].ToString().Equals("Completed"))
+                        if (status.Equals("Completed") || status.Equals("Cancelled"))
                         {
                             btnEdit.Visible = false;
                             btnDelete.Visible= false;
+                        }else if (status.Equals("Pending"))
+                        {
+                            btnDelete.Visible = false;
                         }
 
                         //price part
@@ -327,8 +330,8 @@ namespace Assignment
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
-
-            Response.Redirect("bookingRecordUpdate.aspx?notes=" + txtNotes.Text + "&rental=" + lblRental.Text + "&oriAddOnPrice=" + lblAddOnPrice.Text);
+           
+            Response.Redirect("bookingRecordUpdate.aspx?notes=" + txtNotes.Text + "&rental=" + lblRental.Text + "&oriAddOnPrice=" + lblAddOnPrice.Text+"&pickUpDateTime="+lblPickUpTime.Text);
             hdnOriAddOnPrice.Value = "";
         }
 

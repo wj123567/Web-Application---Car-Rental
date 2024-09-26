@@ -9,18 +9,19 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
 using static System.Collections.Specialized.BitVector32;
+using System.EnterpriseServices;
 namespace Assignment.Management
 {
     public partial class BookingManagement : System.Web.UI.Page
     {
-        //session["BookingId"]
+        private double addonTotal = 0.00;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-               
+              
                GetBookRecords();
-
+               
             }
         }
 
@@ -262,7 +263,7 @@ namespace Assignment.Management
             SqlDataReader reader = com.ExecuteReader();
             if (reader.Read())
             {
-                if (reader["Status"].ToString() == "Complted")
+                if (reader["Status"].ToString() == "Completed")
                 {
                     btnApprove.Visible = false;
                     btnReject.Visible = false;
@@ -415,7 +416,33 @@ namespace Assignment.Management
 
             rptAddOn.DataSource = dtAddOn;
             rptAddOn.DataBind();
+           
         }
+
+        protected void rptAddOn_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Label lblAddOnSubtotal = (Label)e.Item.FindControl("lblAddOnSubtotal");
+
+                if (lblAddOnSubtotal != null && !string.IsNullOrEmpty(lblAddOnSubtotal.Text))
+                {
+                    addonTotal += Convert.ToDouble(lblAddOnSubtotal.Text);
+                }
+            }
+
+            if (e.Item.ItemType == ListItemType.Footer)
+            {
+                Label lblAddOnTotal = (Label)e.Item.FindControl("lblAddOnTotal");
+                if (lblAddOnTotal != null)
+                {
+                    lblAddOnTotal.Text = addonTotal.ToString("F2"); // Format as needed
+                }
+            }
+        }
+
+        
+
         protected void UserDriverRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             Label lblApproval = (Label)e.Item.FindControl("lblApproval");
@@ -443,6 +470,7 @@ namespace Assignment.Management
                     lblApproval.Text = "Unknown";
                     break;
             }
+            
         }
 
         protected void btnApprove_Click(object sender, EventArgs e)
