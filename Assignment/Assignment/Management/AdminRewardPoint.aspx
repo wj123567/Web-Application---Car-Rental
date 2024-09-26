@@ -99,7 +99,7 @@
                         <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
 
                             <tr>
-                                <td colspan="7" class="asd">
+                                <td colspan="4" class="asd">
                                     <asp:DataPager ID="RewardPointsPager" runat="server" PageSize="6">
                                         <Fields>
                                             <asp:NextPreviousPagerField ButtonType="Link" ShowPreviousPageButton="true" ShowNextPageButton="false"/>
