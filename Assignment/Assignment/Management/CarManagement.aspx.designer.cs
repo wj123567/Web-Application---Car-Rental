@@ -744,24 +744,6 @@ namespace Assignment
         protected global::System.Web.UI.WebControls.LinkButton btnSortCarDayPrice;
 
         /// <summary>
-        /// btnSortCarTransmission control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortCarTransmission;
-
-        /// <summary>
-        /// btnSortCarEnergy control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSortCarEnergy;
-
-        /// <summary>
         /// btnSortCarLocation control.
         /// </summary>
         /// <remarks>
@@ -778,6 +760,24 @@ namespace Assignment
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSortCarState;
+
+        /// <summary>
+        /// btnSortRevenue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortRevenue;
+
+        /// <summary>
+        /// btnSortBooking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSortBooking;
 
         /// <summary>
         /// btnSortUpcoming control.

@@ -10,8 +10,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <div>
-        <div class="float-start mx-2 mt-4">
+    <div class="d-flex justify-content-between border-bottom">
+        <div class="mx-2 mt-4">
             <asp:LinkButton ID="btnA2Z" runat="server" CssClass="text-dark mx-2" OnClick="btnA2Z_Click">
         <i class="fa-solid fa-arrow-up-a-z fa-xl"></i>
             </asp:LinkButton>
@@ -29,13 +29,24 @@
         <i class="fa-solid fa-money-bill"></i>
         <i class="fa-solid fa-arrow-down fa-lg"></i>
             </asp:LinkButton>
+            
+            <asp:LinkButton ID="btnRtUp" runat="server" CssClass="text-dark mx-2" OnClick="btnRtUp_Click">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-arrow-up fa-lg"></i>
+            </asp:LinkButton>
+            
+            <asp:LinkButton ID="btnRtDw" runat="server" CssClass="text-dark mx-2" Visible="False" OnClick="btnRtDw_Click">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-arrow-down fa-lg"></i>
+            </asp:LinkButton>
         </div>
 
-        <div class="btn float-end mt-3 mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
+        <div class="btn mt-3 mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvas">
             <span class="text-lg">Filter</span>
             <i class="fa-solid fa-filter fa-xl" data-bs-toggle="offcanvas" data-bs-target="#offcanvas"></i>
         </div>
     </div>
+
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvas" data-bs-keyboard="false" data-bs-backdrop="false">
         <div class="offcanvas-header">

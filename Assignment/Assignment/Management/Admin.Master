@@ -18,6 +18,7 @@
     <link href="../CSS/admin.css" rel="stylesheet" />
     <link href="../CSS/AdminRewardpoint.css" rel="stylesheet" />      
     <link href="../CSS/AdminRedemption.css" rel="stylesheet" />
+    <link href="../CSS/AdminRedemptionRecord.css" rel="stylesheet" />
     <link href="../CSS/dashboard.css" rel="stylesheet" />
     <link href="../CSS/AdminReview.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
@@ -68,15 +69,6 @@
                             <a href="driverManagement.aspx" class="sidebar-link">Driver Management</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="AdminRewardPoint.aspx" class="sidebar-link">Reward Point Management</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="AdminRedemptionRecord.aspx" class="sidebar-link">Redemption Management</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="AdminRedemption.aspx" class="sidebar-link">Redeem Item Management</a>
-                        </li>
-                        <li class="sidebar-item">
                             <a href="AdminReview.aspx" class="sidebar-link">Review Management</a>
                         </li>
                     </ul>
@@ -94,6 +86,24 @@
                                 <li class="sidebar-item">
                                     <a href="AddOnManagement.aspx" class="sidebar-link">Add On Management</a>
                                 </li>
+                            </ul>
+                        </li>               
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#rp" aria-expanded="false" aria-controls="multi">
+                        <i class="lni lni-coin"></i>
+                        <span>Reward Point</span>
+                    </a>
+                            <ul id="rp" class="sidebar-dropdown list-unstyled collapse">
+                        <li class="sidebar-item">
+                            <a href="AdminRewardPoint.aspx" class="sidebar-link">Reward Point Management</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="AdminRedemptionRecord.aspx" class="sidebar-link">Redemption Management</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="AdminRedemption.aspx" class="sidebar-link">Redeem Item Management</a>
+                        </li>
                             </ul>
                         </li>
                 <li class="sidebar-item">

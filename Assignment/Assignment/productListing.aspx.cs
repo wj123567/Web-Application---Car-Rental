@@ -308,13 +308,49 @@ namespace Assignment
         protected void btnDW_Click(object sender, EventArgs e)
         {
             DataTable carData = ViewState["CarData"] as DataTable;
-            btnPU.Visible = true;
             btnDW.Visible = false;
+            btnPU.Visible = true;
 
             if (carData != null)
             {
                 DataView dataView = carData.DefaultView;
                 dataView.Sort = "CarDayPrice DESC";
+                DataTable sortedData = dataView.ToTable();
+
+                ViewState["CarData"] = sortedData;
+                productRepeater.DataSource = sortedData;
+                productRepeater.DataBind();
+            }
+        }        
+        
+        protected void btnRtUp_Click(object sender, EventArgs e)
+        {
+            DataTable carData = ViewState["CarData"] as DataTable;
+            btnRtUp.Visible = false;
+            btnRtDw.Visible = true;
+
+            if (carData != null)
+            {
+                DataView dataView = carData.DefaultView;
+                dataView.Sort = "AVG ASC";
+                DataTable sortedData = dataView.ToTable();
+
+                ViewState["CarData"] = sortedData;
+                productRepeater.DataSource = sortedData;
+                productRepeater.DataBind();
+            }
+        }        
+        
+        protected void btnRtDw_Click(object sender, EventArgs e)
+        {
+            DataTable carData = ViewState["CarData"] as DataTable;
+            btnRtDw.Visible = false;
+            btnRtUp.Visible = true;
+
+            if (carData != null)
+            {
+                DataView dataView = carData.DefaultView;
+                dataView.Sort = "AVG DESC";
                 DataTable sortedData = dataView.ToTable();
 
                 ViewState["CarData"] = sortedData;
