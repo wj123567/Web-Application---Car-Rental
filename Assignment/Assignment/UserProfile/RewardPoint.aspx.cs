@@ -85,7 +85,7 @@ namespace Assignment
                 // Combine and sort records by date
                 pointsRecords.AddRange(earnedPoints);
                 pointsRecords.AddRange(usedPoints);
-                pointsRecords = pointsRecords.OrderBy(pr => pr.Date).ToList();
+                pointsRecords = pointsRecords.OrderByDescending(pr => pr.Date).ToList();
 
                 // Save to ViewState
                 ViewState["PointsRecords"] = pointsRecords;

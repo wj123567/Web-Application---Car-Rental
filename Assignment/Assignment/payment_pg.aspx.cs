@@ -277,7 +277,7 @@ namespace Assignment
 
                         if (booking != null)
                         {
-                            booking.Discount = discountValue;
+                            booking.Discount = Math.Round(discountValue, 2);
                             db.SaveChanges();
                         }
                     }
