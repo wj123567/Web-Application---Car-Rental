@@ -150,7 +150,7 @@
                         </div>
                         <div class="col-sm-4 col-xs-6 mt-4">
                             <asp:Label ID="lblCvv" runat="server" Text="Security Code(CVV)" CssClass="label_style"></asp:Label>
-                            <asp:TextBox ID="txtCvv" runat="server" CssClass="form-control my-1" ValidationGroup="PaymentValidation"></asp:TextBox>
+                            <asp:TextBox ID="txtCvv" runat="server" CssClass="form-control my-1" MaxLength="3"  TextMode="Password" ValidationGroup="PaymentValidation"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rqCvv" runat="server" ErrorMessage="CVV is Required" ControlToValidate="txtCvv" ValidationGroup="PaymentValidation" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
                         </div>
                     </div>
@@ -319,14 +319,19 @@
 
         function validateForm(event) {
             // Trigger ASP.NET validation
+            const hdnCardCheck = document.getElementById("<%= hdnCardCheck.ClientID %>");
             var checkbox = document.getElementById("<%= chkApplyCard.ClientID %>");
-
             var CVV_validator = document.getElementById("<%= rqCvv.ClientID %>");
-            if (checkbox.checked) {
-                ValidatorEnable(CVV_validator, false);
-            } else {
-                ValidatorEnable(CVV_validator, true);
+
+            if (hdnCardCheck.value != "New") {
+                if (checkbox.checked) {
+                    ValidatorEnable(CVV_validator, false);
+                } else {
+                    ValidatorEnable(CVV_validator, true);
+                }
             }
+            
+           
             var isValid = Page_ClientValidate('PaymentValidation');
             
             if (!isValid) {
