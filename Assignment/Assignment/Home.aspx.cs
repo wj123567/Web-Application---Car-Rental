@@ -49,11 +49,42 @@ namespace Assignment
 
                 //You
                 UpdateExpiredVouchers();
+                ResetRewardPointsExpired();
 
             }
         }
 
-        //You
+        //You start
+
+        private void ResetRewardPointsExpired()
+        {
+            using (var db = new SystemDatabaseEntities())
+            {
+                // Loop all users 
+                var users = db.ApplicationUsers.ToList();
+
+                foreach (var user in users)
+                {
+                    var oldestBooking = db.Bookings
+                                          .Where(b => b.UserId == user.Id && b.EarnDate != null)
+                                          .OrderBy(b => b.EarnDate)
+                                          .FirstOrDefault();
+
+                    if (oldestBooking != null && oldestBooking.EarnDate.HasValue)
+                    {
+                        DateTime expiryDate = oldestBooking.EarnDate.Value.AddYears(1);
+
+                        if (DateTime.Now > expiryDate)
+                        {
+                            // Reset the reward points to 0
+                            user.RewardPoints = 0;
+                        }
+                    }
+                }
+
+                db.SaveChanges();
+            }
+        }
         private void UpdateExpiredVouchers()
         {
             using (var db = new SystemDatabaseEntities())
@@ -70,7 +101,7 @@ namespace Assignment
             }
         }
 
-        //You
+        //You end
 
         private void PopulateRegionsAndPoints()
         {

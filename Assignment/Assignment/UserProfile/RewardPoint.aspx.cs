@@ -43,12 +43,24 @@ namespace Assignment
                 {
                     lblUsername.Text = user.Username;
                     lblTotalPoints.Text = user.RewardPoints.ToString() + " Points";
-                    lblExpiryDate.Text = DateTime.Now.ToString();
 
+                    var oldestBooking = db.Bookings
+                                        .Where(b => b.UserId == userId && b.EarnDate != null)
+                                        .OrderBy(b => b.EarnDate)
+                                        .FirstOrDefault();
+
+                    if (oldestBooking != null && oldestBooking.EarnDate.HasValue)
+                    {
+                        DateTime expiryDate = oldestBooking.EarnDate.Value.AddYears(1);
+                        lblExpiryDate.Text = expiryDate.ToString();
+                    }
+                    else
+                    {
+                        lblExpiryDate.Text = "No expiry date available";
+                    }
                 }
                 else
                 {
-                    // Handle the case where the user is not found
                     lblUsername.Text = "User not found";
                     lblTotalPoints.Text = "0";
                 }

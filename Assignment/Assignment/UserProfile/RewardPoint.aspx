@@ -54,7 +54,9 @@
                 </p>
 
                 <p class="ex-1">
-                     <asp:Label ID="lblTotalPoints" runat="server" Text="[Total Points]" CssClass="fs-1"></asp:Label> will be expired at <asp:Label ID="lblExpiryDate" runat="server" Text="[Expriy Date]" CssClass="ex-3"></asp:Label>
+                     <asp:Label ID="lblTotalPoints" runat="server" Text="[Total Points]" CssClass="fs-1"></asp:Label> will be expired at 
+                    <br />
+                    <asp:Label ID="lblExpiryDate" runat="server" Text="[Expriy Date]" CssClass="ex-3"></asp:Label>
                 </p>
 
 
