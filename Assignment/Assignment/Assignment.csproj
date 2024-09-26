@@ -194,6 +194,7 @@
     <Content Include="argon-dashboard-master\pages\sign-up.html" />
     <Content Include="argon-dashboard-master\pages\tables.html" />
     <Content Include="argon-dashboard-master\pages\virtual-reality.html" />
+    <Content Include="CSS\AdminRedemptionRecord.css" />
     <Content Include="CSS\AdminReview.css" />
     <Content Include="CSS\dashboard.css" />
     <Content Include="CSS\errorPage.css" />

@@ -131,7 +131,7 @@
                                     </asp:LinkButton>
                                 </th>
                                 <th>
-                                    ItemDescription
+                                    Item Image
                                 </th>
 
                                 <th>Action</th>
