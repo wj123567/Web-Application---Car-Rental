@@ -3,15 +3,12 @@
   "WorkspaceRootPath": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\userprofile\\bookingrecorddetail.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\userprofile\\bookingrecorddetail.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\userprofile\\driver.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\userprofile\\driver.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\userprofile\\bookingrecorddetail.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\userprofile\\bookingrecorddetail.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/5AF93BBAFA68F486F57EA5CCB10E9041__Y2S1_ASSIGNMENT_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.Location.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|d:\\weijia\\onedrive\\onedrive - msft\\school doc\\uni\\y2s1\\assignment\\web-application---car-rental\\assignment\\assignment\\userprofile\\driver.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{F02D6F55-2A8E-4DBC-A4BB-2213EB14EA5E}|Assignment\\Assignment.csproj|solutionrelative:assignment\\userprofile\\driver.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 279,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -49,38 +46,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "dbo.Location [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/5AF93BBAFA68F486F57EA5CCB10E9041__Y2S1_ASSIGNMENT_WEB_APPLICATION___CAR_RENTAL_ASSIGNMENT_ASSIGNMENT_APP_DATA_SYSTEMDATABASE.MDF/True/SqlTable/dbo.Location.sql",
-              "ToolTip": "dbo.Location [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-09-26T13:52:04.174Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "bookingrecorddetail.aspx.cs",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingrecorddetail.aspx.cs",
-              "RelativeDocumentMoniker": "Assignment\\UserProfile\\bookingrecorddetail.aspx.cs",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingrecorddetail.aspx.cs",
-              "RelativeToolTip": "Assignment\\UserProfile\\bookingrecorddetail.aspx.cs",
-              "ViewState": "AgIAAI4AAAAAAAAAAAAYwJcAAAAmAAAAAAAAAA==",
+              "Title": "driver.aspx.cs",
+              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\driver.aspx.cs",
+              "RelativeDocumentMoniker": "Assignment\\UserProfile\\driver.aspx.cs",
+              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\driver.aspx.cs",
+              "RelativeToolTip": "Assignment\\UserProfile\\driver.aspx.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAuwIUAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T13:40:28.552Z",
+              "WhenOpened": "2024-09-26T15:17:50.998Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "bookingrecorddetail.aspx",
-              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingrecorddetail.aspx",
-              "RelativeDocumentMoniker": "Assignment\\UserProfile\\bookingrecorddetail.aspx",
-              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\bookingrecorddetail.aspx",
-              "RelativeToolTip": "Assignment\\UserProfile\\bookingrecorddetail.aspx",
+              "Title": "driver.aspx",
+              "DocumentMoniker": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\driver.aspx",
+              "RelativeDocumentMoniker": "Assignment\\UserProfile\\driver.aspx",
+              "ToolTip": "D:\\weijia\\Onedrive\\OneDrive - MSFT\\School Doc\\Uni\\Y2S1\\Assignment\\Web-Application---Car-Rental\\Assignment\\Assignment\\UserProfile\\driver.aspx",
+              "RelativeToolTip": "Assignment\\UserProfile\\driver.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2024-09-26T13:40:26.883Z",
+              "WhenOpened": "2024-09-26T15:17:49.701Z",
               "EditorCaption": ""
             }
           ]

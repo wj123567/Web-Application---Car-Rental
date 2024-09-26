@@ -127,7 +127,7 @@ namespace Assignment
                     parameters.Add(new SqlParameter("@IDpic", relPathId));
                 }
 
-                if (fuSelfie2.HasFile)
+                if (fuSelfie2.HasFile && string.IsNullOrEmpty(hdnCapturedSelfie2.Value))
                 {
                     updateString += "SelfiePic = @SelfiePic,";
                     string folderLocation = Server.MapPath("~/Image/DriverSelfie");
@@ -237,7 +237,7 @@ namespace Assignment
                     source.Save(savePathId, ImageFormat.Jpeg);
                 }
 
-                if (fuSelfie.HasFile)
+                if (fuSelfie.HasFile && string.IsNullOrEmpty(hdnCapturedSelfie.Value))
                 {
                     string ext = Path.GetExtension(fuSelfie.FileName);
                     string folderLocation = Server.MapPath("~/Image/DriverSelfie");
