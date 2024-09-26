@@ -429,6 +429,7 @@ namespace Assignment
             lblFeedback.Visible = true;
 
             submit.Enabled = false;
+            Response.Redirect("bookingrecorddetail.aspx");
         }
 
     }
