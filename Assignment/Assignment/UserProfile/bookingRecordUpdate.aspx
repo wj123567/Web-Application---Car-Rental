@@ -252,33 +252,6 @@
                         </div>
                     </div>
                   </div>
-
-                  <div class="booking_summary_container">
-                    <!-- list -->
-                    <ul class="list-unstyled mb-0">
-                      <li class="d-flex justify-content-between mb-2">
-                        <span>Subtotal</span>
-                        <span class="text-dark fw-medium">128.00</span>
-                      </li>
-                      <li class="d-flex justify-content-between mb-2">
-                        <span>Shipping</span>
-                        <span class="text-dark fw-medium">0.00</span>
-                      </li>
-                      <li class="d-flex justify-content-between mb-2">
-                        <span>Discount</span>
-                        <span class="text-dark fw-medium">0.00</span>
-                      </li>
-                      <li class="d-flex justify-content-between mb-2">
-                        <span>Tax</span>
-                        <span class="text-dark fw-medium">0.00</span>
-                      </li>
-                      <li class="border-top my-2"></li>
-                      <li class="d-flex justify-content-between mb-2">
-                        <span class="fw-medium text-dark">Grand Total(RM)</span>
-                        <span class="fw-medium text-dark">128.00</span>
-                      </li>
-                    </ul>
-                  </div>
                 </div>
               </div>
               
