@@ -43,213 +43,215 @@
    
     <div class="modal modal-xl fade" id="reviewBooking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reviewDriver" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel4">Booking Detail <asp:Label ID="lblBookingId" runat="server" Text=""></asp:Label></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="card-body row">
-           
-             <div class="col-6">
-     <h5 class="text-dark">Time & Location</h5>
-     <hr class="mt-0 mb-4">
-     <div class="mb-3">
-         <h6 class="text-dark mb-1 fw-bold">Pick Up</h6>
-     </div>
-     <div class="row gx-3 mb-3">
-         <div class="col-md-6">
-             <asp:Label ID="Label10" runat="server" CssClass="small mb-1" Text="Pick Up Location"></asp:Label>
-             <asp:TextBox ID="txtPickUpLocation" runat="server" CssClass="form-control"  ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
-         </div>
-         <div class="col-md-6">
-             <asp:Label ID="Label9" runat="server" CssClass="small mb-1" Text="Pick Up Time (dd/MM/yyyy)"></asp:Label>
-             <asp:TextBox ID="txtPickUpTime" runat="server" CssClass="form-control" TextMode="DateTime" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
-         </div>
-     </div>
-     <div class="mb-3">
-     <h6 class="text-dark mb-1 fw-bold">Drop Off</h6>
-     </div>
-     <div class="row gx-3 ">
-         <div class="col-md-6">
-             <asp:Label ID="Label8" runat="server" CssClass="small mb-1" Text="Drop off Location"></asp:Label>
-                 <asp:TextBox ID="txtDropOffLocation" runat="server" CssClass="form-control"  ReadOnly="True"></asp:TextBox>
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel4">Booking Detail
+                  <asp:Label ID="lblBookingId" runat="server" Text=""></asp:Label></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-         <div class="col-md-6">
-             <asp:Label ID="Label7" runat="server"  CssClass="small mb-1" Text="Drop off Time (dd/MM/yyyy)"></asp:Label>
-             <asp:TextBox ID="txtDropOffTime" runat="server" CssClass="form-control" TextMode="DateTime"  ReadOnly="True"></asp:TextBox>
-         </div>
-     </div>
-     <div class="mb-3">
- <h6 class="text-dark mb-1 fw-bold">Booking Date</h6>
- </div>
-     <div class="row gx-3 mb-5">
-     <div class="col-md-12">
-         <asp:Label ID="Label6" runat="server"  CssClass="small mb-1" Text="Customer Booking Date (dd/MM/yyyy)"></asp:Label>
-             <asp:TextBox ID="txtCustBookDate" runat="server" CssClass="form-control"  TextMode="DateTime"  ReadOnly="True"></asp:TextBox>
-             
-      </div>
-    
- </div>
-     <div class="mb-3">
-      <h5 class="text-dark">Additional notes</h5>
-      <hr class="mt-0 mb-4">
-     </div>
-     <div class="row gx-3 mb-3">
-         <div class="col">
-             
-             <asp:TextBox ID="txtAdditionalNotes" runat="server" CssClass="form-control d-block" TextMode="MultiLine" Rows="5"  ReadOnly="True" ></asp:TextBox>
-         </div>
-     </div>
-     </div>
-         <div class="col-6">
-            <!-- car & rental -->
-             <h5 class="text-dark">Car Info</h5>
-             <hr class="mt-0 mb-4">
-              <div class="row gx-3 mb-3">
-                <div class="col-md-6">
-                    <asp:Label ID="Label4" runat="server" CssClass="small mb-1"  Text="Car Plate"></asp:Label>
-                 <asp:TextBox ID="txtCarPlate" runat="server" CssClass="form-control"   ReadOnly="True"></asp:TextBox>
-             </div>
-             <div class="col-md-6">
-                 <asp:Label ID="Label3" runat="server" CssClass="small mb-1" Text="Original Location"></asp:Label>
-                 <asp:TextBox ID="txtOriLocation" runat="server" CssClass="form-control"  ReadOnly="True"></asp:TextBox>
-             </div>
-            </div>
-            
-             <!--add on -->
-             <h5 class="text-dark">Add On Info</h5>
-             <hr class="mt-0 mb-4">
-             <div class="table-responsive">
-             <asp:Repeater ID="rptAddOn" runat="server" OnItemDataBound="rptAddOn_ItemDataBound">
-                 <HeaderTemplate>
-                 <table class="table table-striped">
-                     <tr>
-                         <th>Type</th>
-                         <th>Quantity</th>
-                         <th>Subtotal (MYR)</th>
-                     </tr>
-                     </HeaderTemplate>
-                 <ItemTemplate>
-                     <tr>
-                         <td>
-                             <%# Eval("Name") %>
+          <div class="modal-body">
+              <div class="card-body row">
 
-                         </td>
-                         <td>
-                             <asp:Label ID="lblAddOnQuantity" runat="server" Text='<%# Eval("Quantity") %>'></asp:Label>
-                             
+                  <div class="col-6">
+                      <h5 class="text-dark">Time & Location</h5>
+                      <hr class="mt-0 mb-4">
+                      <div class="mb-3">
+                          <h6 class="text-dark mb-1 fw-bold">Pick Up</h6>
+                      </div>
+                      <div class="row gx-3 mb-3">
+                          <div class="col-md-6">
+                              <asp:Label ID="Label10" runat="server" CssClass="small mb-1" Text="Pick Up Location"></asp:Label>
+                              <asp:TextBox ID="txtPickUpLocation" runat="server" CssClass="form-control" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+                          </div>
+                          <div class="col-md-6">
+                              <asp:Label ID="Label9" runat="server" CssClass="small mb-1" Text="Pick Up Time (dd/MM/yyyy)"></asp:Label>
+                              <asp:TextBox ID="txtPickUpTime" runat="server" CssClass="form-control" TextMode="DateTime" ValidationGroup="reviewGroup" ReadOnly="True"></asp:TextBox>
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                          <h6 class="text-dark mb-1 fw-bold">Drop Off</h6>
+                      </div>
+                      <div class="row gx-3 ">
+                          <div class="col-md-6">
+                              <asp:Label ID="Label8" runat="server" CssClass="small mb-1" Text="Drop off Location"></asp:Label>
+                              <asp:TextBox ID="txtDropOffLocation" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                          </div>
+                          <div class="col-md-6">
+                              <asp:Label ID="Label7" runat="server" CssClass="small mb-1" Text="Drop off Time (dd/MM/yyyy)"></asp:Label>
+                              <asp:TextBox ID="txtDropOffTime" runat="server" CssClass="form-control" TextMode="DateTime" ReadOnly="True"></asp:TextBox>
+                          </div>
+                      </div>
+                      <div class="mb-3">
+                          <h6 class="text-dark mb-1 fw-bold">Booking Date</h6>
+                      </div>
+                      <div class="row gx-3 mb-5">
+                          <div class="col-md-12">
+                              <asp:Label ID="Label6" runat="server" CssClass="small mb-1" Text="Customer Booking Date (dd/MM/yyyy)"></asp:Label>
+                              <asp:TextBox ID="txtCustBookDate" runat="server" CssClass="form-control" TextMode="DateTime" ReadOnly="True"></asp:TextBox>
 
-                         </td>
-                         <td>
-                             <asp:Label ID="lblAddOnSubtotal" runat="server" Text='<%# Eval("SubTotal","{0:F2}") %>'></asp:Label>
-                            
-                         </td>
-                     </tr>
-                  
-                </ItemTemplate>
-                     <FooterTemplate>
-                         <tr>
-                             <td colspan="2" class="fw-bold">Total Price</td>
-                             <td>
-                                 <asp:Label ID="lblAddOnTotal" runat="server" Text=""></asp:Label></td>
-                         </tr>
-                         </table>
-                     </FooterTemplate>
-                         
-             </asp:Repeater>
+                          </div>
+
+                      </div>
+                      <div class="mb-3">
+                          <h5 class="text-dark">Additional notes</h5>
+                          <hr class="mt-0 mb-4">
+                      </div>
+                      <div class="row gx-3 mb-3">
+                          <div class="col">
+
+                              <asp:TextBox ID="txtAdditionalNotes" runat="server" CssClass="form-control d-block" TextMode="MultiLine" Rows="5" ReadOnly="True"></asp:TextBox>
+                          </div>
+                      </div>
                   </div>
-              <!-- booking price -->
-      <h5 class="text-dark">Payment Update</h5>
-      <hr class="mt-0 mb-4">
-       <div class="row gx-3 mb-3">
-         <div class="col-md-6">
-             <asp:Label ID="Label2" runat="server" CssClass="small mb-1" Text="Initial Payment Price (MYR)"></asp:Label>
-          <asp:TextBox ID="txtInitBookingPrice" runat="server" CssClass="form-control"   ReadOnly="True"></asp:TextBox>
-      </div>
-      <div class="col-md-6">
-          <asp:Label ID="Label1" runat="server" CssClass="small mb-1" Text="Post-update Charges Amount (MYR)"></asp:Label>
-          <asp:TextBox ID="txtUpdatedBookingPrice" runat="server" CssClass="form-control"   ReadOnly="True"></asp:TextBox>
-      </div>
-     </div>
-    <div class="row gx-3 mb-3">
-        <asp:Label ID="lblFinalPriceInfo" runat="server" CssClass="small mb-1" Text=""></asp:Label>
-        <asp:TextBox ID="txtFinalPriceAmt" runat="server" CssClass="form-control"  ReadOnly="True"></asp:TextBox>
-    </div>
-<h5 class="text-dark">Reject Reason</h5>
-<hr class="mt-0 mb-4">
-<div class="row gx-3 mb-3">
-    
-    <asp:TextBox ID="txtRejectReason" runat="server" CssClass="form-control"  ReadOnly="True"></asp:TextBox>
-</div>
+                  <div class="col-6">
+                      <!-- car & rental -->
+                      <h5 class="text-dark">Car Info</h5>
+                      <hr class="mt-0 mb-4">
+                      <div class="row gx-3 mb-3">
+                          <div class="col-md-6">
+                              <asp:Label ID="Label4" runat="server" CssClass="small mb-1" Text="Car Plate"></asp:Label>
+                              <asp:TextBox ID="txtCarPlate" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                          </div>
+                          <div class="col-md-6">
+                              <asp:Label ID="Label3" runat="server" CssClass="small mb-1" Text="Original Location"></asp:Label>
+                              <asp:TextBox ID="txtOriLocation" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                          </div>
+                      </div>
 
-         </div>   <!-- right col end-->
-    </div>
-</div>
-      <div class="modal-footer d-flex justify-content-between">
-          <div >
-              <button type="button" class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#userInfoModal">Back</button>
+                      <!--add on -->
+                      <h5 class="text-dark">Add On Info</h5>
+                      <hr class="mt-0 mb-4">
+                      <div class="table-responsive">
+                          <asp:Repeater ID="rptAddOn" runat="server" OnItemDataBound="rptAddOn_ItemDataBound">
+                              <HeaderTemplate>
+                                  <table class="table table-striped">
+                                      <tr>
+                                          <th>Type</th>
+                                          <th>Quantity</th>
+                                          <th>Subtotal (MYR)</th>
+                                      </tr>
+                              </HeaderTemplate>
+                              <ItemTemplate>
+                                  <tr>
+                                      <td>
+                                          <%# Eval("Name") %>
+
+                                      </td>
+                                      <td>
+                                          <asp:Label ID="lblAddOnQuantity" runat="server" Text='<%# Eval("Quantity") %>'></asp:Label>
+
+
+                                      </td>
+                                      <td>
+                                          <asp:Label ID="lblAddOnSubtotal" runat="server" Text='<%# Eval("SubTotal","{0:F2}") %>'></asp:Label>
+
+                                      </td>
+                                  </tr>
+
+                              </ItemTemplate>
+                              <FooterTemplate>
+                                  <tr>
+                                      <td colspan="2" class="fw-bold">Total Price</td>
+                                      <td>
+                                          <asp:Label ID="lblAddOnTotal" runat="server" Text=""></asp:Label></td>
+                                  </tr>
+                                  </table>
+                              </FooterTemplate>
+
+                          </asp:Repeater>
+                      </div>
+                      <!-- booking price -->
+                      <h5 class="text-dark">Payment Update</h5>
+                      <hr class="mt-0 mb-4">
+                      <div class="row gx-3 mb-3">
+                          <div class="col-md-6">
+                              <asp:Label ID="Label2" runat="server" CssClass="small mb-1" Text="Initial Payment Price (MYR)"></asp:Label>
+                              <asp:TextBox ID="txtInitBookingPrice" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                          </div>
+                          <div class="col-md-6">
+                              <asp:Label ID="Label1" runat="server" CssClass="small mb-1" Text="Post-update Charges Amount (MYR)"></asp:Label>
+                              <asp:TextBox ID="txtUpdatedBookingPrice" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                          </div>
+                      </div>
+                      <div class="row gx-3 mb-3">
+                          <asp:Label ID="lblFinalPriceInfo" runat="server" CssClass="small mb-1" Text=""></asp:Label>
+                          <asp:TextBox ID="txtFinalPriceAmt" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                      </div>
+                      <h5 class="text-dark">Reject Reason</h5>
+                      <hr class="mt-0 mb-4">
+                      <div class="row gx-3 mb-3">
+
+                          <asp:TextBox ID="txtRejectReason" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                      </div>
+
+                  </div>
+                  <!-- right col end-->
+              </div>
           </div>
-          <div class="ms-auto">
-        <asp:Button ID="btnOk" runat="server" Text="Close" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnOk_Click"/>
-        <asp:Button ID="btnApprove" runat="server" Text="Approve Cancellation" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnApprove_Click"/>
-        <asp:Button ID="btnReject" runat="server" Text="Reject Cancellation" CssClass="btn btn-danger" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#rejectReason" OnClientClick="return false"/>
-         </div>
+          <div class="modal-footer d-flex justify-content-between">
+              <div>
+                  <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#userInfoModal">Back</button>
+              </div>
+              <div class="ms-auto">
+                  <asp:Button ID="btnOk" runat="server" Text="Close" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnOk_Click" />
+                  <asp:Button ID="btnApprove" runat="server" Text="Approve Cancellation" CssClass="btn btn-primary" ValidationGroup="reviewGroup" OnClick="btnApprove_Click" />
+                  <asp:Button ID="btnReject" runat="server" Text="Reject Cancellation" CssClass="btn btn-danger" ValidationGroup="reviewGroup" data-bs-toggle="modal" data-bs-target="#rejectReason" OnClientClick="return false" />
+              </div>
+          </div>
       </div>
-    </div>
   </div>   
 </div>
 
 
        <div class="modal animate__animated animate__slideInLeft animate__faster" id="userInfoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="userInfoModal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel2">User Detail</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5 text-dark" id="staticBackdropLabel2">User Detail</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <ul class="nav nav-tabs mb-2 justify-content-center" id="userModalTab">
+                  <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="userInfoTab" data-bs-toggle="modal" data-bs-target="#userInfoModal" type="button">User Info</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="driverInfoTab" data-bs-toggle="modal" data-bs-target="#userDriverModal" type="button">Driver Info</button>
+                  </li>
+              </ul>
+              <div class="row">
+                  <div>
+                      <div class="mb-3">
+                          <label class="small mb-1">Username</label>
+                          <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                      </div>
+                      <div class="row gx-3 mb-3">
+                          <div class="col-md-6">
+                              <label class="small mb-1">Email address</label>
+                              <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                          </div>
+                          <div class="col-md-6">
+                              <label class="small mb-1">Roles</label>
+                              <asp:TextBox ID="txtRoles" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                          </div>
+                      </div>
+                      <div class="row gx-3 mb-3">
+                          <div class="col-md-6">
+                              <label class="small mb-1">Birthday</label>
+                              <asp:TextBox ID="txtBirthday" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                          </div>
+                          <div class="col-md-6">
+                              <label class="small mb-1">Member Since</label>
+                              <asp:TextBox ID="txtMemberSince" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <asp:Button ID="btnUserNext" CssClass="btn btn-primary " runat="server" Text="Next" data-bs-toggle="modal" data-bs-target="#reviewBooking" OnClientClick="return false" />
+          </div>
       </div>
-      <div class="modal-body">
-        <ul class="nav nav-tabs mb-2 justify-content-center" id="userModalTab">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="userInfoTab" data-bs-toggle="modal" data-bs-target="#userInfoModal" type="button">User Info</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="driverInfoTab" data-bs-toggle="modal" data-bs-target="#userDriverModal" type="button">Driver Info</button>
-          </li>
-        </ul>
-        <div class="row">                              
-                    <div>
-                        <div class="mb-3">
-                            <label class="small mb-1">Username</label>
-                            <asp:TextBox ID="txtUsername" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
-                        </div>
-                        <div class="row gx-3 mb-3">
-                        <div class="col-md-6">
-                            <label class="small mb-1">Email address</label>
-                            <asp:TextBox ID="txtEmailAddress" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
-                        </div>
-                        <div class="col-md-6">
-                                <label class="small mb-1">Roles</label>
-                                 <asp:TextBox ID="txtRoles" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
-                            </div>  
-                        </div>  
-                        <div class="row gx-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="small mb-1">Birthday</label>
-                                 <asp:TextBox ID="txtBirthday" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
-                            </div>                            
-                            <div class="col-md-6">
-                                <label class="small mb-1">Member Since</label>
-                                 <asp:TextBox ID="txtMemberSince" runat="server" CssClass="form-control" ReadOnly="True"></asp:TextBox>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    </div>
-      <div class="modal-footer">
-          <asp:Button ID="btnUserNext"  CssClass="btn btn-primary " runat="server" Text="Next"  data-bs-toggle="modal" data-bs-target="#reviewBooking" OnClientClick="return false" />
-      </div>
-    </div>
     </div>
   </div>  
 

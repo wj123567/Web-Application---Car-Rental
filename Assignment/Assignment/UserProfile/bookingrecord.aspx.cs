@@ -17,7 +17,7 @@ namespace Assignment
             if (!Page.IsPostBack) {
                 
                 string userId = Session["Id"].ToString();
-
+                
                 GetBookRecords("All",userId,"" ,"", "");
             }
   
@@ -39,6 +39,8 @@ namespace Assignment
             lblTotalRecord.Text = "Total Record(s) = " + totalRow.ToString();
 
         }
+      
+
 
         protected void btnFilterPickUpDate_Click(object sender, EventArgs e)
         {
@@ -67,6 +69,7 @@ namespace Assignment
 
         private void GetBookRecords(string statusFilter, string userId, string filterType, string filterStartDate, string filterEndDate)
         {
+            
             int totalRow;
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -127,6 +130,16 @@ namespace Assignment
             }
                   
         }
+
+        private void updateFinalPrice(string userId)
+        {
+            
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+
+        }
+
+       
 
         protected int getTotalRow(string userId,string statusFilter,string filterType ,string filterStartDate , string filterEndDate)
         {

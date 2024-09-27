@@ -476,33 +476,5 @@ namespace Assignment
             con.Close();
            
         }
-
-      /*  private double calculateRemoveAmt(string bookingId, string addOnId)
-        {
-            double totalPrice = 0.00;
-            string sql = @"SELECT Price,Quantity
-                           FROM AddOn a JOIN BookingAddOn b
-                           ON a.Id = b.AddOnId
-                           WHERE BookingId = @BookingID
-                           AND AddOnId = @AddOnID";
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
-            con.Open();
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.Parameters.AddWithValue("@BookingID", bookingId);
-            cmd.Parameters.AddWithValue("@AddOnID", addOnId);
-            SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    double price = Convert.ToDouble(reader["Price"].ToString());
-                    int quantity = Convert.ToInt16(reader["Quantity"].ToString());
-                    totalPrice = price * quantity;
-                }
-
-            }
-            con.Close();
-            return totalPrice;
-        }*/
     }
 }

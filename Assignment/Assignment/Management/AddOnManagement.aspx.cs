@@ -21,7 +21,6 @@ namespace Assignment.Management
             get { return Session["PageNumber"] != null ? (int)Session["PageNumber"] : 1; }
             set { Session["PageNumber"] = value; }
         }
-
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,7 +29,6 @@ namespace Assignment.Management
                 loadAddOnData();
             }
         }
-
 
         protected void loadAddOnData()
         {
@@ -93,8 +91,6 @@ namespace Assignment.Management
             return (int)com.ExecuteScalar();
           
         }
-
-      
 
 
         protected void btnUploadAddOn_Click(object sender, EventArgs e)

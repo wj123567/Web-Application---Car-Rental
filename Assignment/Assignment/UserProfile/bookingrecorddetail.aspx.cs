@@ -17,68 +17,7 @@ namespace Assignment
 
             if (!Page.IsPostBack)
             {
-               /* lblCheck.Text = lblAddOnAmtUpdate.Text;
-                //handle add on price update
-                string addOnUpdate= Request.QueryString["addOnUpdate"];
-                //handle add on delete price update
-                string addOnDeleteUpdate = Request.QueryString["addOnDeleteAmt"];
-
-                if(addOnUpdate != null)
-                {
-                    lblAddOnAmtUpdate.Visible = true;
-                    lblAddOnAmtUpdateTitle.Visible = true;
-                    //current amt before update
-                    double currentLabelAddOnAmt = Convert.ToDouble(lblAddOnAmtUpdate.Text);
-                    //get the actual price in double
-                    double addOnDiff = Convert.ToDouble(addOnUpdate);
-                    double newAmt = currentLabelAddOnAmt + addOnDiff;
-                    if (newAmt > 0)
-                    {
-                        
-                        lblAddOnAmtUpdateTitle.Text = "Money Rebate from Add On Update";                                          
-                        lblAddOnAmtUpdate.Text = newAmt.ToString("F2");
-                        lblAddOnAmtUpdateTitle.CssClass = "text-success fw-bold";
-                        lblAddOnAmtUpdate.CssClass = "text-success";
-                    }
-                    else if(newAmt == 0)
-                    {
-                        lblAddOnAmtUpdateTitle.Visible=false;
-                        lblAddOnAmtUpdate.Visible=false;
-                    }
-                    else
-                    {
-                        lblAddOnAmtUpdateTitle.Text = "Extra Charges from Add On Update";  
-                        lblAddOnAmtUpdate.Text = newAmt.ToString("F2");
-                        lblAddOnAmtUpdateTitle.CssClass = "text-warning fw-bold";
-                        lblAddOnAmtUpdate.CssClass = "text-warning";
-                    }
-                }
-                if (addOnDeleteUpdate != null)
-                {
-                 
-                    double currentLabelAddOnAmt = Convert.ToDouble(lblAddOnAmtUpdate.Text);
-                    double deleteAmt = Convert.ToDouble(addOnDeleteUpdate);
-                    double newAddOnAmt = currentLabelAddOnAmt + deleteAmt;
-                    if (newAddOnAmt > 0)
-                    {
-                        lblAddOnAmtUpdateTitle.Text = "Money Rebate from Add On Update";
-                        lblAddOnAmtUpdate.Text = newAddOnAmt.ToString("F2");
-                        lblAddOnAmtUpdateTitle.CssClass = "text-success fw-bold";
-                        lblAddOnAmtUpdate.CssClass = "text-success";
-                    }
-                    else if (newAddOnAmt == 0)
-                    {
-                        lblAddOnAmtUpdateTitle.Visible = false;
-                        lblAddOnAmtUpdate.Visible = false;
-                    }
-                    else
-                    {
-                        lblAddOnAmtUpdateTitle.Text = "Extra Charges from Add On Update";
-                        lblAddOnAmtUpdate.Text = newAddOnAmt.ToString("F2");
-                        lblAddOnAmtUpdateTitle.CssClass = "text-warning fw-bold";
-                        lblAddOnAmtUpdate.CssClass = "text-warning";
-                    }
-                }*/
+               
 
                 // Retrieve BookingId from session
                 string bookingId = Session["bookingrecordID"] as string;
@@ -135,7 +74,7 @@ namespace Assignment
         private void GetBookingDetails(string bookingId)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
-            decimal addonTotal = calcAddOnTotal(bookingId);
+            double addonTotal = calcAddOnTotal(bookingId);
             
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -185,9 +124,10 @@ namespace Assignment
                         lblRental.Text = totalRental.ToString("F2"); //TotalDays returns fractional number of days, use ceiling to meet our business rule
                         lblAddOnPrice.Text= addonTotal.ToString("F2");
 
+                        double finalAmt = totalRental + addonTotal;
                         //handle price diff due to update
                         double initialAmt = Convert.ToDouble(reader["Price"]);
-                        double afterUpdateAmt = Convert.ToDouble(reader["FinalPrice"]);
+                        double afterUpdateAmt = updateFinalPrice(finalAmt, bookingId) ;
                         lblInitialAmt.Text = initialAmt.ToString("F2");
                         lblAfterUpdateAmt.Text = afterUpdateAmt.ToString("F2");
                         if (reader["Discount"] != DBNull.Value)
@@ -221,10 +161,7 @@ namespace Assignment
                             lblPriceFinalOutcomeAmt.Text = absPriceDiff.ToString("F2");
                             hdnFinalPriceInfo.Value = "Refund";
                         }
-                       /* if (Session["oriAddOnPrice"] == null)
-                        {
-                            Session["oriAddOnPrice"] = addonTotal.ToString("F2");
-                        }*/
+                      
                        
                         //status part
                         lblBookStatus.Text = status;
@@ -239,6 +176,22 @@ namespace Assignment
                     
                 }
             }
+        }
+
+        private double updateFinalPrice(double finalAmt,string bookingId)
+        {
+            string sql = @"UPDATE Booking
+                           SET FinalPrice =@FinalPrice
+                           WHERE Id = @BookingID";
+
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString);
+            con.Open();
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@BookingID", bookingId);
+            cmd.Parameters.AddWithValue("@FinalPrice", finalAmt);
+            cmd.ExecuteNonQuery();
+            con.Close();
+            return finalAmt;
         }
 
         private void GetPaymentDetails(string bookingId)
@@ -275,9 +228,9 @@ namespace Assignment
         }
 
 
-        private decimal calcAddOnTotal(string bookingId)
+        private double calcAddOnTotal(string bookingId)
         {
-            decimal addonTotal=0;
+            double addonTotal=0;
             lblAddOnDesc.Text = "";
             
             string connectionString = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
@@ -295,7 +248,7 @@ namespace Assignment
                     {
 
                         int quantity = Convert.ToInt16(reader["Quantity"]);
-                        decimal price = Convert.ToDecimal(reader["Price"]);
+                        double price = Convert.ToDouble(reader["Price"]);
                         addonTotal += quantity * price;
                         lblAddOnDesc.Text += "("+ reader["Name"].ToString() + "*" + reader["Quantity"].ToString()+ ")" ;
 

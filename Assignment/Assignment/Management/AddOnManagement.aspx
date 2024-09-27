@@ -133,7 +133,7 @@
                                 <div class="col-md-6">
                                     <label class="small mb-1">Add On Maximum Quantity</label>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <asp:TextBox ID="txtMaxQuantity" runat="server" CssClass="form-control" TextMode="Number" ValidationGroup="uploadAddOn" min="1" step="1"></asp:TextBox>
+                                        <asp:TextBox ID="txtMaxQuantity" runat="server" CssClass="form-control" TextMode="Number" ValidationGroup="uploadAddOn" min="1" max="99" step="1"  ></asp:TextBox>
 
                                     </div>
 

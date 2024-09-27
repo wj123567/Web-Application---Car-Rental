@@ -4,34 +4,36 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hdnBookingId" runat="server" />
 
-     <div class="bg_cover">
-    <header class="section_container header_container">
-        <h1 class="section_header">Find and Book Your Car <br/> A Great Experience</h1>
-    </header>
+    <div class="bg_cover">
+        <header class="section_container header_container">
+            <h1 class="section_header">Find and Book Your Car
+                <br />
+                A Great Experience</h1>
+        </header>
 
-         <div class="container">
-          
-    <section class="section_container booking_container">
-   <div class="d-flex justify-content-center mb-3">
-    <asp:Label ID="lblerrortext" runat="server" Text="Please Select Location and Time" CssClass="validate" Visible="False"></asp:Label>
-</div>
-      
+        <div class="container">
 
-     <div class="container booking_selection">
-  <div class="row">
-    <div class="col text-center ">
-      <asp:Label ID="lblLocation" runat="server" Text="Pick Up & Drop Off Location" CssClass="home_label_style justify-content-center"></asp:Label> 
-    </div>
-  
-  </div>
-  <div class="row">
-    <div class="col text-center">
-      <asp:TextBox ID="txtDepartureLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Pick a Location😁"></asp:TextBox>
-       
-    </div>
-    <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Location is Required" ControlToValidate="txtDepartureLocation"  CssClass="validate text-center"  Display="Dynamic"></asp:RequiredFieldValidator>
-  </div>
-</div>
+            <section class="section_container booking_container">
+                <div class="d-flex justify-content-center mb-3">
+                    <asp:Label ID="lblerrortext" runat="server" Text="Please Select Location and Time" CssClass="validate" Visible="False"></asp:Label>
+                </div>
+
+
+                <div class="container booking_selection">
+                    <div class="row">
+                        <div class="col text-center ">
+                            <asp:Label ID="lblLocation" runat="server" Text="Pick Up & Drop Off Location" CssClass="home_label_style justify-content-center"></asp:Label>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <asp:TextBox ID="txtDepartureLocation" runat="server" CssClass="control_style" ReadOnly="true" placeholder="Pick a Location😁"></asp:TextBox>
+
+                        </div>
+                        <asp:RequiredFieldValidator ID="requireDepartureLocation" runat="server" ErrorMessage="Location is Required" ControlToValidate="txtDepartureLocation" CssClass="validate text-center" Display="Dynamic"></asp:RequiredFieldValidator>
+                    </div>
+                </div>
           
                    
         <div class="content_container">
@@ -109,64 +111,66 @@
 </div> 
 </div>
     
-<div id="locationModal" class="modal ">
+    <div id="locationModal" class="modal ">
         <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" id="modal-content">
-        <span class="close" id="modal_close">&times;</span>
-        <h2>Select Location</h2>
-        <hr/>
-        <div class="modal-body">
-            <div class="grid-container">
-                <div class="region">
-                    <h5>Region</h5>
-                    <ul id="RegionListPlaceholder" runat="server"></ul>
-                </div>
+            <div class="modal-content" id="modal-content">
+                <span class="close" id="modal_close">&times;</span>
+                <h2>Select Location</h2>
+                <hr />
+                <div class="modal-body">
+                    <div class="grid-container">
+                        <div class="region">
+                            <h5>Region</h5>
+                            <ul id="RegionListPlaceholder" runat="server"></ul>
+                        </div>
 
-                <!-- Popular Points Section for Penang -->
-                <div id="PopularPointsPlaceholder" runat="server">
-                    
-                </div>
+                        <!-- Popular Points Section for Penang -->
+                        <div id="PopularPointsPlaceholder" runat="server">
+                        </div>
 
+                    </div>
+                </div>
+                <asp:Button ID="modalOkBtn" runat="server" Text="Ok" CssClass="modalbtn_style" Enabled="false" />
             </div>
         </div>
-        <asp:Button ID="modalOkBtn" runat="server" Text="Ok" cssclass="modalbtn_style" Enabled="false"/>
     </div>
-    </div>
-</div>
 
-   
-     <section class=" plan_container">
- <p class="subheader">RENT INFORMATION</p>
- <h2 class="section_header">Plan your rent with confidence</h2>
- <p class="description">
-     Find help with your booking and renting plans, and see what to expect along your journey
- </p>
- <div class="plan_grid">
-     <div class="plan_content">
-         <span class="number">01</span>
-         <h4>Search & Explore </h4>
-         <p>Find a vehicle that suits your budget and travel style, and get a quote online.
-         </p>
-         <!-- -->
-         <span class="number">02</span>
-         <h4>Book & Pay </h4>
-         <p>Select your car hire dates, choose your car pick-up and drop-off points, and book securely.
-         </p>
-         <!-- -->
-         <span class="number">03</span>
-         <h4>Travel & Enjoy </h4>
-         <p> Collect your car and live like a local anywhere in Malaysia.
-         </p>
-      </div>
-     <div class="plan_image">
-         <img src="Image/WZ/homeimg2.jpg" alt="Alternate Text" style=" height:250px"/>
-         <img src="Image/WZ/homeimg1.jpg" alt="Alternate Text" style=" height:300px"/>
-         <img src="Image/WZ/homeimg3.jpg" alt="Alternate Text" style=" height:250px"/>
-     </div>
- </div>
-</section>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <section class=" plan_container">
+        <p class="subheader">RENT INFORMATION</p>
+        <h2 class="section_header">Plan your rent with confidence</h2>
+        <p class="description">
+            Find help with your booking and renting plans, and see what to expect along your journey
+        </p>
+        <div class="plan_grid">
+            <div class="plan_content">
+                <span class="number">01</span>
+                <h4>Search & Explore </h4>
+                <p>
+                    Find a vehicle that suits your budget and travel style, and get a quote online.
+                </p>
+                <!-- -->
+                <span class="number">02</span>
+                <h4>Book & Pay </h4>
+                <p>
+                    Select your car hire dates, choose your car pick-up and drop-off points, and book securely.
+                </p>
+                <!-- -->
+                <span class="number">03</span>
+                <h4>Travel & Enjoy </h4>
+                <p>
+                    Collect your car and live like a local anywhere in Malaysia.
+                </p>
+            </div>
+            <div class="plan_image">
+                <img src="Image/WZ/homeimg2.jpg" alt="Alternate Text" style="height: 250px" />
+                <img src="Image/WZ/homeimg1.jpg" alt="Alternate Text" style="height: 300px" />
+                <img src="Image/WZ/homeimg3.jpg" alt="Alternate Text" style="height: 250px" />
+            </div>
+        </div>
+    </section>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script type="text/javascript">
         function initialiseFlatpickr(){
             var today = new Date();

@@ -278,10 +278,10 @@
 
 
               
-<div class="mt-4 text_center invoice_container">
-<asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-info invoice_style invoice_btn" OnClientClick="return printInvoice(event)" UseSubmitBehaviour="false">
+                <div class="mt-4 text_center invoice_container">
+                    <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-info invoice_style invoice_btn" OnClientClick="return printInvoice(event)" UseSubmitBehaviour="false">
     <i class="ri-file-download-line">Download Invoice </i>
-</asp:LinkButton>
+                    </asp:LinkButton>
 
 </div>
                 

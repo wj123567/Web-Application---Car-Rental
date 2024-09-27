@@ -161,10 +161,10 @@
                                     <i class="fa fa-caret-down"></i>
                                 </div>
                                 </div>
-                                                        <asp:HiddenField ID="hdnTimeFilter" runat="server" />
-                                                        <asp:TextBox ID="txtStartDate" class="form-control" TextMode="Date" runat="server" style="display:none"></asp:TextBox>
-                                                        <asp:TextBox ID="txtEndDate" class="form-control" TextMode="Date" runat="server" style="display:none"></asp:TextBox>
-                                                        <asp:Button ID="btnProcessBookRecord" runat="server" Text="Generate" OnClick="btnBookRecord_Click" CssClass="btn btn-primary " style="display:none"/>
+                                          <asp:HiddenField ID="hdnTimeFilter" runat="server" />
+                                          <asp:TextBox ID="txtStartDate" class="form-control" TextMode="Date" runat="server" style="display:none"></asp:TextBox>
+                                          <asp:TextBox ID="txtEndDate" class="form-control" TextMode="Date" runat="server" style="display:none"></asp:TextBox>
+                                          <asp:Button ID="btnProcessBookRecord" runat="server" Text="Generate" OnClick="btnBookRecord_Click" CssClass="btn btn-primary " style="display:none"/>
                             </div>
                         <hr />
                         <div class="container" style="display:none;">
@@ -189,12 +189,8 @@
 
                                         <!-- Custom Date Pickers (Initially Hidden) -->
                                         <div id="customDateFilter" style="display: none;">
-                                            <label for="startDate">Start Date</label>
-
-                                            
-                                            <label for="endDate">End Date</label>
-
-                                            
+                                            <label for="startDate">Start Date</label>                                            
+                                            <label for="endDate">End Date</label>                                            
                                         </div>
                                     </div>
                                 </div>

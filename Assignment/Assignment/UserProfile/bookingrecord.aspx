@@ -155,7 +155,7 @@
             </td>
 
             <td class="price_data">
-                <p class="fw-normal mb-1"><%# Eval("FinalPrice") %></p>
+                <p class="fw-normal mb-1"><%#Eval("Price") %></p>
             </td>
 
             <td>

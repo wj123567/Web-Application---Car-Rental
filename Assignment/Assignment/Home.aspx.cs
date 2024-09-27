@@ -239,23 +239,7 @@ namespace Assignment
             con.Close();
         return true;
         }
-        // Mark items as disabled before rendering the page
-        /*protected override void Render(HtmlTextWriter writer)
-        {
-            foreach (ListItem item in ddlLocation.Items)
-            {
-                // Example: Disable items with specific values
-                if (item.Value == "select_location"||item.Value == "penang_island" || item.Value == "penang_mainland")
-                {
-                    item.Attributes.Add("disabled", "disabled");
-
-                }
-
-            }
-
-
-            base.Render(writer);
-        }*/
+      
 
         
     }
