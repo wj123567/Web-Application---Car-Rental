@@ -86,9 +86,9 @@
                                 <asp:Image ID="imgAddOnPic" runat="server" CssClass="img-car-pic mb-2" Width="300px" ImageUrl="~/Image/no-img -long.png" />
                             </asp:LinkButton>
                             <div id="img-warning-text" class="small font-italic text-muted">JPG or PNG no larger than 2 MB</div>
-                            <asp:RequiredFieldValidator ID="rqfuAddOnPic" runat="server" ControlToValidate="fuAddOnPic" ErrorMessage="Please upload an image." InitialValue="" ValidationGroup="uploadCar" Display="Dynamic" CssClass="validate">
+                            <asp:RequiredFieldValidator ID="rqfuAddOnPic" runat="server" ControlToValidate="fuAddOnPic" ErrorMessage="Please upload an image." InitialValue="" ValidationGroup="uploadAddOn" Display="Dynamic" CssClass="validate">
                             </asp:RequiredFieldValidator>
-                            <asp:CustomValidator ID="validateAddOnPic" runat="server" ControlToValidate="fuAddOnPic" CssClass="validate" ValidationGroup="uploadCar" ValidateEmptyText="True" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile"></asp:CustomValidator>
+                            <asp:CustomValidator ID="validateAddOnPic" runat="server" ControlToValidate="fuAddOnPic" CssClass="validate" ValidationGroup="uploadAddOn" ValidateEmptyText="True" ErrorMessage="Picture is invalid type or size is too large" ClientValidationFunction="validateFile"></asp:CustomValidator>
                             <asp:FileUpload ID="fuAddOnPic" runat="server" CssClass="uploadPicture" onchange="ShowCropModal(event)" />
                             <br />
                         </div>
@@ -102,48 +102,49 @@
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
                                     <label class="small mb-1">Add On Name</label>
-                                    <asp:TextBox ID="txtAddonName" runat="server" CssClass="form-control" placeholder="Name" ValidationGroup="uploadCar"></asp:TextBox>
-                                    <asp:RegularExpressionValidator ID="regexAddOnName" runat="server" ErrorMessage="Use only character that can be declared as file name" Display="Dynamic" CssClass="validate" ValidationGroup="uploadCar" ControlToValidate="txtAddOnName" ValidationExpression="^[A-Za-z0-9_\-()\. ]+$"></asp:RegularExpressionValidator>
-                                    <asp:RequiredFieldValidator ID="rqAddonName" runat="server" ErrorMessage="Add On Name is required" ControlToValidate="txtAddOnName" CssClass="validate" ValidationGroup="uploadCar"></asp:RequiredFieldValidator>
+                                    <asp:TextBox ID="txtAddonName" runat="server" CssClass="form-control" placeholder="Name" ValidationGroup="uploadAddOn"></asp:TextBox>
+                                    <asp:RegularExpressionValidator ID="regexAddOnName" runat="server" ErrorMessage="Use only character that can be declared as file name" Display="Dynamic" CssClass="validate" ValidationGroup="uploadAddOn" ControlToValidate="txtAddOnName" ValidationExpression="^[A-Za-z0-9_\-()\. ]+$"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="rqAddonName" runat="server" ErrorMessage="Add On Name is required" ControlToValidate="txtAddOnName" CssClass="validate" ValidationGroup="uploadAddOn"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-12">
                                     <label class="small mb-1">Add On Description</label>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" placeholder="Description" ValidationGroup="uploadCar"></asp:TextBox>
+                                        <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" placeholder="Description" ValidationGroup="uploadAddOn"></asp:TextBox>
 
                                     </div>
 
-                                    <asp:RequiredFieldValidator ID="rqDescription" runat="server" ErrorMessage="Add On Description is required" ControlToValidate="txtDescription" CssClass="validate" ValidationGroup="uploadCar"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="rqDescription" runat="server" ErrorMessage="Add On Description is required" ControlToValidate="txtDescription" CssClass="validate" ValidationGroup="uploadAddOn"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
                                     <label class="small mb-1">Add On Price(MYR)</label>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <asp:TextBox ID="txtAddonPrice" runat="server" CssClass="form-control" placeholder="0.00" ValidationGroup="uploadCar"></asp:TextBox>
+                                        <asp:TextBox ID="txtAddonPrice" runat="server" CssClass="form-control" placeholder="0.00" ValidationGroup="uploadAddOn"></asp:TextBox>
 
                                     </div>
 
-                                    <asp:RequiredFieldValidator ID="rqPrice" runat="server" ErrorMessage="Add On Price is required" ControlToValidate="txtAddonPrice" CssClass="validate" ValidationGroup="uploadCar"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="rqPrice" runat="server" ErrorMessage="Add On Price is required" ControlToValidate="txtAddonPrice" CssClass="validate" ValidationGroup="uploadAddOn"></asp:RequiredFieldValidator>
+                                     <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Invalid Price Range (1 - 999.99)" MaximumValue="999.99" MinimumValue="1.00" ControlToValidate="txtAddonPrice" ValidationGroup="uploadAddOn" CssClass="validate" Display="Dynamic" CultureInvariantValues="False" Type="Double"></asp:RangeValidator>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="small mb-1">Add On Maximum Quantity</label>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <asp:TextBox ID="txtMaxQuantity" runat="server" CssClass="form-control" TextMode="Number" ValidationGroup="uploadCar" min="1" step="1"></asp:TextBox>
+                                        <asp:TextBox ID="txtMaxQuantity" runat="server" CssClass="form-control" TextMode="Number" ValidationGroup="uploadAddOn" min="1" step="1"></asp:TextBox>
 
                                     </div>
 
-                                    <asp:RequiredFieldValidator ID="rqMaxQuantity" runat="server" ErrorMessage="Add On Price is required" ControlToValidate="txtMaxQuantity" CssClass="validate" ValidationGroup="uploadCar"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="rqMaxQuantity" runat="server" ErrorMessage="Add On Quantity is required" ControlToValidate="txtMaxQuantity" CssClass="validate" ValidationGroup="uploadAddOn"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
 
 
 
 
-                            <asp:Button ID="btnUploadAddOn" runat="server" Text="Add" CssClass='btn btn-primary' ValidationGroup="uploadCar" OnClick="btnUploadAddOn_Click" />
+                            <asp:Button ID="btnUploadAddOn" runat="server" Text="Add" CssClass='btn btn-primary' ValidationGroup="uploadAddOn" OnClick="btnUploadAddOn_Click" />
                             <asp:Button ID="btnUpdateAddOn" runat="server" Text="Update" CssClass='btn btn-primary' Visible="False" OnClick="btnUpdateAddOn_Click" />
                             <asp:Button ID="btnDelete" runat="server" Text="Delete " CssClass="btn btn-danger" data-bs-toggle="modal" data-bs-target="#ConfirmDelete" OnClientClick="return false" Visible="False" />
                         </div>

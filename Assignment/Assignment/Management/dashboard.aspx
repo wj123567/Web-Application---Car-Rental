@@ -151,7 +151,7 @@
                 <div class="card overflow-auto mb-2" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
                     <div class="card-body p-3">
                         <div class="d-flex justify-content-between">
-                        <h5 class="card-title flex-grow-3 mb-0">Summary Report On Car Booking(Rented)</h5>
+                        <h5 class="card-title flex-grow-3 mb-0">Summary Report On Car Booking</h5>
                                                     <div class="filter flex-shrink-0 mx-2">
                                 <div id="carBookingRpt" class="d-flex align-items-center justify-content-between" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;">
                                     <div>
@@ -254,7 +254,7 @@
                 <div class="card overflow-auto" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius: 15px;">
                     <div class="card-body p-3">
                         <div class="d-flex justify-content-between">
-                            <h5 class="card-title flex-grow-3mb-0">Exception Report on Car Rental Amount Made by Customers</h5>
+                            <h5 class="card-title flex-grow-3mb-0">Exception Report on Booking Amount Made by Customers</h5>
                             <div class="filter flex-shrink-0 mx-2">
                                 <div id="carRentalAmt" class="d-flex align-items-center justify-content-between" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 200px;">
                                     <div>
@@ -745,6 +745,7 @@
                     'This Week': [moment().subtract(6, 'days'), moment()],
                     'Last Week': [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')],
                     'This Month': [moment().startOf('month'), moment().endOf('month')], 'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+
                     'This Year': [moment().startOf('year'), moment().endOf('year')],
                 }
             }, function (start, end, label) {

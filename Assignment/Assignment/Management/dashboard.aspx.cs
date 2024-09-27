@@ -255,18 +255,20 @@ namespace Assignment.Management
             {
 
                 case "Today":
-                    query = @"SELECT DATEPART(HOUR, BookingDate) AS Hour , COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                    query = @"SELECT DATEPART(HOUR, BookingDate) AS Hour , COUNT(*) AS BookingCount, SUM(FinalPrice) AS BookingAmount
                       FROM Booking 
                       WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, GETDATE())  -- Filter by current date
+                      AND Status NOT IN ('Cancelled', 'Pending')
                       GROUP BY DATEPART(HOUR, BookingDate)
                       ORDER BY DATEPART(HOUR, BookingDate)";
                     xAxisTitle = "Hours in 24-hour system";
                     title = "on "+ today.Date.ToString("dd-MMM-yyyy");
                     break;
                 case "Yesterday":
-                    query = @"SELECT DATEPART(HOUR, BookingDate) AS Hour , COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                    query = @"SELECT DATEPART(HOUR, BookingDate) AS Hour , COUNT(*) AS BookingCount, SUM(FinalPrice) AS BookingAmount
                       FROM Booking 
                       WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, DATEADD(DAY,-1,GETDATE()))  -- Filter by current date
+                      AND Status NOT IN ('Cancelled', 'Pending')
                       GROUP BY DATEPART(HOUR, BookingDate)
                       ORDER BY DATEPART(HOUR, BookingDate)";
                     xAxisTitle = "Hours in 24-hour system";
@@ -282,9 +284,10 @@ namespace Assignment.Management
                               DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";//(WEEKDAY) = Sunday-1...Saturday-7 ,start - Sunday , end-Saturday 
 
                             query = weekFilter
-                              + @"SELECT CONVERT(VARCHAR, BookingDate, 103) AS DatePerWeek, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                              + @"SELECT CONVERT(VARCHAR, BookingDate, 103) AS DatePerWeek, COUNT(*) AS BookingCount, SUM(FinalPrice) AS BookingAmount
                               FROM Booking 
                               WHERE BookingDate >= @StartOfWeek AND BookingDate < DATEADD(DAY, 1, @EndOfWeek)
+                              AND Status NOT IN ('Cancelled', 'Pending')
                               GROUP BY CONVERT(VARCHAR, BookingDate, 103)  -- Group by day
                               ORDER BY CONVERT(VARCHAR, BookingDate, 103)  -- Sort by formatted date";
                     title = "from " + startofWeek.ToString("dd-MMM-yyyy") + " to " + endOfWeek.ToString("dd-MMM-yyyy");
@@ -299,9 +302,10 @@ namespace Assignment.Management
                               DECLARE @EndOfLastWeek DATE = DATEADD(DAY, - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";
 
                     query = weekFilter
-                              + @"SELECT CONVERT(VARCHAR, BookingDate, 103) AS DatePerWeek, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                              + @"SELECT CONVERT(VARCHAR, BookingDate, 103) AS DatePerWeek, COUNT(*) AS BookingCount, SUM(FinalPrice) AS BookingAmount
                               FROM Booking 
                               WHERE BookingDate >= @StartOfLastWeek AND BookingDate < DATEADD(DAY, 1, @EndOfLastWeek)
+                              AND Status NOT IN ('Cancelled', 'Pending')
                               GROUP BY CONVERT(VARCHAR, BookingDate, 103)  -- Group by day
                               ORDER BY CONVERT(VARCHAR, BookingDate, 103)  -- Sort by formatted date";
                     title = "from " + startofLastWeek.ToString("dd-MMM-yyyy") + " to " + endofLastWeek.ToString("dd-MMM-yyyy"); 
@@ -312,9 +316,10 @@ namespace Assignment.Management
                                            DECLARE @EndOfMonth DATE = EOMONTH(@CurrentDate)";
 
                     query = monthFilter 
-                            + @"SELECT CONVERT(VARCHAR, BookingDate, 103) AS BookingDate, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                            + @"SELECT CONVERT(VARCHAR, BookingDate, 103) AS BookingDate, COUNT(*) AS BookingCount, SUM(FinalPrice) AS BookingAmount
                             FROM Booking
                             WHERE BookingDate BETWEEN @StartOfMonth AND @EndOfMonth
+                            AND Status NOT IN ('Cancelled', 'Pending')
                             GROUP BY CONVERT(VARCHAR, BookingDate, 103)
                             ORDER BY BookingDate";
 
@@ -330,38 +335,42 @@ namespace Assignment.Management
                                                DECLARE @EndOfPrevMonth DATE = EOMONTH(@CurrentDate, -1)"; 
 
                     query = lastMonthFilter
-                            + @"SELECT CONVERT(VARCHAR, BookingDate, 103) AS BookingDate, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                            + @"SELECT CONVERT(VARCHAR, BookingDate, 103) AS BookingDate, COUNT(*) AS BookingCount, SUM(FinalPrice) AS BookingAmount
                             FROM Booking
                             WHERE BookingDate BETWEEN @StartOfPrevMonth AND DATEADD(DAY ,1, @EndOfPrevMonth)
+                            AND Status NOT IN ('Cancelled', 'Pending')
                             GROUP BY CONVERT(VARCHAR, BookingDate, 103)
                             ORDER BY BookingDate"; // need plus 1 on the EOM because time issue, if no add last day will nt include
 
                     title = "in " + today.AddMonths(-1).ToString("MMMM");
                     break;
                 case "Quarter":
-                    query = @"SELECT YEAR(BookingDate) AS Year, DATEPART(QUARTER, BookingDate) AS Quarter, COUNT(*) AS BookingCount ,SUM(Price) AS BookingAmount
+                    query = @"SELECT YEAR(BookingDate) AS Year, DATEPART(QUARTER, BookingDate) AS Quarter, COUNT(*) AS BookingCount ,SUM(FinalPrice) AS BookingAmount
                             FROM Booking 
                             WHERE BookingDate IS NOT NULL  
                             AND YEAR(BookingDate) = YEAR(CONVERT(DATE,GETDATE()))
+                            AND Status NOT IN ('Cancelled', 'Pending')
                             GROUP BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)
                             ORDER BY YEAR(BookingDate), DATEPART(QUARTER, BookingDate)";
                     title = "for Quarters of "+ today.ToString("yyyy");
                     
                     break;
                 case "This Year":
-                    query = @"SELECT YEAR(BookingDate) AS Year, FORMAT(BookingDate,'MMM') AS Month, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                    query = @"SELECT YEAR(BookingDate) AS Year, FORMAT(BookingDate,'MMM') AS MonthABC, MONTH(BookingDate) AS Month , COUNT(*) AS BookingCount, SUM(FinalPrice) AS BookingAmount
                             FROM Booking 
                             WHERE BookingDate IS NOT NULL 
                             AND YEAR(BookingDate) = YEAR(CONVERT(DATE,GETDATE()))
-                            GROUP BY YEAR(BookingDate), FORMAT(BookingDate, 'MMM')
-                            ORDER BY YEAR(BookingDate), FORMAT(BookingDate, 'MMM')";
+                            AND Status NOT IN ('Cancelled', 'Pending')
+                            GROUP BY YEAR(BookingDate), FORMAT(BookingDate, 'MMM'),MONTH(BookingDate)
+                            ORDER BY YEAR(BookingDate), MONTH(BookingDate)";
                     title = "for Year "+today.ToString("yyyy");
                     xAxisTitle = "Month of The Year";
                     break;
                 case "3 Year":
-                    query = @"SELECT YEAR(BookingDate) AS Year, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                    query = @"SELECT YEAR(BookingDate) AS Year, COUNT(*) AS BookingCount, SUM(FinalPrice) AS BookingAmount
                             FROM Booking 
                             WHERE YEAR(BookingDate) BETWEEN YEAR(CONVERT(DATE,GETDATE()))-2 AND YEAR(CONVERT(DATE,GETDATE()))
+                            AND Status NOT IN ('Cancelled', 'Pending')
                             GROUP BY YEAR(BookingDate)
                             ORDER BY YEAR(BookingDate)";
                     title = "from Year " + today.AddYears(-2).ToString("yyyy") +" to Year " + today.ToString("yyyy");
@@ -373,18 +382,20 @@ namespace Assignment.Management
                     if(customFormat=="In Date")
                     {
                         query = @"
-                            SELECT YEAR(BookingDate) AS Year, MONTH(BookingDate) AS Month, DAY(BookingDate) AS Day, FORMAT(BookingDate, 'MMM') AS MonthABC, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                            SELECT YEAR(BookingDate) AS Year, MONTH(BookingDate) AS Month, DAY(BookingDate) AS Day, FORMAT(BookingDate, 'MMM') AS MonthABC, COUNT(*) AS BookingCount, SUM(FinalPrice) AS BookingAmount
                              FROM Booking
                              WHERE BookingDate >= @StartDate AND BookingDate <= DATEADD(DAY, 1, @EndDate)
+                             AND Status NOT IN ('Cancelled', 'Pending')
                              GROUP BY YEAR(BookingDate), MONTH(BookingDate),DAY(BookingDate),FORMAT(BookingDate, 'MMM')
                              ORDER BY Year, Month ";
                     }
                     else if(customFormat =="In Month")
                     {
                         query = @"
-                            SELECT YEAR(BookingDate) AS Year, MONTH(BookingDate) AS Month, FORMAT(BookingDate, 'MMM') AS MonthABC, COUNT(*) AS BookingCount, SUM(Price) AS BookingAmount
+                            SELECT YEAR(BookingDate) AS Year, MONTH(BookingDate) AS Month, FORMAT(BookingDate, 'MMM') AS MonthABC, COUNT(*) AS BookingCount, SUM(FinalPrice) AS BookingAmount
                              FROM Booking
                              WHERE BookingDate >= @StartDate AND BookingDate <= DATEADD(DAY, 1, @EndDate)
+                             AND Status NOT IN ('Cancelled', 'Pending')
                              GROUP BY YEAR(BookingDate), MONTH(BookingDate),FORMAT(BookingDate, 'MMM')
                              ORDER BY Year, Month ";
                     }
@@ -536,23 +547,25 @@ namespace Assignment.Management
             switch (timeFilter)
             {
                 case "Today":
-                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.FinalPrice) AS TotalPrice
                               FROM ApplicationUser a JOIN Booking b
                               ON a.Id = b.UserId
                               WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, GETDATE())  -- Filter by current date
+                              AND Status NOT IN ('Cancelled', 'Pending')
                               GROUP BY a.ProfilePicture,a.Username,a.Email 
                               ORDER BY TotalPrice DESC";
-                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made on " + today.ToString("dd-MMM-yyyy");
+                    lblTopCust.Text = "Top 5 Customers on Booking Amount Made on " + today.ToString("dd-MMM-yyyy");
                     lackTimeString = " today";
                     break;
                 case "Yesterday":
-                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.FinalPrice) AS TotalPrice
                               FROM ApplicationUser a JOIN Booking b
                               ON a.Id = b.UserId
                               WHERE CONVERT(DATE, BookingDate) = CONVERT(DATE, DATEADD(DAY,-1,GETDATE()))  -- Filter by current date
+                              AND Status NOT IN ('Cancelled', 'Pending')
                               GROUP BY a.ProfilePicture,a.Username,a.Email 
                               ORDER BY TotalPrice DESC";
-                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made on " + today.AddDays(-1).ToString("dd-MMM-yyyy");
+                    lblTopCust.Text = "Top 5 Customers on Booking Amount Made on " + today.AddDays(-1).ToString("dd-MMM-yyyy");
                     lackTimeString = " yesterday";
                     break;
                 case "This Week":
@@ -565,14 +578,15 @@ namespace Assignment.Management
                               DECLARE @EndOfWeek DATE = DATEADD(DAY, 7 - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";//start - Sunday , end-Saturday 
 
                     query = weekFilter
-                      + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                      + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.FinalPrice) AS TotalPrice
                               FROM ApplicationUser a JOIN Booking b
                               ON a.Id = b.UserId
                               WHERE BookingDate >= @StartOfWeek AND BookingDate < DATEADD(DAY, 1, @EndOfWeek)
+                              AND Status NOT IN ('Cancelled', 'Pending')
                               GROUP BY a.ProfilePicture,a.Username,a.Email
                               ORDER BY TotalPrice DESC";
 
-                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made from " + startofWeek.ToString("dd-MMM-yyyy") + " to " + endOfWeek.ToString("dd-MMM-yyyy");
+                    lblTopCust.Text = "Top 5 Customers on Booking Amount Made from " + startofWeek.ToString("dd-MMM-yyyy") + " to " + endOfWeek.ToString("dd-MMM-yyyy");
                     lackTimeString = " from " + startofWeek.ToString("dd-MMM-yyyy") + " to " + endOfWeek.ToString("dd-MMM-yyyy");
                     break;
                 case "Last Week":
@@ -584,13 +598,14 @@ namespace Assignment.Management
                               DECLARE @EndOfLastWeek DATE = DATEADD(DAY, - DATEPART(WEEKDAY, @CurrentDate), @CurrentDate) ";
 
                     query = weekFilter
-                             + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                             + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.FinalPrice) AS TotalPrice
                               FROM ApplicationUser a JOIN Booking b
                               ON a.Id = b.UserId 
                               WHERE BookingDate >= @StartOfLastWeek AND BookingDate < DATEADD(DAY, 1, @EndOfLastWeek)
+                              AND Status NOT IN ('Cancelled', 'Pending')
                               GROUP BY a.ProfilePicture,a.Username,a.Email
                               ORDER BY TotalPrice DESC";
-                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made from " + startofLastWeek.ToString("dd-MMM-yyyy") + " to " + endofLastWeek.ToString("dd-MMM-yyyy");
+                    lblTopCust.Text = "Top 5 Customers on Booking Amount Made from " + startofLastWeek.ToString("dd-MMM-yyyy") + " to " + endofLastWeek.ToString("dd-MMM-yyyy");
                     lackTimeString = " from " + startofLastWeek.ToString("dd-MMM-yyyy") + " to " + endofLastWeek.ToString("dd-MMM-yyyy");
                     break;
 
@@ -600,13 +615,14 @@ namespace Assignment.Management
                                            DECLARE @EndOfMonth DATE = EOMONTH(@CurrentDate)";
 
                     query = monthFilter
-                            + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                            + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.FinalPrice) AS TotalPrice
                             FROM ApplicationUser a JOIN Booking b
                             ON a.Id = b.UserId
                             WHERE BookingDate BETWEEN @StartOfMonth AND @EndOfMonth
+                            AND Status NOT IN ('Cancelled', 'Pending')
                             GROUP BY a.ProfilePicture,a.Username,a.Email 
                             ORDER BY TotalPrice DESC";
-                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made in " + today.ToString("MMMM");
+                    lblTopCust.Text = "Top 5 Customers on Booking Amount Made in " + today.ToString("MMMM");
                     lackTimeString = " in " + today.ToString("MMMM");
                     break;
                 case "Last Month":
@@ -615,13 +631,14 @@ namespace Assignment.Management
                                                DECLARE @StartOfPrevMonth DATE = DATEADD(MONTH, -1, DATEADD(DAY, -DAY(@CurrentDate) + 1, @CurrentDate)) 
                                                DECLARE @EndOfPrevMonth DATE = EOMONTH(@CurrentDate, -1)";
                     query = lastMonthFilter
-                            + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                            + @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.FinalPrice) AS TotalPrice
                             FROM ApplicationUser a JOIN Booking b
                             ON a.Id = b.UserId
                             WHERE BookingDate BETWEEN @StartOfPrevMonth AND DATEADD(DAY ,1, @EndOfPrevMonth)
+                            AND Status NOT IN ('Cancelled', 'Pending')
                             GROUP BY a.ProfilePicture,a.Username,a.Email 
                             ORDER BY TotalPrice DESC";
-                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made in " + today.AddMonths(-1).ToString("MMMM");
+                    lblTopCust.Text = "Top 5 Customers on Booking Amount Made in " + today.AddMonths(-1).ToString("MMMM");
                     lackTimeString = " in " + today.AddMonths(-1).ToString("MMMM");
                     break;
                 case "Quarter":
@@ -659,36 +676,39 @@ namespace Assignment.Management
                             ORDER BY TotalPrice DESC";
                     break;
                 case "This Year":
-                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.FinalPrice) AS TotalPrice
                             FROM ApplicationUser a JOIN Booking b
                             ON a.Id = b.UserId
                             WHERE BookingDate IS NOT NULL  
                             AND YEAR(BookingDate) = YEAR(CONVERT(DATE, GETDATE()))
+                            AND Status NOT IN ('Cancelled', 'Pending')
                             GROUP BY a.ProfilePicture, a.Username, a.Email
                             ORDER BY TotalPrice DESC";
-                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made in Year " + today.ToString("yyyy");
+                    lblTopCust.Text = "Top 5 Customers on Booking Amount Made in Year " + today.ToString("yyyy");
                     lackTimeString = " in " + today.ToString("yyyy");
                     break;
                 case "All Time":
-                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.FinalPrice) AS TotalPrice
                             FROM ApplicationUser a JOIN Booking b
                             ON a.Id = b.UserId
                             WHERE BookingDate IS NOT NULL  
+                            AND Status NOT IN ('Cancelled', 'Pending')
                             GROUP BY a.ProfilePicture, a.Username, a.Email
                             ORDER BY TotalPrice DESC";
-                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made of All Time";
+                    lblTopCust.Text = "Top 5 Customers on Booking Amount Made of All Time";
                     lackTimeString = " of All Time";
                     break;
                 case "Custom":
-                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.Price) AS TotalPrice
+                    query = @"SELECT TOP 5 a.ProfilePicture, a.Username, a.Email,SUM(b.FinalPrice) AS TotalPrice
                              FROM ApplicationUser a JOIN Booking b
                              ON a.Id = b.UserId
                              WHERE BookingDate IS NOT NULL
                              AND BookingDate BETWEEN @StartDate AND @EndDate
+                             AND Status NOT IN ('Cancelled', 'Pending')
                              GROUP BY a.ProfilePicture, a.Username, a.Email
                              ORDER BY TotalPrice DESC ";
 
-                    lblTopCust.Text = "Top 5 Customers on Rental Amount Made " + "from " + dateFrom.ToString("dd-MM-yyyy") + " to " + dateTo.ToString("dd-MM-yyyy");
+                    lblTopCust.Text = "Top 5 Customers on Booking Amount Made " + "from " + dateFrom.ToString("dd-MM-yyyy") + " to " + dateTo.ToString("dd-MM-yyyy");
                     lackTimeString = " from " + dateFrom.ToString("dd-MM-yyyy") + " to " + dateTo.ToString("dd-MM-yyyy");
 
                     break;

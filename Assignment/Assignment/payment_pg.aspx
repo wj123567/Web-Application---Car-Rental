@@ -152,6 +152,7 @@
                             <asp:Label ID="lblCvv" runat="server" Text="Security Code(CVV)" CssClass="label_style"></asp:Label>
                             <asp:TextBox ID="txtCvv" runat="server" CssClass="form-control my-1" MaxLength="3"  TextMode="Password" ValidationGroup="PaymentValidation"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="rqCvv" runat="server" ErrorMessage="CVV is Required" ControlToValidate="txtCvv" ValidationGroup="PaymentValidation" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
+                            <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Invalid CVV Format(3-4 digits)"  ControlToValidate="txtCvv" MinimumValue="100" MaximumValue="9999" ValidationGroup="PaymentValidation" CssClass="validate" Display="Dynamic" CultureInvariantValues="False" Type="Integer"></asp:RangeValidator>
                         </div>
                     </div>
 

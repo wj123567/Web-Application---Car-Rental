@@ -229,6 +229,12 @@ namespace Assignment
                         //status part
                         lblBookStatus.Text = status;
                         lblBookStatus.CssClass = $"badge {GetBadgeClass(status)}";
+
+                        if (reader["RejectReason"] != DBNull.Value)
+                        {
+                            lblRejectUpdate.Visible = true;
+                            lblRejectUpdate.Text = "Reject Cancellation Reason: "+reader["RejectReason"].ToString();
+                        }
                     }
                     
                 }

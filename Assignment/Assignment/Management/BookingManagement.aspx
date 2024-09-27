@@ -20,7 +20,7 @@
       <div class="modal-body">
           <asp:DropDownList ID="ddlRejectReason" runat="server" CssClass="form-select" AutoPostBack="True" ValidationGroup="rejectGroup" OnSelectedIndexChanged="ddlRejectReason_SelectedIndexChanged">
               <asp:ListItem Value="0">Select Reject Reason</asp:ListItem>
-              <asp:ListItem Value="Vehicle already dispatched">Vehicle already dispatched</asp:ListItem>
+              <asp:ListItem Value="Vehicle Already Dispatched">Vehicle already dispatched</asp:ListItem>
               <asp:ListItem Value="Payment Already Processed">Payment Already Processed</asp:ListItem>
               <asp:ListItem Value="Late Cancellation Request">Late Cancellation Request</asp:ListItem>
               <asp:ListItem Value="Preparation Costs Incurred">Preparation Costs Incurred</asp:ListItem>

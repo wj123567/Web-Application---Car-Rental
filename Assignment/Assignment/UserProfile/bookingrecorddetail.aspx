@@ -266,8 +266,9 @@
                             <div class="col">
                                 <h5 class="card-title">Booking Status</h5>
                                 <p>
-                                    <asp:Label ID="lblBookStatus" CssClass="badge " runat="server" Text="Label"></asp:Label>
+                                  <asp:Label ID="lblBookStatus" CssClass="badge " runat="server" Text="Label"></asp:Label>
                                 </p>
+                                <asp:Label ID="lblRejectUpdate" CssClass="badge fw-bold text-danger" runat="server" Text="Label" Visible="false"></asp:Label>
                             </div>
                         </div>
                     </div>
