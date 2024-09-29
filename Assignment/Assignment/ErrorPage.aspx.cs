@@ -20,7 +20,15 @@ namespace Assignment
                     lblError.Text = lblError.Attributes["data-error-msg"] = errorCode;
                     if (lastError != null)
                     {
-                        lblErrorMsg.Text = lastError.InnerException.Message;
+                        if(lastError.InnerException != null)
+                        {
+                            lblErrorMsg.Text = lastError.InnerException.Message;
+                        }
+                        else
+                        {
+                            lblErrorMsg.Text = lastError.Message;
+                        }
+                        
                     }
                     else
                     {

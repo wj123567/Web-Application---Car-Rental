@@ -194,7 +194,7 @@
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
                                     <span>Location Name:</span>
-                                    <asp:TextBox ID="txtLocation" runat="server" CssClass="form-control" placeholder="Location Name" ValidationGroup="deleteGroup" TextMode="SingleLine"></asp:TextBox>
+                                    <asp:TextBox ID="txtLocation" runat="server" CssClass="form-control" placeholder="Location Name" ValidationGroup="addLocation" TextMode="SingleLine"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="reqLocation" runat="server" ErrorMessage="Password is required" ValidationGroup="addLocation" ControlToValidate="txtLocation" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="col-md-6">
@@ -221,9 +221,9 @@
                             <div class="row gx-3 mb-3">
                                 <div class="col-md-6">
                                     <span>Location Postcode:</span>
-                                    <asp:TextBox ID="txtPostcode" runat="server" CssClass="form-control" placeholder="Postcode" ValidationGroup="deleteGroup" TextMode="SingleLine"></asp:TextBox>
+                                    <asp:TextBox ID="txtPostcode" runat="server" CssClass="form-control" placeholder="Postcode" ValidationGroup="addLocation" TextMode="SingleLine"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="requirePostcode" runat="server" ErrorMessage="Postcode is required" ValidationGroup="addLocation" ControlToValidate="txtPostcode" CssClass="validate" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="regexPostcode" runat="server" ErrorMessage="Invalid Postcode" ControlToValidate="txtPostcode" CssClass="validate" Display="Dynamic" ValidationExpression="^(0[1-9]|[1-9][0-9])\d{3}$"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="regexPostcode" runat="server" ErrorMessage="Invalid Postcode" ControlToValidate="txtPostcode" CssClass="validate" Display="Dynamic" ValidationExpression="^(0[1-9]|[1-9][0-9])\d{3}$" ValidationGroup="addLocation"></asp:RegularExpressionValidator>
                                 </div>
                                 <div class="col-md-6">
                                     <span>Location Address:</span>
