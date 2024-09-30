@@ -26,7 +26,7 @@ namespace Assignment
         {
             if (!Page.IsPostBack)
             {
-                ViewState["SQLQuery"] = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate >= CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending','Completed') THEN 1 ELSE 0 END)) as Upcoming, (SUM(CASE WHEN Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Booking, SUM(CASE WHEN B.Status NOT IN ('Cancelled','Pending') THEN B.FinalPrice ELSE 0 END) AS Revenue FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
+                ViewState["SQLQuery"] = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate >= CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending','Completed') THEN 1 ELSE 0 END)) as Upcoming, (SUM(CASE WHEN Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Booking, SUM(CASE WHEN B.Status NOT IN ('Cancelled','Pending') THEN B.FinalPrice ELSE 0 END) AS Revenue FROM Car C LEFT JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
                 loadCarData();
             }
 
@@ -713,7 +713,7 @@ namespace Assignment
         }
         protected void hiddenBtn_Click(object sender, EventArgs e)
         {
-            string findCar = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate > CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending','Completed') THEN 1 ELSE 0 END)) as Upcoming, (SUM(CASE WHEN Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Booking, SUM(CASE WHEN B.Status NOT IN ('Cancelled', 'Pending') THEN B.FinalPrice ELSE 0 END) AS Revenue FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR C.CarPlate LIKE @searchString GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
+            string findCar = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate > CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending','Completed') THEN 1 ELSE 0 END)) as Upcoming, (SUM(CASE WHEN Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Booking, SUM(CASE WHEN B.Status NOT IN ('Cancelled', 'Pending') THEN B.FinalPrice ELSE 0 END) AS Revenue FROM Car C LEFT JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate WHERE (CarName LIKE @searchString OR CType LIKE @searchString OR CarBrand LIKE @searchString OR (CarBrand + CarName) LIKE @searchString) OR C.CarPlate LIKE @searchString GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
             ViewState["SQLQuery"] = findCar;
             loadCarData();
             UpdatePanel1.Update();
@@ -730,11 +730,11 @@ namespace Assignment
             string selectCar = " ";
             if (loc != "0")
             {
-                selectCar = "SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate >= CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending','Completed') THEN 1 ELSE 0 END)) as Upcoming, (SUM(CASE WHEN Status NOT IN('Cancelled','Pending','Completed') THEN 1 ELSE 0 END)) as Booking, SUM(CASE WHEN B.Status NOT IN ('Cancelled', 'Pending') THEN B.FinalPrice ELSE 0 END) AS Revenue FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate WHERE C.LocationId = @LocationId GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
+                selectCar = "SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate >= CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending','Completed') THEN 1 ELSE 0 END)) as Upcoming, (SUM(CASE WHEN Status NOT IN('Cancelled','Pending','Completed') THEN 1 ELSE 0 END)) as Booking, SUM(CASE WHEN B.Status NOT IN ('Cancelled', 'Pending') THEN B.FinalPrice ELSE 0 END) AS Revenue FROM Car C LEFT JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate WHERE C.LocationId = @LocationId GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
             }
             else
             {
-                selectCar = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate >= CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Upcoming, (SUM(CASE WHEN Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Booking, SUM(CASE WHEN B.Status NOT IN ('Cancelled', 'Pending') THEN B.FinalPrice ELSE 0 END) AS Revenue FROM Car C JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
+                selectCar = @"SELECT C.*, L.LocationName, (SUM(CASE WHEN B.StartDate >= CONVERT (date, SYSDATETIME()) AND Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Upcoming, (SUM(CASE WHEN Status NOT IN('Cancelled','Pending') THEN 1 ELSE 0 END)) as Booking, SUM(CASE WHEN B.Status NOT IN ('Cancelled', 'Pending') THEN B.FinalPrice ELSE 0 END) AS Revenue FROM Car C LEFT JOIN Location L ON C.LocationId = L.Id LEFT JOIN Booking B ON C.CarPlate = B.CarPlate GROUP BY C.CarPlate, C.CarBrand, C.CarName, C.CType, C.CarDesc, C.CarImage, C.CarDayPrice, C.CarSeat, C.CarTransmission, C.CarEnergy, C.LocationId, C.IsDelisted, L.LocationName";
             }
 
             ViewState["SQLQuery"] = selectCar;
